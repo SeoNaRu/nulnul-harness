@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Prepare the project-local agent setup a repository needs, continue the user's work, and improve the setup from real outcomes.",
   "author": {
-    "name": "SeoNaRu"
+    "name": "SeoNaRu",
+    "url": "https://github.com/SeoNaRu"
   },
+  "homepage": "https://github.com/SeoNaRu/project-harness",
+  "repository": "https://github.com/SeoNaRu/project-harness",
   "license": "MIT",
   "keywords": [
     "agents",
@@ -28,6 +31,9 @@
     "brandColor": "#4F46E5",
     "composerIcon": "./assets/project-harness.svg",
     "logo": "./assets/project-harness.svg",
+    "websiteURL": "https://github.com/SeoNaRu/project-harness",
+    "privacyPolicyURL": "https://github.com/SeoNaRu/project-harness/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/SeoNaRu/project-harness/blob/main/TERMS.md",
     "defaultPrompt": [
       "Build what I ask for and prepare this project first if needed.",
       "Review recent project results and improve the agent setup.",

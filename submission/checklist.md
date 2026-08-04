@@ -9,11 +9,12 @@
 - [x] Ordinary requests implicitly trigger the skill; read-only requests do not
 - [x] Local install, version refresh, removal, and clean reinstall pass
 - [x] Privacy, terms, support, listing copy, release notes, and MIT license drafted
+- [x] Current web and connected-GitHub checks found no exact `Project Harness` plugin or `SeoNaRu/project-harness` repository collision
 
 ## Requires publisher action or approval
 
 - [ ] Confirm `Project Harness`, `SeoNaRu`, and MIT as the public name, verified publisher, and license
-- [ ] Publish this repository and use its public HTTPS pages for website, support, privacy, and terms
+- [ ] Create and publish `SeoNaRu/project-harness`, making the prepared website, support, privacy, and terms URLs live
 - [ ] Ensure the OpenAI organization has a verified individual or business identity and **Apps Management: Write**
 - [ ] Create a **Skills only** draft at <https://platform.openai.com/plugins>
 - [ ] Upload `dist/project-harness-1.0.0.zip`, listing copy, logo, starter prompts, `evals/cases.json`, release notes, and selected countries

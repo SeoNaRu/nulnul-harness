@@ -25,6 +25,9 @@ class ProductPluginTests(unittest.TestCase):
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["project-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
         self.assertLessEqual(len(manifest["interface"]["defaultPrompt"]), 3)
+        self.assertEqual(manifest["repository"], "https://github.com/SeoNaRu/project-harness")
+        for field in ("websiteURL", "privacyPolicyURL", "termsOfServiceURL"):
+            self.assertTrue(manifest["interface"][field].startswith("https://"), field)
         for field in ("composerIcon", "logo"):
             asset = PLUGIN / manifest["interface"][field].removeprefix("./")
             self.assertTrue(asset.is_file(), field)

@@ -18,7 +18,12 @@
 
 ## Public URLs
 
-After the repository is published, use its landing page for Website, its issue tracker for Support, and the rendered `PRIVACY.md` and `TERMS.md` pages for Privacy and Terms.
+- Website: <https://github.com/SeoNaRu/project-harness>
+- Support: <https://github.com/SeoNaRu/project-harness/issues>
+- Privacy: <https://github.com/SeoNaRu/project-harness/blob/main/PRIVACY.md>
+- Terms: <https://github.com/SeoNaRu/project-harness/blob/main/TERMS.md>
+
+These URLs become valid only after the publisher creates and pushes the public repository.
 
 ## Availability
 
