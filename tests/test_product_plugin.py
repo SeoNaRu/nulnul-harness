@@ -35,7 +35,7 @@ class ProductPluginTests(unittest.TestCase):
         text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
         for heading in ("## Product decision gate", "## Required inputs", "## Workflow", "## Outputs", "## Failure handling", "## Validation"):
             self.assertIn(heading, text)
-        self.assertIn("takes precedence over another skill", text)
+        self.assertIn("Do not invent a product", text)
         for path in (
             "references/discovery-and-questions.md",
             "references/project-files.md",

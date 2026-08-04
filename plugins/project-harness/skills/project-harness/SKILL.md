@@ -9,7 +9,7 @@ Make project preparation an invisible preflight. Never require the user to under
 
 ## Product decision gate
 
-When the repository has no reliable product evidence and the request leaves the intended user or product outcome open, stop after one concise blocking question. Do not invent a product, choose a stack, create files, or activate downstream build or design skills until the user answers. This gate takes precedence over another skill's permission to fill in an unspecified brief.
+When the repository has no reliable product evidence and the request leaves the intended user or product outcome open, stop after one concise blocking question. Do not invent a product, choose a stack, create files, or apply downstream build or design guidance that fills in the brief until the user answers.
 
 ## Required inputs
 
