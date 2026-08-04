@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Harness"
+  short_description: "Set up and evolve each project automatically"
+  default_prompt: "Use $project-harness to prepare this project and continue my request."

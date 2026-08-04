@@ -1,0 +1,22 @@
+# Submission checklist
+
+## Complete locally
+
+- [x] Skills-only plugin with no MCP, app, hook, authentication, or external service
+- [x] Strict-semver `1.0.0` manifest and production square logo
+- [x] Plugin structure validator passes
+- [x] Five positive and three negative reviewer scenarios pass
+- [x] Ordinary requests implicitly trigger the skill; read-only requests do not
+- [x] Local install, version refresh, removal, and clean reinstall pass
+- [x] Privacy, terms, support, listing copy, release notes, and MIT license drafted
+
+## Requires publisher action or approval
+
+- [ ] Confirm `Project Harness`, `SeoNaRu`, and MIT as the public name, verified publisher, and license
+- [ ] Publish this repository and use its public HTTPS pages for website, support, privacy, and terms
+- [ ] Ensure the OpenAI organization has a verified individual or business identity and **Apps Management: Write**
+- [ ] Create a **Skills only** draft at <https://platform.openai.com/plugins>
+- [ ] Upload `dist/project-harness-1.0.0.zip`, listing copy, logo, starter prompts, `evals/cases.json`, release notes, and selected countries
+- [ ] Review the policy attestations and explicitly approve **Submit for Review**
+- [ ] After OpenAI approval, explicitly approve **Publish**
+- [ ] Find the exact public listing and verify installation in a clean user environment

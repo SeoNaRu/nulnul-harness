@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Project Harness</title>
+  <rect width="256" height="256" rx="56" fill="#4F46E5"/>
+  <path d="M72 72v112M184 72v112M72 128h112" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="72" cy="72" r="18" fill="#A5B4FC"/>
+  <circle cx="184" cy="72" r="18" fill="#A5B4FC"/>
+  <circle cx="72" cy="184" r="18" fill="#C7D2FE"/>
+  <circle cx="184" cy="184" r="18" fill="#C7D2FE"/>
+</svg>
