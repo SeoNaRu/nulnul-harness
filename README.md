@@ -33,6 +33,25 @@ More tools do not make a better agent system. Unverified skills, overlapping rol
 - resume later sessions from repository evidence, not chat memory;
 - turn reproducible feedback into agent upgrades that require an independent Gate.
 
+## How this was built
+
+**The idea.** Most agent setups fail before the model does. The failure is rarely bad reasoning; it is a second process overwriting a state file, a check recorded as passing when it never ran, a counter that means something different in three places. So this project stayed a **skills-only plugin**: no server, no daemon, no background process. Just an execution contract the agent reads, plus templates it can delete afterward.
+
+**The path.** Version 1.x answered the setup question — inspect the repository, verify existing capabilities before making new ones, assemble the smallest working set, run, checkpoint, evolve. That part held up, so it was never rewritten.
+
+**The stress test.** Then a real recurring workflow (finding and reviewing creator leads) ran in an unattended loop for a full day. It broke in eleven ways that none of the references prevented, and none of the eleven were reasoning failures:
+
+- three unattended loops each rewrote the whole state file from memory: **12,000 decisions lost**;
+- the collector skipped writing a run record when it found nothing, and the next search window was derived from the last run record — so the window froze and the same 120 items were rescanned all day. After the fix, **1,265 new records in one pass**;
+- a link checker skipped a check and the aggregator wrote it as `ok`, so never-verified rows shipped as verified;
+- a domain check used `A` records instead of `MX` and froze **15 healthy mailboxes** as dead;
+- a filter matched disclaimer text in long bios and rejected **20 valid records**;
+- "completed" was counted in three places with three definitions, so the loop declared its target reached and exited on work that was not delivered.
+
+Each failure became a rule with the number that produced it, written into the reference the agent actually loads. See [Field-hardened rules](#field-hardened-rules).
+
+**What that day changed about the design.** The measured gains came from correcting judgment functions that already existed — not from adding agents. So the setup output now ships four mechanisms before it ships any agent roster: a minimal frozen benchmark, the one function that defines the deliverable unit, a documentation debt hook, and a lock on the state file. This is one project over one day, so treat it as field evidence, not a benchmark.
+
 ## Quick start
 
 ```bash
@@ -102,6 +121,27 @@ These rules come from a full day of unattended loop operation on a real recurrin
 | Gate decisions logged, with the false-positive share reported | Accumulated false alarms train people to wave the gate through, and the gate stops protecting anything |
 | A documentation debt detector in the day-one setup | A fix that lands only in code is invisible to the next session |
 | Day-one setup ships a minimal frozen benchmark, the deliverable-unit function, the doc-debt hook, and the state lock | A cold start has nothing for the Gate to run against, so evolution cannot begin |
+
+## Prior art
+
+None of the parts here are new. Split the design and every piece has an existing name, and the mapping below is accurate:
+
+| Part of NULNUL | Existing name | Where it lives here |
+| --- | --- | --- |
+| Coach and Gate separated | actor-critic ([Sutton & Barto](http://incompleteideas.net/book/the-book.html)); the generator–verifier gap — checking an answer is a different, easier job than producing it | `references/personal-evolution.md` |
+| Automatic promotion and rollback | champion/challenger, model-registry promotion gates ([MLflow](https://mlflow.org/docs/latest/model-registry.html)), [canary release](https://martinfowler.com/bliki/CanaryRelease.html) | promotion condition 8: one observed live cycle, automatic revert on a metric drop |
+| Gating on regression checks | eval-gated CI ([promptfoo](https://www.promptfoo.dev/), [Braintrust](https://www.braintrust.dev/), [LangSmith](https://docs.smith.langchain.com/)) | [`evals/cases.json`](evals/cases.json), `scripts/harness_100.py`, the repository test suite |
+| Optimizing against a metric | [DSPy](https://arxiv.org/abs/2310.03714) compiles prompts against a metric | the single goal-metric function every counter imports, and the Coach's named primary metric |
+| Learning from failure and retrying | [Reflexion](https://arxiv.org/abs/2303.11366), [Self-Refine](https://arxiv.org/abs/2303.17651) | the feedback → proposal loop |
+| An agent accumulating skills | [Voyager](https://arxiv.org/abs/2305.16291)'s skill library | `.agents/skills/<name>/`, created only after existing candidates were checked and rejected |
+| Pulling skills and tools from outside | [MCP](https://modelcontextprotocol.io/) registries, plugin marketplaces | `references/capability-discovery.md` |
+
+Two differences are deliberate:
+
+- **Self-refinement judges itself; this does not.** Reflexion-style loops let the same agent critique and accept its own retry. Here a promotion needs an independent Gate plus one observed live cycle, and the validator rejects a state file where the proposal author or the target agent signed off on it.
+- **The loop's failures are operational, so the rules are too.** Locks, cursors, and a distinct `unknown` state are not agent-reasoning topics, and that is exactly why an agent-only design keeps losing data to them.
+
+The contribution, if any, is the packaging: one portable contract that carries all of it into a fresh repository, with no service to run and nothing left behind after deletion.
 
 ## Evidence, not claims
 
