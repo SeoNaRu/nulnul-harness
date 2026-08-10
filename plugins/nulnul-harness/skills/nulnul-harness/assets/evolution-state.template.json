@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "personal_evolution_home": null,
+  "checkpoint": {
+    "goal": "",
+    "milestone": "",
+    "completion_check": "",
+    "status": "active",
+    "last_verified": "",
+    "next_action": "",
+    "blockers": [],
+    "approved_permissions": []
+  },
+  "agents": {
+    "navigator": {
+      "version": 1,
+      "job": "Own the outcome, checkpoint, permissions, resume, and synthesis.",
+      "profile_path": null,
+      "last_promotion_id": null
+    },
+    "coach": {
+      "version": 1,
+      "job": "Turn reproducible feedback into one targeted upgrade proposal.",
+      "profile_path": null,
+      "last_promotion_id": null
+    },
+    "gate": {
+      "version": 1,
+      "job": "Independently evaluate and promote, reject, or roll back proposals.",
+      "profile_path": null,
+      "last_promotion_id": null
+    }
+  },
+  "feedback": [],
+  "proposals": [],
+  "promotions": []
+}

@@ -1,4 +1,4 @@
 interface:
   display_name: "nulnul harness"
-  short_description: "Find proven skills and evolve the workflow"
-  default_prompt: "Use $nulnul-harness to find proven capabilities, build the smallest working agent setup, complete my request, and improve it from verified results."
+  short_description: "Evolve a verified personal agent team"
+  default_prompt: "Use $nulnul-harness to complete this project, preserve verified checkpoints, and upgrade each agent only from independently tested feedback."

@@ -25,6 +25,8 @@ Keep only durable, non-sensitive evidence:
 
 Never store raw conversations, secrets, credentials, personal data, or full tool logs as project memory.
 
+When a signal identifies an agent, a bad handoff, a session-loss failure, or the Coach itself, apply `personal-evolution.md`. Convert the signal into a structured feedback event before proposing any instruction change.
+
 ## Propose one causal change
 
 Change the nearest durable layer:
@@ -48,6 +50,8 @@ Run the same representative check before and after the change. Accept the candid
 4. the added complexity has a concrete continuing job.
 
 Record the accepted change, evidence, and rollback or removal condition in concise project-local form. Otherwise restore the prior setup and keep the failure evidence without preserving the failed experiment.
+
+Agent and Coach upgrades require an independent Gate. A proposal author may implement a candidate in isolation but cannot approve, promote, or broaden its own authority. Keep the last accepted version until the Gate records a reproducible decision.
 
 ## Prune
 

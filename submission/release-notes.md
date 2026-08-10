@@ -1,7 +1,7 @@
-# nulnul harness 1.0.1
+# nulnul harness 1.1.0
 
-This patch release strengthens implicit activation when a project has no known setup, while preserving direct behavior for coherent repositories and read-only requests.
+This release adds controlled personal-agent evolution and verified session continuity.
 
-The release adds Harness 100, an evidence-backed gate covering six positive and three negative isolated scenarios. All nine currently pass. It also adds a deterministic YouTube-to-Sheets classification and deduplication benchmark, a fully synthetic public workbook example, recurring data-workflow safety rules, an Obsidian experiment wiki, and a public README that separates verified behavior from untested performance claims.
+Workers can now report bounded evidence to a Coach, which proposes one targeted version change. An independent Gate compares the candidate with the last accepted version before promotion, rejection, or rollback. The same rule applies when the Coach itself is improved: no agent can approve its own upgrade. A repository-local checkpoint lets the Navigator resume the original goal from verified state instead of reconstructing it from chat.
 
-`nulnul harness` remains a skills-only plugin. It bundles no MCP server, external service, authentication, telemetry, hook, UI, or background process. Authentication, external writes, deployment, publication, and global registration remain explicit approval boundaries.
+The release includes a deterministic standard-library validator for evolution state. It rejects self-approval, invalid version transitions, unapproved permission expansion, broken references, and sensitive persisted fields. `nulnul harness` remains skills-only, with no service, authentication, telemetry, hook, UI, or background process.

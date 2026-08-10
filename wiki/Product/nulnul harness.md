@@ -2,12 +2,12 @@
 
 ## 한 문장
 
-검증된 능력을 찾아 프로젝트별 실행 시스템으로 조립하고, 실제 결과가 좋아진 변경만 남기는 Codex 하네스.
+검증된 능력을 찾아 프로젝트별 실행 시스템으로 조립하고, 검증된 작업 상태를 이어가며, 독립 평가를 통과한 에이전트 개선만 남기는 Codex 하네스.
 
 ## 제품 루프
 
 ```text
-Discover → Verify → Assemble → Run → Measure → Evolve
+Discover → Verify → Assemble → Run → Checkpoint → Evolve
 ```
 
 | 단계 | 남겨야 할 증거 |
@@ -16,8 +16,10 @@ Discover → Verify → Assemble → Run → Measure → Evolve
 | Verify | 출처·호환성·품질·권한·라이선스와 선택 이유 |
 | Assemble | 활성 능력과 각 에이전트의 구체적인 역할 |
 | Run | 실제 결과물과 완료 검사 |
-| Measure | 성공률·정확도·중복률·비용·시간·사용자 개입 |
-| Evolve | 동일 평가의 전후 결과와 롤백 조건 |
+| Checkpoint | 목표·완료 검사·검증 근거·다음 행동·승인된 권한 |
+| Evolve | 피드백·버전 제안·독립 Gate 결정·롤백 조건 |
+
+상세 계약은 [[개인 에이전트 진화]]에 기록한다.
 
 ## 경쟁 기준
 

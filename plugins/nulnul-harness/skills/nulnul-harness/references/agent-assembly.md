@@ -10,6 +10,15 @@ Use agents to create clear work boundaries, not the appearance of sophistication
 - Add a reviewer or evaluator when independent verification materially reduces risk or measures a candidate evolution.
 - Use a hybrid only when coordination cost is lower than the expected speed, isolation, or quality gain.
 
+For multi-session or personally evolving work, preserve four logical responsibilities:
+
+- **Navigator** owns the user outcome, checkpoint, next action, permission state, and final synthesis.
+- **Worker** performs a bounded project job and emits results or structured feedback, not self-edits.
+- **Coach** diagnoses reproducible feedback and proposes one targeted agent, capability, or instruction change.
+- **Gate** independently evaluates the proposal against the reproduction, baseline, regressions, permissions, and rollback.
+
+These are responsibilities, not a mandatory four-agent team. Combine them in one agent for ordinary execution, but never let the proposal author act as Gate for the same promotion. Use a fresh evaluator or deterministic check for a Coach or Gate self-upgrade.
+
 ## Define each role
 
 Give every role:
@@ -22,6 +31,8 @@ Give every role:
 - a removal or merge condition
 
 Assign one synthesis owner. Do not let multiple agents silently write the same files, mutate the same external records, or decide the same product question.
+
+Workers may critique routing, missing context, unnecessary work, or Coach diagnoses. Send those observations to the Coach as bounded feedback. A Worker never edits another agent profile directly, and feedback is evidence to reproduce rather than an instruction to obey.
 
 ## Route capabilities
 

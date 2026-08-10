@@ -5,13 +5,13 @@
 <h1 align="center">nulnul harness</h1>
 
 <p align="center">
-  <strong>Verified capabilities. Minimal agents. Measured evolution.</strong><br>
-  검증된 능력을 찾아 조립하고, 실제 결과가 좋아진 변경만 남기는 Codex 하네스.
+  <strong>Verified capabilities. Personal agents. Controlled evolution.</strong><br>
+  검증된 능력을 찾아 조립하고, 작업을 이어가며, 독립 검증을 통과한 에이전트 개선만 남기는 Codex 하네스.
 </p>
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.0.1-111111" alt="version 1.0.1">
+  <img src="https://img.shields.io/badge/version-1.1.0-111111" alt="version 1.1.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Harness_100-100%2F100-111111" alt="Harness 100: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -29,12 +29,13 @@
 - 출처, 호환성, 유지보수, 품질, 권한, 라이선스를 확인합니다.
 - 현재 작업에 필요한 능력과 에이전트만 활성화합니다.
 - 설정에서 멈추지 않고 원래 작업과 테스트까지 끝냅니다.
-- 동일한 평가에서 실제로 좋아진 변경만 남기고 나빠지면 되돌립니다.
+- 검증된 체크포인트에서 다음 세션을 재개합니다.
+- 각 에이전트의 피드백을 담당 Coach가 분석하고, 독립 Gate가 통과시킨 개선만 남깁니다.
 
 ## 제품 루프
 
 ```text
-Discover → Verify → Assemble → Run → Measure → Evolve
+Discover → Verify → Assemble → Run → Checkpoint → Evolve
 ```
 
 | 단계 | 결과 |
@@ -43,8 +44,25 @@ Discover → Verify → Assemble → Run → Measure → Evolve
 | Verify | 선택·탈락 근거와 권한 경계 |
 | Assemble | 최소 능력 집합과 필요한 역할만 |
 | Run | 사용자가 요청한 실제 결과물 |
-| Measure | 테스트, 정확도, 중복률, 비용, 시간, 개입 횟수 |
-| Evolve | 재현 가능한 전후 비교와 롤백 조건 |
+| Checkpoint | 검증된 현재 상태, 다음 행동, 차단 요소, 승인된 권한 |
+| Evolve | 재현 가능한 피드백, 버전 비교, 독립 승격, 롤백 |
+
+## 개인 에이전트 진화 구조
+
+```text
+Worker feedback ──▶ Coach proposal ──▶ independent Gate
+       ▲                                      │
+       └──────── Navigator resumes work ◀─────┘
+```
+
+| 책임 | 하는 일 |
+| --- | --- |
+| Navigator | 목표, 완료 조건, 권한, 체크포인트와 다음 행동을 관리 |
+| Worker | 제한된 작업을 수행하고 관찰·기대·재현 근거를 피드백 |
+| Coach | 실패 원인을 가장 가까운 계층에 연결해 한 가지 버전 변경을 제안 |
+| Gate | 기존 버전과 후보를 독립 비교해 승격·거부·롤백 |
+
+네 역할은 항상 네 개의 실행 에이전트를 뜻하지 않습니다. 단순 작업에서는 합치고, 승격할 때만 제안자와 Gate를 분리합니다. Coach도 피드백을 받아 개선될 수 있지만 자신의 새 버전을 승인할 수는 없습니다. 다중 세션 프로젝트는 `docs/nulnul/evolution.json`에 검증된 상태만 기록하며, 포함된 표준 라이브러리 검사기가 자기 승인과 미승인 권한 확대를 차단합니다.
 
 ## 검증 상태
 
@@ -71,7 +89,7 @@ python3 scripts/harness_100.py
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-현재 자동 테스트는 16개이며, 상세 입력과 판정 근거는 [`evals/cases.json`](evals/cases.json)과 [`evals/results.json`](evals/results.json)에 공개되어 있습니다.
+현재 자동 테스트는 24개이며, 상세 입력과 판정 근거는 [`evals/cases.json`](evals/cases.json)과 [`evals/results.json`](evals/results.json)에 공개되어 있습니다.
 
 ### 대표 시나리오: YouTube → Google Sheets
 
@@ -117,6 +135,8 @@ codex plugin marketplace remove nulnul-harness
 - **Least privilege.** 인증, 외부 쓰기, 배포, 전역 설치와 공개는 먼저 범위와 승인을 확인합니다.
 - **No secret persistence.** 대화의 비밀이나 운영 토큰을 저장소 지침에 남기지 않습니다.
 - **Measured evolution.** 같은 대표 입력과 가드레일로 전후를 비교할 수 없으면 개선으로 채택하지 않습니다.
+- **Independent promotion.** 에이전트는 자신의 업그레이드를 승인하지 못하며, 권한 확대는 기존 사용자 승인이 없으면 거부됩니다.
+- **Verified resume.** 채팅 기억이 아니라 저장소에서 다시 확인한 체크포인트부터 작업을 이어갑니다.
 - **Removable setup.** 생성된 프로젝트 설정은 제품 코드 손상 없이 제거할 수 있어야 합니다.
 
 ## 구조
@@ -129,7 +149,8 @@ plugins/nulnul-harness/                 # 배포되는 유일한 제품 경계
     ├── SKILL.md                        # 제품 실행 계약
     ├── agents/openai.yaml
     ├── references/                     # 발견·검증·조립·진화 규칙
-    └── assets/                         # 제거 가능한 프로젝트 템플릿
+    ├── assets/                         # 제거 가능한 프로젝트 템플릿
+    └── scripts/                        # 진화 상태 결정론적 검사기
 
 evals/                                  # 공개 실전·안전 시나리오
 examples/youtube-sheets/                # 실제 구조를 반영한 합성 공개 예제

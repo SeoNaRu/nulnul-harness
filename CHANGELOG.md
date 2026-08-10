@@ -2,6 +2,14 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 1.1.0 — 2026-08-10
+
+- Added Navigator, Worker, Coach, and independent Gate responsibilities for personal agent evolution.
+- Added a removable repository checkpoint for verified multi-session resume.
+- Added bounded feedback, versioned proposals, promotion, rejection, and rollback contracts.
+- Added a deterministic validator that rejects self-approval, invalid state, sensitive fields, and unapproved permission expansion.
+- Added regression tests for Coach upgrades, independent promotion, permissions, and checkpoint validity.
+
 ## 1.0.1 — 2026-08-10
 
 - Strengthened implicit activation when repository setup is missing or unknown.

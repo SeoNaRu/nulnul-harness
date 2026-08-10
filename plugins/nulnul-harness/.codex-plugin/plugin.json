@@ -1,7 +1,7 @@
 {
   "name": "nulnul-harness",
-  "version": "1.0.1",
-  "description": "Find proven capabilities, assemble the smallest useful agent system, complete the work, and improve it from measured results.",
+  "version": "1.1.0",
+  "description": "Find proven capabilities, assemble the smallest useful agent system, preserve progress, and evolve each agent from independently verified feedback.",
   "author": {
     "name": "SeoNaRu",
     "url": "https://github.com/SeoNaRu"
@@ -15,20 +15,23 @@
     "agent-assembly",
     "codex",
     "automation",
-    "adaptive-workflow"
+    "adaptive-workflow",
+    "personal-agents"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "nulnul harness",
-    "shortDescription": "Verified skills. Less work.",
-    "longDescription": "Describe the outcome. nulnul harness inspects the project, finds and verifies existing skills before creating new ones, assembles only the agents the workflow needs, completes the work, and keeps improvements that pass real checks.",
+    "shortDescription": "Verified agents. Less work.",
+    "longDescription": "Describe the outcome. nulnul harness finds proven skills, assembles only the agents the workflow needs, preserves verified progress across sessions, and upgrades each agent only when an independent Gate accepts reproducible evidence.",
     "developerName": "SeoNaRu",
     "category": "Productivity",
     "capabilities": [
       "reuse-first-capability-discovery",
       "minimal-agent-assembly",
       "project-bootstrap",
-      "evidence-gated-evolution"
+      "evidence-gated-evolution",
+      "session-continuity",
+      "personal-agent-evolution"
     ],
     "brandColor": "#111111",
     "composerIcon": "./assets/nulnul-harness.svg",
@@ -39,7 +42,7 @@
     "defaultPrompt": [
       "Build this project. Find proven skills before creating new ones, and keep the setup minimal.",
       "Turn this recurring workflow into a verified automation and improve it from real runs.",
-      "Review this project's results and simplify or upgrade its skills and agents only where evidence supports it."
+      "Use worker feedback to upgrade the responsible agent, preserve the last verified checkpoint, and require independent promotion."
     ]
   }
 }

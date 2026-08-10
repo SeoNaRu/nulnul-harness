@@ -21,7 +21,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.0.1")
+        self.assertEqual(manifest["version"], "1.1.0")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -45,6 +45,8 @@ class ProductPluginTests(unittest.TestCase):
         self.assertIn("Treat installed availability as discovery evidence, not verification", text)
         self.assertIn("Popularity is a signal, not proof", text)
         self.assertIn("keep it only when the primary metric improves", text)
+        self.assertIn("Never let an agent approve its own upgrade", text)
+        self.assertIn("resume from the last verified checkpoint", text)
         for path in (
             "references/discovery-and-questions.md",
             "references/capability-discovery.md",
@@ -52,9 +54,12 @@ class ProductPluginTests(unittest.TestCase):
             "references/agent-assembly.md",
             "references/project-files.md",
             "references/evolution.md",
+            "references/personal-evolution.md",
             "assets/AGENTS.template.md",
+            "assets/evolution-state.template.json",
             "assets/project-contract.template.md",
             "agents/openai.yaml",
+            "scripts/validate_evolution_state.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
@@ -95,7 +100,7 @@ class ProductPluginTests(unittest.TestCase):
         product = {
             path.relative_to(PLUGIN).as_posix(): path.read_bytes()
             for path in PLUGIN.rglob("*")
-            if path.is_file()
+            if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc"
         }
         self.assertEqual(bundled, product)
 

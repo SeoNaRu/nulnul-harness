@@ -2,19 +2,19 @@
 
 - Name: nulnul harness
 - Package: `nulnul-harness`
-- Version: `1.0.1`
+- Version: `1.1.0`
 - Publisher: SeoNaRu (must match the verified OpenAI Platform identity)
 - Category: Productivity
 - Shape: Skills only; no MCP server, app, UI, hooks, authentication, or publisher-operated service
-- Short description: Verified skills. Less work.
-- Long description: Describe the outcome. nulnul harness inspects the project, finds and verifies existing skills before creating new ones, assembles only the agents the workflow needs, completes the work, and keeps improvements that pass real checks.
+- Short description: Verified agents. Less work.
+- Long description: Describe the outcome. nulnul harness finds proven skills, assembles only the agents the workflow needs, preserves verified progress across sessions, and upgrades each agent only when an independent Gate accepts reproducible evidence.
 - Logo: `plugins/nulnul-harness/assets/nulnul-harness.svg`
 
 ## Starter prompts
 
 1. Build this project. Find proven skills before creating new ones, and keep the setup minimal.
 2. Turn this recurring workflow into a verified automation and improve it from real runs.
-3. Review this project's results and simplify or upgrade its skills and agents only where evidence supports it.
+3. Use worker feedback to upgrade the responsible agent, preserve the last verified checkpoint, and require independent promotion.
 
 ## Public URLs
 

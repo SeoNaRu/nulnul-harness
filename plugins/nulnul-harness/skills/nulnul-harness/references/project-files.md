@@ -24,8 +24,15 @@ Use when the project needs a durable setup contract. Include:
 - each selected capability's source, job, trigger, check, permission boundary, and removal condition
 - execution topology, ownership, handoffs, and synthesis only when coordination is needed
 - baseline metrics, guardrails, accepted improvements, rollback conditions, and removable assumptions
+- the current verified checkpoint and a pointer to `docs/nulnul/evolution.json` when work spans sessions or agent-specific learning is enabled
 
 Start from `../assets/project-contract.template.md` and remove unused sections.
+
+## `docs/nulnul/evolution.json`
+
+Create this only for multi-session work, agent-specific feedback, or personal evolution. Start from `../assets/evolution-state.template.json`. Keep the current checkpoint, agent versions, bounded feedback, proposals, and Gate decisions. Validate it with `../scripts/validate_evolution_state.py` after every update.
+
+Keep project feedback project-local by default. Promote a rule to a user-selected private personal evolution home only after it generalizes across representative projects or the user explicitly requests that scope. Never commit a private personal-home path, raw conversation, secret, credential, personal data, or full transcript to a public repository.
 
 ## `.agents/skills/<name>/`
 

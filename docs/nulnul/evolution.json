@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "personal_evolution_home": null,
+  "checkpoint": {
+    "goal": "Maintain nulnul-harness as a verified personal agent system that completes projects and improves agents from independently tested feedback.",
+    "milestone": "Version 1.1.0 personal evolution loop implemented and self-applied.",
+    "completion_check": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 -B scripts/harness_100.py",
+    "status": "active",
+    "last_verified": "24 automated tests passed, Harness 100 scored 100/100, and the skill validator passed on 2026-08-10.",
+    "next_action": "Resume from the next user-requested product outcome; keep the paused A/B benchmark excluded until the user resumes it.",
+    "blockers": [],
+    "approved_permissions": [
+      "push the current feature branch and update the existing draft PR"
+    ]
+  },
+  "agents": {
+    "navigator": {
+      "version": 1,
+      "job": "Own the product outcome, verified checkpoint, permissions, resume, and final synthesis.",
+      "profile_path": null,
+      "last_promotion_id": null
+    },
+    "coach": {
+      "version": 1,
+      "job": "Turn reproducible worker, user, test, and Gate feedback into one targeted upgrade proposal.",
+      "profile_path": null,
+      "last_promotion_id": null
+    },
+    "gate": {
+      "version": 1,
+      "job": "Independently compare candidates with accepted versions and promote, reject, or roll back.",
+      "profile_path": null,
+      "last_promotion_id": null
+    },
+    "product-builder": {
+      "version": 2,
+      "job": "Implement the smallest complete product change and leave executable verification.",
+      "profile_path": null,
+      "last_promotion_id": "promotion-product-builder-2"
+    }
+  },
+  "feedback": [
+    {
+      "id": "feedback-validator-forward-eval",
+      "source": "gate",
+      "target_agent": "product-builder",
+      "observed": "The evolution validator allowed contradictory promotion state and blank evidence, and malformed non-string ids could raise TypeError.",
+      "expected": "Reject contradictory or evidence-free state and return validation errors for malformed input without crashing.",
+      "evidence": "tests.test_personal_evolution reproduces proposal/promotion mismatch, empty evidence, and malformed ids.",
+      "scope": "project",
+      "status": "converted"
+    }
+  ],
+  "proposals": [
+    {
+      "id": "proposal-product-builder-2",
+      "feedback_ids": [
+        "feedback-validator-forward-eval"
+      ],
+      "target_agent": "product-builder",
+      "from_version": 1,
+      "to_version": 2,
+      "cause": "The first validator checked required keys but did not fully enforce cross-record consistency or malformed value types.",
+      "change_target": "Evolution state validator trust-boundary checks and focused regressions.",
+      "regression_check": "python3 -B -m unittest tests.test_personal_evolution -v",
+      "primary_metric": "forward-evaluation contract gaps",
+      "permission_delta": [],
+      "rollback": "Restore product-builder v1 and the previous validator while retaining the failing forward-evaluation cases.",
+      "status": "accepted"
+    }
+  ],
+  "promotions": [
+    {
+      "id": "promotion-product-builder-2",
+      "proposal_id": "proposal-product-builder-2",
+      "gate_agent": "gate",
+      "before": "A fresh evaluator reproduced three contract gaps in the initial validator.",
+      "after": "Eight evolution regressions, all 24 automated tests, and Harness 100 passed.",
+      "regressions_passed": true,
+      "decision": "accepted"
+    }
+  ]
+}

@@ -43,6 +43,8 @@ Available capabilities and capabilities active for the current task are separate
 
 {direct, single-agent, multi-agent, or hybrid topology chosen from concrete work boundaries; include distinct ownership, handoffs, checks, and one synthesis owner}
 
+For multi-session or personally evolving work, record Navigator, Worker, Coach, and independent Gate responsibilities. Point to `docs/nulnul/evolution.json`; do not duplicate its live state here.
+
 ## Evolution baseline
 
 - Representative run: {input and expected outcome}
@@ -55,3 +57,9 @@ Available capabilities and capabilities active for the current task are separate
 - Assumption: {narrow reversible assumption}
 - Revisit when: {failure, test, workaround, or user correction}
 - Accepted change: {change, before/after evidence, and removal condition}
+
+## Continuity
+
+- Evolution state: `docs/nulnul/evolution.json` or not needed
+- Resume rule: read the last verified checkpoint, confirm repository reality, then perform exactly the recorded next action
+- Personal promotion scope: project-local unless a private personal evolution home is explicitly configured
