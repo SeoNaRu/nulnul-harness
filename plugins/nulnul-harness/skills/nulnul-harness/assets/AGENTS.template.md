@@ -14,4 +14,4 @@
 - Build: `{build_command}`
 - Test: `{test_command}`
 - Verify: `{verification_command}`
-- Detailed project setup: `docs/harness/project.md`
+- Detailed project setup: `docs/nulnul/project.md`

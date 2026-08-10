@@ -1,14 +1,14 @@
 {
-  "name": "project-harness",
+  "name": "nulnul-harness",
   "interface": {
-    "displayName": "Project Harness"
+    "displayName": "nulnul harness"
   },
   "plugins": [
     {
-      "name": "project-harness",
+      "name": "nulnul-harness",
       "source": {
         "source": "local",
-        "path": "./plugins/project-harness"
+        "path": "./plugins/nulnul-harness"
       },
       "policy": {
         "installation": "AVAILABLE",

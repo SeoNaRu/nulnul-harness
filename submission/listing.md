@@ -1,27 +1,27 @@
 # Public listing draft
 
-- Name: Project Harness
-- Package: `project-harness`
+- Name: nulnul harness
+- Package: `nulnul-harness`
 - Version: `1.0.0`
 - Publisher: SeoNaRu (must match the verified OpenAI Platform identity)
 - Category: Productivity
 - Shape: Skills only; no MCP server, app, UI, hooks, authentication, or publisher-operated service
-- Short description: Agent setup that evolves
-- Long description: Inspect a repository before asking questions, create only the necessary project-local rules, skills, roles, and checks, continue the original task, and evolve the setup from observed work.
-- Logo: `plugins/project-harness/assets/project-harness.svg`
+- Short description: Verified skills. Less work.
+- Long description: Describe the outcome. nulnul harness inspects the project, finds and verifies existing skills before creating new ones, assembles only the agents the workflow needs, completes the work, and keeps improvements that pass real checks.
+- Logo: `plugins/nulnul-harness/assets/nulnul-harness.svg`
 
 ## Starter prompts
 
-1. Build what I ask for and prepare this project first if needed.
-2. Review recent project results and improve the agent setup.
-3. Start this empty project by asking only the decisions you cannot discover.
+1. Build this project. Find proven skills before creating new ones, and keep the setup minimal.
+2. Turn this recurring workflow into a verified automation and improve it from real runs.
+3. Review this project's results and simplify or upgrade its skills and agents only where evidence supports it.
 
 ## Public URLs
 
-- Website: <https://github.com/SeoNaRu/project-harness>
-- Support: <https://github.com/SeoNaRu/project-harness/issues>
-- Privacy: <https://github.com/SeoNaRu/project-harness/blob/main/PRIVACY.md>
-- Terms: <https://github.com/SeoNaRu/project-harness/blob/main/TERMS.md>
+- Website: <https://github.com/SeoNaRu/nulnul-harness>
+- Support: <https://github.com/SeoNaRu/nulnul-harness/issues>
+- Privacy: <https://github.com/SeoNaRu/nulnul-harness/blob/main/PRIVACY.md>
+- Terms: <https://github.com/SeoNaRu/nulnul-harness/blob/main/TERMS.md>
 
 These URLs become valid only after the publisher creates and pushes the public repository.
 

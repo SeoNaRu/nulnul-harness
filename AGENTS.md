@@ -1,15 +1,16 @@
-# Project Harness working agreement
+# nulnul harness working agreement
 
-This repository builds `plugins/project-harness/`, a Codex plugin that prepares and evolves project-local agent setups without requiring users to understand harness terminology.
+This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds proven capabilities, assembles the smallest useful project-local agent system, completes the user's work, and evolves it from measured outcomes without requiring users to operate a harness.
 
-- Treat `plugins/project-harness/` as the only shipped product boundary.
+- Treat `plugins/nulnul-harness/` as the only shipped product boundary.
 - Keep the plugin skills-only until a real workflow proves that an MCP server, hook, app, or external service is necessary.
 - Inspect a target repository before asking questions. Ask only for product decisions or constraints that cannot be discovered safely.
+- Search installed, official, curated, and reputable public capabilities before creating a project-local substitute. Verify fit, provenance, compatibility, maintenance, permissions, and license; popularity alone is not verification.
 - Continue the user's original task after setup; setup alone is not task completion.
 - Add every necessary, non-overlapping capability, but activate only what the current task needs.
-- Choose direct, single-agent, multi-agent, or hybrid execution from concrete work boundaries rather than a fixed default.
+- Prefer direct or single-agent execution. Add roles only from concrete independent work or verification boundaries, with one synthesis owner.
 - Never register global tools, use credentials, deploy, or publish without explicit user approval.
-- Keep generated project setup removable and evolve it only from observed results, failures, tests, workarounds, and user corrections.
+- Keep generated setup removable. Accept an evolution only when a reproducible before/after check improves the primary outcome without violating guardrails.
 
 Validate product changes with:
 

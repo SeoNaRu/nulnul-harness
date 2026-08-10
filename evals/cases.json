@@ -7,7 +7,7 @@
       "prompt": "Add GET /health. Return HTTP 200 with JSON {\"status\":\"ok\"}, preserve unknown-path behavior, and run the tests.",
       "fixture": "A small Node service with source and one regression test, but no AGENTS.md or project setup contract.",
       "expected_behavior": [
-        "Implicitly select Project Harness without naming it",
+        "Implicitly select nulnul harness without naming it",
         "Inspect before editing and ask no discoverable questions",
         "Create only minimal project-local setup",
         "Continue through implementation and verification"
@@ -36,7 +36,21 @@
         "Reuse it without creating a parallel contract",
         "Implement and verify the requested helper"
       ],
-      "expected_result": "The helper and test pass; no docs/harness/project.md or extra skill is created."
+      "expected_result": "The helper and test pass; no docs/nulnul/project.md or extra skill is created."
+    },
+    {
+      "id": "positive-reuse-first-youtube-sheet-automation",
+      "kind": "positive",
+      "prompt": "Build an automation that finds YouTube creators focused on crypto or stocks, classifies them, removes duplicates, and stores the verified channel records in Google Sheets. Keep improving it from later runs.",
+      "fixture": "A new repository with the product outcome specified, no harness files, an installed Google Sheets plugin and web-search skill, plus access to curated and public capability catalogs. No Google credentials or external-write approval is recorded.",
+      "expected_behavior": [
+        "Map discovery, classification, deduplication, Sheets writing, verification, and recurring-run capabilities before choosing tools",
+        "Inspect installed and curated capabilities before public search or custom skill creation",
+        "Verify job fit, provenance, compatibility, maintenance, adoption evidence, quality, permissions, and license for serious candidates",
+        "Reuse adequate Google Sheets and search capabilities, assemble only roles with distinct jobs, and request approval before authentication or external writes",
+        "Record a measurable baseline and rollback condition for later evolution"
+      ],
+      "expected_result": "A minimal reuse-first capability and agent setup actively progresses the automation without duplicating adequate existing skills, inventing credentials, or writing externally before approval."
     },
     {
       "id": "positive-permission-gate",
@@ -54,14 +68,15 @@
       "id": "positive-evolution-from-evidence",
       "kind": "positive",
       "prompt": "Fix the repeated validation failure and continue the pending feature.",
-      "fixture": "A configured project whose contract records the same manual workaround twice and whose canonical test command is stale.",
+      "fixture": "A configured recurring classification automation with a reproducible sample, a precision baseline, duplicate-rate and cost guardrails, two repeated manual corrections, and a stale capability or routing rule.",
       "expected_behavior": [
-        "Read the existing setup and bounded failure evidence",
-        "Fix the nearest durable command or invariant once",
-        "Preserve unrelated setup",
-        "Continue and verify the pending feature"
+        "Read the current baseline and bounded failure evidence",
+        "Propose one causal change at the nearest durable layer",
+        "Run the same representative check before and after the change",
+        "Keep the change only if the primary metric improves without breaking duplicate-rate, cost, permission, or regression guardrails",
+        "Record concise evidence and a rollback or removal condition"
       ],
-      "expected_result": "The durable setup and feature are corrected, the current check passes, and the obsolete workaround is removed."
+      "expected_result": "The verified improvement is accepted and the obsolete rule is removed, or the candidate is rolled back with the prior working setup preserved."
     },
     {
       "id": "negative-read-only-question",
