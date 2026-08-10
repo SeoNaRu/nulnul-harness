@@ -61,14 +61,14 @@ codex plugin marketplace add "$PWD"
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
-Start a new Codex session and ask for the product, not the harness:
+Start a new Codex session and describe the outcome. Asking for a harness is enough — you never describe agents, roles, or setup steps:
 
 ```text
-Build an automation that finds finance YouTube creators, deduplicates them,
+Build me a harness that finds finance YouTube creators, deduplicates them,
 and safely writes reviewed results to Google Sheets.
 ```
 
-The harness inspects the project, reuses adequate instructions and tests, checks available capabilities, asks only for decisions it cannot safely discover, and continues through implementation and verification. It does not activate for simple read-only questions or duplicate a coherent project setup.
+The harness inspects the project, reuses adequate instructions and tests, checks available capabilities, asks only for decisions it cannot safely discover, and continues through implementation and verification. Describing the product without the word "harness" works the same way. It does not activate for simple read-only questions or duplicate a coherent project setup.
 
 ## Product loop
 
