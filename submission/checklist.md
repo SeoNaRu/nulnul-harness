@@ -6,8 +6,9 @@
 - [x] Strict-semver `1.0.0` manifest and production square logo
 - [x] Plugin structure validator passes
 - [ ] Six positive and three negative reviewer scenarios pass for the renamed package
-- [ ] Ordinary requests implicitly trigger `nulnul-harness`; read-only requests do not
-- [ ] Local install, version refresh, removal, and clean reinstall pass for `nulnul-harness`
+- [x] Ordinary project-start requests implicitly trigger `nulnul-harness`; read-only requests do not
+- [x] Local install, removal, clean reinstall, installed-source equality, and installed-skill validation pass for `nulnul-harness`
+- [x] `dist/nulnul-harness-1.0.0.zip` passes archive integrity validation
 - [x] Privacy, terms, support, listing copy, release notes, and MIT license drafted
 - [ ] Current public checks find no conflicting `nulnul harness` listing or package identity
 

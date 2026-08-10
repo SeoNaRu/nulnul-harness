@@ -10,8 +10,8 @@
       "case_id": "positive-empty-ambiguous-project",
       "status": "passed",
       "run_at": "2026-08-10",
-      "surface": "isolated fresh-agent forward test",
-      "evidence": "In an empty Git repository the renamed skill asked one blocking question for the intended user and recurring outcome, and created no project files."
+      "surface": "clean-installed plugin in fresh Codex exec session",
+      "evidence": "The ordinary unnamed request selected the installed nulnul-harness skill, inspected an empty Git repository, asked one bounded product-outcome question, and created no project files."
     },
     {
       "case_id": "positive-existing-coherent-setup",
@@ -37,8 +37,10 @@
     },
     {
       "case_id": "negative-read-only-question",
-      "status": "requires-rerun",
-      "evidence": "Implicit non-trigger behavior must be confirmed with the renamed skill description."
+      "status": "passed",
+      "run_at": "2026-08-10",
+      "surface": "clean-installed plugin in fresh read-only Codex exec session",
+      "evidence": "The explanation request did not select nulnul-harness, read only utility.py, returned an accurate explanation, preserved the source checksum, and changed no project files."
     },
     {
       "case_id": "negative-secret-in-repository",
