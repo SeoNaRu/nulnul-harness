@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="plugins/nulnul-harness/assets/nulnul-harness.svg" width="96" alt="nulnul harness logo">
+  <img src="plugins/nulnul-harness/assets/nulnul-logo-black.svg" width="320" alt="nulnul logo">
 </p>
 
 <h1 align="center">nulnul harness</h1>
@@ -159,6 +159,6 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/harness_100.py
 ```
 
-Product decisions and experiment notes live in [`wiki/Home.md`](wiki/Home.md). See [`CHANGELOG.md`](CHANGELOG.md), [`SUPPORT.md`](SUPPORT.md), and the [MIT license](LICENSE).
+Product decisions and experiment notes are summarized in [`CHANGELOG.md`](CHANGELOG.md). See [`SUPPORT.md`](SUPPORT.md) and the [MIT license](LICENSE).
 
 MIT © [SeoNaRu](https://github.com/SeoNaRu)

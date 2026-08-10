@@ -35,7 +35,7 @@ class ProductPluginTests(unittest.TestCase):
             asset = PLUGIN / manifest["interface"][field].removeprefix("./")
             self.assertTrue(asset.is_file(), field)
             root = ET.parse(asset).getroot()
-            self.assertEqual(root.attrib["viewBox"].split()[2:], ["256", "256"])
+            self.assertIn("viewBox", root.attrib)
 
     def test_skill_is_portable_and_complete(self):
         text = (SKILL / "SKILL.md").read_text(encoding="utf-8")

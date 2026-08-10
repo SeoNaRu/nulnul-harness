@@ -17,3 +17,6 @@ coverage/
 *.log
 .DS_Store
 Thumbs.db
+
+# Personal Obsidian wiki (maintained outside the repository)
+wiki/

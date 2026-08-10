@@ -159,6 +159,6 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/harness_100.py
 ```
 
-제품 결정과 실험 기록은 [`wiki/Home.md`](wiki/Home.md)에 있습니다. [`CHANGELOG.md`](CHANGELOG.md), [`SUPPORT.md`](SUPPORT.md), [MIT 라이선스](LICENSE)도 확인하세요.
+제품 결정과 실험 기록은 [`CHANGELOG.md`](CHANGELOG.md)에 요약되어 있습니다. [`SUPPORT.md`](SUPPORT.md)와 [MIT 라이선스](LICENSE)도 확인하세요.
 
 MIT © [SeoNaRu](https://github.com/SeoNaRu)
