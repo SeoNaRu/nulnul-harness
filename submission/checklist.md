@@ -16,7 +16,7 @@
 
 - [x] Confirm `nulnul harness`, `SeoNaRu`, and MIT as the public name, publisher, and license
 - [x] Create the public `SeoNaRu/nulnul-harness` repository
-- [ ] Push the prepared repository, making the website, support, privacy, and terms URLs live
+- [x] Publish the prepared repository, making the website, support, privacy, and terms URLs live
 - [ ] Ensure the OpenAI organization has a verified individual or business identity and **Apps Management: Write**
 - [ ] Create a **Skills only** draft at <https://platform.openai.com/plugins>
 - [ ] Upload `dist/nulnul-harness-1.0.0.zip`, listing copy, logo, starter prompts, `evals/cases.json`, release notes, and selected countries
