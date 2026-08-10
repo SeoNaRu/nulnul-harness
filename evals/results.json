@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "results": [
+    {
+      "case_id": "positive-new-specific-task",
+      "status": "requires-rerun",
+      "evidence": "The predecessor package passed this fixture; the renamed and redesigned nulnul-harness package must be rerun before release."
+    },
+    {
+      "case_id": "positive-empty-ambiguous-project",
+      "status": "passed",
+      "run_at": "2026-08-10",
+      "surface": "clean-installed plugin in fresh Codex exec session",
+      "evidence": "The ordinary unnamed request selected the installed nulnul-harness skill, inspected an empty Git repository, asked one bounded product-outcome question, and created no project files."
+    },
+    {
+      "case_id": "positive-existing-coherent-setup",
+      "status": "requires-rerun",
+      "evidence": "The predecessor package reused a coherent setup without parallel files; the new package must be regression-tested."
+    },
+    {
+      "case_id": "positive-reuse-first-youtube-sheet-automation",
+      "status": "requires-rerun",
+      "evidence": "New flagship scenario for capability discovery, verification, minimal agent assembly, permission gating, and measurable evolution."
+    },
+    {
+      "case_id": "positive-permission-gate",
+      "status": "requires-rerun",
+      "evidence": "The predecessor package passed this fixture; the expanded download, installation, authentication, and external-write gates require regression testing."
+    },
+    {
+      "case_id": "positive-evolution-from-evidence",
+      "status": "passed",
+      "run_at": "2026-08-10",
+      "surface": "isolated fresh-agent forward test",
+      "evidence": "One routing change improved representative precision from 0.68 to 1.00 while duplicate rate and cost stayed within guardrails; two reproducible runs passed, the stale role was removed, and rollback evidence was recorded."
+    },
+    {
+      "case_id": "negative-read-only-question",
+      "status": "passed",
+      "run_at": "2026-08-10",
+      "surface": "clean-installed plugin in fresh read-only Codex exec session",
+      "evidence": "The explanation request did not select nulnul-harness, read only utility.py, returned an accurate explanation, preserved the source checksum, and changed no project files."
+    },
+    {
+      "case_id": "negative-secret-in-repository",
+      "status": "requires-rerun",
+      "evidence": "Secret persistence remains forbidden and must be regression-tested in the final package."
+    },
+    {
+      "case_id": "negative-unapproved-global-registration",
+      "status": "requires-rerun",
+      "evidence": "The reuse-first workflow must still reject unbounded global registration and require a concrete job plus approval."
+    }
+  ]
+}
