@@ -1,6 +1,6 @@
 ---
 name: nulnul-harness
-description: Turn a project idea or recurring workflow into a minimal, evolving agent system. Inspect the repository, discover and verify existing skills or plugins before creating new ones, assemble only the capabilities and agents the work needs, complete the user's original task, and keep improvements that pass measured checks. Use when the user starts, builds, or automates a project; asks which skills or agents to use; or repeated runs, failures, tests, workarounds, or corrections show that the setup should evolve. Do not use for simple read-only questions or isolated work already covered by a coherent setup.
+description: Turn a project idea or recurring workflow into a minimal, evolving agent system. Use automatically before implementation or automation when repository setup adequacy is unknown or the project lacks coherent agent instructions or completion checks; when the user starts or builds a project; when skills or agents must be chosen; or when observed results show that the setup should evolve. Inspect the repository, verify existing skills or plugins before creating new ones, assemble only what the work needs, complete the original task, and keep only measured improvements. Do not use for simple read-only questions or isolated work already covered by a coherent setup.
 ---
 
 # nulnul harness
@@ -23,6 +23,7 @@ When an empty or evidence-poor repository and a broad request leave the intended
 2. Inspect the repository and its existing `AGENTS.md`, project contracts, skills, plugins, tools, tests, and run evidence. Reuse a sufficient setup; do not create a parallel one.
 3. Apply `references/discovery-and-questions.md`. Ask only decisions that materially change the product, permission boundary, or success check.
 4. Convert the requested workflow into a capability map with required inputs, outputs, quality checks, and external writes.
+   - For recurring workflows that collect, classify, review, or sync records, apply `references/data-workflow-safety.md`.
 5. Apply `references/capability-discovery.md`. Search installed and trusted existing capabilities before creating anything. Treat installed availability as discovery evidence, not verification. Inspect the local capability and verify fit, provenance, compatibility, maintenance, adoption evidence, documentation or tests, permissions, and license before calling it proven. Popularity is a signal, not proof of safety or fitness.
 6. Select the smallest complete, non-overlapping capability set. Activate only what the current run needs. Obtain explicit approval before downloads, global installs, plugin or MCP registration, authentication, external writes, deployment, destructive operations, or publication.
 7. Apply `references/agent-assembly.md`. Prefer direct execution or one agent. Add a role only for a concrete independent job, context boundary, parallel branch, or verification need; give one owner final synthesis.
@@ -53,4 +54,5 @@ When an empty or evidence-poor repository and a broad request leave the intended
 - Confirm every agent role has distinct ownership, bounded inputs and outputs, a completion check, and one synthesis owner.
 - Confirm a custom skill was created only after adequate existing candidates were checked and rejected with reasons.
 - Confirm no secret, personal data, raw conversation, machine-specific path, or unapproved global or external change was introduced.
+- Confirm recurring data workflows use stable identity, deterministic deduplication, exclusion precedence, explicit review states, auditable reasons, idempotent writes, and spreadsheet-safe values where applicable.
 - Run the target repository's real checks, verify the original result, and compare evolution changes against a recorded baseline.

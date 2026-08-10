@@ -1,0 +1,16 @@
+{
+  "records": [
+    {
+      "channel_id": "UC-crypto-lab",
+      "category": "crypto"
+    },
+    {
+      "channel_id": "UC-stock-note",
+      "category": "stocks"
+    },
+    {
+      "channel_id": "UC-market-bridge",
+      "category": "both"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "min_subscribers": 400,
+    "max_subscribers": 100000,
+    "min_engagement": 0.02,
+    "max_recent_upload_days": 180
+  },
+  "excluded_channel_ids": [
+    "demo-contacted"
+  ],
+  "candidates": [
+    {
+      "channel_id": "demo-crypto",
+      "name": "Example Crypto Lab",
+      "channel_url": "https://youtube.invalid/@example-crypto-lab",
+      "category": "crypto",
+      "subscribers": 5200,
+      "engagement": 0.061,
+      "recent_upload_days": 2,
+      "membership": true,
+      "contact": {"type": "none", "value": ""},
+      "discovery_path": "search: bitcoin market structure"
+    },
+    {
+      "channel_id": "demo-crypto",
+      "name": "Example Crypto Lab duplicate discovery",
+      "channel_url": "https://youtube.invalid/@example-crypto-lab",
+      "category": "crypto",
+      "subscribers": 5200,
+      "engagement": 0.061,
+      "recent_upload_days": 2,
+      "membership": true,
+      "contact": {"type": "direct_email", "value": "crypto@example.invalid"},
+      "discovery_path": "video search: on-chain analysis"
+    },
+    {
+      "channel_id": "demo-stock",
+      "name": "Example Stock Desk",
+      "channel_url": "https://youtube.invalid/@example-stock-desk",
+      "category": "stocks",
+      "subscribers": 12400,
+      "engagement": 0.047,
+      "recent_upload_days": 4,
+      "membership": true,
+      "contact": {"type": "direct_open_chat", "value": "https://example.invalid/open-chat/stock"},
+      "discovery_path": "search: earnings analysis"
+    },
+    {
+      "channel_id": "demo-channel-only",
+      "name": "Example Market Channel",
+      "channel_url": "https://youtube.invalid/@example-market-channel",
+      "category": "both",
+      "subscribers": 8700,
+      "engagement": 0.038,
+      "recent_upload_days": 1,
+      "membership": false,
+      "contact": {"type": "channel_only", "value": "https://example.invalid/community/channel"},
+      "discovery_path": "search: cross asset analysis"
+    },
+    {
+      "channel_id": "demo-indirect",
+      "name": "Example Macro Notes",
+      "channel_url": "https://youtube.invalid/@example-macro-notes",
+      "category": "stocks",
+      "subscribers": 2300,
+      "engagement": 0.052,
+      "recent_upload_days": 7,
+      "membership": false,
+      "contact": {"type": "indirect", "value": "https://example.invalid/community/blog"},
+      "discovery_path": "channel search: macro investing"
+    },
+    {
+      "channel_id": "demo-no-contact",
+      "name": "Example Chart Room",
+      "channel_url": "https://youtube.invalid/@example-chart-room",
+      "category": "crypto",
+      "subscribers": 1900,
+      "engagement": 0.041,
+      "recent_upload_days": 11,
+      "membership": false,
+      "contact": {"type": "none", "value": ""},
+      "discovery_path": "video search: divergence"
+    },
+    {
+      "channel_id": "demo-inactive",
+      "name": "Example Dormant Investor",
+      "channel_url": "https://youtube.invalid/@example-dormant-investor",
+      "category": "stocks",
+      "subscribers": 3400,
+      "engagement": 0.049,
+      "recent_upload_days": 420,
+      "membership": true,
+      "contact": {"type": "direct_email", "value": "inactive@example.invalid"},
+      "discovery_path": "search: long-term investing"
+    },
+    {
+      "channel_id": "demo-small",
+      "name": "Example New Trader",
+      "channel_url": "https://youtube.invalid/@example-new-trader",
+      "category": "crypto",
+      "subscribers": 120,
+      "engagement": 0.09,
+      "recent_upload_days": 1,
+      "membership": false,
+      "contact": {"type": "direct_email", "value": "small@example.invalid"},
+      "discovery_path": "search: beginner crypto"
+    },
+    {
+      "channel_id": "demo-irrelevant",
+      "name": "=IMPORTXML synthetic formula",
+      "channel_url": "https://youtube.invalid/@example-game-coins",
+      "category": "other",
+      "subscribers": 6200,
+      "engagement": 0.07,
+      "recent_upload_days": 2,
+      "membership": false,
+      "contact": {"type": "direct_email", "value": "games@example.invalid"},
+      "discovery_path": "search: game coins"
+    },
+    {
+      "channel_id": "demo-contacted",
+      "name": "Example Already Contacted",
+      "channel_url": "https://youtube.invalid/@example-contacted",
+      "category": "crypto",
+      "subscribers": 9100,
+      "engagement": 0.055,
+      "recent_upload_days": 3,
+      "membership": true,
+      "contact": {"type": "direct_email", "value": "contacted@example.invalid"},
+      "discovery_path": "search: crypto analysis"
+    }
+  ]
+}

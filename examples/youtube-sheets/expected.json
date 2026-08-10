@@ -1,0 +1,178 @@
+{
+  "leads": [
+    {
+      "channel_id": "demo-crypto",
+      "name": "Example Crypto Lab",
+      "channel_url": "https://youtube.invalid/@example-crypto-lab",
+      "subscribers": 5200,
+      "engagement": 0.061,
+      "recent_upload_days": 2,
+      "membership": true,
+      "category": "crypto",
+      "discovery_path": "search: bitcoin market structure | video search: on-chain analysis",
+      "contact": "crypto@example.invalid",
+      "contact_grade": "direct-email"
+    },
+    {
+      "channel_id": "demo-stock",
+      "name": "Example Stock Desk",
+      "channel_url": "https://youtube.invalid/@example-stock-desk",
+      "subscribers": 12400,
+      "engagement": 0.047,
+      "recent_upload_days": 4,
+      "membership": true,
+      "category": "stocks",
+      "discovery_path": "search: earnings analysis",
+      "contact": "https://example.invalid/open-chat/stock",
+      "contact_grade": "direct-open-chat"
+    }
+  ],
+  "needs_second_review": [
+    {
+      "channel_id": "demo-channel-only",
+      "name": "Example Market Channel",
+      "channel_url": "https://youtube.invalid/@example-market-channel",
+      "subscribers": 8700,
+      "engagement": 0.038,
+      "recent_upload_days": 1,
+      "membership": false,
+      "category": "both",
+      "discovery_path": "search: cross asset analysis",
+      "current_contact": "https://example.invalid/community/channel",
+      "contact_grade": "channel-only",
+      "review_reason": "channel link has no direct message route"
+    },
+    {
+      "channel_id": "demo-indirect",
+      "name": "Example Macro Notes",
+      "channel_url": "https://youtube.invalid/@example-macro-notes",
+      "subscribers": 2300,
+      "engagement": 0.052,
+      "recent_upload_days": 7,
+      "membership": false,
+      "category": "stocks",
+      "discovery_path": "channel search: macro investing",
+      "current_contact": "https://example.invalid/community/blog",
+      "contact_grade": "indirect",
+      "review_reason": "only an indirect community or social route was found"
+    },
+    {
+      "channel_id": "demo-no-contact",
+      "name": "Example Chart Room",
+      "channel_url": "https://youtube.invalid/@example-chart-room",
+      "subscribers": 1900,
+      "engagement": 0.041,
+      "recent_upload_days": 11,
+      "membership": false,
+      "category": "crypto",
+      "discovery_path": "video search: divergence",
+      "current_contact": "",
+      "contact_grade": "none",
+      "review_reason": "no contact route was found"
+    }
+  ],
+  "research_log": [
+    {
+      "channel_id": "demo-channel-only",
+      "name": "Example Market Channel",
+      "verdict": "O",
+      "reason": "accepted",
+      "subscribers": 8700,
+      "engagement": 0.038,
+      "recent_upload_days": 1,
+      "membership": false,
+      "discovery_path": "search: cross asset analysis"
+    },
+    {
+      "channel_id": "demo-contacted",
+      "name": "Example Already Contacted",
+      "verdict": "X",
+      "reason": "already_contacted",
+      "subscribers": 9100,
+      "engagement": 0.055,
+      "recent_upload_days": 3,
+      "membership": true,
+      "discovery_path": "search: crypto analysis"
+    },
+    {
+      "channel_id": "demo-crypto",
+      "name": "Example Crypto Lab",
+      "verdict": "O",
+      "reason": "accepted",
+      "subscribers": 5200,
+      "engagement": 0.061,
+      "recent_upload_days": 2,
+      "membership": true,
+      "discovery_path": "search: bitcoin market structure | video search: on-chain analysis"
+    },
+    {
+      "channel_id": "demo-inactive",
+      "name": "Example Dormant Investor",
+      "verdict": "X",
+      "reason": "inactive",
+      "subscribers": 3400,
+      "engagement": 0.049,
+      "recent_upload_days": 420,
+      "membership": true,
+      "discovery_path": "search: long-term investing"
+    },
+    {
+      "channel_id": "demo-indirect",
+      "name": "Example Macro Notes",
+      "verdict": "O",
+      "reason": "accepted",
+      "subscribers": 2300,
+      "engagement": 0.052,
+      "recent_upload_days": 7,
+      "membership": false,
+      "discovery_path": "channel search: macro investing"
+    },
+    {
+      "channel_id": "demo-irrelevant",
+      "name": "'=IMPORTXML synthetic formula",
+      "verdict": "X",
+      "reason": "not_relevant",
+      "subscribers": 6200,
+      "engagement": 0.07,
+      "recent_upload_days": 2,
+      "membership": false,
+      "discovery_path": "search: game coins"
+    },
+    {
+      "channel_id": "demo-no-contact",
+      "name": "Example Chart Room",
+      "verdict": "O",
+      "reason": "accepted",
+      "subscribers": 1900,
+      "engagement": 0.041,
+      "recent_upload_days": 11,
+      "membership": false,
+      "discovery_path": "video search: divergence"
+    },
+    {
+      "channel_id": "demo-small",
+      "name": "Example New Trader",
+      "verdict": "X",
+      "reason": "subscriber_range",
+      "subscribers": 120,
+      "engagement": 0.09,
+      "recent_upload_days": 1,
+      "membership": false,
+      "discovery_path": "search: beginner crypto"
+    },
+    {
+      "channel_id": "demo-stock",
+      "name": "Example Stock Desk",
+      "verdict": "O",
+      "reason": "accepted",
+      "subscribers": 12400,
+      "engagement": 0.047,
+      "recent_upload_days": 4,
+      "membership": true,
+      "discovery_path": "search: earnings analysis"
+    }
+  ],
+  "exclusions": [
+    "demo-contacted"
+  ]
+}

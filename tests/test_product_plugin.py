@@ -1,6 +1,7 @@
 import json
 import unittest
 import xml.etree.ElementTree as ET
+import zipfile
 from pathlib import Path
 
 
@@ -20,7 +21,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.0.0")
+        self.assertEqual(manifest["version"], "1.0.1")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -40,12 +41,14 @@ class ProductPluginTests(unittest.TestCase):
         for heading in ("## Product decision gate", "## Required inputs", "## Workflow", "## Outputs", "## Failure handling", "## Validation"):
             self.assertIn(heading, text)
         self.assertIn("Search installed and trusted existing capabilities before creating anything", text)
+        self.assertIn("Use automatically before implementation or automation", text)
         self.assertIn("Treat installed availability as discovery evidence, not verification", text)
         self.assertIn("Popularity is a signal, not proof", text)
         self.assertIn("keep it only when the primary metric improves", text)
         for path in (
             "references/discovery-and-questions.md",
             "references/capability-discovery.md",
+            "references/data-workflow-safety.md",
             "references/agent-assembly.md",
             "references/project-files.md",
             "references/evolution.md",
@@ -56,6 +59,7 @@ class ProductPluginTests(unittest.TestCase):
             self.assertTrue((SKILL / path).is_file(), path)
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
             self.assertNotIn(forbidden, text)
+        self.assertIn("stable identity, deterministic deduplication, exclusion precedence", text)
 
     def test_submission_scenario_inventory(self):
         payload = json.loads((ROOT / "evals/cases.json").read_text(encoding="utf-8"))
@@ -73,6 +77,27 @@ class ProductPluginTests(unittest.TestCase):
         self.assertEqual(len(results), len(cases))
         self.assertEqual({result["case_id"] for result in results}, {case["id"] for case in cases})
         self.assertTrue(all(result["status"] in {"passed", "requires-rerun"} for result in results))
+
+    def test_release_metadata_and_archive_are_consistent(self):
+        version = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
+        self.assertIn(f"Version: `{version}`", (ROOT / "submission/listing.md").read_text(encoding="utf-8"))
+        self.assertIn(f"# nulnul harness {version}", (ROOT / "submission/release-notes.md").read_text(encoding="utf-8"))
+        self.assertIn(f"version-{version}", (ROOT / "README.md").read_text(encoding="utf-8"))
+
+        archive = ROOT / "dist" / f"nulnul-harness-{version}.zip"
+        self.assertTrue(archive.is_file())
+        with zipfile.ZipFile(archive) as bundle:
+            bundled = {
+                Path(name).relative_to("nulnul-harness").as_posix(): bundle.read(name)
+                for name in bundle.namelist()
+                if not name.endswith("/")
+            }
+        product = {
+            path.relative_to(PLUGIN).as_posix(): path.read_bytes()
+            for path in PLUGIN.rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(bundled, product)
 
     def test_legacy_lab_is_not_part_of_the_product(self):
         for path in ("plugins/project-harness", "catalog", "docs/research", "sandbox", "scripts/validate_lab.py", "skills-lock.json"):

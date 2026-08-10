@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "channel_id": "UC-crypto-lab",
+      "title": "Crypto Lab",
+      "description": "온체인 데이터와 비트코인 시장 구조를 분석합니다.",
+      "recent_video_titles": [
+        "비트코인 온체인 지표 읽기",
+        "이더리움 수수료와 네트워크 활동"
+      ]
+    },
+    {
+      "channel_id": "UC-stock-note",
+      "title": "Stock Note",
+      "description": "기업 실적과 장기 주식 투자를 다룹니다.",
+      "recent_video_titles": [
+        "반도체 기업 실적 비교",
+        "현금흐름표로 종목 분석하기"
+      ]
+    },
+    {
+      "channel_id": "UC-market-bridge",
+      "title": "Market Bridge",
+      "description": "주식과 디지털 자산 시장을 함께 분석합니다.",
+      "recent_video_titles": [
+        "금리 변화가 기술주에 미치는 영향",
+        "비트코인과 나스닥 상관관계"
+      ]
+    },
+    {
+      "channel_id": "UC-daily-kitchen",
+      "title": "Daily Kitchen",
+      "description": "간단한 집밥과 주방 도구를 소개합니다.",
+      "recent_video_titles": [
+        "10분 된장찌개",
+        "프라이팬 관리법"
+      ]
+    },
+    {
+      "channel_id": "UC-coin-game",
+      "title": "Coin Game",
+      "description": "게임 속 코인과 아이템을 리뷰합니다.",
+      "recent_video_titles": [
+        "신작 게임 코인 파밍",
+        "아이템 거래소 업데이트"
+      ]
+    },
+    {
+      "channel_id": "UC-stock-note",
+      "title": "Stock Note 재수집본",
+      "description": "검색 경로만 다른 동일 채널입니다.",
+      "recent_video_titles": [
+        "반도체 기업 실적 비교"
+      ]
+    }
+  ],
+  "expected": [
+    {
+      "channel_id": "UC-crypto-lab",
+      "include": true,
+      "category": "crypto"
+    },
+    {
+      "channel_id": "UC-stock-note",
+      "include": true,
+      "category": "stocks"
+    },
+    {
+      "channel_id": "UC-market-bridge",
+      "include": true,
+      "category": "both"
+    },
+    {
+      "channel_id": "UC-daily-kitchen",
+      "include": false,
+      "category": null
+    },
+    {
+      "channel_id": "UC-coin-game",
+      "include": false,
+      "category": null
+    }
+  ]
+}

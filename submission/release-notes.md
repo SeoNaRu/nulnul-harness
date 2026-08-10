@@ -1,5 +1,7 @@
-# nulnul harness 1.0.0
+# nulnul harness 1.0.1
 
-Initial skills-only release. nulnul harness turns a project idea or recurring workflow into a minimal agent system. It inspects the repository, finds and verifies existing capabilities before creating local substitutes, assembles only distinct agent roles, continues the original work, and accepts evolution only when a reproducible result improves without violating guardrails.
+This patch release strengthens implicit activation when a project has no known setup, while preserving direct behavior for coherent repositories and read-only requests.
 
-It bundles no MCP server, external service, authentication, telemetry, or UI. The final package requires six positive and three negative forward scenarios before submission. No test credentials are required for local structure validation; connector scenarios must stop before authentication or external writes unless the evaluator explicitly authorizes them.
+The release adds Harness 100, an evidence-backed gate covering six positive and three negative isolated scenarios. All nine currently pass. It also adds a deterministic YouTube-to-Sheets classification and deduplication benchmark, a fully synthetic public workbook example, recurring data-workflow safety rules, an Obsidian experiment wiki, and a public README that separates verified behavior from untested performance claims.
+
+`nulnul harness` remains a skills-only plugin. It bundles no MCP server, external service, authentication, telemetry, hook, UI, or background process. Authentication, external writes, deployment, publication, and global registration remain explicit approval boundaries.
