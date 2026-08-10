@@ -56,9 +56,10 @@ When an empty or evidence-poor repository and a broad request leave the intended
 
 - Confirm every selected capability has a concrete job, inspectable source, activation condition, check, permission boundary, verification status, and removal condition.
 - Confirm every agent role has distinct ownership, bounded inputs and outputs, a completion check, and one synthesis owner.
-- Confirm feedback is bounded evidence, the Coach cannot promote its own proposal, agent versions change only through an independent Gate, and permission expansion has explicit approval.
+- Confirm feedback is bounded evidence, the Coach cannot promote its own proposal, agent versions change only through an independent Gate, permission expansion has explicit approval, and every promotion has one observed live cycle with an automatic rollback threshold.
 - Confirm a custom skill was created only after adequate existing candidates were checked and rejected with reasons.
 - Confirm no secret, personal data, raw conversation, machine-specific path, or unapproved global or external change was introduced.
 - Confirm recurring data workflows use stable identity, deterministic deduplication, exclusion precedence, explicit review states, auditable reasons, idempotent writes, and spreadsheet-safe values where applicable.
+- Confirm one writer per state file, a distinct `unknown` verification state, validity checks proven against a negative control, and cursors persisted even on an empty cycle.
 - When `docs/nulnul/evolution.json` exists, run `scripts/validate_evolution_state.py` from this skill against it before relying on or updating the state.
 - Run the target repository's real checks, verify the original result, and compare evolution changes against a recorded baseline.

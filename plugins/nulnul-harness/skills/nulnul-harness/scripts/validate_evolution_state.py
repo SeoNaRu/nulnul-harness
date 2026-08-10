@@ -140,6 +140,16 @@ def validate(payload):
             errors.append(f"feedback {row['id']} has invalid status")
         if not isinstance(row["target_agent"], str) or row["target_agent"] not in agents:
             errors.append(f"feedback {row['id']} targets an unknown agent")
+        rejected = row.get("rejected_proposals")
+        if rejected is not None and (
+            not isinstance(rejected, list)
+            or any(
+                not isinstance(item, str)
+                or proposal_by_id.get(item, {}).get("status") not in ("rejected", "rolled_back")
+                for item in rejected
+            )
+        ):
+            errors.append(f"feedback {row['id']}.rejected_proposals must reference rejected or rolled back proposals")
 
     for row in collections["proposals"]:
         if not isinstance(row, dict) or not PROPOSAL_FIELDS <= row.keys():

@@ -131,6 +131,21 @@ class PersonalEvolutionTests(unittest.TestCase):
         self.state["agents"]["coach"].update(version=3, last_promotion_id="promotion-2")
         self.assertEqual(validator.validate(self.state), [])
 
+    def test_feedback_can_reference_a_rejected_proposal(self):
+        self.add_accepted_coach_upgrade()
+        self.state["proposals"][0]["status"] = "rejected"
+        self.state["promotions"][0]["decision"] = "rejected"
+        self.state["feedback"][0]["rejected_proposals"] = ["proposal-1"]
+        self.assertEqual(validator.validate(self.state), [])
+
+    def test_feedback_cannot_reference_an_accepted_proposal_as_rejected(self):
+        self.add_accepted_coach_upgrade()
+        self.state["feedback"][0]["rejected_proposals"] = ["proposal-1"]
+        self.assertIn(
+            "feedback feedback-1.rejected_proposals must reference rejected or rolled back proposals",
+            validator.validate(self.state),
+        )
+
     def test_proposal_author_cannot_serve_as_gate(self):
         self.add_accepted_coach_upgrade()
         self.state["proposals"][0]["author_agent"] = "gate"

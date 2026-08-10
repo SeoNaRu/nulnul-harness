@@ -51,9 +51,32 @@ Promote only when all are true:
 4. the result is reproducible on representative input;
 5. no unapproved permission, cost, credential, external-write, deployment, or publication scope is added;
 6. rollback points to the last accepted version;
-7. the Gate is neither the target agent nor the proposal author.
+7. the Gate is neither the target agent nor the proposal author;
+8. one live cycle after promotion is observed against the recorded metric, and the promotion is rolled back automatically when the metric drops past the stated threshold.
+
+Condition 8 is not optional. A frozen sample judges stored records only; it cannot reproduce what appears at run time — resolver behaviour, load, execution order, or input that grew longer than the sample. Record the metric value at promotion, compare it at the start of the next cycle, and revert the promoting commit on a drop. The frozen sample catches regressions against known cases; the live cycle catches the ones the sample cannot contain. Both are required.
 
 Reject or roll back otherwise. Never let an agent serve as Gate for its own upgrade. If no independent Gate or valid check is available, leave the proposal pending and continue the project with the last accepted version.
+
+## Define the goal metric once
+
+- Define the goal metric in exactly one function. Every counter — the autonomous loop, status output, shell scripts, reports — imports that function instead of recounting.
+- Define it as the deliverable unit after review. Records in `rejected` or `hold` do not count toward the goal.
+- Never make a proxy metric the goal. Rows discovered is not rows deliverable, and a loop that reaches its target on the proxy stops early on work that is not done.
+- The `init` question is "what unit does this project deliver?", not "which metric do you want to track?".
+
+## Keep rejected knowledge
+
+- Preserve rejected and rolled-back proposals with their candidate diff and the reason for the decision. Keep the diff reachable from the proposal and the reason in the Gate's promotion record.
+- The Coach queries rejected and rolled-back proposals for the same target before authoring a proposal, and states why this candidate differs from the one already rejected.
+- A feedback record may list `rejected_proposals` with the proposal ids already rejected for it, so the pipeline sees the history the document already holds.
+- A loop that keeps only its wins repeats its losses.
+
+## Measure the Gate itself
+
+- Log every Gate decision: verdict, reason, and target. Include the firing count and the false-positive share in the regular report.
+- Once false positives accumulate, people start approving or ignoring the gate by reflex, and the gate stops protecting anything.
+- On a false positive the correct response is avoidance, not approval: get the same result without the new permission, and narrow the gate's condition so the same case does not fire again.
 
 ## Scope learning safely
 

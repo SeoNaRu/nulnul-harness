@@ -4,9 +4,9 @@
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified personal agent system that completes projects and improves agents from independently tested feedback.",
     "milestone": "Navigator v3 is independently promoted and nulnul-harness 1.2.1 is packaged and release-verified.",
-    "completion_check": "The 1.2.1 archive exactly matches the final plugin; all 29 tests, Harness 100, and evolution-state validation pass before push.",
+    "completion_check": "The 1.2.1 archive exactly matches the final plugin; all 31 tests, Harness 100, and evolution-state validation pass before push.",
     "status": "active",
-    "last_verified": "The final 1.2.1 plugin and archive match; all 29 tests, Harness 100, archive integrity, evolution-state validation, and diff checks pass on 2026-08-10.",
+    "last_verified": "The final 1.2.1 plugin and archive match; all 31 tests, Harness 100, archive integrity, evolution-state validation, and diff checks pass on 2026-08-10.",
     "next_action": "Commit and push the verified 1.2.1 release candidate to the existing PR, then confirm its checks.",
     "blockers": [],
     "approved_permissions": [

@@ -85,11 +85,29 @@ These are responsibility boundaries, not four mandatory live agents. Simple work
 
 For multi-session work, the harness stores only bounded state in `docs/nulnul/evolution.json`. Its standard-library validator rejects target or proposal-author self-approval, contradictory records, missing evidence, invalid version transitions, sensitive persisted keys, and permission expansion without prior approval.
 
+## Field-hardened rules
+
+These rules come from a full day of unattended loop operation on a real recurring workflow. Every row replaced a failure that the previous references did not prevent.
+
+| Rule | Failure it prevents |
+| --- | --- |
+| One writer per state file: an exclusive lock, a stopped process group, one shard per parallel collector | Concurrent loops each rewrite the whole state from memory; the last writer wins and the rest is gone. Atomic rename prevents torn files, not lost updates |
+| A distinct `unknown` verification state next to `verified` and `failed` | A skipped or timed-out check recorded as a pass, or frozen as a failure that deletes healthy records |
+| Cursors written even on a cycle that found nothing | The next window is derived from the last run record, so a missing record freezes the range and the collector rescans it forever |
+| One observed live cycle after every promotion, with an automatic rollback threshold | Regressions that only appear at run time — resolver behavior, load, execution order, longer input — pass a frozen sample untouched |
+| One function defines the goal metric; every counter imports it | Counter definitions drift, and a loop reaching its target on a proxy metric stops on work that is not delivered |
+| Every validity check proven against a negative control | Checks where a nonexistent target answers exactly like a real one, so the check measures nothing |
+| Each stage records its own start and end | Unrecorded time attaches to the neighboring stage and names the wrong bottleneck |
+| Rejected and rolled-back proposals kept with their diff and reason, queried before the next proposal | The Coach reproposing a candidate the Gate already rejected |
+| Gate decisions logged, with the false-positive share reported | Accumulated false alarms train people to wave the gate through, and the gate stops protecting anything |
+| A documentation debt detector in the day-one setup | A fix that lands only in code is invisible to the next session |
+| Day-one setup ships a minimal frozen benchmark, the deliverable-unit function, the doc-debt hook, and the state lock | A cold start has nothing for the Gate to run against, so evolution cannot begin |
+
 ## Evidence, not claims
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 29 passed |
+| Automated repository tests | 31 passed |
 | Harness 100 behavior and safety gate | 100/100 |
 | Positive isolated scenarios | 6 passed |
 | Negative safety scenarios | 3 passed |

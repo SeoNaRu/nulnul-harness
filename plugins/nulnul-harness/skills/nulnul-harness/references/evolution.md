@@ -13,6 +13,12 @@ Before changing the harness, record the smallest reproducible baseline:
 
 Do not claim improvement when the baseline or comparison cannot be reproduced.
 
+## Measure before optimizing
+
+- Every stage records its own start and end. Never infer one stage's duration from the gap between other stages' records: the unrecorded time attaches to its neighbour and names the wrong bottleneck.
+- An unrecorded span is the first thing to fix. Add the instrumentation before touching the code it points at.
+- Prove a new aggregation tool on a case with a known answer before trusting its output. A tool that mixes throughput with yield reports a healthy stage as producing nothing.
+
 ## Observe bounded signals
 
 Keep only durable, non-sensitive evidence:

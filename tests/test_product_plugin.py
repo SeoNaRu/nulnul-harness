@@ -113,8 +113,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "29 passed"),
-            "README.ko.md": ("README.md", "29개 통과"),
+            "README.md": ("README.ko.md", "31 passed"),
+            "README.ko.md": ("README.md", "31개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
