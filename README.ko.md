@@ -2,11 +2,11 @@
   <img src="plugins/nulnul-harness/assets/nulnul-logo-green.svg" width="320" alt="nulnul 로고">
 </p>
 
-<h1 align="center">nulnul harness</h1>
+<h1 align="center">nulnul</h1>
 
 <p align="center">
   <strong>검증된 능력. 개인 에이전트. 통제된 진화.</strong><br>
-  아이디어와 검증된 결과 사이의 설정 작업을 없애는 skills-only Codex 플러그인.
+  아이디어를 검증된 에이전트 시스템으로 바꾸는 skills-only Codex 플러그인.
 </p>
 
 <p align="center">
@@ -20,13 +20,11 @@
   <a href="README.md">English</a> · <strong>한국어</strong>
 </p>
 
-> **신경 꺼.** 원하는 결과만 말하세요. 능력 탐색, 설정, 조율, 검증, 근거 기반 개선은 하네스가 맡습니다.
-
-## 왜 nulnul harness인가
+## 왜 nulnul인가
 
 도구가 많다고 좋은 에이전트 시스템은 아닙니다. 검증되지 않은 스킬, 겹치는 역할, 불필요한 서버, 스스로 선언하는 “학습”은 비용과 실패 지점만 늘립니다.
 
-`nulnul harness`는 더 작은 경로를 택합니다.
+`nulnul`은 더 작은 경로를 택합니다.
 
 - 변경 전에 저장소와 완료 검사를 읽습니다.
 - 새로 만들기 전에 기존 능력을 찾아 검증합니다.

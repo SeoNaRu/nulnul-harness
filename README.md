@@ -2,11 +2,11 @@
   <img src="plugins/nulnul-harness/assets/nulnul-logo-green.svg" width="320" alt="nulnul logo">
 </p>
 
-<h1 align="center">nulnul harness</h1>
+<h1 align="center">nulnul</h1>
 
 <p align="center">
   <strong>Verified capabilities. Personal agents. Controlled evolution.</strong><br>
-  A skills-only Codex plugin that removes the setup work between an idea and a verified result.
+  A skills-only Codex plugin for turning ideas into verified agent systems.
 </p>
 
 <p align="center">
@@ -20,13 +20,11 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> **Stop worrying about it.** Describe the outcome. The harness absorbs capability discovery, setup, coordination, verification, and evidence-gated improvement.
-
-## Why nulnul harness
+## Why nulnul
 
 More tools do not make a better agent system. Unverified skills, overlapping roles, unnecessary servers, and self-declared “learning” create cost and failure points.
 
-`nulnul harness` takes the smaller path:
+`nulnul` takes the smaller path:
 
 - inspect the repository and its completion checks before changing it;
 - find and verify existing capabilities before creating new ones;
