@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="plugins/nulnul-harness/assets/nulnul-harness.svg" width="96" alt="nulnul harness 로고">
+  <img src="plugins/nulnul-harness/assets/nulnul-logo-green.svg" width="320" alt="nulnul 로고">
 </p>
 
 <h1 align="center">nulnul harness</h1>
