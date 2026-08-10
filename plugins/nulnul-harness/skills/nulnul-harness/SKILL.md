@@ -62,4 +62,5 @@ When an empty or evidence-poor repository and a broad request leave the intended
 - Confirm recurring data workflows use stable identity, deterministic deduplication, exclusion precedence, explicit review states, auditable reasons, idempotent writes, and spreadsheet-safe values where applicable.
 - Confirm one writer per state file, a distinct `unknown` verification state, validity checks proven against a negative control, and cursors persisted even on an empty cycle.
 - When `docs/nulnul/evolution.json` exists, run `scripts/validate_evolution_state.py` from this skill against it before relying on or updating the state.
+- Before ending a session that changed source, run `scripts/check_doc_debt.py` from this skill and update any document it reports as stale.
 - Run the target repository's real checks, verify the original result, and compare evolution changes against a recorded baseline.

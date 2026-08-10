@@ -6,7 +6,7 @@ Create only files with a durable consumer.
 
 A cold project has no accepted version, no baseline, and no history for the Coach to learn from, so the first setup ships the mechanisms that make later sessions possible. Include, before any extra agent:
 
-- a **documentation debt detector**, so a fix never stays only in code (see below);
+- a **documentation debt detector**, so a fix never stays only in code — `../scripts/check_doc_debt.py` ships with this skill;
 - a **minimal frozen benchmark**, even a handful of hand-labelled cases, because a Gate without one cannot run on day one;
 - the **deliverable-unit function** that defines the goal metric, plus its source of truth (see `personal-evolution.md`);
 - the **single-writer lock** for any long-running loop's state file (see `data-workflow-safety.md`).
@@ -17,8 +17,17 @@ These four matter more than the agent roster. Most measured gains come from corr
 
 A fix that lands in code but not in the harness documents is knowledge the next session cannot see, and the next session is where it was needed.
 
-- Warn when source files are newer than the harness documents that describe them. Comparing modification times in a hook is enough; a precise detector is not required.
+- Warn when source files are newer than the harness documents that describe them. Comparing modification times is enough; a precise detector is not required.
 - A false positive costs one warning line. A miss costs re-digging a hole that was already dug.
+
+Run the shipped detector instead of writing one:
+
+```bash
+python3 ../scripts/check_doc_debt.py .                       # AGENTS.md, CLAUDE.md, docs/nulnul/project.md, README.md
+python3 ../scripts/check_doc_debt.py . --document AGENTS.md  # narrow it to one document
+```
+
+It exits non-zero when a listed document is older than the newest tracked source file, so it works as a pre-push hook or a final check before ending a session.
 
 ## `AGENTS.md`
 
