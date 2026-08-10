@@ -37,6 +37,7 @@ class PersonalEvolutionTests(unittest.TestCase):
                 "id": "proposal-1",
                 "feedback_ids": ["feedback-1"],
                 "target_agent": "coach",
+                "author_agent": "coach",
                 "from_version": 1,
                 "to_version": 2,
                 "cause": "The profile did not require a single change target.",
@@ -95,7 +96,7 @@ class PersonalEvolutionTests(unittest.TestCase):
         broken = copy.deepcopy(self.state)
         broken["agents"]["coach"] = []
         broken["feedback"] = [{"id": [], "source": [], "target_agent": [], "observed": "x", "expected": "y", "evidence": "z", "scope": [], "status": []}]
-        broken["proposals"] = [{"id": "p", "feedback_ids": [[]], "target_agent": "coach", "from_version": 1, "to_version": 2, "cause": "x", "change_target": "y", "regression_check": "z", "primary_metric": "m", "permission_delta": [[]], "rollback": "v1", "status": "accepted"}]
+        broken["proposals"] = [{"id": "p", "feedback_ids": [[]], "target_agent": "coach", "author_agent": [], "from_version": 1, "to_version": 2, "cause": "x", "change_target": "y", "regression_check": "z", "primary_metric": "m", "permission_delta": [[]], "rollback": "v1", "status": "accepted"}]
         broken["promotions"] = [{"id": "g", "proposal_id": [], "gate_agent": [], "before": "x", "after": "y", "regressions_passed": "yes", "decision": []}]
         self.assertTrue(validator.validate(broken))
 
@@ -113,6 +114,28 @@ class PersonalEvolutionTests(unittest.TestCase):
         self.state["feedback"][0]["evidence"] = ""
         self.assertIn(
             "feedback feedback-1.evidence must be non-empty",
+            validator.validate(self.state),
+        )
+
+    def test_agent_can_keep_history_after_a_second_promotion(self):
+        self.add_accepted_coach_upgrade()
+        self.state["feedback"].append(
+            {"id": "feedback-2", "source": "test", "target_agent": "coach", "observed": "v2 failed", "expected": "v3 passes", "evidence": "regression-2", "scope": "agent", "status": "converted"}
+        )
+        self.state["proposals"].append(
+            {"id": "proposal-2", "feedback_ids": ["feedback-2"], "target_agent": "coach", "author_agent": "coach", "from_version": 2, "to_version": 3, "cause": "v2 gap", "change_target": "Coach profile", "regression_check": "regression-2", "primary_metric": "failures", "permission_delta": [], "rollback": "coach v2", "status": "accepted"}
+        )
+        self.state["promotions"].append(
+            {"id": "promotion-2", "proposal_id": "proposal-2", "gate_agent": "gate", "before": "v2 failed", "after": "v3 passed", "regressions_passed": True, "decision": "accepted"}
+        )
+        self.state["agents"]["coach"].update(version=3, last_promotion_id="promotion-2")
+        self.assertEqual(validator.validate(self.state), [])
+
+    def test_proposal_author_cannot_serve_as_gate(self):
+        self.add_accepted_coach_upgrade()
+        self.state["proposals"][0]["author_agent"] = "gate"
+        self.assertIn(
+            "promotion promotion-1 is approved by its proposal author",
             validator.validate(self.state),
         )
 

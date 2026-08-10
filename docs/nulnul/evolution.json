@@ -3,11 +3,11 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified personal agent system that completes projects and improves agents from independently tested feedback.",
-    "milestone": "Version 1.1.0 personal evolution loop implemented and self-applied.",
+    "milestone": "Version 1.2.0 fast path, bilingual onboarding, and hardened evolution history independently promoted.",
     "completion_check": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 -B scripts/harness_100.py",
     "status": "active",
-    "last_verified": "24 automated tests passed, Harness 100 scored 100/100, and the skill validator passed on 2026-08-10.",
-    "next_action": "Resume from the next user-requested product outcome; keep the paused A/B benchmark excluded until the user resumes it.",
+    "last_verified": "Independent Gates promoted Navigator v2 and product-builder v5 after skill validation, 27 automated tests, Harness 100, archive consistency, and evolution-state validation passed on 2026-08-10.",
+    "next_action": "Resume from the next user-requested product outcome; do not claim runtime uplift until the paused A/B benchmark is explicitly resumed.",
     "blockers": [],
     "approved_permissions": [
       "push the current feature branch and update the existing draft PR"
@@ -15,10 +15,10 @@
   },
   "agents": {
     "navigator": {
-      "version": 1,
+      "version": 2,
       "job": "Own the product outcome, verified checkpoint, permissions, resume, and final synthesis.",
       "profile_path": null,
-      "last_promotion_id": null
+      "last_promotion_id": "promotion-navigator-2"
     },
     "coach": {
       "version": 1,
@@ -33,10 +33,10 @@
       "last_promotion_id": null
     },
     "product-builder": {
-      "version": 2,
+      "version": 5,
       "job": "Implement the smallest complete product change and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": "promotion-product-builder-2"
+      "last_promotion_id": "promotion-product-builder-5"
     }
   },
   "feedback": [
@@ -49,6 +49,56 @@
       "evidence": "tests.test_personal_evolution reproduces proposal/promotion mismatch, empty evidence, and malformed ids.",
       "scope": "project",
       "status": "converted"
+    },
+    {
+      "id": "feedback-global-onboarding",
+      "source": "user",
+      "target_agent": "product-builder",
+      "observed": "The default GitHub README was Korean-first and did not make the product, evidence boundary, and international onboarding immediately clear.",
+      "expected": "Provide professional English and Korean entry points with the same version, installation, evidence, trust, and limitation claims.",
+      "evidence": "README.md had no locale switch or equivalent English product guide before this candidate.",
+      "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-fast-path-overhead",
+      "source": "user",
+      "target_agent": "navigator",
+      "observed": "The workflow could still enter capability discovery even when a repository already had sufficient instructions, capabilities, and completion checks.",
+      "expected": "Reuse a coherent setup immediately and search only for uncovered jobs, stopping after one adequate verified candidate per job.",
+      "evidence": "The previous core workflow called capability discovery unconditionally after repository inspection.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-korean-forward-term",
+      "source": "gate",
+      "target_agent": "product-builder",
+      "observed": "The Korean README translated forward evaluation as an unnatural term that reduced professional clarity.",
+      "expected": "Use a clear Korean rendering of forward evaluation without changing the verified claim.",
+      "evidence": "Independent bilingual Gate rejected README.ko.md wording after all functional checks passed.",
+      "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-historical-promotion-chain",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "The state validator rejected a valid agent after its second accepted promotion because it required every historical proposal to equal the current version.",
+      "expected": "Validate accepted proposals as a continuous history and link the agent only to its latest accepted promotion.",
+      "evidence": "Applying product-builder v3 made the repository state fail until a two-promotion regression reproduced and fixed the history rule.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-proposal-author-independence",
+      "source": "gate",
+      "target_agent": "product-builder",
+      "observed": "The validator prevented a target agent from approving itself but did not record or compare the proposal author with the Gate.",
+      "expected": "Persist the proposal author and reject any promotion whose Gate authored the proposal.",
+      "evidence": "The independent v4 Gate identified that author independence could only be inferred, not mechanically validated.",
+      "scope": "core",
+      "status": "converted"
     }
   ],
   "proposals": [
@@ -58,6 +108,7 @@
         "feedback-validator-forward-eval"
       ],
       "target_agent": "product-builder",
+      "author_agent": "coach",
       "from_version": 1,
       "to_version": 2,
       "cause": "The first validator checked required keys but did not fully enforce cross-record consistency or malformed value types.",
@@ -66,6 +117,92 @@
       "primary_metric": "forward-evaluation contract gaps",
       "permission_delta": [],
       "rollback": "Restore product-builder v1 and the previous validator while retaining the failing forward-evaluation cases.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-3",
+      "feedback_ids": [
+        "feedback-global-onboarding"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 2,
+      "to_version": 3,
+      "cause": "The product documentation optimized for one language and exposed no deterministic locale consistency check.",
+      "change_target": "Root English and Korean README onboarding plus locale consistency regression.",
+      "regression_check": "python3 -B -m unittest discover -s tests -p 'test_product_plugin.py' -v",
+      "primary_metric": "bilingual onboarding contract checks",
+      "permission_delta": [],
+      "rollback": "Restore the prior Korean README and remove README.ko.md plus its consistency regression.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-2",
+      "feedback_ids": [
+        "feedback-fast-path-overhead"
+      ],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 1,
+      "to_version": 2,
+      "cause": "Repository inspection identified reusable setup, but discovery remained an unconditional later step.",
+      "change_target": "Core workflow fast path and bounded capability-discovery stopping rule.",
+      "regression_check": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 -B scripts/harness_100.py",
+      "primary_metric": "unnecessary setup and discovery steps on coherent repositories",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v1 and the previous unconditional discovery wording.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-3b",
+      "feedback_ids": [
+        "feedback-global-onboarding",
+        "feedback-korean-forward-term"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 2,
+      "to_version": 3,
+      "cause": "The first bilingual candidate used an unnatural Korean term despite passing structural checks.",
+      "change_target": "Bilingual onboarding with corrected Korean evaluation terminology.",
+      "regression_check": "python3 -B -m unittest discover -s tests -p 'test_product_plugin.py' -v",
+      "primary_metric": "bilingual onboarding Gate blockers",
+      "permission_delta": [],
+      "rollback": "Restore product-builder v2 and the prior Korean-only README.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-4",
+      "feedback_ids": [
+        "feedback-historical-promotion-chain"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 3,
+      "to_version": 4,
+      "cause": "The validator treated each accepted proposal as the current version instead of validating ordered promotion history.",
+      "change_target": "Accepted promotion-chain validation and latest-promotion linkage.",
+      "regression_check": "python3 -B -m unittest tests.test_personal_evolution -v",
+      "primary_metric": "valid multi-promotion histories rejected",
+      "permission_delta": [],
+      "rollback": "Restore product-builder v3 and the single-promotion validator while retaining the failing history regression.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-5",
+      "feedback_ids": [
+        "feedback-proposal-author-independence"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 4,
+      "to_version": 5,
+      "cause": "Proposal records identified the target but not the author, so Gate independence was not fully machine-checkable.",
+      "change_target": "Proposal author persistence and author-versus-Gate validation.",
+      "regression_check": "python3 -B -m unittest tests.test_personal_evolution -v",
+      "primary_metric": "proposal-author self-approvals accepted",
+      "permission_delta": [],
+      "rollback": "Restore product-builder v4 and remove the author field while retaining the independence regression.",
       "status": "accepted"
     }
   ],
@@ -76,6 +213,51 @@
       "gate_agent": "gate",
       "before": "A fresh evaluator reproduced three contract gaps in the initial validator.",
       "after": "Eight evolution regressions, all 24 automated tests, and Harness 100 passed.",
+      "regressions_passed": true,
+      "decision": "accepted"
+    },
+    {
+      "id": "promotion-product-builder-3-rejected",
+      "proposal_id": "proposal-product-builder-3",
+      "gate_agent": "gate",
+      "before": "The bilingual candidate passed structural and functional checks.",
+      "after": "The independent Gate found an unnatural Korean term that blocked professional release readiness.",
+      "regressions_passed": true,
+      "decision": "rejected"
+    },
+    {
+      "id": "promotion-navigator-2",
+      "proposal_id": "proposal-navigator-2",
+      "gate_agent": "gate",
+      "before": "Capability discovery remained an unconditional workflow step after repository inspection.",
+      "after": "A fresh Gate confirmed coherent repositories take the direct path while uncovered jobs retain full candidate verification.",
+      "regressions_passed": true,
+      "decision": "accepted"
+    },
+    {
+      "id": "promotion-product-builder-3b",
+      "proposal_id": "proposal-product-builder-3b",
+      "gate_agent": "gate",
+      "before": "The first bilingual candidate was rejected for one unclear Korean term.",
+      "after": "The corrected English and Korean onboarding passed independent review and all repository checks.",
+      "regressions_passed": true,
+      "decision": "accepted"
+    },
+    {
+      "id": "promotion-product-builder-4",
+      "proposal_id": "proposal-product-builder-4",
+      "gate_agent": "gate",
+      "before": "The validator rejected valid multi-promotion history and could not preserve rejected alternatives alongside later accepted versions.",
+      "after": "A fresh Gate verified continuous history, rejected broken chains and self-approval, and confirmed latest-promotion linkage.",
+      "regressions_passed": true,
+      "decision": "accepted"
+    },
+    {
+      "id": "promotion-product-builder-5",
+      "proposal_id": "proposal-product-builder-5",
+      "gate_agent": "gate",
+      "before": "Gate independence could be inferred only from the target agent because proposal authors were not persisted.",
+      "after": "A fresh Gate verified proposal-author persistence and rejection when the declared author also serves as Gate, without breaking valid history.",
       "regressions_passed": true,
       "decision": "accepted"
     }

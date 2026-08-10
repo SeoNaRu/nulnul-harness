@@ -14,6 +14,8 @@ For each required capability, state:
 
 Do not search for vague categories such as “all useful tools.”
 
+Skip discovery entirely when the inspected repository already has an adequate capability for every required job and a runnable completion check. Otherwise search only for uncovered jobs. Stop when each uncovered job has one adequate verified candidate; compare more candidates only when the first has a concrete fit, safety, compatibility, or maintenance gap.
+
 ## Search in trust order
 
 1. Native tools and already installed skills, plugins, and connectors visible in the current session.

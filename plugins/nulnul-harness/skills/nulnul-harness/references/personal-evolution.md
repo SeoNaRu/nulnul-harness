@@ -35,7 +35,7 @@ For each reproducible feedback cluster:
 
 1. identify whether the defect belongs to product code, data, tool routing, capability choice, agent profile, handoff, checkpoint, or the Coach diagnosis;
 2. target the nearest durable layer and one agent version;
-3. state the cause, candidate change, reproduction, primary metric, guardrails, permission delta, and rollback;
+3. state the proposal author, cause, candidate change, reproduction, primary metric, guardrails, permission delta, and rollback;
 4. keep the current accepted version active while the candidate is evaluated;
 5. never bundle unrelated lessons or let a Worker edit another profile directly.
 
@@ -50,7 +50,8 @@ Promote only when all are true:
 3. unrelated regressions and guardrails pass;
 4. the result is reproducible on representative input;
 5. no unapproved permission, cost, credential, external-write, deployment, or publication scope is added;
-6. rollback points to the last accepted version.
+6. rollback points to the last accepted version;
+7. the Gate is neither the target agent nor the proposal author.
 
 Reject or roll back otherwise. Never let an agent serve as Gate for its own upgrade. If no independent Gate or valid check is available, leave the proposal pending and continue the project with the last accepted version.
 

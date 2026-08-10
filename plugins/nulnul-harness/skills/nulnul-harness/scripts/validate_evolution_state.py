@@ -22,6 +22,7 @@ PROPOSAL_FIELDS = {
     "id",
     "feedback_ids",
     "target_agent",
+    "author_agent",
     "from_version",
     "to_version",
     "cause",
@@ -147,6 +148,8 @@ def validate(payload):
         if not isinstance(row["target_agent"], str) or row["target_agent"] not in agents:
             errors.append(f"proposal {proposal_id} targets an unknown agent")
             continue
+        if not isinstance(row["author_agent"], str) or row["author_agent"] not in agents:
+            errors.append(f"proposal {proposal_id} has an unknown author agent")
         if not isinstance(agents[row["target_agent"]], dict):
             continue
         if not isinstance(row["status"], str) or row["status"] not in ("proposed", "gated", "accepted", "rejected", "rolled_back"):
@@ -165,8 +168,11 @@ def validate(payload):
         elif any(not isinstance(item, str) or not item for item in row["permission_delta"]):
             errors.append(f"proposal {proposal_id}.permission_delta must contain non-empty strings")
         current_version = agents[row["target_agent"]].get("version")
-        expected_version = row["to_version"] if row["status"] == "accepted" else row["from_version"]
-        if current_version != expected_version:
+        if row["status"] in ("proposed", "gated") and current_version != row["from_version"]:
+            errors.append(f"proposal {proposal_id} disagrees with the target agent version")
+        elif row["status"] in ("accepted", "rejected", "rolled_back") and (
+            not isinstance(current_version, int) or current_version < row["from_version"]
+        ):
             errors.append(f"proposal {proposal_id} disagrees with the target agent version")
 
     for row in collections["promotions"]:
@@ -187,6 +193,8 @@ def validate(payload):
             errors.append(f"promotion {promotion_id} uses an unknown gate agent")
         elif gate_agent == proposal.get("target_agent"):
             errors.append(f"promotion {promotion_id} is self-approved")
+        if gate_agent == proposal.get("author_agent"):
+            errors.append(f"promotion {promotion_id} is approved by its proposal author")
         if not isinstance(row["decision"], str) or row["decision"] not in ("accepted", "rejected", "rolled_back"):
             errors.append(f"promotion {promotion_id} has invalid decision")
         elif proposal.get("status") != row["decision"]:
@@ -201,15 +209,27 @@ def validate(payload):
             if isinstance(permission_delta, list) and any(permission not in approved for permission in permission_delta):
                 errors.append(f"promotion {promotion_id} expands permission without approval")
 
+    accepted_by_agent = {}
     for proposal_id, proposal in proposal_by_id.items():
         if not isinstance(proposal, dict) or proposal.get("status") != "accepted":
             continue
         accepted = [row for row in promotions_by_proposal.get(proposal_id, []) if row.get("decision") == "accepted"]
         if len(accepted) != 1:
             errors.append(f"accepted proposal {proposal_id} needs exactly one accepted promotion")
-        agent = agents.get(proposal.get("target_agent"), {})
-        if accepted and agent.get("last_promotion_id") != accepted[0].get("id"):
-            errors.append(f"accepted proposal {proposal_id} is not linked from the target agent")
+        elif proposal.get("target_agent") in agents:
+            accepted_by_agent.setdefault(proposal["target_agent"], []).append((proposal, accepted[0]))
+
+    for agent_id, history in accepted_by_agent.items():
+        history.sort(key=lambda item: item[0].get("to_version", 0))
+        for previous, current in zip(history, history[1:]):
+            if current[0].get("from_version") != previous[0].get("to_version"):
+                errors.append(f"agents.{agent_id} has a broken accepted version chain")
+        latest_proposal, latest_promotion = history[-1]
+        agent = agents.get(agent_id, {})
+        if agent.get("version") != latest_proposal.get("to_version"):
+            errors.append(f"agents.{agent_id}.version does not match its latest accepted proposal")
+        if agent.get("last_promotion_id") != latest_promotion.get("id"):
+            errors.append(f"agents.{agent_id}.last_promotion_id does not match its latest accepted promotion")
 
     return errors
 

@@ -2,6 +2,14 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 1.2.0 — 2026-08-10
+
+- Added equivalent English and Korean product onboarding with deterministic locale, version, command, evidence, and local-link checks.
+- Added a direct fast path for repositories whose existing setup already covers the requested work, and bounded discovery to uncovered jobs.
+- Fixed evolution-state validation so continuous multi-promotion history and rejected candidates remain valid while the current agent links only to its latest accepted promotion.
+- Added proposal-author records and reject promotions whose declared author also serves as Gate.
+- Independently gated the bilingual onboarding, fast path, and historical promotion behavior before release.
+
 ## 1.1.0 — 2026-08-10
 
 - Added Navigator, Worker, Coach, and independent Gate responsibilities for personal agent evolution.

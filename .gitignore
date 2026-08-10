@@ -10,6 +10,7 @@ node_modules/
 dist/*
 !dist/nulnul-harness-1.0.1.zip
 !dist/nulnul-harness-1.1.0.zip
+!dist/nulnul-harness-1.2.0.zip
 build/
 coverage/
 *.log

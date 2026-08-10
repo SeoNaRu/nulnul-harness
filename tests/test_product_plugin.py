@@ -1,4 +1,5 @@
 import json
+import re
 import unittest
 import xml.etree.ElementTree as ET
 import zipfile
@@ -21,7 +22,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.1.0")
+        self.assertEqual(manifest["version"], "1.2.0")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -47,6 +48,8 @@ class ProductPluginTests(unittest.TestCase):
         self.assertIn("keep it only when the primary metric improves", text)
         self.assertIn("Never let an agent approve its own upgrade", text)
         self.assertIn("resume from the last verified checkpoint", text)
+        self.assertIn("take the fast path", text)
+        self.assertIn("stop when every uncovered job has one adequate verified candidate", text)
         for path in (
             "references/discovery-and-questions.md",
             "references/capability-discovery.md",
@@ -103,6 +106,24 @@ class ProductPluginTests(unittest.TestCase):
             if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc"
         }
         self.assertEqual(bundled, product)
+
+    def test_readme_locales_are_consistent_and_links_resolve(self):
+        manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
+        readmes = {
+            "README.md": ("README.ko.md", "27 passed"),
+            "README.ko.md": ("README.md", "27개 통과"),
+        }
+        for name, (other_locale, test_claim) in readmes.items():
+            text = (ROOT / name).read_text(encoding="utf-8")
+            self.assertIn(other_locale, text)
+            self.assertIn(f"version-{manifest['version']}", text)
+            self.assertIn("Harness_100-100%2F100", text)
+            self.assertIn("codex plugin add nulnul-harness@nulnul-harness", text)
+            self.assertIn(test_claim, text)
+            for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
+                if target.startswith(("https://", "http://", "#")):
+                    continue
+                self.assertTrue((ROOT / target.split("#", 1)[0]).exists(), f"{name}: {target}")
 
     def test_legacy_lab_is_not_part_of_the_product(self):
         for path in ("plugins/project-harness", "catalog", "docs/research", "sandbox", "scripts/validate_lab.py", "skills-lock.json"):
