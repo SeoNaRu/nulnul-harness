@@ -17,6 +17,7 @@ This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds prov
 Validate product changes with:
 
 ```bash
+python3 scripts/pack_plugin.py
 python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .
 ```
