@@ -1,11 +1,7 @@
-# nulnul harness 1.2.0
+# nulnul harness 1.2.1
 
-This release makes controlled personal-agent evolution faster to enter, safer across repeated upgrades, and easier to adopt internationally.
+This patch stops `nulnul harness` from activating when a user-named local task contract already provides explicit inputs, outputs, constraints, and a runnable completion check. Project setup, capability selection, external-write planning, multi-session checkpointing, and evidence-gated evolution still activate the harness.
 
-Workers can now report bounded evidence to a Coach, which proposes one targeted version change. An independent Gate compares the candidate with the last accepted version before promotion, rejection, or rollback. The same rule applies when the Coach itself is improved: no agent can approve its own upgrade. A repository-local checkpoint lets the Navigator resume the original goal from verified state instead of reconstructing it from chat.
+On the public offline workbook task, 1.2.0 and the Navigator v3 candidate both produced 3/3 exact results with no human intervention. The candidate reduced median elapsed time by 25.76%, input tokens by 25.90%, output tokens by 22.76%, and reasoning tokens by 39.34% versus 1.2.0. Two additional self-contained task types skipped activation, while an ambiguous empty project still activated and asked the required product question.
 
-The deterministic standard-library validator now preserves continuous multi-promotion history while still rejecting target or declared proposal-author self-approval, broken chains, invalid transitions, unapproved permission expansion, broken references, and sensitive persisted fields. This is structural validation of recorded state, not cryptographic identity proof. `nulnul harness` remains skills-only, with no service, authentication, telemetry, hook, UI, or background process.
-
-The default GitHub documentation now provides equivalent English and Korean onboarding. Automated checks keep locale links, version badges, install commands, evidence counts, and local documentation targets consistent.
-
-Repositories with sufficient instructions, capabilities, and completion checks now take a direct execution path. Capability discovery runs only for uncovered jobs and stops after finding one adequate verified candidate per job.
+This is task-specific preliminary evidence, not a universal speed claim. The plugin remains skills-only with no service, authentication, telemetry, hook, UI, or background process.

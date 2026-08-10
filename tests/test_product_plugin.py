@@ -22,7 +22,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.2.0")
+        self.assertEqual(manifest["version"], "1.2.1")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -42,13 +42,16 @@ class ProductPluginTests(unittest.TestCase):
         for heading in ("## Product decision gate", "## Required inputs", "## Workflow", "## Outputs", "## Failure handling", "## Validation"):
             self.assertIn(heading, text)
         self.assertIn("Search installed and trusted existing capabilities before creating anything", text)
-        self.assertIn("Use automatically before implementation or automation", text)
+        self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
         self.assertIn("Treat installed availability as discovery evidence, not verification", text)
         self.assertIn("Popularity is a signal, not proof", text)
         self.assertIn("keep it only when the primary metric improves", text)
         self.assertIn("Never let an agent approve its own upgrade", text)
         self.assertIn("resume from the last verified checkpoint", text)
         self.assertIn("take the fast path", text)
+        self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
+        self.assertIn("do not activate when it already provides explicit local inputs, outputs, constraints, and a runnable completion check", text)
+        self.assertIn("external-write planning, multi-session checkpointing, or evidence-gated agent evolution", text)
         self.assertIn("stop when every uncovered job has one adequate verified candidate", text)
         for path in (
             "references/discovery-and-questions.md",
@@ -110,8 +113,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "27 passed"),
-            "README.ko.md": ("README.md", "27개 통과"),
+            "README.md": ("README.ko.md", "29 passed"),
+            "README.ko.md": ("README.md", "29개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")

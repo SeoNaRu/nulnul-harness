@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-10",
+  "task": "TASK.md",
+  "fixture": "../../../examples/youtube-sheets/input.json",
+  "expected": "../../../examples/youtube-sheets/expected.json",
+  "method": {
+    "trials_per_arm": 3,
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "sandbox": "workspace-write",
+    "network": false,
+    "baseline": "Fresh repository with user configuration ignored.",
+    "harness": "Same repository with only nulnul-harness 1.2.0 available project-locally.",
+    "success_check": "Exact JSON value and key-order match against the public expected result."
+  },
+  "runs": {
+    "baseline": [
+      {
+        "id": "baseline-1",
+        "passed": true,
+        "elapsed_seconds": 201.56,
+        "input_tokens": 258044,
+        "cached_input_tokens": 212224,
+        "output_tokens": 7763,
+        "reasoning_output_tokens": 2303,
+        "human_interventions": 0
+      },
+      {
+        "id": "baseline-2",
+        "passed": true,
+        "elapsed_seconds": 183.66,
+        "input_tokens": 251094,
+        "cached_input_tokens": 209152,
+        "output_tokens": 7245,
+        "reasoning_output_tokens": 2545,
+        "human_interventions": 0
+      },
+      {
+        "id": "baseline-3b",
+        "passed": true,
+        "elapsed_seconds": 215.33,
+        "input_tokens": 243990,
+        "cached_input_tokens": 219392,
+        "output_tokens": 9894,
+        "reasoning_output_tokens": 3704,
+        "human_interventions": 0
+      }
+    ],
+    "harness": [
+      {
+        "id": "harness-1",
+        "passed": true,
+        "elapsed_seconds": 224.91,
+        "input_tokens": 256844,
+        "cached_input_tokens": 227840,
+        "output_tokens": 9893,
+        "reasoning_output_tokens": 3640,
+        "human_interventions": 0
+      },
+      {
+        "id": "harness-2",
+        "passed": true,
+        "elapsed_seconds": 263.05,
+        "input_tokens": 321196,
+        "cached_input_tokens": 255232,
+        "output_tokens": 10136,
+        "reasoning_output_tokens": 3646,
+        "human_interventions": 0
+      },
+      {
+        "id": "harness-3",
+        "passed": true,
+        "elapsed_seconds": 297.6,
+        "input_tokens": 265535,
+        "cached_input_tokens": 192000,
+        "output_tokens": 9165,
+        "reasoning_output_tokens": 3462,
+        "human_interventions": 0
+      }
+    ],
+    "navigator_v3_candidate": [
+      {
+        "id": "candidate-b1",
+        "activated": false,
+        "passed": true,
+        "elapsed_seconds": 209.94,
+        "input_tokens": 196767,
+        "cached_input_tokens": 158464,
+        "output_tokens": 7641,
+        "reasoning_output_tokens": 3194,
+        "human_interventions": 0
+      },
+      {
+        "id": "candidate-b2",
+        "activated": false,
+        "passed": true,
+        "elapsed_seconds": 195.3,
+        "input_tokens": 189197,
+        "cached_input_tokens": 155392,
+        "output_tokens": 5401,
+        "reasoning_output_tokens": 1180,
+        "human_interventions": 0
+      },
+      {
+        "id": "candidate-b3",
+        "activated": false,
+        "passed": true,
+        "elapsed_seconds": 181.24,
+        "input_tokens": 262677,
+        "cached_input_tokens": 201984,
+        "output_tokens": 7798,
+        "reasoning_output_tokens": 2208,
+        "human_interventions": 0
+      }
+    ]
+  },
+  "medians": {
+    "baseline": {
+      "success_rate": 1.0,
+      "elapsed_seconds": 201.56,
+      "input_tokens": 251094,
+      "cached_input_tokens": 212224,
+      "output_tokens": 7763,
+      "reasoning_output_tokens": 2545,
+      "human_interventions": 0
+    },
+    "harness": {
+      "success_rate": 1.0,
+      "elapsed_seconds": 263.05,
+      "input_tokens": 265535,
+      "cached_input_tokens": 227840,
+      "output_tokens": 9893,
+      "reasoning_output_tokens": 3640,
+      "human_interventions": 0
+    },
+    "navigator_v3_candidate": {
+      "success_rate": 1.0,
+      "elapsed_seconds": 195.3,
+      "input_tokens": 196767,
+      "cached_input_tokens": 158464,
+      "output_tokens": 7641,
+      "reasoning_output_tokens": 2208,
+      "human_interventions": 0
+    },
+    "harness_delta_percent": {
+      "success_rate": 0.0,
+      "elapsed_seconds": 30.51,
+      "input_tokens": 5.75,
+      "cached_input_tokens": 7.36,
+      "output_tokens": 27.44,
+      "reasoning_output_tokens": 43.03
+    },
+    "candidate_delta_vs_harness_percent": {
+      "success_rate": 0.0,
+      "elapsed_seconds": -25.76,
+      "input_tokens": -25.9,
+      "cached_input_tokens": -30.45,
+      "output_tokens": -22.76,
+      "reasoning_output_tokens": -39.34
+    }
+  },
+  "excluded_runs": [
+    {
+      "id": "all-pre-2026-08-10-runs",
+      "reason": "Prior paused or incomplete work was excluded before the fresh comparison."
+    },
+    {
+      "id": "baseline-contaminated-plugin-override",
+      "reason": "The attempted configuration override still loaded nulnul-harness."
+    },
+    {
+      "id": "baseline-3",
+      "reason": "The output passed, but final token usage could not be recovered after session output truncation."
+    },
+    {
+      "id": "candidate-1",
+      "reason": "The first wording candidate still activated nulnul-harness because its broad positive trigger overrode the exception; the run was stopped and excluded."
+    }
+  ],
+  "candidate_guard_checks": [
+    {
+      "id": "self-contained-text-normalization",
+      "expected_activation": false,
+      "observed_activation": false,
+      "result": "passed exact three-line output"
+    },
+    {
+      "id": "self-contained-python-bug-fix",
+      "expected_activation": false,
+      "observed_activation": false,
+      "result": "passed repository unittest"
+    },
+    {
+      "id": "ambiguous-empty-project",
+      "expected_activation": true,
+      "observed_activation": true,
+      "result": "asked one blocking product question without creating product files"
+    },
+    {
+      "id": "repository-safety-regressions",
+      "expected_activation": true,
+      "observed_activation": true,
+      "result": "Harness 100 remains 100/100 for capability, permission, evolution, secret, and global-registration boundaries"
+    }
+  ],
+  "conclusion": "Preliminary task-specific result: baseline, nulnul-harness 1.2.0, and Navigator v3 each achieved 3/3 exact outputs with no human intervention. Navigator v3 correctly skipped activation and reduced median elapsed time 25.76% versus 1.2.0 without worsening measured token medians. Cross-task and activation guards passed and an independent Gate promoted the change; do not generalize from n=3."
+}

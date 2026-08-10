@@ -2,6 +2,12 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 1.2.1 — 2026-08-10
+
+- Skip harness activation when a user-named local task contract already contains explicit inputs, outputs, constraints, and a runnable completion check.
+- Preserved activation for project setup, capability selection, external writes, multi-session checkpoints, and evidence-gated evolution.
+- Added reproducible 3×3 A/B evidence and two cross-task activation guards; Navigator v3 reduced median elapsed time 25.76% versus 1.2.0 without changing exact-result success or intervention rate.
+
 ## 1.2.0 — 2026-08-10
 
 - Added equivalent English and Korean product onboarding with deterministic locale, version, command, evidence, and local-link checks.

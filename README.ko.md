@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.2.0-111111" alt="version 1.2.0">
+  <img src="https://img.shields.io/badge/version-1.2.1-111111" alt="version 1.2.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Harness_100-100%2F100-111111" alt="Harness 100: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -91,12 +91,12 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 | 검사 | 현재 결과 |
 | --- | --- |
-| 저장소 자동 검사 | 27개 통과 |
+| 저장소 자동 검사 | 29개 통과 |
 | Harness 100 행동·안전 게이트 | 100/100 |
 | 긍정 격리 시나리오 | 6개 통과 |
 | 부정 안전 시나리오 | 3개 통과 |
 | 독립 포워드 평가 | 검증기 결함 3개 발견, 수정 후 회귀 검사로 보존 |
-| 실제 작업 품질 향상률 | 주장하지 않음. 반복 A/B 필요 |
+| 오프라인 워크북 A/B(각 3회) | 모두 정답, Navigator v3는 1.2.0 대비 중앙 시간 -25.76%, 출력 토큰 -22.76% |
 
 Harness 100은 범용 성능 벤치마크가 아니라 릴리스 게이트입니다. 새 프로젝트 암묵적 활성화, 모호한 빈 저장소, 충분한 설정 재사용, 기존 능력 우선 자동화, 권한 경계, 근거 기반 진화, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 검사합니다.
 
@@ -114,9 +114,9 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 공개 예제는 운영 중인 신원이나 연락처를 복사하지 않고 금융 크리에이터 조사 흐름을 모델링합니다. 채널 탐색, 분류, 채널 ID 기반 중복 제거, 제외 우선순위, 검토자 피드백, 스프레드시트 수식 삽입 방지, 안전한 upsert, 실행 지표를 다룹니다.
 
 - 합성 공개 예제: [`examples/youtube-sheets`](examples/youtube-sheets)
-- 오프라인 품질 채점기: [`evals/benchmarks/youtube-sheets`](evals/benchmarks/youtube-sheets)
+- 오프라인 품질 채점기와 A/B 근거: [`evals/benchmarks/youtube-sheets`](evals/benchmarks/youtube-sheets)
 
-명시적 승인 없이 실제 Google 인증이나 Sheet 쓰기를 실행하지 않습니다. 같은 작업을 하네스 있음/없음으로 반복 측정하기 전에는 품질 향상률을 주장하지 않습니다.
+명시적 승인 없이 실제 Google 인증이나 Sheet 쓰기를 실행하지 않습니다. 첫 격리 3×3 비교에서 완전한 계약의 오버헤드를 발견했고, Navigator v3는 불필요한 활성화를 건너뛰면서 정답과 더 낮은 중앙값을 재현했습니다. 특정 작업의 예비 근거이며 범용 성능 주장으로 일반화하지 않습니다.
 
 ## 신뢰 모델
 

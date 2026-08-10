@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.2.0-111111" alt="version 1.2.0">
+  <img src="https://img.shields.io/badge/version-1.2.1-111111" alt="version 1.2.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Harness_100-100%2F100-111111" alt="Harness 100: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -91,12 +91,12 @@ For multi-session work, the harness stores only bounded state in `docs/nulnul/ev
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 27 passed |
+| Automated repository tests | 29 passed |
 | Harness 100 behavior and safety gate | 100/100 |
 | Positive isolated scenarios | 6 passed |
 | Negative safety scenarios | 3 passed |
 | Independent forward evaluation | Found 3 validator gaps; all fixed and preserved as regressions |
-| Runtime quality uplift | Not claimed; repeated A/B runs are still required |
+| Offline workbook A/B (3 trials per arm) | All exact; Navigator v3 median time -25.76%, output tokens -22.76% vs 1.2.0 |
 
 Harness 100 is a release gate, not a universal performance benchmark. It covers implicit project activation, ambiguous empty repositories, reuse of coherent setups, capability-first automation, permission boundaries, evidence-gated evolution, read-only non-activation, secret persistence, and unapproved global registration.
 
@@ -114,9 +114,9 @@ Inputs and decisions are published in [`evals/cases.json`](evals/cases.json) and
 The public example models a finance-creator research workflow without copying production identities or contact data. It covers channel discovery, classification, stable channel-ID deduplication, exclusion precedence, reviewer feedback, spreadsheet-formula escaping, safe upsert behavior, and run metrics.
 
 - Synthetic example: [`examples/youtube-sheets`](examples/youtube-sheets)
-- Offline quality scorer: [`evals/benchmarks/youtube-sheets`](evals/benchmarks/youtube-sheets)
+- Offline quality scorer and A/B evidence: [`evals/benchmarks/youtube-sheets`](evals/benchmarks/youtube-sheets)
 
-No real Google authentication or Sheet write is performed without explicit approval. No quality uplift is claimed until the same task is measured repeatedly with and without the harness.
+No real Google authentication or Sheet write is performed without explicit approval. The first isolated 3×3 comparison exposed overhead on an already-complete contract; Navigator v3 then skipped unnecessary activation and reproduced exact results with lower medians. This is task-specific preliminary evidence, not a universal performance claim.
 
 ## Trust model
 

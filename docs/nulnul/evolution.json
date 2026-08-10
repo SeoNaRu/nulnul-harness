@@ -3,11 +3,11 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified personal agent system that completes projects and improves agents from independently tested feedback.",
-    "milestone": "Version 1.2.0 fast path, bilingual onboarding, and hardened evolution history independently promoted.",
-    "completion_check": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 -B scripts/harness_100.py",
+    "milestone": "Navigator v3 is independently promoted and nulnul-harness 1.2.1 is packaged and release-verified.",
+    "completion_check": "The 1.2.1 archive exactly matches the final plugin; all 29 tests, Harness 100, and evolution-state validation pass before push.",
     "status": "active",
-    "last_verified": "Independent Gates promoted Navigator v2 and product-builder v5 after skill validation, 27 automated tests, Harness 100, archive consistency, and evolution-state validation passed on 2026-08-10.",
-    "next_action": "Resume from the next user-requested product outcome; do not claim runtime uplift until the paused A/B benchmark is explicitly resumed.",
+    "last_verified": "The final 1.2.1 plugin and archive match; all 29 tests, Harness 100, archive integrity, evolution-state validation, and diff checks pass on 2026-08-10.",
+    "next_action": "Commit and push the verified 1.2.1 release candidate to the existing PR, then confirm its checks.",
     "blockers": [],
     "approved_permissions": [
       "push the current feature branch and update the existing draft PR"
@@ -15,10 +15,10 @@
   },
   "agents": {
     "navigator": {
-      "version": 2,
+      "version": 3,
       "job": "Own the product outcome, verified checkpoint, permissions, resume, and final synthesis.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-2"
+      "last_promotion_id": "promotion-navigator-3"
     },
     "coach": {
       "version": 1,
@@ -97,6 +97,16 @@
       "observed": "The validator prevented a target agent from approving itself but did not record or compare the proposal author with the Gate.",
       "expected": "Persist the proposal author and reject any promotion whose Gate authored the proposal.",
       "evidence": "The independent v4 Gate identified that author independence could only be inferred, not mechanically validated.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-self-contained-activation-overhead",
+      "source": "gate",
+      "target_agent": "navigator",
+      "observed": "nulnul-harness 1.2.0 activated for a self-contained local task and repeatedly loaded setup references even though the task already supplied explicit inputs, outputs, constraints, and a runnable completion check.",
+      "expected": "Skip harness activation for complete isolated task contracts while retaining activation for external writes, capability discovery, multi-session checkpointing, and evolution.",
+      "evidence": "evals/benchmarks/youtube-sheets/ab-results.json records 3/3 exact outputs in both arms with 30.51% median elapsed and 27.44% output-token overhead in the harness arm.",
       "scope": "core",
       "status": "converted"
     }
@@ -204,6 +214,23 @@
       "permission_delta": [],
       "rollback": "Restore product-builder v4 and remove the author field while retaining the independence regression.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-3",
+      "feedback_ids": [
+        "feedback-self-contained-activation-overhead"
+      ],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 2,
+      "to_version": 3,
+      "cause": "The activation description excluded coherent repository setup but not a complete standalone task contract, so setup guidance was loaded without an uncovered job.",
+      "change_target": "The nulnul-harness activation description only; no workflow, permission, capability, or product-file change.",
+      "regression_check": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 -B scripts/harness_100.py",
+      "primary_metric": "median elapsed time and token use on self-contained local tasks",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v2 activation wording and retain the benchmark evidence.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -258,6 +285,15 @@
       "gate_agent": "gate",
       "before": "Gate independence could be inferred only from the target agent because proposal authors were not persisted.",
       "after": "A fresh Gate verified proposal-author persistence and rejection when the declared author also serves as Gate, without breaking valid history.",
+      "regressions_passed": true,
+      "decision": "accepted"
+    },
+    {
+      "id": "promotion-navigator-3",
+      "proposal_id": "proposal-navigator-3",
+      "gate_agent": "gate",
+      "before": "nulnul-harness 1.2.0 activated on a complete local task contract and added median time and token overhead without changing correctness.",
+      "after": "A fresh Gate verified 3/3 exact candidate runs, 25.76% lower median elapsed time, lower token medians, two cross-task non-activation guards, and preserved ambiguous-project activation.",
       "regressions_passed": true,
       "decision": "accepted"
     }
