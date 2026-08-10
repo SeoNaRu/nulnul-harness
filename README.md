@@ -85,6 +85,61 @@ Discover → Verify → Assemble → Run → Checkpoint → Evolve
 | Checkpoint | Verified state, next action, blockers, and approved permissions |
 | Evolve | Reproducible feedback, version comparison, independent promotion, and rollback |
 
+One run, in full:
+
+```text
+your request
+     │
+     ▼
+inspect the repository ──▶ coherent setup and completion check already exist? ──yes──▶ reuse, skip setup
+     │ no                                                                                     │
+     ▼                                                                                        │
+map the required jobs ──▶ search installed and existing capabilities                          │
+     │                             │                                                          │
+     │                             └─ none adequate ──▶ verify one candidate ──▶ create only what is missing
+     ▼                                                                                        │
+assemble the smallest working set ◀───────────────────────────────────────────────────────────┘
+     │
+     ▼
+do the actual work ──▶ verify with the repository's own checks
+     │                          │
+     │                          └─ failed ──▶ feedback ──▶ Coach proposal ──▶ independent Gate ──▶ promote or roll back
+     ▼
+checkpoint the verified state ──▶ the next session resumes from here, not from chat memory
+```
+
+The `yes` branch is the common one on a mature repository, and it produces no files at all.
+
+## What lands in your repository
+
+```text
+your-project/
+├── AGENTS.md                  # short repo-wide guidance, merged with what you already wrote
+├── docs/nulnul/
+│   ├── project.md             # goal, completion check, capabilities, permission boundaries, rollback
+│   └── evolution.json         # checkpoint, agent versions, bounded feedback, Gate decisions
+└── .agents/skills/<name>/     # only when a recurring workflow has no adequate existing skill
+```
+
+That is the entire footprint. `evolution.json` appears only for multi-session or self-improving work, the project-local skill only when every existing candidate was checked and rejected, and a fast-path run writes nothing. Deleting `docs/nulnul/` and `.agents/` removes the harness without touching product code.
+
+The goal is fewer generated files, not more. A setup that produces dozens of agent definitions has moved the problem, not solved it.
+
+## Use cases
+
+Each of these is one sentence in a fresh session. Every one is a recurring data workflow, so it inherits deduplication, exclusion precedence, `unknown` states, cursor persistence, and single-writer locking without asking for them.
+
+```text
+Build me a harness that finds finance YouTube creators, deduplicates them, and writes reviewed results to Google Sheets.
+Build me a harness that watches job boards for new postings, drops duplicates, and keeps one reviewable queue.
+Build me a harness that snapshots competitor pricing pages weekly and reports only what changed.
+Build me a harness that collects new papers and release notes in my field and produces one weekly digest.
+Build me a harness that classifies an inbound inquiry inbox and routes anything uncertain to a review queue.
+Build me a harness that collects product reviews, tags recurring issues, and keeps a running summary sheet.
+Build me a harness that verifies every link in our docs and reports dead ones with the state it could not check.
+Build me a harness that collects CI failures and clusters the ones that repeat across runs.
+```
+
 ## Personal agent evolution
 
 ```text
@@ -199,6 +254,44 @@ plugins/nulnul-harness/                 # only shipped product boundary
 ```
 
 The plugin remains skills-only. It includes no MCP server, hook, app, authentication, telemetry, hosted service, or background process. Evolution happens during normal agent work; it is not an unsupervised daemon. Gate independence is validated from declared state; it is not cryptographic identity proof.
+
+## FAQ
+
+<details>
+<summary>Is Harness 100 a performance benchmark?</summary>
+
+No. It is a release gate over behaviors and safety boundaries: implicit activation, ambiguous empty repositories, reuse of a coherent setup, capability-first automation, permission boundaries, evidence-gated evolution, read-only non-activation, secret persistence, and unapproved global registration. Speed and quality evidence is separate, task-specific, and reported as such in [Evidence, not claims](#evidence-not-claims).
+</details>
+
+<details>
+<summary>Why does it create so few agents?</summary>
+
+Because that is where the measurements pointed. Over a full day of unattended operation, every measured gain came from correcting a judgment function that already existed; new agents contributed nothing and added coordination cost. A role is added only for a concrete independent job, a context boundary, a parallel branch, or an independent verification need.
+</details>
+
+<details>
+<summary>Why can't an agent accept its own improvement?</summary>
+
+Producing an answer and checking one are different jobs, and the second is the easier one to keep honest. A promotion needs an independent Gate, a reproduced failure, passing regressions, and one observed live cycle with an automatic rollback threshold. The state validator rejects a file where the proposal author or the target agent signed its own promotion, so the rule survives a persuasive agent.
+</details>
+
+<details>
+<summary>Why no MCP server, hook, or background process?</summary>
+
+Nothing here needs to run continuously, and a component that runs continuously has to be operated, secured, and removed. Capability discovery can still adopt an MCP server or plugin when a job actually needs one — behind explicit approval, and recorded with its permission boundary and removal condition.
+</details>
+
+<details>
+<summary>What is left after I remove it?</summary>
+
+Product code, and whatever guidance you wrote yourself. Generated project state lives in `docs/nulnul/` and `.agents/`, and the plugin merges with user-owned instructions rather than replacing them.
+</details>
+
+<details>
+<summary>How is this different from a harness that generates agent teams?</summary>
+
+Different job. Team-generating factories produce a staffed organization from a domain description. This one starts from the repository you already have, reuses what covers the work, and generates the smallest set that passes a completion check — often nothing. It also carries the operational rules that decide whether an unattended loop keeps its data: locks, cursors, unverified states, and rollback thresholds.
+</details>
 
 ## Removal
 
