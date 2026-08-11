@@ -4,7 +4,9 @@ This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds prov
 
 - Treat `plugins/nulnul-harness/` as the only shipped product boundary.
 - Keep the plugin skills-only until a real workflow proves that an MCP server, hook, app, or external service is necessary.
-- Inspect a target repository before asking questions. Ask only for product decisions or constraints that cannot be discovered safely.
+- Inspect a target repository before asking questions. Ask only for product decisions or constraints that cannot be discovered safely. A request to set the harness up on a repository that already has work is never one of those questions.
+- Detect the host surface before writing setup files, and enumerate its installed skills, plugins, and agents before claiming a job is covered.
+- Upgrade an existing agent roster in place. Classify every existing role as kept, upgraded, merged, or removed; never recreate one that already exists.
 - Search installed, official, curated, and reputable public capabilities before creating a project-local substitute. Verify fit, provenance, compatibility, maintenance, permissions, and license; popularity alone is not verification.
 - Continue the user's original task after setup; setup alone is not task completion.
 - Add every necessary, non-overlapping capability, but activate only what the current task needs.

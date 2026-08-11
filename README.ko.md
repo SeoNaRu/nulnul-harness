@@ -6,13 +6,13 @@
 
 <p align="center">
   <strong>검증된 능력. 개인 에이전트. 통제된 진화.</strong><br>
-  아이디어를 검증된 에이전트 시스템으로 바꾸는 skills-only Codex 플러그인.
+  아이디어를 검증된 에이전트 시스템으로 바꾸는 skills-only 플러그인. Codex와 Claude Code 모두 지원.
 </p>
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/version-1.2.1-111111" alt="version 1.2.1">
-  <a href="evals/results.json"><img src="https://img.shields.io/badge/Harness_100-100%2F100-111111" alt="Harness 100: 100/100"></a>
+  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
 
@@ -57,9 +57,23 @@
 ```bash
 git clone https://github.com/SeoNaRu/nulnul-harness.git
 cd nulnul-harness
+```
+
+Codex:
+
+```bash
 codex plugin marketplace add "$PWD"
 codex plugin add nulnul-harness@nulnul-harness
 ```
+
+Claude Code:
+
+```bash
+claude plugin marketplace add "$PWD"
+claude plugin install nulnul-harness@nulnul-harness
+```
+
+두 환경 모두 같은 스킬을 씁니다. 하네스가 호스트를 감지해 해당 호스트의 설정 경로에 씁니다.
 
 새 Codex 세션에서 원하는 결과를 말하세요. "하네스 만들어줘"면 충분합니다. 에이전트도, 역할도, 설정 절차도 직접 적지 않습니다.
 
@@ -185,7 +199,7 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 | --- | --- | --- |
 | Coach/Gate 분리 | actor-critic([Sutton & Barto](http://incompleteideas.net/book/the-book.html)), generator-verifier gap — 만드는 일과 채점하는 일은 다른 일이고 채점이 더 쉽습니다 | `references/personal-evolution.md` |
 | 자동 승격·롤백 | champion/challenger, 모델 레지스트리 승격 게이트([MLflow](https://mlflow.org/docs/latest/model-registry.html)), [카나리 배포](https://martinfowler.com/bliki/CanaryRelease.html) | 승격 조건 8번 — 한 사이클 현장 관찰, 지표 하락 시 자동 되돌림 |
-| 회귀 테스트로 게이팅 | eval-gated CI([promptfoo](https://www.promptfoo.dev/), [Braintrust](https://www.braintrust.dev/), [LangSmith](https://docs.smith.langchain.com/)) | [`evals/cases.json`](evals/cases.json), `scripts/harness_100.py`, 저장소 테스트 |
+| 회귀 테스트로 게이팅 | eval-gated CI([promptfoo](https://www.promptfoo.dev/), [Braintrust](https://www.braintrust.dev/), [LangSmith](https://docs.smith.langchain.com/)) | [`evals/cases.json`](evals/cases.json), `scripts/release_gate.py`, 저장소 테스트 |
 | 지표 기준 프롬프트 최적화 | [DSPy](https://arxiv.org/abs/2310.03714) — 메트릭에 대고 프롬프트를 컴파일 | 모든 카운터가 import하는 목표 지표 함수, Coach가 명시하는 주요 지표 |
 | 실패에서 배워 재시도 | [Reflexion](https://arxiv.org/abs/2303.11366), [Self-Refine](https://arxiv.org/abs/2303.17651) | 피드백 → 제안 루프 |
 | 에이전트가 스킬을 쌓아감 | [Voyager](https://arxiv.org/abs/2305.16291)의 skill library | `.agents/skills/<name>/` — 기존 후보를 확인하고 기각한 뒤에만 생성 |
@@ -202,19 +216,19 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 | 검사 | 현재 결과 |
 | --- | --- |
-| 저장소 자동 검사 | 38개 통과 |
-| Harness 100 행동·안전 게이트 | 100/100 |
-| 긍정 격리 시나리오 | 6개 통과 |
+| 저장소 자동 검사 | 40개 통과 |
+| Release Gate 행동·안전 게이트 | 100/100 |
+| 긍정 격리 시나리오 | 8개 통과 |
 | 부정 안전 시나리오 | 3개 통과 |
 | 독립 포워드 평가 | 검증기 결함 3개 발견, 수정 후 회귀 검사로 보존 |
 | 오프라인 워크북 A/B(각 3회) | 모두 정답, Navigator v3는 1.2.0 대비 중앙 시간 -25.76%, 출력 토큰 -22.76% |
 
-Harness 100은 범용 성능 벤치마크가 아니라 릴리스 게이트입니다. 새 프로젝트 암묵적 활성화, 모호한 빈 저장소, 충분한 설정 재사용, 기존 능력 우선 자동화, 권한 경계, 근거 기반 진화, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 검사합니다.
+Release Gate은 범용 성능 벤치마크가 아니라 릴리스 게이트입니다. 새 프로젝트 암묵적 활성화, 모호한 빈 저장소, 충분한 설정 재사용, 기존 에이전트가 있는 저장소로의 도입, 다국어 세팅 트리거, 기존 능력 우선 자동화, 권한 경계, 근거 기반 진화, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 검사합니다.
 
 공개 검증을 재현할 수 있습니다.
 
 ```bash
-python3 scripts/harness_100.py
+python3 scripts/release_gate.py
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
@@ -244,6 +258,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```text
 plugins/nulnul-harness/                 # 유일한 배포 제품 경계
 ├── .codex-plugin/plugin.json
+├── .claude-plugin/plugin.json          # Claude Code 매니페스트
 ├── assets/nulnul-harness.svg
 └── skills/nulnul-harness/
     ├── SKILL.md                        # 실행 계약
@@ -258,7 +273,7 @@ plugins/nulnul-harness/                 # 유일한 배포 제품 경계
 ## 자주 묻는 질문
 
 <details>
-<summary>Harness 100은 성능 벤치마크인가요?</summary>
+<summary>Release Gate은 성능 벤치마크인가요?</summary>
 
 아닙니다. 행동과 안전 경계를 검사하는 릴리스 게이트입니다. 암묵적 활성화, 모호한 빈 저장소, 충분한 설정 재사용, 능력 우선 자동화, 권한 경계, 근거 기반 진화, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 다룹니다. 속도·품질 근거는 별도이고 특정 작업 한정이며 [주장보다 근거](#주장보다-근거)에 그대로 표기합니다.
 </details>
@@ -300,12 +315,17 @@ codex plugin remove nulnul-harness@nulnul-harness
 codex plugin marketplace remove nulnul-harness
 ```
 
+```bash
+claude plugin uninstall nulnul-harness@nulnul-harness
+claude plugin marketplace remove nulnul-harness
+```
+
 ## 개발
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 -m unittest discover -s tests -p 'test_*.py' -v
-python3 scripts/harness_100.py
+python3 scripts/release_gate.py
 ```
 
 제품 결정과 실험 기록은 [`CHANGELOG.md`](CHANGELOG.md)에 요약되어 있습니다. [`SUPPORT.md`](SUPPORT.md)와 [MIT 라이선스](LICENSE)도 확인하세요.

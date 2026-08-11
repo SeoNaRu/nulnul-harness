@@ -23,6 +23,20 @@
       "evidence": "The run followed the existing CommonJS, src/test, dependency-free, and npm-test contract; it added only slugify.js and its focused test, created no parallel project contract or skill, and passed both repository tests."
     },
     {
+      "case_id": "positive-adopt-existing-harness",
+      "status": "passed",
+      "run_at": "2026-08-11",
+      "surface": "headless Claude Code session on an isolated Node fixture with two existing agents and a passing test",
+      "evidence": "The run took adopt-and-upgrade without asking what to build, enumerated the installed roster and gave one decision per job (ponytail, caveman, and rtk reused for context economy; code-review routed as Gate; nothing installed; no custom skill), classified both existing agents as reuse-and-upgrade, and shipped the day-one mechanisms: vendored doc-debt detector, frozen benchmark with a recorded baseline, the single goal-metric function, and the state lock recorded as not applicable with its activation condition. Checks passed: npm test 5/5, check_doc_debt clean, evolution.json valid. It also found and logged an unfixed defect (dedupe collapses rows missing channelId) as pending feedback rather than silently patching product code. The three writes under .claude/agents/ were refused by the host's unattended-write guard; the run reported the refusal, emitted the full file content, and recorded it as the checkpoint blocker."
+    },
+    {
+      "case_id": "positive-multilingual-setup-trigger",
+      "status": "passed",
+      "run_at": "2026-08-11",
+      "surface": "four fresh headless Claude Code sessions on one isolated Node fixture with two existing agents",
+      "evidence": "All four phrasings (하네스 세팅해줘 / set up the harness / 配置一下 harness / ハーネスをセットアップして) selected the nulnul-harness skill without it being named, took the adopt-and-upgrade path, asked no question about what to build, enumerated the installed roster, identified ponytail and caveman as covering context economy with zero installs, and replied in the language of the request."
+    },
+    {
       "case_id": "positive-reuse-first-youtube-sheet-automation",
       "status": "passed",
       "run_at": "2026-08-10",

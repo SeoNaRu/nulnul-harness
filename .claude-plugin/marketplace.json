@@ -1,0 +1,16 @@
+{
+  "name": "nulnul-harness",
+  "description": "The nulnul harness plugin: reuse-first capability discovery, minimal agent assembly, and evidence-gated evolution for Claude Code.",
+  "owner": {
+    "name": "SeoNaRu",
+    "url": "https://github.com/SeoNaRu"
+  },
+  "plugins": [
+    {
+      "name": "nulnul-harness",
+      "source": "./plugins/nulnul-harness",
+      "description": "Find proven capabilities, assemble the smallest useful agent system, preserve progress, and evolve each agent from independently verified feedback.",
+      "version": "1.2.1"
+    }
+  ]
+}

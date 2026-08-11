@@ -5,12 +5,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SPEC = importlib.util.spec_from_file_location("harness_100", ROOT / "scripts/harness_100.py")
+SPEC = importlib.util.spec_from_file_location("release_gate", ROOT / "scripts/release_gate.py")
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
 
 
-class Harness100Tests(unittest.TestCase):
+class ReleaseGateTests(unittest.TestCase):
     def setUp(self):
         self.cases = json.loads((ROOT / "evals/cases.json").read_text(encoding="utf-8"))
         self.results = json.loads((ROOT / "evals/results.json").read_text(encoding="utf-8"))
@@ -18,7 +18,7 @@ class Harness100Tests(unittest.TestCase):
     def test_current_score_uses_only_passed_evidence(self):
         score = MODULE.calculate(self.cases, self.results)
         expected = sum(
-            case["harness_100_weight"]
+            case["release_gate_weight"]
             for case in self.cases["cases"]
             if next(result for result in self.results["results"] if result["case_id"] == case["id"])["status"]
             == "passed"
@@ -40,7 +40,7 @@ class Harness100Tests(unittest.TestCase):
 
     def test_invalid_weights_fail_closed(self):
         altered = json.loads(json.dumps(self.cases))
-        altered["cases"][0]["harness_100_weight"] += 1
+        altered["cases"][0]["release_gate_weight"] += 1
         with self.assertRaises(ValueError):
             MODULE.calculate(altered, self.results)
 

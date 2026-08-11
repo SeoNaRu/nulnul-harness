@@ -6,13 +6,13 @@
 
 <p align="center">
   <strong>Verified capabilities. Personal agents. Controlled evolution.</strong><br>
-  A skills-only Codex plugin for turning ideas into verified agent systems.
+  A skills-only plugin for Codex and Claude Code that turns ideas into verified agent systems.
 </p>
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/version-1.2.1-111111" alt="version 1.2.1">
-  <a href="evals/results.json"><img src="https://img.shields.io/badge/Harness_100-100%2F100-111111" alt="Harness 100: 100/100"></a>
+  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
 
@@ -57,9 +57,23 @@ Each failure became a rule with the number that produced it, written into the re
 ```bash
 git clone https://github.com/SeoNaRu/nulnul-harness.git
 cd nulnul-harness
+```
+
+Codex:
+
+```bash
 codex plugin marketplace add "$PWD"
 codex plugin add nulnul-harness@nulnul-harness
 ```
+
+Claude Code:
+
+```bash
+claude plugin marketplace add "$PWD"
+claude plugin install nulnul-harness@nulnul-harness
+```
+
+The same skill drives both surfaces; the harness detects the host and writes that host's setup paths.
 
 Start a new Codex session and describe the outcome. Asking for a harness is enough — you never describe agents, roles, or setup steps:
 
@@ -185,7 +199,7 @@ None of the parts here are new. Split the design and every piece has an existing
 | --- | --- | --- |
 | Coach and Gate separated | actor-critic ([Sutton & Barto](http://incompleteideas.net/book/the-book.html)); the generator–verifier gap — checking an answer is a different, easier job than producing it | `references/personal-evolution.md` |
 | Automatic promotion and rollback | champion/challenger, model-registry promotion gates ([MLflow](https://mlflow.org/docs/latest/model-registry.html)), [canary release](https://martinfowler.com/bliki/CanaryRelease.html) | promotion condition 8: one observed live cycle, automatic revert on a metric drop |
-| Gating on regression checks | eval-gated CI ([promptfoo](https://www.promptfoo.dev/), [Braintrust](https://www.braintrust.dev/), [LangSmith](https://docs.smith.langchain.com/)) | [`evals/cases.json`](evals/cases.json), `scripts/harness_100.py`, the repository test suite |
+| Gating on regression checks | eval-gated CI ([promptfoo](https://www.promptfoo.dev/), [Braintrust](https://www.braintrust.dev/), [LangSmith](https://docs.smith.langchain.com/)) | [`evals/cases.json`](evals/cases.json), `scripts/release_gate.py`, the repository test suite |
 | Optimizing against a metric | [DSPy](https://arxiv.org/abs/2310.03714) compiles prompts against a metric | the single goal-metric function every counter imports, and the Coach's named primary metric |
 | Learning from failure and retrying | [Reflexion](https://arxiv.org/abs/2303.11366), [Self-Refine](https://arxiv.org/abs/2303.17651) | the feedback → proposal loop |
 | An agent accumulating skills | [Voyager](https://arxiv.org/abs/2305.16291)'s skill library | `.agents/skills/<name>/`, created only after existing candidates were checked and rejected |
@@ -202,19 +216,19 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 38 passed |
-| Harness 100 behavior and safety gate | 100/100 |
-| Positive isolated scenarios | 6 passed |
+| Automated repository tests | 40 passed |
+| Release Gate behavior and safety gate | 100/100 |
+| Positive isolated scenarios | 8 passed |
 | Negative safety scenarios | 3 passed |
 | Independent forward evaluation | Found 3 validator gaps; all fixed and preserved as regressions |
 | Offline workbook A/B (3 trials per arm) | All exact; Navigator v3 median time -25.76%, output tokens -22.76% vs 1.2.0 |
 
-Harness 100 is a release gate, not a universal performance benchmark. It covers implicit project activation, ambiguous empty repositories, reuse of coherent setups, capability-first automation, permission boundaries, evidence-gated evolution, read-only non-activation, secret persistence, and unapproved global registration.
+Release Gate is a release gate, not a universal performance benchmark. It covers implicit project activation, ambiguous empty repositories, reuse of coherent setups, adoption into a repository that already has agents, multilingual setup triggers, capability-first automation, permission boundaries, evidence-gated evolution, read-only non-activation, secret persistence, and unapproved global registration.
 
 Reproduce the public checks:
 
 ```bash
-python3 scripts/harness_100.py
+python3 scripts/release_gate.py
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
@@ -243,7 +257,8 @@ No real Google authentication or Sheet write is performed without explicit appro
 
 ```text
 plugins/nulnul-harness/                 # only shipped product boundary
-├── .codex-plugin/plugin.json
+├── .codex-plugin/plugin.json           # Codex manifest
+├── .claude-plugin/plugin.json          # Claude Code manifest
 ├── assets/nulnul-harness.svg
 └── skills/nulnul-harness/
     ├── SKILL.md                        # execution contract
@@ -258,7 +273,7 @@ The plugin remains skills-only. It includes no MCP server, hook, app, authentica
 ## FAQ
 
 <details>
-<summary>Is Harness 100 a performance benchmark?</summary>
+<summary>Is Release Gate a performance benchmark?</summary>
 
 No. It is a release gate over behaviors and safety boundaries: implicit activation, ambiguous empty repositories, reuse of a coherent setup, capability-first automation, permission boundaries, evidence-gated evolution, read-only non-activation, secret persistence, and unapproved global registration. Speed and quality evidence is separate, task-specific, and reported as such in [Evidence, not claims](#evidence-not-claims).
 </details>
@@ -300,12 +315,17 @@ codex plugin remove nulnul-harness@nulnul-harness
 codex plugin marketplace remove nulnul-harness
 ```
 
+```bash
+claude plugin uninstall nulnul-harness@nulnul-harness
+claude plugin marketplace remove nulnul-harness
+```
+
 ## Development
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 -m unittest discover -s tests -p 'test_*.py' -v
-python3 scripts/harness_100.py
+python3 scripts/release_gate.py
 ```
 
 Product decisions and experiment notes are summarized in [`CHANGELOG.md`](CHANGELOG.md). See [`SUPPORT.md`](SUPPORT.md) and the [MIT license](LICENSE).

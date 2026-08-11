@@ -1,0 +1,22 @@
+{
+  "name": "nulnul-harness",
+  "version": "1.2.1",
+  "description": "Find proven capabilities, assemble the smallest useful agent system, preserve progress, and evolve each agent from independently verified feedback.",
+  "author": {
+    "name": "SeoNaRu",
+    "url": "https://github.com/SeoNaRu"
+  },
+  "homepage": "https://github.com/SeoNaRu/nulnul-harness",
+  "repository": "https://github.com/SeoNaRu/nulnul-harness",
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "skill-discovery",
+    "agent-assembly",
+    "claude-code",
+    "claude-code-plugin",
+    "automation",
+    "adaptive-workflow",
+    "personal-agents"
+  ]
+}

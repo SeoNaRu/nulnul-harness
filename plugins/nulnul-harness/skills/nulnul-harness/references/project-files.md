@@ -2,9 +2,25 @@
 
 Create only files with a durable consumer.
 
+## Surface map
+
+The file names below are the Codex layout. Detect the host before inspecting or writing, and use its paths; writing Codex paths into a Claude Code project produces a setup nothing loads.
+
+| Role | Codex | Claude Code |
+| --- | --- | --- |
+| Repo-wide instructions | `AGENTS.md` | `CLAUDE.md` (a repository may keep both; `AGENTS.md` stays canonical here and `CLAUDE.md` points at it) |
+| Project-local skills | `.agents/skills/<name>/` | `.claude/skills/<name>/` |
+| Durable agent definitions | project contract roles | `.claude/agents/<name>.md` with YAML frontmatter |
+| Host configuration and hooks | host settings | `.claude/settings.json`, or `~/.claude/settings.json` for user scope |
+| Installed capabilities to enumerate | installed skills and plugins | session skill and agent listings, `.claude/`, `~/.claude/plugins/` |
+
+Treat a path that does not exist on the detected host as not applicable, not as a missing file to create.
+
 ## Day-one setup output
 
-A cold project has no accepted version, no baseline, and no history for the Coach to learn from, so the first setup ships the mechanisms that make later sessions possible. Include, before any extra agent:
+A cold project has no accepted version, no baseline, and no history for the Coach to learn from, so the first setup ships the mechanisms that make later sessions possible. Coldness is about evidence, not age: a repository with code, tests, and a working agent roster is still cold when it has no baseline, no checkpoint, and no debt detector, and an adoption run into one owes the same day-one output as an empty directory. "Nothing here needs it yet" is the judgement this list exists to overrule — the mechanisms are what make the *next* session possible, so the session that skips them is never the one that pays.
+
+Include, before any extra agent:
 
 - a **documentation debt detector**, so a fix never stays only in code — `../scripts/check_doc_debt.py` ships with this skill;
 - a **minimal frozen benchmark**, even a handful of hand-labelled cases, because a Gate without one cannot run on day one;
@@ -12,6 +28,8 @@ A cold project has no accepted version, no baseline, and no history for the Coac
 - the **single-writer lock** for any long-running loop's state file (see `data-workflow-safety.md`).
 
 These four matter more than the agent roster. Most measured gains come from correcting an existing judgment function, not from adding another agent.
+
+One durable role does belong in day-one output when the host supports agent definitions: a **session entry agent** carrying the Navigator responsibility — the current checkpoint, the next action, the permission state, and final synthesis. A responsibility that lives only in a transcript does not survive the session boundary it exists to cross, and every later checkpoint, Coach proposal, and Gate decision reads from it. Write it to the host's agent path from the surface map, and on an adoption run upgrade the existing entry agent instead of adding a second one. This is one role, not a team; Worker, Coach, and Gate still stay merged until concrete evidence splits them.
 
 ## Documentation debt detection
 

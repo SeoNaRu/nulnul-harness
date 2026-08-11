@@ -19,6 +19,20 @@ For multi-session or personally evolving work, preserve four logical responsibil
 
 These are responsibilities, not a mandatory four-agent team. Combine them in one agent for ordinary execution, but never let the proposal author act as Gate for the same promotion. Use a fresh evaluator or deterministic check for a Coach or Gate self-upgrade.
 
+## Adopt an existing team
+
+When the repository or host already defines agents, the default is to upgrade them in place, not to design a replacement team beside them. Recreating a role the user already uses discards their accumulated context and leaves two owners for one job.
+
+Read every existing agent definition first, then for each one record:
+
+- the job it already owns, and which of the four responsibilities it covers
+- whether its inputs, capabilities, and completion check are still stated and still true
+- whether another existing or proposed role overlaps it
+
+Then classify each: **keep** unchanged, **upgrade** in place with the smallest edit that closes a stated gap, **merge** into an overlapping role, or **remove** when its job is gone. Name the classification and its reason for every existing agent, including the ones kept. Only after that, add a role for a responsibility no existing agent covers.
+
+An agent upgrade is an evolution: it needs the same evidence as any other change, and the agent proposing an edit to itself is not its own Gate. Cite the failure, correction, or uncovered responsibility that motivates the edit.
+
 ## Define each role
 
 Give every role:

@@ -201,7 +201,7 @@
       "id": "repository-safety-regressions",
       "expected_activation": true,
       "observed_activation": true,
-      "result": "Harness 100 remains 100/100 for capability, permission, evolution, secret, and global-registration boundaries"
+      "result": "Release Gate remains 100/100 for capability, permission, evolution, secret, and global-registration boundaries"
     }
   ],
   "conclusion": "Preliminary task-specific result: baseline, nulnul-harness 1.2.0, and Navigator v3 each achieved 3/3 exact outputs with no human intervention. Navigator v3 correctly skipped activation and reduced median elapsed time 25.76% versus 1.2.0 without worsening measured token medians. Cross-task and activation guards passed and an independent Gate promoted the change; do not generalize from n=3."

@@ -19,6 +19,19 @@ class ProductPluginTests(unittest.TestCase):
         self.assertEqual(entry["policy"]["installation"], "AVAILABLE")
         self.assertEqual(marketplace["name"], "nulnul-harness")
 
+    def test_claude_code_marketplace_and_plugin_manifests_agree(self):
+        marketplace = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8"))
+        plugin = json.loads((PLUGIN / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
+        codex = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
+        entry = next(item for item in marketplace["plugins"] if item["name"] == "nulnul-harness")
+        self.assertEqual(entry["source"], "./plugins/nulnul-harness")
+        self.assertEqual(entry["version"], plugin["version"])
+        self.assertTrue(marketplace["description"])
+        for field in ("name", "version", "description", "homepage", "repository", "license"):
+            self.assertEqual(plugin[field], codex[field], field)
+        self.assertIn("claude-code-plugin", plugin["keywords"])
+        self.assertTrue((PLUGIN / "skills/nulnul-harness/SKILL.md").is_file())
+
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
@@ -41,14 +54,17 @@ class ProductPluginTests(unittest.TestCase):
         text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
         for heading in ("## Product decision gate", "## Required inputs", "## Workflow", "## Outputs", "## Failure handling", "## Validation"):
             self.assertIn(heading, text)
-        self.assertIn("Search installed and trusted existing capabilities before creating anything", text)
+        self.assertIn("Enumerate the host's installed skills, plugins, and agents before judging coverage", text)
         self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
         self.assertIn("Treat installed availability as discovery evidence, not verification", text)
         self.assertIn("Popularity is a signal, not proof", text)
         self.assertIn("keep it only when the primary metric improves", text)
         self.assertIn("Never let an agent approve its own upgrade", text)
         self.assertIn("resume from the last verified checkpoint", text)
-        self.assertIn("take the fast path", text)
+        self.assertIn("**Fast path**", text)
+        self.assertIn("**Adopt and upgrade**", text)
+        self.assertIn("Never recreate a role that already exists", text)
+        self.assertIn("Context is a budget like any other", text)
         self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
         self.assertIn("do not activate when it already provides explicit local inputs, outputs, constraints, and a runnable completion check", text)
         self.assertIn("external-write planning, multi-session checkpointing, or evidence-gated agent evolution", text)
@@ -56,6 +72,7 @@ class ProductPluginTests(unittest.TestCase):
         for path in (
             "references/discovery-and-questions.md",
             "references/capability-discovery.md",
+            "references/capability-registry.md",
             "references/data-workflow-safety.md",
             "references/agent-assembly.md",
             "references/project-files.md",
@@ -72,11 +89,26 @@ class ProductPluginTests(unittest.TestCase):
             self.assertNotIn(forbidden, text)
         self.assertIn("stable identity, deterministic deduplication, exclusion precedence", text)
 
+    def test_setup_trigger_is_multilingual(self):
+        description = re.search(
+            r"^description: (.*)$", (SKILL / "SKILL.md").read_text(encoding="utf-8"), re.M
+        ).group(1)
+        for phrase in (
+            "set up the harness",
+            "하네스 세팅해줘",
+            "하네스 구성해줘",
+            "配置一下 harness",
+            "设置这个项目的 harness",
+            "ハーネスをセットアップして",
+            "ハーネスを構成して",
+        ):
+            self.assertIn(phrase, description, phrase)
+
     def test_submission_scenario_inventory(self):
         payload = json.loads((ROOT / "evals/cases.json").read_text(encoding="utf-8"))
         cases = payload["cases"]
-        self.assertEqual(len({case["id"] for case in cases}), 9)
-        self.assertEqual(sum(case["kind"] == "positive" for case in cases), 6)
+        self.assertEqual(len({case["id"] for case in cases}), 11)
+        self.assertEqual(sum(case["kind"] == "positive" for case in cases), 8)
         self.assertEqual(sum(case["kind"] == "negative" for case in cases), 3)
         for case in cases:
             for field in ("prompt", "fixture", "expected_behavior", "expected_result"):
@@ -113,15 +145,16 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "38 passed"),
-            "README.ko.md": ("README.md", "38개 통과"),
+            "README.md": ("README.ko.md", "40 passed"),
+            "README.ko.md": ("README.md", "40개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
             self.assertIn(other_locale, text)
             self.assertIn(f"version-{manifest['version']}", text)
-            self.assertIn("Harness_100-100%2F100", text)
+            self.assertIn("Release_Gate-100%2F100", text)
             self.assertIn("codex plugin add nulnul-harness@nulnul-harness", text)
+            self.assertIn("claude plugin install nulnul-harness@nulnul-harness", text)
             self.assertIn(test_claim, text)
             for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
                 if target.startswith(("https://", "http://", "#")):
