@@ -4,6 +4,10 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+## 1.3.5 — 2026-08-11
+
+- Require an exact checkpoint completion command and execute it through the shipped runner before verified fast resume.
+
 ## 1.3.4 — 2026-08-11
 
 - Promoted the Claude Code unattended boundary to a top-level guard: `.claude/**` is classified read-only before roster inspection, and even a host-denied write call fails setup.

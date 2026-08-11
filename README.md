@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.3.4-111111" alt="version 1.3.4">
+  <img src="https://img.shields.io/badge/version-1.3.5-111111" alt="version 1.3.5">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -256,7 +256,7 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 64 passed |
+| Automated repository tests | 65 passed |
 | Release Gate behavior and safety gate | 100/100 |
 | Positive isolated scenarios | 9 passed |
 | Negative safety scenarios | 3 passed |

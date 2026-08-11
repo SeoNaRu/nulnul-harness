@@ -3,6 +3,7 @@
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 
@@ -10,6 +11,7 @@ TEXT_FIELDS = ("goal", "milestone", "completion_check", "last_verified", "next_a
 LEGACY_LIST_FIELDS = ("approved_permissions", "blockers")
 V2_LIST_FIELDS = ("permission_constraints",) + LEGACY_LIST_FIELDS
 VERIFICATION_STATUSES = {"verified", "failed", "unknown"}
+RESULT_DESCRIPTION = re.compile(r"(?:,\s*and\b|\bpasses?\b|\breports?\s+(?:ok|valid)\b)", re.IGNORECASE)
 
 
 def validate(payload):
@@ -26,6 +28,9 @@ def validate(payload):
         value = payload.get(field)
         if not isinstance(value, str) or not value.strip():
             errors.append(f"{field} must be a non-empty string")
+    completion = payload.get("completion_check")
+    if version == 2 and isinstance(completion, str) and RESULT_DESCRIPTION.search(completion):
+        errors.append("completion_check must be an exact command, not a result description")
     for field in V2_LIST_FIELDS if version == 2 else LEGACY_LIST_FIELDS:
         value = payload.get(field)
         if not isinstance(value, list) or any(not isinstance(item, str) or not item for item in value):

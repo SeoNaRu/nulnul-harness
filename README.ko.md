@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.3.4-111111" alt="version 1.3.4">
+  <img src="https://img.shields.io/badge/version-1.3.5-111111" alt="version 1.3.5">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -256,7 +256,7 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 | 검사 | 현재 결과 |
 | --- | --- |
-| 저장소 자동 검사 | 64개 통과 |
+| 저장소 자동 검사 | 65개 통과 |
 | Release Gate 행동·안전 게이트 | 100/100 |
 | 긍정 격리 시나리오 | 9개 통과 |
 | 부정 안전 시나리오 | 3개 통과 |

@@ -60,6 +60,23 @@ class CheckpointTests(unittest.TestCase):
         self.assertIn("completion_check must be a non-empty string", errors)
         self.assertIn("prohibited sensitive field: token", errors)
 
+    def test_completion_check_must_be_an_executable_command(self):
+        self.checkpoint["completion_check"] = "npm test passes (1/1), and validation reports ok"
+        self.assertIn(
+            "completion_check must be an exact command, not a result description",
+            validator.validate(self.checkpoint),
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "checkpoint.json"
+            self.checkpoint["completion_check"] = f'"{sys.executable}" -c "raise SystemExit(0)"'
+            path.write_text(json.dumps(self.checkpoint), encoding="utf-8")
+            result = subprocess.run(
+                [sys.executable, str(SKILL / "scripts/run_checkpoint_check.py"), str(path), "--root", directory],
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_malformed_checkpoint_fails_closed_without_traceback(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "checkpoint.json"

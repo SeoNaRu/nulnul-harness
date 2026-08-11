@@ -1,4 +1,4 @@
-# nulnul harness 1.3.4
+# nulnul harness 1.3.5
 
 This patch closes the last weighted Release Gate gap. In unattended Claude Code sessions, `.claude/**` is now classified read-only before roster inspection; even a denied write-tool call is a failed setup rather than an acceptable fallback.
 

@@ -37,7 +37,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.3.4")
+        self.assertEqual(manifest["version"], "1.3.5")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -95,6 +95,7 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/validate_evolution_state.py",
             "scripts/validate_project_setup.py",
             "scripts/validate_checkpoint.py",
+            "scripts/run_checkpoint_check.py",
             "scripts/validate_learning_loop.py",
             "scripts/migrate_legacy_checkpoint.py",
             "scripts/apply_live_cycle_rollback.py",
@@ -184,8 +185,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "64 passed"),
-            "README.ko.md": ("README.md", "64개 통과"),
+            "README.md": ("README.ko.md", "65 passed"),
+            "README.ko.md": ("README.md", "65개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
