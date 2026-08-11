@@ -48,6 +48,6 @@ Keep a project-scoped meta improvement when it wins on the originating workflow.
 
 ## Accumulate across runs
 
-An accepted change is not complete until one later live cycle uses the new procedure and records the named metric, rollback threshold, and evidence. New version-2 evolution states make that observation part of the promotion record. If the live cycle is missing, the validator rejects acceptance; if the threshold fires, record a rollback and restore the last accepted version.
+An accepted change is not complete until one later live cycle uses the new procedure and records the named metric, rollback threshold, and evidence. Version-3 evolution states make the threshold executable through `scripts/apply_live_cycle_rollback.py`. If the live cycle is missing, the validator rejects acceptance; if the numeric comparison fires, the script atomically records the rollback and restores the last accepted active-version state without executing arbitrary commands.
 
 This loop runs during normal project work. NULNUL does not silently start a daemon, purchase a managed runtime, register global tools, or publish changes. [Claude Managed Agents](https://news.hada.io/topic?id=28326) is a possible hosted runtime for teams that explicitly choose it; it is not HyperAgents and is not required by this skills-only plugin.

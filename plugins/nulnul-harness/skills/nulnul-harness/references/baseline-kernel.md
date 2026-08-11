@@ -30,7 +30,7 @@ MCP registration, downloads, authentication, global installation, and external w
 When a run creates or materially upgrades `docs/nulnul/project.md`, start from `assets/project-contract.template.md` and run:
 
 ```bash
-python3 scripts/validate_project_setup.py docs/nulnul/project.md
+python3 <nulnul-skill-directory>/scripts/validate_project_setup.py docs/nulnul/project.md
 ```
 
-The check verifies that the durable contract contains a goal, runnable completion check, inspected roster, capability evidence and routing, plain-language setup decisions, permissions, topology, baseline, and continuity without unfinished template placeholders. It does not require a durable contract on the fast path.
+Run the copy belonging to the currently loaded NULNUL skill; do not persist its machine-specific absolute path in the project contract. The check verifies that the durable contract contains a goal, runnable completion check, inspected roster, capability evidence and routing, plain-language setup decisions, permissions, topology, baseline, and continuity without unfinished template placeholders. It does not require a durable contract on the fast path.

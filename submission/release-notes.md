@@ -1,7 +1,9 @@
-# nulnul harness 1.2.1
+# nulnul harness 1.3.0
 
-This patch stops `nulnul harness` from activating when a user-named local task contract already provides explicit inputs, outputs, constraints, and a runnable completion check. Project setup, capability selection, external-write planning, multi-session checkpointing, and evidence-gated evolution still activate the harness.
+This release turns NULNUL into a governed meta-harness for beginners: it inspects an existing project before asking questions, reuses suitable skills and plugins, upgrades the existing agent roster in place, completes the original work, and lets the Coach improve its own improvement procedure behind an independent Gate.
 
-On the public offline workbook task, 1.2.0 and the Navigator v3 candidate both produced 3/3 exact results with no human intervention. The candidate reduced median elapsed time by 25.76%, input tokens by 25.90%, output tokens by 22.76%, and reasoning tokens by 39.34% versus 1.2.0. Two additional self-contained task types skipped activation, while an ambiguous empty project still activated and asked the required product question.
+The new Baseline Kernel keeps repository truth, an observable outcome, a before-state check, capability decisions, permission boundaries, task continuation, and governed evolution active on every setup. A deterministic validator rejects incomplete durable setup contracts. Evolution schema v3 adds numeric live-cycle thresholds and an atomic standard-library executor that restores the prior active agent-version state without running arbitrary commands or editing product files; schema versions 1 and 2 remain readable.
 
-This is task-specific preliminary evidence, not a universal speed claim. The plugin remains skills-only with no service, authentication, telemetry, hook, UI, or background process.
+Two fresh Codex sessions demonstrated Coach v1 to v2 meta evolution across a later live cycle. The repository suite and negative controls cover self-approval, permissions, incomplete setup, missing live observations, and both firing and non-firing rollback thresholds. Release Gate remains 90/100 because the user-deferred Claude Code adoption rerun is not counted as passed.
+
+The plugin remains skills-only with no service, authentication, telemetry, hook, UI, or background process. Git-based marketplace installation and repeatable Codex and Claude Code update commands are documented in both README locales.

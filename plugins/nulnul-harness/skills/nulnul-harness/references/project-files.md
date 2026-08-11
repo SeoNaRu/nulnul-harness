@@ -72,7 +72,7 @@ Use when the project needs a durable setup contract. Include:
 - baseline metrics, guardrails, accepted improvements, rollback conditions, and removable assumptions
 - the current verified checkpoint and a pointer to `docs/nulnul/evolution.json` when work spans sessions or agent-specific learning is enabled
 
-Start from `../assets/project-contract.template.md`, remove unused optional content, and run `../scripts/validate_project_setup.py docs/nulnul/project.md`. Keep the stable headings and required fields so the next session can verify the setup without interpreting prose.
+Start from `../assets/project-contract.template.md`, remove unused optional content, and run the currently loaded skill's `scripts/validate_project_setup.py` against `docs/nulnul/project.md`. Do not record the installed skill's machine-specific path. Keep the stable headings and required fields so the next session can verify the setup without interpreting prose.
 
 ## `docs/nulnul/evolution.json`
 

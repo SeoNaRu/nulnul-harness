@@ -15,7 +15,7 @@ Combine roles for low-risk execution when useful. Separate Coach and Gate for ev
 
 For work that spans sessions or needs agent-specific learning, create `docs/nulnul/evolution.json` from `../assets/evolution-state.template.json`. Validate it with `../scripts/validate_evolution_state.py` after each change.
 
-New states use schema version 2. Version 1 remains readable for compatibility, but version 2 records whether a proposal changes the task or the improvement procedure and refuses to finalize an accepted promotion without a later observed live cycle.
+New states use schema version 3. Versions 1 and 2 remain readable for compatibility. Version 3 keeps the task/meta and live-cycle records from version 2, then adds a numeric metric value, comparison operator, and rollback value so the threshold can execute instead of remaining prose.
 
 The Navigator updates a checkpoint only after verifying repository reality. Store the goal, current milestone, completion check, status, last verified evidence, exact next action, blockers, and approved permission changes. On resume, recheck the evidence and continue from the next action instead of reconstructing a plan from chat.
 
@@ -60,7 +60,9 @@ Promote only when all are true:
 7. the Gate is neither the target agent nor the proposal author;
 8. one live cycle after promotion is observed against the recorded metric, and the promotion is rolled back automatically when the metric drops past the stated threshold.
 
-Condition 8 is not optional. A frozen sample judges stored records only; it cannot reproduce what appears at run time — resolver behaviour, load, execution order, or input that grew longer than the sample. Record the metric value at promotion, compare it at the start of the next cycle, and revert the promoting commit on a drop. The frozen sample catches regressions against known cases; the live cycle catches the ones the sample cannot contain. Both are required.
+Condition 8 is not optional. A frozen sample judges stored records only; it cannot reproduce what appears at run time — resolver behaviour, load, execution order, or input that grew longer than the sample. Record the metric value at promotion, compare it at the start of the next cycle, and deactivate the candidate on a drop. The frozen sample catches regressions against known cases; the live cycle catches the ones the sample cannot contain. Both are required.
+
+For schema-version-3 state, record `metric_value`, `rollback_operator` (`lt`, `lte`, `gt`, `gte`, `eq`, or `ne`), and `rollback_value`, then run the currently loaded skill's `scripts/apply_live_cycle_rollback.py` against the state. It atomically restores the previous active agent-version pointer when the comparison is true and leaves the state untouched otherwise. Validate the result afterward. The executor intentionally does not run arbitrary rollback commands or edit product files; candidate artifacts must remain versioned and the Gate restores them through the proposal's recorded, permission-safe rollback path.
 
 Reject or roll back otherwise. Never let an agent serve as Gate for its own upgrade. If no independent Gate or valid check is available, leave the proposal pending and continue the project with the last accepted version.
 
