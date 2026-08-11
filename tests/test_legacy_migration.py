@@ -1,3 +1,4 @@
+import importlib.util
 import json
 import shutil
 import subprocess
@@ -10,6 +11,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "plugins/nulnul-harness/skills/nulnul-harness"
 SCRIPT = SKILL / "scripts/migrate_legacy_checkpoint.py"
+sys.path.insert(0, str(SCRIPT.parent))
+SPEC = importlib.util.spec_from_file_location("migrate_legacy_checkpoint", SCRIPT)
+migration = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(migration)
 
 
 class LegacyMigrationTests(unittest.TestCase):
@@ -36,6 +41,7 @@ class LegacyMigrationTests(unittest.TestCase):
             result = self.migrate(contract, guidance)
             checkpoint = json.loads((contract.parent / "checkpoint.json").read_text(encoding="utf-8"))
             self.assertEqual(result["status"], "created")
+            self.assertEqual(checkpoint["schema_version"], 2)
             self.assertEqual(checkpoint["verification_status"], "unknown")
             self.assertEqual(checkpoint["goal"], "Ship the legacy project safely.")
             self.assertEqual(checkpoint["permission_constraints"], [
@@ -92,6 +98,7 @@ class LegacyMigrationTests(unittest.TestCase):
             result = self.migrate(contract, target / "AGENTS.md")
             checkpoint = json.loads(checkpoint_path.read_text(encoding="utf-8"))
             self.assertEqual(result["status"], "upgraded")
+            self.assertEqual(checkpoint["schema_version"], 2)
             self.assertEqual(checkpoint["goal"], "Keep this value")
             self.assertEqual(checkpoint["next_action"], "Continue the old task")
             self.assertEqual(checkpoint["verification_status"], "unknown")
@@ -99,6 +106,29 @@ class LegacyMigrationTests(unittest.TestCase):
                 "No external writes.",
                 "Deployment requires explicit approval.",
             ])
+
+    def test_partial_write_failure_restores_every_file(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            checkpoint = root / "checkpoint.json"
+            guidance = root / "AGENTS.md"
+            guidance.write_text("original\n", encoding="utf-8")
+            calls = 0
+
+            def fail_second_replace(source, target):
+                nonlocal calls
+                calls += 1
+                if calls == 2:
+                    raise OSError("injected write failure")
+                return source.replace(target)
+
+            with self.assertRaisesRegex(OSError, "injected write failure"):
+                migration.atomic_batch_write(
+                    {checkpoint: "new checkpoint\n", guidance: "changed\n"},
+                    replace=fail_second_replace,
+                )
+            self.assertFalse(checkpoint.exists())
+            self.assertEqual(guidance.read_text(encoding="utf-8"), "original\n")
 
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
-# nulnul harness 1.3.2
+# nulnul harness 1.3.3
 
-This patch hardens the concise resume and self-improvement paths. Checkpoints now distinguish `verified`, `failed`, and `unknown`; only verified state may enter fast resume, and permission constraints remain visible without loading the full setup contract.
+This patch closes three integrity gaps found while testing 1.3.2. New concise checkpoints use schema version 2; version 1 remains readable for safe migration but can never enter fast resume, and unknown future versions fail closed.
 
-Machine-readable nonpass verdicts now carry stable links to Coach feedback and proposals, with a deterministic negative control that fails when the loop is disconnected. A legacy durable setup can be migrated without overwriting its contract, inventing successful verification, editing host-protected paths, or creating a second live-state writer.
+Machine-readable nonpass verdict inventories are mandatory in both Product and Release Gates. Removing the complete inventory fails the release instead of silently opting out. Legacy migration prepares every target before replacement and restores earlier files when an injected later write fails.
 
-The plugin remains skills-only. It adds two small standard-library scripts and focused fixtures, with no server, hook, daemon, authentication, external service, or new permission.
+The plugin remains skills-only. It reuses its existing standard-library validators and migrator, with no server, hook, daemon, authentication, external service, or new permission.
 
 The plugin remains skills-only with no service, authentication, telemetry, hook, UI, or background process. Git-based marketplace installation and repeatable Codex and Claude Code update commands are documented in both README locales.

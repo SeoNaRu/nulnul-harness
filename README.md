@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.3.2-111111" alt="version 1.3.2">
+  <img src="https://img.shields.io/badge/version-1.3.3-111111" alt="version 1.3.3">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-90%2F100-111111" alt="Release Gate: 90/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -256,7 +256,7 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 62 passed |
+| Automated repository tests | 64 passed |
 | Release Gate behavior and safety gate | 90/100 |
 | Positive isolated scenarios | 8 passed; 1 requires rerun |
 | Negative safety scenarios | 3 passed |
@@ -266,7 +266,7 @@ The contribution, if any, is the packaging: one portable contract that carries a
 | Fresh Codex setup A/B | Exact behavior; accepted 1.3.0 input +2.31%, output -5.42%, reasoning -9.80% vs 1.2.1; initial +50.89% arm rejected |
 | Fresh Codex resume A/B | Exact behavior in 3/3 trials; concise checkpoint reduced median input 38.52%, output 30.72%, and reasoning 56.33% vs 1.3.0; three weaker arms rejected |
 | Later transfer cycle | A separate slugger project changed exactly one behavior and test, passed 3/3 tests and both harness checks, and did not read the marked full contract |
-| Learning-loop and upgrade controls | Every published nonpass verdict links to Coach feedback and a proposal; a 1.3.0 contract and 1.3.1 checkpoint migrate without claiming verification or creating a second state writer |
+| Learning-loop and upgrade controls | Schema-v1 checkpoints are read-only; missing verdict inventories fail Product and Release Gates; injected migration write failure restores every earlier file |
 | Executable rollback controls | Threshold breach restored Coach v1 active-version state; healthy metric produced no write |
 
 Release Gate is a release gate, not a universal performance benchmark. The headless Claude Code adoption case currently requires a fresh run after the specification stopped writing host-protected agent definitions; it contributes no points until that evidence exists. The passed cases cover implicit project activation, ambiguous empty repositories, reuse of coherent setups, multilingual setup triggers, capability-first automation, permission boundaries, evidence-gated evolution, two-session improvement of the improvement procedure, read-only non-activation, secret persistence, and unapproved global registration.

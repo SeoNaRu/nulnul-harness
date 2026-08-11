@@ -1,5 +1,7 @@
 import json
 import re
+import subprocess
+import sys
 import unittest
 import xml.etree.ElementTree as ET
 import zipfile
@@ -35,7 +37,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.3.2")
+        self.assertEqual(manifest["version"], "1.3.3")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -180,8 +182,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "62 passed"),
-            "README.ko.md": ("README.md", "62개 통과"),
+            "README.md": ("README.ko.md", "64 passed"),
+            "README.ko.md": ("README.md", "64개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
@@ -223,6 +225,17 @@ class ProductPluginTests(unittest.TestCase):
         self.assertLess(resume["accepted_candidate"]["input_change_percent"], 0)
         self.assertTrue(resume["transfer_live_cycle"]["exact_behavior"])
         self.assertFalse(resume["transfer_live_cycle"]["full_setup_contract_read"])
+        learning = subprocess.run(
+            [
+                sys.executable,
+                str(SKILL / "scripts/validate_learning_loop.py"),
+                str(ROOT / "evals/benchmarks/setup-baseline/results.json"),
+                str(ROOT / "docs/nulnul/evolution.json"),
+            ],
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(learning.returncode, 0, learning.stdout + learning.stderr)
 
     def test_meta_harness_is_a_product_capability(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))

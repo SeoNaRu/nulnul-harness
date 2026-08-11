@@ -44,6 +44,15 @@ class ReleaseGateTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             MODULE.calculate(altered, self.results)
 
+    def test_missing_learning_verdict_inventory_fails_release(self):
+        learning = json.loads(
+            (ROOT / "evals/benchmarks/setup-baseline/results.json").read_text(encoding="utf-8")
+        )
+        evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
+        learning.pop("learning_verdicts")
+        with self.assertRaisesRegex(ValueError, "learning_verdicts must be an array"):
+            MODULE.validate_learning_gate(learning, evolution)
+
 
 if __name__ == "__main__":
     unittest.main()

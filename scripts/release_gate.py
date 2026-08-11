@@ -1,11 +1,24 @@
 #!/usr/bin/env python3
 """Calculate the evidence-backed nulnul Release Gate release score."""
 
+import importlib.util
 import json
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+LEARNING_VALIDATOR = (
+    ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_learning_loop.py"
+)
+
+
+def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
+    spec = importlib.util.spec_from_file_location("validate_learning_loop", LEARNING_VALIDATOR)
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    errors = validator.validate(results_payload, evolution_payload)
+    if errors:
+        raise ValueError("Release Gate learning loop failed: " + "; ".join(errors))
 
 
 def calculate(cases_payload: dict, results_payload: dict) -> dict:
@@ -42,6 +55,11 @@ def calculate(cases_payload: dict, results_payload: dict) -> dict:
 def main() -> None:
     cases = json.loads((ROOT / "evals/cases.json").read_text(encoding="utf-8"))
     results = json.loads((ROOT / "evals/results.json").read_text(encoding="utf-8"))
+    learning = json.loads(
+        (ROOT / "evals/benchmarks/setup-baseline/results.json").read_text(encoding="utf-8")
+    )
+    evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
+    validate_learning_gate(learning, evolution)
     print(json.dumps(calculate(cases, results), ensure_ascii=False, indent=2))
 
 

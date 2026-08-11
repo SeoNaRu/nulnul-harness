@@ -7,7 +7,8 @@ from pathlib import Path
 
 
 TEXT_FIELDS = ("goal", "milestone", "completion_check", "last_verified", "next_action")
-LIST_FIELDS = ("permission_constraints", "approved_permissions", "blockers")
+LEGACY_LIST_FIELDS = ("approved_permissions", "blockers")
+V2_LIST_FIELDS = ("permission_constraints",) + LEGACY_LIST_FIELDS
 VERIFICATION_STATUSES = {"verified", "failed", "unknown"}
 
 
@@ -15,15 +16,17 @@ def validate(payload):
     if not isinstance(payload, dict):
         return ["checkpoint must be an object"]
     errors = []
-    if payload.get("schema_version") != 1:
-        errors.append("schema_version must be 1")
-    if payload.get("verification_status") not in VERIFICATION_STATUSES:
+    version = payload.get("schema_version")
+    if version not in {1, 2}:
+        errors.append("schema_version must be 1 or 2")
+        return errors
+    if version == 2 and payload.get("verification_status") not in VERIFICATION_STATUSES:
         errors.append("verification_status must be verified, failed, or unknown")
     for field in TEXT_FIELDS:
         value = payload.get(field)
         if not isinstance(value, str) or not value.strip():
             errors.append(f"{field} must be a non-empty string")
-    for field in LIST_FIELDS:
+    for field in V2_LIST_FIELDS if version == 2 else LEGACY_LIST_FIELDS:
         value = payload.get(field)
         if not isinstance(value, list) or any(not isinstance(item, str) or not item for item in value):
             errors.append(f"{field} must be an array of non-empty strings")
@@ -35,7 +38,11 @@ def validate(payload):
 
 
 def fast_path_ready(payload):
-    return not validate(payload) and payload["verification_status"] == "verified"
+    return (
+        not validate(payload)
+        and payload["schema_version"] == 2
+        and payload["verification_status"] == "verified"
+    )
 
 
 def main():

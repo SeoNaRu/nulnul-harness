@@ -36,6 +36,11 @@ class LearningLoopTests(unittest.TestCase):
             "verdict continuation-context-cost has an invalid proposal id",
             validator.validate(broken, self.evolution),
         )
+        broken.pop("learning_verdicts")
+        self.assertEqual(
+            validator.validate(broken, self.evolution),
+            ["learning_verdicts must be an array"],
+        )
 
 
 if __name__ == "__main__":

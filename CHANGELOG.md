@@ -4,6 +4,12 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+## 1.3.3 — 2026-08-11
+
+- Versioned the concise checkpoint contract correctly: new state uses schema v2, schema v1 remains readable but cannot fast-resume, and unknown future versions fail closed.
+- Made learning-loop inventory mandatory in both Product and Release Gates, including a negative control that removes the entire verdict array.
+- Made legacy migration transactional across its project files and added a failure-injection control that restores every earlier replacement.
+
 ## 1.3.2 — 2026-08-11
 
 - Added explicit `verified`, `failed`, and `unknown` checkpoint states; only verified state may enter fast resume, and permission constraints now travel with the concise checkpoint.

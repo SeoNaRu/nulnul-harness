@@ -44,6 +44,14 @@ class CheckpointTests(unittest.TestCase):
             "verification_status must be verified, failed, or unknown",
             validator.validate(self.checkpoint),
         )
+        legacy = {key: value for key, value in self.checkpoint.items() if key not in {
+            "verification_status", "permission_constraints"
+        }}
+        legacy["schema_version"] = 1
+        self.assertEqual(validator.validate(legacy), [])
+        self.assertFalse(validator.fast_path_ready(legacy))
+        legacy["schema_version"] = 99
+        self.assertEqual(validator.validate(legacy), ["schema_version must be 1 or 2"])
 
     def test_missing_check_and_sensitive_field_are_rejected(self):
         self.checkpoint["completion_check"] = ""
