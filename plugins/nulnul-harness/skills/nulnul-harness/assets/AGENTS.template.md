@@ -14,5 +14,5 @@
 - Build: `{build_command}`
 - Test: `{test_command}`
 - Verify: `{verification_command}`
-- Detailed project setup: `docs/nulnul/project.md`
-- Resume checkpoint: `docs/nulnul/checkpoint.json` when present; take the fast path only when its validator reports `fast_path_ready: true`
+- Resume checkpoint: validate `docs/nulnul/checkpoint.json` before any repository-wide inspection; when `fast_path_ready` is true, read only it and task files
+- Detailed project setup: `docs/nulnul/project.md` (full workflow only)

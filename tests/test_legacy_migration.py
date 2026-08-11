@@ -50,6 +50,7 @@ class LegacyMigrationTests(unittest.TestCase):
             ])
             self.assertIn("Active checkpoint: `docs/nulnul/checkpoint.json`", contract.read_text(encoding="utf-8"))
             self.assertIn("docs/nulnul/checkpoint.json", guidance.read_text(encoding="utf-8"))
+            self.assertIn("before repository-wide inspection", guidance.read_text(encoding="utf-8"))
             self.assertEqual(guidance.stat().st_mode & 0o777, 0o640)
 
     def test_existing_evolution_state_prevents_a_second_writer(self):

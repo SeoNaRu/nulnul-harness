@@ -7,20 +7,20 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Release executable checkpoint completion and machine-verified public Claude adoption evidence as nulnul-harness 1.3.5.",
+    "milestone": "Make measured setup, workflow, activation, and fast-path performance release-blocking and stabilize bounded fast resume.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-11: GitHub-marketplace-installed nulnul-harness 1.3.5 completed a fresh headless Claude Code adopt cycle with zero protected writes, unchanged hashes for both existing agents, roster enumeration and classification, a host-loaded session entry, and fast_path_ready. The exact npm test checkpoint command and four other recorded checks exited zero. The 29-file archive matched the plugin, all 66 repository tests and 11 product tests passed, and the machine-evidenced Release Gate returned 100/100 with release_ready true.",
-    "next_action": "Observe the next independent public-project cycle and roll back Gate v3 or Navigator v10 on one unverified paid-runtime result, prose completion check, protected write, false fast resume, missing learning inventory, partial migration, duplicate writer, or lost permission constraint.",
+    "last_verified": "2026-08-11: Gate v5 replaced historical arm names and the absolute fast-path token ceiling with version-independent champion/candidate comparisons. Four counterbalanced paired rounds gave Navigator v12 4/4 bounded behavior, three comparable pairs, and -18.4% median paired input-token change under the 20% budget. The runner records stage times and bounded tool/read/validator/test counts without raw transcripts; fixed-order and mismatched-pair negative controls fail closed. The 29-file archive matched the plugin, all 79 repository tests and 12 product tests passed, learning and evolution validation passed, document debt was empty, and Release Gate returned 100/100 with release_ready true.",
+    "next_action": "Observe whether repeated completion-check commands persist now that benchmark telemetry exposes them; add a release guard only after a reproduced candidate improves that count without hurting behavior or paired cost.",
     "blockers": [],
     "approved_permissions": []
   },
   "agents": {
     "navigator": {
-      "version": 10,
+      "version": 12,
       "job": "Own verified-only resume, explicit checkpoint compatibility, transactional migration, unattended host boundaries, permissions, and final synthesis.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-10"
+      "last_promotion_id": "promotion-navigator-12"
     },
     "coach": {
       "version": 4,
@@ -29,10 +29,10 @@
       "last_promotion_id": "promotion-coach-4"
     },
     "gate": {
-      "version": 3,
+      "version": 5,
       "job": "Independently compare candidates, require machine-verified public-run evidence, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-3"
+      "last_promotion_id": "promotion-gate-5"
     },
     "product-builder": {
       "version": 5,
@@ -159,6 +159,46 @@
       "observed": "The successful Claude adoption rerun loaded a local plugin directory, so it did not prove the documented GitHub marketplace install path.",
       "expected": "Count the adoption case only when the active plugin source is GitHub and its installed version matches the release manifest.",
       "evidence": "The final fresh run used the GitHub marketplace installation at version 1.3.5 with no plugin-dir override.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-performance-release-gap",
+      "source": "user",
+      "target_agent": "gate",
+      "observed": "Release readiness could remain 100/100 while recorded setup, workflow, or fast-path token and elapsed-time metrics regressed, and activation coverage was four one-shot cases.",
+      "expected": "Fail releases on published performance regression and keep a repeated positive, negative, and fast-path activation matrix.",
+      "evidence": "The existing release score summed behavior statuses without opening the A/B measurements; the activation runner defaulted to one round across four cases.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-fast-path-read-instability",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "A fresh verified-checkpoint fixture completed correctly but stayed inside its checkpoint and task-file read budget in only 1 of 3 runs.",
+      "expected": "All three fresh runs must validate first, avoid full repository discovery, change the requested behavior, and pass the recorded check.",
+      "evidence": "evals/benchmarks/activation/results.json preserves the failed baseline, two rejected rules, and the accepted 3-of-3 arm.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-paired-performance-portability",
+      "source": "test",
+      "target_agent": "gate",
+      "observed": "The fast-path gate used a 250000-token absolute ceiling, historical version and arm names, fixed champion-first order, and no stage or tool telemetry; a same-source run exceeded the ceiling and reproduced one forbidden discovery read.",
+      "expected": "Use generic champion/candidate evidence, counterbalance arm order, compare only behavior-valid pairs against a relative budget, and retain bounded aggregate telemetry without raw transcripts.",
+      "evidence": "The fixed-order 3-pair run failed at 2/3 champion behavior; the counterbalanced 4-pair run exposed one excluded champion pair and three valid cost pairs.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-fast-path-command-budget",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "Fresh fast-path runs still occasionally used repository discovery, while aggregate telemetry also exposed repeated completion-check commands that token-only evidence could not explain.",
+      "expected": "Name forbidden discovery commands, keep the completion check on the shipped wrapper, preserve exact behavior, and stay within the paired relative cost budget.",
+      "evidence": "The final candidate stayed bounded in 4/4 rounds and improved median paired input by 18.4%; repeated check counts remain measured feedback rather than an unproven release threshold.",
       "scope": "core",
       "status": "converted"
     }
@@ -433,6 +473,114 @@
       "discovery_evidence": "The first passing rerun explicitly used --plugin-dir and therefore could not verify marketplace distribution.",
       "transfer_check": "A fresh fixture loaded only the user-scope GitHub marketplace installation and passed the same adoption gates.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-gate-4",
+      "feedback_ids": ["feedback-performance-release-gap"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 3,
+      "to_version": 4,
+      "cause": "Behavior scores and measured cost evidence were published but independently evaluated.",
+      "change_target": "Release validation for setup, workflow, fast-path, and activation performance budgets plus negative controls.",
+      "regression_check": "python3 -B -m unittest tests.test_activation_benchmark tests.test_release_gate -v",
+      "primary_metric": "published performance regressions allowed through release",
+      "permission_delta": [],
+      "rollback": "Restore Gate v3 while retaining the performance evidence and failing controls.",
+      "change_level": "meta",
+      "discovery_evidence": "The user's performance priority exposed that the 100-point behavior score did not include the already recorded time and token measurements.",
+      "transfer_check": "The gate independently recomputes both the setup/resume benchmark and the separate YouTube workflow A/B medians.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-11-explicit",
+      "feedback_ids": ["feedback-fast-path-read-instability"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 10,
+      "to_version": 11,
+      "cause": "A prohibition named the full contract and made the forbidden file salient without defining the only allowed inputs.",
+      "change_target": "An explicit do-not-read rule for the full contract.",
+      "regression_check": "Three fresh verified-checkpoint runs with tool-command read auditing.",
+      "primary_metric": "fast-path runs staying within the read budget",
+      "permission_delta": [],
+      "rollback": "Keep Navigator v10 and the failed arm.",
+      "change_level": "task",
+      "discovery_evidence": "The candidate improved bounded reads from 1/3 to 2/3 but still opened the full contract once.",
+      "transfer_check": "Not run because the originating gate rejected the candidate.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-11-allowed-set",
+      "feedback_ids": ["feedback-fast-path-read-instability"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 10,
+      "to_version": 11,
+      "cause": "Negative-only wording left repository inspection choices open and produced unstable fast resume.",
+      "change_target": "An early positive allowlist covering only the skill entry, checkpoint, validator output, direct task files, and files loaded by the completion check.",
+      "regression_check": "Three fresh verified-checkpoint runs plus repository tests and the activation artifact validator.",
+      "primary_metric": "fast-path runs staying within the read budget",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v10 when any of three repeated runs reads outside the allowed set or median input exceeds 250000 tokens.",
+      "change_level": "task",
+      "discovery_evidence": "The 3-of-3 candidate also reduced median elapsed, output, and reasoning cost versus the invalid baseline; input remained below the recorded 250000-token ceiling.",
+      "transfer_check": "The same isolated fixture exercised host guidance, skill routing, checkpoint validation, product edit, completion check, and checkpoint refresh.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-11-concise",
+      "feedback_ids": ["feedback-fast-path-read-instability"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 10,
+      "to_version": 11,
+      "cause": "The accepted allowlist might have been reducible to a shorter rule.",
+      "change_target": "A four-sentence fast-path instruction.",
+      "regression_check": "Three fresh verified-checkpoint runs with tool-command read auditing.",
+      "primary_metric": "fast-path runs staying within the read budget",
+      "permission_delta": [],
+      "rollback": "Keep the allowed-read-set candidate and preserve the concise failure.",
+      "change_level": "task",
+      "discovery_evidence": "The shorter arm fell to 2/3 and raised median input to 263745 tokens.",
+      "transfer_check": "Not run because the originating gate rejected the candidate.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-gate-5",
+      "feedback_ids": ["feedback-paired-performance-portability"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 4,
+      "to_version": 5,
+      "cause": "Absolute ceilings, fixed run order, and historical evidence keys confused runtime variance with product regression and made the validator release-specific.",
+      "change_target": "A version-independent champion/candidate schema, counterbalanced paired runner, relative input budget, stage/tool telemetry, and mismatch negative controls.",
+      "regression_check": "python3 -B -m unittest tests.test_activation_benchmark tests.test_release_gate -v",
+      "primary_metric": "performance regressions or mismatched pairs accepted by Release Gate",
+      "permission_delta": [],
+      "rollback": "Restore Gate v4 while retaining all paired runs and aggregate telemetry.",
+      "change_level": "meta",
+      "discovery_evidence": "Same-source input varied from 156151 to 355919 tokens, and the first fixed-order pair set reproduced a forbidden read despite an earlier 3/3 result.",
+      "transfer_check": "The same generic validator recomputes setup, resume, workflow, and paired runtime comparisons without knowing product version or arm IDs.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-12",
+      "feedback_ids": ["feedback-fast-path-command-budget"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 11,
+      "to_version": 12,
+      "cause": "The positive read allowlist still permitted occasional repository-discovery interpretation and gave no single wrapper for the recorded completion check.",
+      "change_target": "Name repository-discovery commands as forbidden and route the recorded check through the existing checkpoint runner.",
+      "regression_check": "Four counterbalanced fast-path pairs with command auditing and a 20% maximum paired input-token increase.",
+      "primary_metric": "fast-path runs staying inside the allowed read set",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v11 on one candidate forbidden read or paired input regression above 20%.",
+      "change_level": "task",
+      "discovery_evidence": "The final candidate passed 4/4 bounded runs; three behavior-valid pairs measured -18.4% median input change.",
+      "transfer_check": "The fixture exercised host guidance, skill routing, checkpoint validation, product edit, wrapper check, and checkpoint refresh under both arm orders.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -680,6 +828,98 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "The capture tool queried Claude marketplace and installed-plugin state directly, and offline validation matched version 1.3.5."
+      }
+    },
+    {
+      "id": "promotion-gate-4",
+      "proposal_id": "proposal-gate-4",
+      "gate_agent": "product-builder",
+      "before": "Release readiness ignored published setup, workflow, resume, and activation cost regressions.",
+      "after": "The Release Gate recomputes recorded medians, rejects injected token/time/read-scope regressions, and requires a ten-case three-round activation design.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "published performance regressions allowed through release",
+        "rollback_threshold": "roll back on one injected or recorded regression returning release_ready",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "Independent negative controls injected fast-path input, workflow elapsed-time, full-contract-read, activation-matrix-size, and round-count regressions; each failed."
+      }
+    },
+    {
+      "id": "promotion-navigator-11-explicit-rejected",
+      "proposal_id": "proposal-navigator-11-explicit",
+      "gate_agent": "gate",
+      "before": "Only 1 of 3 baseline runs stayed inside the fast-path read budget.",
+      "after": "The explicit prohibition reached 2 of 3 but still read the full contract once.",
+      "regressions_passed": false,
+      "decision": "rejected",
+      "live_cycle": null
+    },
+    {
+      "id": "promotion-navigator-11",
+      "proposal_id": "proposal-navigator-11-allowed-set",
+      "gate_agent": "gate",
+      "before": "Only 1 of 3 baseline runs stayed inside the fast-path read budget.",
+      "after": "All 3 runs stayed bounded, completed the product change, and passed the recorded check; median elapsed/output/reasoning were 72.43 seconds, 2570 tokens, and 1260 tokens.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "fast-path bounded-read success rate",
+        "rollback_threshold": "roll back below 1.0 success rate or above 250000 median input tokens across three comparable runs",
+        "metric_value": 1.0,
+        "rollback_operator": "lt",
+        "rollback_value": 1.0,
+        "evidence": "Three fresh isolated runs were 3/3 exact with no forbidden read; median input was 243079 tokens, below the recorded ceiling."
+      }
+    },
+    {
+      "id": "promotion-navigator-11-concise-rejected",
+      "proposal_id": "proposal-navigator-11-concise",
+      "gate_agent": "gate",
+      "before": "The allowed-read-set candidate passed 3 of 3 with median input 243079 tokens.",
+      "after": "The concise rule fell to 2 of 3 and median input increased to 263745 tokens.",
+      "regressions_passed": false,
+      "decision": "rejected",
+      "live_cycle": null
+    },
+    {
+      "id": "promotion-gate-5",
+      "proposal_id": "proposal-gate-5",
+      "gate_agent": "product-builder",
+      "before": "Release performance checks depended on historical arm names, an absolute token ceiling, and fixed-order runs without stage attribution.",
+      "after": "One generic validator reads champion/candidate comparisons, paired order is counterbalanced, and sanitized stage/tool telemetry explains cost without storing transcripts.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "invalid generic performance comparisons accepted",
+        "rollback_threshold": "roll back after one mismatched pair, behavior regression, or over-budget candidate passes",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "Injected mismatched pair IDs, false controls, token regressions, and candidate read regressions each failed before release scoring."
+      }
+    },
+    {
+      "id": "promotion-navigator-12",
+      "proposal_id": "proposal-navigator-12",
+      "gate_agent": "gate",
+      "before": "Fresh champion runs remained bounded in 3 of 4 counterbalanced rounds.",
+      "after": "The candidate stayed bounded in all 4 rounds and improved median paired input tokens by 18.4% across three comparable pairs.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "fast-path bounded-read success rate",
+        "rollback_threshold": "roll back below 1.0 candidate success rate across four counterbalanced rounds",
+        "metric_value": 1.0,
+        "rollback_operator": "lt",
+        "rollback_value": 1.0,
+        "evidence": "The candidate was 4/4 exact with no forbidden read; three valid pairs measured -18.4% input, -3.3% elapsed, -12.03% output, and -16.56% reasoning change."
       }
     }
   ]

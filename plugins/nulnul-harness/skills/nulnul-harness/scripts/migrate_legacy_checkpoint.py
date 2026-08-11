@@ -122,8 +122,8 @@ def migrate(contract_path, guidance_path):
     contract = contract_path.read_text(encoding="utf-8")
     guidance = guidance_path.read_text(encoding="utf-8")
     entry = (
-        "Resume from `docs/nulnul/checkpoint.json`; use the fast path only when "
-        "`verification_status` is `verified`."
+        "Validate `docs/nulnul/checkpoint.json` before repository-wide inspection; when "
+        "`fast_path_ready` is true, read only it and task files."
     )
     updated_guidance = guidance if "docs/nulnul/checkpoint.json" in guidance else guidance.rstrip() + "\n\n" + entry + "\n"
     if checkpoint_path.exists():

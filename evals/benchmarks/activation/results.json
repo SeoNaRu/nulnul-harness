@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-11",
+  "surface": "fresh codex exec --ignore-user-config --ephemeral",
+  "case": "verified-checkpoint-fast-path",
+  "method": {
+    "runs_per_arm": 3,
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "completion_check": "python3 -m unittest -q",
+    "performance_budget": "counterbalanced paired input-token change <= 20%",
+    "required_behavior": "read checkpoint and task files only, fix the task, pass the recorded check"
+  },
+  "arms": [
+    {
+      "id": "initial-read-budget",
+      "decision": "baseline-failed",
+      "runs": [
+        {"correct": false, "forbidden_reads": ["docs/nulnul/project.md"], "elapsed_seconds": 76.49, "input_tokens": 223636, "output_tokens": 2596, "reasoning_output_tokens": 1445},
+        {"correct": false, "forbidden_reads": ["docs/nulnul/project.md"], "elapsed_seconds": 77.48, "input_tokens": 200868, "output_tokens": 2743, "reasoning_output_tokens": 1687},
+        {"correct": true, "forbidden_reads": [], "elapsed_seconds": 92.84, "input_tokens": 157588, "output_tokens": 2758, "reasoning_output_tokens": 1786}
+      ],
+      "medians": {"elapsed_seconds": 77.48, "input_tokens": 200868, "output_tokens": 2743, "reasoning_output_tokens": 1687}
+    },
+    {
+      "id": "explicit-prohibition",
+      "decision": "rejected",
+      "runs": [
+        {"correct": false, "forbidden_reads": ["docs/nulnul/project.md"], "elapsed_seconds": 92.42, "input_tokens": 199688, "output_tokens": 2731, "reasoning_output_tokens": 1706},
+        {"correct": true, "forbidden_reads": [], "elapsed_seconds": 84.99, "input_tokens": 244270, "output_tokens": 2661, "reasoning_output_tokens": 1344},
+        {"correct": true, "forbidden_reads": [], "elapsed_seconds": 91.52, "input_tokens": 218520, "output_tokens": 2143, "reasoning_output_tokens": 1080}
+      ],
+      "medians": {"elapsed_seconds": 91.52, "input_tokens": 218520, "output_tokens": 2661, "reasoning_output_tokens": 1344}
+    },
+    {
+      "id": "allowed-read-set",
+      "decision": "accepted",
+      "runs": [
+        {"correct": true, "forbidden_reads": [], "elapsed_seconds": 97.14, "input_tokens": 268281, "output_tokens": 2952, "reasoning_output_tokens": 1710},
+        {"correct": true, "forbidden_reads": [], "elapsed_seconds": 72.43, "input_tokens": 156940, "output_tokens": 2097, "reasoning_output_tokens": 1260},
+        {"correct": true, "forbidden_reads": [], "elapsed_seconds": 68.35, "input_tokens": 243079, "output_tokens": 2570, "reasoning_output_tokens": 1179}
+      ],
+      "medians": {"elapsed_seconds": 72.43, "input_tokens": 243079, "output_tokens": 2570, "reasoning_output_tokens": 1260}
+    },
+    {
+      "id": "concise-read-rule",
+      "decision": "rejected",
+      "runs": [
+        {"correct": true, "forbidden_reads": [], "elapsed_seconds": 84.89, "input_tokens": 306112, "output_tokens": 2990, "reasoning_output_tokens": 1485},
+        {"correct": false, "forbidden_reads": ["find"], "elapsed_seconds": 114.21, "input_tokens": 263745, "output_tokens": 3109, "reasoning_output_tokens": 1831},
+        {"correct": true, "forbidden_reads": [], "elapsed_seconds": 75.21, "input_tokens": 242687, "output_tokens": 2620, "reasoning_output_tokens": 1369}
+      ],
+      "medians": {"elapsed_seconds": 84.89, "input_tokens": 263745, "output_tokens": 2990, "reasoning_output_tokens": 1485}
+    }
+  ],
+  "paired_comparison": {
+    "mode": "counterbalanced",
+    "rounds": 4,
+    "minimum_comparable_pairs": 3,
+    "maximum_input_change_percent": 20,
+    "champion": {
+      "label": "discovery-command prohibition",
+      "runs": [
+        {"pair": "round-1", "correct": true, "forbidden_reads": [], "elapsed_seconds": 87.84, "input_tokens": 247195, "output_tokens": 3175, "reasoning_output_tokens": 2005, "stage_seconds": {"fixture": 0.006, "agent": 87.84, "verification": 0.057, "total": 87.91}, "telemetry": {"tool_calls": 11, "shell_commands": 10, "read_commands": 5, "validator_commands": 1, "test_commands": 3}},
+        {"pair": "round-2", "correct": true, "forbidden_reads": [], "elapsed_seconds": 115.07, "input_tokens": 266157, "output_tokens": 3301, "reasoning_output_tokens": 2118, "stage_seconds": {"fixture": 0.004, "agent": 115.07, "verification": 0.038, "total": 115.11}, "telemetry": {"tool_calls": 12, "shell_commands": 11, "read_commands": 8, "validator_commands": 1, "test_commands": 1}},
+        {"pair": "round-3", "correct": false, "forbidden_reads": ["docs/nulnul/project.md", "/references/", "rg --files"], "elapsed_seconds": 99.79, "input_tokens": 241889, "output_tokens": 3320, "reasoning_output_tokens": 1634, "stage_seconds": {"fixture": 0.003, "agent": 99.79, "verification": 0.042, "total": 99.84}, "telemetry": {"tool_calls": 12, "shell_commands": 10, "read_commands": 6, "validator_commands": 2, "test_commands": 1}},
+        {"pair": "round-4", "correct": true, "forbidden_reads": [], "elapsed_seconds": 128.5, "input_tokens": 245821, "output_tokens": 3518, "reasoning_output_tokens": 2338, "stage_seconds": {"fixture": 0.004, "agent": 128.5, "verification": 0.103, "total": 128.61}, "telemetry": {"tool_calls": 11, "shell_commands": 10, "read_commands": 7, "validator_commands": 1, "test_commands": 1}}
+      ]
+    },
+    "candidate": {
+      "label": "bounded discovery and completion-check rule",
+      "runs": [
+        {"pair": "round-1", "correct": true, "forbidden_reads": [], "elapsed_seconds": 84.94, "input_tokens": 201718, "output_tokens": 2793, "reasoning_output_tokens": 1673, "stage_seconds": {"fixture": 0.526, "agent": 84.94, "verification": 0.04, "total": 85.51}, "telemetry": {"tool_calls": 9, "shell_commands": 8, "read_commands": 3, "validator_commands": 1, "test_commands": 1}},
+        {"pair": "round-2", "correct": true, "forbidden_reads": [], "elapsed_seconds": 96.93, "input_tokens": 201743, "output_tokens": 2815, "reasoning_output_tokens": 1670, "stage_seconds": {"fixture": 0.373, "agent": 96.93, "verification": 0.049, "total": 97.35}, "telemetry": {"tool_calls": 9, "shell_commands": 8, "read_commands": 5, "validator_commands": 1, "test_commands": 1}},
+        {"pair": "round-3", "correct": true, "forbidden_reads": [], "elapsed_seconds": 83.65, "input_tokens": 226968, "output_tokens": 3336, "reasoning_output_tokens": 2159, "stage_seconds": {"fixture": 0.476, "agent": 83.65, "verification": 0.104, "total": 84.23}, "telemetry": {"tool_calls": 10, "shell_commands": 9, "read_commands": 4, "validator_commands": 1, "test_commands": 2}},
+        {"pair": "round-4", "correct": true, "forbidden_reads": [], "elapsed_seconds": 183.55, "input_tokens": 348600, "output_tokens": 4361, "reasoning_output_tokens": 2544, "stage_seconds": {"fixture": 0.753, "agent": 183.55, "verification": 0.181, "total": 184.48}, "telemetry": {"tool_calls": 15, "shell_commands": 14, "read_commands": 10, "validator_commands": 1, "test_commands": 2}}
+      ]
+    },
+    "excluded_pairs": [{"pair": "round-3", "reason": "champion read outside the fast-path budget"}],
+    "paired_change_percent": {"elapsed_seconds": -3.3, "input_tokens": -18.4, "output_tokens": -12.03, "reasoning_output_tokens": -16.56},
+    "decision": "accepted"
+  },
+  "learning_verdicts": [
+    {"id": "initial-fast-path-read-scope", "status": "failed", "feedback_id": "feedback-fast-path-read-instability", "proposal_ids": ["proposal-navigator-11-explicit", "proposal-navigator-11-allowed-set"]},
+    {"id": "explicit-prohibition-read-scope", "status": "rejected", "feedback_id": "feedback-fast-path-read-instability", "proposal_ids": ["proposal-navigator-11-explicit"]},
+    {"id": "allowed-read-set", "status": "accepted"},
+    {"id": "concise-read-rule", "status": "rejected", "feedback_id": "feedback-fast-path-read-instability", "proposal_ids": ["proposal-navigator-11-concise"]},
+    {"id": "fixed-order-paired-control", "status": "rejected", "feedback_id": "feedback-paired-performance-portability", "proposal_ids": ["proposal-gate-5"]},
+    {"id": "counterbalanced-bounded-check", "status": "accepted"}
+  ]
+}

@@ -4,6 +4,13 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+- Made published setup, workflow, and fast-path token/time measurements release-blocking, with negative controls for token, elapsed-time, and read-scope regressions.
+- Expanded activation coverage from four one-shot cases to ten positive/negative project shapes with three runs by default, precision/recall, medians, bounded stderr, and fail-closed summaries.
+- Replaced the absolute 250,000-token fast-path ceiling with four counterbalanced champion/candidate rounds and a 20% paired relative budget; Navigator v12 stayed bounded in 4/4 runs and improved median paired input 18.4% across three comparable pairs.
+- Added fixture, agent, verification, and total timing plus aggregate tool/read/validator/test counts without retaining raw transcripts; telemetry exposed fixed-order bias and repeated-check work.
+- Made performance evidence version-independent: one generic champion/candidate schema now gates setup, resume, workflow, and paired runtime comparisons, with mismatched-pair and regression negative controls.
+- Connected the repository root agent to the user's approved external Obsidian LLM Wiki through an ignored local path, updating only durable lessons, index links, and the append-only log without publishing a machine-specific path.
+
 ## 1.3.5 — 2026-08-11
 
 - Require an exact checkpoint completion command and execute it through the shipped runner before verified fast resume.

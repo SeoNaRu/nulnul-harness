@@ -111,6 +111,8 @@ class ProductPluginTests(unittest.TestCase):
         self.assertLess(text.index("## Resume fast path"), text.index("## Workflow"))
         self.assertIn("Do not load setup, discovery, assembly, or evolution references", text)
         self.assertIn("Read that checkpoint and the current task files, not the full setup contract", text)
+        self.assertIn("validate that checkpoint before any repository-wide inspection", text)
+        self.assertIn("entire allowed read set", text)
         self.assertIn("repeat an unchanged passing check", text)
         self.assertIn("when a legacy `project.md` has durable continuity", text)
         self.assertIn("Never create `checkpoint.json` when `evolution.json` exists", text)
@@ -185,8 +187,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "66 passed"),
-            "README.ko.md": ("README.md", "66개 통과"),
+            "README.md": ("README.ko.md", "79 passed"),
+            "README.ko.md": ("README.md", "79개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
@@ -252,6 +254,22 @@ class ProductPluginTests(unittest.TestCase):
             "Accumulate across runs",
         ):
             self.assertIn(phrase, reference)
+
+    def test_root_agent_routes_only_approved_durable_wiki_lessons(self):
+        agreement = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        ignored = (ROOT / ".gitignore").read_text(encoding="utf-8")
+        for phrase in (
+            ".nulnul.local.json",
+            "obsidian_wiki_root",
+            "00_위키-작업규칙.md",
+            "read `index.md` first",
+            "append one entry to `log.md`",
+            "Skip routine passing runs",
+            "never copy raw transcripts",
+        ):
+            self.assertIn(phrase, agreement)
+        self.assertIn(".nulnul.local.json", ignored)
+        self.assertNotIn("/mnt/c/Users/", agreement)
 
     def test_legacy_lab_is_not_part_of_the_product(self):
         for path in ("plugins/project-harness", "catalog", "docs/research", "sandbox", "scripts/validate_lab.py", "skills-lock.json"):

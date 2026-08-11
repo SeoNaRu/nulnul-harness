@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-11",
+  "comparisons": [
+    {
+      "id": "existing-project-setup",
+      "mode": "median",
+      "minimum_runs": 1,
+      "required": {"exact_behavior": true},
+      "metrics": {"input_tokens": {"maximum_change_percent": 20}},
+      "champion": {"label": "previous accepted behavior", "runs": [
+        {"input_tokens": 448668, "exact_behavior": true}
+      ]},
+      "candidate": {"label": "current candidate", "runs": [
+        {"input_tokens": 459014, "exact_behavior": true}
+      ]}
+    },
+    {
+      "id": "fast-resume",
+      "mode": "median",
+      "minimum_runs": 3,
+      "required": {"exact_behavior": true},
+      "metrics": {
+        "input_tokens": {"maximum_change_percent": -0.01},
+        "output_tokens": {"maximum_change_percent": -0.01},
+        "reasoning_output_tokens": {"maximum_change_percent": -0.01}
+      },
+      "champion": {"label": "full durable contract", "runs": [
+        {"input_tokens": 223911, "output_tokens": 3076, "reasoning_output_tokens": 1342, "exact_behavior": true},
+        {"input_tokens": 225307, "output_tokens": 3663, "reasoning_output_tokens": 1678, "exact_behavior": true},
+        {"input_tokens": 194905, "output_tokens": 2348, "reasoning_output_tokens": 864, "exact_behavior": true}
+      ]},
+      "candidate": {"label": "concise verified checkpoint", "runs": [
+        {"input_tokens": 179673, "output_tokens": 2226, "reasoning_output_tokens": 586, "exact_behavior": true},
+        {"input_tokens": 121418, "output_tokens": 1756, "reasoning_output_tokens": 521, "exact_behavior": true},
+        {"input_tokens": 137669, "output_tokens": 2131, "reasoning_output_tokens": 761, "exact_behavior": true}
+      ]}
+    },
+    {
+      "id": "bounded-workflow",
+      "mode": "median",
+      "minimum_runs": 3,
+      "required": {"passed": true, "human_interventions": 0},
+      "metrics": {
+        "elapsed_seconds": {"maximum_change_percent": 0},
+        "input_tokens": {"maximum_change_percent": 0},
+        "output_tokens": {"maximum_change_percent": 0},
+        "reasoning_output_tokens": {"maximum_change_percent": 0}
+      },
+      "champion": {"label": "previous harness", "runs": [
+        {"elapsed_seconds": 224.91, "input_tokens": 256844, "output_tokens": 9893, "reasoning_output_tokens": 3640, "passed": true, "human_interventions": 0},
+        {"elapsed_seconds": 263.05, "input_tokens": 321196, "output_tokens": 10136, "reasoning_output_tokens": 3646, "passed": true, "human_interventions": 0},
+        {"elapsed_seconds": 297.6, "input_tokens": 265535, "output_tokens": 9165, "reasoning_output_tokens": 3462, "passed": true, "human_interventions": 0}
+      ]},
+      "candidate": {"label": "bounded activation", "runs": [
+        {"elapsed_seconds": 209.94, "input_tokens": 196767, "output_tokens": 7641, "reasoning_output_tokens": 3194, "passed": true, "human_interventions": 0},
+        {"elapsed_seconds": 195.3, "input_tokens": 189197, "output_tokens": 5401, "reasoning_output_tokens": 1180, "passed": true, "human_interventions": 0},
+        {"elapsed_seconds": 181.24, "input_tokens": 262677, "output_tokens": 7798, "reasoning_output_tokens": 2208, "passed": true, "human_interventions": 0}
+      ]}
+    },
+    {
+      "id": "paired-runtime-control",
+      "mode": "paired",
+      "minimum_runs": 3,
+      "required": {"correct": true},
+      "metrics": {"input_tokens": {"maximum_change_percent": 20}},
+      "champion": {"label": "same-time accepted harness", "runs": [
+        {"pair": "round-1", "input_tokens": 247195, "correct": true},
+        {"pair": "round-2", "input_tokens": 266157, "correct": true},
+        {"pair": "round-4", "input_tokens": 245821, "correct": true}
+      ]},
+      "candidate": {"label": "same-time candidate", "runs": [
+        {"pair": "round-1", "input_tokens": 201718, "correct": true},
+        {"pair": "round-2", "input_tokens": 201743, "correct": true},
+        {"pair": "round-4", "input_tokens": 348600, "correct": true}
+      ]}
+    }
+  ],
+  "controls": [
+    {"id": "fast-path-transfer-bounded-read", "passed": true}
+  ]
+}

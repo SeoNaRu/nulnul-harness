@@ -20,3 +20,4 @@ Thumbs.db
 
 # Personal Obsidian wiki (maintained outside the repository)
 wiki/
+.nulnul.local.json

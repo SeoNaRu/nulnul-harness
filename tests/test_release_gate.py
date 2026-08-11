@@ -14,6 +14,16 @@ class ReleaseGateTests(unittest.TestCase):
     def setUp(self):
         self.cases = json.loads((ROOT / "evals/cases.json").read_text(encoding="utf-8"))
         self.results = json.loads((ROOT / "evals/results.json").read_text(encoding="utf-8"))
+        self.setup = json.loads(
+            (ROOT / "evals/benchmarks/setup-baseline/results.json").read_text(encoding="utf-8")
+        )
+        self.performance = json.loads(
+            (ROOT / "evals/benchmarks/performance.json").read_text(encoding="utf-8")
+        )
+        self.activation = json.loads(
+            (ROOT / "evals/benchmarks/activation/results.json").read_text(encoding="utf-8")
+        )
+        self.evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
 
     def test_current_score_uses_only_passed_evidence(self):
         score = MODULE.calculate(self.cases, self.results)
@@ -45,13 +55,74 @@ class ReleaseGateTests(unittest.TestCase):
             MODULE.calculate(altered, self.results)
 
     def test_missing_learning_verdict_inventory_fails_release(self):
-        learning = json.loads(
-            (ROOT / "evals/benchmarks/setup-baseline/results.json").read_text(encoding="utf-8")
-        )
+        learning = json.loads(json.dumps(self.setup))
         evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
         learning.pop("learning_verdicts")
         with self.assertRaisesRegex(ValueError, "learning_verdicts must be an array"):
             MODULE.validate_learning_gate(learning, evolution)
+
+    def test_current_performance_and_activation_gates_pass(self):
+        performance = MODULE.validate_performance_gate(self.performance)
+        activation = MODULE.validate_activation_gate()
+        live = MODULE.validate_activation_results(self.activation, self.evolution)
+        self.assertEqual(performance["status"], "passed")
+        self.assertLess(performance["comparisons"]["fast-resume"]["input_tokens"], 0)
+        self.assertGreaterEqual(activation["case_count"], 10)
+        self.assertGreaterEqual(activation["minimum_rounds"], 3)
+        self.assertEqual(live["exact_runs"], 3)
+        self.assertGreaterEqual(live["comparable_pairs"], 3)
+        self.assertLessEqual(live["paired_input_change_percent"], 20)
+
+    def test_performance_gate_rejects_token_or_read_scope_regression(self):
+        slower = json.loads(json.dumps(self.performance))
+        comparison = next(item for item in slower["comparisons"] if item["id"] == "fast-resume")
+        for run in comparison["candidate"]["runs"]:
+            run["input_tokens"] = 999999
+        with self.assertRaisesRegex(ValueError, "fast-resume regressed"):
+            MODULE.validate_performance_gate(slower)
+
+        slower_workflow = json.loads(json.dumps(self.performance))
+        comparison = next(item for item in slower_workflow["comparisons"] if item["id"] == "bounded-workflow")
+        for run in comparison["candidate"]["runs"]:
+            run["elapsed_seconds"] = 999999
+        with self.assertRaisesRegex(ValueError, "bounded-workflow regressed"):
+            MODULE.validate_performance_gate(slower_workflow)
+
+        broad = json.loads(json.dumps(self.performance))
+        broad["controls"][0]["passed"] = False
+        with self.assertRaisesRegex(ValueError, "control failed"):
+            MODULE.validate_performance_gate(broad)
+
+    def test_performance_gate_rejects_mismatched_pairs(self):
+        paired = json.loads(json.dumps(self.performance))
+        comparison = next(item for item in paired["comparisons"] if item["mode"] == "paired")
+        comparison["candidate"]["runs"][0]["pair"] = "wrong"
+        with self.assertRaisesRegex(ValueError, "mismatched pair"):
+            MODULE.validate_performance_gate(paired)
+
+    def test_activation_gate_rejects_small_or_single_run_matrix(self):
+        tiny = {"positive": {"expect_activation": True}}
+        with self.assertRaisesRegex(ValueError, "at least 10 cases"):
+            MODULE.validate_activation_gate(tiny, 3)
+        with self.assertRaisesRegex(ValueError, "at least 3 times"):
+            MODULE.validate_activation_gate(
+                {f"p{i}": {"expect_activation": True} for i in range(5)}
+                | {f"n{i}": {"expect_activation": False} for i in range(5)},
+                1,
+            )
+
+    def test_activation_results_reject_read_or_token_regressions(self):
+        broad = json.loads(json.dumps(self.activation))
+        accepted = next(arm for arm in broad["arms"] if arm["decision"] == "accepted")
+        accepted["runs"][0]["correct"] = False
+        accepted["runs"][0]["forbidden_reads"] = ["docs/nulnul/project.md"]
+        with self.assertRaisesRegex(ValueError, "not exact and bounded"):
+            MODULE.validate_activation_results(broad, self.evolution)
+
+        expensive = json.loads(json.dumps(self.activation))
+        expensive["paired_comparison"]["maximum_input_change_percent"] = -100
+        with self.assertRaisesRegex(ValueError, "paired input-token budget"):
+            MODULE.validate_activation_results(expensive, self.evolution)
 
     def test_claude_evidence_fails_on_unverified_protected_write(self):
         version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]

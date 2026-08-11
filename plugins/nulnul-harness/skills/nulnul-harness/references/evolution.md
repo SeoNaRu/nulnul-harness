@@ -59,6 +59,8 @@ Record the accepted change, evidence, and rollback or removal condition in conci
 
 Agent and Coach upgrades require an independent Gate. A proposal author may implement a candidate in isolation but cannot approve, promote, or broaden its own authority. Keep the last accepted version until the Gate records a reproducible decision.
 
+For a product release, behavior passing is necessary but does not excuse a measured cost regression. Re-run each activation case at least three times, keep positive and negative routing coverage, and compare a candidate with a same-model champion in counterbalanced paired rounds. Gate the median paired change against a relative budget rather than an absolute token ceiling. Record fixture, agent, verification, and total time plus bounded tool/read/validator/test counts without persisting raw transcripts. A fast-resume candidate also fails when it reads the full setup contract or setup references.
+
 ## Prune
 
 Remove or replace a capability or role when its job disappears, overlaps another, loses maintenance or compatibility, adds more coordination than value, or no longer improves the baseline. Installed availability does not justify activation.

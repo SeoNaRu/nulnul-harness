@@ -256,8 +256,8 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 66 passed |
-| Release Gate behavior and safety gate | 100/100 |
+| Automated repository tests | 79 passed |
+| Release Gate | 100/100 behavior and safety; recorded setup, workflow, and fast-path performance budgets also pass |
 | Positive isolated scenarios | 9 passed |
 | Negative safety scenarios | 3 passed |
 | Two-run Codex meta-evolution | Coach v1 → v2; 0/2 relevant-method misses; 8/8 fixture tests; unnecessary infrastructure skipped |
@@ -266,11 +266,12 @@ The contribution, if any, is the packaging: one portable contract that carries a
 | Fresh Codex setup A/B | Exact behavior; accepted 1.3.0 input +2.31%, output -5.42%, reasoning -9.80% vs 1.2.1; initial +50.89% arm rejected |
 | Fresh Codex resume A/B | Exact behavior in 3/3 trials; concise checkpoint reduced median input 38.52%, output 30.72%, and reasoning 56.33% vs 1.3.0; three weaker arms rejected |
 | Later transfer cycle | A separate slugger project changed exactly one behavior and test, passed 3/3 tests and both harness checks, and did not read the marked full contract |
+| Activation and fast-path runner | 10 positive/negative project shapes, 3 runs by default; the counterbalanced candidate was bounded in 4/4 runs and changed paired input -18.4% across 3 comparable pairs |
 | Headless Claude Code adoption | GitHub-marketplace-installed 1.3.5 kept both agent-profile hashes unchanged, made zero `.claude/**` write calls, created a verified checkpoint with an executable completion command, and passed five machine-recorded checks |
 | Learning-loop and upgrade controls | Schema-v1 checkpoints are read-only; missing verdict inventories fail Product and Release Gates; injected migration write failure restores every earlier file |
 | Executable rollback controls | Threshold breach restored Coach v1 active-version state; healthy metric produced no write |
 
-Release Gate is a release gate, not a universal performance benchmark. All twelve weighted behavior and safety cases now pass. They cover implicit project activation, ambiguous empty repositories, reuse and protected-path-safe upgrade of existing setups, multilingual setup triggers, capability-first automation, permission boundaries, evidence-gated evolution, two-session improvement of the improvement procedure, read-only non-activation, secret persistence, and unapproved global registration.
+Release Gate is not a universal performance benchmark. All twelve weighted behavior and safety cases pass, and release readiness also fails on a recorded setup, workflow, or fast-path regression. Performance evidence uses version-independent champion/candidate records; fast-path candidates run in counterbalanced paired order and are checked against a relative token budget instead of an absolute ceiling. The activation runner reports precision, recall, stage times, and aggregate tool/read/validator/test counts without retaining raw transcripts.
 
 Reproduce the public checks:
 
@@ -279,7 +280,7 @@ python3 scripts/release_gate.py
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-Inputs and decisions are published in [`evals/cases.json`](evals/cases.json), [`evals/results.json`](evals/results.json), and the [`fresh Codex setup baseline`](evals/benchmarks/setup-baseline/results.json).
+Inputs and decisions are published in [`evals/cases.json`](evals/cases.json), [`evals/results.json`](evals/results.json), the [`performance comparisons`](evals/benchmarks/performance.json), and the [`fresh Codex setup baseline`](evals/benchmarks/setup-baseline/results.json).
 
 ## Reference workflow: YouTube → Google Sheets
 
@@ -316,14 +317,14 @@ plugins/nulnul-harness/                 # only shipped product boundary
     └── scripts/                        # state validator and documentation debt detector
 ```
 
-The plugin remains skills-only. It includes no MCP server, hook, app, authentication, telemetry, hosted service, or background process. Evolution happens during normal agent work; it is not an unsupervised daemon. Gate independence is validated from declared state; it is not cryptographic identity proof.
+The plugin remains skills-only. It includes no MCP server, hook, app, authentication, remote telemetry, hosted service, or background process. Local release benchmarks retain sanitized aggregates only. Evolution happens during normal agent work; it is not an unsupervised daemon. Gate independence is validated from declared state; it is not cryptographic identity proof.
 
 ## FAQ
 
 <details>
 <summary>Is Release Gate a performance benchmark?</summary>
 
-No. It is a release gate over behaviors and safety boundaries: implicit activation, ambiguous empty repositories, reuse of a coherent setup, capability-first automation, permission boundaries, evidence-gated evolution, read-only non-activation, secret persistence, and unapproved global registration. Speed and quality evidence is separate, task-specific, and reported as such in [Evidence, not claims](#evidence-not-claims).
+Not a universal one. It gates behavior and safety, then enforces the published task-specific setup, workflow, and fast-path performance budgets. The measurements remain scoped to their recorded fixtures and are reported in [Evidence, not claims](#evidence-not-claims).
 </details>
 
 <details>
