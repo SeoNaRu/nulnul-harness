@@ -2,17 +2,15 @@
   <img src="plugins/nulnul-harness/assets/nulnul-logo-green.svg" width="320" alt="NULNUL logo">
 </p>
 
-<h1 align="center">NULNUL</h1>
-
 <p align="center">
   <strong>Verified capabilities. Personal agents. Controlled evolution.</strong><br>
-  A skills-only plugin for Codex and Claude Code that turns ideas into verified agent systems.
+  A beginner-friendly Codex and Claude Code plugin that builds the agent team, capabilities, and evolving meta-harness around your project.
 </p>
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/version-1.2.1-111111" alt="version 1.2.1">
-  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
+  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-90%2F100-111111" alt="Release Gate: 90/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
 
@@ -31,7 +29,30 @@ More tools do not make a better agent system. Unverified skills, overlapping rol
 - activate only the skills and agents needed for the current job;
 - finish the original task instead of stopping at setup;
 - resume later sessions from repository evidence, not chat memory;
-- turn reproducible feedback into agent upgrades that require an independent Gate.
+- turn reproducible feedback into agent upgrades that require an independent Gate;
+- improve the Coach's own discovery and improvement procedure when the user had to find a better method.
+
+You describe the result, not the AI architecture. On an existing project NULNUL inspects the repository and upgrades its current setup in place. In an empty project it asks what you want to make, then chooses the smallest useful team. It reuses suitable installed skills and plugins immediately, explains any new installation in plain language, asks once when approval is required, and skips overlapping tools.
+
+## The baseline that is always on
+
+Every setup keeps a seven-part **Baseline Kernel**: repository truth, the original outcome, one runnable completion check, a before state, inspected capability decisions, permission boundaries, and independently gated evolution with rollback. When a durable `docs/nulnul/project.md` is needed, a bundled validator rejects unfinished contracts that omit the inspected roster, plain-language setup decisions, or continuity.
+
+Heavier infrastructure still stays evidence-driven. Persistent memory appears when work spans sessions; performance tracking when an outcome needs comparison; a dashboard when repeated human decisions need trends; more agents when independent work justifies coordination; staged verification for risky changes; a lock for shared mutable state; MCP only for an uncovered tool or service boundary; and a project-local skill only after adequate existing candidates fail. See [`references/baseline-kernel.md`](plugins/nulnul-harness/skills/nulnul-harness/references/baseline-kernel.md).
+
+## From harness engineering to a meta-harness
+
+NULNUL began with [GeekNews Weekly 353: “In the age of abundant skills, build your own harness”](https://news.hada.io/weekly/202615). Its research foundation is Meta and UBC's [HyperAgents](https://ai.meta.com/research/publications/hyperagents/) ([paper](https://arxiv.org/abs/2603.19461), [code](https://github.com/facebookresearch/Hyperagents)): a task agent and a meta agent live in one editable program, and the meta agent may improve the procedure that produces later improvements.
+
+NULNUL translates that idea into a removable project system for people who should not need to engineer a harness themselves:
+
+| Editable side | NULNUL responsibility |
+| --- | --- |
+| Task side | Navigator and Worker complete the project with the selected skills and plugins |
+| Meta side | Coach finds better capabilities and methods, then edits the task side or its own discovery and improvement rules |
+| Independent boundary | Gate compares the candidate, blocks self-approval and permission expansion, and observes the next live run |
+
+This is governed self-improvement during normal project work, not a claim that the plugin reproduces HyperAgents' open-ended research system. The initial conditions and exact meta-evolution contract live in [`references/meta-evolution.md`](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md).
 
 ## How this was built
 
@@ -50,7 +71,7 @@ More tools do not make a better agent system. Unverified skills, overlapping rol
 
 Each failure became a rule with the number that produced it, written into the reference the agent actually loads. See [Field-hardened rules](#field-hardened-rules).
 
-**What that day changed about the design.** The measured gains came from correcting judgment functions that already existed — not from adding agents. So the setup output now ships four mechanisms before it ships any agent roster: a minimal frozen benchmark, the one function that defines the deliverable unit, a documentation debt hook, and a lock on the state file. This is one project over one day, so treat it as field evidence, not a benchmark.
+**What that day changed about the design.** The measured gains came from correcting judgment functions that already existed — not from adding agents. NULNUL now checks four jobs before adding an agent: repeated judgement may need a frozen benchmark, counted recurring work one deliverable function, changing source and guidance a documentation-debt hook, and concurrent state one writer plus a lock. It creates only the mechanisms whose jobs exist and lets later evidence add the rest. This is one project over one day, so treat it as field evidence, not a benchmark.
 
 ## Quick start
 
@@ -73,9 +94,9 @@ claude plugin marketplace add "$PWD"
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
-The same skill drives both surfaces; the harness detects the host and writes that host's setup paths.
+The same skill drives both surfaces. The harness detects the host and writes only repository-owned setup paths. In unattended Claude Code sessions, `.claude/**` is inspected but never modified; `CLAUDE.md`, `docs/nulnul/`, and the verified checkpoint provide session continuity and reusable local workflows.
 
-Start a new Codex session and describe the outcome. Asking for a harness is enough — you never describe agents, roles, or setup steps:
+Start a new session and describe the outcome. Asking for a harness is enough — you never describe agents, roles, or setup steps:
 
 ```text
 Build me a harness that finds finance YouTube creators, deduplicates them,
@@ -87,7 +108,7 @@ The harness inspects the project, reuses adequate instructions and tests, checks
 ## Product loop
 
 ```text
-Discover → Verify → Assemble → Run → Checkpoint → Evolve
+Discover → Verify → Assemble → Run → Checkpoint → Evolve the task or the improvement process
 ```
 
 | Stage | Durable result |
@@ -97,7 +118,7 @@ Discover → Verify → Assemble → Run → Checkpoint → Evolve
 | Assemble | The smallest complete capability and agent set |
 | Run | The user-visible result and its completion check |
 | Checkpoint | Verified state, next action, blockers, and approved permissions |
-| Evolve | Reproducible feedback, version comparison, independent promotion, and rollback |
+| Evolve | Task or meta-procedure change, transfer check, live observation, and rollback |
 
 One run, in full:
 
@@ -128,14 +149,16 @@ The `yes` branch is the common one on a mature repository, and it produces no fi
 
 ```text
 your-project/
-├── AGENTS.md                  # short repo-wide guidance, merged with what you already wrote
+├── AGENTS.md or CLAUDE.md     # host-loaded guidance, merged with what you already wrote
 ├── docs/nulnul/
 │   ├── project.md             # goal, completion check, capabilities, permission boundaries, rollback
 │   └── evolution.json         # checkpoint, agent versions, bounded feedback, Gate decisions
-└── .agents/skills/<name>/     # only when a recurring workflow has no adequate existing skill
+├── .agents/skills/<name>/      # Codex: only when no adequate existing skill covers the workflow
+└── docs/nulnul/workflows/<name>.md
+                                # unattended Claude Code: reusable workflow referenced by CLAUDE.md
 ```
 
-That is the entire footprint. `evolution.json` appears only for multi-session or self-improving work, the project-local skill only when every existing candidate was checked and rejected, and a fast-path run writes nothing. Deleting `docs/nulnul/` and `.agents/` removes the harness without touching product code.
+That is the entire footprint. `evolution.json` appears only for multi-session or self-improving work, the project-local skill only when every existing candidate was checked and rejected, and a fast-path run writes nothing. Remove the generated `docs/nulnul/` and project-local skill directory to remove the harness without touching product code. Host-owned agent definitions are never part of that footprint.
 
 The goal is fewer generated files, not more. A setup that produces dozens of agent definitions has moved the problem, not solved it.
 
@@ -166,10 +189,10 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 | --- | --- |
 | Navigator | Own the outcome, completion check, permissions, checkpoint, and resume |
 | Worker | Complete one bounded job and report observable evidence |
-| Coach | Diagnose the nearest responsible layer and propose one versioned change |
+| Coach | Act as the meta-agent: discover better methods and propose one task- or meta-level change |
 | Gate | Compare the candidate with the accepted version, then promote, reject, or roll back |
 
-These are responsibility boundaries, not four mandatory live agents. Simple work can combine roles; every promotion still separates its author from its Gate. The Coach can be upgraded from feedback, but it cannot approve its own candidate.
+These are responsibility boundaries, not four mandatory live agents. Simple work can combine roles; every promotion still separates its author from its Gate. The Coach can upgrade its own discovery and improvement procedure, but it cannot approve its own candidate.
 
 For multi-session work, the harness stores only bounded state in `docs/nulnul/evolution.json`. Its standard-library validator rejects target or proposal-author self-approval, contradictory records, missing evidence, invalid version transitions, sensitive persisted keys, and permission expansion without prior approval.
 
@@ -188,8 +211,8 @@ These rules come from a full day of unattended loop operation on a real recurrin
 | Each stage records its own start and end | Unrecorded time attaches to the neighboring stage and names the wrong bottleneck |
 | Rejected and rolled-back proposals kept with their diff and reason, queried before the next proposal | The Coach reproposing a candidate the Gate already rejected |
 | Gate decisions logged, with the false-positive share reported | Accumulated false alarms train people to wave the gate through, and the gate stops protecting anything |
-| A documentation debt detector in the day-one setup | A fix that lands only in code is invisible to the next session |
-| Day-one setup ships a minimal frozen benchmark, the deliverable-unit function, the doc-debt hook, and the state lock | A cold start has nothing for the Gate to run against, so evolution cannot begin |
+| A documentation debt detector when source and durable guidance evolve together | A fix that lands only in code is invisible to the next session |
+| Benchmark, deliverable function, doc-debt hook, and state lock selected from inspected jobs | Speculative scaffolding on a simple project, or no mechanism when a recurring job actually needs one |
 
 ## Prior art
 
@@ -197,6 +220,7 @@ None of the parts here are new. Split the design and every piece has an existing
 
 | Part of NULNUL | Existing name | Where it lives here |
 | --- | --- | --- |
+| Editable task and meta sides | [HyperAgents](https://ai.meta.com/research/publications/hyperagents/) — the meta agent can modify the task agent and its own modification procedure | `references/meta-evolution.md`, with an independent Gate added as a safety boundary |
 | Coach and Gate separated | actor-critic ([Sutton & Barto](http://incompleteideas.net/book/the-book.html)); the generator–verifier gap — checking an answer is a different, easier job than producing it | `references/personal-evolution.md` |
 | Automatic promotion and rollback | champion/challenger, model-registry promotion gates ([MLflow](https://mlflow.org/docs/latest/model-registry.html)), [canary release](https://martinfowler.com/bliki/CanaryRelease.html) | promotion condition 8: one observed live cycle, automatic revert on a metric drop |
 | Gating on regression checks | eval-gated CI ([promptfoo](https://www.promptfoo.dev/), [Braintrust](https://www.braintrust.dev/), [LangSmith](https://docs.smith.langchain.com/)) | [`evals/cases.json`](evals/cases.json), `scripts/release_gate.py`, the repository test suite |
@@ -207,7 +231,8 @@ None of the parts here are new. Split the design and every piece has an existing
 
 Two differences are deliberate:
 
-- **Self-refinement judges itself; this does not.** Reflexion-style loops let the same agent critique and accept its own retry. Here a promotion needs an independent Gate plus one observed live cycle, and the validator rejects a state file where the proposal author or the target agent signed off on it.
+- **The system improves itself; it cannot approve itself.** Reflexion-style loops let the same agent critique and accept its own retry. Here the Coach may modify its own improvement procedure, but promotion needs an independent Gate plus one observed live cycle, and the validator rejects a state file where the proposal author or target signed off on it.
+- **Managed runtime is optional.** [Claude Managed Agents](https://news.hada.io/topic?id=28326) supplies hosted sessions, sandboxes, identity, and tracing; it is not HyperAgents and NULNUL does not require that service or lock a project to one model provider.
 - **The loop's failures are operational, so the rules are too.** Locks, cursors, and a distinct `unknown` state are not agent-reasoning topics, and that is exactly why an agent-only design keeps losing data to them.
 
 The contribution, if any, is the packaging: one portable contract that carries all of it into a fresh repository, with no service to run and nothing left behind after deletion.
@@ -216,14 +241,15 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 40 passed |
-| Release Gate behavior and safety gate | 100/100 |
-| Positive isolated scenarios | 8 passed |
+| Automated repository tests | 47 passed |
+| Release Gate behavior and safety gate | 90/100 |
+| Positive isolated scenarios | 8 passed; 1 requires rerun |
 | Negative safety scenarios | 3 passed |
+| Two-run Codex meta-evolution | Coach v1 → v2; 0/2 relevant-method misses; 8/8 fixture tests; unnecessary infrastructure skipped |
 | Independent forward evaluation | Found 3 validator gaps; all fixed and preserved as regressions |
 | Offline workbook A/B (3 trials per arm) | All exact; Navigator v3 median time -25.76%, output tokens -22.76% vs 1.2.0 |
 
-Release Gate is a release gate, not a universal performance benchmark. It covers implicit project activation, ambiguous empty repositories, reuse of coherent setups, adoption into a repository that already has agents, multilingual setup triggers, capability-first automation, permission boundaries, evidence-gated evolution, read-only non-activation, secret persistence, and unapproved global registration.
+Release Gate is a release gate, not a universal performance benchmark. The headless Claude Code adoption case currently requires a fresh run after the specification stopped writing host-protected agent definitions; it contributes no points until that evidence exists. The passed cases cover implicit project activation, ambiguous empty repositories, reuse of coherent setups, multilingual setup triggers, capability-first automation, permission boundaries, evidence-gated evolution, two-session improvement of the improvement procedure, read-only non-activation, secret persistence, and unapproved global registration.
 
 Reproduce the public checks:
 
@@ -251,6 +277,7 @@ No real Google authentication or Sheet write is performed without explicit appro
 - **No secret persistence.** Credentials, raw conversations, and personal data do not become project memory.
 - **Independent promotion.** An agent cannot approve its own upgrade.
 - **Verified resume.** Checkpoints are rechecked against repository reality before use.
+- **Host-owned configuration stays host-owned.** Unattended sessions inspect `.claude/**` but never rewrite their own agents, skills, settings, or hooks.
 - **Removable setup.** Generated project state can be deleted without damaging product code.
 
 ## What ships

@@ -4,16 +4,24 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+- Added a seven-invariant Baseline Kernel for repository truth, observable outcomes, before-state checks, capability decisions, permission boundaries, task continuation, and governed evolution.
+- Added a deterministic project-setup validator with negative controls so durable contracts cannot omit the inspected roster, completion check, plain-language setup decisions, or continuity fields.
+- Grounded the product's meta-harness in Meta and UBC's HyperAgents research and the GeekNews harness discussion, while explicitly avoiding a claim of reproducing the open-ended research system.
+- Unified the task side and Coach-led meta side as one editable project program. User-supplied better methods now become discovery feedback, and the Coach may improve its own discovery, assembly, measurement, memory, and improvement procedure.
+- Added evolution schema v2 with discovery evidence, transfer checks for broader changes, and a required observed live cycle plus rollback threshold before acceptance; schema v1 checkpoints remain readable.
+- Made persistent memory, performance tracking, multi-stage verification, frozen benchmarks, delivery counters, document-debt checks, and state locks job-driven candidates instead of unconditional scaffolding.
+- Passed a two-session isolated Codex meta-evolution: Coach v1 stayed active while v2 was gated, a fresh evaluator observed zero relevant-method misses across two mechanisms, accepted v2 with rollback evidence, and passed all 8 fixture tests and negative controls.
 - Added an adopt-and-upgrade mode so a setup request on a repository that already has work no longer asks what to build.
 - Required the host's installed skills, plugins, and agents to be enumerated before coverage is judged, and reported as a roster.
 - Required every existing agent to be classified as kept, upgraded, merged, or removed instead of recreated.
-- Added a host surface map covering Codex and Claude Code paths, a context-cost verification dimension, and a durable session entry agent in day-one output.
+- Added a host surface map covering Codex and Claude Code paths, a context-cost verification dimension, and a durable session entry instruction in day-one output.
 - Added multilingual setup triggers to the skill description (English, Korean, Chinese, Japanese) with a deterministic test that fails if a phrase is dropped.
 - Published the plugin for Claude Code: `.claude-plugin/plugin.json` and a repository-root `.claude-plugin/marketplace.json`.
 - Renamed Harness 100 to Release Gate, matching what the script actually computes.
 - Added `references/capability-registry.md`: where to search when the installed roster falls short, with the host marketplace commands, the sources already trusted on the machine, and named context-economy candidates.
 - Fixed both halves of the gate that let an adopt run skip day-one output: step 8 judged sufficiency before reading the list, and the list described itself as belonging to a "cold project", which a repository with code and agents read as excluding itself. Measured runs delivered the `CLAUDE.md` contract and nothing else — no checkpoint, no benchmark, no debt detector.
-- Added the `positive-adopt-existing-harness` and `positive-multilingual-setup-trigger` scenarios. Both passed on measured runs: the trigger fired in four languages, and the adoption run shipped every day-one mechanism with the repository's checks still green. Release Gate is back to 100/100.
+- Added the `positive-adopt-existing-harness` and `positive-multilingual-setup-trigger` scenarios. The trigger passed in four languages. The former adoption result was invalidated after its headless Claude Code run attempted host-protected `.claude/**` writes and left a missing session entry; it now requires a clean rerun, so Release Gate is 90/100 until that evidence exists.
+- Treat Claude Code's `.claude/**` tree as a read-only discovery surface in unattended sessions. Session continuity and reusable local workflows now enter through host-loaded repository guidance and `docs/nulnul/` instead of requiring the host to let an agent rewrite its own configuration.
 
 ## 1.2.1 — 2026-08-10
 

@@ -1,7 +1,7 @@
 {
   "name": "nulnul-harness",
   "version": "1.2.1",
-  "description": "Find proven capabilities, assemble the smallest useful agent system, preserve progress, and evolve each agent from independently verified feedback.",
+  "description": "Build a project-fit agent team, reuse proven skills and plugins, and evolve both the work and its improvement procedure.",
   "author": {
     "name": "SeoNaRu",
     "url": "https://github.com/SeoNaRu"
@@ -16,13 +16,15 @@
     "codex",
     "automation",
     "adaptive-workflow",
-    "personal-agents"
+    "personal-agents",
+    "meta-harness",
+    "self-improvement"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "nulnul harness",
-    "shortDescription": "Verified agents. Less work.",
-    "longDescription": "Describe the outcome. nulnul harness finds proven skills, assembles only the agents the workflow needs, preserves verified progress across sessions, and upgrades each agent only when an independent Gate accepts reproducible evidence.",
+    "shortDescription": "Your evolving AI team.",
+    "longDescription": "Describe the outcome, not the AI architecture. nulnul harness inspects the project, reuses suitable skills and plugins, assembles the smallest useful task and meta-agent system, preserves progress, and improves both the work and its own improvement procedure behind an independent Gate.",
     "developerName": "SeoNaRu",
     "category": "Productivity",
     "capabilities": [
@@ -31,7 +33,8 @@
       "project-bootstrap",
       "evidence-gated-evolution",
       "session-continuity",
-      "personal-agent-evolution"
+      "personal-agent-evolution",
+      "meta-harness-evolution"
     ],
     "brandColor": "#111111",
     "composerIcon": "./assets/nulnul-harness.svg",
@@ -41,8 +44,8 @@
     "termsOfServiceURL": "https://github.com/SeoNaRu/nulnul-harness/blob/main/TERMS.md",
     "defaultPrompt": [
       "Build this project. Find proven skills before creating new ones, and keep the setup minimal.",
-      "Turn this recurring workflow into a verified automation and improve it from real runs.",
-      "Use worker feedback to upgrade the responsible agent, preserve the last verified checkpoint, and require independent promotion."
+      "Turn this recurring workflow into a verified automation and improve both the work and its improvement process from real runs.",
+      "Build the smallest task and meta-agent system for this project, preserve verified progress, and require independent promotion."
     ]
   }
 }

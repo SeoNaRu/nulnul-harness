@@ -6,7 +6,7 @@ Turn user corrections and agent feedback into tested agent versions, not free-fo
 
 - **Navigator** owns the outcome, verified checkpoint, next action, blockers, permissions, and session resume.
 - **Worker** completes one bounded job and reports an observable result, failure, workaround, or critique.
-- **Coach** reproduces feedback, identifies the nearest responsible layer, and proposes one causal change plus a regression check and rollback.
+- **Coach** is the meta-agent. It reproduces feedback, discovers credible better methods when the current frame is insufficient, and proposes one causal task- or meta-level change plus a regression check and rollback.
 - **Gate** is independent from the proposal author. It compares the candidate with the last accepted version and records promote, reject, or rollback.
 
 Combine roles for low-risk execution when useful. Separate Coach and Gate for every promotion. When the Coach or Gate is the target, use a fresh evaluator or deterministic check that did not author the candidate. Do not create recursive coaches.
@@ -14,6 +14,8 @@ Combine roles for low-risk execution when useful. Separate Coach and Gate for ev
 ## Persist only when needed
 
 For work that spans sessions or needs agent-specific learning, create `docs/nulnul/evolution.json` from `../assets/evolution-state.template.json`. Validate it with `../scripts/validate_evolution_state.py` after each change.
+
+New states use schema version 2. Version 1 remains readable for compatibility, but version 2 records whether a proposal changes the task or the improvement procedure and refuses to finalize an accepted promotion without a later observed live cycle.
 
 The Navigator updates a checkpoint only after verifying repository reality. Store the goal, current milestone, completion check, status, last verified evidence, exact next action, blockers, and approved permission changes. On resume, recheck the evidence and continue from the next action instead of reconstructing a plan from chat.
 
@@ -36,10 +38,14 @@ For each reproducible feedback cluster:
 1. identify whether the defect belongs to product code, data, tool routing, capability choice, agent profile, handoff, checkpoint, or the Coach diagnosis;
 2. target the nearest durable layer and one agent version;
 3. state the proposal author, cause, candidate change, reproduction, primary metric, guardrails, permission delta, and rollback;
+   - set `change_level` to `task` for the work or its harness and `meta` when changing how future improvements are discovered, generated, measured, selected, remembered, or rolled back;
+   - for a meta change, record `discovery_evidence`; for personal or core scope also record a representative `transfer_check`;
 4. keep the current accepted version active while the candidate is evaluated;
 5. never bundle unrelated lessons or let a Worker edit another profile directly.
 
 Workers may critique the Coach. Feed those critiques back as Coach-targeted events. The Coach may author its next version, but only an independent Gate may promote it.
+
+Apply `meta-evolution.md` when the feedback says the user had to find a better method, research direction, skill, plugin, or harness pattern. That is evidence that the improvement mechanism missed an opportunity, not merely a request to add a citation.
 
 ## Gate and promote
 

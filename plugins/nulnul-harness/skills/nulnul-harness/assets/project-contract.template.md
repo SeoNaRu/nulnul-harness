@@ -17,6 +17,13 @@ Observable completion check: {user-visible or machine-verifiable result}
 - {non-negotiable constraint}
 - External services, credentials, deployment, public writes, and global configuration require explicit user approval.
 
+## Inspected roster
+
+- Host surface: {Codex, Claude Code, or another detected host}
+- Skills: {inspected installed skills, or none}
+- Plugins: {inspected installed plugins, or none}
+- Agents: {inspected existing agents, or none}
+
 ## Capability requirements
 
 | Required job | Input → output | Quality check | Data or permission boundary |
@@ -38,6 +45,13 @@ Create a custom capability only when the checked candidates are inadequate.
 | {name} | {source and revision when needed} | {necessary non-overlapping job} | {trigger} | {observable check} | {authority limit} | {removal condition} |
 
 Available capabilities and capabilities active for the current task are separate sets.
+
+## Setup decisions
+
+- Reuse now: {safe installed capabilities activated for named jobs, or none with reason}
+- Add now: {project-local additions for named jobs, or none with reason}
+- Needs approval: {downloads, registration, authentication, external writes, deployment, or none}
+- Skip: {evaluated capabilities or infrastructure omitted with reason}
 
 ## Agent topology
 
