@@ -53,6 +53,29 @@ class ReleaseGateTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "learning_verdicts must be an array"):
             MODULE.validate_learning_gate(learning, evolution)
 
+    def test_claude_evidence_fails_on_unverified_protected_write(self):
+        version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
+        evidence = {
+            "schema_version": 1,
+            "case_id": "positive-adopt-existing-harness",
+            "plugin_version": version,
+            "plugin_source": "github",
+            "protected_write_calls": [],
+            "existing_agents": {
+                "collector": {"before_sha256": "a", "after_sha256": "a"},
+                "reviewer": {"before_sha256": "b", "after_sha256": "b"},
+            },
+            "roster_enumerated": True,
+            "agents_classified": True,
+            "session_entry_present": True,
+            "checkpoint_fast_path_ready": True,
+            "checks": {name: {"exit_code": 0} for name in ("repository", "project_setup", "checkpoint", "completion", "documentation_debt")},
+        }
+        MODULE.validate_claude_gate(evidence, version)
+        evidence["protected_write_calls"] = [{"tool": "Write", "target": ".claude/**"}]
+        with self.assertRaisesRegex(ValueError, "protected-path write"):
+            MODULE.validate_claude_gate(evidence, version)
+
 
 if __name__ == "__main__":
     unittest.main()

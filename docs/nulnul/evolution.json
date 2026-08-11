@@ -7,20 +7,20 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Release protected-path-safe unattended Claude Code adoption and a fully evidenced Release Gate as nulnul-harness 1.3.4.",
+    "milestone": "Release executable checkpoint completion and machine-verified public Claude adoption evidence as nulnul-harness 1.3.5.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-11: the 1.3.4 archive matched all 28 plugin files; all 64 repository tests and 11 product tests passed. A fresh headless Claude Code adopt cycle made zero protected-path write calls, kept and contract-upgraded both agents, left a valid fast-resumable checkpoint, and passed the repository, project, checkpoint, and documentation-debt checks. All 12 weighted Release Gate cases passed for 100/100 and release_ready true; evolution validation, rollback no-op, and diff checks also passed.",
-    "next_action": "Observe the next public-marketplace Claude Code adoption and roll back Navigator v9 on one protected-path write call, false fast resume, missing learning inventory, partial migration, duplicate state writer, or lost permission constraint.",
+    "last_verified": "2026-08-11: GitHub-marketplace-installed nulnul-harness 1.3.5 completed a fresh headless Claude Code adopt cycle with zero protected writes, unchanged hashes for both existing agents, roster enumeration and classification, a host-loaded session entry, and fast_path_ready. The exact npm test checkpoint command and four other recorded checks exited zero. The 29-file archive matched the plugin, all 66 repository tests and 11 product tests passed, and the machine-evidenced Release Gate returned 100/100 with release_ready true.",
+    "next_action": "Observe the next independent public-project cycle and roll back Gate v3 or Navigator v10 on one unverified paid-runtime result, prose completion check, protected write, false fast resume, missing learning inventory, partial migration, duplicate writer, or lost permission constraint.",
     "blockers": [],
     "approved_permissions": []
   },
   "agents": {
     "navigator": {
-      "version": 9,
+      "version": 10,
       "job": "Own verified-only resume, explicit checkpoint compatibility, transactional migration, unattended host boundaries, permissions, and final synthesis.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-9"
+      "last_promotion_id": "promotion-navigator-10"
     },
     "coach": {
       "version": 4,
@@ -29,10 +29,10 @@
       "last_promotion_id": "promotion-coach-4"
     },
     "gate": {
-      "version": 1,
-      "job": "Independently compare candidates with accepted versions and promote, reject, or roll back.",
+      "version": 3,
+      "job": "Independently compare candidates, require machine-verified public-run evidence, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": null
+      "last_promotion_id": "promotion-gate-3"
     },
     "product-builder": {
       "version": 5,
@@ -129,6 +129,36 @@
       "observed": "A headless Claude Code adopt run read the protected-path rule but still issued two Write calls against existing .claude/agents profiles, then treated the host denials as an acceptable manual follow-up.",
       "expected": "Classify .claude/** as read-only before roster inspection, issue no write tool call against it, and upgrade existing roles only through repository guidance during unattended runs.",
       "evidence": "The first isolated 1.3.3 run recorded both denied Write calls; a fresh patched run exposed the same tools but recorded zero protected-path write calls.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-release-self-asserted-evidence",
+      "source": "test",
+      "target_agent": "gate",
+      "observed": "The Release Gate awarded the Claude adoption weight by trusting a hand-edited passed status without checking the protected-write trace, agent hashes, or validator exits.",
+      "expected": "Require a sanitized structured artifact and reject any protected write, changed profile, stale version, missing setup output, or failed check.",
+      "evidence": "The previous release_gate.py summed statuses only; its new negative control injects a protected write and fails the gate.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-checkpoint-prose-command",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "A generated verified checkpoint stored a prose success description in completion_check, and structural validation still allowed fast resume.",
+      "expected": "Store the exact repository command and execute that field successfully before verified fast resume.",
+      "evidence": "The observed prose form now fails validation; the shipped runner executed the public E2E checkpoint's exact npm test command with exit code zero.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-local-only-claude-evidence",
+      "source": "gate",
+      "target_agent": "gate",
+      "observed": "The successful Claude adoption rerun loaded a local plugin directory, so it did not prove the documented GitHub marketplace install path.",
+      "expected": "Count the adoption case only when the active plugin source is GitHub and its installed version matches the release manifest.",
+      "evidence": "The final fresh run used the GitHub marketplace installation at version 1.3.5 with no plugin-dir override.",
       "scope": "core",
       "status": "converted"
     }
@@ -349,6 +379,60 @@
       "discovery_evidence": "The first authorized rerun reproduced the exact host-boundary defect rather than merely reporting a denied final state.",
       "transfer_check": "A fresh fixture with the same two agents and product behavior kept both profiles unchanged while moving their upgraded contracts into CLAUDE.md.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-gate-2",
+      "feedback_ids": ["feedback-release-self-asserted-evidence"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 1,
+      "to_version": 2,
+      "cause": "A categorical result status carried no executable link to the paid runtime evidence behind it.",
+      "change_target": "Sanitized Claude adoption evidence capture and an offline Release Gate validator with a protected-write negative control.",
+      "regression_check": "python3 -B -m unittest tests.test_release_gate -v",
+      "primary_metric": "Claude adoption passes accepted without machine-valid evidence",
+      "permission_delta": [],
+      "rollback": "Restore Gate v1 and retain the structured artifact plus its failing negative control.",
+      "change_level": "meta",
+      "discovery_evidence": "Reviewing release_gate.py showed that it summed hand-edited statuses and never opened runtime evidence.",
+      "transfer_check": "The same validator checks provenance, protected writes, unchanged profiles, roster and session outputs, and every required command exit.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-10",
+      "feedback_ids": ["feedback-checkpoint-prose-command"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 9,
+      "to_version": 10,
+      "cause": "Checkpoint validation checked non-empty text but did not distinguish an executable command from a sentence about successful results.",
+      "change_target": "Exact-command validation plus a shipped runner that executes completion_check before verified promotion.",
+      "regression_check": "python3 -B -m unittest tests.test_checkpoint -v",
+      "primary_metric": "prose completion descriptions allowed into verified fast resume",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v9 and retain the prose and nonzero command controls.",
+      "change_level": "task",
+      "discovery_evidence": "The generated Claude checkpoint reproduced the structural validator gap with a human-readable but non-runnable completion description.",
+      "transfer_check": "The public installed-plugin run generated npm test and the runner executed that exact field successfully.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-gate-3",
+      "feedback_ids": ["feedback-local-only-claude-evidence"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 2,
+      "to_version": 3,
+      "cause": "Local plugin injection bypassed the user-facing marketplace acquisition path.",
+      "change_target": "Require GitHub marketplace provenance and exact installed-version equality in Claude adoption evidence.",
+      "regression_check": "python3 scripts/claude_adopt_evidence.py validate evals/benchmarks/claude-adopt/evidence.json --version 1.3.5",
+      "primary_metric": "local-only Claude runs accepted as public-install evidence",
+      "permission_delta": [],
+      "rollback": "Restore Gate v2 while retaining the GitHub-source evidence field and stale-version control.",
+      "change_level": "meta",
+      "discovery_evidence": "The first passing rerun explicitly used --plugin-dir and therefore could not verify marketplace distribution.",
+      "transfer_check": "A fresh fixture loaded only the user-scope GitHub marketplace installation and passed the same adoption gates.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -542,6 +626,60 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "The transcript audit inspected 31 tool calls and found zero protected write targets; npm test, project setup validation, checkpoint validation with fast_path_ready, and documentation-debt validation passed."
+      }
+    },
+    {
+      "id": "promotion-gate-2",
+      "proposal_id": "proposal-gate-2",
+      "gate_agent": "product-builder",
+      "before": "One Claude adoption pass could be awarded from a hand-edited status with no runtime artifact validation.",
+      "after": "The Release Gate imports the evidence validator, and an injected protected write fails before scoring.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "Claude adoption passes accepted without machine-valid evidence",
+        "rollback_threshold": "roll back on one scored Claude adoption result without a valid structured artifact",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The current Release Gate validated the sanitized public-run artifact before returning 100/100."
+      }
+    },
+    {
+      "id": "promotion-navigator-10",
+      "proposal_id": "proposal-navigator-10",
+      "gate_agent": "gate",
+      "before": "A prose completion description passed checkpoint validation and could accompany verified status.",
+      "after": "The prose negative control fails, while the public E2E checkpoint's npm test command executes with exit code zero.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "prose completion descriptions allowed into verified fast resume",
+        "rollback_threshold": "roll back on one prose completion description entering fast resume",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "Checkpoint tests rejected the observed sentence and the shipped runner passed the exact npm test field in the public fixture."
+      }
+    },
+    {
+      "id": "promotion-gate-3",
+      "proposal_id": "proposal-gate-3",
+      "gate_agent": "product-builder",
+      "before": "The passing Claude evidence came from a local plugin-dir override.",
+      "after": "The recorded run used GitHub marketplace source and installed version 1.3.5 without a local override.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "local-only Claude runs accepted as public-install evidence",
+        "rollback_threshold": "roll back on one non-GitHub or stale-version run accepted by the gate",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The capture tool queried Claude marketplace and installed-plugin state directly, and offline validation matched version 1.3.5."
       }
     }
   ]

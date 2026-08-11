@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEARNING_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_learning_loop.py"
 )
+CLAUDE_EVIDENCE_VALIDATOR = ROOT / "scripts/claude_adopt_evidence.py"
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -19,6 +20,15 @@ def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> No
     errors = validator.validate(results_payload, evolution_payload)
     if errors:
         raise ValueError("Release Gate learning loop failed: " + "; ".join(errors))
+
+
+def validate_claude_gate(evidence_payload: dict, version: str) -> None:
+    spec = importlib.util.spec_from_file_location("claude_adopt_evidence", CLAUDE_EVIDENCE_VALIDATOR)
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    errors = validator.validate(evidence_payload, version)
+    if errors:
+        raise ValueError("Release Gate Claude evidence failed: " + "; ".join(errors))
 
 
 def calculate(cases_payload: dict, results_payload: dict) -> dict:
@@ -59,7 +69,10 @@ def main() -> None:
         (ROOT / "evals/benchmarks/setup-baseline/results.json").read_text(encoding="utf-8")
     )
     evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
+    evidence = json.loads((ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8"))
+    version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
     validate_learning_gate(learning, evolution)
+    validate_claude_gate(evidence, version)
     print(json.dumps(calculate(cases, results), ensure_ascii=False, indent=2))
 
 

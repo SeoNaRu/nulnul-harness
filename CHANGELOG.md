@@ -7,6 +7,8 @@ All notable changes to `nulnul harness` are recorded here.
 ## 1.3.5 — 2026-08-11
 
 - Require an exact checkpoint completion command and execute it through the shipped runner before verified fast resume.
+- Make the Release Gate validate a sanitized Claude adoption artifact instead of trusting a hand-edited `passed` status; negative controls reject protected writes.
+- Re-run adoption using the GitHub marketplace installation with no local plugin override, preserving both existing agent hashes and passing five recorded checks.
 
 ## 1.3.4 — 2026-08-11
 

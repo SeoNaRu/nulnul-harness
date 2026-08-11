@@ -256,7 +256,7 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 65 passed |
+| Automated repository tests | 66 passed |
 | Release Gate behavior and safety gate | 100/100 |
 | Positive isolated scenarios | 9 passed |
 | Negative safety scenarios | 3 passed |
@@ -266,7 +266,7 @@ The contribution, if any, is the packaging: one portable contract that carries a
 | Fresh Codex setup A/B | Exact behavior; accepted 1.3.0 input +2.31%, output -5.42%, reasoning -9.80% vs 1.2.1; initial +50.89% arm rejected |
 | Fresh Codex resume A/B | Exact behavior in 3/3 trials; concise checkpoint reduced median input 38.52%, output 30.72%, and reasoning 56.33% vs 1.3.0; three weaker arms rejected |
 | Later transfer cycle | A separate slugger project changed exactly one behavior and test, passed 3/3 tests and both harness checks, and did not read the marked full contract |
-| Headless Claude Code adoption | A fresh existing project kept and contract-upgraded both agents, enumerated the installed roster, made zero `.claude/**` write calls, created a verified schema-v2 checkpoint and host-loaded session entry, and passed all four repository and harness checks |
+| Headless Claude Code adoption | GitHub-marketplace-installed 1.3.5 kept both agent-profile hashes unchanged, made zero `.claude/**` write calls, created a verified checkpoint with an executable completion command, and passed five machine-recorded checks |
 | Learning-loop and upgrade controls | Schema-v1 checkpoints are read-only; missing verdict inventories fail Product and Release Gates; injected migration write failure restores every earlier file |
 | Executable rollback controls | Threshold breach restored Coach v1 active-version state; healthy metric produced no write |
 
