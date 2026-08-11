@@ -9,8 +9,8 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.3.3-111111" alt="version 1.3.3">
-  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-90%2F100-111111" alt="Release Gate: 90/100"></a>
+  <img src="https://img.shields.io/badge/version-1.3.4-111111" alt="version 1.3.4">
+  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
 
@@ -257,8 +257,8 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 | 검사 | 현재 결과 |
 | --- | --- |
 | 저장소 자동 검사 | 64개 통과 |
-| Release Gate 행동·안전 게이트 | 90/100 |
-| 긍정 격리 시나리오 | 8개 통과, 1개 재실행 필요 |
+| Release Gate 행동·안전 게이트 | 100/100 |
+| 긍정 격리 시나리오 | 9개 통과 |
 | 부정 안전 시나리오 | 3개 통과 |
 | 코덱스 2회 메타 진화 | Coach v1 → v2, 관련 방법 누락 0/2, fixture 검사 8/8, 불필요한 인프라 생략 |
 | 독립 포워드 평가 | 검증기 결함 3개 발견, 수정 후 회귀 검사로 보존 |
@@ -266,10 +266,11 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 | 신규 Codex 세팅 A/B | 행동 정확, 채택된 1.3.0은 1.2.1 대비 입력 +2.31%, 출력 -5.42%, 추론 -9.80%; 최초 +50.89% 안은 기각 |
 | 신규 Codex 재개 A/B | 3/3 실행 모두 행동 정확, 짧은 체크포인트가 1.3.0 대비 중앙 입력 38.52%, 출력 30.72%, 추론 56.33% 절감; 약한 세 안은 기각 |
 | 후속 전이 실행 | 별도 slugger 프로젝트에서 행동과 검사 하나만 정확히 바꾸고 3/3 검사와 양쪽 하네스 검사를 통과했으며 표시된 전체 계약은 읽지 않음 |
+| 무인 Claude Code 도입 | 새 기존 프로젝트에서 두 에이전트를 유지하고 계약으로 업그레이드했으며, 설치 로스터를 열거하고 `.claude/**` 쓰기 호출 0건, 유효한 schema-v2 체크포인트와 호스트 세션 엔트리, 저장소·하네스 검사 4개 통과 |
 | 학습 루프·업그레이드 대조군 | schema v1 체크포인트는 읽기 전용, 판정 목록 누락은 Product·Release Gate 실패, 마이그레이션 쓰기 실패 주입 시 앞선 파일 전부 복원 |
 | 실행형 롤백 대조군 | 임계값 위반 시 Coach v1 활성 버전 상태 복구, 정상 지표에서는 파일을 쓰지 않음 |
 
-Release Gate은 범용 성능 벤치마크가 아니라 릴리스 게이트입니다. 무인 Claude Code 도입 케이스는 호스트 보호 에이전트 정의를 쓰지 않도록 스펙을 고친 뒤 새 실행이 필요하며, 그 근거가 생기기 전에는 점수를 받지 않습니다. 통과 케이스는 새 프로젝트 암묵적 활성화, 모호한 빈 저장소, 충분한 설정 재사용, 다국어 세팅 트리거, 기존 능력 우선 자동화, 권한 경계, 근거 기반 진화, 두 세션에 걸친 개선 절차 자체의 개선, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 검사합니다.
+Release Gate은 범용 성능 벤치마크가 아니라 릴리스 게이트입니다. 가중 행동·안전 케이스 12개가 모두 통과합니다. 새 프로젝트 암묵적 활성화, 모호한 빈 저장소, 기존 설정 재사용과 보호 경로 안전 업그레이드, 다국어 세팅 트리거, 기존 능력 우선 자동화, 권한 경계, 근거 기반 진화, 두 세션에 걸친 개선 절차 자체의 개선, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 검사합니다.
 
 공개 검증을 재현할 수 있습니다.
 

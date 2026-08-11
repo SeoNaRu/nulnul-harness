@@ -23,7 +23,7 @@ These are responsibilities, not a mandatory four-agent team. Combine them in one
 
 When the repository or host already defines agents, the default is to upgrade them in place, not to design a replacement team beside them. Recreating a role the user already uses discards their accumulated context and leaves two owners for one job.
 
-Some hosts expose agent definitions for discovery but protect them from the unattended session they configure. In that case, do not attempt the write and do not call an unapplied profile edit an upgrade. Put shared behavior in the repository contract the agents already load, classify the role as upgraded through that contract, and reserve profile-specific edits for an explicit manual request.
+Some hosts expose agent definitions for discovery but protect them from the unattended session they configure. In that case, do not attempt the write and do not call an unapplied profile edit an upgrade. A denied `Write`, `Edit`, or shell write still counts as an attempted write and fails the setup. Put shared behavior in the repository contract the agents already load, classify the role as upgraded through that contract, and reserve profile-specific edits for an explicit manual request.
 
 Read every existing agent definition first, then for each one record:
 

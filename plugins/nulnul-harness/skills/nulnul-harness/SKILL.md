@@ -13,6 +13,10 @@ When an empty or evidence-poor repository and a broad request leave the intended
 
 A request to adopt, install, or upgrade the harness in a repository that already contains work is not an open product decision. The observable result is the upgraded setup itself: an inspected capability roster, an adopted or upgraded agent team, and the project's own checks still passing. Do not ask the user what to build, and do not treat the setup request as too broad to act on.
 
+## Claude Code unattended guard
+
+In a Claude Code print, SDK, headless, or otherwise non-interactive session, classify `.claude/**` as read-only before inspecting the roster. Never issue `Write`, `Edit`, or a shell command that targets anything under `.claude/**`; a denied write attempt is still a failed setup. Upgrade existing roles through `CLAUDE.md` and `docs/nulnul/`, and reserve profile edits for a later explicit manual request. If session mode is uncertain and the agent cannot ask permission interactively, use this read-only rule.
+
 ## Required inputs
 
 - the user's pending outcome or automation idea
@@ -73,6 +77,7 @@ Before applying the full workflow, use this path when host-loaded guidance point
 - Confirm task and meta changes are both editable targets, a user-supplied better direction becomes Coach feedback rather than documentation only, and personal or core meta changes have a representative transfer check.
 - Confirm a custom skill was created only after adequate existing candidates were checked and rejected with reasons.
 - Confirm the host's installed skills, plugins, and agents were actually enumerated, and that a setup request on a non-empty repository produced an upgraded roster rather than a question about what to build.
+- Confirm an unattended Claude Code run made no write tool call targeting `.claude/**`, including one the host denied.
 - Confirm roster enumeration used session catalogs and bounded host listings rather than recursively scanning homes, caches, marketplaces, or every capability body.
 - Confirm no secret, personal data, raw conversation, machine-specific path, or unapproved global or external change was introduced.
 - Confirm recurring data workflows use stable identity, deterministic deduplication, exclusion precedence, explicit review states, auditable reasons, idempotent writes, and spreadsheet-safe values where applicable.

@@ -7,20 +7,20 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Release explicit checkpoint compatibility, mandatory learning inventory, and transactional legacy migration as nulnul-harness 1.3.3.",
+    "milestone": "Release protected-path-safe unattended Claude Code adoption and a fully evidenced Release Gate as nulnul-harness 1.3.4.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-11: the 1.3.3 archive matched all 28 plugin files; all 64 repository tests and 11 product tests passed, including checkpoint schema compatibility, mandatory learning inventory, transactional migration rollback, evolution validation, rollback no-op, diff, and documentation-debt checks. The release gate scored 90/100 because the explicitly deferred Claude Code adopt rerun remains pending.",
-    "next_action": "When Claude Code verification is authorized, rerun the adopt-existing-harness case; meanwhile roll back the responsible candidate on any false fast resume, missing learning inventory, partial migration, duplicate state writer, or lost permission constraint.",
+    "last_verified": "2026-08-11: the 1.3.4 archive matched all 28 plugin files; all 64 repository tests and 11 product tests passed. A fresh headless Claude Code adopt cycle made zero protected-path write calls, kept and contract-upgraded both agents, left a valid fast-resumable checkpoint, and passed the repository, project, checkpoint, and documentation-debt checks. All 12 weighted Release Gate cases passed for 100/100 and release_ready true; evolution validation, rollback no-op, and diff checks also passed.",
+    "next_action": "Observe the next public-marketplace Claude Code adoption and roll back Navigator v9 on one protected-path write call, false fast resume, missing learning inventory, partial migration, duplicate state writer, or lost permission constraint.",
     "blockers": [],
     "approved_permissions": []
   },
   "agents": {
     "navigator": {
-      "version": 8,
-      "job": "Own verified-only resume, explicit checkpoint compatibility, transactional legacy migration, permissions, and final synthesis.",
+      "version": 9,
+      "job": "Own verified-only resume, explicit checkpoint compatibility, transactional migration, unattended host boundaries, permissions, and final synthesis.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-8"
+      "last_promotion_id": "promotion-navigator-9"
     },
     "coach": {
       "version": 4,
@@ -120,6 +120,16 @@
       "expected": "Prepare every update first and restore every replaced file if any replacement fails.",
       "evidence": "A deterministic second-replacement failure injection verifies that no new checkpoint or partial guidance edit remains.",
       "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-claude-protected-write-attempt",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "A headless Claude Code adopt run read the protected-path rule but still issued two Write calls against existing .claude/agents profiles, then treated the host denials as an acceptable manual follow-up.",
+      "expected": "Classify .claude/** as read-only before roster inspection, issue no write tool call against it, and upgrade existing roles only through repository guidance during unattended runs.",
+      "evidence": "The first isolated 1.3.3 run recorded both denied Write calls; a fresh patched run exposed the same tools but recorded zero protected-path write calls.",
+      "scope": "core",
       "status": "converted"
     }
   ],
@@ -321,6 +331,24 @@
       "discovery_evidence": "Failure injection at the second replacement reproduced the cross-file partial-state risk.",
       "transfer_check": "The transaction covers both checkpoint creation plus guidance edit and checkpoint upgrade plus guidance edit paths.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-9",
+      "feedback_ids": ["feedback-claude-protected-write-attempt"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 8,
+      "to_version": 9,
+      "cause": "The adopt-in-place instruction remained more salient than a later host-boundary warning, so the model attempted profile writes before falling back to shared guidance.",
+      "change_target": "A top-level Claude Code unattended guard plus an explicit validation invariant that a denied protected-path write is still failure.",
+      "regression_check": "Fresh headless Claude Code adoption on the frozen two-agent Node fixture, transcript write-target audit, npm test, project and checkpoint validators, and documentation-debt check.",
+      "primary_metric": "write tool calls targeting .claude/** during unattended adoption",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v8 while retaining both the failed and passing isolated run evidence.",
+      "change_level": "task",
+      "discovery_evidence": "The first authorized rerun reproduced the exact host-boundary defect rather than merely reporting a denied final state.",
+      "transfer_check": "A fresh fixture with the same two agents and product behavior kept both profiles unchanged while moving their upgraded contracts into CLAUDE.md.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -496,6 +524,24 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "The migration negative control failed the second replacement and found no new checkpoint or changed guidance file afterward."
+      }
+    },
+    {
+      "id": "promotion-navigator-9",
+      "proposal_id": "proposal-navigator-9",
+      "gate_agent": "gate",
+      "before": "The isolated headless run issued two Write calls targeting existing .claude/agents profiles and accepted host denial as a fallback.",
+      "after": "The fresh run issued zero protected-path write calls, classified and contract-upgraded both roles through CLAUDE.md, and left a verified schema-v2 checkpoint.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "write tool calls targeting .claude/** during unattended adoption",
+        "rollback_threshold": "roll back on one protected-path write tool call, whether allowed or denied",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The transcript audit inspected 31 tool calls and found zero protected write targets; npm test, project setup validation, checkpoint validation with fast_path_ready, and documentation-debt validation passed."
       }
     }
   ]

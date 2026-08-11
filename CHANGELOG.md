@@ -4,6 +4,12 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+## 1.3.4 — 2026-08-11
+
+- Promoted the Claude Code unattended boundary to a top-level guard: `.claude/**` is classified read-only before roster inspection, and even a host-denied write call fails setup.
+- Re-ran the existing-project adoption case after the first run reproduced two protected-profile write attempts. The fresh run made zero such calls, kept and contract-upgraded both agents, enumerated the installed roster, and left a valid fast-resumable checkpoint.
+- Closed the Release Gate at 100/100 after the isolated repository test, project-contract validator, checkpoint validator, and documentation-debt check all passed.
+
 ## 1.3.3 — 2026-08-11
 
 - Versioned the concise checkpoint contract correctly: new state uses schema v2, schema v1 remains readable but cannot fast-resume, and unknown future versions fail closed.
