@@ -4,6 +4,11 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+## 1.3.1 — 2026-08-11
+
+- Added a validated concise resume checkpoint that keeps stable setup evidence out of the host-loaded entry. Three exact A/B trials reduced median input 38.52%, output 30.72%, and reasoning 56.33% versus 1.3.0, and a later transfer cycle passed without reading the full contract.
+- Closed the measured-result loop: every reproducible rejected, regressed, failed, or not-established verdict now becomes Coach feedback and one bounded proposal in the same run. Three losing resume mechanisms remain recorded instead of being retried silently.
+
 ## 1.3.0 — 2026-08-11
 
 - Added repeatable Git-marketplace installation and update instructions for Codex and Claude Code, with a real semver release boundary.

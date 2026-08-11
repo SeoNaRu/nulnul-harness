@@ -30,7 +30,7 @@ Include, before any extra agent:
 
 Record an omitted mechanism as `not applicable` with one reason. The Coach may add it later when a live run reveals the job; that evidence-driven construction is part of the meta-harness rather than a setup failure. These mechanisms matter more than a large agent roster when their jobs exist.
 
-One durable **session entry instruction** belongs in day-one output. Put it in the repository instruction file the detected host already loads: `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code. It points to the verified checkpoint and assigns Navigator responsibility — current state, next action, permissions, and final synthesis — without requiring another agent file. Existing Claude Code agents still get classified and may be upgraded through the shared repository contract they load, but an unattended session must not create or edit `.claude/**`. Profile- or plugin-specific changes remain a manual, explicitly requested operation. Worker, Coach, and Gate stay merged until concrete evidence splits them.
+One durable **session entry instruction** and one concise checkpoint belong in day-one output. Put the instruction in the repository file the detected host already loads: `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code. For a project without agent-specific evolution, create `docs/nulnul/checkpoint.json` from `assets/checkpoint.template.json`, validate it, and point the session entry there rather than at the full setup contract. The checkpoint owns only the current goal, milestone, completion check, last verified result, next action, permissions, and blockers; `project.md` keeps stable setup evidence and does not duplicate those live fields. When `evolution.json` already owns the checkpoint, do not create a second writer. Existing Claude Code agents still get classified and may be upgraded through shared repository guidance, but an unattended session must not create or edit `.claude/**`. Worker, Coach, and Gate stay merged until concrete evidence splits them.
 
 ## Documentation debt detection
 
@@ -54,7 +54,7 @@ Use for short repo-wide guidance that matters in most sessions:
 
 - project purpose and canonical boundaries
 - exact build, test, and verification commands
-- a pointer to the detailed project contract or reusable workflow
+- a pointer to `docs/nulnul/checkpoint.json` when it exists, otherwise the active evolution checkpoint or detailed project contract
 
 Do not copy directory tours, temporary plans, generated capability lists, or model-specific retry advice into it.
 
@@ -70,9 +70,13 @@ Use when the project needs a durable setup contract. Include:
 - each selected capability's source, job, trigger, check, permission boundary, and removal condition
 - execution topology, ownership, handoffs, and synthesis only when coordination is needed
 - baseline metrics, guardrails, accepted improvements, rollback conditions, and removable assumptions
-- the current verified checkpoint and a pointer to `docs/nulnul/evolution.json` when work spans sessions or agent-specific learning is enabled
+- a pointer to the active checkpoint without duplicating its live fields
 
 Start from `../assets/project-contract.template.md`, remove unused optional content, and run the currently loaded skill's `scripts/validate_project_setup.py` against `docs/nulnul/project.md`. Do not record the installed skill's machine-specific path. Keep the stable headings and required fields so the next session can verify the setup without interpreting prose.
+
+## `docs/nulnul/checkpoint.json`
+
+Use the concise checkpoint for durable projects that do not need agent-specific feedback or promotion history. Start from `../assets/checkpoint.template.json`, give it one Navigator writer, and validate it with `../scripts/validate_checkpoint.py`. Session entry files point here so ordinary continuation does not reload the full roster and setup evidence. Remove it when continuity is no longer needed; replace it with `evolution.json`, rather than duplicating it, when governed agent evolution begins.
 
 ## `docs/nulnul/evolution.json`
 

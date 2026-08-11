@@ -35,7 +35,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.3.0")
+        self.assertEqual(manifest["version"], "1.3.1")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -90,6 +90,7 @@ class ProductPluginTests(unittest.TestCase):
             "agents/openai.yaml",
             "scripts/validate_evolution_state.py",
             "scripts/validate_project_setup.py",
+            "scripts/validate_checkpoint.py",
             "scripts/apply_live_cycle_rollback.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
@@ -99,9 +100,17 @@ class ProductPluginTests(unittest.TestCase):
         self.assertIn("Apply `references/baseline-kernel.md`", text)
         self.assertIn("Do not load it for a pure local function", text)
         self.assertIn("Run them without reading their source", text)
+        self.assertIn("## Resume fast path", text)
+        self.assertLess(text.index("## Resume fast path"), text.index("## Workflow"))
+        self.assertIn("Do not load setup, discovery, assembly, or evolution references", text)
+        self.assertIn("Read that checkpoint and the current task files, not the full setup contract", text)
+        self.assertIn("repeat an unchanged passing check", text)
         discovery = (SKILL / "references/capability-discovery.md").read_text(encoding="utf-8")
         self.assertIn("Never recursively scan a home directory", discovery)
         self.assertIn("Do not treat cached marketplace entries as installed", discovery)
+        meta = (SKILL / "references/meta-evolution.md").read_text(encoding="utf-8")
+        self.assertIn("Close every measured learning loop in the same run", meta)
+        self.assertIn("append one `pending` proposal", meta)
 
     def test_setup_trigger_is_multilingual(self):
         description = re.search(
@@ -167,8 +176,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "52 passed"),
-            "README.ko.md": ("README.md", "52개 통과"),
+            "README.md": ("README.ko.md", "55 passed"),
+            "README.ko.md": ("README.md", "55개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
@@ -203,6 +212,13 @@ class ProductPluginTests(unittest.TestCase):
         )
         self.assertTrue(results["continuation"]["exact_behavior"])
         self.assertIn("not-established", results["continuation"]["status"])
+        resume = results["resume_gate"]
+        self.assertEqual(resume["status"], "accepted-after-three-rejections")
+        self.assertEqual(len(resume["rejected_candidates"]), 3)
+        self.assertTrue(all(run["exact_behavior"] for run in resume["accepted_candidate"]["runs"]))
+        self.assertLess(resume["accepted_candidate"]["input_change_percent"], 0)
+        self.assertTrue(resume["transfer_live_cycle"]["exact_behavior"])
+        self.assertFalse(resume["transfer_live_cycle"]["full_setup_contract_read"])
 
     def test_meta_harness_is_a_product_capability(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))

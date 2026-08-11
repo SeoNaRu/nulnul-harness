@@ -3,7 +3,7 @@
 Keep these invariants active on every setup or adopt-and-upgrade run. They are the small base that is cheaper than rediscovering a broken project. A fast-path task may satisfy them from repository evidence without creating a file.
 
 1. **Repository truth** — inspect the host surface, repository instructions, code, checks, and installed skills, plugins, and agents. Keep `unknown` distinct from verified or failed.
-2. **Observable outcome** — preserve the user's original request and name one runnable completion check. Harness setup alone is not completion.
+2. **Observable outcome** — preserve the user's original request and name one runnable completion check. Put live continuation fields in one concise checkpoint instead of duplicating the full setup contract. Harness setup alone is not completion.
 3. **Before state** — run the smallest existing check before changing the harness, or add one focused reproduction when no useful check exists.
 4. **Capability decisions** — map each job to inspected evidence and report **reuse now**, **add now**, **needs approval**, or **skip**. Create a local substitute only after adequate candidates fail.
 5. **Permission boundary** — never expand credentials, cost, global configuration, external writes, deployment, or publication without explicit approval.

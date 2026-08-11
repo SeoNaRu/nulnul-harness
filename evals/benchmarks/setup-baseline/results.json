@@ -72,6 +72,66 @@
       "reasoning_output_tokens": 1960,
       "read_deterministic_validator_source": false
     },
-    "conclusion": "The continuation contract is reproducible, but these two runs do not establish a context-cost improvement."
+    "conclusion": "The continuation contract is reproducible, but these two runs did not establish a context-cost improvement. That nonpass verdict became Coach feedback for the resume gate below."
+  },
+  "resume_gate": {
+    "status": "accepted-after-three-rejections",
+    "primary_metric": "median input tokens with exact behavior",
+    "baseline_1.3.0": {
+      "runs": [
+        {"input_tokens": 223911, "output_tokens": 3076, "reasoning_output_tokens": 1342, "exact_behavior": true},
+        {"input_tokens": 225307, "output_tokens": 3663, "reasoning_output_tokens": 1678, "exact_behavior": true},
+        {"input_tokens": 194905, "output_tokens": 2348, "reasoning_output_tokens": 864, "exact_behavior": true}
+      ],
+      "median_input_tokens": 223911,
+      "median_output_tokens": 3076,
+      "median_reasoning_output_tokens": 1342
+    },
+    "rejected_candidates": [
+      {
+        "id": "late-workflow-resume-rule",
+        "median_input_tokens": 226237.5,
+        "input_change_percent": 0.73,
+        "reason": "The rule appeared after the workflow had already loaded evolution references."
+      },
+      {
+        "id": "early-resume-rule-only",
+        "median_input_tokens": 224713,
+        "input_change_percent": 0.36,
+        "reason": "Prompt wording alone did not shorten the durable contract or consistently reduce work."
+      },
+      {
+        "id": "resume-renderer-script",
+        "median_input_tokens": null,
+        "reason": "Agents often read the full contract before invoking the renderer, and the added tracked script created documentation-debt work in the candidate fixture."
+      }
+    ],
+    "accepted_candidate": {
+      "id": "concise-host-loaded-checkpoint",
+      "runs": [
+        {"input_tokens": 179673, "output_tokens": 2226, "reasoning_output_tokens": 586, "exact_behavior": true},
+        {"input_tokens": 121418, "output_tokens": 1756, "reasoning_output_tokens": 521, "exact_behavior": true},
+        {"input_tokens": 137669, "output_tokens": 2131, "reasoning_output_tokens": 761, "exact_behavior": true}
+      ],
+      "median_input_tokens": 137669,
+      "median_output_tokens": 2131,
+      "median_reasoning_output_tokens": 586,
+      "input_change_percent": -38.52,
+      "output_change_percent": -30.72,
+      "reasoning_change_percent": -56.33,
+      "behavior_gate": "3/3 exact; each run changed product, one test, and only stale checkpoint fields"
+    },
+    "transfer_live_cycle": {
+      "project": "dependency-free Python slugger",
+      "task": "normalize underscores with one focused regression",
+      "input_tokens": 196143,
+      "output_tokens": 2827,
+      "reasoning_output_tokens": 1242,
+      "exact_behavior": true,
+      "tests": "3/3 passed",
+      "checkpoint_validator": "passed",
+      "documentation_debt": "empty",
+      "full_setup_contract_read": false
+    }
   }
 }

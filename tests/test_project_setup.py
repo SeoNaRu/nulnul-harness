@@ -39,7 +39,7 @@ Direct execution with an independent test.
 ## Evolution baseline
 Existing tests pass before and after.
 ## Continuity
-No checkpoint needed for this single session.
+- Active checkpoint: not needed for this single session.
 """
 
 

@@ -15,3 +15,5 @@ The setup prompt forbids network, credentials, external writes, global registrat
 The 1.3.0 candidate must keep exact setup behavior while staying within 20% of the 1.2.1 input-token arm. A larger increase is a regression even when the files are correct; inspect roster discovery first because recursive cache or marketplace enumeration contributes no job evidence.
 
 [`results.json`](results.json) records every accepted and rejected arm. Setup passed at +2.31% input tokens after the +50.89% recursive-discovery candidate was rejected. The fresh continuation passed behavior and safety checks, but it does not claim a context-cost improvement.
+
+That nonpass verdict then entered the Coach loop. Three resume candidates were rejected before a concise host-loaded checkpoint won: across three exact runs, median input tokens fell 38.52%, output tokens 30.72%, and reasoning tokens 56.33% versus the 1.3.0 continuation baseline. A later slugger-project live cycle passed 3/3 tests, checkpoint validation, and documentation-debt checks without reading the full setup contract.

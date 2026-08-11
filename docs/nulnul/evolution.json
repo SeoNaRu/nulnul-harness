@@ -1,30 +1,32 @@
 {
-  "schema_version": 1,
+  "schema_version": 3,
+  "history": {
+    "previous_state_git_ref": "67e5ca6:docs/nulnul/evolution.json",
+    "reason": "Begin an executable schema-v3 epoch without inventing live-cycle evidence for schema-v1 promotions."
+  },
   "personal_evolution_home": null,
   "checkpoint": {
-    "goal": "Maintain nulnul-harness as a verified personal agent system that completes projects and improves agents from independently tested feedback.",
-    "milestone": "Navigator v3 is independently promoted and nulnul-harness 1.2.1 is packaged and release-verified.",
-    "completion_check": "The 1.2.1 archive exactly matches the final plugin; all 31 tests, Release Gate, and evolution-state validation pass before push.",
+    "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
+    "milestone": "Release Navigator v4 and Coach v2 as nulnul-harness 1.3.1 after repeated A/B, transfer, and live-cycle evidence.",
+    "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "The final 1.2.1 plugin and archive match; all 31 tests, Release Gate, archive integrity, evolution-state validation, and diff checks pass on 2026-08-10.",
-    "next_action": "Commit and push the verified 1.2.1 release candidate to the existing PR, then confirm its checks.",
+    "last_verified": "2026-08-11: three exact resume trials reduced median input 38.52%, output 30.72%, and reasoning 56.33%; a later slugger transfer cycle passed without reading the full setup contract; the 1.3.1 archive matched the plugin and all 55 repository tests, 11 product tests, evolution validation, rollback no-op, diff, and documentation-debt checks passed.",
+    "next_action": "Observe the next real concise-checkpoint resume cycle and roll Navigator v4 back if input-token change exceeds 20% or behavior, checkpoint validation, or permission guardrails fail.",
     "blockers": [],
-    "approved_permissions": [
-      "push the current feature branch and update the existing draft PR"
-    ]
+    "approved_permissions": []
   },
   "agents": {
     "navigator": {
-      "version": 3,
-      "job": "Own the product outcome, verified checkpoint, permissions, resume, and final synthesis.",
+      "version": 4,
+      "job": "Own the product outcome, concise checkpoint, permissions, resume, and final synthesis.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-3"
+      "last_promotion_id": "promotion-navigator-4"
     },
     "coach": {
-      "version": 1,
-      "job": "Turn reproducible worker, user, test, and Gate feedback into one targeted upgrade proposal.",
+      "version": 2,
+      "job": "Convert every reproducible nonpass verdict into one bounded pending proposal and preserve rejected search knowledge.",
       "profile_path": null,
-      "last_promotion_id": null
+      "last_promotion_id": "promotion-coach-2"
     },
     "gate": {
       "version": 1,
@@ -36,266 +38,189 @@
       "version": 5,
       "job": "Implement the smallest complete product change and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": "promotion-product-builder-5"
+      "last_promotion_id": null
     }
   },
   "feedback": [
     {
-      "id": "feedback-validator-forward-eval",
-      "source": "gate",
-      "target_agent": "product-builder",
-      "observed": "The evolution validator allowed contradictory promotion state and blank evidence, and malformed non-string ids could raise TypeError.",
-      "expected": "Reject contradictory or evidence-free state and return validation errors for malformed input without crashing.",
-      "evidence": "tests.test_personal_evolution reproduces proposal/promotion mismatch, empty evidence, and malformed ids.",
-      "scope": "project",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-global-onboarding",
+      "id": "feedback-unclosed-measurement-loop",
       "source": "user",
-      "target_agent": "product-builder",
-      "observed": "The default GitHub README was Korean-first and did not make the product, evidence boundary, and international onboarding immediately clear.",
-      "expected": "Provide professional English and Korean entry points with the same version, installation, evidence, trust, and limitation claims.",
-      "evidence": "README.md had no locale switch or equivalent English product guide before this candidate.",
-      "scope": "project",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-fast-path-overhead",
-      "source": "user",
-      "target_agent": "navigator",
-      "observed": "The workflow could still enter capability discovery even when a repository already had sufficient instructions, capabilities, and completion checks.",
-      "expected": "Reuse a coherent setup immediately and search only for uncovered jobs, stopping after one adequate verified candidate per job.",
-      "evidence": "The previous core workflow called capability discovery unconditionally after repository inspection.",
+      "target_agent": "coach",
+      "observed": "The continuation benchmark reported context-cost improvement as not established, but the active evolution state did not convert that machine-readable result into Coach feedback or a next proposal.",
+      "expected": "Every reproducible rejected, regressed, failed, or not-established verdict becomes bounded feedback and one pending proposal in the same run.",
+      "evidence": "evals/benchmarks/setup-baseline/results.json continuation status and this run's preserved candidate decisions.",
       "scope": "core",
       "status": "converted"
     },
     {
-      "id": "feedback-korean-forward-term",
-      "source": "gate",
-      "target_agent": "product-builder",
-      "observed": "The Korean README translated forward evaluation as an unnatural term that reduced professional clarity.",
-      "expected": "Use a clear Korean rendering of forward evaluation without changing the verified claim.",
-      "evidence": "Independent bilingual Gate rejected README.ko.md wording after all functional checks passed.",
-      "scope": "project",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-historical-promotion-chain",
+      "id": "feedback-resume-context-cost",
       "source": "test",
-      "target_agent": "product-builder",
-      "observed": "The state validator rejected a valid agent after its second accepted promotion because it required every historical proposal to equal the current version.",
-      "expected": "Validate accepted proposals as a continuous history and link the agent only to its latest accepted promotion.",
-      "evidence": "Applying product-builder v3 made the repository state fail until a two-promotion regression reproduced and fixed the history rule.",
-      "scope": "core",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-proposal-author-independence",
-      "source": "gate",
-      "target_agent": "product-builder",
-      "observed": "The validator prevented a target agent from approving itself but did not record or compare the proposal author with the Gate.",
-      "expected": "Persist the proposal author and reject any promotion whose Gate authored the proposal.",
-      "evidence": "The independent v4 Gate identified that author independence could only be inferred, not mechanically validated.",
-      "scope": "core",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-self-contained-activation-overhead",
-      "source": "gate",
       "target_agent": "navigator",
-      "observed": "nulnul-harness 1.2.0 activated for a self-contained local task and repeatedly loaded setup references even though the task already supplied explicit inputs, outputs, constraints, and a runnable completion check.",
-      "expected": "Skip harness activation for complete isolated task contracts while retaining activation for external writes, capability discovery, multi-session checkpointing, and evolution.",
-      "evidence": "evals/benchmarks/youtube-sheets/ab-results.json records 3/3 exact outputs in both arms with 30.51% median elapsed and 27.44% output-token overhead in the harness arm.",
+      "observed": "Two prior continuation runs completed correctly but used 260119 and 315284 input tokens, so a context-cost improvement was not established.",
+      "expected": "Resume a covered task from concise verified state with exact behavior and a lower repeated-run median without expanding permissions.",
+      "evidence": "evals/benchmarks/setup-baseline/results.json resume_gate reproduces the baseline and four candidate mechanisms.",
       "scope": "core",
       "status": "converted"
     }
   ],
   "proposals": [
     {
-      "id": "proposal-product-builder-2",
-      "feedback_ids": [
-        "feedback-validator-forward-eval"
-      ],
-      "target_agent": "product-builder",
+      "id": "proposal-coach-2",
+      "feedback_ids": ["feedback-unclosed-measurement-loop"],
+      "target_agent": "coach",
       "author_agent": "coach",
       "from_version": 1,
       "to_version": 2,
-      "cause": "The first validator checked required keys but did not fully enforce cross-record consistency or malformed value types.",
-      "change_target": "Evolution state validator trust-boundary checks and focused regressions.",
-      "regression_check": "python3 -B -m unittest tests.test_personal_evolution -v",
-      "primary_metric": "forward-evaluation contract gaps",
+      "cause": "Benchmark publication and evolution triage were separate steps, so a nonpass result could remain documentation instead of becoming the next experiment.",
+      "change_target": "Meta-evolution rule that converts machine-readable nonpass verdicts into bounded feedback and one pending proposal before another experiment.",
+      "regression_check": "python3 -B -m unittest tests.test_product_plugin.ProductPluginTests.test_setup_baseline_rejects_context_regressions -v",
+      "primary_metric": "machine-readable nonpass verdicts left unconverted",
       "permission_delta": [],
-      "rollback": "Restore product-builder v1 and the previous validator while retaining the failing forward-evaluation cases.",
+      "rollback": "Restore Coach v1 and keep all benchmark and rejected-candidate evidence.",
+      "change_level": "meta",
+      "discovery_evidence": "The user correctly identified that completed tests had not become active learning state.",
+      "transfer_check": "The same run converted rule-order, prompt-only, and renderer failures before selecting the checkpoint candidate.",
       "status": "accepted"
     },
     {
-      "id": "proposal-product-builder-3",
-      "feedback_ids": [
-        "feedback-global-onboarding"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 2,
-      "to_version": 3,
-      "cause": "The product documentation optimized for one language and exposed no deterministic locale consistency check.",
-      "change_target": "Root English and Korean README onboarding plus locale consistency regression.",
-      "regression_check": "python3 -B -m unittest discover -s tests -p 'test_product_plugin.py' -v",
-      "primary_metric": "bilingual onboarding contract checks",
-      "permission_delta": [],
-      "rollback": "Restore the prior Korean README and remove README.ko.md plus its consistency regression.",
-      "status": "rejected"
-    },
-    {
-      "id": "proposal-navigator-2",
-      "feedback_ids": [
-        "feedback-fast-path-overhead"
-      ],
+      "id": "proposal-navigator-4-late-rule",
+      "feedback_ids": ["feedback-resume-context-cost"],
       "target_agent": "navigator",
-      "author_agent": "coach",
-      "from_version": 1,
-      "to_version": 2,
-      "cause": "Repository inspection identified reusable setup, but discovery remained an unconditional later step.",
-      "change_target": "Core workflow fast path and bounded capability-discovery stopping rule.",
-      "regression_check": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 -B scripts/release_gate.py",
-      "primary_metric": "unnecessary setup and discovery steps on coherent repositories",
-      "permission_delta": [],
-      "rollback": "Restore Navigator v1 and the previous unconditional discovery wording.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-product-builder-3b",
-      "feedback_ids": [
-        "feedback-global-onboarding",
-        "feedback-korean-forward-term"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 2,
-      "to_version": 3,
-      "cause": "The first bilingual candidate used an unnatural Korean term despite passing structural checks.",
-      "change_target": "Bilingual onboarding with corrected Korean evaluation terminology.",
-      "regression_check": "python3 -B -m unittest discover -s tests -p 'test_product_plugin.py' -v",
-      "primary_metric": "bilingual onboarding Gate blockers",
-      "permission_delta": [],
-      "rollback": "Restore product-builder v2 and the prior Korean-only README.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-product-builder-4",
-      "feedback_ids": [
-        "feedback-historical-promotion-chain"
-      ],
-      "target_agent": "product-builder",
       "author_agent": "coach",
       "from_version": 3,
       "to_version": 4,
-      "cause": "The validator treated each accepted proposal as the current version instead of validating ordered promotion history.",
-      "change_target": "Accepted promotion-chain validation and latest-promotion linkage.",
-      "regression_check": "python3 -B -m unittest tests.test_personal_evolution -v",
-      "primary_metric": "valid multi-promotion histories rejected",
+      "cause": "The resume rule appeared after the workflow had already loaded evolution references.",
+      "change_target": "A resume instruction inside the existing workflow step.",
+      "regression_check": "Three-run continuation token and behavior gate.",
+      "primary_metric": "median input tokens with exact behavior",
       "permission_delta": [],
-      "rollback": "Restore product-builder v3 and the single-promotion validator while retaining the failing history regression.",
-      "status": "accepted"
+      "rollback": "Keep Navigator v3 and preserve the rejected arm.",
+      "change_level": "task",
+      "discovery_evidence": "The first repeated continuation gate measured a 0.73% median input regression.",
+      "transfer_check": "Not run because the originating gate rejected the candidate.",
+      "status": "rejected"
     },
     {
-      "id": "proposal-product-builder-5",
-      "feedback_ids": [
-        "feedback-proposal-author-independence"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 4,
-      "to_version": 5,
-      "cause": "Proposal records identified the target but not the author, so Gate independence was not fully machine-checkable.",
-      "change_target": "Proposal author persistence and author-versus-Gate validation.",
-      "regression_check": "python3 -B -m unittest tests.test_personal_evolution -v",
-      "primary_metric": "proposal-author self-approvals accepted",
-      "permission_delta": [],
-      "rollback": "Restore product-builder v4 and remove the author field while retaining the independence regression.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-navigator-3",
-      "feedback_ids": [
-        "feedback-self-contained-activation-overhead"
-      ],
+      "id": "proposal-navigator-4-early-rule",
+      "feedback_ids": ["feedback-resume-context-cost"],
       "target_agent": "navigator",
       "author_agent": "coach",
-      "from_version": 2,
-      "to_version": 3,
-      "cause": "The activation description excluded coherent repository setup but not a complete standalone task contract, so setup guidance was loaded without an uncovered job.",
-      "change_target": "The nulnul-harness activation description only; no workflow, permission, capability, or product-file change.",
-      "regression_check": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 -B scripts/release_gate.py",
-      "primary_metric": "median elapsed time and token use on self-contained local tasks",
+      "from_version": 3,
+      "to_version": 4,
+      "cause": "Moving prompt guidance earlier still left the long durable contract as the session entry.",
+      "change_target": "An early resume rule without changing checkpoint structure.",
+      "regression_check": "Three-run continuation token and behavior gate.",
+      "primary_metric": "median input tokens with exact behavior",
       "permission_delta": [],
-      "rollback": "Restore Navigator v2 activation wording and retain the benchmark evidence.",
+      "rollback": "Keep Navigator v3 and preserve the rejected arm.",
+      "change_level": "task",
+      "discovery_evidence": "The second repeated continuation gate measured a 0.36% median input regression.",
+      "transfer_check": "Not run because the originating gate rejected the candidate.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-4-renderer",
+      "feedback_ids": ["feedback-resume-context-cost"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 3,
+      "to_version": 4,
+      "cause": "A renderer could shorten the contract only after the agent chose to invoke it, which was too late to bound initial reads.",
+      "change_target": "A deterministic full-contract resume-context renderer.",
+      "regression_check": "Three-run continuation behavior and documentation-debt gate.",
+      "primary_metric": "median input tokens with exact behavior",
+      "permission_delta": [],
+      "rollback": "Remove the renderer and keep Navigator v3 plus the failure evidence.",
+      "change_level": "task",
+      "discovery_evidence": "Agents often read the full contract first and then investigated new documentation debt.",
+      "transfer_check": "Not run because the originating gate rejected the candidate.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-4",
+      "feedback_ids": ["feedback-resume-context-cost"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 3,
+      "to_version": 4,
+      "cause": "The host-loaded session entry pointed at a full setup inventory even though ordinary continuation needs only current outcome, check, next action, permissions, and blockers.",
+      "change_target": "A validated concise checkpoint as the host-loaded resume entry, with stable setup evidence left in project.md.",
+      "regression_check": "Three-run continuation A/B, full repository tests, checkpoint negative control, and documentation-debt check.",
+      "primary_metric": "median input tokens with exact behavior",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v3 session entries that point at project.md and remove checkpoint.json after copying its last verified state back.",
+      "change_level": "task",
+      "discovery_evidence": "Three rejected candidates isolated the long host-loaded contract as the remaining structural cost.",
+      "transfer_check": "A dependency-free slugger project resumed from checkpoint.json, changed one behavior and test, passed 3 of 3 tests and both harness checks, and did not read the marked full contract.",
       "status": "accepted"
     }
   ],
   "promotions": [
     {
-      "id": "promotion-product-builder-2",
-      "proposal_id": "proposal-product-builder-2",
+      "id": "promotion-coach-2",
+      "proposal_id": "proposal-coach-2",
       "gate_agent": "gate",
-      "before": "A fresh evaluator reproduced three contract gaps in the initial validator.",
-      "after": "Eight evolution regressions, all 24 automated tests, and Release Gate passed.",
+      "before": "One machine-readable not-established result remained outside the active evolution state.",
+      "after": "The same run converted the result, preserved three rejected mechanisms, and accepted only the independently winning candidate.",
       "regressions_passed": true,
-      "decision": "accepted"
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "machine-readable nonpass verdicts left unconverted",
+        "rollback_threshold": "roll back on any unconverted nonpass verdict in the next measured loop",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The resume loop recorded three rejected proposals and one accepted proposal before continuing."
+      }
     },
     {
-      "id": "promotion-product-builder-3-rejected",
-      "proposal_id": "proposal-product-builder-3",
+      "id": "promotion-navigator-4-late-rule-rejected",
+      "proposal_id": "proposal-navigator-4-late-rule",
       "gate_agent": "gate",
-      "before": "The bilingual candidate passed structural and functional checks.",
-      "after": "The independent Gate found an unnatural Korean term that blocked professional release readiness.",
+      "before": "1.3.0 continuation median input was 223911 tokens across three exact runs.",
+      "after": "The late-rule candidate median was 226237.5 tokens, a 0.73% regression.",
       "regressions_passed": true,
-      "decision": "rejected"
+      "decision": "rejected",
+      "live_cycle": null
     },
     {
-      "id": "promotion-navigator-2",
-      "proposal_id": "proposal-navigator-2",
+      "id": "promotion-navigator-4-early-rule-rejected",
+      "proposal_id": "proposal-navigator-4-early-rule",
       "gate_agent": "gate",
-      "before": "Capability discovery remained an unconditional workflow step after repository inspection.",
-      "after": "A fresh Gate confirmed coherent repositories take the direct path while uncovered jobs retain full candidate verification.",
+      "before": "1.3.0 continuation median input was 223911 tokens across three exact runs.",
+      "after": "The early-rule candidate median was 224713 tokens, a 0.36% regression.",
       "regressions_passed": true,
-      "decision": "accepted"
+      "decision": "rejected",
+      "live_cycle": null
     },
     {
-      "id": "promotion-product-builder-3b",
-      "proposal_id": "proposal-product-builder-3b",
+      "id": "promotion-navigator-4-renderer-rejected",
+      "proposal_id": "proposal-navigator-4-renderer",
       "gate_agent": "gate",
-      "before": "The first bilingual candidate was rejected for one unclear Korean term.",
-      "after": "The corrected English and Korean onboarding passed independent review and all repository checks.",
-      "regressions_passed": true,
-      "decision": "accepted"
+      "before": "The candidate intended to render only selected contract sections.",
+      "after": "Fresh runs read the full contract before the renderer or entered documentation-debt investigation, so the Gate stopped the arm.",
+      "regressions_passed": false,
+      "decision": "rejected",
+      "live_cycle": null
     },
     {
-      "id": "promotion-product-builder-4",
-      "proposal_id": "proposal-product-builder-4",
+      "id": "promotion-navigator-4",
+      "proposal_id": "proposal-navigator-4",
       "gate_agent": "gate",
-      "before": "The validator rejected valid multi-promotion history and could not preserve rejected alternatives alongside later accepted versions.",
-      "after": "A fresh Gate verified continuous history, rejected broken chains and self-approval, and confirmed latest-promotion linkage.",
+      "before": "1.3.0 continuation median input/output/reasoning tokens were 223911/3076/1342 across three exact runs.",
+      "after": "The concise checkpoint candidate reached 137669/2131/586, improving 38.52%/30.72%/56.33%, and a later slugger transfer cycle passed without reading the full contract.",
       "regressions_passed": true,
-      "decision": "accepted"
-    },
-    {
-      "id": "promotion-product-builder-5",
-      "proposal_id": "proposal-product-builder-5",
-      "gate_agent": "gate",
-      "before": "Gate independence could be inferred only from the target agent because proposal authors were not persisted.",
-      "after": "A fresh Gate verified proposal-author persistence and rejection when the declared author also serves as Gate, without breaking valid history.",
-      "regressions_passed": true,
-      "decision": "accepted"
-    },
-    {
-      "id": "promotion-navigator-3",
-      "proposal_id": "proposal-navigator-3",
-      "gate_agent": "gate",
-      "before": "nulnul-harness 1.2.0 activated on a complete local task contract and added median time and token overhead without changing correctness.",
-      "after": "A fresh Gate verified 3/3 exact candidate runs, 25.76% lower median elapsed time, lower token medians, two cross-task non-activation guards, and preserved ambiguous-project activation.",
-      "regressions_passed": true,
-      "decision": "accepted"
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "resume input-token change percent versus the 1.3.0 median",
+        "rollback_threshold": "roll back above a 20% input-token regression or on any behavior, validation, or permission failure",
+        "metric_value": -38.52,
+        "rollback_operator": "gt",
+        "rollback_value": 20,
+        "evidence": "Three exact A/B candidate runs plus a later exact slugger transfer cycle with 3 of 3 tests, valid checkpoint, empty document debt, and no full-contract read."
+      }
     }
   ]
 }

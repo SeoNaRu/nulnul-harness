@@ -21,6 +21,10 @@ A request to adopt, install, or upgrade the harness in a repository that already
 - relevant current research, maintained implementations, and user-supplied ideas that reveal a better problem-solving or self-improvement method
 - user answers only for material product, data, cost, privacy, credential, or publication decisions that safe inspection cannot reveal
 
+## Resume fast path
+
+Before applying the full workflow, use this path when host-loaded guidance points to `docs/nulnul/checkpoint.json` and the user asks for one specific covered task. Read that checkpoint and the current task files, not the full setup contract. If the checkpoint matches repository reality, the permission boundary is unchanged, and no job is uncovered, implement the task directly, run the recorded check once after the change, refresh only the checkpoint fields made stale, and stop. Do not load setup, discovery, assembly, or evolution references, re-enumerate the roster, or repeat an unchanged passing check. Fall through to the full workflow when the checkpoint is missing or invalid, the task is ambiguous or uncovered, permissions change, or measured feedback requires evolution.
+
 ## Workflow
 
 1. Apply `references/baseline-kernel.md`: preserve the original request, inspect repository truth, define one observable result and before-state check, keep the permission boundary, and continue the work after setup. Setup is not completion. For multi-session or personally evolving work, apply `references/personal-evolution.md` and resume from the last verified checkpoint before starting new work.
@@ -73,6 +77,7 @@ A request to adopt, install, or upgrade the harness in a repository that already
 - Confirm recurring data workflows use stable identity, deterministic deduplication, exclusion precedence, explicit review states, auditable reasons, idempotent writes, and spreadsheet-safe values where applicable.
 - Confirm one writer per state file, a distinct `unknown` verification state, validity checks proven against a negative control, and cursors persisted even on an empty cycle.
 - Confirm the baseline kernel remained true; when a durable project contract exists, run `scripts/validate_project_setup.py` against it and fix unfinished or missing fields.
+- When `docs/nulnul/checkpoint.json` exists, run `scripts/validate_checkpoint.py` from this skill before relying on or updating its concise resume state.
 - When `docs/nulnul/evolution.json` exists, run `scripts/validate_evolution_state.py` from this skill against it before relying on or updating the state.
 - After recording a schema-version-3 live cycle, run `scripts/apply_live_cycle_rollback.py` from this skill against the state, then validate it again; a prose threshold is not an automatic rollback.
 - Before ending a session that changed source, run `scripts/check_doc_debt.py` from this skill and update any document it reports as stale.

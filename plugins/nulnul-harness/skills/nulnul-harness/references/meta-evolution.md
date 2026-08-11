@@ -38,6 +38,8 @@ Treat each of these as Coach-targeted meta feedback:
 
 When the solution landscape may have changed, inspect current primary or reputable sources before fixing the frame around the existing design. Compare the current procedure with the first adequate credible alternative; do not perform an unbounded survey. Extract the useful mechanism rather than copying a branded architecture.
 
+Close every measured learning loop in the same run. When a benchmark or live-cycle verdict is `rejected`, `regressed`, `failed`, or `not-established`, append one bounded feedback record to the active evolution state before starting another experiment. If the evidence reproduces, let the Coach append one `pending` proposal for the nearest durable layer; never turn the result directly into accepted instructions. Preserve the failed arm, metric, and guardrail, then let an independent Gate accept or reject the candidate. Do not wait for the user to rediscover a result already present in machine-readable evidence.
+
 ## Change the improvement procedure
 
 Use `personal-evolution.md`, with the proposal marked `change_level: meta`, when the candidate changes how future improvements are discovered, generated, measured, selected, remembered, or rolled back. Record the discovery evidence that motivated it. A meta candidate may update the Coach, Gate criteria, capability search order, measurement strategy, checkpoint policy, or this procedure itself.

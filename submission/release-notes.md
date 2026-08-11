@@ -1,9 +1,9 @@
-# nulnul harness 1.3.0
+# nulnul harness 1.3.1
 
-This release turns NULNUL into a governed meta-harness for beginners: it inspects an existing project before asking questions, reuses suitable skills and plugins, upgrades the existing agent roster in place, completes the original work, and lets the Coach improve its own improvement procedure behind an independent Gate.
+This patch makes later sessions cheaper and closes NULNUL's measured self-improvement loop. A validated concise checkpoint now carries only the current goal, completion check, verified result, next action, permissions, and blockers; stable setup evidence remains outside the host-loaded entry.
 
-The new Baseline Kernel keeps repository truth, an observable outcome, a before-state check, capability decisions, permission boundaries, task continuation, and governed evolution active on every setup. A deterministic validator rejects incomplete durable setup contracts. Evolution schema v3 adds numeric live-cycle thresholds and an atomic standard-library executor that restores the prior active agent-version state without running arbitrary commands or editing product files; schema versions 1 and 2 remain readable.
+Three exact Codex A/B trials reduced median resume input tokens 38.52%, output tokens 30.72%, and reasoning tokens 56.33% versus 1.3.0 while preserving exact behavior. Three weaker candidates were rejected and retained as search history. A later transfer cycle on a separate slugger project changed exactly one behavior and test, passed all three project tests and both harness checks, and did not read the marked full contract.
 
-Two fresh Codex sessions demonstrated Coach v1 to v2 meta evolution across a later live cycle. The repository suite and negative controls cover self-approval, permissions, incomplete setup, missing live observations, and both firing and non-firing rollback thresholds. Release Gate remains 90/100 because the user-deferred Claude Code adoption rerun is not counted as passed.
+Machine-readable rejected, regressed, failed, or not-established verdicts now enter Coach feedback and one bounded proposal in the same run. Independent Gate decisions, executable rollback thresholds, permission boundaries, and the skills-only product shape remain unchanged.
 
 The plugin remains skills-only with no service, authentication, telemetry, hook, UI, or background process. Git-based marketplace installation and repeatable Codex and Claude Code update commands are documented in both README locales.

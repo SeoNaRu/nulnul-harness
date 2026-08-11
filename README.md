@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.3.0-111111" alt="version 1.3.0">
+  <img src="https://img.shields.io/badge/version-1.3.1-111111" alt="version 1.3.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-90%2F100-111111" alt="Release Gate: 90/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -36,7 +36,7 @@ You describe the result, not the AI architecture. On an existing project NULNUL 
 
 ## The baseline that is always on
 
-Every setup keeps a seven-part **Baseline Kernel**: repository truth, the original outcome, one runnable completion check, a before state, inspected capability decisions, permission boundaries, and independently gated evolution with rollback. When a durable `docs/nulnul/project.md` is needed, a bundled validator rejects unfinished contracts that omit the inspected roster, plain-language setup decisions, or continuity.
+Every setup keeps a seven-part **Baseline Kernel**: repository truth, the original outcome, one runnable completion check, a before state, inspected capability decisions, permission boundaries, and independently gated evolution with rollback. When durable continuity is needed, stable setup evidence stays in `docs/nulnul/project.md` while a validated concise checkpoint carries only the current goal, check, verified result, next action, permissions, and blockers into the next session.
 
 Heavier infrastructure still stays evidence-driven. Persistent memory appears when work spans sessions; performance tracking when an outcome needs comparison; a dashboard when repeated human decisions need trends; more agents when independent work justifies coordination; staged verification for risky changes; a lock for shared mutable state; MCP only for an uncovered tool or service boundary; and a project-local skill only after adequate existing candidates fail. See [`references/baseline-kernel.md`](plugins/nulnul-harness/skills/nulnul-harness/references/baseline-kernel.md).
 
@@ -166,13 +166,14 @@ your-project/
 ├── AGENTS.md or CLAUDE.md     # host-loaded guidance, merged with what you already wrote
 ├── docs/nulnul/
 │   ├── project.md             # goal, completion check, capabilities, permission boundaries, rollback
-│   └── evolution.json         # checkpoint, agent versions, bounded feedback, Gate decisions
+│   ├── checkpoint.json        # concise resume state for ordinary multi-session work
+│   └── evolution.json         # replaces checkpoint.json when agent evolution needs governed history
 ├── .agents/skills/<name>/      # Codex: only when no adequate existing skill covers the workflow
 └── docs/nulnul/workflows/<name>.md
                                 # unattended Claude Code: reusable workflow referenced by CLAUDE.md
 ```
 
-That is the entire footprint. `evolution.json` appears only for multi-session or self-improving work, the project-local skill only when every existing candidate was checked and rejected, and a fast-path run writes nothing. Remove the generated `docs/nulnul/` and project-local skill directory to remove the harness without touching product code. Host-owned agent definitions are never part of that footprint.
+That is the entire footprint. Ordinary multi-session work gets `checkpoint.json`; agent-specific feedback and promotion history replace it with `evolution.json`, never a second live-state writer. The project-local skill appears only when every existing candidate was checked and rejected, and a fast-path run writes nothing. Remove the generated `docs/nulnul/` and project-local skill directory to remove the harness without touching product code. Host-owned agent definitions are never part of that footprint.
 
 The goal is fewer generated files, not more. A setup that produces dozens of agent definitions has moved the problem, not solved it.
 
@@ -255,7 +256,7 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 52 passed |
+| Automated repository tests | 55 passed |
 | Release Gate behavior and safety gate | 90/100 |
 | Positive isolated scenarios | 8 passed; 1 requires rerun |
 | Negative safety scenarios | 3 passed |
@@ -263,7 +264,8 @@ The contribution, if any, is the packaging: one portable contract that carries a
 | Independent forward evaluation | Found 3 validator gaps; all fixed and preserved as regressions |
 | Offline workbook A/B (3 trials per arm) | All exact; Navigator v3 median time -25.76%, output tokens -22.76% vs 1.2.0 |
 | Fresh Codex setup A/B | Exact behavior; accepted 1.3.0 input +2.31%, output -5.42%, reasoning -9.80% vs 1.2.1; initial +50.89% arm rejected |
-| Fresh Codex continuation | Exact change; 3/3 project tests and both validators passed; context-cost improvement not established |
+| Fresh Codex resume A/B | Exact behavior in 3/3 trials; concise checkpoint reduced median input 38.52%, output 30.72%, and reasoning 56.33% vs 1.3.0; three weaker arms rejected |
+| Later transfer cycle | A separate slugger project changed exactly one behavior and test, passed 3/3 tests and both harness checks, and did not read the marked full contract |
 | Executable rollback controls | Threshold breach restored Coach v1 active-version state; healthy metric produced no write |
 
 Release Gate is a release gate, not a universal performance benchmark. The headless Claude Code adoption case currently requires a fresh run after the specification stopped writing host-protected agent definitions; it contributes no points until that evidence exists. The passed cases cover implicit project activation, ambiguous empty repositories, reuse of coherent setups, multilingual setup triggers, capability-first automation, permission boundaries, evidence-gated evolution, two-session improvement of the improvement procedure, read-only non-activation, secret persistence, and unapproved global registration.
