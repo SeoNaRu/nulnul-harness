@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "personal_evolution_home": null,
+  "checkpoint": {
+    "goal": "Maintain a beginner-friendly reading queue and improve its project harness from bounded evidence.",
+    "milestone": "The baseline router passes but does not explain its decisions.",
+    "completion_check": "python3 -B -m unittest discover -s tests -p 'test_*.py' -v",
+    "status": "active",
+    "last_verified": "The two baseline routing tests pass.",
+    "next_action": "Make route return both queue and a short reason while preserving keep/review behavior.",
+    "blockers": [],
+    "approved_permissions": []
+  },
+  "agents": {
+    "navigator": {
+      "version": 1,
+      "job": "Own the outcome, checkpoint, permissions, resume, and synthesis.",
+      "profile_path": null,
+      "last_promotion_id": null
+    },
+    "coach": {
+      "version": 1,
+      "job": "React to failed tests and propose one task fix.",
+      "profile_path": "docs/nulnul/meta-policy.md",
+      "last_promotion_id": null
+    },
+    "gate": {
+      "version": 1,
+      "job": "Independently evaluate proposals.",
+      "profile_path": null,
+      "last_promotion_id": null
+    }
+  },
+  "feedback": [],
+  "proposals": [],
+  "promotions": []
+}

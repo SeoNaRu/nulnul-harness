@@ -60,17 +60,22 @@ class ProductPluginTests(unittest.TestCase):
         self.assertIn("Popularity is a signal, not proof", text)
         self.assertIn("keep it only when the primary metric improves", text)
         self.assertIn("Never let an agent approve its own upgrade", text)
+        self.assertIn("a better method the user had to surface", text)
+        self.assertIn("The meta side may modify its own discovery", text)
+        self.assertIn("reuse now, add now, needs approval, and skip", text)
         self.assertIn("resume from the last verified checkpoint", text)
         self.assertIn("**Fast path**", text)
         self.assertIn("**Adopt and upgrade**", text)
         self.assertIn("Never recreate a role that already exists", text)
         self.assertIn("Context is a budget like any other", text)
+        self.assertIn("Never make an unattended session edit host-protected configuration paths", text)
         self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
         self.assertIn("do not activate when it already provides explicit local inputs, outputs, constraints, and a runnable completion check", text)
         self.assertIn("external-write planning, multi-session checkpointing, or evidence-gated agent evolution", text)
         self.assertIn("stop when every uncovered job has one adequate verified candidate", text)
         for path in (
             "references/discovery-and-questions.md",
+            "references/baseline-kernel.md",
             "references/capability-discovery.md",
             "references/capability-registry.md",
             "references/data-workflow-safety.md",
@@ -78,16 +83,19 @@ class ProductPluginTests(unittest.TestCase):
             "references/project-files.md",
             "references/evolution.md",
             "references/personal-evolution.md",
+            "references/meta-evolution.md",
             "assets/AGENTS.template.md",
             "assets/evolution-state.template.json",
             "assets/project-contract.template.md",
             "agents/openai.yaml",
             "scripts/validate_evolution_state.py",
+            "scripts/validate_project_setup.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
             self.assertNotIn(forbidden, text)
         self.assertIn("stable identity, deterministic deduplication, exclusion precedence", text)
+        self.assertIn("Apply `references/baseline-kernel.md`", text)
 
     def test_setup_trigger_is_multilingual(self):
         description = re.search(
@@ -107,8 +115,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_submission_scenario_inventory(self):
         payload = json.loads((ROOT / "evals/cases.json").read_text(encoding="utf-8"))
         cases = payload["cases"]
-        self.assertEqual(len({case["id"] for case in cases}), 11)
-        self.assertEqual(sum(case["kind"] == "positive" for case in cases), 8)
+        self.assertEqual(len({case["id"] for case in cases}), 12)
+        self.assertEqual(sum(case["kind"] == "positive" for case in cases), 9)
         self.assertEqual(sum(case["kind"] == "negative" for case in cases), 3)
         for case in cases:
             for field in ("prompt", "fixture", "expected_behavior", "expected_result"):
@@ -120,6 +128,14 @@ class ProductPluginTests(unittest.TestCase):
         self.assertEqual(len(results), len(cases))
         self.assertEqual({result["case_id"] for result in results}, {case["id"] for case in cases})
         self.assertTrue(all(result["status"] in {"passed", "requires-rerun"} for result in results))
+        adopt = next(case for case in cases if case["id"] == "positive-adopt-existing-harness")
+        self.assertIn("make no unattended write attempt within it", " ".join(adopt["expected_behavior"]))
+        adopt_result = next(result for result in results if result["case_id"] == adopt["id"])
+        self.assertEqual(adopt_result["status"], "requires-rerun")
+        meta = next(case for case in cases if case["id"] == "positive-meta-evolution-from-discovery")
+        self.assertIn("improvement procedure itself", " ".join(meta["expected_behavior"]))
+        meta_result = next(result for result in results if result["case_id"] == meta["id"])
+        self.assertEqual(meta_result["status"], "passed")
 
     def test_release_metadata_and_archive_are_consistent(self):
         version = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
@@ -145,21 +161,37 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "40 passed"),
-            "README.ko.md": ("README.md", "40개 통과"),
+            "README.md": ("README.ko.md", "47 passed"),
+            "README.ko.md": ("README.md", "47개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
             self.assertIn(other_locale, text)
             self.assertIn(f"version-{manifest['version']}", text)
-            self.assertIn("Release_Gate-100%2F100", text)
+            self.assertIn("Release_Gate-90%2F100", text)
             self.assertIn("codex plugin add nulnul-harness@nulnul-harness", text)
             self.assertIn("claude plugin install nulnul-harness@nulnul-harness", text)
             self.assertIn(test_claim, text)
+            self.assertNotIn('<h1 align="center">NULNUL</h1>', text)
+            self.assertIn("https://ai.meta.com/research/publications/hyperagents/", text)
+            self.assertIn("https://news.hada.io/weekly/202615", text)
             for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
                 if target.startswith(("https://", "http://", "#")):
                     continue
                 self.assertTrue((ROOT / target.split("#", 1)[0]).exists(), f"{name}: {target}")
+
+    def test_meta_harness_is_a_product_capability(self):
+        manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
+        self.assertIn("meta-harness-evolution", manifest["interface"]["capabilities"])
+        reference = (SKILL / "references/meta-evolution.md").read_text(encoding="utf-8")
+        for phrase in (
+            "One editable project program",
+            "Bootstrap the initial conditions",
+            "Discover better ways, not only failures",
+            "Change the improvement procedure",
+            "Accumulate across runs",
+        ):
+            self.assertIn(phrase, reference)
 
     def test_legacy_lab_is_not_part_of_the_product(self):
         for path in ("plugins/project-harness", "catalog", "docs/research", "sandbox", "scripts/validate_lab.py", "skills-lock.json"):

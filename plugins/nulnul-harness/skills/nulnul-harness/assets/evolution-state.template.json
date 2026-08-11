@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "",
@@ -20,7 +20,7 @@
     },
     "coach": {
       "version": 1,
-      "job": "Turn reproducible feedback into one targeted upgrade proposal.",
+      "job": "Discover better methods and turn reproducible feedback into one task- or meta-level upgrade proposal.",
       "profile_path": null,
       "last_promotion_id": null
     },

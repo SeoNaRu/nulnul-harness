@@ -9,27 +9,28 @@ The file names below are the Codex layout. Detect the host before inspecting or 
 | Role | Codex | Claude Code |
 | --- | --- | --- |
 | Repo-wide instructions | `AGENTS.md` | `CLAUDE.md` (a repository may keep both; `AGENTS.md` stays canonical here and `CLAUDE.md` points at it) |
-| Project-local skills | `.agents/skills/<name>/` | `.claude/skills/<name>/` |
-| Durable agent definitions | project contract roles | `.claude/agents/<name>.md` with YAML frontmatter |
-| Host configuration and hooks | host settings | `.claude/settings.json`, or `~/.claude/settings.json` for user scope |
+| Project-local workflow | `.agents/skills/<name>/` | `docs/nulnul/workflows/<name>.md`, referenced from `CLAUDE.md` |
+| Existing agent definitions to inspect | project contract roles | `.claude/agents/<name>.md` with YAML frontmatter; read-only in unattended sessions |
+| Session entry | `AGENTS.md` points to the verified checkpoint | `CLAUDE.md` points to the verified checkpoint |
+| Host configuration and hooks | host settings | `.claude/settings.json`, or `~/.claude/settings.json` for user scope; inspect only |
 | Installed capabilities to enumerate | installed skills and plugins | session skill and agent listings, `.claude/`, `~/.claude/plugins/` |
 
-Treat a path that does not exist on the detected host as not applicable, not as a missing file to create.
+Treat a path that does not exist on the detected host as not applicable, not as a missing file to create. Presence does not imply write authority: Claude Code's `.claude/**` tree is a discovery surface, not an unattended write target. Do not probe that boundary by attempting a write. Put generated Claude Code setup in repository-owned guidance, `docs/nulnul/`, or another existing product path instead.
 
 ## Day-one setup output
 
-A cold project has no accepted version, no baseline, and no history for the Coach to learn from, so the first setup ships the mechanisms that make later sessions possible. Coldness is about evidence, not age: a repository with code, tests, and a working agent roster is still cold when it has no baseline, no checkpoint, and no debt detector, and an adoption run into one owes the same day-one output as an empty directory. "Nothing here needs it yet" is the judgement this list exists to overrule — the mechanisms are what make the *next* session possible, so the session that skips them is never the one that pays.
+A cold project has no accepted version or history for the Coach to learn from. Bootstrap the initial conditions in `meta-evolution.md`, then add only the mechanisms whose jobs the inspected workflow already exposes. Coldness is about evidence, not age, but it does not justify speculative infrastructure.
 
 Include, before any extra agent:
 
-- a **documentation debt detector**, so a fix never stays only in code — `../scripts/check_doc_debt.py` ships with this skill;
-- a **minimal frozen benchmark**, even a handful of hand-labelled cases, because a Gate without one cannot run on day one;
-- the **deliverable-unit function** that defines the goal metric, plus its source of truth (see `personal-evolution.md`);
-- the **single-writer lock** for any long-running loop's state file (see `data-workflow-safety.md`).
+- a **documentation debt detector** when source and durable agent guidance evolve together — `../scripts/check_doc_debt.py` ships with this skill;
+- a **minimal frozen benchmark** when the workflow repeats judgement or will evaluate competing versions;
+- one **deliverable-unit function** when recurring work is counted toward a target (see `personal-evolution.md`);
+- a **single-writer lock** when a long-running or concurrent loop mutates shared state (see `data-workflow-safety.md`).
 
-These four matter more than the agent roster. Most measured gains come from correcting an existing judgment function, not from adding another agent.
+Record an omitted mechanism as `not applicable` with one reason. The Coach may add it later when a live run reveals the job; that evidence-driven construction is part of the meta-harness rather than a setup failure. These mechanisms matter more than a large agent roster when their jobs exist.
 
-One durable role does belong in day-one output when the host supports agent definitions: a **session entry agent** carrying the Navigator responsibility — the current checkpoint, the next action, the permission state, and final synthesis. A responsibility that lives only in a transcript does not survive the session boundary it exists to cross, and every later checkpoint, Coach proposal, and Gate decision reads from it. Write it to the host's agent path from the surface map, and on an adoption run upgrade the existing entry agent instead of adding a second one. This is one role, not a team; Worker, Coach, and Gate still stay merged until concrete evidence splits them.
+One durable **session entry instruction** belongs in day-one output. Put it in the repository instruction file the detected host already loads: `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code. It points to the verified checkpoint and assigns Navigator responsibility — current state, next action, permissions, and final synthesis — without requiring another agent file. Existing Claude Code agents still get classified and may be upgraded through the shared repository contract they load, but an unattended session must not create or edit `.claude/**`. Profile- or plugin-specific changes remain a manual, explicitly requested operation. Worker, Coach, and Gate stay merged until concrete evidence splits them.
 
 ## Documentation debt detection
 
@@ -71,7 +72,7 @@ Use when the project needs a durable setup contract. Include:
 - baseline metrics, guardrails, accepted improvements, rollback conditions, and removable assumptions
 - the current verified checkpoint and a pointer to `docs/nulnul/evolution.json` when work spans sessions or agent-specific learning is enabled
 
-Start from `../assets/project-contract.template.md` and remove unused sections.
+Start from `../assets/project-contract.template.md`, remove unused optional content, and run `../scripts/validate_project_setup.py docs/nulnul/project.md`. Keep the stable headings and required fields so the next session can verify the setup without interpreting prose.
 
 ## `docs/nulnul/evolution.json`
 
@@ -82,6 +83,8 @@ Keep project feedback project-local by default. Promote a rule to a user-selecte
 ## `.agents/skills/<name>/`
 
 Create a project-local skill only when a workflow will recur and verified native, installed, curated, or suitable public skills do not adequately cover it. Record why the closest candidates were rejected. Keep the main `SKILL.md` concise; place detailed conditional material in `references/` and deterministic output templates in `assets/`.
+
+In an unattended Claude Code session, keep the equivalent reusable workflow under `docs/nulnul/workflows/` and reference it from `CLAUDE.md`; do not write `.claude/skills/**`. Installing it as a host-native skill is a separate manual action that requires an explicit user request.
 
 ## Agent roles and handoffs
 

@@ -46,6 +46,9 @@ class PersonalEvolutionTests(unittest.TestCase):
                 "primary_metric": "unrelated changes",
                 "permission_delta": permission_delta or [],
                 "rollback": "coach v1",
+                "change_level": "meta",
+                "discovery_evidence": "Worker critique reproduced by tests/test_coach_scope.py::test_one_layer",
+                "transfer_check": "The one-layer rule also passes on a second representative project.",
                 "status": "accepted",
             }
         )
@@ -58,6 +61,12 @@ class PersonalEvolutionTests(unittest.TestCase):
                 "after": "regression passed",
                 "regressions_passed": True,
                 "decision": "accepted",
+                "live_cycle": {
+                    "status": "observed",
+                    "metric": "unrelated changes stayed at zero on the next run",
+                    "rollback_threshold": "roll back on any unrelated change",
+                    "evidence": "next-run regression passed",
+                },
             }
         )
         self.state["agents"]["coach"].update(version=2, last_promotion_id="promotion-1")
@@ -74,6 +83,32 @@ class PersonalEvolutionTests(unittest.TestCase):
 
     def test_independent_gate_can_promote_coach(self):
         self.add_accepted_coach_upgrade()
+        self.assertEqual(validator.validate(self.state), [])
+
+    def test_meta_upgrade_needs_discovery_and_transfer_evidence(self):
+        self.add_accepted_coach_upgrade()
+        self.state["proposals"][0]["discovery_evidence"] = None
+        self.state["proposals"][0]["transfer_check"] = None
+        errors = validator.validate(self.state)
+        self.assertIn("meta proposal proposal-1 needs discovery evidence", errors)
+        self.assertIn("broad meta proposal proposal-1 needs a transfer check", errors)
+
+    def test_accepted_upgrade_needs_an_observed_live_cycle(self):
+        self.add_accepted_coach_upgrade()
+        self.state["promotions"][0]["live_cycle"] = None
+        self.assertIn(
+            "promotion promotion-1 needs a complete live cycle",
+            validator.validate(self.state),
+        )
+
+    def test_version_one_state_remains_readable(self):
+        self.add_accepted_coach_upgrade()
+        self.state["schema_version"] = 1
+        for proposal in self.state["proposals"]:
+            for field in ("change_level", "discovery_evidence", "transfer_check"):
+                proposal.pop(field)
+        for promotion in self.state["promotions"]:
+            promotion.pop("live_cycle")
         self.assertEqual(validator.validate(self.state), [])
 
     def test_agent_cannot_approve_its_own_upgrade(self):
@@ -123,10 +158,10 @@ class PersonalEvolutionTests(unittest.TestCase):
             {"id": "feedback-2", "source": "test", "target_agent": "coach", "observed": "v2 failed", "expected": "v3 passes", "evidence": "regression-2", "scope": "agent", "status": "converted"}
         )
         self.state["proposals"].append(
-            {"id": "proposal-2", "feedback_ids": ["feedback-2"], "target_agent": "coach", "author_agent": "coach", "from_version": 2, "to_version": 3, "cause": "v2 gap", "change_target": "Coach profile", "regression_check": "regression-2", "primary_metric": "failures", "permission_delta": [], "rollback": "coach v2", "status": "accepted"}
+            {"id": "proposal-2", "feedback_ids": ["feedback-2"], "target_agent": "coach", "author_agent": "coach", "from_version": 2, "to_version": 3, "cause": "v2 gap", "change_target": "Coach profile", "regression_check": "regression-2", "primary_metric": "failures", "permission_delta": [], "rollback": "coach v2", "change_level": "meta", "discovery_evidence": "regression-2", "transfer_check": None, "status": "accepted"}
         )
         self.state["promotions"].append(
-            {"id": "promotion-2", "proposal_id": "proposal-2", "gate_agent": "gate", "before": "v2 failed", "after": "v3 passed", "regressions_passed": True, "decision": "accepted"}
+            {"id": "promotion-2", "proposal_id": "proposal-2", "gate_agent": "gate", "before": "v2 failed", "after": "v3 passed", "regressions_passed": True, "decision": "accepted", "live_cycle": {"status": "observed", "metric": "failures stayed at zero", "rollback_threshold": "roll back on one recurrence", "evidence": "next run passed"}}
         )
         self.state["agents"]["coach"].update(version=3, last_promotion_id="promotion-2")
         self.assertEqual(validator.validate(self.state), [])
@@ -135,6 +170,7 @@ class PersonalEvolutionTests(unittest.TestCase):
         self.add_accepted_coach_upgrade()
         self.state["proposals"][0]["status"] = "rejected"
         self.state["promotions"][0]["decision"] = "rejected"
+        self.state["promotions"][0]["live_cycle"] = None
         self.state["feedback"][0]["rejected_proposals"] = ["proposal-1"]
         self.assertEqual(validator.validate(self.state), [])
 

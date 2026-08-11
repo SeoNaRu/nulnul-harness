@@ -2,17 +2,15 @@
   <img src="plugins/nulnul-harness/assets/nulnul-logo-green.svg" width="320" alt="NULNUL 로고">
 </p>
 
-<h1 align="center">NULNUL</h1>
-
 <p align="center">
   <strong>검증된 능력. 개인 에이전트. 통제된 진화.</strong><br>
-  아이디어를 검증된 에이전트 시스템으로 바꾸는 skills-only 플러그인. Codex와 Claude Code 모두 지원.
+  초보자도 결과만 말하면 프로젝트에 맞는 에이전트 팀·능력·진화형 메타 하네스를 구성하는 Codex·Claude Code 플러그인입니다.
 </p>
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/version-1.2.1-111111" alt="version 1.2.1">
-  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
+  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-90%2F100-111111" alt="Release Gate: 90/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
 
@@ -32,6 +30,29 @@
 - 설정에서 멈추지 않고 사용자가 요청한 원래 작업을 끝냅니다.
 - 채팅 기억이 아니라 저장소 근거에서 다음 세션을 재개합니다.
 - 재현 가능한 피드백을 독립 Gate가 승인한 에이전트 개선으로 바꿉니다.
+- 사용자가 더 좋은 방법을 대신 찾아와야 했다면 Coach의 탐색·개선 절차 자체를 고칩니다.
+
+사용자는 AI 구조가 아니라 원하는 결과만 말합니다. 기존 프로젝트에서는 저장소를 먼저 읽고 현재 설정을 제자리에서 업그레이드합니다. 빈 프로젝트에서는 무엇을 만들지 묻고 가장 작은 팀을 고릅니다. 맞는 스킬과 플러그인이 이미 설치돼 있으면 바로 재사용하고, 새 설치는 쉬운 말로 설명한 뒤 승인이 필요한 항목만 한 번 묻고, 겹치는 도구는 생략합니다.
+
+## 항상 켜지는 기본선
+
+모든 세팅에는 일곱 가지 **Baseline Kernel**이 적용됩니다. 저장소의 실제 상태, 원래 사용자 목표, 실행 가능한 완료 검사 하나, 변경 전 상태, 검사한 능력과 결정, 권한 경계, 독립 Gate와 롤백이 있는 진화입니다. 지속형 `docs/nulnul/project.md`가 필요하면 포함된 검증기가 로스터·쉬운 말의 세팅 결정·재개 정보를 빠뜨리거나 템플릿을 덜 채운 계약을 거부합니다.
+
+무거운 인프라는 여전히 근거가 생길 때만 추가합니다. 다중 세션에는 영속 메모리, 결과 비교에는 성능 추적, 반복적인 사람의 판단에 추세가 필요하면 대시보드, 독립 작업에는 추가 에이전트, 위험한 변경에는 다단계 검증, 공유 상태에는 락, 기존 능력으로 못 푸는 도구·서비스 경계에는 승인된 MCP, 적합한 기존 후보가 없을 때만 프로젝트 로컬 스킬을 추가합니다. 자세한 계약은 [`references/baseline-kernel.md`](plugins/nulnul-harness/skills/nulnul-harness/references/baseline-kernel.md)에 있습니다.
+
+## 하네스 엔지니어링에서 메타 하네스로
+
+NULNUL의 출발점은 [GeekNews Weekly 353: “스킬이 쏟아지는 시대, 내 하네스는 내가 만든다”](https://news.hada.io/weekly/202615)입니다. 연구적 근간은 Meta·UBC의 [HyperAgents](https://ai.meta.com/research/publications/hyperagents/)([논문](https://arxiv.org/abs/2603.19461), [코드](https://github.com/facebookresearch/Hyperagents))입니다. 태스크 에이전트와 메타 에이전트를 하나의 편집 가능한 프로그램에 두고, 메타 에이전트가 이후 개선을 만드는 절차 자체도 개선한다는 구조입니다.
+
+NULNUL은 사용자가 하네스를 직접 설계하지 않아도 되도록 이 아이디어를 제거 가능한 프로젝트 시스템으로 옮깁니다.
+
+| 편집 가능한 측 | NULNUL 책임 |
+| --- | --- |
+| 태스크 측 | Navigator와 Worker가 선택된 스킬·플러그인으로 프로젝트를 완수 |
+| 메타 측 | Coach가 더 나은 능력과 방법을 찾고 태스크 측 또는 자신의 탐색·개선 규칙을 수정 |
+| 독립 경계 | Gate가 후보를 비교하고 자기 승인·권한 확대를 막으며 다음 실제 실행을 관찰 |
+
+이는 일반 프로젝트 작업 중 일어나는 통제된 자기 개선입니다. HyperAgents의 개방형 연구 시스템을 그대로 재현했다는 주장은 아닙니다. 초기 조건과 정확한 메타 진화 계약은 [`references/meta-evolution.md`](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md)에 있습니다.
 
 ## 어떻게 만들었나
 
@@ -50,7 +71,7 @@
 
 각 실패는 그 숫자와 함께 규칙이 되어, 에이전트가 실제로 읽는 참조 문서에 들어갔습니다. [실전에서 굳힌 규칙](#실전에서-굳힌-규칙) 참고.
 
-**그날이 설계에서 바꾼 것.** 측정된 개선은 전부 **이미 있던 판정 함수를 고친 데서** 나왔습니다. 새 에이전트의 기여분은 0이었습니다. 그래서 지금은 에이전트 목록보다 먼저 네 가지 기전을 산출합니다. 최소 동결 벤치마크, 납품 단위를 정의하는 함수 하나, 문서 부채 훅, 상태 파일 락. 한 프로젝트의 하루치이므로 벤치마크가 아니라 현장 근거로 읽어야 합니다.
+**그날이 설계에서 바꾼 것.** 측정된 개선은 전부 **이미 있던 판정 함수를 고친 데서** 나왔습니다. 새 에이전트의 기여분은 0이었습니다. 그래서 지금은 에이전트를 더하기 전에 네 가지 작업을 확인합니다. 반복 판정에는 동결 벤치마크, 목표 건수를 세는 반복 작업에는 납품 함수 하나, 코드와 지침이 함께 변하면 문서 부채 훅, 공유 상태를 동시에 쓰면 쓰기자 하나와 락이 필요할 수 있습니다. 실제 작업이 있는 기전만 만들고 나머지는 이후 실행 근거가 생길 때 Meta Coach가 추가합니다. 한 프로젝트의 하루치이므로 벤치마크가 아니라 현장 근거로 읽어야 합니다.
 
 ## 빠른 시작
 
@@ -73,9 +94,9 @@ claude plugin marketplace add "$PWD"
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
-두 환경 모두 같은 스킬을 씁니다. 하네스가 호스트를 감지해 해당 호스트의 설정 경로에 씁니다.
+두 환경 모두 같은 스킬을 씁니다. 하네스는 호스트를 감지하고 저장소가 소유한 설정 경로에만 씁니다. 무인 Claude Code 세션에서는 `.claude/**`를 검사만 하고 수정하지 않으며, `CLAUDE.md`, `docs/nulnul/`, 검증된 체크포인트가 세션 연속성과 재사용 워크플로를 담당합니다.
 
-새 Codex 세션에서 원하는 결과를 말하세요. "하네스 만들어줘"면 충분합니다. 에이전트도, 역할도, 설정 절차도 직접 적지 않습니다.
+새 세션에서 원하는 결과를 말하세요. "하네스 만들어줘"면 충분합니다. 에이전트도, 역할도, 설정 절차도 직접 적지 않습니다.
 
 ```text
 금융 YouTube 크리에이터를 찾고 중복을 제거한 뒤,
@@ -87,7 +108,7 @@ claude plugin install nulnul-harness@nulnul-harness
 ## 제품 루프
 
 ```text
-Discover → Verify → Assemble → Run → Checkpoint → Evolve
+Discover → Verify → Assemble → Run → Checkpoint → 태스크 또는 개선 절차를 Evolve
 ```
 
 | 단계 | 남는 결과 |
@@ -97,7 +118,7 @@ Discover → Verify → Assemble → Run → Checkpoint → Evolve
 | Assemble | 가장 작지만 완전한 능력·에이전트 구성 |
 | Run | 사용자에게 보이는 결과와 완료 검사 |
 | Checkpoint | 검증된 상태, 다음 행동, 차단 요소, 승인된 권한 |
-| Evolve | 재현 가능한 피드백, 버전 비교, 독립 승격, 롤백 |
+| Evolve | 태스크 또는 메타 절차 변경, 전이 검사, 실제 실행 관찰, 롤백 |
 
 한 번의 실행 전체:
 
@@ -128,14 +149,16 @@ Discover → Verify → Assemble → Run → Checkpoint → Evolve
 
 ```text
 your-project/
-├── AGENTS.md                  # 짧은 저장소 지침, 이미 쓴 내용과 병합
+├── AGENTS.md 또는 CLAUDE.md   # 호스트가 읽는 저장소 지침, 기존 내용과 병합
 ├── docs/nulnul/
 │   ├── project.md             # 목표, 완료 검사, 능력, 권한 경계, 롤백
 │   └── evolution.json         # 체크포인트, 에이전트 버전, 제한된 피드백, Gate 판정
-└── .agents/skills/<name>/     # 반복 워크플로에 적합한 기존 스킬이 없을 때만
+├── .agents/skills/<name>/      # Codex: 반복 작업을 맡을 기존 스킬이 없을 때만
+└── docs/nulnul/workflows/<name>.md
+                                # 무인 Claude Code: CLAUDE.md가 참조하는 재사용 워크플로
 ```
 
-이게 전부입니다. `evolution.json`은 다중 세션이나 자가 개선 작업에서만, 프로젝트 로컬 스킬은 기존 후보를 전부 확인하고 기각했을 때만 생깁니다. 빠른 경로 실행은 아무것도 쓰지 않습니다. `docs/nulnul/`과 `.agents/`만 지우면 제품 코드는 그대로 두고 하네스만 사라집니다.
+이게 전부입니다. `evolution.json`은 다중 세션이나 자가 개선 작업에서만, 프로젝트 로컬 스킬은 기존 후보를 전부 확인하고 기각했을 때만 생깁니다. 빠른 경로 실행은 아무것도 쓰지 않습니다. 생성된 `docs/nulnul/`과 프로젝트 로컬 스킬 디렉터리를 지우면 제품 코드는 그대로 두고 하네스만 사라집니다. 호스트 소유 에이전트 정의는 이 설치 범위에 포함되지 않습니다.
 
 목표는 생성 파일을 늘리는 게 아니라 줄이는 것입니다. 에이전트 정의 수십 개를 뽑아내는 설정은 문제를 푼 게 아니라 옮긴 것입니다.
 
@@ -166,10 +189,10 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 | --- | --- |
 | Navigator | 결과, 완료 검사, 권한, 체크포인트, 재개를 관리 |
 | Worker | 제한된 작업 하나를 수행하고 관찰 가능한 근거를 보고 |
-| Coach | 가장 가까운 원인 계층을 진단하고 한 가지 버전 변경을 제안 |
+| Coach | 메타 에이전트로서 더 나은 방법을 찾고 한 가지 태스크·메타 변경을 제안 |
 | Gate | 후보와 승인된 버전을 비교해 승격·거부·롤백 |
 
-네 책임은 항상 네 개의 실행 에이전트를 뜻하지 않습니다. 단순 작업에서는 역할을 합칠 수 있지만 승격 제안자와 Gate는 반드시 분리합니다. Coach도 피드백으로 개선될 수 있지만 자신의 후보를 승인할 수 없습니다.
+네 책임은 항상 네 개의 실행 에이전트를 뜻하지 않습니다. 단순 작업에서는 역할을 합칠 수 있지만 승격 제안자와 Gate는 반드시 분리합니다. Coach는 자신의 탐색·개선 절차도 개선할 수 있지만 자신의 후보를 승인할 수 없습니다.
 
 다중 세션 작업은 `docs/nulnul/evolution.json`에 제한된 상태만 저장합니다. 포함된 표준 라이브러리 검사기는 대상 또는 제안 작성자의 자기 승인, 모순된 기록, 빈 근거, 잘못된 버전 이동, 민감 키 저장, 사전 승인 없는 권한 확대를 거부합니다.
 
@@ -188,8 +211,8 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 | 각 단계는 자기 시작·종료를 스스로 기록 | 기록 없는 시간이 옆 단계에 붙어 엉뚱한 병목을 지목합니다 |
 | 기각·롤백된 후보를 diff와 사유째로 보존하고 다음 제안 전에 조회 | Coach가 이미 Gate에서 기각된 후보를 다시 제안하는 일 |
 | 게이트 판정 로그와 오탐 비율 리포트 | 오탐이 쌓이면 사람이 반사적으로 승인하게 되고, 그 순간 게이트는 아무것도 지키지 못합니다 |
-| 첫날 설정에 문서 부채 감지기 포함 | 코드에만 남은 수정은 다음 세션에서 보이지 않습니다 |
-| 첫날 설정이 최소 동결 벤치마크, 납품 단위 함수, 문서 부채 훅, 상태 파일 락을 함께 산출 | 콜드 스타트에서는 Gate가 돌릴 대상이 없어 진화 자체가 시작되지 않습니다 |
+| 코드와 지속 지침이 함께 변할 때 문서 부채 감지기 포함 | 코드에만 남은 수정은 다음 세션에서 보이지 않습니다 |
+| 검사한 작업에 따라 벤치마크·납품 함수·문서 훅·상태 락 선택 | 단순 프로젝트의 추측성 비계 또는 반복 작업에 실제 필요한 기전 누락 |
 
 ## 기존 개념과의 관계
 
@@ -197,6 +220,7 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 | NULNUL의 부품 | 기존 이름 | 여기서는 어디에 있나 |
 | --- | --- | --- |
+| 편집 가능한 태스크·메타 측 | [HyperAgents](https://ai.meta.com/research/publications/hyperagents/) — 메타 에이전트가 태스크 에이전트와 자신의 수정 절차를 변경 | `references/meta-evolution.md`, 안전 경계로 독립 Gate 추가 |
 | Coach/Gate 분리 | actor-critic([Sutton & Barto](http://incompleteideas.net/book/the-book.html)), generator-verifier gap — 만드는 일과 채점하는 일은 다른 일이고 채점이 더 쉽습니다 | `references/personal-evolution.md` |
 | 자동 승격·롤백 | champion/challenger, 모델 레지스트리 승격 게이트([MLflow](https://mlflow.org/docs/latest/model-registry.html)), [카나리 배포](https://martinfowler.com/bliki/CanaryRelease.html) | 승격 조건 8번 — 한 사이클 현장 관찰, 지표 하락 시 자동 되돌림 |
 | 회귀 테스트로 게이팅 | eval-gated CI([promptfoo](https://www.promptfoo.dev/), [Braintrust](https://www.braintrust.dev/), [LangSmith](https://docs.smith.langchain.com/)) | [`evals/cases.json`](evals/cases.json), `scripts/release_gate.py`, 저장소 테스트 |
@@ -207,7 +231,8 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 의도적으로 다르게 둔 지점은 두 개입니다.
 
-- **자기 개선 루프는 스스로를 채점하지만, 여기서는 못 합니다.** Reflexion 계열은 같은 에이전트가 자기 재시도를 비평하고 받아들입니다. 여기서는 승격에 독립 Gate와 한 사이클의 현장 관찰이 필요하고, 제안 작성자나 대상 에이전트가 승인한 상태 파일은 검증기가 거부합니다.
+- **시스템은 자신을 개선하지만, 자신을 승인하지는 못합니다.** Reflexion 계열은 같은 에이전트가 자기 재시도를 비평하고 받아들입니다. 여기서는 Coach가 자신의 개선 절차를 수정할 수 있지만 승격에는 독립 Gate와 한 사이클의 실제 관찰이 필요하고, 제안 작성자나 대상이 승인한 상태 파일은 검증기가 거부합니다.
+- **관리형 런타임은 선택 사항입니다.** [Claude Managed Agents](https://news.hada.io/topic?id=28326)는 호스팅된 세션·샌드박스·ID·추적을 제공하지만 HyperAgents는 아닙니다. NULNUL은 그 서비스를 요구하거나 프로젝트를 한 모델 제공자에 묶지 않습니다.
 - **루프가 실제로 깨지는 지점은 운영이라, 규칙도 운영 쪽입니다.** 락, 커서, `unknown` 상태 분리는 에이전트 추론 주제가 아닙니다. 그래서 에이전트만 다루는 설계가 계속 데이터를 잃습니다.
 
 기여라고 할 만한 건 포장입니다. 실행할 서비스 없이, 새 저장소에 그대로 옮겨지고, 지우면 흔적이 남지 않는 계약 하나로 위 전부를 옮깁니다.
@@ -216,14 +241,15 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 | 검사 | 현재 결과 |
 | --- | --- |
-| 저장소 자동 검사 | 40개 통과 |
-| Release Gate 행동·안전 게이트 | 100/100 |
-| 긍정 격리 시나리오 | 8개 통과 |
+| 저장소 자동 검사 | 47개 통과 |
+| Release Gate 행동·안전 게이트 | 90/100 |
+| 긍정 격리 시나리오 | 8개 통과, 1개 재실행 필요 |
 | 부정 안전 시나리오 | 3개 통과 |
+| 코덱스 2회 메타 진화 | Coach v1 → v2, 관련 방법 누락 0/2, fixture 검사 8/8, 불필요한 인프라 생략 |
 | 독립 포워드 평가 | 검증기 결함 3개 발견, 수정 후 회귀 검사로 보존 |
 | 오프라인 워크북 A/B(각 3회) | 모두 정답, Navigator v3는 1.2.0 대비 중앙 시간 -25.76%, 출력 토큰 -22.76% |
 
-Release Gate은 범용 성능 벤치마크가 아니라 릴리스 게이트입니다. 새 프로젝트 암묵적 활성화, 모호한 빈 저장소, 충분한 설정 재사용, 기존 에이전트가 있는 저장소로의 도입, 다국어 세팅 트리거, 기존 능력 우선 자동화, 권한 경계, 근거 기반 진화, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 검사합니다.
+Release Gate은 범용 성능 벤치마크가 아니라 릴리스 게이트입니다. 무인 Claude Code 도입 케이스는 호스트 보호 에이전트 정의를 쓰지 않도록 스펙을 고친 뒤 새 실행이 필요하며, 그 근거가 생기기 전에는 점수를 받지 않습니다. 통과 케이스는 새 프로젝트 암묵적 활성화, 모호한 빈 저장소, 충분한 설정 재사용, 다국어 세팅 트리거, 기존 능력 우선 자동화, 권한 경계, 근거 기반 진화, 두 세션에 걸친 개선 절차 자체의 개선, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 검사합니다.
 
 공개 검증을 재현할 수 있습니다.
 
@@ -251,6 +277,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 - **No secret persistence.** 자격 증명, 대화 전문, 개인 데이터를 프로젝트 기억으로 만들지 않습니다.
 - **Independent promotion.** 에이전트는 자신의 업그레이드를 승인하지 못합니다.
 - **Verified resume.** 체크포인트를 사용하기 전에 저장소 현실과 다시 비교합니다.
+- **호스트 소유 설정은 호스트가 관리합니다.** 무인 세션은 `.claude/**`를 검사하지만 자기 에이전트·스킬·설정·훅을 다시 쓰지 않습니다.
 - **Removable setup.** 생성된 프로젝트 상태는 제품 코드를 손상하지 않고 제거할 수 있습니다.
 
 ## 배포 범위

@@ -14,7 +14,7 @@ For multi-session or personally evolving work, preserve four logical responsibil
 
 - **Navigator** owns the user outcome, checkpoint, next action, permission state, and final synthesis.
 - **Worker** performs a bounded project job and emits results or structured feedback, not self-edits.
-- **Coach** diagnoses reproducible feedback and proposes one targeted agent, capability, or instruction change.
+- **Coach** is the meta-agent: it diagnoses reproducible failures and missed better methods, then proposes one targeted change to the task side or to its own discovery and improvement procedure.
 - **Gate** independently evaluates the proposal against the reproduction, baseline, regressions, permissions, and rollback.
 
 These are responsibilities, not a mandatory four-agent team. Combine them in one agent for ordinary execution, but never let the proposal author act as Gate for the same promotion. Use a fresh evaluator or deterministic check for a Coach or Gate self-upgrade.
@@ -22,6 +22,8 @@ These are responsibilities, not a mandatory four-agent team. Combine them in one
 ## Adopt an existing team
 
 When the repository or host already defines agents, the default is to upgrade them in place, not to design a replacement team beside them. Recreating a role the user already uses discards their accumulated context and leaves two owners for one job.
+
+Some hosts expose agent definitions for discovery but protect them from the unattended session they configure. In that case, do not attempt the write and do not call an unapplied profile edit an upgrade. Put shared behavior in the repository contract the agents already load, classify the role as upgraded through that contract, and reserve profile-specific edits for an explicit manual request.
 
 Read every existing agent definition first, then for each one record:
 
@@ -47,6 +49,8 @@ Give every role:
 Assign one synthesis owner. Do not let multiple agents silently write the same files, mutate the same external records, or decide the same product question.
 
 Workers may critique routing, missing context, unnecessary work, or Coach diagnoses. Send those observations to the Coach as bounded feedback. A Worker never edits another agent profile directly, and feedback is evidence to reproduce rather than an instruction to obey.
+
+When the user supplies research, a capability, or an architecture the current process should reasonably have found, record a Coach-targeted discovery failure. Apply `meta-evolution.md`; do not reduce the correction to a README citation or ask the user to keep researching for the system.
 
 ## Route capabilities
 

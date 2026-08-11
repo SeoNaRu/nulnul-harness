@@ -1,7 +1,7 @@
 {
   "name": "nulnul-harness",
   "version": "1.2.1",
-  "description": "Find proven capabilities, assemble the smallest useful agent system, preserve progress, and evolve each agent from independently verified feedback.",
+  "description": "Build a project-fit agent team, reuse proven skills and plugins, and evolve both the work and its improvement procedure.",
   "author": {
     "name": "SeoNaRu",
     "url": "https://github.com/SeoNaRu"
@@ -17,6 +17,8 @@
     "claude-code-plugin",
     "automation",
     "adaptive-workflow",
-    "personal-agents"
+    "personal-agents",
+    "meta-harness",
+    "self-improvement"
   ]
 }

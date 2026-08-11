@@ -1,0 +1,53 @@
+# Meta-harness evolution
+
+Let a non-expert describe the outcome while the harness improves both the work and the way it learns to do the work. NULNUL is inspired by [HyperAgents](https://ai.meta.com/research/publications/hyperagents/) ([paper](https://arxiv.org/abs/2603.19461), [code](https://github.com/facebookresearch/Hyperagents)) and the harness-engineering direction summarized in [GeekNews Weekly 353](https://news.hada.io/weekly/202615). It adopts the editable task/meta boundary, cross-run accumulation, and transfer checks without claiming open-ended autonomous self-improvement.
+
+## One editable project program
+
+- The **task side** is the Navigator, Worker, selected capabilities, product code, and completion check that produce the user's outcome.
+- The **meta side** is the Coach plus the discovery, assembly, measurement, checkpoint, and evolution rules that modify the task side and their own improvement procedure.
+- The **shared program** is the repository guidance, `docs/nulnul/` contract and state, selected local workflows, and the NULNUL references they invoke. Both sides may be versioned change targets.
+- The **Gate** stays independent from the candidate. This is a deliberate safety boundary beyond the task/meta program, not a second team the user must operate.
+
+These are logical responsibilities. Keep them merged in one working agent until an independent evaluation boundary or real parallel work requires another agent.
+
+## Bootstrap the initial conditions
+
+The first useful harness leaves only what the next run needs to improve itself:
+
+1. the user's outcome and one observable deliverable;
+2. the inspected repository and installed agent, skill, and plugin roster;
+3. one adequate capability per uncovered job, with activation and removal conditions;
+4. the smallest runnable completion check;
+5. a verified checkpoint when work spans sessions; and
+6. a bounded feedback path to the Coach plus an independent Gate for promotion.
+
+Do not make the user choose an architecture, agent count, skill catalog, or meta-learning method. In plain language report **reuse now**, **add now**, **needs approval**, and **skip**. Reuse safe installed capabilities immediately. Ask once before downloads, global registration, authentication, external writes, deployment, or publication.
+
+Persistent memory, performance tracking, multi-stage verification, retries, benchmarks, and locks are candidate harness components, not a mandatory scaffold. Add the smallest one when the workflow exposes its job: session loss needs a checkpoint, repeated judgement needs a frozen sample, counted recurring work needs one deliverable function, concurrent state needs one writer and a lock, and risky promotion needs staged verification and rollback.
+
+## Discover better ways, not only failures
+
+Treat each of these as Coach-targeted meta feedback:
+
+- the user supplies relevant research, a tool, or a design direction the harness should reasonably have found;
+- repeated human guidance is needed to choose capabilities, route work, or recover a session;
+- the current improvement procedure keeps producing the same rejected proposal or optimizes only the current task;
+- a maintained native, installed, official, curated, or public capability can replace custom setup;
+- current evidence shows the harness itself costs more time, context, or coordination than it saves.
+
+When the solution landscape may have changed, inspect current primary or reputable sources before fixing the frame around the existing design. Compare the current procedure with the first adequate credible alternative; do not perform an unbounded survey. Extract the useful mechanism rather than copying a branded architecture.
+
+## Change the improvement procedure
+
+Use `personal-evolution.md`, with the proposal marked `change_level: meta`, when the candidate changes how future improvements are discovered, generated, measured, selected, remembered, or rolled back. Record the discovery evidence that motivated it. A meta candidate may update the Coach, Gate criteria, capability search order, measurement strategy, checkpoint policy, or this procedure itself.
+
+The Coach may edit its own candidate but cannot Gate it. A Gate-targeted candidate needs a fresh evaluator or deterministic negative control that did not author it. Do not create recursive Coaches.
+
+Keep a project-scoped meta improvement when it wins on the originating workflow. Promote it to personal or core scope only after a representative transfer check shows that the improvement survives another project or domain without importing private data, paths, or permissions. Preserve rejected candidates so later runs improve the search for improvements instead of repeating it.
+
+## Accumulate across runs
+
+An accepted change is not complete until one later live cycle uses the new procedure and records the named metric, rollback threshold, and evidence. New version-2 evolution states make that observation part of the promotion record. If the live cycle is missing, the validator rejects acceptance; if the threshold fires, record a rollback and restore the last accepted version.
+
+This loop runs during normal project work. NULNUL does not silently start a daemon, purchase a managed runtime, register global tools, or publish changes. [Claude Managed Agents](https://news.hada.io/topic?id=28326) is a possible hosted runtime for teams that explicitly choose it; it is not HyperAgents and is not required by this skills-only plugin.

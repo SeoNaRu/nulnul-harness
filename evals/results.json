@@ -24,10 +24,10 @@
     },
     {
       "case_id": "positive-adopt-existing-harness",
-      "status": "passed",
+      "status": "requires-rerun",
       "run_at": "2026-08-11",
       "surface": "headless Claude Code session on an isolated Node fixture with two existing agents and a passing test",
-      "evidence": "The run took adopt-and-upgrade without asking what to build, enumerated the installed roster and gave one decision per job (ponytail, caveman, and rtk reused for context economy; code-review routed as Gate; nothing installed; no custom skill), classified both existing agents as reuse-and-upgrade, and shipped the day-one mechanisms: vendored doc-debt detector, frozen benchmark with a recorded baseline, the single goal-metric function, and the state lock recorded as not applicable with its activation condition. Checks passed: npm test 5/5, check_doc_debt clean, evolution.json valid. It also found and logged an unfixed defect (dedupe collapses rows missing channelId) as pending feedback rather than silently patching product code. The three writes under .claude/agents/ were refused by the host's unattended-write guard; the run reported the refusal, emitted the full file content, and recorded it as the checkpoint blocker."
+      "evidence": "The prior headless Claude Code run is invalidated by a host-surface defect in the former specification. Although its settings allowed edits, the host safety guard refused both Write and Edit operations under .claude/agents/, demonstrating that .claude/** is not an unattended setup target. The run then left CLAUDE.md pointing to a navigator profile that did not exist while recording the checkpoint as active, so reporting the refusal was not a usable session entry. A fresh isolated run must show adopt-and-upgrade with no .claude/** write attempt, a host-loaded repository instruction pointing to an on-disk checkpoint, all day-one mechanisms, and green repository checks."
     },
     {
       "case_id": "positive-multilingual-setup-trigger",
@@ -56,6 +56,13 @@
       "run_at": "2026-08-10",
       "surface": "isolated fresh-agent forward test",
       "evidence": "One routing change improved representative precision from 0.68 to 1.00 while duplicate rate and cost stayed within guardrails; two reproducible runs passed, the stale role was removed, and rollback evidence was recorded."
+    },
+    {
+      "case_id": "positive-meta-evolution-from-discovery",
+      "status": "passed",
+      "run_at": "2026-08-11",
+      "surface": "two fresh Codex exec sessions on an isolated beginner Python project",
+      "evidence": "The first session recorded a user-supplied HyperAgents correction as Coach feedback, created a Coach v2 candidate, passed a frozen benchmark and negative controls, kept v1 active, and completed the project's reason-return task. A second fresh evaluator staged the candidate, considered persistent memory and performance tracking but correctly skipped them because existing state and metrics covered the jobs, completed robotics-note routing, observed zero relevant-method misses across two mechanisms, and accepted v2 with a rollback threshold. All 8 fixture tests, state validation, document-debt, and negative controls passed; no network, external write, global registration, credential use, or .claude write occurred."
     },
     {
       "case_id": "negative-read-only-question",
