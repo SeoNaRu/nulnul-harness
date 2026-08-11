@@ -14,6 +14,7 @@ This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds prov
 - Never register global tools, use credentials, deploy, or publish without explicit user approval.
 - Keep generated setup removable. Accept an evolution only when a reproducible before/after check improves the primary outcome without violating guardrails, and observe one live cycle after promotion with an executable automatic rollback threshold; schema-v3 states must run the shipped rollback executor before final validation.
 - Give durable projects one validated concise resume checkpoint; keep stable setup evidence outside the host-loaded entry, and convert every reproducible nonpass verdict into Coach feedback and one bounded proposal in the same run.
+- Allow fast resume only from an explicitly verified checkpoint; machine-link every nonpass verdict to its feedback and proposal, and migrate legacy durable contracts without creating a second live-state writer.
 - Give every state file one writing process, keep `unknown` distinct from `verified` and `failed`, persist cursors on empty cycles, and prove each validity check against a negative control.
 - Update the harness documents in the same change as the code they describe.
 

@@ -35,7 +35,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.3.1")
+        self.assertEqual(manifest["version"], "1.3.2")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -91,6 +91,8 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/validate_evolution_state.py",
             "scripts/validate_project_setup.py",
             "scripts/validate_checkpoint.py",
+            "scripts/validate_learning_loop.py",
+            "scripts/migrate_legacy_checkpoint.py",
             "scripts/apply_live_cycle_rollback.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
@@ -105,6 +107,8 @@ class ProductPluginTests(unittest.TestCase):
         self.assertIn("Do not load setup, discovery, assembly, or evolution references", text)
         self.assertIn("Read that checkpoint and the current task files, not the full setup contract", text)
         self.assertIn("repeat an unchanged passing check", text)
+        self.assertIn("when a legacy `project.md` has durable continuity", text)
+        self.assertIn("Never create `checkpoint.json` when `evolution.json` exists", text)
         discovery = (SKILL / "references/capability-discovery.md").read_text(encoding="utf-8")
         self.assertIn("Never recursively scan a home directory", discovery)
         self.assertIn("Do not treat cached marketplace entries as installed", discovery)
@@ -176,8 +180,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "55 passed"),
-            "README.ko.md": ("README.md", "55개 통과"),
+            "README.md": ("README.ko.md", "62 passed"),
+            "README.ko.md": ("README.md", "62개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")

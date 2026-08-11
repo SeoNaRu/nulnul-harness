@@ -75,5 +75,5 @@ For multi-session or personally evolving work, record Navigator, Worker, Coach, 
 ## Continuity
 
 - Active checkpoint: `docs/nulnul/checkpoint.json`, `docs/nulnul/evolution.json`, or not needed
-- Resume rule: read the active checkpoint, confirm repository reality, then perform exactly the recorded next action
+- Resume rule: validate the active checkpoint, use fast resume only when its status is verified, confirm repository reality, then perform exactly the recorded next action
 - Personal promotion scope: project-local unless a private personal evolution home is explicitly configured

@@ -10,7 +10,7 @@
       "name": "nulnul-harness",
       "source": "./plugins/nulnul-harness",
       "description": "Find proven capabilities, assemble the smallest useful task and meta agent system, preserve progress, and evolve the system from independently verified feedback.",
-      "version": "1.3.1"
+      "version": "1.3.2"
     }
   ]
 }

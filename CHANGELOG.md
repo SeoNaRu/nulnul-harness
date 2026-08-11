@@ -4,6 +4,12 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+## 1.3.2 — 2026-08-11
+
+- Added explicit `verified`, `failed`, and `unknown` checkpoint states; only verified state may enter fast resume, and permission constraints now travel with the concise checkpoint.
+- Added a deterministic learning-loop validator so every machine-readable nonpass verdict must link to Coach feedback and a proposal instead of remaining a report-only result.
+- Added a safe legacy durable-setup migrator that preserves 1.3.0 contracts and 1.3.1 checkpoint values and permission constraints, starts as unknown, updates the existing host entry, and skips when `evolution.json` already owns continuity.
+
 ## 1.3.1 — 2026-08-11
 
 - Added a validated concise resume checkpoint that keeps stable setup evidence out of the host-loaded entry. Three exact A/B trials reduced median input 38.52%, output 30.72%, and reasoning 56.33% versus 1.3.0, and a later transfer cycle passed without reading the full contract.

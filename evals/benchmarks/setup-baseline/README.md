@@ -17,3 +17,5 @@ The 1.3.0 candidate must keep exact setup behavior while staying within 20% of t
 [`results.json`](results.json) records every accepted and rejected arm. Setup passed at +2.31% input tokens after the +50.89% recursive-discovery candidate was rejected. The fresh continuation passed behavior and safety checks, but it does not claim a context-cost improvement.
 
 That nonpass verdict then entered the Coach loop. Three resume candidates were rejected before a concise host-loaded checkpoint won: across three exact runs, median input tokens fell 38.52%, output tokens 30.72%, and reasoning tokens 56.33% versus the 1.3.0 continuation baseline. A later slugger-project live cycle passed 3/3 tests, checkpoint validation, and documentation-debt checks without reading the full setup contract.
+
+The result file also publishes stable learning-verdict links. `validate_learning_loop.py` checks them against the active evolution state and fails when a nonpass verdict loses either its Coach feedback or proposal. This turns the earlier report-only gap into an executable release control.

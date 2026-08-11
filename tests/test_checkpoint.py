@@ -25,12 +25,25 @@ class CheckpointTests(unittest.TestCase):
             goal="Ship safely",
             milestone="Complete one route",
             completion_check="python3 -m unittest -v",
+            verification_status="verified",
             last_verified="2 of 2 tests passed",
             next_action="Implement the next bounded request",
         )
 
     def test_complete_checkpoint_is_valid(self):
         self.assertEqual(validator.validate(self.checkpoint), [])
+        self.assertTrue(validator.fast_path_ready(self.checkpoint))
+
+    def test_only_verified_checkpoints_can_take_the_fast_path(self):
+        for status in ("unknown", "failed"):
+            self.checkpoint["verification_status"] = status
+            self.assertEqual(validator.validate(self.checkpoint), [])
+            self.assertFalse(validator.fast_path_ready(self.checkpoint))
+        self.checkpoint["verification_status"] = "claimed"
+        self.assertIn(
+            "verification_status must be verified, failed, or unknown",
+            validator.validate(self.checkpoint),
+        )
 
     def test_missing_check_and_sensitive_field_are_rejected(self):
         self.checkpoint["completion_check"] = ""

@@ -3,8 +3,10 @@
   "goal": "",
   "milestone": "",
   "completion_check": "",
+  "verification_status": "unknown",
   "last_verified": "",
   "next_action": "",
+  "permission_constraints": [],
   "approved_permissions": [],
   "blockers": []
 }

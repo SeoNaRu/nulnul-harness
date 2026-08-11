@@ -7,26 +7,26 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Release Navigator v4 and Coach v2 as nulnul-harness 1.3.1 after repeated A/B, transfer, and live-cycle evidence.",
+    "milestone": "Release checkpoint-state, learning-linkage, and legacy-migration controls as nulnul-harness 1.3.2.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-11: three exact resume trials reduced median input 38.52%, output 30.72%, and reasoning 56.33%; a later slugger transfer cycle passed without reading the full setup contract; the 1.3.1 archive matched the plugin and all 55 repository tests, 11 product tests, evolution validation, rollback no-op, diff, and documentation-debt checks passed.",
-    "next_action": "Observe the next real concise-checkpoint resume cycle and roll Navigator v4 back if input-token change exceeds 20% or behavior, checkpoint validation, or permission guardrails fail.",
+    "last_verified": "2026-08-11: the 1.3.2 archive matched all 28 plugin files; all 62 repository tests, 11 product tests, checkpoint-state controls, learning-link integrity checks, 1.3.0 and 1.3.1 migration and protected-path controls, evolution validation, rollback no-op, diff, and documentation-debt checks passed.",
+    "next_action": "Observe the next upgraded real project and roll back the responsible candidate on any false fast resume, unlinked nonpass verdict, duplicate state writer, or lost permission constraint.",
     "blockers": [],
     "approved_permissions": []
   },
   "agents": {
     "navigator": {
-      "version": 4,
-      "job": "Own the product outcome, concise checkpoint, permissions, resume, and final synthesis.",
+      "version": 6,
+      "job": "Own verified-only resume, safe legacy continuity migration, permissions, and final synthesis.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-4"
+      "last_promotion_id": "promotion-navigator-6"
     },
     "coach": {
-      "version": 2,
-      "job": "Convert every reproducible nonpass verdict into one bounded pending proposal and preserve rejected search knowledge.",
+      "version": 3,
+      "job": "Convert and machine-link every reproducible nonpass verdict to bounded feedback and proposals while preserving rejected search knowledge.",
       "profile_path": null,
-      "last_promotion_id": "promotion-coach-2"
+      "last_promotion_id": "promotion-coach-3"
     },
     "gate": {
       "version": 1,
@@ -60,6 +60,36 @@
       "expected": "Resume a covered task from concise verified state with exact behavior and a lower repeated-run median without expanding permissions.",
       "evidence": "evals/benchmarks/setup-baseline/results.json resume_gate reproduces the baseline and four candidate mechanisms.",
       "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-checkpoint-verification-state",
+      "source": "user",
+      "target_agent": "navigator",
+      "observed": "The concise checkpoint stored free-form evidence but could not distinguish verified, failed, and unknown current state before fast resume.",
+      "expected": "Only an explicitly verified valid checkpoint may enter fast resume; failed and unknown remain valid diagnostic states.",
+      "evidence": "The prior checkpoint schema and validator had no verification-status field or fast-path predicate.",
+      "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-learning-link-integrity",
+      "source": "user",
+      "target_agent": "coach",
+      "observed": "The learning-loop rule existed in prose, but no check proved that every machine-readable nonpass verdict linked to its feedback and proposal.",
+      "expected": "A deterministic validator fails when any rejected, regressed, failed, or not-established verdict lacks both links.",
+      "evidence": "The setup benchmark stored nonpass results separately from evolution state and the product test checked no cross-file identity link.",
+      "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-legacy-checkpoint-migration",
+      "source": "user",
+      "target_agent": "navigator",
+      "observed": "Projects configured before the concise checkpoint release retained a full-contract session entry and had no verified migration path.",
+      "expected": "Upgrade the legacy durable contract in place without inventing verification, losing permission constraints, touching protected host paths, or creating a second writer.",
+      "evidence": "The 1.3.0 project and AGENTS templates had no concise checkpoint entry, while 1.3.1 only specified new day-one output.",
+      "scope": "project",
       "status": "converted"
     }
   ],
@@ -153,6 +183,60 @@
       "discovery_evidence": "Three rejected candidates isolated the long host-loaded contract as the remaining structural cost.",
       "transfer_check": "A dependency-free slugger project resumed from checkpoint.json, changed one behavior and test, passed 3 of 3 tests and both harness checks, and did not read the marked full contract.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-5",
+      "feedback_ids": ["feedback-checkpoint-verification-state"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 4,
+      "to_version": 5,
+      "cause": "A non-empty evidence string was insufficient to prove that current repository reality had passed the recorded check.",
+      "change_target": "Checkpoint status enum, permission constraints, and a verified-only fast-path predicate.",
+      "regression_check": "python3 -B -m unittest tests.test_checkpoint -v",
+      "primary_metric": "unverified checkpoints allowed into fast resume",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v4 and the 1.3.1 checkpoint schema while retaining the failing status cases.",
+      "change_level": "task",
+      "discovery_evidence": "A schema audit found the baseline invariant unknown distinct from verified and failed was not executable for concise checkpoints.",
+      "transfer_check": "Unknown and failed states remain valid across the same checkpoint shape but both fail the fast-path predicate.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-coach-3",
+      "feedback_ids": ["feedback-learning-link-integrity"],
+      "target_agent": "coach",
+      "author_agent": "coach",
+      "from_version": 2,
+      "to_version": 3,
+      "cause": "Prose required same-run conversion but benchmark and evolution files could silently drift apart afterward.",
+      "change_target": "Stable verdict links plus a deterministic cross-file learning-loop validator.",
+      "regression_check": "python3 -B -m unittest tests.test_learning_loop -v",
+      "primary_metric": "published nonpass verdicts without valid feedback and proposal links",
+      "permission_delta": [],
+      "rollback": "Restore Coach v2 and remove the linkage validator while retaining its disconnected negative control.",
+      "change_level": "meta",
+      "discovery_evidence": "The previous run needed a user correction because machine-readable nonpass evidence did not force evolution-state linkage.",
+      "transfer_check": null,
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-6",
+      "feedback_ids": ["feedback-legacy-checkpoint-migration"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 5,
+      "to_version": 6,
+      "cause": "New day-one instructions did not transform already generated project contracts or their host-loaded entry.",
+      "change_target": "A bounded standard-library migrator for the stable 1.3.0 contract and root guidance surfaces.",
+      "regression_check": "python3 -B -m unittest tests.test_legacy_migration -v",
+      "primary_metric": "unsafe legacy migrations",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v5 and remove the migrator without changing any already migrated user project.",
+      "change_level": "task",
+      "discovery_evidence": "The accepted checkpoint mechanism covered new setups but not existing users updating the plugin.",
+      "transfer_check": "A frozen 1.3.0 repository fixture preserved its contract and permissions, while the evolution-owned variant produced no checkpoint write.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -220,6 +304,60 @@
         "rollback_operator": "gt",
         "rollback_value": 20,
         "evidence": "Three exact A/B candidate runs plus a later exact slugger transfer cycle with 3 of 3 tests, valid checkpoint, empty document debt, and no full-contract read."
+      }
+    },
+    {
+      "id": "promotion-navigator-5",
+      "proposal_id": "proposal-navigator-5",
+      "gate_agent": "gate",
+      "before": "Any structurally valid checkpoint could be treated as resumable because verification state was not machine-readable.",
+      "after": "Verified passed the fast-path predicate; unknown and failed remained valid but could not enter it; an invalid status was rejected.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "unverified checkpoints allowed into fast resume",
+        "rollback_threshold": "roll back on one unverified fast resume",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The focused checkpoint run exercised verified, unknown, failed, invalid, malformed, and sensitive-field controls."
+      }
+    },
+    {
+      "id": "promotion-coach-3",
+      "proposal_id": "proposal-coach-3",
+      "gate_agent": "gate",
+      "before": "Four published nonpass verdicts had no mechanically checked identity path into active feedback and proposals.",
+      "after": "All four links validated, and removing one feedback link failed closed.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "published nonpass verdicts without valid feedback and proposal links",
+        "rollback_threshold": "roll back on one unlinked published nonpass verdict",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The shipped validator checked the current setup benchmark against this active evolution state and its negative control disconnected the first verdict."
+      }
+    },
+    {
+      "id": "promotion-navigator-6",
+      "proposal_id": "proposal-navigator-6",
+      "gate_agent": "gate",
+      "before": "An existing 1.3.0 durable setup had no deterministic path to the concise checkpoint.",
+      "after": "The 1.3.0 fixture migrated as unknown with both permission constraints and updated guidance; a 1.3.1 checkpoint kept its values while gaining missing safety fields; an evolution-owned fixture produced no second state file or contract edit.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "unsafe legacy migrations",
+        "rollback_threshold": "roll back on one invented verification, duplicate writer, lost permission constraint, protected-path write, or overwritten state",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The migration CLI ran on frozen 1.3.0 and 1.3.1 fixtures plus evolution-owned and protected-path negative controls in isolated temporary directories."
       }
     }
   ]

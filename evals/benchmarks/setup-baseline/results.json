@@ -74,6 +74,32 @@
     },
     "conclusion": "The continuation contract is reproducible, but these two runs did not establish a context-cost improvement. That nonpass verdict became Coach feedback for the resume gate below."
   },
+  "learning_verdicts": [
+    {
+      "id": "continuation-context-cost",
+      "status": "not-established",
+      "feedback_id": "feedback-resume-context-cost",
+      "proposal_ids": ["proposal-navigator-4-late-rule"]
+    },
+    {
+      "id": "late-workflow-resume-rule",
+      "status": "rejected",
+      "feedback_id": "feedback-resume-context-cost",
+      "proposal_ids": ["proposal-navigator-4-late-rule"]
+    },
+    {
+      "id": "early-resume-rule-only",
+      "status": "rejected",
+      "feedback_id": "feedback-resume-context-cost",
+      "proposal_ids": ["proposal-navigator-4-early-rule"]
+    },
+    {
+      "id": "resume-renderer-script",
+      "status": "rejected",
+      "feedback_id": "feedback-resume-context-cost",
+      "proposal_ids": ["proposal-navigator-4-renderer"]
+    }
+  ],
   "resume_gate": {
     "status": "accepted-after-three-rejections",
     "primary_metric": "median input tokens with exact behavior",

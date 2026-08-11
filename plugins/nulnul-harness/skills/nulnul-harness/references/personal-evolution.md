@@ -17,7 +17,7 @@ For work that spans sessions or needs agent-specific learning, create `docs/nuln
 
 New states use schema version 3. Versions 1 and 2 remain readable for compatibility. Version 3 keeps the task/meta and live-cycle records from version 2, then adds a numeric metric value, comparison operator, and rollback value so the threshold can execute instead of remaining prose.
 
-The Navigator updates a checkpoint only after verifying repository reality. Store the goal, current milestone, completion check, status, last verified evidence, exact next action, blockers, and approved permission changes. On resume, recheck the evidence and continue from the next action instead of reconstructing a plan from chat.
+The Navigator updates a checkpoint only after verifying repository reality. Store the goal, current milestone, completion check, explicit `verified`, `failed`, or `unknown` status, last verified evidence, exact next action, permission constraints and approvals, and blockers. Only `verified` may take a fast resume; recheck the evidence and continue from the next action instead of reconstructing a plan from chat.
 
 ## Convert feedback into evidence
 

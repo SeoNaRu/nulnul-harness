@@ -7,7 +7,8 @@ from pathlib import Path
 
 
 TEXT_FIELDS = ("goal", "milestone", "completion_check", "last_verified", "next_action")
-LIST_FIELDS = ("approved_permissions", "blockers")
+LIST_FIELDS = ("permission_constraints", "approved_permissions", "blockers")
+VERIFICATION_STATUSES = {"verified", "failed", "unknown"}
 
 
 def validate(payload):
@@ -16,6 +17,8 @@ def validate(payload):
     errors = []
     if payload.get("schema_version") != 1:
         errors.append("schema_version must be 1")
+    if payload.get("verification_status") not in VERIFICATION_STATUSES:
+        errors.append("verification_status must be verified, failed, or unknown")
     for field in TEXT_FIELDS:
         value = payload.get(field)
         if not isinstance(value, str) or not value.strip():
@@ -31,6 +34,10 @@ def validate(payload):
     return errors
 
 
+def fast_path_ready(payload):
+    return not validate(payload) and payload["verification_status"] == "verified"
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("checkpoint", type=Path)
@@ -40,7 +47,11 @@ def main():
         errors = validate(payload)
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         errors = [f"cannot read checkpoint: {error}"]
-    print(json.dumps({"valid": not errors, "errors": errors}, ensure_ascii=False, indent=2))
+    print(json.dumps({
+        "valid": not errors,
+        "fast_path_ready": not errors and fast_path_ready(payload),
+        "errors": errors,
+    }, ensure_ascii=False, indent=2))
     raise SystemExit(bool(errors))
 
 
