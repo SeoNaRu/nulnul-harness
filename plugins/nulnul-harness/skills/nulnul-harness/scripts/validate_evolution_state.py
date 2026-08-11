@@ -37,6 +37,8 @@ PROMOTION_FIELDS = {"id", "proposal_id", "gate_agent", "before", "after", "regre
 PROPOSAL_V2_FIELDS = PROPOSAL_FIELDS | {"change_level", "discovery_evidence", "transfer_check"}
 PROMOTION_V2_FIELDS = PROMOTION_FIELDS | {"live_cycle"}
 LIVE_CYCLE_FIELDS = {"status", "metric", "rollback_threshold", "evidence"}
+LIVE_CYCLE_V3_FIELDS = LIVE_CYCLE_FIELDS | {"metric_value", "rollback_operator", "rollback_value"}
+ROLLBACK_OPERATORS = {"lt", "lte", "gt", "gte", "eq", "ne"}
 PROHIBITED_KEYS = {"raw_conversation", "secret", "secrets", "credential", "credentials", "api_key", "token"}
 
 
@@ -67,11 +69,11 @@ def validate(payload):
         return ["root must be an object"]
     reject_sensitive_keys(payload)
     schema_version = payload.get("schema_version")
-    if schema_version not in (1, 2):
-        errors.append("schema_version must be 1 or 2")
+    if schema_version not in (1, 2, 3):
+        errors.append("schema_version must be 1, 2, or 3")
         schema_version = 1
-    proposal_fields = PROPOSAL_V2_FIELDS if schema_version == 2 else PROPOSAL_FIELDS
-    promotion_fields = PROMOTION_V2_FIELDS if schema_version == 2 else PROMOTION_FIELDS
+    proposal_fields = PROPOSAL_V2_FIELDS if schema_version >= 2 else PROPOSAL_FIELDS
+    promotion_fields = PROMOTION_V2_FIELDS if schema_version >= 2 else PROMOTION_FIELDS
     evolution_home = payload.get("personal_evolution_home")
     if evolution_home is not None and (not isinstance(evolution_home, str) or not evolution_home.strip()):
         errors.append("personal_evolution_home must be null or a non-empty string")
@@ -184,7 +186,7 @@ def validate(payload):
             errors.append(f"proposal {proposal_id}.permission_delta must be an array")
         elif any(not isinstance(item, str) or not item for item in row["permission_delta"]):
             errors.append(f"proposal {proposal_id}.permission_delta must contain non-empty strings")
-        if schema_version == 2:
+        if schema_version >= 2:
             change_level = row["change_level"]
             if change_level not in ("task", "meta"):
                 errors.append(f"proposal {proposal_id}.change_level must be task or meta")
@@ -253,10 +255,11 @@ def validate(payload):
             permission_delta = proposal.get("permission_delta", [])
             if isinstance(permission_delta, list) and any(permission not in approved for permission in permission_delta):
                 errors.append(f"promotion {promotion_id} expands permission without approval")
-        if schema_version == 2:
+        if schema_version >= 2:
             live_cycle = row["live_cycle"]
             if row["decision"] in ("accepted", "rolled_back"):
-                if not isinstance(live_cycle, dict) or not LIVE_CYCLE_FIELDS <= live_cycle.keys():
+                required_live_fields = LIVE_CYCLE_V3_FIELDS if schema_version == 3 else LIVE_CYCLE_FIELDS
+                if not isinstance(live_cycle, dict) or not required_live_fields <= live_cycle.keys():
                     errors.append(f"promotion {promotion_id} needs a complete live cycle")
                 else:
                     expected_status = "observed" if row["decision"] == "accepted" else "rolled_back"
@@ -265,6 +268,15 @@ def validate(payload):
                     for field in ("metric", "rollback_threshold", "evidence"):
                         if not isinstance(live_cycle[field], str) or not live_cycle[field].strip():
                             errors.append(f"promotion {promotion_id}.live_cycle.{field} must be non-empty")
+                    if schema_version == 3:
+                        for field in ("metric_value", "rollback_value"):
+                            value = live_cycle[field]
+                            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                                errors.append(f"promotion {promotion_id}.live_cycle.{field} must be a number")
+                        if live_cycle["rollback_operator"] not in ROLLBACK_OPERATORS:
+                            errors.append(
+                                f"promotion {promotion_id}.live_cycle.rollback_operator is invalid"
+                            )
             elif live_cycle is not None:
                 errors.append(f"rejected promotion {promotion_id}.live_cycle must be null")
 

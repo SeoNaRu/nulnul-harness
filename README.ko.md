@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.2.1-111111" alt="version 1.2.1">
+  <img src="https://img.shields.io/badge/version-1.3.0-111111" alt="version 1.3.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-90%2F100-111111" alt="Release Gate: 90/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -75,22 +75,17 @@ NULNUL은 사용자가 하네스를 직접 설계하지 않아도 되도록 이 
 
 ## 빠른 시작
 
-```bash
-git clone https://github.com/SeoNaRu/nulnul-harness.git
-cd nulnul-harness
-```
-
 Codex:
 
 ```bash
-codex plugin marketplace add "$PWD"
+codex plugin marketplace add SeoNaRu/nulnul-harness --ref main
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
 Claude Code:
 
 ```bash
-claude plugin marketplace add "$PWD"
+claude plugin marketplace add SeoNaRu/nulnul-harness
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
@@ -104,6 +99,25 @@ claude plugin install nulnul-harness@nulnul-harness
 ```
 
 하네스는 프로젝트를 검사하고, 충분한 기존 지침과 테스트를 재사용하고, 사용 가능한 능력을 검증하고, 안전하게 알 수 없는 결정만 질문한 뒤 구현과 검증까지 이어갑니다. "하네스"라는 말 없이 원하는 제품만 설명해도 동일하게 동작합니다. 단순 읽기 전용 질문에는 활성화되지 않으며 충분한 프로젝트 설정을 중복 생성하지 않습니다.
+
+## 업데이트
+
+Codex는 Git 마켓플레이스를 갱신한 뒤 다시 설치합니다. 현재 Codex 플러그인 CLI에는 별도 플러그인 업데이트 명령이 없습니다.
+
+```bash
+codex plugin marketplace upgrade nulnul-harness
+codex plugin remove nulnul-harness@nulnul-harness
+codex plugin add nulnul-harness@nulnul-harness
+```
+
+Claude Code는 마켓플레이스와 플러그인을 갱신한 뒤 재시작합니다.
+
+```bash
+claude plugin marketplace update nulnul-harness
+claude plugin update nulnul-harness@nulnul-harness
+```
+
+처음에 로컬 복제본을 마켓플레이스로 추가했다면 그 폴더에서 먼저 `git pull origin main`을 실행하고 같은 재설치·업데이트 명령을 사용합니다. 어느 환경이든 새 에이전트 세션을 시작해야 합니다. 프로젝트에 만들어진 `AGENTS.md`, `CLAUDE.md`, `docs/nulnul/` 상태는 보존됩니다.
 
 ## 제품 루프
 
@@ -241,13 +255,16 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 | 검사 | 현재 결과 |
 | --- | --- |
-| 저장소 자동 검사 | 47개 통과 |
+| 저장소 자동 검사 | 52개 통과 |
 | Release Gate 행동·안전 게이트 | 90/100 |
 | 긍정 격리 시나리오 | 8개 통과, 1개 재실행 필요 |
 | 부정 안전 시나리오 | 3개 통과 |
 | 코덱스 2회 메타 진화 | Coach v1 → v2, 관련 방법 누락 0/2, fixture 검사 8/8, 불필요한 인프라 생략 |
 | 독립 포워드 평가 | 검증기 결함 3개 발견, 수정 후 회귀 검사로 보존 |
 | 오프라인 워크북 A/B(각 3회) | 모두 정답, Navigator v3는 1.2.0 대비 중앙 시간 -25.76%, 출력 토큰 -22.76% |
+| 신규 Codex 세팅 A/B | 행동 정확, 채택된 1.3.0은 1.2.1 대비 입력 +2.31%, 출력 -5.42%, 추론 -9.80%; 최초 +50.89% 안은 기각 |
+| 신규 Codex 연속 작업 | 변경 정확, 프로젝트 검사 3/3과 양쪽 검증기 통과; 컨텍스트 비용 개선은 미입증 |
+| 실행형 롤백 대조군 | 임계값 위반 시 Coach v1 활성 버전 상태 복구, 정상 지표에서는 파일을 쓰지 않음 |
 
 Release Gate은 범용 성능 벤치마크가 아니라 릴리스 게이트입니다. 무인 Claude Code 도입 케이스는 호스트 보호 에이전트 정의를 쓰지 않도록 스펙을 고친 뒤 새 실행이 필요하며, 그 근거가 생기기 전에는 점수를 받지 않습니다. 통과 케이스는 새 프로젝트 암묵적 활성화, 모호한 빈 저장소, 충분한 설정 재사용, 다국어 세팅 트리거, 기존 능력 우선 자동화, 권한 경계, 근거 기반 진화, 두 세션에 걸친 개선 절차 자체의 개선, 읽기 전용 비활성화, 비밀 저장 거부, 미승인 전역 등록 거부를 검사합니다.
 
@@ -258,7 +275,7 @@ python3 scripts/release_gate.py
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-입력과 판정은 [`evals/cases.json`](evals/cases.json)과 [`evals/results.json`](evals/results.json)에 공개돼 있습니다.
+입력과 판정은 [`evals/cases.json`](evals/cases.json), [`evals/results.json`](evals/results.json), [`신규 Codex 세팅 기준선`](evals/benchmarks/setup-baseline/results.json)에 공개돼 있습니다.
 
 ## 대표 워크플로: YouTube → Google Sheets
 

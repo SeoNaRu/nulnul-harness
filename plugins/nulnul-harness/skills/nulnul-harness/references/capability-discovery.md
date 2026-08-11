@@ -34,6 +34,16 @@ Check these against the roster on every setup or adoption run, because a reposit
 
 Use the available skill or plugin catalog first. Installed or catalog-listed means available, not verified. Inspect the local `SKILL.md`, plugin manifest, declared dependencies, and source metadata for each serious candidate. Use read-only web or repository search for current public maintenance, adoption, license, and issue evidence when those claims affect selection. If a source or dimension cannot be checked, label the candidate provisional and report the gap instead of inventing availability, adoption, or verification.
 
+## Bound roster discovery
+
+Enumeration records names, versions, and installed or active status; it does not mean reading every capability. Use the session-provided skill and agent catalog as the canonical roster, then one bounded host command when available:
+
+- Codex plugins: `codex plugin list --json` without `--available`;
+- Claude Code plugins: `claude plugin list --json` without marketplace-wide expansion;
+- project-local skills or agents: list only the immediate capability directories named by the detected surface map.
+
+Never recursively scan a home directory, plugin cache, temporary marketplace snapshot, or the contents of every installed capability. Do not treat cached marketplace entries as installed. If the bounded host command fails, record plugin status as `unknown` with the error and continue; broaden discovery only for a concrete uncovered job. Read full instructions and manifests only for candidates selected for that job.
+
 ## Verify candidates
 
 Record evidence for each serious candidate:

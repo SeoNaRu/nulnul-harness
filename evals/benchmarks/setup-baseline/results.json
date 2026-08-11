@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-11",
+  "surface": "fresh codex exec --ignore-user-config --ephemeral",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "setup_prompt": "Set up the NULNUL harness without changing product code, using network, credentials, external writes, global registration, or deployment.",
+  "setup_gate": {
+    "required_behavior": [
+      "adopt the existing project without asking what to build",
+      "classify the existing maintainer instead of recreating it",
+      "enumerate the host roster before deciding coverage",
+      "write valid project and evolution contracts",
+      "leave product code and repository tests unchanged"
+    ],
+    "maximum_input_increase_percent": 20.0,
+    "status": "passed"
+  },
+  "setup_arms": [
+    {
+      "id": "prior-1.2.1",
+      "decision": "baseline",
+      "exact_behavior": true,
+      "input_tokens": 448668,
+      "cached_input_tokens": 399872,
+      "output_tokens": 11591,
+      "reasoning_output_tokens": 5582
+    },
+    {
+      "id": "initial-1.3.0-candidate",
+      "decision": "rejected",
+      "exact_behavior": true,
+      "input_tokens": 677005,
+      "cached_input_tokens": 580864,
+      "output_tokens": 12726,
+      "reasoning_output_tokens": 6290,
+      "input_change_percent": 50.89,
+      "reason": "Unbounded recursive roster discovery scanned home, cache, and temporary marketplace copies without adding job evidence."
+    },
+    {
+      "id": "accepted-1.3.0-candidate",
+      "decision": "accepted",
+      "exact_behavior": true,
+      "input_tokens": 459014,
+      "cached_input_tokens": 412416,
+      "output_tokens": 10963,
+      "reasoning_output_tokens": 5035,
+      "input_change_percent": 2.31,
+      "output_change_percent": -5.42,
+      "reasoning_change_percent": -9.8
+    }
+  ],
+  "continuation": {
+    "prompt": "Add robotics-note routing and one focused regression test, then update only stale durable checkpoint evidence.",
+    "status": "behavior-passed-context-improvement-not-established",
+    "exact_behavior": true,
+    "repository_tests": "3/3 passed",
+    "project_validator": "passed",
+    "evolution_validator": "passed",
+    "documentation_debt": "empty",
+    "first_run": {
+      "input_tokens": 260119,
+      "cached_input_tokens": 224768,
+      "output_tokens": 4508,
+      "reasoning_output_tokens": 2019,
+      "read_deterministic_validator_source": true
+    },
+    "bounded_source_run": {
+      "input_tokens": 315284,
+      "cached_input_tokens": 283648,
+      "output_tokens": 5008,
+      "reasoning_output_tokens": 1960,
+      "read_deterministic_validator_source": false
+    },
+    "conclusion": "The continuation contract is reproducible, but these two runs do not establish a context-cost improvement."
+  }
+}

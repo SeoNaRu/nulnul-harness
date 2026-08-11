@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.2.1-111111" alt="version 1.2.1">
+  <img src="https://img.shields.io/badge/version-1.3.0-111111" alt="version 1.3.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-90%2F100-111111" alt="Release Gate: 90/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -75,22 +75,17 @@ Each failure became a rule with the number that produced it, written into the re
 
 ## Quick start
 
-```bash
-git clone https://github.com/SeoNaRu/nulnul-harness.git
-cd nulnul-harness
-```
-
 Codex:
 
 ```bash
-codex plugin marketplace add "$PWD"
+codex plugin marketplace add SeoNaRu/nulnul-harness --ref main
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
 Claude Code:
 
 ```bash
-claude plugin marketplace add "$PWD"
+claude plugin marketplace add SeoNaRu/nulnul-harness
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
@@ -104,6 +99,25 @@ and safely writes reviewed results to Google Sheets.
 ```
 
 The harness inspects the project, reuses adequate instructions and tests, checks available capabilities, asks only for decisions it cannot safely discover, and continues through implementation and verification. Describing the product without the word "harness" works the same way. It does not activate for simple read-only questions or duplicate a coherent project setup.
+
+## Update
+
+Codex refreshes the Git marketplace, then reinstalls because its current plugin CLI has no separate plugin-update command:
+
+```bash
+codex plugin marketplace upgrade nulnul-harness
+codex plugin remove nulnul-harness@nulnul-harness
+codex plugin add nulnul-harness@nulnul-harness
+```
+
+Claude Code updates the marketplace and plugin, then requires a restart:
+
+```bash
+claude plugin marketplace update nulnul-harness
+claude plugin update nulnul-harness@nulnul-harness
+```
+
+If the marketplace was originally added from a local clone, run `git pull origin main` in that clone first and then use the same reinstall or update commands. Start a fresh agent session after either update. Project-local `AGENTS.md`, `CLAUDE.md`, and `docs/nulnul/` state are preserved.
 
 ## Product loop
 
@@ -241,13 +255,16 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 47 passed |
+| Automated repository tests | 52 passed |
 | Release Gate behavior and safety gate | 90/100 |
 | Positive isolated scenarios | 8 passed; 1 requires rerun |
 | Negative safety scenarios | 3 passed |
 | Two-run Codex meta-evolution | Coach v1 → v2; 0/2 relevant-method misses; 8/8 fixture tests; unnecessary infrastructure skipped |
 | Independent forward evaluation | Found 3 validator gaps; all fixed and preserved as regressions |
 | Offline workbook A/B (3 trials per arm) | All exact; Navigator v3 median time -25.76%, output tokens -22.76% vs 1.2.0 |
+| Fresh Codex setup A/B | Exact behavior; accepted 1.3.0 input +2.31%, output -5.42%, reasoning -9.80% vs 1.2.1; initial +50.89% arm rejected |
+| Fresh Codex continuation | Exact change; 3/3 project tests and both validators passed; context-cost improvement not established |
+| Executable rollback controls | Threshold breach restored Coach v1 active-version state; healthy metric produced no write |
 
 Release Gate is a release gate, not a universal performance benchmark. The headless Claude Code adoption case currently requires a fresh run after the specification stopped writing host-protected agent definitions; it contributes no points until that evidence exists. The passed cases cover implicit project activation, ambiguous empty repositories, reuse of coherent setups, multilingual setup triggers, capability-first automation, permission boundaries, evidence-gated evolution, two-session improvement of the improvement procedure, read-only non-activation, secret persistence, and unapproved global registration.
 
@@ -258,7 +275,7 @@ python3 scripts/release_gate.py
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-Inputs and decisions are published in [`evals/cases.json`](evals/cases.json) and [`evals/results.json`](evals/results.json).
+Inputs and decisions are published in [`evals/cases.json`](evals/cases.json), [`evals/results.json`](evals/results.json), and the [`fresh Codex setup baseline`](evals/benchmarks/setup-baseline/results.json).
 
 ## Reference workflow: YouTube → Google Sheets
 

@@ -4,6 +4,11 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+## 1.3.0 — 2026-08-11
+
+- Added repeatable Git-marketplace installation and update instructions for Codex and Claude Code, with a real semver release boundary.
+- Added evolution schema v3 and an atomic standard-library live-cycle rollback executor so numeric thresholds restore the prior active agent-version state instead of remaining prose; schema versions 1 and 2 remain readable, and arbitrary commands or product files are never auto-edited.
+- Added a frozen Codex setup A/B: an initial +50.89% input-token regression exposed recursive roster discovery, bounded discovery reduced the accepted candidate to +2.31% versus 1.2.1, and a fresh continuation passed 3/3 project tests and both state validators. Continuation context savings remain unproven and are reported as such.
 - Added a seven-invariant Baseline Kernel for repository truth, observable outcomes, before-state checks, capability decisions, permission boundaries, task continuation, and governed evolution.
 - Added a deterministic project-setup validator with negative controls so durable contracts cannot omit the inspected roster, completion check, plain-language setup decisions, or continuity fields.
 - Grounded the product's meta-harness in Meta and UBC's HyperAgents research and the GeekNews harness discussion, while explicitly avoiding a claim of reproducing the open-ended research system.

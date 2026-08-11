@@ -35,7 +35,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.2.1")
+        self.assertEqual(manifest["version"], "1.3.0")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -90,12 +90,18 @@ class ProductPluginTests(unittest.TestCase):
             "agents/openai.yaml",
             "scripts/validate_evolution_state.py",
             "scripts/validate_project_setup.py",
+            "scripts/apply_live_cycle_rollback.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
             self.assertNotIn(forbidden, text)
         self.assertIn("stable identity, deterministic deduplication, exclusion precedence", text)
         self.assertIn("Apply `references/baseline-kernel.md`", text)
+        self.assertIn("Do not load it for a pure local function", text)
+        self.assertIn("Run them without reading their source", text)
+        discovery = (SKILL / "references/capability-discovery.md").read_text(encoding="utf-8")
+        self.assertIn("Never recursively scan a home directory", discovery)
+        self.assertIn("Do not treat cached marketplace entries as installed", discovery)
 
     def test_setup_trigger_is_multilingual(self):
         description = re.search(
@@ -161,8 +167,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "47 passed"),
-            "README.ko.md": ("README.md", "47개 통과"),
+            "README.md": ("README.ko.md", "52 passed"),
+            "README.ko.md": ("README.md", "52개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
@@ -179,6 +185,24 @@ class ProductPluginTests(unittest.TestCase):
                 if target.startswith(("https://", "http://", "#")):
                     continue
                 self.assertTrue((ROOT / target.split("#", 1)[0]).exists(), f"{name}: {target}")
+
+    def test_setup_baseline_rejects_context_regressions(self):
+        results = json.loads(
+            (ROOT / "evals/benchmarks/setup-baseline/results.json").read_text(encoding="utf-8")
+        )
+        arms = {arm["id"]: arm for arm in results["setup_arms"]}
+        baseline = arms["prior-1.2.1"]
+        accepted = arms["accepted-1.3.0-candidate"]
+        rejected = arms["initial-1.3.0-candidate"]
+        change = 100 * (accepted["input_tokens"] / baseline["input_tokens"] - 1)
+        self.assertTrue(accepted["exact_behavior"])
+        self.assertLessEqual(change, results["setup_gate"]["maximum_input_increase_percent"])
+        self.assertEqual(rejected["decision"], "rejected")
+        self.assertGreater(
+            rejected["input_change_percent"], results["setup_gate"]["maximum_input_increase_percent"]
+        )
+        self.assertTrue(results["continuation"]["exact_behavior"])
+        self.assertIn("not-established", results["continuation"]["status"])
 
     def test_meta_harness_is_a_product_capability(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))

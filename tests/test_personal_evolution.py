@@ -65,6 +65,9 @@ class PersonalEvolutionTests(unittest.TestCase):
                     "status": "observed",
                     "metric": "unrelated changes stayed at zero on the next run",
                     "rollback_threshold": "roll back on any unrelated change",
+                    "metric_value": 0,
+                    "rollback_operator": "gt",
+                    "rollback_value": 0,
                     "evidence": "next-run regression passed",
                 },
             }
@@ -110,6 +113,22 @@ class PersonalEvolutionTests(unittest.TestCase):
         for promotion in self.state["promotions"]:
             promotion.pop("live_cycle")
         self.assertEqual(validator.validate(self.state), [])
+
+    def test_version_two_state_remains_readable(self):
+        self.add_accepted_coach_upgrade()
+        self.state["schema_version"] = 2
+        live_cycle = self.state["promotions"][0]["live_cycle"]
+        for field in ("metric_value", "rollback_operator", "rollback_value"):
+            live_cycle.pop(field)
+        self.assertEqual(validator.validate(self.state), [])
+
+    def test_version_three_needs_an_executable_threshold(self):
+        self.add_accepted_coach_upgrade()
+        self.state["promotions"][0]["live_cycle"].pop("rollback_value")
+        self.assertIn(
+            "promotion promotion-1 needs a complete live cycle",
+            validator.validate(self.state),
+        )
 
     def test_agent_cannot_approve_its_own_upgrade(self):
         self.add_accepted_coach_upgrade(gate_agent="coach")
@@ -161,7 +180,7 @@ class PersonalEvolutionTests(unittest.TestCase):
             {"id": "proposal-2", "feedback_ids": ["feedback-2"], "target_agent": "coach", "author_agent": "coach", "from_version": 2, "to_version": 3, "cause": "v2 gap", "change_target": "Coach profile", "regression_check": "regression-2", "primary_metric": "failures", "permission_delta": [], "rollback": "coach v2", "change_level": "meta", "discovery_evidence": "regression-2", "transfer_check": None, "status": "accepted"}
         )
         self.state["promotions"].append(
-            {"id": "promotion-2", "proposal_id": "proposal-2", "gate_agent": "gate", "before": "v2 failed", "after": "v3 passed", "regressions_passed": True, "decision": "accepted", "live_cycle": {"status": "observed", "metric": "failures stayed at zero", "rollback_threshold": "roll back on one recurrence", "evidence": "next run passed"}}
+            {"id": "promotion-2", "proposal_id": "proposal-2", "gate_agent": "gate", "before": "v2 failed", "after": "v3 passed", "regressions_passed": True, "decision": "accepted", "live_cycle": {"status": "observed", "metric": "failures stayed at zero", "rollback_threshold": "roll back on one recurrence", "metric_value": 0, "rollback_operator": "gte", "rollback_value": 1, "evidence": "next run passed"}}
         )
         self.state["agents"]["coach"].update(version=3, last_promotion_id="promotion-2")
         self.assertEqual(validator.validate(self.state), [])
