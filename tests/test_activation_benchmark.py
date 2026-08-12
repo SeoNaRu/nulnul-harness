@@ -48,6 +48,19 @@ class ActivationBenchmarkTests(unittest.TestCase):
         self.assertEqual(telemetry["test_commands"], 1)
         self.assertNotIn("commands", telemetry)
 
+    def test_checkpoint_truth_flags_an_unverified_mutated_fast_resume(self):
+        checkpoint = {"verification_status": "verified", "last_verified": "old pass"}
+        validation = {"valid": True, "fast_path_ready": True, "verification_status": "verified"}
+        observation = MODULE.checkpoint_truth_observation(
+            {"checkpoint": checkpoint, "validation": validation},
+            {"checkpoint": checkpoint.copy(), "validation": validation.copy()},
+            product_mutated=True,
+            telemetry={"completion_check_invocations": 0},
+        )
+        self.assertTrue(observation["unverified_mutated_repository_state_accepted_for_fast_resume"])
+        self.assertFalse(observation["checkpoint_changed_before_gate"])
+        self.assertFalse(observation["verified_evidence_changed_before_gate"])
+
     def test_paired_comparison_uses_matching_rounds(self):
         records = []
         for round_index, champion_tokens, candidate_tokens in ((1, 100, 90), (2, 200, 220), (3, 300, 240)):

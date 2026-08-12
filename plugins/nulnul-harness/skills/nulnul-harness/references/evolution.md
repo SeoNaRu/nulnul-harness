@@ -31,6 +31,10 @@ Keep only durable, non-sensitive evidence:
 
 Never store raw conversations, secrets, credentials, personal data, or full tool logs as project memory.
 
+When aggregate counts cannot identify a causal stage or owner, use the existing evaluation record as a bounded Experience Digest rather than adding a trace system. Keep only stable stage names, logical owner, elapsed time, aggregate tool/read/validator/test/completion-check counts, bounded signals, candidate/champion identity, and verification status. Reject prompts, responses, transcripts, command lists, sensitive fields, and machine paths with `scripts/validate_experience_digest.py`. Compute `first_divergence` only from a stable structural difference; otherwise record `unknown`.
+
+For an ordering question, reduce the existing event sequence to bounded facts such as implementation completed, verification entered, wrapper observed, and final synthesis observed. Count verification only after the final implementation change, keep behavior and read-scope guardrails separate, and discard the event text. Expose a capability path in an already-read fixture before blaming resolution; if the path is available but final synthesis still precedes verification, classify the ordering evidence without turning the count into a release invariant.
+
 When a signal identifies an agent, a bad handoff, a session-loss failure, or the Coach itself, apply `personal-evolution.md`. Convert the signal into a structured feedback event before proposing any instruction change.
 
 ## Propose one causal change

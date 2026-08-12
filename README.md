@@ -36,7 +36,7 @@ You describe the result, not the AI architecture. On an existing project NULNUL 
 
 ## The baseline that is always on
 
-Every setup keeps a seven-part **Baseline Kernel**: repository truth, the original outcome, one runnable completion check, a before state, inspected capability decisions, permission boundaries, and independently gated evolution with rollback. When durable continuity is needed, stable setup evidence stays in `docs/nulnul/project.md` while a validated concise checkpoint carries only the current goal, check, explicit `verified`/`failed`/`unknown` status, last evidence, next action, permission boundary, and blockers. Only `verified` enters the fast resume path.
+Every setup keeps a seven-part **Baseline Kernel**: repository truth, the original outcome, one runnable completion check, a before state, inspected capability decisions, permission boundaries, and independently gated evolution with rollback. When durable continuity is needed, stable setup evidence stays in `docs/nulnul/project.md` while a concise checkpoint carries the current goal, check, bounded verification files, explicit `verified`/`failed`/`unknown` status, last evidence, next action, permission boundary, and blockers. Fast resume also requires a runner-owned receipt whose fingerprint matches those current files; a stale `verified` label is insufficient.
 
 Heavier infrastructure still stays evidence-driven. Persistent memory appears when work spans sessions; performance tracking when an outcome needs comparison; a dashboard when repeated human decisions need trends; more agents when independent work justifies coordination; staged verification for risky changes; a lock for shared mutable state; MCP only for an uncovered tool or service boundary; and a project-local skill only after adequate existing candidates fail. See [`references/baseline-kernel.md`](plugins/nulnul-harness/skills/nulnul-harness/references/baseline-kernel.md).
 
@@ -211,6 +211,8 @@ These are responsibility boundaries, not four mandatory live agents. Simple work
 
 For multi-session work, the harness stores only bounded state in `docs/nulnul/evolution.json`. Its standard-library validator rejects target or proposal-author self-approval, contradictory records, missing evidence, invalid version transitions, sensitive persisted keys, and permission expansion without prior approval.
 
+The 1.4 Observable Evolution candidate adds bounded Experience Digests to the existing activation runner: stable `activation`/`resume`/`verification` stages, logical owner, elapsed time, aggregate tool/read/validator/test/completion-check counts, bounded signals, and verification status. It stores no prompt, response, transcript, command list, or machine path. The 1.4.1 runs falsified path resolution, supported final-action ordering, and rejected two Navigator-instruction candidates. The final 1.4.2 interruption test then found the real defect: all three mutated states remained fast-resumable before independent Gate verification. Schema-v3 checkpoints now require a runner-owned bounded file fingerprint; the candidate reduced unverified mutated-state acceptance from 3/3 to 0/3 without changing Navigator wording.
+
 ## Field-hardened rules
 
 These rules come from a full day of unattended loop operation on a real recurring workflow. Every row replaced a failure that the previous references did not prevent.
@@ -256,7 +258,7 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 79 passed |
+| Automated repository tests | 85 passed |
 | Release Gate | 100/100 behavior and safety; recorded setup, workflow, and fast-path performance budgets also pass |
 | Positive isolated scenarios | 9 passed |
 | Negative safety scenarios | 3 passed |
@@ -267,11 +269,12 @@ The contribution, if any, is the packaging: one portable contract that carries a
 | Fresh Codex resume A/B | Exact behavior in 3/3 trials; concise checkpoint reduced median input 38.52%, output 30.72%, and reasoning 56.33% vs 1.3.0; three weaker arms rejected |
 | Later transfer cycle | A separate slugger project changed exactly one behavior and test, passed 3/3 tests and both harness checks, and did not read the marked full contract |
 | Activation and fast-path runner | 10 positive/negative project shapes, 3 runs by default; the counterbalanced candidate was bounded in 4/4 runs and changed paired input -18.4% across 3 comparable pairs |
+| Observable evolution | 3 bounded digests separated Navigator `0` from Gate `1`; invalid-stage and raw-transcript controls failed, and the ownership-rule candidate was rejected |
 | Headless Claude Code adoption | GitHub-marketplace-installed 1.3.5 kept both agent-profile hashes unchanged, made zero `.claude/**` write calls, created a verified checkpoint with an executable completion command, and passed five machine-recorded checks |
 | Learning-loop and upgrade controls | Schema-v1 checkpoints are read-only; missing verdict inventories fail Product and Release Gates; injected migration write failure restores every earlier file |
 | Executable rollback controls | Threshold breach restored Coach v1 active-version state; healthy metric produced no write |
 
-Release Gate is not a universal performance benchmark. All twelve weighted behavior and safety cases pass, and release readiness also fails on a recorded setup, workflow, or fast-path regression. Performance evidence uses version-independent champion/candidate records; fast-path candidates run in counterbalanced paired order and are checked against a relative token budget instead of an absolute ceiling. The activation runner reports precision, recall, stage times, and aggregate tool/read/validator/test counts without retaining raw transcripts.
+Release Gate is not a universal performance benchmark. All twelve weighted behavior and safety cases pass, and release readiness also fails on a recorded setup, workflow, or fast-path regression. Performance evidence uses version-independent champion/candidate records; fast-path candidates run in counterbalanced paired order and are checked against a relative token budget instead of an absolute ceiling. The activation runner reports precision, recall, stage times, logical owners, and aggregate tool/read/validator/test/completion-check counts without retaining raw transcripts or command lists.
 
 Reproduce the public checks:
 

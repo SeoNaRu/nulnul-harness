@@ -12,6 +12,9 @@ LEARNING_VALIDATOR = (
 )
 CLAUDE_EVIDENCE_VALIDATOR = ROOT / "scripts/claude_adopt_evidence.py"
 ACTIVATION_BENCHMARK = ROOT / "evals/benchmarks/activation/run_activation.py"
+EXPERIENCE_VALIDATOR = (
+    ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_experience_digest.py"
+)
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -132,6 +135,102 @@ def validate_activation_results(payload: dict, evolution: dict) -> dict:
     }
 
 
+def validate_observable_evolution(payload: dict) -> dict:
+    evidence = payload.get("observable_evolution", {})
+    champion = evidence.get("champion", {})
+    runs = champion.get("runs", [])
+    broad = champion.get("broad_test_commands", [])
+    exact = champion.get("exact_completion_check_invocations", [])
+    if len(runs) < 3 or len(broad) != len(runs) or len(exact) != len(runs):
+        raise ValueError("Release Gate observable evidence needs three aligned champion runs")
+    spec = importlib.util.spec_from_file_location("validate_experience_digest", EXPERIENCE_VALIDATOR)
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    for run in runs + evidence.get("candidate", {}).get("runs", []):
+        errors = validator.validate(run)
+        if errors:
+            raise ValueError("Release Gate Experience Digest failed: " + "; ".join(errors))
+    if broad == exact or not all(value == 0 for value in exact):
+        raise ValueError("Release Gate observable evidence did not reproduce the attribution error")
+    owners = []
+    for run in runs:
+        stages = {stage["stage"]: stage for stage in run["stages"]}
+        resume = stages.get("resume", {})
+        verification = stages.get("verification", {})
+        if (
+            resume.get("owner") != "navigator"
+            or resume.get("completion_check_invocations") != 0
+            or verification.get("owner") != "gate"
+            or verification.get("completion_check_invocations") != 1
+            or "completion_check_missing" not in run.get("signals", [])
+        ):
+            raise ValueError("Release Gate observable evidence cannot distinguish check ownership")
+        owners.append({"navigator": 0, "gate": 1})
+    divergence = evidence.get("first_divergence")
+    if divergence != {"status": "unknown", "stage": None}:
+        raise ValueError("Release Gate observable evidence must preserve unknown divergence")
+    if evidence.get("candidate", {}).get("decision") != "rejected":
+        raise ValueError("Release Gate observable evidence lost the rejected Navigator candidate")
+    causal = evidence.get("causal_attribution_1_4_1", {})
+    measurements = causal.get("measurements", {})
+    for condition in ("baseline", "resolvable_wrapper"):
+        measured = measurements.get(condition, {})
+        aligned = (
+            measured.get("navigator_completion_checks") == [0, 0, 0]
+            and measured.get("gate_completion_checks") == [1, 1, 1]
+            and measured.get("implementation_completed") == [True, True, True]
+            and measured.get("verification_stage_entered") == [False, False, False]
+            and measured.get("final_synthesis_observed") == [True, True, True]
+            and measured.get("behavior_passed") == [True, True, True]
+        )
+        if not aligned:
+            raise ValueError("Release Gate causal attribution evidence is incomplete or misaligned")
+    candidate = causal.get("candidate", {})
+    if (
+        causal.get("status") != "completed"
+        or causal.get("diagnosis") != "final_action_ordering_supported"
+        or causal.get("first_divergence") != {"status": "unknown", "stage": None}
+        or causal.get("gate_decision") != "rejected"
+        or candidate.get("navigator_completion_checks") != [0]
+        or candidate.get("decision") != "rejected_early"
+    ):
+        raise ValueError("Release Gate causal attribution decision is not supported")
+    truth = evidence.get("checkpoint_truth_1_4_2", {})
+    champion_truth = truth.get("champion_measurements", {})
+    candidate_truth = truth.get("candidate_measurements", {})
+    controls = truth.get("deterministic_controls", {})
+    if (
+        truth.get("status") != "candidate_gate_passed"
+        or truth.get("diagnosis") != "real_checkpoint_truth_defect"
+        or champion_truth.get("unverified_mutated_repository_state_accepted_for_fast_resume")
+        != [True, True, True]
+        or champion_truth.get("navigator_completion_check_invocations") != [0, 0, 0]
+        or candidate_truth.get("unverified_mutated_repository_state_accepted_for_fast_resume")
+        != [False, False, False]
+        or candidate_truth.get("task_behavior_passed") != [True, True, True]
+        or candidate_truth.get("read_scope_passed") != [True, True, True]
+        or candidate_truth.get("fast_path_ready_after_gate") != [True, True, True]
+        or candidate_truth.get("direct_completion_check_invocations") != [0, 0, 0]
+        or not controls
+        or not all(value is expected for value, expected in (
+            (controls.get("clean_verified_state_fast_resumes"), True),
+            (controls.get("pre_check_mutation_fast_resumes"), False),
+            (controls.get("failed_check_fast_resumes"), False),
+            (controls.get("unknown_state_fast_resumes"), False),
+            (controls.get("old_nonempty_evidence_fast_resumes"), False),
+            (controls.get("missing_receipt_fast_resumes"), False),
+        ))
+        or truth.get("candidate_decision") != "accepted_by_independent_gate"
+    ):
+        raise ValueError("Release Gate checkpoint-truth evidence is incomplete or unsafe")
+    return {
+        "status": "passed", "runs": len(runs), "owners": owners[0],
+        "causal_diagnosis": causal["diagnosis"],
+        "checkpoint_truth_diagnosis": truth["diagnosis"],
+        "unverified_mutated_state_acceptance": 0,
+    }
+
+
 def _paired_changes(champion: list[dict], candidate: list[dict], fields) -> dict:
     champion_by_pair = {run.get("pair"): run for run in champion}
     candidate_by_pair = {run.get("pair"): run for run in candidate}
@@ -233,6 +332,7 @@ def main() -> None:
         **validate_activation_gate(),
         **validate_activation_results(activation, evolution),
     }
+    score["observable_evolution_gate"] = validate_observable_evolution(activation)
     print(json.dumps(score, ensure_ascii=False, indent=2))
 
 

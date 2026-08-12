@@ -36,7 +36,7 @@
 
 ## 항상 켜지는 기본선
 
-모든 세팅에는 일곱 가지 **Baseline Kernel**이 적용됩니다. 저장소의 실제 상태, 원래 사용자 목표, 실행 가능한 완료 검사 하나, 변경 전 상태, 검사한 능력과 결정, 권한 경계, 독립 Gate와 롤백이 있는 진화입니다. 연속 작업이 필요하면 안정적인 세팅 근거는 `docs/nulnul/project.md`에 두고, 검증된 짧은 체크포인트에는 현재 목표·검사·명시적인 `verified`/`failed`/`unknown` 상태·마지막 근거·다음 행동·권한 경계·차단 요소만 담습니다. `verified`만 빠른 재개가 가능합니다.
+모든 세팅에는 일곱 가지 **Baseline Kernel**이 적용됩니다. 저장소의 실제 상태, 원래 사용자 목표, 실행 가능한 완료 검사 하나, 변경 전 상태, 검사한 능력과 결정, 권한 경계, 독립 Gate와 롤백이 있는 진화입니다. 연속 작업이 필요하면 안정적인 세팅 근거는 `docs/nulnul/project.md`에 두고, 짧은 체크포인트에는 현재 목표·검사·제한된 검증 파일·명시적인 `verified`/`failed`/`unknown` 상태·마지막 근거·다음 행동·권한 경계·차단 요소만 담습니다. 빠른 재개에는 runner가 기록한 receipt의 fingerprint가 현재 파일과 일치해야 하며 stale `verified` 표시는 충분하지 않습니다.
 
 무거운 인프라는 여전히 근거가 생길 때만 추가합니다. 다중 세션에는 영속 메모리, 결과 비교에는 성능 추적, 반복적인 사람의 판단에 추세가 필요하면 대시보드, 독립 작업에는 추가 에이전트, 위험한 변경에는 다단계 검증, 공유 상태에는 락, 기존 능력으로 못 푸는 도구·서비스 경계에는 승인된 MCP, 적합한 기존 후보가 없을 때만 프로젝트 로컬 스킬을 추가합니다. 자세한 계약은 [`references/baseline-kernel.md`](plugins/nulnul-harness/skills/nulnul-harness/references/baseline-kernel.md)에 있습니다.
 
@@ -211,6 +211,8 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 다중 세션 작업은 `docs/nulnul/evolution.json`에 제한된 상태만 저장합니다. 포함된 표준 라이브러리 검사기는 대상 또는 제안 작성자의 자기 승인, 모순된 기록, 빈 근거, 잘못된 버전 이동, 민감 키 저장, 사전 승인 없는 권한 확대를 거부합니다.
 
+1.4 Observable Evolution 후보는 기존 활성화 실행기에 제한된 Experience Digest를 추가합니다. 안정적으로 구분되는 `activation`·`resume`·`verification` 단계, 논리적 owner, 경과 시간, 도구·읽기·검증기·테스트·완료 검사 집계, 제한된 signal, 검증 상태만 남깁니다. prompt, response, transcript, command 목록, 머신 경로는 저장하지 않습니다. 1.4.1은 path resolution을 반증하고 final-action ordering을 지지했으며 Navigator instruction 후보 두 개를 reject했습니다. 마지막 1.4.2 interruption 실험은 실제 defect를 찾았습니다. 세 mutated state 모두 independent Gate 전 fast resume가 가능했습니다. schema-v3 checkpoint는 이제 runner가 기록한 제한된 파일 fingerprint를 요구하며, Navigator 문구를 바꾸지 않고 unverified mutated-state acceptance를 3/3에서 0/3으로 줄였습니다.
+
 ## 실전에서 굳힌 규칙
 
 실제 반복 워크플로를 하루 종일 무인 루프로 돌리며 얻은 규칙입니다. 각 항목은 기존 참조 문서가 막지 못해 실제로 사고를 낸 실패를 대체합니다.
@@ -256,7 +258,7 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 | 검사 | 현재 결과 |
 | --- | --- |
-| 저장소 자동 검사 | 79개 통과 |
+| 저장소 자동 검사 | 85개 통과 |
 | Release Gate | 행동·안전 100/100, 기록된 세팅·워크플로·빠른 재개 성능 예산도 통과 |
 | 긍정 격리 시나리오 | 9개 통과 |
 | 부정 안전 시나리오 | 3개 통과 |
@@ -267,11 +269,12 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 | 신규 Codex 재개 A/B | 3/3 실행 모두 행동 정확, 짧은 체크포인트가 1.3.0 대비 중앙 입력 38.52%, 출력 30.72%, 추론 56.33% 절감; 약한 세 안은 기각 |
 | 후속 전이 실행 | 별도 slugger 프로젝트에서 행동과 검사 하나만 정확히 바꾸고 3/3 검사와 양쪽 하네스 검사를 통과했으며 표시된 전체 계약은 읽지 않음 |
 | 활성화·빠른 재개 실행기 | 긍정·부정 프로젝트 형태 10개, 기본 3회 반복; 교차 순서 후보는 4/4회 읽기 경계를 지켰고 비교 가능한 3쌍에서 paired 입력 -18.4% |
+| Observable Evolution | 6개 진단 run이 path resolution을 반증하고 final-action ordering을 지지했으며, 잘못된 event order·stage·raw transcript 대조군은 실패하고 ordering-only 후보는 기각 |
 | 무인 Claude Code 도입 | GitHub marketplace 설치본 1.3.5가 두 에이전트 프로필 해시를 보존하고 `.claude/**` 쓰기 호출 0건, 실행 가능한 완료 명령이 든 검증 체크포인트, 기계 기록 검사 5개 통과 |
 | 학습 루프·업그레이드 대조군 | schema v1 체크포인트는 읽기 전용, 판정 목록 누락은 Product·Release Gate 실패, 마이그레이션 쓰기 실패 주입 시 앞선 파일 전부 복원 |
 | 실행형 롤백 대조군 | 임계값 위반 시 Coach v1 활성 버전 상태 복구, 정상 지표에서는 파일을 쓰지 않음 |
 
-Release Gate은 범용 성능 벤치마크는 아닙니다. 가중 행동·안전 케이스 12개가 모두 통과하며 기록된 세팅·워크플로·빠른 재개 성능이 회귀해도 릴리스가 실패합니다. 성능 근거는 버전과 무관한 champion/candidate 형식이고, 빠른 재개는 실행 순서를 교차한 paired 상대 토큰 예산으로 검사합니다. 활성화 실행기는 정밀도·재현율·단계 시간과 도구/읽기/검증/테스트 집계를 내되 원본 대화 로그는 보존하지 않습니다.
+Release Gate은 범용 성능 벤치마크는 아닙니다. 가중 행동·안전 케이스 12개가 모두 통과하며 기록된 세팅·워크플로·빠른 재개 성능이 회귀해도 릴리스가 실패합니다. 성능 근거는 버전과 무관한 champion/candidate 형식이고, 빠른 재개는 실행 순서를 교차한 paired 상대 토큰 예산으로 검사합니다. 활성화 실행기는 정밀도·재현율·단계 시간·논리적 owner와 도구/읽기/검증/테스트/완료 검사 집계를 내되 원본 대화나 command 목록은 보존하지 않습니다.
 
 공개 검증을 재현할 수 있습니다.
 

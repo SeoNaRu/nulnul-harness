@@ -7,20 +7,20 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Make measured setup, workflow, activation, and fast-path performance release-blocking and stabilize bounded fast resume.",
+    "milestone": "Close 1.4 Observable Evolution with a verified checkpoint-truth boundary before considering the 1.5 Generalization Gate.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-11: Gate v5 replaced historical arm names and the absolute fast-path token ceiling with version-independent champion/candidate comparisons. Four counterbalanced paired rounds gave Navigator v12 4/4 bounded behavior, three comparable pairs, and -18.4% median paired input-token change under the 20% budget. The runner records stage times and bounded tool/read/validator/test counts without raw transcripts; fixed-order and mismatched-pair negative controls fail closed. The 29-file archive matched the plugin, all 79 repository tests and 12 product tests passed, learning and evolution validation passed, document debt was empty, and Release Gate returned 100/100 with release_ready true.",
-    "next_action": "Observe whether repeated completion-check commands persist now that benchmark telemetry exposes them; add a release guard only after a reproduced candidate improves that count without hurting behavior or paired cost.",
+    "last_verified": "2026-08-12: NULNUL 1.4.2 reproduced stale verified truth in 3 of 3 fresh schema-v2 interruption runs. A new process accepted every unverified mutated state for fast resume before the independent Gate. Navigator-instruction candidates remained rejected. Navigator v15 instead binds schema-v3 fast resume to a completion-runner-owned receipt over explicit bounded verification files. Candidate acceptance fell to 0 of 3, task and read-scope behavior passed 3 of 3, deterministic failed/unknown/missing/old-evidence controls failed closed, Release Gate returned 100/100, and a post-promotion live interruption blocked resume before Gate then restored it after a passing Gate check.",
+    "next_action": "Treat 1.4 Observable Evolution as closed and review the 1.5 Generalization Gate only as the next evidence-driven milestone.",
     "blockers": [],
     "approved_permissions": []
   },
   "agents": {
     "navigator": {
-      "version": 12,
-      "job": "Own verified-only resume, explicit checkpoint compatibility, transactional migration, unattended host boundaries, permissions, and final synthesis.",
+      "version": 15,
+      "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-12"
+      "last_promotion_id": "promotion-navigator-15"
     },
     "coach": {
       "version": 4,
@@ -29,10 +29,10 @@
       "last_promotion_id": "promotion-coach-4"
     },
     "gate": {
-      "version": 5,
-      "job": "Independently compare candidates, require machine-verified public-run evidence, and promote, reject, or roll back.",
+      "version": 6,
+      "job": "Independently compare candidates, validate bounded stage/owner evidence, require machine-verified public-run evidence, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-5"
+      "last_promotion_id": "promotion-gate-6"
     },
     "product-builder": {
       "version": 5,
@@ -199,6 +199,47 @@
       "observed": "Fresh fast-path runs still occasionally used repository discovery, while aggregate telemetry also exposed repeated completion-check commands that token-only evidence could not explain.",
       "expected": "Name forbidden discovery commands, keep the completion check on the shipped wrapper, preserve exact behavior, and stay within the paired relative cost budget.",
       "evidence": "The final candidate stayed bounded in 4/4 rounds and improved median paired input by 18.4%; repeated check counts remain measured feedback rather than an unproven release threshold.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-fast-path-check-ownership",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "Three fresh fast-path runs reported broad test-command counts of 1, 1, and 2 but exact attribution found zero Navigator completion-check invocations in all three; the independent Gate alone executed the check.",
+      "expected": "Navigator invokes the checkpoint wrapper exactly once, never executes the recorded command directly, and the Gate remains an independent verification owner.",
+      "evidence": "evals/benchmarks/activation/results.json observable_evolution distinguishes resume/Navigator from verification/Gate without retaining commands or transcripts.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-fast-path-final-ordering",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "With the exact existing wrapper invocation exposed in already-read guidance, all three Navigator v12 runs still invoked it zero times and moved from the final implementation change to final synthesis without entering verification.",
+      "expected": "Verify the implemented behavior through the recorded wrapper before refreshing verified checkpoint evidence or producing final synthesis.",
+      "evidence": "evals/benchmarks/activation/results.json causal_attribution_1_4_1 distinguishes path availability from post-implementation event ordering with bounded signals.",
+      "scope": "core",
+      "status": "converted",
+      "rejected_proposals": ["proposal-navigator-13"]
+    },
+    {
+      "id": "feedback-experience-attribution",
+      "source": "test",
+      "target_agent": "gate",
+      "observed": "Broad substring telemetry reported one or two test commands but could not tell that Navigator executed zero completion checks while the Gate executed one in all three runs.",
+      "expected": "Retain only bounded stage/owner counters, classify actual completion-check invocations exactly, preserve unknown attribution, and reject traces, invalid stages, and sensitive fields.",
+      "evidence": "Three fresh fast-path digests in evals/benchmarks/activation/results.json separate resume/Navigator from verification/Gate; the known-answer control rejects substring false positives.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-checkpoint-truth-freshness",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "In three controlled interruptions, product code changed and Navigator ran zero completion checks, yet the unchanged verified checkpoint was accepted for fast resume by a fresh validator process before the independent Gate ran.",
+      "expected": "A verified checkpoint must bind to the exact declared repository files that passed its completion check, so any pre-Gate mutation blocks fresh resume until verification succeeds again.",
+      "evidence": "evals/benchmarks/activation/results.json checkpoint_truth_1_4_2 records the dangerous metric as 1 in all three current-champion runs without storing commands, transcripts, or paths.",
       "scope": "core",
       "status": "converted"
     }
@@ -581,6 +622,114 @@
       "discovery_evidence": "The final candidate passed 4/4 bounded runs; three behavior-valid pairs measured -18.4% median input change.",
       "transfer_check": "The fixture exercised host guidance, skill routing, checkpoint validation, product edit, wrapper check, and checkpoint refresh under both arm orders.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-13",
+      "feedback_ids": ["feedback-fast-path-check-ownership"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 12,
+      "to_version": 13,
+      "cause": "The fast-path rule named the wrapper but did not assign its invocation to a logical owner, while the independent benchmark verification masked three skipped Navigator checks.",
+      "change_target": "One explicit ownership sentence: Navigator invokes the loaded checkpoint wrapper exactly once; its underlying command is not a second Navigator action and the later Gate check is independent.",
+      "regression_check": "Four counterbalanced fast-path pairs with bounded Experience Digests, exact command classification, and a 20% maximum paired input-token increase.",
+      "primary_metric": "Navigator-owned completion-check invocations per exact fast-path run",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v12 if any candidate run is not exact and bounded, does not invoke the wrapper exactly once, invokes the command directly, or exceeds the paired input budget.",
+      "change_level": "task",
+      "discovery_evidence": "Exact attribution disproved the apparent repeated-check signal and exposed a 0-of-3 Navigator ownership gap hidden by Gate verification.",
+      "transfer_check": "The existing verified-checkpoint fixture exercises the same resume, edit, wrapper, checkpoint, and independent verification boundary.",
+      "prediction": "Explicit ownership makes all candidate runs invoke the wrapper exactly once without direct completion-command execution.",
+      "expected_delta": {
+        "navigator_completion_check_invocations": "0 -> 1",
+        "direct_completion_check_invocations": "0 -> 0",
+        "input_tokens": "<= champion + 20%"
+      },
+      "falsification_condition": "Any candidate run with a Navigator completion-check count other than one, a direct invocation, non-exact behavior, or paired input regression above 20%.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-14",
+      "feedback_ids": ["feedback-fast-path-final-ordering"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 12,
+      "to_version": 14,
+      "cause": "Path exposure did not change execution; bounded event order instead showed that Navigator finalized after implementation without entering verification.",
+      "change_target": "Reorder the existing fast-path actions so the wrapper check precedes checkpoint refresh and final synthesis.",
+      "regression_check": "Counterbalanced same-model fast-path champion/candidate runs with exact completion attribution, bounded read scope, and a 20% paired input-token budget.",
+      "primary_metric": "Navigator-owned wrapper invocations after implementation",
+      "permission_delta": [],
+      "rollback": "Keep Navigator v12 if the first representative candidate run omits the wrapper, or if repeated runs regress behavior, read scope, permissions, privacy, or paired input cost above 20%.",
+      "change_level": "task",
+      "discovery_evidence": "Three baseline and three path-exposed runs all reported Navigator 0 and Gate 1; every run reached final synthesis without post-implementation verification.",
+      "transfer_check": "The existing verified-checkpoint fixture and its path-exposed twin exercise the same resume, implementation, checkpoint, wrapper, and independent Gate boundary.",
+      "prediction": "Placing verification before checkpoint refresh and final synthesis makes the Navigator invoke the wrapper exactly once after implementation without direct execution or added discovery.",
+      "expected_delta": {
+        "navigator_wrapper_invocations": "0 -> 1",
+        "direct_completion_check_invocations": "0 -> 0",
+        "repository_discovery": "unchanged",
+        "input_tokens": "<= champion + 20%"
+      },
+      "falsification_condition": "The first representative candidate run omits or repeats the wrapper, executes the completion command directly, changes behavior, or crosses the allowed read set.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-gate-6",
+      "feedback_ids": ["feedback-experience-attribution"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 5,
+      "to_version": 6,
+      "cause": "Substring telemetry counted command text rather than executions and merged agent work with independent verification, so the apparent repeated-check signal named the wrong process defect.",
+      "change_target": "A bounded Experience Digest on the existing activation runner with exact completion-check classification, resume/verification owners, conservative first divergence, and a shipped privacy validator.",
+      "regression_check": "python3 -B -m unittest tests.test_activation_benchmark tests.test_experience_digest tests.test_release_gate -v",
+      "primary_metric": "known-answer completion-check attribution errors accepted",
+      "permission_delta": [],
+      "rollback": "Restore Gate v5 and the prior aggregate telemetry while retaining the false-positive and rejected ownership-candidate evidence.",
+      "change_level": "meta",
+      "discovery_evidence": "The current next_action's repeated-check hypothesis disappeared under exact attribution; all three live runs instead showed Navigator 0 and Gate 1.",
+      "transfer_check": "The validator accepts only three stable runner stages and bounded identifiers, while synthetic direct, wrapper, read-only, bad-stage, and raw-transcript controls exercise the generic schema.",
+      "prediction": "Exact classification returns 2 on the known-answer fixture, 0 for read-only false positives, and attributes all live checks to their actual resume or verification owner without changing task behavior.",
+      "expected_delta": {
+        "known_answer_attribution_errors": "1 -> 0",
+        "live_owner_resolution": "unknown -> navigator:0, gate:1",
+        "task_behavior": "unchanged"
+      },
+      "falsification_condition": "Any known-answer miscount, accepted raw transcript or invalid stage, altered task result, or live digest that cannot distinguish Navigator from Gate.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-15",
+      "feedback_ids": ["feedback-checkpoint-truth-freshness"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 12,
+      "to_version": 15,
+      "cause": "Checkpoint verification was a durable label with no binding to the repository files that produced it, so a fresh validator could not distinguish the last verified state from later unverified mutations.",
+      "change_target": "Schema-v3 bounded verification files plus a completion-runner-owned receipt enforced by the validator; no Navigator wording change.",
+      "regression_check": "Checkpoint truth unit controls, three-run pre-Gate interruption benchmark, product tests, documentation debt, and Release Gate.",
+      "primary_metric": "unverified mutated repository states accepted for fast resume",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v12 checkpoint schema and runner, retain the three-run stale-truth evidence, and reject the candidate if any unverified mutation fast-resumes or a clean verified state cannot resume.",
+      "change_level": "task",
+      "discovery_evidence": "Three fresh verified champion runs each changed product files, invoked zero Navigator completion checks, kept verified truth exposed, and returned fast_path_ready=true in a fresh process before Gate verification.",
+      "transfer_check": "Exercise success, pre-Gate mutation, failed completion, unknown status, old evidence, and schema migration on dependency-free fixtures.",
+      "prediction": "Binding verified truth to a bounded declared file fingerprint changes pre-Gate acceptance from 3 of 3 to 0 of 3 while preserving clean post-check fast resume.",
+      "expected_delta": {
+        "unverified_mutated_state_acceptance": "3/3 -> 0/3",
+        "verified_clean_state_fast_resume": "1 -> 1",
+        "permissions": "unchanged"
+      },
+      "falsification_condition": "Any pre-Gate mutated state remains fast-resumable, any failed or unknown state fast-resumes, or a successful completion check cannot restore clean fast resume.",
+      "guardrails": [
+        "verified clean state remains fast-resumable",
+        "task behavior and existing checkpoint migration remain compatible",
+        "permissions and bounded evidence privacy remain unchanged",
+        "fingerprinting stays limited to declared verification files",
+        "rollback remains executable"
+      ],
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -920,6 +1069,62 @@
         "rollback_operator": "lt",
         "rollback_value": 1.0,
         "evidence": "The candidate was 4/4 exact with no forbidden read; three valid pairs measured -18.4% input, -3.3% elapsed, -12.03% output, and -16.56% reasoning change."
+      }
+    },
+    {
+      "id": "promotion-navigator-13-rejected",
+      "proposal_id": "proposal-navigator-13",
+      "gate_agent": "gate",
+      "before": "Exact attribution found zero Navigator-owned completion-check invocations in three fresh runs.",
+      "after": "The first candidate run still invoked zero checks and also read setup references through repository discovery.",
+      "regressions_passed": false,
+      "decision": "rejected",
+      "live_cycle": null
+    },
+    {
+      "id": "promotion-navigator-14-rejected",
+      "proposal_id": "proposal-navigator-14",
+      "gate_agent": "gate",
+      "before": "All three path-exposed Navigator v12 runs completed implementation and final synthesis without entering verification or invoking the wrapper.",
+      "after": "The ordering-only candidate preserved behavior but still invoked zero wrappers, never entered post-implementation verification, and increased reads, tools, input, and elapsed cost versus the path-exposed champion median.",
+      "regressions_passed": false,
+      "decision": "rejected",
+      "live_cycle": null
+    },
+    {
+      "id": "promotion-gate-6",
+      "proposal_id": "proposal-gate-6",
+      "gate_agent": "product-builder",
+      "before": "Broad command substrings reported one or two tests but could not identify whether Navigator or the independent Gate ran the completion check.",
+      "after": "Three bounded digests identify Navigator with zero and Gate with one completion-check invocation; exact and privacy negative controls fail closed.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "invalid, sensitive, or owner-ambiguous Experience Digests accepted",
+        "rollback_threshold": "roll back after one invalid, sensitive, or owner-ambiguous digest passes Release Gate",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "Known-answer classification, bad-stage, raw-transcript, and three live owner-attribution checks passed before the post-promotion Release Gate cycle."
+      }
+    },
+    {
+      "id": "promotion-navigator-15",
+      "proposal_id": "proposal-navigator-15",
+      "gate_agent": "gate",
+      "before": "Three fresh verified schema-v2 runs changed product state without Navigator verification and all three remained fast-resumable before independent Gate verification.",
+      "after": "Schema-v3 runner-owned receipts reduced unverified mutated-state acceptance from 3 of 3 to 0 of 3; task behavior, bounded reads, clean post-check resume, permissions, and privacy controls passed.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "unverified mutated repository states accepted for fast resume",
+        "rollback_threshold": "roll back after any unverified mutated state becomes fast-resumable",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "After promotion, a clean verified fixture fast-resumed, a product-and-test mutation was blocked by a fresh process before Gate, and the same state fast-resumed only after the completion runner passed and refreshed its receipt."
       }
     }
   ]

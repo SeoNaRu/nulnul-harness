@@ -17,7 +17,7 @@ For work that spans sessions or needs agent-specific learning, create `docs/nuln
 
 New states use schema version 3. Versions 1 and 2 remain readable for compatibility. Version 3 keeps the task/meta and live-cycle records from version 2, then adds a numeric metric value, comparison operator, and rollback value so the threshold can execute instead of remaining prose.
 
-The Navigator updates a checkpoint only after verifying repository reality. Concise checkpoints use schema version 2 and store the goal, current milestone, completion check, explicit `verified`, `failed`, or `unknown` status, last verified evidence, exact next action, permission constraints and approvals, and blockers. Schema version 1 is readable only for migration; only version-2 `verified` may take a fast resume. Recheck the evidence and continue from the next action instead of reconstructing a plan from chat.
+The Navigator owns checkpoint intent but not verification truth. Concise checkpoints use schema version 3 and store the goal, current milestone, completion check, bounded verification file list, explicit `verified`, `failed`, or `unknown` status, last verified summary, exact next action, permission constraints and approvals, and blockers. The completion runner alone writes the sibling verification receipt after executing the check. Fast resume requires the receipt's fingerprint to match current repository reality; older schemas, missing receipts, failed, unknown, and stale states fail closed. Recheck that evidence and continue from the next action instead of reconstructing a plan from chat.
 
 ## Convert feedback into evidence
 
@@ -37,7 +37,7 @@ For each reproducible feedback cluster:
 
 1. identify whether the defect belongs to product code, data, tool routing, capability choice, agent profile, handoff, checkpoint, or the Coach diagnosis;
 2. target the nearest durable layer and one agent version;
-3. state the proposal author, cause, candidate change, reproduction, primary metric, guardrails, permission delta, and rollback;
+3. state the proposal author, cause, candidate change, reproduction, primary metric, guardrails, permission delta, and rollback; before building a new schema-v3 candidate, also record its `prediction`, flat `expected_delta`, and `falsification_condition` so the Gate can test the proposed mechanism rather than explain the result afterward;
    - set `change_level` to `task` for the work or its harness and `meta` when changing how future improvements are discovered, generated, measured, selected, remembered, or rolled back;
    - for a meta change, record `discovery_evidence`; for personal or core scope also record a representative `transfer_check`;
 4. keep the current accepted version active while the candidate is evaluated;

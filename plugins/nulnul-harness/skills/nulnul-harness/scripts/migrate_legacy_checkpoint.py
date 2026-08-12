@@ -41,11 +41,12 @@ def build_checkpoint(contract):
     if not goal or not milestone or completion is None:
         raise ValueError("legacy contract is missing goal, milestone, or completion check")
     payload = {
-        "schema_version": 2,
+        "schema_version": 3,
         "goal": goal,
         "milestone": milestone,
         "completion_check": completion.group(1).strip(),
         "verification_status": "unknown",
+        "verification_files": [],
         "last_verified": "Legacy setup has no machine-readable verification result.",
         "next_action": "Run the recorded completion check, then record verified evidence.",
         "permission_constraints": permission_constraints(contract),
@@ -128,15 +129,19 @@ def migrate(contract_path, guidance_path):
     updated_guidance = guidance if "docs/nulnul/checkpoint.json" in guidance else guidance.rstrip() + "\n\n" + entry + "\n"
     if checkpoint_path.exists():
         checkpoint = json.loads(checkpoint_path.read_text(encoding="utf-8"))
-        if not isinstance(checkpoint, dict) or checkpoint.get("schema_version") not in {1, 2}:
-            raise ValueError("existing checkpoint is not a supported schema-version-1-or-2 object")
-        if checkpoint["schema_version"] == 2:
+        if not isinstance(checkpoint, dict) or checkpoint.get("schema_version") not in {1, 2, 3}:
+            raise ValueError("existing checkpoint is not a supported schema-version-1-through-3 object")
+        if checkpoint["schema_version"] == 3:
             errors = validate_checkpoint.validate(checkpoint)
             if errors:
-                raise ValueError("existing schema-version-2 checkpoint is invalid: " + "; ".join(errors))
+                raise ValueError("existing schema-version-3 checkpoint is invalid: " + "; ".join(errors))
             return {"status": "skipped", "reason": "checkpoint.json is already current"}
-        checkpoint["schema_version"] = 2
-        checkpoint.setdefault("verification_status", "unknown")
+        errors = validate_checkpoint.validate(checkpoint)
+        if errors:
+            raise ValueError("existing legacy checkpoint is invalid: " + "; ".join(errors))
+        checkpoint["schema_version"] = 3
+        checkpoint["verification_status"] = "unknown"
+        checkpoint["verification_files"] = []
         checkpoint.setdefault("permission_constraints", permission_constraints(contract))
         blockers = checkpoint.get("blockers")
         if not isinstance(blockers, list):

@@ -99,6 +99,7 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/validate_learning_loop.py",
             "scripts/migrate_legacy_checkpoint.py",
             "scripts/apply_live_cycle_rollback.py",
+            "scripts/validate_experience_digest.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
@@ -187,8 +188,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "79 passed"),
-            "README.ko.md": ("README.md", "79개 통과"),
+            "README.md": ("README.ko.md", "85 passed"),
+            "README.ko.md": ("README.md", "85개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")

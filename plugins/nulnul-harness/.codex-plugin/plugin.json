@@ -34,7 +34,8 @@
       "evidence-gated-evolution",
       "session-continuity",
       "personal-agent-evolution",
-      "meta-harness-evolution"
+      "meta-harness-evolution",
+      "observable-evolution"
     ],
     "brandColor": "#111111",
     "composerIcon": "./assets/nulnul-harness.svg",

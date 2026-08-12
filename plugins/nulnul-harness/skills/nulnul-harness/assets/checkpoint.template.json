@@ -1,9 +1,10 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "goal": "",
   "milestone": "",
   "completion_check": "",
   "verification_status": "unknown",
+  "verification_files": [],
   "last_verified": "",
   "next_action": "",
   "permission_constraints": [],

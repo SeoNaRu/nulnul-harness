@@ -80,12 +80,252 @@
     "paired_change_percent": {"elapsed_seconds": -3.3, "input_tokens": -18.4, "output_tokens": -12.03, "reasoning_output_tokens": -16.56},
     "decision": "accepted"
   },
+  "observable_evolution": {
+    "schema_version": 1,
+    "run_date": "2026-08-12",
+    "issue": "fast-path completion-check ownership",
+    "prediction": "An explicit Navigator-owned wrapper rule changes Navigator completion-check invocations from 0 to exactly 1 without direct execution or behavior and paired-cost regression.",
+    "expected_delta": {
+      "navigator_completion_check_invocations": "0 -> 1",
+      "direct_completion_check_invocations": "0 -> 0",
+      "input_tokens": "<= champion + 20%"
+    },
+    "falsification_condition": "Reject if any candidate run is not exact and bounded, invokes the Navigator check other than once through the wrapper, or the paired input-token median exceeds champion by 20%.",
+    "checkpoint_truth_1_4_2": {
+      "status": "candidate_gate_passed",
+      "question": "Can an unverified mutated repository state cross a session boundary with fast_path_ready=true?",
+      "primary_metric": "unverified_mutated_repository_state_accepted_for_fast_resume",
+      "hypotheses": [
+        {
+          "id": "stale_verified_truth_defect",
+          "prediction": "After product mutation and before any completion check, a fresh validator still reports fast_path_ready=true.",
+          "falsification_condition": "The pre-Gate fresh validator blocks fast resume after product mutation.",
+          "decision": "supported"
+        },
+        {
+          "id": "safe_verification_boundary",
+          "prediction": "After product mutation and before Gate verification, checkpoint freshness is invalidated and a fresh validator reports fast_path_ready=false.",
+          "falsification_condition": "The pre-Gate fresh validator reports fast_path_ready=true.",
+          "decision": "falsified"
+        }
+      ],
+      "champion_measurements": {
+        "initial_fast_path_ready": [true, true, true],
+        "product_mutated": [true, true, true],
+        "navigator_completion_check_invocations": [0, 0, 0],
+        "checkpoint_changed_before_gate": [true, true, true],
+        "verified_evidence_changed_before_gate": [true, false, false],
+        "verification_status_before_gate": ["verified", "verified", "verified"],
+        "fast_path_ready_before_gate": [true, true, true],
+        "unverified_mutated_repository_state_accepted_for_fast_resume": [true, true, true]
+      },
+      "diagnosis": "real_checkpoint_truth_defect",
+      "candidate_id": "proposal-navigator-15",
+      "rejected_mechanism": {
+        "mechanism": "Store the verification fingerprint inside Navigator-owned checkpoint.json.",
+        "falsification": "Navigator refreshed the same file, so the first candidate run remained fast-resumable; verified truth needed a separate runner-owned receipt."
+      },
+      "candidate_measurements": {
+        "task_behavior_passed": [true, true, true],
+        "read_scope_passed": [true, true, true],
+        "product_mutated": [true, true, true],
+        "navigator_completion_check_invocations": [2, 1, 1],
+        "direct_completion_check_invocations": [0, 0, 0],
+        "verification_status_before_gate": ["verified", "verified", "verified"],
+        "fast_path_ready_before_gate": [true, true, true],
+        "unverified_mutated_repository_state_accepted_for_fast_resume": [false, false, false],
+        "fast_path_ready_after_gate": [true, true, true],
+        "input_tokens": [180593, 137490, 138280],
+        "elapsed_seconds": [64.38, 65.91, 65.16],
+        "repository_reads": [4, 4, 2],
+        "tool_invocations": [9, 7, 6]
+      },
+      "deterministic_controls": {
+        "clean_verified_state_fast_resumes": true,
+        "pre_check_mutation_fast_resumes": false,
+        "failed_check_fast_resumes": false,
+        "unknown_state_fast_resumes": false,
+        "old_nonempty_evidence_fast_resumes": false,
+        "missing_receipt_fast_resumes": false
+      },
+      "candidate_decision": "accepted_by_independent_gate",
+      "authoritative_owner": "The completion runner is the only verification-receipt writer. Navigator owns checkpoint intent; ordinary execution may combine implementation and verification, while the independent Gate repeats the same verification event."
+    },
+    "causal_attribution_1_4_1": {
+      "status": "completed",
+      "question": "Why does Navigator omit the recorded completion-check wrapper?",
+      "conditions": {
+        "baseline": "Current verified checkpoint fast path.",
+        "resolvable_wrapper": "Same fixture and Navigator v12, with the exact existing wrapper invocation exposed in the already-read AGENTS.md."
+      },
+      "hypotheses": [
+        {
+          "id": "path_resolution",
+          "prediction": "Exposing the exact wrapper invocation changes Navigator wrapper execution from 0 to 1 in all three resolvable-wrapper runs.",
+          "expected_delta": {
+            "navigator_completion_check_invocations": "0 -> 1",
+            "repository_discovery": "unchanged"
+          },
+          "falsification_condition": "All three resolvable-wrapper runs still report zero Navigator wrapper invocations.",
+          "decision": "falsified"
+        },
+        {
+          "id": "final_action_ordering",
+          "prediction": "At least two of three resolvable-wrapper runs complete implementation and final synthesis without entering verification after the final file change.",
+          "expected_delta": {
+            "final_synthesis_without_verification": ">= 2 of 3"
+          },
+          "falsification_condition": "All three resolvable-wrapper runs enter verification after implementation but omit the wrapper.",
+          "decision": "supported"
+        }
+      ],
+      "repetitions_per_condition": 3,
+      "measurements": {
+        "baseline": {
+          "behavior_passed": [true, true, true],
+          "read_scope_passed": [true, true, true],
+          "navigator_completion_checks": [0, 0, 0],
+          "gate_completion_checks": [1, 1, 1],
+          "implementation_completed": [true, true, true],
+          "verification_stage_entered": [false, false, false],
+          "final_synthesis_observed": [true, true, true],
+          "reads": [5, 6, 4],
+          "tools": [14, 11, 11],
+          "validators": [1, 1, 1],
+          "tests": [2, 2, 2],
+          "elapsed_seconds": [106.84, 74.51, 76.39],
+          "input_tokens": [313565, 244785, 241970],
+          "output_tokens": [3839, 2934, 2737],
+          "reasoning_output_tokens": [2389, 1822, 1634]
+        },
+        "resolvable_wrapper": {
+          "behavior_passed": [true, true, true],
+          "read_scope_passed": [true, false, true],
+          "navigator_completion_checks": [0, 0, 0],
+          "gate_completion_checks": [1, 1, 1],
+          "implementation_completed": [true, true, true],
+          "verification_stage_entered": [false, false, false],
+          "final_synthesis_observed": [true, true, true],
+          "reads": [6, 8, 4],
+          "tools": [9, 11, 6],
+          "validators": [1, 1, 1],
+          "tests": [1, 1, 1],
+          "elapsed_seconds": [73.08, 100.41, 44.94],
+          "input_tokens": [203811, 264376, 137418],
+          "output_tokens": [3049, 4414, 1721],
+          "reasoning_output_tokens": [1989, 2958, 999]
+        }
+      },
+      "first_divergence": {"status": "unknown", "stage": null},
+      "diagnosis": "final_action_ordering_supported",
+      "defect_assessment": "The independent benchmark Gate preserved behavior in 6 of 6 runs, but ordinary fast-path execution may merge roles and Navigator owns verified checkpoint truth; Gate evidence therefore masks rather than removes the contract defect.",
+      "candidate": {
+        "id": "proposal-navigator-14",
+        "mechanism": "Run the existing wrapper before checkpoint refresh and final synthesis.",
+        "valid_runs": 1,
+        "invalid_startup_probes_excluded": 1,
+        "behavior_passed": [true],
+        "read_scope_passed": [true],
+        "navigator_completion_checks": [0],
+        "gate_completion_checks": [1],
+        "verification_stage_entered": [false],
+        "reads": [10],
+        "tools": [14],
+        "validators": [2],
+        "tests": [1],
+        "elapsed_seconds": [96.08],
+        "input_tokens": [312398],
+        "output_tokens": [3828],
+        "reasoning_output_tokens": [2462],
+        "first_divergence": {"status": "unknown", "stage": null},
+        "decision": "rejected_early"
+      },
+      "gate_decision": "rejected"
+    },
+    "champion": {
+      "broad_test_commands": [1, 1, 2],
+      "exact_completion_check_invocations": [0, 0, 0],
+      "runs": [
+        {
+          "schema_version": 1,
+          "run_id": "verified-checkpoint-fast-path:champion:r1",
+          "case_id": "verified-checkpoint-fast-path",
+          "arm": "champion",
+          "stages": [
+            {"stage": "resume", "owner": "navigator", "elapsed_ms": 74080, "tool_invocations": 10, "repository_reads": 5, "validator_invocations": 1, "test_invocations": 1, "completion_check_invocations": 0},
+            {"stage": "verification", "owner": "gate", "elapsed_ms": 37, "tool_invocations": 1, "repository_reads": 0, "validator_invocations": 0, "test_invocations": 1, "completion_check_invocations": 1}
+          ],
+          "signals": ["completion_check_missing"],
+          "verification_result": "verified",
+          "input_tokens": 223732,
+          "output_tokens": 2955
+        },
+        {
+          "schema_version": 1,
+          "run_id": "verified-checkpoint-fast-path:champion:r2",
+          "case_id": "verified-checkpoint-fast-path",
+          "arm": "champion",
+          "stages": [
+            {"stage": "resume", "owner": "navigator", "elapsed_ms": 71000, "tool_invocations": 8, "repository_reads": 5, "validator_invocations": 1, "test_invocations": 1, "completion_check_invocations": 0},
+            {"stage": "verification", "owner": "gate", "elapsed_ms": 39, "tool_invocations": 1, "repository_reads": 0, "validator_invocations": 0, "test_invocations": 1, "completion_check_invocations": 1}
+          ],
+          "signals": ["completion_check_missing"],
+          "verification_result": "verified",
+          "input_tokens": 182511,
+          "output_tokens": 2938
+        },
+        {
+          "schema_version": 1,
+          "run_id": "verified-checkpoint-fast-path:champion:r3",
+          "case_id": "verified-checkpoint-fast-path",
+          "arm": "champion",
+          "stages": [
+            {"stage": "resume", "owner": "navigator", "elapsed_ms": 96460, "tool_invocations": 12, "repository_reads": 6, "validator_invocations": 1, "test_invocations": 2, "completion_check_invocations": 0},
+            {"stage": "verification", "owner": "gate", "elapsed_ms": 39, "tool_invocations": 1, "repository_reads": 0, "validator_invocations": 0, "test_invocations": 1, "completion_check_invocations": 1}
+          ],
+          "signals": ["completion_check_missing"],
+          "verification_result": "verified",
+          "input_tokens": 268848,
+          "output_tokens": 3675
+        }
+      ]
+    },
+    "candidate": {
+      "mechanism": "Explicit Navigator ownership sentence",
+      "runs": [
+        {
+          "schema_version": 1,
+          "run_id": "verified-checkpoint-fast-path:candidate:r1",
+          "case_id": "verified-checkpoint-fast-path",
+          "arm": "candidate",
+          "stages": [
+            {"stage": "resume", "owner": "navigator", "elapsed_ms": 79590, "tool_invocations": 14, "repository_reads": 11, "validator_invocations": 1, "test_invocations": 1, "completion_check_invocations": 0},
+            {"stage": "verification", "owner": "gate", "elapsed_ms": 37, "tool_invocations": 1, "repository_reads": 0, "validator_invocations": 0, "test_invocations": 1, "completion_check_invocations": 1}
+          ],
+          "signals": ["completion_check_missing"],
+          "verification_result": "failed",
+          "input_tokens": 260275,
+          "output_tokens": 3254
+        }
+      ],
+      "direct_completion_check_invocations": 0,
+      "forbidden_reads": ["references", "repository_discovery"],
+      "decision": "rejected"
+    },
+    "first_divergence": {"status": "unknown", "stage": null},
+    "gate_decision": "accepted"
+  },
   "learning_verdicts": [
     {"id": "initial-fast-path-read-scope", "status": "failed", "feedback_id": "feedback-fast-path-read-instability", "proposal_ids": ["proposal-navigator-11-explicit", "proposal-navigator-11-allowed-set"]},
     {"id": "explicit-prohibition-read-scope", "status": "rejected", "feedback_id": "feedback-fast-path-read-instability", "proposal_ids": ["proposal-navigator-11-explicit"]},
     {"id": "allowed-read-set", "status": "accepted"},
     {"id": "concise-read-rule", "status": "rejected", "feedback_id": "feedback-fast-path-read-instability", "proposal_ids": ["proposal-navigator-11-concise"]},
     {"id": "fixed-order-paired-control", "status": "rejected", "feedback_id": "feedback-paired-performance-portability", "proposal_ids": ["proposal-gate-5"]},
-    {"id": "counterbalanced-bounded-check", "status": "accepted"}
+    {"id": "counterbalanced-bounded-check", "status": "accepted"},
+    {"id": "completion-check-ownership", "status": "rejected", "feedback_id": "feedback-fast-path-check-ownership", "proposal_ids": ["proposal-navigator-13"]},
+    {"id": "completion-check-final-ordering", "status": "rejected", "feedback_id": "feedback-fast-path-final-ordering", "proposal_ids": ["proposal-navigator-14"]},
+    {"id": "experience-attribution", "status": "accepted"},
+    {"id": "checkpoint-truth-freshness", "status": "failed", "feedback_id": "feedback-checkpoint-truth-freshness", "proposal_ids": ["proposal-navigator-15"]},
+    {"id": "checkpoint-truth-freshness-candidate", "status": "accepted"}
   ]
 }

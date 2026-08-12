@@ -41,8 +41,9 @@ class LegacyMigrationTests(unittest.TestCase):
             result = self.migrate(contract, guidance)
             checkpoint = json.loads((contract.parent / "checkpoint.json").read_text(encoding="utf-8"))
             self.assertEqual(result["status"], "created")
-            self.assertEqual(checkpoint["schema_version"], 2)
+            self.assertEqual(checkpoint["schema_version"], 3)
             self.assertEqual(checkpoint["verification_status"], "unknown")
+            self.assertEqual(checkpoint["verification_files"], [])
             self.assertEqual(checkpoint["goal"], "Ship the legacy project safely.")
             self.assertEqual(checkpoint["permission_constraints"], [
                 "No external writes.",
@@ -99,10 +100,11 @@ class LegacyMigrationTests(unittest.TestCase):
             result = self.migrate(contract, target / "AGENTS.md")
             checkpoint = json.loads(checkpoint_path.read_text(encoding="utf-8"))
             self.assertEqual(result["status"], "upgraded")
-            self.assertEqual(checkpoint["schema_version"], 2)
+            self.assertEqual(checkpoint["schema_version"], 3)
             self.assertEqual(checkpoint["goal"], "Keep this value")
             self.assertEqual(checkpoint["next_action"], "Continue the old task")
             self.assertEqual(checkpoint["verification_status"], "unknown")
+            self.assertFalse(checkpoint_path.with_name("checkpoint.verification.json").exists())
             self.assertEqual(checkpoint["permission_constraints"], [
                 "No external writes.",
                 "Deployment requires explicit approval.",

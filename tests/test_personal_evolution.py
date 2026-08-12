@@ -163,6 +163,17 @@ class PersonalEvolutionTests(unittest.TestCase):
             validator.validate(self.state),
         )
 
+    def test_new_proposal_requires_a_falsifiable_prediction(self):
+        self.add_accepted_coach_upgrade()
+        proposal = self.state["proposals"][0]
+        proposal.update(status="proposed", prediction="one failure disappears")
+        self.state["agents"]["coach"].update(version=1, last_promotion_id=None)
+        errors = validator.validate(self.state)
+        self.assertIn(
+            "proposal proposal-1 missing prediction fields: expected_delta, falsification_condition",
+            errors,
+        )
+
     def test_empty_reproduction_evidence_is_rejected(self):
         self.add_accepted_coach_upgrade()
         self.state["feedback"][0]["evidence"] = ""

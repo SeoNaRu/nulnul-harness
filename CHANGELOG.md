@@ -4,10 +4,19 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## Unreleased
 
+- Added bounded Experience Digests to the existing activation runner, with stable stage/owner attribution and aggregate counts but no prompts, responses, transcripts, command lists, or machine paths.
+- Reproduced the reported completion-check signal, then disproved it: broad substring telemetry reported `[1, 1, 2]`, while exact classification showed Navigator `0` and independent Gate `1` in all three fresh runs.
+- Rejected the one-sentence Navigator ownership candidate on its first falsifying run; it still invoked zero checks and also crossed the fast-path read boundary.
+- Added falsifiable proposal fields, exact-command known-answer controls, invalid-stage and raw-transcript controls, a shipped digest validator, Release Gate coverage, and a post-promotion live cycle with executable rollback.
+- Closed the 1.4.1 causal question with two three-run conditions: exposing the exact wrapper path still produced Navigator `0`, Gate `1`, and final synthesis without post-implementation verification in every run, falsifying path resolution and supporting final-action ordering.
+- Rejected the ordering-only Navigator v14 candidate on its first valid run; it again skipped verification and increased reads, tools, input, and elapsed cost, so Navigator v12 remains active and no completion-count release invariant was added.
+- Reproduced the remaining 1.4.2 truth defect in 3/3 fresh interruptions: product state changed with zero Navigator checks while a new process still received `fast_path_ready=true` from stale schema-v2 evidence.
+- Bound schema-v3 fast resume to a runner-owned verification receipt over an explicit bounded file list. Mutation, failed, unknown, missing-evidence, and old-evidence controls now fail closed; the candidate reduced unverified mutated-state acceptance from 3/3 to 0/3 without changing Navigator wording.
+
 - Made published setup, workflow, and fast-path token/time measurements release-blocking, with negative controls for token, elapsed-time, and read-scope regressions.
 - Expanded activation coverage from four one-shot cases to ten positive/negative project shapes with three runs by default, precision/recall, medians, bounded stderr, and fail-closed summaries.
 - Replaced the absolute 250,000-token fast-path ceiling with four counterbalanced champion/candidate rounds and a 20% paired relative budget; Navigator v12 stayed bounded in 4/4 runs and improved median paired input 18.4% across three comparable pairs.
-- Added fixture, agent, verification, and total timing plus aggregate tool/read/validator/test counts without retaining raw transcripts; telemetry exposed fixed-order bias and repeated-check work.
+- Added fixture, agent, verification, and total timing plus aggregate tool/read/validator/test counts without retaining raw transcripts; telemetry exposed fixed-order bias and the completion-check attribution gap investigated in 1.4.
 - Made performance evidence version-independent: one generic champion/candidate schema now gates setup, resume, workflow, and paired runtime comparisons, with mismatched-pair and regression negative controls.
 - Connected the repository root agent to the user's approved external Obsidian LLM Wiki through an ignored local path, updating only durable lessons, index links, and the append-only log without publishing a machine-specific path.
 

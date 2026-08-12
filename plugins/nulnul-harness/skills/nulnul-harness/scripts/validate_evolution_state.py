@@ -35,6 +35,7 @@ PROPOSAL_FIELDS = {
 }
 PROMOTION_FIELDS = {"id", "proposal_id", "gate_agent", "before", "after", "regressions_passed", "decision"}
 PROPOSAL_V2_FIELDS = PROPOSAL_FIELDS | {"change_level", "discovery_evidence", "transfer_check"}
+PREDICTION_FIELDS = {"prediction", "expected_delta", "falsification_condition"}
 PROMOTION_V2_FIELDS = PROMOTION_FIELDS | {"live_cycle"}
 LIVE_CYCLE_FIELDS = {"status", "metric", "rollback_threshold", "evidence"}
 LIVE_CYCLE_V3_FIELDS = LIVE_CYCLE_FIELDS | {"metric_value", "rollback_operator", "rollback_value"}
@@ -173,6 +174,24 @@ def validate(payload):
             continue
         if not isinstance(row["status"], str) or row["status"] not in ("proposed", "gated", "accepted", "rejected", "rolled_back"):
             errors.append(f"proposal {proposal_id} has invalid status")
+        prediction_fields = PREDICTION_FIELDS & row.keys()
+        if schema_version == 3 and row.get("status") in ("proposed", "gated"):
+            prediction_fields = PREDICTION_FIELDS
+        missing_predictions = PREDICTION_FIELDS - row.keys() if prediction_fields else set()
+        if missing_predictions:
+            errors.append(
+                f"proposal {proposal_id} missing prediction fields: {', '.join(sorted(missing_predictions))}"
+            )
+        elif prediction_fields:
+            for field in ("prediction", "falsification_condition"):
+                if not isinstance(row[field], str) or not row[field].strip():
+                    errors.append(f"proposal {proposal_id}.{field} must be non-empty")
+            expected_delta = row["expected_delta"]
+            if not isinstance(expected_delta, dict) or not expected_delta or any(
+                not isinstance(key, str) or not key or isinstance(value, (dict, list))
+                for key, value in expected_delta.items()
+            ):
+                errors.append(f"proposal {proposal_id}.expected_delta must be a non-empty flat object")
         if not isinstance(row["feedback_ids"], list) or not row["feedback_ids"] or any(
             not isinstance(item, str) or item not in feedback_by_id for item in row["feedback_ids"]
         ):

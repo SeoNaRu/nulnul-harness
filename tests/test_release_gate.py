@@ -124,6 +124,34 @@ class ReleaseGateTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "paired input-token budget"):
             MODULE.validate_activation_results(expensive, self.evolution)
 
+    def test_observable_evolution_rejects_invalid_or_sensitive_digests(self):
+        result = MODULE.validate_observable_evolution(self.activation)
+        self.assertEqual(result["owners"], {"navigator": 0, "gate": 1})
+
+        bad_stage = json.loads(json.dumps(self.activation))
+        bad_stage["observable_evolution"]["champion"]["runs"][0]["stages"][0]["stage"] = "thinking"
+        with self.assertRaisesRegex(ValueError, "stage is invalid"):
+            MODULE.validate_observable_evolution(bad_stage)
+
+        sensitive = json.loads(json.dumps(self.activation))
+        sensitive["observable_evolution"]["champion"]["runs"][0]["raw_transcript"] = "private"
+        with self.assertRaisesRegex(ValueError, "raw_transcript is prohibited"):
+            MODULE.validate_observable_evolution(sensitive)
+
+        wrong_order = json.loads(json.dumps(self.activation))
+        wrong_order["observable_evolution"]["causal_attribution_1_4_1"]["measurements"][
+            "resolvable_wrapper"
+        ]["verification_stage_entered"][0] = True
+        with self.assertRaisesRegex(ValueError, "incomplete or misaligned"):
+            MODULE.validate_observable_evolution(wrong_order)
+
+        stale_truth = json.loads(json.dumps(self.activation))
+        stale_truth["observable_evolution"]["checkpoint_truth_1_4_2"][
+            "candidate_measurements"
+        ]["unverified_mutated_repository_state_accepted_for_fast_resume"][0] = True
+        with self.assertRaisesRegex(ValueError, "checkpoint-truth evidence is incomplete or unsafe"):
+            MODULE.validate_observable_evolution(stale_truth)
+
     def test_claude_evidence_fails_on_unverified_protected_write(self):
         version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
         evidence = {
