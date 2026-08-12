@@ -213,7 +213,7 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 1.4 Observable Evolution 후보는 기존 활성화 실행기에 제한된 Experience Digest를 추가합니다. 안정적으로 구분되는 `activation`·`resume`·`verification` 단계, 논리적 owner, 경과 시간, 도구·읽기·검증기·테스트·완료 검사 집계, 제한된 signal, 검증 상태만 남깁니다. prompt, response, transcript, command 목록, 머신 경로는 저장하지 않습니다. 1.4.1은 path resolution을 반증하고 final-action ordering을 지지했으며 Navigator instruction 후보 두 개를 reject했습니다. 마지막 1.4.2 interruption 실험은 실제 defect를 찾았습니다. 세 mutated state 모두 independent Gate 전 fast resume가 가능했습니다. schema-v3 checkpoint는 이제 runner가 기록한 제한된 파일 fingerprint를 요구하며, Navigator 문구를 바꾸지 않고 unverified mutated-state acceptance를 3/3에서 0/3으로 줄였습니다.
 
-1.5 Generalization Gate는 이미 노출된 DEV/VALIDATION case와 candidate가 고정된 뒤 한 번만 쓰는 HOLDOUT 근거를 분리합니다. 첫 Ruby holdout은 fixture 자체가 잘못되어 실패했고 영구히 validation으로 강등했으며, 이 실패로 mandatory fixture preflight를 추가했습니다. 고정된 Navigator v15 snapshot에 없던 새 Perl/TAP CLI case는 stale-state 3/3 차단과 post-check resume 3/3을 보였고, champion 3회 retry와 best-of-3는 계속 unsafe했습니다. 판정은 의도적으로 **Narrower Scope**입니다. checkpoint freshness는 이 unseen shape로 전이됐지만 harness 전체의 일반화는 확립되지 않았습니다.
+1.5 Generalization Gate는 이미 노출된 DEV/VALIDATION case와 candidate가 고정된 뒤 한 번만 쓰는 HOLDOUT 근거를 분리합니다. 첫 Ruby holdout은 fixture 자체가 잘못되어 실패했고 영구히 validation으로 강등했으며, 이 실패로 mandatory fixture preflight를 추가했습니다. 고정된 Navigator v15 snapshot에 없던 새 Perl/TAP CLI case는 stale-state 3/3 차단과 post-check resume 3/3을 보였고, champion 3회 retry와 best-of-3는 계속 unsafe했습니다. 판정은 의도적으로 **Narrower Scope**입니다. checkpoint freshness는 이 unseen shape로 전이됐지만 harness 전체의 일반화는 확립되지 않았습니다. 릴리스 adoption은 coverage 판단 전에 제한된 `claude plugin list --json` inventory도 요구하며, sanitized 1.5.0 nonpass 두 건이 이 규칙을 main workflow로 승격시켰습니다.
 
 ## 실전에서 굳힌 규칙
 

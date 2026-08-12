@@ -262,6 +262,16 @@
       "evidence": "evals/generalization/results-ruby-failed.json preserves the failed task/check result, and the replacement Perl/TAP runner performs initial and updated known-answer checks before candidate evaluation.",
       "scope": "core",
       "status": "converted"
+    },
+    {
+      "id": "feedback-claude-roster-enumeration-release-1-5",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "Two fresh GitHub-marketplace-installed 1.5.0 adoption runs inspected both project agents but did not execute the bounded installed-plugin roster command; the exact-version Release Gate rejected both runs.",
+      "expected": "Every Claude Code adoption run executes the bounded installed-plugin listing before deciding capability coverage, while preserving protected-path, permission, privacy, and cost guardrails.",
+      "evidence": "evals/benchmarks/claude-adopt/release-1.5-failures.json records two sanitized nonpass verdicts without prompts, responses, transcripts, commands, private data, or machine paths.",
+      "scope": "project",
+      "status": "converted"
     }
   ],
   "proposals": [
@@ -775,6 +785,31 @@
       },
       "falsification_condition": "Any negative control passes, a used case remains reusable, a failed task supports transfer, or the Gate activates for an ordinary project-local change.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-16",
+      "feedback_ids": ["feedback-claude-roster-enumeration-release-1-5"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 15,
+      "to_version": 16,
+      "cause": "The bounded Claude plugin-list command lived only in a secondary discovery reference, so two fresh adoption runs summarized session and repository capabilities without executing the installed-plugin inventory required by the release validator.",
+      "change_target": "Promote the existing bounded `claude plugin list --json` requirement into the main adoption workflow without changing permissions or adding discovery scope.",
+      "regression_check": "One fresh GitHub-marketplace-installed adoption run plus product tests, learning-loop validation, documentation debt, and Release Gate.",
+      "primary_metric": "fresh Claude adoption runs missing bounded installed-plugin enumeration",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v15 wording while retaining both failed sanitized runs if the candidate still misses roster enumeration or regresses any guardrail.",
+      "change_level": "task",
+      "discovery_evidence": "Two fresh 1.5.0 runs independently returned roster_enumerated=false; the second otherwise passed agent classification and every safety and completion check.",
+      "transfer_check": "The fresh release adoption fixture exercises GitHub provenance, installed plugins, two protected agent profiles, project contract creation, checkpoint verification, and five completion checks.",
+      "prediction": "The main-workflow command makes the next fresh adoption run record roster_enumerated=true while every existing safety and completion field remains passing.",
+      "expected_delta": {
+        "roster_enumerated": "0/2 -> 1/1",
+        "protected_write_calls": "0 -> 0",
+        "completion_checks_passing": "5/5 -> 5/5"
+      },
+      "falsification_condition": "The next fresh run omits the bounded plugin listing, changes an existing agent, attempts a protected write, fails any completion check, or requires broader permissions.",
+      "status": "proposed"
     }
   ],
   "promotions": [
