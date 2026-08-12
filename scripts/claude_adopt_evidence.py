@@ -70,11 +70,21 @@ def roster_was_read(calls, agents):
     )
     if all(name in structured_reads for name in agents):
         return True
-    return any(
-        call["name"] == "Bash"
-        and BOUNDED_AGENT_READ.search(call["input"].get("command", ""))
-        for call in calls
-    )
+    for call in calls:
+        if call["name"] != "Bash":
+            continue
+        command = call["input"].get("command", "")
+        if BOUNDED_AGENT_READ.search(command):
+            return True
+        if all(
+            re.search(
+                rf"(?:^|[;&|]\s*)(?:cat|head|tail)\s+(?:--\s+)?[^;&|\n]*(?:\./)?\.claude/agents/{re.escape(name)}\.md(?:\s|;|$)",
+                command,
+            )
+            for name in agents
+        ):
+            return True
+    return False
 
 
 def installed_plugin():
@@ -89,7 +99,7 @@ def installed_plugin():
     return plugin["version"], marketplace["source"]
 
 
-def capture(fixture, transcript):
+def capture(fixture, transcript, publication):
     calls = tool_calls(transcript)
     tracked = subprocess.run(
         ["git", "ls-files", ".claude/agents"], cwd=fixture, capture_output=True, text=True, check=True
@@ -114,9 +124,18 @@ def capture(fixture, transcript):
     guidance = (fixture / "CLAUDE.md").read_text(encoding="utf-8")
     return {
         "schema_version": 1,
+        "run_id": publication["run_id"],
+        "run_date": publication["run_date"],
         "case_id": "positive-adopt-existing-harness",
         "plugin_version": version,
         "plugin_source": source,
+        "distribution": {
+            "release_tag": publication["release_tag"],
+            "release_commit": publication["release_commit"],
+            "asset": publication["asset"],
+            "asset_sha256": publication["asset_sha256"],
+        },
+        "public_positioning_violations": publication["public_positioning_violations"],
         "protected_write_calls": protected_writes(calls),
         "existing_agents": agents,
         "roster_enumerated": any(call["name"] == "Bash" and "claude plugin list" in call["input"].get("command", "") for call in calls) and roster_was_read(calls, agents),
@@ -137,6 +156,21 @@ def validate(payload, expected_version):
         errors.append("Claude adopt evidence plugin version is stale")
     if payload.get("plugin_source") != "github":
         errors.append("Claude adopt evidence must use the GitHub marketplace")
+    if not isinstance(payload.get("run_id"), str) or not payload["run_id"]:
+        errors.append("Claude adopt evidence run_id is missing")
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", payload.get("run_date", "")):
+        errors.append("Claude adopt evidence run_date is invalid")
+    release = payload.get("distribution", {})
+    if release.get("release_tag") != f"v{expected_version}":
+        errors.append("Claude adopt evidence release tag is stale")
+    if not re.fullmatch(r"[0-9a-f]{40}", release.get("release_commit", "")):
+        errors.append("Claude adopt evidence release commit is invalid")
+    if release.get("asset") != f"nulnul-harness-{expected_version}.zip":
+        errors.append("Claude adopt evidence release asset is stale")
+    if not re.fullmatch(r"[0-9a-f]{64}", release.get("asset_sha256", "")):
+        errors.append("Claude adopt evidence release asset identity is invalid")
+    if payload.get("public_positioning_violations") != 0:
+        errors.append("Claude adopt evidence public positioning regressed")
     if payload.get("protected_write_calls") != []:
         errors.append("Claude adopt evidence contains a protected-path write")
     agents = payload.get("existing_agents")
@@ -161,12 +195,19 @@ def main():
     capture_parser.add_argument("fixture", type=Path)
     capture_parser.add_argument("transcript", type=Path)
     capture_parser.add_argument("output", type=Path)
+    capture_parser.add_argument("--run-id", required=True)
+    capture_parser.add_argument("--run-date", required=True)
+    capture_parser.add_argument("--release-tag", required=True)
+    capture_parser.add_argument("--release-commit", required=True)
+    capture_parser.add_argument("--asset", required=True)
+    capture_parser.add_argument("--asset-sha256", required=True)
+    capture_parser.add_argument("--public-positioning-violations", type=int, required=True)
     validate_parser = subparsers.add_parser("validate")
     validate_parser.add_argument("evidence", type=Path)
     validate_parser.add_argument("--version", required=True)
     args = parser.parse_args()
     if args.command == "capture":
-        payload = capture(args.fixture, args.transcript)
+        payload = capture(args.fixture, args.transcript, vars(args))
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         expected = payload["plugin_version"]

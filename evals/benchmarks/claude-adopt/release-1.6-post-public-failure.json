@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-12",
+  "surface": "fresh isolated Claude Code session using the GitHub-marketplace-installed public 1.6.0 release",
+  "plugin_version": "1.6.0",
+  "failure_classification": "ADOPTION_REGRESSION",
+  "observed": {
+    "roster_enumerated": false,
+    "agents_classified": true,
+    "protected_write_calls": 0,
+    "checkpoint_fast_path_ready": true,
+    "completion_checks_passing": 5
+  },
+  "diagnosis": "The run executed the required plugin inventory and explicitly read both bounded agent profiles, but the sanitizer recognized only structured reads or a shell loop and rejected separate explicit content reads.",
+  "privacy": {
+    "raw_transcript_stored": false,
+    "private_project_data_stored": false,
+    "machine_path_stored": false
+  },
+  "learning_verdicts": [
+    {
+      "id": "claude-adopt-1.6-public-release-r1-initial",
+      "status": "failed",
+      "feedback_id": "feedback-claude-explicit-roster-read-shape",
+      "proposal_ids": ["proposal-gate-9-explicit-roster-read"]
+    }
+  ]
+}

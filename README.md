@@ -18,7 +18,7 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> Version 1.6.0 is verified against a fresh GitHub-marketplace Claude Code adoption. The Release Gate passes the exact-version provenance check, protected-path controls, checkpoint checks, and the repository's published behavior and safety suite.
+> Version 1.6.0 is released and verified against a post-publication fresh GitHub-marketplace Claude Code adoption. The Release Gate passes exact release identity, protected-path controls, checkpoint checks, and the repository's published behavior and safety suite.
 
 ## What is NULNUL?
 
@@ -307,9 +307,9 @@ Some of the strongest evidence came from failures:
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **112 passed (112/112)** | Deterministic product, state, privacy, rollback, and negative-control contracts hold. |
+| Repository tests | **114 passed (114/114)** | Deterministic product, state, privacy, rollback, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
-| Final 1.6.0 Release Gate | **Passed** | A fresh GitHub-marketplace 1.6.0 adoption preserved two agent profiles, made zero protected writes, produced verified resumable state, and passed five executable checks. |
+| Final 1.6.0 Release Gate | **Passed** | A post-publication fresh GitHub-marketplace 1.6.0 reinstall preserved two agent profiles, made zero protected writes, produced verified resumable state, and passed five executable checks. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one project shape; harness-wide generalization is not established. |
 | Bounded evolution | Champion/retry **7 violations**, new candidate **0**, stop `SUCCESS` | Live generation and bounded stopping worked once in a narrow failure family. |

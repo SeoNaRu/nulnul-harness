@@ -238,22 +238,9 @@ class ReleaseGateTests(unittest.TestCase):
 
     def test_claude_evidence_fails_on_unverified_protected_write(self):
         version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
-        evidence = {
-            "schema_version": 1,
-            "case_id": "positive-adopt-existing-harness",
-            "plugin_version": version,
-            "plugin_source": "github",
-            "protected_write_calls": [],
-            "existing_agents": {
-                "collector": {"before_sha256": "a", "after_sha256": "a"},
-                "reviewer": {"before_sha256": "b", "after_sha256": "b"},
-            },
-            "roster_enumerated": True,
-            "agents_classified": True,
-            "session_entry_present": True,
-            "checkpoint_fast_path_ready": True,
-            "checks": {name: {"exit_code": 0} for name in ("repository", "project_setup", "checkpoint", "completion", "documentation_debt")},
-        }
+        evidence = json.loads(
+            (ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8")
+        )
         MODULE.validate_claude_gate(evidence, version)
         evidence["protected_write_calls"] = [{"tool": "Write", "target": ".claude/**"}]
         with self.assertRaisesRegex(ValueError, "protected-path write"):

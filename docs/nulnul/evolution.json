@@ -7,11 +7,11 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Close 1.6.0 only after exact-version public adoption and green main CI verify the bounded autonomous evolution release.",
+    "milestone": "NULNUL 1.6.0 is public and release-closed after post-public exact-version adoption and the final Release Gate.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-12: One live bounded activation-metadata episode reduced seven deterministic public-positioning violations to zero within its preregistered one-generation budget and stopped on SUCCESS. A fresh GitHub-marketplace-installed 1.6.0 Claude adoption then preserved two existing agent hashes, made zero protected writes, recorded bounded roster inspection, produced a fresh verified checkpoint, and passed five checks. The Gate's tool-shape attribution defect was closed with a paths-only negative control. Release Gate returned release_ready=true and post-push main CI run 31570823735 passed. Harness-wide autonomy and generalization remain unestablished.",
-    "next_action": "Keep 1.6 bounded and observe ordinary use. Do not begin 1.7 Personal Evolution until the user requests it and project-scoped transfer evidence identifies that as the next bottleneck.",
+    "last_verified": "2026-08-12: Public release v1.6.0 points to green commit 5df8309 and publishes the byte-identical validated archive with SHA-256 90747ddc02f93d227409f322e2d65bc9a5a8c807a760058e5d20e114aea4c0bf. A post-public fresh GitHub-marketplace reinstall reported exact version 1.6.0, preserved two agent hashes, made zero protected writes, produced verified resumable state, passed five checks, and retained zero public-positioning violations. An initial sanitizer nonpass exposed explicit bounded content reads as a second attribution shape; Gate v9 accepts that behavior while the paths-only negative control remains rejected. Final Release Gate returned release_ready=true. Harness-wide autonomy and generalization remain unestablished.",
+    "next_action": "1.7 Personal Evolution is next but not started: require a fresh transfer check before any project-proven improvement becomes reusable personal experience.",
     "blockers": [],
     "approved_permissions": []
   },
@@ -29,10 +29,10 @@
       "last_promotion_id": "promotion-coach-4"
     },
     "gate": {
-      "version": 8,
-      "job": "Independently compare candidates, validate semantically equivalent bounded evidence without accepting paths-only traces, separate exposed evaluation from one-shot holdouts for broad transfer claims, and promote, reject, or roll back.",
+      "version": 9,
+      "job": "Independently compare candidates, validate semantically equivalent bounded evidence including explicit profile reads without accepting paths-only traces, separate exposed evaluation from one-shot holdouts for broad transfer claims, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-8"
+      "last_promotion_id": "promotion-gate-9"
     },
     "product-builder": {
       "version": 6,
@@ -311,6 +311,16 @@
       "observed": "A fresh GitHub-installed 1.6.0 adoption read every existing agent through one bounded shell loop, but the sanitizer recognized only separate Read/Glob/Grep tool calls and returned roster_enumerated=false.",
       "expected": "Credit semantically equivalent bounded agent-profile reads while continuing to reject commands that merely print agent paths.",
       "evidence": "The sanitized fresh run preserved both agent hashes, made zero protected writes, classified both roles, produced a fresh verified checkpoint, and passed five checks; a paths-only negative control remains false.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-claude-explicit-roster-read-shape",
+      "source": "gate",
+      "target_agent": "gate",
+      "observed": "The post-public fresh 1.6.0 adoption ran the required plugin inventory and explicitly read both bounded agent profiles, but the sanitizer credited only structured reads or a shell loop and returned roster_enumerated=false.",
+      "expected": "Credit explicit bounded content reads for every declared agent while continuing to reject path listing or printed-path traces.",
+      "evidence": "The sanitized nonpass preserved both agent hashes, made zero protected writes, classified both roles, produced a verified checkpoint, and passed five checks; the explicit-read known-answer control passes and the paths-only control remains false.",
       "scope": "core",
       "status": "converted"
     }
@@ -963,6 +973,30 @@
       },
       "falsification_condition": "The fresh artifact remains invalid, a paths-only command counts as a read, any protected write appears, or any completion check fails.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-gate-9-explicit-roster-read",
+      "feedback_ids": ["feedback-claude-explicit-roster-read-shape"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 8,
+      "to_version": 9,
+      "cause": "The sanitizer still coupled valid agent-profile evidence to one structured-read family and one loop shape, rejecting bounded explicit content reads of every declared profile.",
+      "change_target": "Recognize explicit cat/head/tail reads of every declared .claude/agents profile without crediting commands that only enumerate or print paths.",
+      "regression_check": "python3 -m unittest tests.test_claude_adopt_evidence tests.test_release_gate -v && python3 scripts/claude_adopt_evidence.py validate evals/benchmarks/claude-adopt/evidence.json --version 1.6.0",
+      "primary_metric": "valid explicit bounded roster reads rejected by tool-shape coupling",
+      "permission_delta": [],
+      "rollback": "Restore Gate v8 attribution and retain the post-public sanitized nonpass if the explicit-read control or paths-only control fails.",
+      "change_level": "meta",
+      "discovery_evidence": "The post-public transcript contained two required plugin-list executions and explicit content reads for both tracked agent profiles; independent hashes and five checks proved the intended bounded inspection.",
+      "transfer_check": "The sanitizer accepts structured reads, a bounded loop, and explicit reads of every named profile, but rejects a command that only prints both paths.",
+      "prediction": "The same post-public run changes roster_enumerated from false to true while protected writes remain zero, five checks pass, and the paths-only negative control remains false.",
+      "expected_delta": {
+        "valid_explicit_roster_read": "rejected -> accepted",
+        "paths_only_control": "rejected -> rejected"
+      },
+      "falsification_condition": "The post-public artifact remains invalid, any declared profile is unread, a paths-only command counts as a read, any protected write appears, or any completion check fails.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -1458,6 +1492,24 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "Exact-version GitHub adoption passed locally and GitHub Actions run 31570823735 completed successfully before promotion."
+      }
+    },
+    {
+      "id": "promotion-gate-9",
+      "proposal_id": "proposal-gate-9-explicit-roster-read",
+      "gate_agent": "product-builder",
+      "before": "The post-public 1.6.0 adoption performed the plugin inventory and read both profiles explicitly, but the Gate rejected that valid bounded tool shape.",
+      "after": "The sanitizer validates the same post-public run, requires exact release identity and zero public-positioning violations, and still rejects the paths-only control.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "valid explicit bounded roster reads rejected by tool-shape coupling",
+        "rollback_threshold": "roll back if one paths-only trace is credited or one complete explicit bounded roster read is rejected",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The post-public GitHub-marketplace-installed 1.6.0 evidence validates with exact release identity, unchanged agent hashes, zero protected writes, five checks, and zero positioning violations; all three roster controls pass."
       }
     }
   ],

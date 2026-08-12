@@ -1,3 +1,4 @@
+import json
 import importlib.util
 import unittest
 from pathlib import Path
@@ -19,9 +20,36 @@ class ClaudeAdoptEvidenceTests(unittest.TestCase):
         }]
         self.assertTrue(MODULE.roster_was_read(calls, {"collector": {}, "reviewer": {}}))
 
+    def test_explicit_bounded_agent_reads_count(self):
+        calls = [{
+            "name": "Bash",
+            "input": {
+                "command": (
+                    "cat .claude/agents/collector.md; "
+                    "cat .claude/agents/reviewer.md"
+                )
+            },
+        }]
+        self.assertTrue(MODULE.roster_was_read(calls, {"collector": {}, "reviewer": {}}))
+
     def test_printed_agent_paths_do_not_count_as_reads(self):
         calls = [{
             "name": "Bash",
-            "input": {"command": "printf '.claude/agents/collector.md\\n.claude/agents/reviewer.md\\n'"},
+            "input": {
+                "command": (
+                    "echo cat .claude/agents/collector.md; "
+                    "echo cat .claude/agents/reviewer.md"
+                )
+            },
         }]
         self.assertFalse(MODULE.roster_was_read(calls, {"collector": {}, "reviewer": {}}))
+
+    def test_release_identity_and_positioning_are_required(self):
+        evidence = json.loads(
+            (ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8")
+        )
+        evidence.pop("distribution")
+        evidence["public_positioning_violations"] = 1
+        errors = MODULE.validate(evidence, "1.6.0")
+        self.assertIn("Claude adopt evidence release tag is stale", errors)
+        self.assertIn("Claude adopt evidence public positioning regressed", errors)

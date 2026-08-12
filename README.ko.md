@@ -18,7 +18,7 @@
   <a href="README.md">English</a> · <strong>한국어</strong>
 </p>
 
-> 버전 1.6.0은 fresh GitHub-marketplace Claude Code adoption으로 검증됐습니다. Release Gate는 exact-version provenance, protected-path control, checkpoint 검사, 공개 behavior/safety suite를 모두 통과합니다.
+> 버전 1.6.0은 공개 완료 후 fresh GitHub-marketplace Claude Code adoption으로 다시 검증됐습니다. Release Gate는 정확한 release identity, protected-path control, checkpoint 검사, 공개 behavior/safety suite를 모두 통과합니다.
 
 ## NULNUL은 무엇인가요?
 
@@ -307,9 +307,9 @@ transfer claim만 → sealed unseen check → scoped decision
 
 | Evidence | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **112개 통과 (112/112)** | deterministic product, state, privacy, rollback, negative-control contract가 유지됩니다. |
+| 저장소 test | **114개 통과 (114/114)** | deterministic product, state, privacy, rollback, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
-| 최종 1.6.0 Release Gate | **통과** | Fresh GitHub-marketplace 1.6.0 adoption이 agent profile 두 개를 보존하고 protected write 0, verified resumable state, executable check 5개 통과를 기록했습니다. |
+| 최종 1.6.0 Release Gate | **통과** | 공개 완료 후 fresh GitHub-marketplace 1.6.0 재설치가 agent profile 두 개를 보존하고 protected write 0, verified resumable state, executable check 5개 통과를 기록했습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
 | Unseen transfer | **Narrower Scope** | mechanism 하나가 project shape 하나로 전이됐으며 harness-wide generalization은 미입증입니다. |
 | Bounded evolution | champion/retry **위반 7개**, 새 후보 **0개**, stop `SUCCESS` | 좁은 failure family 하나에서 live generation과 bounded stopping이 한 번 동작했습니다. |

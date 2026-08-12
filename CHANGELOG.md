@@ -15,6 +15,9 @@ All notable changes to `nulnul harness` are recorded here.
 - Verified a fresh GitHub-marketplace-installed 1.6.0 Claude Code adoption: two existing agent profiles remained byte-identical, protected writes stayed at zero, the checkpoint was fresh and fast-resumable, and five executable checks passed. No prior 1.5.0 evidence was relabeled.
 - Fixed an evidence-attribution defect exposed by that run: one bounded shell loop actually read both agent profiles but the sanitizer recognized only separate structured read tools. The Gate now accepts the bounded read behavior and retains a paths-only negative control.
 - Preserved the failed main CI caused by pushing a known stale exact-version artifact as Navigator feedback. Navigator v18 now requires exact-version evidence or a non-main publication candidate before a version-changing main push and an observed green CI before completion; the repair passed main CI in run 31570823735.
+- Published annotated tag `v1.6.0` and a GitHub Release from green commit `5df8309`; the downloaded public archive is byte-identical to the validated local bundle with SHA-256 `90747ddc02f93d227409f322e2d65bc9a5a8c807a760058e5d20e114aea4c0bf`.
+- Reinstalled 1.6.0 from the refreshed public GitHub marketplace into a new isolated project after publication. The run executed installed-plugin inventory, kept both agent profiles byte-identical, made zero protected writes, produced verified resumable state, and passed five checks with zero public-positioning violations.
+- Preserved the initial post-public sanitizer nonpass: explicit bounded `cat` reads of both profiles were rejected despite valid behavior. Gate v9 now credits explicit content reads for every declared profile, retains the paths-only negative control, and requires machine-readable release tag, commit, asset digest, run identity, and positioning evidence.
 
 ## 1.5.0 — 2026-08-12
 
