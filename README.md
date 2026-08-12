@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>Focus on the project. Let NULNUL handle the harness.</strong><br>
-  Tell Codex or Claude Code what you want to build. NULNUL sets up only what the project needs, does the work, and promotes an improvement only after it proves better than the current way.
+  <strong>Build the project. NULNUL governs the harness.</strong><br>
+  A repository-native control layer for Codex and Claude Code: minimal capability assembly, executable verification, durable continuity, and independently gated evolution.
 </p>
 
 <p align="center">
@@ -18,11 +18,11 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> Repository version 1.6.0 is a release candidate. The known behavior and safety cases score 100/100, but final publication remains blocked until a fresh exact-version public adoption run replaces the retained 1.5.0 evidence.
+> Version 1.6.0 is verified against a fresh GitHub-marketplace Claude Code adoption. The Release Gate passes the exact-version provenance check, protected-path controls, checkpoint checks, and the repository's published behavior and safety suite.
 
 ## What is NULNUL?
 
-NULNUL is a skills-only plugin for Codex and Claude Code. It builds the working environment and verification flow around a project so you do not have to design that system before starting the work.
+NULNUL is a skills-only plugin for Codex and Claude Code. It establishes the smallest project-local operating contract an agent needs: what already exists, which capabilities are justified, what may change, how completion is proved, and what state is safe to resume.
 
 You describe the result. NULNUL then:
 
@@ -42,7 +42,7 @@ leaves verified state when the work continues later
 
 Here, “harness” means the small set of project rules, capabilities, state, and checks that help a coding agent work reliably. It does not mean “create an agent team.” Sometimes the correct result is **zero new agents, zero new skills, and zero new infrastructure**.
 
-## Why would I use it?
+## The operational problem
 
 AI-assisted development often creates a second project: managing the AI environment itself.
 
@@ -54,9 +54,9 @@ AI-assisted development often creates a second project: managing the AI environm
 - Every repository gets a new harness assembled from scratch.
 - You spend more time choosing AI tools than working on the product.
 
-NULNUL moves that work into the repository workflow. It inspects before it asks, reuses before it creates, keeps durable state bounded, and treats an executable check—not a confident answer—as completion.
+NULNUL moves that work into an inspectable repository contract. It inspects before it asks, reuses before it creates, keeps durable state bounded, and treats an executable check—not a confident answer—as completion.
 
-## Only verified improvements are promoted
+## Controlled evolution: proposal is not approval
 
 NULNUL can change its project harness, but it cannot approve its own change.
 
@@ -76,7 +76,7 @@ Independent Gate
            Keep    Rollback
 ```
 
-The process that proposes a change is separate from the process that gives it credit. A Coach may explain why a candidate should work, but that explanation is not evidence. The Gate uses completion checks, validators, guardrails, costs, and rollback viability to accept, reject, or keep the current champion.
+The process that proposes a change is separate from the process that assigns credit. A Coach may state a causal hypothesis, prediction, and falsification condition; none of those is evidence by itself. The Gate owns deterministic measurement across completion checks, validators, permission and privacy guardrails, cost, candidate identity, and rollback viability.
 
 In bounded evolution, the candidate count, generation count, evaluation budget, permissions, and stop conditions are fixed before search begins. If nothing is better, **`NO_PROMOTION` is a correct result**.
 
@@ -135,9 +135,9 @@ Fix the booking API and verify that the existing behavior still passes.
 
 You do not need to choose the agents or design the workflow first.
 
-## Try these prompts
+## Operational use cases
 
-Copy one into Codex or Claude Code after installation.
+These prompts exercise the same contracts used by the published evaluation cases.
 
 ### Existing backend project
 
@@ -202,6 +202,21 @@ With NULNUL, the user can ask for the result. The plugin then:
 
 Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Simple work combines roles. A separate role exists only when it has a distinct job, such as independent verification.
 
+## Engineering model
+
+NULNUL is deliberately skills-only. It adds no server, daemon, hosted control plane, or background self-improvement process. Reliability comes from a small set of repository-native contracts:
+
+| Contract | Enforcement |
+| --- | --- |
+| Repository truth | Host surface, existing guidance, capabilities, agents, tests, and permissions are inspected before assembly. |
+| Verified continuity | Schema-v3 checkpoints use an exact completion command, bounded verification files, and a runner-owned freshness receipt. Mutated state cannot claim verified fast resume. |
+| Governed evolution | Schema-v4 episodes freeze pathology, candidate/generation/evaluation budgets, permission delta, archive identity, deterministic credit ownership, and a stop reason before promotion. |
+| Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, and mechanism identity are machine-readable. A used holdout cannot be relabeled unseen. |
+| Release integrity | Exact plugin provenance and version, protected writes, agent hashes, validators, negative controls, archive/source parity, and documentation debt fail closed. |
+| Evidence hygiene | Stored artifacts exclude prompts, responses, raw transcripts, credentials, private project data, complete commands, and machine paths. |
+
+These are executable contracts rather than architecture labels. Their validators and negative controls ship in the repository.
+
 ## How it differs from nearby categories
 
 These categories can coexist. The distinction is about the default job, not a claim that one tool replaces every other tool.
@@ -255,9 +270,9 @@ Some of the strongest evidence came from failures:
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **110 passed (110/110)** | Deterministic product, state, privacy, rollback, and negative-control contracts hold. |
+| Repository tests | **112 passed (112/112)** | Deterministic product, state, privacy, rollback, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
-| Final 1.6.0 Release Gate | **Pending exact-version public adoption** | The Gate correctly rejects the retained 1.5.0 Claude evidence as stale. |
+| Final 1.6.0 Release Gate | **Passed** | A fresh GitHub-marketplace 1.6.0 adoption preserved two agent profiles, made zero protected writes, produced verified resumable state, and passed five executable checks. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one project shape; harness-wide generalization is not established. |
 | Bounded evolution | Champion/retry **7 violations**, new candidate **0**, stop `SUCCESS` | Live generation and bounded stopping worked once in a narrow failure family. |
@@ -271,7 +286,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-On the current release candidate, the second command is expected to stop at the stale exact-version adoption check rather than report `release_ready`.
+The second command must report `release_ready: true`. A stale adoption version, local-only plugin source, protected write, changed agent hash, missing roster inspection, failed validator, or regression causes a nonzero exit.
 
 The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), and the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -307,7 +322,7 @@ The roadmap describes user value, not an automatic release promise.
 | --- | --- | --- |
 | 1.4 Observable Evolution | Completed | See why the harness failed instead of trusting a plausible explanation. |
 | 1.5 Generalization Gate | Completed | Check whether a fix transfers or merely fits familiar evaluation cases. |
-| 1.6 Bounded Autonomous Evolution | Release candidate; publication evidence pending | Let the harness search a tiny candidate space under fixed budgets and stop without changing anything when evidence is weak. |
+| 1.6 Bounded Autonomous Evolution | Completed | Let the harness search a tiny candidate space under fixed budgets and stop without changing anything when evidence is weak. |
 | 1.7 Personal Evolution | Next; not started | Reuse a project-proven improvement elsewhere only after a fresh transfer check. |
 | 2.0 Cross-project / Meta Evolution | Long-term target | Combine scoped lessons without sharing raw workloads and improve the improvement procedure itself. |
 
@@ -345,7 +360,7 @@ Yes. NULNUL inspects and classifies the current setup before adding anything. It
 <details>
 <summary>Is the 100/100 score proof that NULNUL is better everywhere?</summary>
 
-No. It covers known behavior and safety fixtures. Generalization Gate limits transfer claims separately, and final 1.6.0 publication evidence is still pending.
+No. It covers known behavior and safety fixtures. Generalization Gate limits transfer claims separately; one accepted mechanism transferred on one unseen project shape, which is not harness-wide generalization.
 </details>
 
 ## Update, remove, and develop

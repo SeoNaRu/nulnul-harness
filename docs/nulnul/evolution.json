@@ -7,12 +7,12 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Publish the locally validated 1.6.0 bounded autonomous evolution candidate and obtain exact-version public adoption evidence.",
+    "milestone": "Close 1.6.0 only after exact-version public adoption and green main CI verify the bounded autonomous evolution release.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-12: A new activation-metadata failure reproduced seven public-positioning violations in two unchanged champion checks. Before generation, the episode froze one generation, two candidates, two model invocations, two evaluations, no permission delta, and no HOLDOUT access. Rejected archive lookup found no matching mechanism. The first Coach invocation produced no proposal after a bounded read miss; the final allowed invocation generated one new four-file metadata candidate. Independent Gate evidence reduced the primary metric 7 to 0, product tests and Release Gate passed at the champion product identity, and a post-promotion live check stayed at 0. The episode stopped on SUCCESS with AUTONOMOUS_EVOLUTION_WIN, scoped only to this activation-metadata failure family.",
-    "next_action": "With explicit publication approval, push the 1.6.0 candidate, publish it, run a fresh GitHub-marketplace Claude adoption, and replace the retained 1.5.0 exact-version evidence. Do not begin 1.7 or claim broad autonomy before the 1.6 Release Gate passes on that public evidence.",
-    "blockers": ["Exact-version 1.6.0 public adoption evidence requires an approved push and publication."],
+    "last_verified": "2026-08-12: One live bounded activation-metadata episode reduced seven deterministic public-positioning violations to zero within its preregistered one-generation budget and stopped on SUCCESS. A fresh GitHub-marketplace-installed 1.6.0 Claude adoption then preserved two existing agent hashes, made zero protected writes, recorded bounded roster inspection, produced a fresh verified checkpoint, and passed the repository, setup, checkpoint, exact completion, and documentation-debt checks. The Gate's tool-shape attribution defect was closed with a paths-only negative control. Harness-wide autonomy and generalization remain unestablished.",
+    "next_action": "Push the exact-version evidence repair, observe main CI to green, then accept or reject proposal-navigator-18-release-sequencing from that live result. Do not begin 1.7 in this run.",
+    "blockers": ["The release-sequencing proposal remains pending until post-push main CI is observed green."],
     "approved_permissions": []
   },
   "agents": {
@@ -29,10 +29,10 @@
       "last_promotion_id": "promotion-coach-4"
     },
     "gate": {
-      "version": 7,
-      "job": "Independently compare candidates, validate bounded evidence, separate exposed evaluation from one-shot holdouts for broad transfer claims, and promote, reject, or roll back.",
+      "version": 8,
+      "job": "Independently compare candidates, validate semantically equivalent bounded evidence without accepting paths-only traces, separate exposed evaluation from one-shot holdouts for broad transfer claims, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-7"
+      "last_promotion_id": "promotion-gate-8"
     },
     "product-builder": {
       "version": 6,
@@ -291,6 +291,26 @@
       "observed": "After the product-first README became the public repository entry, seven installed and marketplace metadata surfaces still defined NULNUL as an agent or AI team builder, contradicting the product contract that zero new agents can be the correct result.",
       "expected": "Every public acquisition surface describes the outcome-first, reuse-first, verified minimal harness without presenting agent-team creation as the product category.",
       "evidence": "Two unchanged champion evaluations of ProductPluginTests.test_public_metadata_is_product_first each reported the same seven violating surfaces before candidate generation.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-release-main-sequencing",
+      "source": "user",
+      "target_agent": "navigator",
+      "observed": "A known exact-version evidence mismatch was pushed to main, the resulting CI failure was described as expected, and release work was reported complete before a green post-push check existed.",
+      "expected": "Do not knowingly leave main red: obtain exact-version evidence before the main merge when possible, otherwise use a non-main publication candidate, and report completion only after the resulting main CI is green.",
+      "evidence": "GitHub Actions run 31568697702 failed exactly where the pre-push audit predicted: the 1.6.0 manifest was paired with retained 1.5.0 Claude adoption evidence.",
+      "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-claude-roster-read-shape",
+      "source": "gate",
+      "target_agent": "gate",
+      "observed": "A fresh GitHub-installed 1.6.0 adoption read every existing agent through one bounded shell loop, but the sanitizer recognized only separate Read/Glob/Grep tool calls and returned roster_enumerated=false.",
+      "expected": "Credit semantically equivalent bounded agent-profile reads while continuing to reject commands that merely print agent paths.",
+      "evidence": "The sanitized fresh run preserved both agent hashes, made zero protected writes, classified both roles, produced a fresh verified checkpoint, and passed five checks; a paths-only negative control remains false.",
       "scope": "core",
       "status": "converted"
     }
@@ -895,6 +915,54 @@
       },
       "mechanism_id": "public-metadata-outcome-contract",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-18-release-sequencing",
+      "feedback_ids": ["feedback-release-main-sequencing"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 17,
+      "to_version": 18,
+      "cause": "The release checklist treated publication as permission to push a predictably failing version commit directly to main and deferred the required exact-version evidence to a later run.",
+      "change_target": "Add a repository working rule that requires exact-version evidence or a non-main publication candidate before a version-changing main push, then requires watching main CI to green before completion.",
+      "regression_check": "Fresh exact-version GitHub adoption, python3 scripts/release_gate.py, push, and observed green main CI.",
+      "primary_metric": "known stale exact-version evidence pushed to main and reported complete",
+      "permission_delta": [],
+      "rollback": "Remove the sequencing sentence while retaining the failed CI and user correction as rejected evidence.",
+      "change_level": "task",
+      "discovery_evidence": "The stale evidence was identified before push and the next main run failed on that exact condition.",
+      "transfer_check": "This same repair run must replace the stale evidence and observe green main CI before the proposal can be accepted.",
+      "prediction": "The repair commit will contain exact-version 1.6.0 adoption evidence and Release Gate will pass locally; the proposal remains pending until post-push main CI is green.",
+      "expected_delta": {
+        "known_stale_main_completions": "1 -> 0",
+        "post_push_ci_observed": "false -> true"
+      },
+      "falsification_condition": "Release Gate is stale before push, main CI is not watched, or completion is reported while main remains red.",
+      "status": "proposed"
+    },
+    {
+      "id": "proposal-gate-8-semantic-roster-read",
+      "feedback_ids": ["feedback-claude-roster-read-shape"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 7,
+      "to_version": 8,
+      "cause": "The sanitizer coupled roster evidence to three structured read tool names instead of the bounded read behavior the Gate intended to measure.",
+      "change_target": "Recognize a bounded .claude/agents shell iteration that actually reads each profile, with a paths-only negative control.",
+      "regression_check": "python3 -m unittest tests.test_claude_adopt_evidence tests.test_release_gate -v && python3 scripts/claude_adopt_evidence.py validate evals/benchmarks/claude-adopt/evidence.json --version 1.6.0",
+      "primary_metric": "valid bounded roster reads rejected by tool-shape coupling",
+      "permission_delta": [],
+      "rollback": "Restore structured-read-only attribution and retain the fresh 1.6.0 nonpass if the paths-only control passes.",
+      "change_level": "meta",
+      "discovery_evidence": "The fresh transcript contained both the GitHub plugin listing and a bounded for-loop that read .claude/agents/*, while agent hashes and all five checks independently proved the intended bounded inspection.",
+      "transfer_check": "The same sanitizer accepts direct structured reads and the bounded loop, but rejects a command that only prints both agent paths.",
+      "prediction": "The fresh 1.6.0 artifact changes roster_enumerated from false to true while protected writes stay zero and the paths-only negative control stays false.",
+      "expected_delta": {
+        "valid_bounded_roster_read": "rejected -> accepted",
+        "paths_only_control": "rejected -> rejected"
+      },
+      "falsification_condition": "The fresh artifact remains invalid, a paths-only command counts as a read, any protected write appears, or any completion check fails.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -1354,6 +1422,24 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "A post-promotion deterministic live check again reported zero violations; the executable rollback threshold remains active."
+      }
+    },
+    {
+      "id": "promotion-gate-8",
+      "proposal_id": "proposal-gate-8-semantic-roster-read",
+      "gate_agent": "product-builder",
+      "before": "The fresh 1.6.0 adoption satisfied the bounded roster behavior but was rejected because its tool shape used one shell loop instead of separate structured reads.",
+      "after": "The sanitizer accepts the bounded profile-reading loop, rejects a paths-only command, and validates the exact-version artifact with zero protected writes and five passing checks.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "valid bounded roster reads rejected by tool-shape coupling",
+        "rollback_threshold": "roll back if one paths-only trace is credited or one bounded real roster read is rejected",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The fresh GitHub-marketplace-installed 1.6.0 run validated; the direct-read path still works and the new paths-only negative control remains rejected."
       }
     }
   ],

@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>프로젝트에 집중하세요. 하네스는 NULNUL이 맡습니다.</strong><br>
-  Codex나 Claude Code에 만들고 싶은 것을 말하세요. NULNUL은 프로젝트에 필요한 것만 구성하고, 실제 작업을 진행하며, 기존 방식보다 낫다고 검증된 개선만 승격합니다.
+  <strong>프로젝트를 만드세요. 하네스는 NULNUL이 통제합니다.</strong><br>
+  Codex와 Claude Code를 위한 repository-native control layer: 최소 capability 구성, executable verification, durable continuity, independently gated evolution.
 </p>
 
 <p align="center">
@@ -18,11 +18,11 @@
   <a href="README.md">English</a> · <strong>한국어</strong>
 </p>
 
-> 저장소 버전 1.6.0은 release candidate입니다. 확인된 동작과 안전 사례는 100/100이지만, 보존된 1.5.0 근거를 fresh exact-version public adoption 실행으로 교체하기 전에는 최종 공개가 완료되지 않습니다.
+> 버전 1.6.0은 fresh GitHub-marketplace Claude Code adoption으로 검증됐습니다. Release Gate는 exact-version provenance, protected-path control, checkpoint 검사, 공개 behavior/safety suite를 모두 통과합니다.
 
 ## NULNUL은 무엇인가요?
 
-NULNUL은 Codex와 Claude Code에서 프로젝트에 필요한 작업 환경과 검증 절차를 구성하는 skills-only plugin입니다. 사용자가 일을 시작하기 전에 AI 작업 구조부터 설계하지 않아도 되게 만듭니다.
+NULNUL은 Codex와 Claude Code에서 사용하는 skills-only plugin입니다. Agent가 신뢰성 있게 작업하는 데 필요한 최소 project-local 운영 contract, 즉 이미 존재하는 것, 정당화된 capability, 허용된 변경, 완료 증명, 안전한 resume 상태를 구성합니다.
 
 원하는 결과를 말하면 NULNUL이 다음을 맡습니다.
 
@@ -42,7 +42,7 @@ NULNUL은 Codex와 Claude Code에서 프로젝트에 필요한 작업 환경과 
 
 여기서 “하네스”는 coding agent가 안정적으로 일하도록 돕는 작은 프로젝트 규칙·능력·상태·검사 묶음입니다. “agent team을 만든다”는 뜻이 아닙니다. 때로는 **새 agent 0개, 새 skill 0개, 새 infrastructure 0개**가 정답입니다.
 
-## 왜 쓰나요?
+## 실제 운영 문제
 
 AI로 개발하다 보면 프로젝트 옆에 또 하나의 프로젝트가 생깁니다. AI coding 환경 자체를 관리하는 일입니다.
 
@@ -54,9 +54,9 @@ AI로 개발하다 보면 프로젝트 옆에 또 하나의 프로젝트가 생�
 - 저장소마다 하네스를 처음부터 다시 구성합니다.
 - 프로젝트보다 AI 도구를 고르는 데 더 오래 걸립니다.
 
-NULNUL은 이 일을 저장소 workflow 안으로 옮깁니다. 질문하기 전에 조사하고, 만들기 전에 재사용하고, 오래 남길 상태는 작게 유지하며, 자신감 있는 답변이 아니라 실행 가능한 검사를 완료 기준으로 삼습니다.
+NULNUL은 이 일을 inspectable repository contract로 옮깁니다. 질문하기 전에 조사하고, 만들기 전에 재사용하고, 오래 남길 상태는 작게 유지하며, 자신감 있는 답변이 아니라 실행 가능한 검사를 완료 기준으로 삼습니다.
 
-## 검증된 개선만 승격합니다
+## 통제된 진화: 제안은 승인이 아닙니다
 
 NULNUL은 프로젝트 하네스를 바꿀 수 있지만 자기 변경을 스스로 승인할 수는 없습니다.
 
@@ -76,7 +76,7 @@ NULNUL은 프로젝트 하네스를 바꿀 수 있지만 자기 변경을 스스
             유지     rollback
 ```
 
-변경을 제안하는 역할과 그 변경에 점수를 주는 역할을 분리합니다. Coach가 후보가 좋아질 이유를 설명할 수는 있지만 그 설명 자체는 근거가 아닙니다. Gate가 completion check, validator, guardrail, 비용, rollback 가능성을 보고 승격·거부하거나 현재 champion을 유지합니다.
+변경을 제안하는 과정과 credit을 부여하는 과정을 분리합니다. Coach는 causal hypothesis, prediction, falsification condition을 제시할 수 있지만 그 자체는 근거가 아닙니다. Gate가 completion check, validator, permission/privacy guardrail, cost, candidate identity, rollback 가능성에 대한 deterministic measurement를 소유합니다.
 
 Bounded evolution에서는 탐색을 시작하기 전에 후보 수, generation 수, 평가 budget, permission, 종료 조건을 고정합니다. 더 나은 후보가 없다면 **`NO_PROMOTION`이 올바른 결과**입니다.
 
@@ -135,9 +135,9 @@ claude plugin install nulnul-harness@nulnul-harness
 
 어떤 agent가 필요한지, workflow를 어떻게 나눌지 먼저 설계할 필요가 없습니다.
 
-## 바로 써볼 수 있는 예시
+## 운영 use case
 
-설치 후 다음 prompt를 Codex나 Claude Code에 그대로 붙여 넣을 수 있습니다.
+아래 prompt는 공개 evaluation case와 같은 contract를 실제 프로젝트에 적용합니다.
 
 ### 기존 backend 프로젝트
 
@@ -202,6 +202,21 @@ NULNUL을 사용하면 사용자는 결과를 요청할 수 있습니다. Plugin
 
 Navigator, Worker, Coach, Gate는 네 명의 필수 agent가 아니라 responsibility boundary입니다. 단순한 작업에서는 역할을 합칩니다. 독립 검증처럼 별도 job이 있을 때만 역할을 분리합니다.
 
+## Engineering model
+
+NULNUL은 의도적으로 skills-only입니다. Server, daemon, hosted control plane, background self-improvement process를 추가하지 않습니다. 신뢰성은 작은 repository-native contract 집합에서 나옵니다.
+
+| Contract | Enforcement |
+| --- | --- |
+| Repository truth | 구성 전에 host surface, 기존 guidance, capability, agent, test, permission을 조사합니다. |
+| Verified continuity | Schema-v3 checkpoint는 exact completion command, bounded verification files, runner-owned freshness receipt를 사용합니다. 변경된 상태는 verified fast resume를 주장할 수 없습니다. |
+| Governed evolution | Schema-v4 episode는 승격 전에 pathology, candidate/generation/evaluation budget, permission delta, archive identity, deterministic credit owner, stop reason을 고정합니다. |
+| Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, mechanism identity가 machine-readable합니다. 사용한 holdout을 unseen으로 다시 부를 수 없습니다. |
+| Release integrity | Exact plugin provenance/version, protected write, agent hash, validator, negative control, archive/source parity, documentation debt가 fail-closed로 동작합니다. |
+| Evidence hygiene | 저장 artifact에는 prompt, response, raw transcript, credential, private project data, 전체 command, machine path가 들어가지 않습니다. |
+
+이는 architecture 명칭이 아니라 실행 가능한 contract입니다. Validator와 negative control도 저장소에 함께 제공됩니다.
+
 ## 주변 도구와 무엇이 다른가요?
 
 다음 category는 함께 사용할 수 있습니다. 차이는 어떤 도구가 다른 모든 도구를 대체한다는 주장이 아니라 기본 job의 차이입니다.
@@ -255,9 +270,9 @@ transfer claim만 → sealed unseen check → scoped decision
 
 | Evidence | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **110개 통과 (110/110)** | deterministic product, state, privacy, rollback, negative-control contract가 유지됩니다. |
+| 저장소 test | **112개 통과 (112/112)** | deterministic product, state, privacy, rollback, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
-| 최종 1.6.0 Release Gate | **exact-version public adoption 대기** | Gate가 보존된 1.5.0 Claude evidence를 stale로 올바르게 거부합니다. |
+| 최종 1.6.0 Release Gate | **통과** | Fresh GitHub-marketplace 1.6.0 adoption이 agent profile 두 개를 보존하고 protected write 0, verified resumable state, executable check 5개 통과를 기록했습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
 | Unseen transfer | **Narrower Scope** | mechanism 하나가 project shape 하나로 전이됐으며 harness-wide generalization은 미입증입니다. |
 | Bounded evolution | champion/retry **위반 7개**, 새 후보 **0개**, stop `SUCCESS` | 좁은 failure family 하나에서 live generation과 bounded stopping이 한 번 동작했습니다. |
@@ -271,7 +286,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-현재 release candidate에서 두 번째 command는 `release_ready`를 보고하는 대신 stale exact-version adoption check에서 멈추는 것이 정상입니다.
+두 번째 command는 `release_ready: true`를 보고해야 합니다. Stale adoption version, local-only plugin source, protected write, changed agent hash, missing roster inspection, failed validator, regression은 nonzero exit를 냅니다.
 
 근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json)을 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
 
@@ -307,7 +322,7 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 | --- | --- | --- |
 | 1.4 Observable Evolution | 완료 | 그럴듯한 설명을 믿는 대신 하네스가 왜 실패했는지 볼 수 있습니다. |
 | 1.5 Generalization Gate | 완료 | 해결책이 전이되는지 익숙한 evaluation case에만 맞는지 구분합니다. |
-| 1.6 Bounded Autonomous Evolution | Release candidate; publication evidence 대기 | 고정 budget 안에서 작은 후보 공간을 탐색하고 근거가 약하면 아무것도 바꾸지 않은 채 멈춥니다. |
+| 1.6 Bounded Autonomous Evolution | 완료 | 고정 budget 안에서 작은 후보 공간을 탐색하고 근거가 약하면 아무것도 바꾸지 않은 채 멈춥니다. |
 | 1.7 Personal Evolution | 다음; 시작하지 않음 | 프로젝트에서 검증된 개선을 fresh transfer check 뒤에만 다른 곳에서 재사용합니다. |
 | 2.0 Cross-project / Meta Evolution | 장기 목표 | raw workload를 공유하지 않고 scoped lesson을 합치며 개선 절차 자체를 발전시킵니다. |
 
@@ -345,7 +360,7 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 <details>
 <summary>100/100은 NULNUL이 어디서나 더 좋다는 뜻인가요?</summary>
 
-아닙니다. 확인된 behavior와 safety fixture만 다룹니다. Generalization Gate가 transfer claim을 별도로 제한하며 최종 1.6.0 publication evidence도 아직 필요합니다.
+아닙니다. 확인된 behavior와 safety fixture만 다룹니다. Generalization Gate가 transfer claim을 별도로 제한하며, accepted mechanism 하나가 unseen project shape 하나에 전이됐을 뿐 harness-wide generalization은 아닙니다.
 </details>
 
 ## 업데이트, 제거, 개발

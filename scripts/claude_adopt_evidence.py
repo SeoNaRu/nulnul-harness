@@ -26,6 +26,10 @@ CHECK_LABELS = {
     "documentation_debt": "check_doc_debt.py",
 }
 WRITE_COMMAND = re.compile(r"(?:>|>>|\btee\b|\bsed\s+-i\b|\bcp\b|\bmv\b|\brm\b).*(?:^|/)\.claude/", re.I)
+BOUNDED_AGENT_READ = re.compile(
+    r"for\s+\w+\s+in\s+(?:\./)?\.claude/agents/\*.*\b(?:cat|head|tail)\b",
+    re.I | re.S,
+)
 
 
 def digest(data):
@@ -56,6 +60,21 @@ def protected_writes(calls):
         elif name == "Bash" and WRITE_COMMAND.search(command):
             found.append({"tool": name, "target": ".claude/**"})
     return found
+
+
+def roster_was_read(calls, agents):
+    structured_reads = " ".join(
+        json.dumps(call["input"])
+        for call in calls
+        if call["name"] in {"Read", "Glob", "Grep"}
+    )
+    if all(name in structured_reads for name in agents):
+        return True
+    return any(
+        call["name"] == "Bash"
+        and BOUNDED_AGENT_READ.search(call["input"].get("command", ""))
+        for call in calls
+    )
 
 
 def installed_plugin():
@@ -93,7 +112,6 @@ def capture(fixture, transcript):
     version, source = installed_plugin()
     project = (fixture / "docs/nulnul/project.md").read_text(encoding="utf-8")
     guidance = (fixture / "CLAUDE.md").read_text(encoding="utf-8")
-    agent_reads = " ".join(json.dumps(call["input"]) for call in calls if call["name"] in {"Read", "Glob", "Grep"})
     return {
         "schema_version": 1,
         "case_id": "positive-adopt-existing-harness",
@@ -101,7 +119,7 @@ def capture(fixture, transcript):
         "plugin_source": source,
         "protected_write_calls": protected_writes(calls),
         "existing_agents": agents,
-        "roster_enumerated": any(call["name"] == "Bash" and "claude plugin list" in call["input"].get("command", "") for call in calls) and all(name in agent_reads for name in agents),
+        "roster_enumerated": any(call["name"] == "Bash" and "claude plugin list" in call["input"].get("command", "") for call in calls) and roster_was_read(calls, agents),
         "agents_classified": all(name in project and re.search(rf"{re.escape(name)}[^\n]*(?:keep|upgrade|merge|remove)", project, re.I) for name in agents),
         "session_entry_present": "docs/nulnul/checkpoint.json" in guidance,
         "checkpoint_fast_path_ready": checkpoint.get("fast_path_ready") is True,

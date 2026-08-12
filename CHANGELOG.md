@@ -2,7 +2,7 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## Unreleased — 1.6.0 Bounded Autonomous Evolution release candidate
+## 1.6.0 — 2026-08-12
 
 - Tested whether one reproduced failure can drive candidate search without one-at-a-time user direction while fixed budgets, permissions, sealed evaluation, and an independent Gate remain in control.
 - Added schema-v4 autonomous episodes with machine-readable `WHERE × WHY` pathology, one-generation candidate/model/evaluation budgets, rejected-proposal archive identity, deterministic credit, comparable champion/retry/best-of-N arms, cost, decision, and stop reason.
@@ -12,7 +12,9 @@ All notable changes to `nulnul harness` are recorded here.
 - The independent Gate accepted only the four preregistered metadata edits after product checks, permission/privacy/read-scope guardrails, Release Gate 100/100, and a post-promotion zero-violation live cycle. The episode stopped on `SUCCESS`; the executable rollback threshold remained clear.
 - Extended fair baseline accounting only enough to compare deterministic completion checks as well as model invocations, with a negative control that rejects a completion-check budget bypass.
 - Kept the claim narrow: live candidate generation and correct bounded stopping are established for this activation-metadata failure family, not as live open-ended generation, broad autonomous improvement, personal promotion, or cross-project aggregation.
-- Aligned local product surfaces to 1.6.0. Exact-version public adoption remains pending because the candidate has not been pushed or published; no prior 1.5.0 adoption evidence was relabeled.
+- Verified a fresh GitHub-marketplace-installed 1.6.0 Claude Code adoption: two existing agent profiles remained byte-identical, protected writes stayed at zero, the checkpoint was fresh and fast-resumable, and five executable checks passed. No prior 1.5.0 evidence was relabeled.
+- Fixed an evidence-attribution defect exposed by that run: one bounded shell loop actually read both agent profiles but the sanitizer recognized only separate structured read tools. The Gate now accepts the bounded read behavior and retains a paths-only negative control.
+- Preserved the failed main CI caused by pushing a known stale exact-version artifact as Navigator feedback. The release-sequencing candidate requires exact-version evidence or a non-main publication candidate before a version-changing main push, followed by an observed green CI before completion.
 
 ## 1.5.0 — 2026-08-12
 
