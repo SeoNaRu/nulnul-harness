@@ -1,9 +1,9 @@
-# nulnul harness 1.3.5
+# nulnul harness 1.5.0
 
-This patch makes the 100/100 Release Gate mechanically defensible. Its Claude adoption case now depends on a sanitized structured artifact instead of trusting a hand-edited `passed` status; the validator rejects any protected-path write, changed agent hash, stale plugin version, non-GitHub source, missing session entry, or failed check.
+This release adds a scoped Generalization Gate beside the existing 100/100 behavior and safety Release Gate. Evaluation exposure is machine-readable, previously seen cases cannot be relabeled as unseen, and used holdouts cannot be recycled.
 
-The final E2E used the GitHub-marketplace-installed 1.3.5 plugin with no local plugin override. It made zero `.claude/**` write calls, preserved both existing agent hashes, enumerated and classified the roster, and left a valid fast-resume checkpoint and session entry.
+The first one-shot holdout exposed an invalid Ruby fixture and was permanently downgraded to validation. After mandatory fixture preflight, a new Perl/TAP CLI shape transferred the checkpoint-freshness mechanism: all three stale mutations were blocked and all three post-check states resumed, while champion retry and best-of-3 remained unsafe. The decision is deliberately narrower scope; harness-wide generalization is not established.
 
-Checkpoint completion checks must now be exact commands. The shipped runner executed the generated `npm test` command successfully; prose descriptions fail validation and cannot enter fast resume. Five E2E checks and all 66 repository tests pass. The plugin remains skills-only with no server, hook, daemon, authentication, external service, or new permission.
+Schema-v3 checkpoints keep runner-owned bounded verification receipts, and Generalization Gate activates only for personal/core promotion or transfer claims. Ordinary project-local changes do not pay holdout cost. The plugin remains skills-only with no server, hook, daemon, authentication, external service, raw transcript store, or new permission.
 
-The plugin remains skills-only with no service, authentication, telemetry, hook, UI, or background process. Git-based marketplace installation and repeatable Codex and Claude Code update commands are documented in both README locales.
+All 94 repository tests, the packaged-product checks, documentation-debt check, and Release Gate pass with fresh GitHub-marketplace installation evidence for version 1.5.0.

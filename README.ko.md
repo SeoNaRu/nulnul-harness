@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.3.5-111111" alt="version 1.3.5">
+  <img src="https://img.shields.io/badge/version-1.5.0-111111" alt="version 1.5.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
