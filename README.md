@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.7.0--rc.1-111111" alt="version 1.7.0-rc.1">
+  <img src="https://img.shields.io/badge/version-1.7.0-111111" alt="version 1.7.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="known behavior and safety score: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -18,7 +18,7 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> Candidate version 1.7.0-rc.1 is local and unreleased. The latest public release remains 1.6.0, verified against a post-publication fresh GitHub-marketplace Claude Code adoption.
+> Candidate version 1.7.0 is locally validated but not yet public. The latest public release remains 1.6.0, verified against a post-publication fresh GitHub-marketplace Claude Code adoption.
 >
 > **1.7 status:** Personal Evolution is locally verified as a release candidate. Its first scoped adaptation passed two transfer shapes, skipped an incompatible shape, and was reused in one fresh project from an isolated opt-in home. No real personal home or global state was created, and exact-version public adoption is still pending.
 
@@ -328,7 +328,7 @@ Some of the strongest evidence came from failures:
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one project shape; harness-wide generalization is not established. |
 | Bounded evolution | Champion/retry **7 violations**, new candidate **0**, stop `SUCCESS` | Live generation and bounded stopping worked once in a narrow failure family. |
 | Personal transfer candidate | **2 apply, 1 skip, fresh Project D pass** | One adaptation can be transferred, compatibility-checked, reused, deduplicated, and revoked without raw project data; broader personal evolution is not established. |
-| 1.7 release status | **1.7.0-rc.1, unreleased** | Functional and safety evidence is local; exact public 1.7.0 installation evidence does not exist yet. |
+| 1.7 release status | **1.7.0 candidate, unpublished** | A real opt-in Personal Home and local safety evidence are verified; exact public 1.7.0 installation evidence does not exist yet. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
 
@@ -339,7 +339,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-For a released version, the second command must report `release_ready: true`. This unreleased 1.7.0-rc.1 is expected to stop on stale exact-version adoption until public 1.7.0 exists; bypassing that failure would repeat the version-attribution defect the Gate is meant to prevent.
+For a released version, the second command must report `release_ready: true`. This unpublished 1.7.0 candidate is expected to stop on stale exact-version adoption until public 1.7.0 exists; bypassing that failure would repeat the version-attribution defect the Gate is meant to prevent.
 
 The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), and the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) plus [results](evals/personal-evolution/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -383,7 +383,7 @@ The roadmap describes user value, not an automatic release promise.
 
 - Authentication, external writes, deployment, publication, destructive operations, paid resources, and global registration require explicit approval.
 - Credentials, raw conversations, transcripts, complete command histories, machine paths, and private project data do not become evolution memory.
-- Personal Evolution requires an explicitly selected existing local directory. The current repository keeps `personal_evolution_home: null`; tests use a temporary isolated home and do not authorize a global write.
+- Personal Evolution requires an explicitly selected existing local directory. One real private local home is configured and validates; its machine path is deliberately absent from public evidence.
 - Unattended Claude Code sessions may inspect host-owned `.claude/**` configuration but do not rewrite it.
 - Checkpoints are compared with bounded repository reality before fast resume.
 - Independent Gate ownership is validated from declared state; it is not cryptographic proof of separate runtime identities.

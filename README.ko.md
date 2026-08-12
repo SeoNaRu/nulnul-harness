@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.7.0--rc.1-111111" alt="version 1.7.0-rc.1">
+  <img src="https://img.shields.io/badge/version-1.7.0-111111" alt="version 1.7.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="확인된 동작과 안전 점수: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -18,7 +18,7 @@
   <a href="README.md">English</a> · <strong>한국어</strong>
 </p>
 
-> Candidate version 1.7.0-rc.1은 로컬 상태이며 아직 공개되지 않았습니다. 최신 공개 버전은 1.6.0이고, 공개 완료 후 fresh GitHub-marketplace Claude Code adoption으로 검증됐습니다.
+> Candidate version 1.7.0은 로컬 검증을 마쳤지만 아직 공개되지 않았습니다. 최신 공개 버전은 1.6.0이고, 공개 완료 후 fresh GitHub-marketplace Claude Code adoption으로 검증됐습니다.
 >
 > **1.7 상태:** Personal Evolution은 로컬에서 검증된 release candidate입니다. 첫 scoped adaptation은 서로 다른 transfer shape 두 개를 통과하고 맞지 않는 shape 하나를 건너뛴 뒤, 격리된 opt-in home을 통해 fresh 프로젝트 하나에서 재사용됐습니다. 실제 personal home이나 global state는 만들지 않았고 exact-version public adoption은 아직 남아 있습니다.
 
@@ -327,7 +327,7 @@ transfer claim만 → sealed unseen check → scoped decision
 | Unseen transfer | **Narrower Scope** | mechanism 하나가 project shape 하나로 전이됐으며 harness-wide generalization은 미입증입니다. |
 | Bounded evolution | champion/retry **위반 7개**, 새 후보 **0개**, stop `SUCCESS` | 좁은 failure family 하나에서 live generation과 bounded stopping이 한 번 동작했습니다. |
 | Personal transfer candidate | **적용 2, 건너뜀 1, fresh Project D 통과** | Raw project data 없이 adaptation 하나를 transfer, compatibility check, reuse, dedup, revoke할 수 있습니다. 더 넓은 personal evolution은 미입증입니다. |
-| 1.7 release 상태 | **1.7.0-rc.1, 미공개** | 기능·safety evidence는 로컬에서 검증됐지만 exact public 1.7.0 installation evidence는 아직 없습니다. |
+| 1.7 release 상태 | **1.7.0 candidate, 미공개** | 실제 opt-in Personal Home과 local safety evidence는 검증됐지만 exact public 1.7.0 installation evidence는 아직 없습니다. |
 
 개선 후보가 반드시 이겨야 하는 것은 아닙니다. 거부, `NO_PROMOTION`, narrower scope, rollback은 모두 정상 결과입니다.
 
@@ -338,7 +338,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-공개된 버전이라면 두 번째 command가 `release_ready: true`를 보고해야 합니다. 미공개 1.7.0-rc.1에서는 public 1.7.0이 생길 때까지 stale exact-version adoption에서 멈추는 것이 정상입니다. 이 실패를 우회하면 Gate가 막으려는 version-attribution defect를 반복하게 됩니다.
+공개된 버전이라면 두 번째 command가 `release_ready: true`를 보고해야 합니다. 미공개 1.7.0 candidate에서는 public 1.7.0이 생길 때까지 stale exact-version adoption에서 멈추는 것이 정상입니다. 이 실패를 우회하면 Gate가 막으려는 version-attribution defect를 반복하게 됩니다.
 
 근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json)을 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
 
@@ -382,7 +382,7 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 
 - 인증, 외부 쓰기, 배포, 공개, destructive operation, paid resource, 전역 등록에는 명시적 승인이 필요합니다.
 - Credential, raw conversation, transcript, 전체 command history, machine path, private project data는 evolution memory가 되지 않습니다.
-- Personal Evolution은 사용자가 명시적으로 선택한 기존 local directory를 요구합니다. 현재 repository의 `personal_evolution_home`은 `null`이고, test는 격리된 temporary home만 사용해 global write를 승인하지 않습니다.
+- Personal Evolution은 사용자가 명시적으로 선택한 기존 local directory를 요구합니다. 실제 private local home 하나가 설정되어 validator를 통과했으며, machine path는 public evidence에 남기지 않습니다.
 - 무인 Claude Code 세션은 host-owned `.claude/**` configuration을 검사할 수 있지만 다시 쓰지 않습니다.
 - Fast resume 전에 checkpoint를 제한된 repository reality와 비교합니다.
 - Independent Gate ownership은 선언된 state에서 검증하며 서로 다른 runtime identity를 암호학적으로 증명하지 않습니다.

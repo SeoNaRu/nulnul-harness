@@ -2,14 +2,14 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## 1.7.0-rc.1 — local release candidate, unreleased
+## 1.7.0 — release candidate, unpublished
 
 - Tested whether a project-verified mechanism can become a privacy-safe personal adaptation rather than copied project memory. The accepted checkpoint-freshness receipt was selected because it closed a reproduced 3/3 stale-resume defect, passed its independent Gate and live cycle, has a binary transfer metric, and needs no project identity or raw artifact.
 - Added one standard-library personal-adaptation CLI. It requires a user-selected existing local home, validates preregistered transfer evidence, writes only generalized bounded adaptations, deduplicates identical mechanism/activation identities, detects conflicts, checks new-project compatibility, and supports revocation. Missing home returns `PERSONAL_HOME_REQUIRED`; no default home, cloud store, daemon, MCP, or global rule was added.
 - Froze the source evidence and candidate at ref `435a8e5` before three new one-shot transfer cases. Node and Make project shapes each blocked stale resume and restored it after the exact check; a one-shot shape correctly returned `SKIP`. All used cases were retired after first exposure.
 - The independent Personal Gate recorded `PERSONAL_PROMOTION` only for durable local projects with deterministic completion checks, bounded verification files, and checkpoint receipt support. Raw source, private identity, paths, credentials, prompts, transcripts, logs, permission expansion, hidden failures, self-approval, false activation, conflict, stale/revoked use, duplicate identity, and universalized narrower scope fail closed.
 - In an isolated opt-in Personal Home, a fresh data-CLI Project D discovered the adaptation without user restatement, passed compatibility, applied the already shipped checkpoint mechanism, and passed its exact completion check. A no-registry baseline also passed task behavior but discovered no approved adaptation; no token, elapsed-time, or broad task-quality win is claimed.
-- Kept the public version at 1.6.0. The functional 1.7 component Gates pass locally, while the full Release Gate correctly stops on stale exact-version adoption. 1.7 is not release-closed until a real personal home is explicitly selected where needed and a separate public 1.7.0 exact-version adoption lifecycle succeeds.
+- Configured one explicit private local Personal Home, promoted the verified adaptation, and passed its registry and privacy validation without storing the path publicly. The functional 1.7 component Gates pass locally, while the full Release Gate correctly stops on stale exact-version adoption. 1.7 is not release-closed until public 1.7.0 exact-version adoption succeeds.
 
 ## 1.6.0 — 2026-08-12
 

@@ -4,26 +4,25 @@
     "previous_state_git_ref": "67e5ca6:docs/nulnul/evolution.json",
     "reason": "Begin an executable schema-v3 epoch without inventing live-cycle evidence for schema-v1 promotions."
   },
-  "personal_evolution_home": null,
+  "personal_evolution_home": "configured-private-local-home",
   "personal_evolution": {
     "status": "local_verified_release_candidate",
-    "home_status": "PERSONAL_HOME_REQUIRED",
+    "home_status": "configured",
     "adaptation_id": "personal-checkpoint-freshness-v1",
     "decision": "PERSONAL_PROMOTION",
     "preregistration": "evals/personal-evolution/preregistration.json",
     "results": "evals/personal-evolution/results.json",
     "claim_boundary": "A privacy-safe checkpoint-freshness adaptation transferred to two bounded local project shapes, skipped one incompatible shape, and was reused in one fresh Project D. Personal adaptation families, cross-project aggregation, and universal generalization are not established.",
-    "next_action": "Obtain explicit user selection of a real private Personal Evolution Home before any durable personal write, then complete the separate 1.7.0 exact-version release lifecycle."
+    "next_action": "Complete the separate 1.7.0 publication and fresh exact-version personal-reuse adoption lifecycle."
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 1.7 Personal Evolution is locally verified as candidate version 1.7.0-rc.1; latest public version remains 1.6.0.",
+    "milestone": "NULNUL 1.7 Personal Evolution is locally verified as candidate version 1.7.0; latest public version remains 1.6.0.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-12: The accepted checkpoint-freshness mechanism was frozen as a privacy-safe personal candidate. Fresh Node and Make holdouts blocked stale state and restored verified resume; a one-shot negative shape skipped. Independent Personal Gate recorded PERSONAL_PROMOTION. An isolated opt-in Personal Home deduplicated the adaptation, and fresh Project D discovered it, passed compatibility, applied the shipped mechanism, and passed its exact check. The real personal home remains unset; no private or global state was created. Candidate version is 1.7.0-rc.1 and public product version remains 1.6.0 pending a separate exact-version 1.7.0 release lifecycle.",
-    "next_action": "Keep 1.7 in local release-candidate state until a real Personal Evolution Home is explicitly selected and a separate 1.7.0 publication plus fresh exact-version adoption closes the release lifecycle.",
+    "last_verified": "2026-08-12: The accepted checkpoint-freshness mechanism was frozen as a privacy-safe personal candidate. Fresh Node and Make holdouts blocked stale state and restored verified resume; a one-shot negative shape skipped. Independent Personal Gate recorded PERSONAL_PROMOTION. A real user-authorized private local Personal Home now contains the validated generalized adaptation; its path is not public evidence. Fresh Project D discovered it in an isolated control, passed compatibility, applied the shipped mechanism, and passed its exact check. Candidate version is 1.7.0 and public product version remains 1.6.0 pending exact-version adoption.",
+    "next_action": "Publish candidate 1.7.0 without leaving known-red main, then run fresh public Personal Home adoption and close only after the final Release Gate passes.",
     "blockers": [
-      "A durable Personal Evolution Home has not been explicitly selected.",
       "Public 1.7.0 publication and fresh exact-version adoption evidence are not yet available."
     ],
     "approved_permissions": []
