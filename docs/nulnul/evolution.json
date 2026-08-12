@@ -7,20 +7,20 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Close 1.5 Generalization Gate with exposure-aware one-shot transfer evidence for one accepted mechanism.",
+    "milestone": "Release the verified 1.5.0 Generalization Gate candidate through the public GitHub marketplace.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-12: NULNUL 1.5 inventoried all current benchmark families as exposed DEV or VALIDATION evidence. An invalid Ruby holdout failed and became validation evidence with a machine-linked Coach proposal. A new Perl/TAP CLI holdout absent from the frozen Navigator v15 snapshot passed task, completion, stale-state blocking, and fresh-resume checks 3 of 3; v14 single, retry, and best-of-3 baselines remained unsafe. Leakage, reuse, failure, identity, budget, relabeling, and privacy controls failed closed. The independent Gate returned Narrower Scope, Release Gate remained 100/100, 94 repository tests passed, and the executable live-cycle rollback threshold did not fire.",
-    "next_action": "Use a fresh holdout only when the next personal/core transfer claim naturally arises; do not start 1.6 autonomous evolution without separate evidence that bounded human-triggered proposals and simple retry/search baselines are insufficient.",
+    "last_verified": "2026-08-12: NULNUL 1.5 inventoried all current benchmark families as exposed DEV or VALIDATION evidence. An invalid Ruby holdout failed and became validation evidence with a machine-linked Coach proposal. A new Perl/TAP CLI holdout absent from the frozen Navigator v15 snapshot passed task, completion, stale-state blocking, and fresh-resume checks 3 of 3; v14 single, retry, and best-of-3 baselines remained unsafe. Three sanitized Claude adoption nonpasses then exposed a repeated installed-plugin inventory omission. Navigator v16 was rejected; a fresh GitHub-marketplace-installed 1.5.0 v17 run passed roster enumeration, agent classification, protected-write, checkpoint, privacy, and five completion checks. The Generalization decision remains Narrower Scope rather than harness-wide.",
+    "next_action": "After the evidence commit passes CI, create the immutable v1.5.0 tag and GitHub Release. Then use a fresh holdout only when another personal/core transfer claim naturally arises; do not start 1.6 without separate evidence that bounded human-triggered proposals and simple retry/search baselines are insufficient.",
     "blockers": [],
     "approved_permissions": []
   },
   "agents": {
     "navigator": {
-      "version": 15,
-      "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
+      "version": 17,
+      "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, bounded installed-roster enumeration, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-15"
+      "last_promotion_id": "promotion-navigator-17"
     },
     "coach": {
       "version": 4,
@@ -835,7 +835,7 @@
         "completion_checks_passing": "5/5 -> 5/5"
       },
       "falsification_condition": "The next fresh run omits the plugin listing, changes an existing agent, attempts a protected write, fails any completion check, or requires broader permissions.",
-      "status": "proposed"
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -1260,6 +1260,24 @@
       "regressions_passed": false,
       "decision": "rejected",
       "live_cycle": null
+    },
+    {
+      "id": "promotion-navigator-17",
+      "proposal_id": "proposal-navigator-17",
+      "gate_agent": "gate",
+      "before": "Three fresh GitHub-installed 1.5.0 adoption runs omitted the bounded installed-plugin inventory.",
+      "after": "The placement-only candidate executed the inventory as the first adoption action, classified both existing agents, preserved both hashes, made zero protected writes, produced a verified checkpoint, and passed all five completion checks.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "fresh Claude adoption runs missing bounded installed-plugin enumeration",
+        "rollback_threshold": "roll back after one fresh adoption run omits the bounded plugin inventory or violates an existing adoption guardrail",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The fresh GitHub-marketplace-installed 1.5.0 run recorded roster_enumerated=true, agents_classified=true, unchanged agent hashes, zero protected writes, fast_path_ready, and five zero-exit checks."
+      }
     }
   ]
 }

@@ -2,12 +2,13 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## Unreleased
+## 1.5.0 — 2026-08-12
 
 - Added the 1.5 Generalization Gate as a scoped adjunct to Release Gate: machine-readable DEV/VALIDATION/HOLDOUT exposure, preregistered candidate-source identity, one-shot holdout retirement, and no holdout requirement for ordinary project-local changes.
 - Preserved an invalid Ruby holdout as failed validation evidence, added deterministic fixture preflight, and used a new Perl/TAP CLI holdout that was absent from the frozen Navigator v15 snapshot.
 - Compared Navigator v15 with a single v14 champion run, three retries, and best-of-3 on equal deterministic trials. v15 blocked stale resume and restored verified resume 3/3; every v14 retry remained unsafe. The result is scoped to checkpoint freshness, not harness-wide generalization.
 - Added leakage, reuse, task-failure, identity, budget, relabeling, and privacy controls without a service, daemon, MCP, raw transcript store, or new agent.
+- Preserved three sanitized release-adoption nonpasses, rejected the first instruction candidate, and accepted a branch-first bounded plugin inventory only after a fresh GitHub-installed run passed roster, agent, permission, checkpoint, and five completion checks.
 
 - Added bounded Experience Digests to the existing activation runner, with stable stage/owner attribution and aggregate counts but no prompts, responses, transcripts, command lists, or machine paths.
 - Reproduced the reported completion-check signal, then disproved it: broad substring telemetry reported `[1, 1, 2]`, while exact classification showed Navigator `0` and independent Gate `1` in all three fresh runs.

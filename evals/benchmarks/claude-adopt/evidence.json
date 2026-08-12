@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "case_id": "positive-adopt-existing-harness",
-  "plugin_version": "1.3.5",
+  "plugin_version": "1.5.0",
   "plugin_source": "github",
   "protected_write_calls": [],
   "existing_agents": {
     "collector": {
-      "before_sha256": "464c4c29d0e4cfb6f7f1bc06680359ec839bc7e17109042eca8ab72f2749e386",
-      "after_sha256": "464c4c29d0e4cfb6f7f1bc06680359ec839bc7e17109042eca8ab72f2749e386"
+      "before_sha256": "9d4ba300087b4bd982f705d5d8fe99e0b1a51d1bce27b2b2f13be71fec086972",
+      "after_sha256": "9d4ba300087b4bd982f705d5d8fe99e0b1a51d1bce27b2b2f13be71fec086972"
     },
     "reviewer": {
-      "before_sha256": "23a3abc00237c5690e07b199cc1e37f12516318d7526e9e6e9ba31d04b9c3070",
-      "after_sha256": "23a3abc00237c5690e07b199cc1e37f12516318d7526e9e6e9ba31d04b9c3070"
+      "before_sha256": "e8cc199e93081727b4f517038c64a5e238b8f2e9a147c4d117db8d2051b59440",
+      "after_sha256": "e8cc199e93081727b4f517038c64a5e238b8f2e9a147c4d117db8d2051b59440"
     }
   },
   "roster_enumerated": true,
