@@ -77,7 +77,7 @@ class ProductPluginTests(unittest.TestCase):
         self.assertIn("do not activate when it already provides explicit local inputs, outputs, constraints, and a runnable completion check", text)
         self.assertIn("external-write planning, multi-session checkpointing, or evidence-gated agent evolution", text)
         self.assertIn("stop when every uncovered job has one adequate verified candidate", text)
-        self.assertIn("run the bounded `claude plugin list --json` command", text)
+        self.assertIn("first run the bounded `claude plugin list --json` command", text)
         for path in (
             "references/discovery-and-questions.md",
             "references/baseline-kernel.md",

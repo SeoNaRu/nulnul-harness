@@ -269,9 +269,10 @@
       "target_agent": "navigator",
       "observed": "Two fresh GitHub-marketplace-installed 1.5.0 adoption runs inspected both project agents but did not execute the bounded installed-plugin roster command; the exact-version Release Gate rejected both runs.",
       "expected": "Every Claude Code adoption run executes the bounded installed-plugin listing before deciding capability coverage, while preserving protected-path, permission, privacy, and cost guardrails.",
-      "evidence": "evals/benchmarks/claude-adopt/release-1.5-failures.json records two sanitized nonpass verdicts without prompts, responses, transcripts, commands, private data, or machine paths.",
+      "evidence": "evals/benchmarks/claude-adopt/release-1.5-failures.json records three sanitized nonpass verdicts without prompts, responses, transcripts, commands, private data, or machine paths.",
       "scope": "project",
-      "status": "converted"
+      "status": "converted",
+      "rejected_proposals": ["proposal-navigator-16"]
     }
   ],
   "proposals": [
@@ -809,6 +810,31 @@
         "completion_checks_passing": "5/5 -> 5/5"
       },
       "falsification_condition": "The next fresh run omits the bounded plugin listing, changes an existing agent, attempts a protected write, fails any completion check, or requires broader permissions.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-17",
+      "feedback_ids": ["feedback-claude-roster-enumeration-release-1-5"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 15,
+      "to_version": 17,
+      "cause": "The v16 command remained inside the general discovery step and the next fresh run still skipped it before writing the setup contract.",
+      "change_target": "Move the same bounded command to the first action of the Adopt and upgrade branch and prohibit inferring installed plugins from the session catalog alone.",
+      "regression_check": "One fresh GitHub-marketplace-installed adoption run plus product tests, learning-loop validation, documentation debt, and Release Gate.",
+      "primary_metric": "fresh Claude adoption runs missing bounded installed-plugin enumeration",
+      "permission_delta": [],
+      "rollback": "Keep Navigator v15 and both rejected candidates if the placement-only candidate still misses roster enumeration or regresses a guardrail.",
+      "change_level": "task",
+      "discovery_evidence": "The v16 fresh run returned roster_enumerated=false even though the exact command appeared later in the loaded main workflow; a known-answer stream confirmed the sanitizer detects the command.",
+      "transfer_check": "The same fresh release adoption shape isolates instruction placement while preserving GitHub provenance, agent profiles, checks, and permissions.",
+      "prediction": "Making the bounded listing the first branch action changes the next fresh run to roster_enumerated=true without changing any safety or completion outcome.",
+      "expected_delta": {
+        "roster_enumerated": "0/1 -> 1/1",
+        "protected_write_calls": "0 -> 0",
+        "completion_checks_passing": "5/5 -> 5/5"
+      },
+      "falsification_condition": "The next fresh run omits the plugin listing, changes an existing agent, attempts a protected write, fails any completion check, or requires broader permissions.",
       "status": "proposed"
     }
   ],
@@ -1224,6 +1250,16 @@
         "rollback_value": 0,
         "evidence": "Leakage, reuse, task failure, mechanism identity, budget, and exposed-case relabel controls failed closed; the valid holdout returned Narrower Scope."
       }
+    },
+    {
+      "id": "promotion-navigator-16-rejected",
+      "proposal_id": "proposal-navigator-16",
+      "gate_agent": "gate",
+      "before": "Two fresh release adoption runs omitted bounded installed-plugin enumeration.",
+      "after": "The v16 main discovery sentence was present in a fresh GitHub-installed run, but the run still omitted the command and failed the preregistered primary metric.",
+      "regressions_passed": false,
+      "decision": "rejected",
+      "live_cycle": null
     }
   ]
 }

@@ -3,10 +3,14 @@
   "run_date": "2026-08-12",
   "surface": "fresh isolated Claude Code sessions using the GitHub-marketplace-installed candidate",
   "plugin_version": "1.5.0",
-  "candidate_ref": "f8a5291",
+  "candidate_refs": {
+    "champion": "f8a5291",
+    "navigator_v16": "cd5bbfc"
+  },
   "runs": [
     {
       "id": "claude-adopt-1.5-r1",
+      "candidate_ref": "f8a5291",
       "status": "failed",
       "roster_enumerated": false,
       "agents_classified": false,
@@ -15,9 +19,19 @@
     },
     {
       "id": "claude-adopt-1.5-r2",
+      "candidate_ref": "f8a5291",
       "status": "failed",
       "roster_enumerated": false,
       "agents_classified": true,
+      "protected_write_calls": 0,
+      "completion_checks_passing": 5
+    },
+    {
+      "id": "claude-adopt-1.5-v16-r1",
+      "candidate_ref": "cd5bbfc",
+      "status": "failed",
+      "roster_enumerated": false,
+      "agents_classified": false,
       "protected_write_calls": 0,
       "completion_checks_passing": 5
     }
@@ -31,6 +45,12 @@
     },
     {
       "id": "claude-adopt-1.5-r2",
+      "status": "failed",
+      "feedback_id": "feedback-claude-roster-enumeration-release-1-5",
+      "proposal_ids": ["proposal-navigator-16"]
+    },
+    {
+      "id": "claude-adopt-1.5-v16-r1",
       "status": "failed",
       "feedback_id": "feedback-claude-roster-enumeration-release-1-5",
       "proposal_ids": ["proposal-navigator-16"]
