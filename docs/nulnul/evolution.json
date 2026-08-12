@@ -10,17 +10,17 @@
     "milestone": "Close 1.6.0 only after exact-version public adoption and green main CI verify the bounded autonomous evolution release.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-12: One live bounded activation-metadata episode reduced seven deterministic public-positioning violations to zero within its preregistered one-generation budget and stopped on SUCCESS. A fresh GitHub-marketplace-installed 1.6.0 Claude adoption then preserved two existing agent hashes, made zero protected writes, recorded bounded roster inspection, produced a fresh verified checkpoint, and passed the repository, setup, checkpoint, exact completion, and documentation-debt checks. The Gate's tool-shape attribution defect was closed with a paths-only negative control. Harness-wide autonomy and generalization remain unestablished.",
-    "next_action": "Push the exact-version evidence repair, observe main CI to green, then accept or reject proposal-navigator-18-release-sequencing from that live result. Do not begin 1.7 in this run.",
-    "blockers": ["The release-sequencing proposal remains pending until post-push main CI is observed green."],
+    "last_verified": "2026-08-12: One live bounded activation-metadata episode reduced seven deterministic public-positioning violations to zero within its preregistered one-generation budget and stopped on SUCCESS. A fresh GitHub-marketplace-installed 1.6.0 Claude adoption then preserved two existing agent hashes, made zero protected writes, recorded bounded roster inspection, produced a fresh verified checkpoint, and passed five checks. The Gate's tool-shape attribution defect was closed with a paths-only negative control. Release Gate returned release_ready=true and post-push main CI run 31570823735 passed. Harness-wide autonomy and generalization remain unestablished.",
+    "next_action": "Keep 1.6 bounded and observe ordinary use. Do not begin 1.7 Personal Evolution until the user requests it and project-scoped transfer evidence identifies that as the next bottleneck.",
+    "blockers": [],
     "approved_permissions": []
   },
   "agents": {
     "navigator": {
-      "version": 17,
-      "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, bounded installed-roster enumeration, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
+      "version": 18,
+      "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, bounded installed-roster enumeration, green-main release sequencing, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-17"
+      "last_promotion_id": "promotion-navigator-18"
     },
     "coach": {
       "version": 4,
@@ -938,7 +938,7 @@
         "post_push_ci_observed": "false -> true"
       },
       "falsification_condition": "Release Gate is stale before push, main CI is not watched, or completion is reported while main remains red.",
-      "status": "proposed"
+      "status": "accepted"
     },
     {
       "id": "proposal-gate-8-semantic-roster-read",
@@ -1440,6 +1440,24 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "The fresh GitHub-marketplace-installed 1.6.0 run validated; the direct-read path still works and the new paths-only negative control remains rejected."
+      }
+    },
+    {
+      "id": "promotion-navigator-18",
+      "proposal_id": "proposal-navigator-18-release-sequencing",
+      "gate_agent": "gate",
+      "before": "A known exact-version mismatch was pushed to main and work was reported complete while CI run 31568697702 remained red.",
+      "after": "The repair recorded fresh exact-version 1.6.0 evidence, passed Release Gate locally, and was not called complete until main CI run 31570823735 passed.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "known stale exact-version evidence pushed to main and reported complete",
+        "rollback_threshold": "roll back if one version-changing main push is knowingly left red or reported complete before CI passes",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "Exact-version GitHub adoption passed locally and GitHub Actions run 31570823735 completed successfully before promotion."
       }
     }
   ],

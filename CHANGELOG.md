@@ -14,7 +14,7 @@ All notable changes to `nulnul harness` are recorded here.
 - Kept the claim narrow: live candidate generation and correct bounded stopping are established for this activation-metadata failure family, not as live open-ended generation, broad autonomous improvement, personal promotion, or cross-project aggregation.
 - Verified a fresh GitHub-marketplace-installed 1.6.0 Claude Code adoption: two existing agent profiles remained byte-identical, protected writes stayed at zero, the checkpoint was fresh and fast-resumable, and five executable checks passed. No prior 1.5.0 evidence was relabeled.
 - Fixed an evidence-attribution defect exposed by that run: one bounded shell loop actually read both agent profiles but the sanitizer recognized only separate structured read tools. The Gate now accepts the bounded read behavior and retains a paths-only negative control.
-- Preserved the failed main CI caused by pushing a known stale exact-version artifact as Navigator feedback. The release-sequencing candidate requires exact-version evidence or a non-main publication candidate before a version-changing main push, followed by an observed green CI before completion.
+- Preserved the failed main CI caused by pushing a known stale exact-version artifact as Navigator feedback. Navigator v18 now requires exact-version evidence or a non-main publication candidate before a version-changing main push and an observed green CI before completion; the repair passed main CI in run 31570823735.
 
 ## 1.5.0 — 2026-08-12
 
