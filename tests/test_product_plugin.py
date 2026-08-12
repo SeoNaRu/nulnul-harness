@@ -65,7 +65,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.6.0")
+        self.assertEqual(manifest["version"], "1.7.0-rc.1")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -132,6 +132,7 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/validate_experience_digest.py",
             "scripts/validate_generalization_gate.py",
             "scripts/validate_autonomous_evolution.py",
+            "scripts/personal_adaptation.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
@@ -161,6 +162,8 @@ class ProductPluginTests(unittest.TestCase):
         personal = (SKILL / "references/personal-evolution.md").read_text(encoding="utf-8")
         self.assertIn("Run one bounded autonomous episode", personal)
         self.assertIn("NO_PROMOTION", personal)
+        self.assertIn("Reuse a verified adaptation personally", personal)
+        self.assertIn("PERSONAL_HOME_REQUIRED", personal)
 
     def test_setup_trigger_is_multilingual(self):
         description = re.search(
@@ -206,7 +209,8 @@ class ProductPluginTests(unittest.TestCase):
         version = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
         self.assertIn(f"Version: `{version}`", (ROOT / "submission/listing.md").read_text(encoding="utf-8"))
         self.assertIn(f"# nulnul harness {version}", (ROOT / "submission/release-notes.md").read_text(encoding="utf-8"))
-        self.assertIn(f"version-{version}", (ROOT / "README.md").read_text(encoding="utf-8"))
+        badge_version = version.replace("-", "--")
+        self.assertIn(f"version-{badge_version}", (ROOT / "README.md").read_text(encoding="utf-8"))
 
         archive = ROOT / "dist" / f"nulnul-harness-{version}.zip"
         self.assertTrue(archive.is_file())
@@ -226,13 +230,13 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "114 passed"),
-            "README.ko.md": ("README.md", "114개 통과"),
+            "README.md": ("README.ko.md", "132 passed"),
+            "README.ko.md": ("README.md", "132개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
             self.assertIn(other_locale, text)
-            self.assertIn(f"version-{manifest['version']}", text)
+            self.assertIn(f"version-{manifest['version'].replace('-', '--')}", text)
             self.assertIn("Release_Gate-100%2F100", text)
             self.assertIn("codex plugin add nulnul-harness@nulnul-harness", text)
             self.assertIn("claude plugin install nulnul-harness@nulnul-harness", text)

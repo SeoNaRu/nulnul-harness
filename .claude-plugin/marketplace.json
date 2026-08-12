@@ -10,7 +10,7 @@
       "name": "nulnul-harness",
       "source": "./plugins/nulnul-harness",
       "description": "Turn a requested project outcome into verified work by reusing proven capabilities, filling only demonstrated gaps, preserving progress, and gating bounded improvements independently.",
-      "version": "1.6.0"
+      "version": "1.7.0-rc.1"
     }
   ]
 }

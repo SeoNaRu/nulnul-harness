@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.6.0-111111" alt="version 1.6.0">
+  <img src="https://img.shields.io/badge/version-1.7.0--rc.1-111111" alt="version 1.7.0-rc.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="known behavior and safety score: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -18,7 +18,9 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> Version 1.6.0 is released and verified against a post-publication fresh GitHub-marketplace Claude Code adoption. The Release Gate passes exact release identity, protected-path controls, checkpoint checks, and the repository's published behavior and safety suite.
+> Candidate version 1.7.0-rc.1 is local and unreleased. The latest public release remains 1.6.0, verified against a post-publication fresh GitHub-marketplace Claude Code adoption.
+>
+> **1.7 status:** Personal Evolution is locally verified as a release candidate. Its first scoped adaptation passed two transfer shapes, skipped an incompatible shape, and was reused in one fresh project from an isolated opt-in home. No real personal home or global state was created, and exact-version public adoption is still pending.
 
 ## What is NULNUL?
 
@@ -74,7 +76,7 @@ Growth is driven by demonstrated work, not project size labels or a target agent
 | A failure becomes reproducible | Register one causal candidate, compare it with the current way, and keep it only if the Gate passes. |
 | A role or mechanism loses its job | Merge or remove it. Harness growth is not append-only. |
 
-This growth is currently project-scoped. NULNUL does not yet carry adaptations automatically across unrelated projects.
+Public 1.6.0 growth is project-scoped. The local 1.7 candidate adds an opt-in path for carrying one independently verified adaptation across projects, but only after transfer evidence, activation checks, and a separate Personal Gate. It never copies project memory or applies an adaptation globally.
 
 ## The operational problem
 
@@ -114,7 +116,7 @@ The process that proposes a change is separate from the process that assigns cre
 
 In bounded evolution, the candidate count, generation count, evaluation budget, permissions, and stop conditions are fixed before search begins. If nothing is better, **`NO_PROMOTION` is a correct result**.
 
-This is user-triggered, bounded improvement—not continuous self-learning, an unattended loop, or open-ended self-improvement.
+For personal reuse, project approval is still not enough. A generalized candidate must pass representative transfer checks and a separate Personal Gate. A new project then checks compatibility and may apply, narrow, or skip it. This is user-triggered, bounded improvement—not continuous self-learning, an unattended loop, or open-ended self-improvement.
 
 ## When it fits — and when it does not
 
@@ -135,7 +137,7 @@ This is user-triggered, bounded improvement—not continuous self-learning, an u
 - an always-on workflow engine or hosted orchestration service;
 - a system that should authenticate, deploy, publish, or write externally without approval;
 - a tool intended to improve the underlying model's reasoning ability;
-- automatic personal memory or learning across unrelated projects—those are not current capabilities.
+- raw personal memory, automatic global rules, or unapproved learning across unrelated projects—the 1.7 candidate stores only scoped verified adaptations in a user-selected local home.
 
 If the repository already has everything the task needs, you may not need NULNUL at all.
 
@@ -219,6 +221,15 @@ rejected directions, run one bounded improvement episode, and keep the
 current harness if no candidate wins on deterministic evidence.
 ```
 
+### Reuse a verified method in another project (1.7 release candidate)
+
+```text
+If this project produces a method worth reusing elsewhere, generalize only the
+mechanism, run representative transfer and negative-skip checks, and ask before
+writing it to a personal evolution home. In a new project, apply it only after
+a compatibility check.
+```
+
 ## What NULNUL actually does
 
 Without a harness, the user often has to choose capabilities, write project rules, manage context, design completion checks, preserve session state, and remember which fixes failed.
@@ -233,6 +244,7 @@ With NULNUL, the user can ask for the result. The plugin then:
 6. runs an exact repository command and records bounded, sanitized evidence;
 7. leaves verified state for later sessions when the project is durable;
 8. turns reproducible nonpass results into bounded improvement proposals.
+9. when explicitly opted in, can discover a Personal-Gate-approved adaptation, check it against the new project, and apply or skip it without copying the source project.
 
 Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Simple work combines roles. A separate role exists only when it has a distinct job, such as independent verification.
 
@@ -249,6 +261,7 @@ NULNUL is deliberately skills-only. It adds no server, daemon, hosted control pl
 | Verified continuity | Schema-v3 checkpoints use an exact completion command, bounded verification files, and a runner-owned freshness receipt. Mutated state cannot claim verified fast resume. |
 | Governed evolution | Schema-v4 episodes freeze pathology, candidate/generation/evaluation budgets, permission delta, archive identity, deterministic credit ownership, and a stop reason before promotion. |
 | Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, and mechanism identity are machine-readable. A used holdout cannot be relabeled unseen. |
+| Personal adaptation | A user-selected local registry stores generalized mechanisms, activation conditions, contraindications, transfer summaries, provenance, permissions, and revocation state. Missing home, conflicts, private data, stale status, and false activation fail closed. |
 | Release integrity | Exact plugin provenance and version, protected writes, agent hashes, validators, negative controls, archive/source parity, and documentation debt fail closed. |
 | Evidence hygiene | Stored artifacts exclude prompts, responses, raw transcripts, credentials, private project data, complete commands, and machine paths. |
 
@@ -303,16 +316,19 @@ Some of the strongest evidence came from failures:
 - **Invalid holdout preserved.** A Ruby fixture error consumed the first one-shot case. It was downgraded to validation, never renamed unseen, and replaced with a new case.
 - **Scoped generalization.** Checkpoint freshness survived one unseen local Perl/TAP project shape. The decision was **Narrower Scope**, not “the harness generalizes.”
 - **Live bounded evolution.** Two unchanged champion checks each found seven stale public-positioning surfaces. A newly generated one-generation candidate reached zero, passed the independent Gate, and stopped on `SUCCESS`. This establishes that behavior only for that activation-metadata failure family.
+- **Personal transfer candidate.** The accepted checkpoint-freshness mechanism passed fresh Node and Make project shapes, skipped a one-shot shape, and was discovered and verified in a fresh data-CLI Project D. The Gate decision was `PERSONAL_PROMOTION` for the explicit durable-checkpoint conditions only; it does not establish a general personal-memory system.
 - **Field failures became rules.** One workflow lost 12,000 decisions to concurrent writers, and an empty-cycle cursor repeatedly rescanned the same 120 items. Those incidents produced single-writer and cursor-persistence rules; they are not universal benchmarks.
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **114 passed (114/114)** | Deterministic product, state, privacy, rollback, and negative-control contracts hold. |
+| Repository tests | **132 passed (132/132)** | Deterministic product, state, privacy, rollback, transfer, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
 | Final 1.6.0 Release Gate | **Passed** | A post-publication fresh GitHub-marketplace 1.6.0 reinstall preserved two agent profiles, made zero protected writes, produced verified resumable state, and passed five executable checks. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one project shape; harness-wide generalization is not established. |
 | Bounded evolution | Champion/retry **7 violations**, new candidate **0**, stop `SUCCESS` | Live generation and bounded stopping worked once in a narrow failure family. |
+| Personal transfer candidate | **2 apply, 1 skip, fresh Project D pass** | One adaptation can be transferred, compatibility-checked, reused, deduplicated, and revoked without raw project data; broader personal evolution is not established. |
+| 1.7 release status | **1.7.0-rc.1, unreleased** | Functional and safety evidence is local; exact public 1.7.0 installation evidence does not exist yet. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
 
@@ -323,9 +339,9 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-The second command must report `release_ready: true`. A stale adoption version, local-only plugin source, protected write, changed agent hash, missing roster inspection, failed validator, or regression causes a nonzero exit.
+For a released version, the second command must report `release_ready: true`. This unreleased 1.7.0-rc.1 is expected to stop on stale exact-version adoption until public 1.7.0 exists; bypassing that failure would repeat the version-attribution defect the Gate is meant to prevent.
 
-The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), and the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
+The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), and the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) plus [results](evals/personal-evolution/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Why I built NULNUL
 
@@ -360,18 +376,20 @@ The roadmap describes user value, not an automatic release promise.
 | 1.4 Observable Evolution | Completed | See why the harness failed instead of trusting a plausible explanation. |
 | 1.5 Generalization Gate | Completed | Check whether a fix transfers or merely fits familiar evaluation cases. |
 | 1.6 Bounded Autonomous Evolution | Completed | Let the harness search a tiny candidate space under fixed budgets and stop without changing anything when evidence is weak. |
-| 1.7 Personal Evolution | Next; not started | Reuse a project-proven improvement elsewhere only after a fresh transfer check. |
-| 2.0 Cross-project / Meta Evolution | Long-term target | Combine scoped lessons without sharing raw workloads and improve the improvement procedure itself. |
+| 1.7 Personal Evolution | Current; locally verified release candidate | Reuse a project-proven improvement elsewhere only after transfer evidence, a Personal Gate, and a new-project compatibility check. Public 1.7.0 release evidence is still pending. |
+| 2.0 Cross-project / Meta Evolution | Next target after 1.7 closes | Relate multiple verified personal adaptations to improve what should be tried and when, without sharing raw workloads. |
 
 ## Trust boundaries and limitations
 
 - Authentication, external writes, deployment, publication, destructive operations, paid resources, and global registration require explicit approval.
 - Credentials, raw conversations, transcripts, complete command histories, machine paths, and private project data do not become evolution memory.
+- Personal Evolution requires an explicitly selected existing local directory. The current repository keeps `personal_evolution_home: null`; tests use a temporary isolated home and do not authorize a global write.
 - Unattended Claude Code sessions may inspect host-owned `.claude/**` configuration but do not rewrite it.
 - Checkpoints are compared with bounded repository reality before fast resume.
 - Independent Gate ownership is validated from declared state; it is not cryptographic proof of separate runtime identities.
 - NULNUL does not remove the underlying model's reasoning limits or prevent every agent error.
 - One unseen transfer and one live bounded episode do not establish universal or harness-wide generalization.
+- The first Personal Gate result covers one checkpoint mechanism and four bounded shapes. It does not prove that arbitrary project lessons transfer, that multiple adaptations compose, or that personal reuse beats fresh reasoning on tokens or elapsed time.
 - There is no daemon, recursive Coach, candidate population, hosted evolution service, or unattended infinite loop.
 
 ## FAQ

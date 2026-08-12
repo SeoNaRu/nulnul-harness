@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-12",
+  "source_shape": {
+    "project_shape": "source",
+    "mechanism_id": "checkpoint-freshness-receipt-v15",
+    "before_unsafe_fast_resume": "3 of 3",
+    "after_unsafe_fast_resume": "0 of 3",
+    "post_check_resume": "3 of 3"
+  },
+  "transfer_results": [
+    {
+      "case_id": "personal:node-package-transfer-1",
+      "role_at_run": "holdout",
+      "mechanism_id": "checkpoint-freshness-receipt-v15",
+      "candidate_ref": "435a8e5",
+      "project_shape": "node-package",
+      "activation_decision": "APPLY",
+      "application_status": "applied",
+      "completion_check_passed": true,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "read_scope": "passed",
+        "completion_checks": "passed",
+        "revocation": "passed"
+      },
+      "evidence": "The initial state verified, mutation invalidated the receipt, and the exact check restored verified resume using local files only."
+    },
+    {
+      "case_id": "personal:make-cli-transfer-2",
+      "role_at_run": "holdout",
+      "mechanism_id": "checkpoint-freshness-receipt-v15",
+      "candidate_ref": "435a8e5",
+      "project_shape": "build-tool-cli",
+      "activation_decision": "APPLY",
+      "application_status": "applied",
+      "completion_check_passed": true,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "read_scope": "passed",
+        "completion_checks": "passed",
+        "revocation": "passed"
+      },
+      "evidence": "The initial state verified, mutation invalidated the receipt, and the exact check restored verified resume using local files only."
+    },
+    {
+      "case_id": "personal:one-shot-skip-3",
+      "role_at_run": "holdout",
+      "mechanism_id": "checkpoint-freshness-receipt-v15",
+      "candidate_ref": "435a8e5",
+      "project_shape": "one-shot",
+      "activation_decision": "SKIP",
+      "application_status": "skipped",
+      "completion_check_passed": null,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "read_scope": "passed",
+        "completion_checks": "passed",
+        "revocation": "passed"
+      },
+      "evidence": "The one-shot shape had no durable checkpoint, bounded verification files, or resume job, so no adaptation was applied."
+    }
+  ],
+  "exposure_updates": [
+    {
+      "case_id": "personal:node-package-transfer-1",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    },
+    {
+      "case_id": "personal:make-cli-transfer-2",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    },
+    {
+      "case_id": "personal:one-shot-skip-3",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    }
+  ],
+  "personal_gate": {
+    "decision": "PERSONAL_PROMOTION",
+    "gate_agent": "gate",
+    "candidate_author": "coach",
+    "evidence": "Both positive holdouts passed freshness and completion checks, the negative holdout skipped, and all bounded guardrails passed.",
+    "established_scope": "Durable local projects with deterministic completion checks, bounded verification files, and checkpoint receipt support."
+  },
+  "rejected_personal_candidates": [
+    {
+      "candidate_id": "personal-checkpoint-ruby-transfer-v0",
+      "mechanism_id": "checkpoint-freshness-receipt-v15",
+      "source_claim_id": "claim-checkpoint-freshness-ruby-cli-1",
+      "decision": "PERSONAL_REJECT",
+      "reason": "The only transfer fixture failed preflight, so it was retained as validation evidence and could not support personal promotion."
+    }
+  ],
+  "personal_adaptation": {
+    "adaptation_id": "personal-checkpoint-freshness-v1",
+    "title": "Verified checkpoint freshness for durable projects",
+    "target_job": "prevent stale verified resume after project mutation",
+    "mechanism_id": "checkpoint-freshness-receipt-v15",
+    "mechanism": "Use a completion-runner-owned receipt over bounded verification files and require a current fingerprint before fast resume.",
+    "source_scope": "core",
+    "source_evidence": {
+      "original_failure": "A verified label survived later unverified project mutation.",
+      "before": "Unsafe mutated-state fast resume was accepted in 3 of 3 reproduced trials.",
+      "after": "Unsafe mutated-state fast resume was accepted in 0 of 3 candidate trials.",
+      "gate_decision": "The independent Gate accepted Navigator v15.",
+      "live_cycle": "Freshly checked state resumed in 3 of 3 post-check trials.",
+      "known_limitation": "Only declared verification files are covered by freshness evidence."
+    },
+    "activation_conditions": [
+      "durable_multi_session",
+      "verified_checkpoint_used",
+      "deterministic_completion_check",
+      "bounded_verification_files",
+      "checkpoint_receipt_supported"
+    ],
+    "contraindications": [
+      "one_shot_task",
+      "completion_check_unavailable",
+      "mutable_file_identity_unavailable"
+    ],
+    "primary_metric": "An approved adaptation is identified without candidate regeneration, stale mutation is blocked, and verified resume is restored after the exact check.",
+    "guardrails": [
+      "task correctness",
+      "permission boundary",
+      "privacy",
+      "bounded read scope",
+      "no unnecessary infrastructure",
+      "revocation"
+    ],
+    "required_permissions": [],
+    "privacy_class": "generalized_bounded_evidence",
+    "provenance": {
+      "source_proposal_id": "proposal-navigator-15",
+      "candidate_ref": "435a8e5",
+      "source_gate_id": "promotion-navigator-15"
+    },
+    "disable_condition": "Revoke or narrow after any false activation, stale-state acceptance, source-evidence invalidation, permission drift, or repeated transfer regression.",
+    "conflicts_with": [],
+    "current_scope": "personal",
+    "tested_project_shapes": [
+      "source",
+      "node-package",
+      "build-tool-cli",
+      "one-shot",
+      "data-cli"
+    ],
+    "transfer_results": [
+      {
+        "case_id": "personal:node-package-transfer-1",
+        "role_at_run": "holdout",
+        "mechanism_id": "checkpoint-freshness-receipt-v15",
+        "candidate_ref": "435a8e5",
+        "project_shape": "node-package",
+        "activation_decision": "APPLY",
+        "application_status": "applied",
+        "completion_check_passed": true,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "read_scope": "passed",
+          "completion_checks": "passed",
+          "revocation": "passed"
+        },
+        "evidence": "The initial state verified, mutation invalidated the receipt, and the exact check restored verified resume using local files only."
+      },
+      {
+        "case_id": "personal:make-cli-transfer-2",
+        "role_at_run": "holdout",
+        "mechanism_id": "checkpoint-freshness-receipt-v15",
+        "candidate_ref": "435a8e5",
+        "project_shape": "build-tool-cli",
+        "activation_decision": "APPLY",
+        "application_status": "applied",
+        "completion_check_passed": true,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "read_scope": "passed",
+          "completion_checks": "passed",
+          "revocation": "passed"
+        },
+        "evidence": "The initial state verified, mutation invalidated the receipt, and the exact check restored verified resume using local files only."
+      },
+      {
+        "case_id": "personal:one-shot-skip-3",
+        "role_at_run": "holdout",
+        "mechanism_id": "checkpoint-freshness-receipt-v15",
+        "candidate_ref": "435a8e5",
+        "project_shape": "one-shot",
+        "activation_decision": "SKIP",
+        "application_status": "skipped",
+        "completion_check_passed": null,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "read_scope": "passed",
+          "completion_checks": "passed",
+          "revocation": "passed"
+        },
+        "evidence": "The one-shot shape had no durable checkpoint, bounded verification files, or resume job, so no adaptation was applied."
+      }
+    ],
+    "status": "active",
+    "promoted_by": "gate",
+    "promoted_at": "2026-08-12"
+  },
+  "personal_home_evaluation": {
+    "kind": "isolated user-selected temporary directory",
+    "global_home_created": false,
+    "promotion_status": "promoted"
+  },
+  "baseline_comparison": {
+    "comparable_dimension": "deterministic personal inventory lookup and project completion correctness",
+    "incomparable_dimensions": [
+      "inference tokens",
+      "elapsed time",
+      "candidate-generation effort"
+    ],
+    "fresh_start": {
+      "adaptation_discovered": false,
+      "completion_check_passed": true
+    },
+    "personal_reuse": {
+      "adaptation_discovered": true,
+      "completion_check_passed": true
+    },
+    "conclusion": "Both arms keep task correctness; only the personal-home arm discovers a previously approved adaptation. No token, runtime, or universal task-quality win is claimed."
+  },
+  "fresh_project_adoption": {
+    "project_shape": "data-cli",
+    "adaptation_id": "personal-checkpoint-freshness-v1",
+    "inventory_discovered": true,
+    "compatibility_check_passed": true,
+    "applied": true,
+    "completion_check_passed": true,
+    "guardrails": {
+      "task_correctness": "passed",
+      "permissions": "passed",
+      "privacy": "passed",
+      "read_scope": "passed",
+      "completion_checks": "passed",
+      "revocation": "passed"
+    },
+    "evidence": "A fresh project found the approved adaptation, matched generic conditions, used the shipped checkpoint mechanism, and passed its exact local check."
+  }
+}

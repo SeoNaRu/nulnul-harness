@@ -41,6 +41,10 @@ LIVE_CYCLE_FIELDS = {"status", "metric", "rollback_threshold", "evidence"}
 LIVE_CYCLE_V3_FIELDS = LIVE_CYCLE_FIELDS | {"metric_value", "rollback_operator", "rollback_value"}
 ROLLBACK_OPERATORS = {"lt", "lte", "gt", "gte", "eq", "ne"}
 PROHIBITED_KEYS = {"raw_conversation", "secret", "secrets", "credential", "credentials", "api_key", "token"}
+PERSONAL_SUMMARY_FIELDS = {
+    "status", "home_status", "adaptation_id", "decision", "preregistration",
+    "results", "claim_boundary", "next_action",
+}
 
 
 def validate(payload):
@@ -80,6 +84,15 @@ def validate(payload):
         errors.append("personal_evolution_home must be null or a non-empty string")
     if schema_version >= 4 and not isinstance(payload.get("autonomous_episodes"), list):
         errors.append("autonomous_episodes must be an array")
+    personal = payload.get("personal_evolution")
+    if personal is not None and require_fields(personal, PERSONAL_SUMMARY_FIELDS, "personal_evolution"):
+        if personal["status"] not in {"not_started", "local_verified_release_candidate", "released"}:
+            errors.append("personal_evolution.status is invalid")
+        if personal["home_status"] not in {"PERSONAL_HOME_REQUIRED", "configured"}:
+            errors.append("personal_evolution.home_status is invalid")
+        for field in PERSONAL_SUMMARY_FIELDS - {"status", "home_status"}:
+            if not isinstance(personal[field], str) or not personal[field].strip():
+                errors.append(f"personal_evolution.{field} must be non-empty")
 
     checkpoint = payload.get("checkpoint")
     if require_fields(checkpoint, CHECKPOINT_FIELDS, "checkpoint"):

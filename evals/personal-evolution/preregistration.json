@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "approved_permissions": [],
+  "personal_candidate": {
+    "adaptation_id": "personal-checkpoint-freshness-v1",
+    "title": "Verified checkpoint freshness for durable projects",
+    "target_job": "prevent stale verified resume after project mutation",
+    "mechanism_id": "checkpoint-freshness-receipt-v15",
+    "mechanism": "Use a completion-runner-owned receipt over bounded verification files and require a current fingerprint before fast resume.",
+    "source_scope": "core",
+    "source_evidence": {
+      "original_failure": "A verified label survived later unverified project mutation.",
+      "before": "Unsafe mutated-state fast resume was accepted in 3 of 3 reproduced trials.",
+      "after": "Unsafe mutated-state fast resume was accepted in 0 of 3 candidate trials.",
+      "gate_decision": "The independent Gate accepted Navigator v15.",
+      "live_cycle": "Freshly checked state resumed in 3 of 3 post-check trials.",
+      "known_limitation": "Only declared verification files are covered by freshness evidence."
+    },
+    "activation_conditions": [
+      "durable_multi_session",
+      "verified_checkpoint_used",
+      "deterministic_completion_check",
+      "bounded_verification_files",
+      "checkpoint_receipt_supported"
+    ],
+    "contraindications": [
+      "one_shot_task",
+      "completion_check_unavailable",
+      "mutable_file_identity_unavailable"
+    ],
+    "primary_metric": "An approved adaptation is identified without candidate regeneration, stale mutation is blocked, and verified resume is restored after the exact check.",
+    "guardrails": [
+      "task correctness",
+      "permission boundary",
+      "privacy",
+      "bounded read scope",
+      "no unnecessary infrastructure",
+      "revocation"
+    ],
+    "required_permissions": [],
+    "privacy_class": "generalized_bounded_evidence",
+    "provenance": {
+      "source_proposal_id": "proposal-navigator-15",
+      "candidate_ref": "435a8e5",
+      "source_gate_id": "promotion-navigator-15"
+    },
+    "disable_condition": "Revoke or narrow after any false activation, stale-state acceptance, source-evidence invalidation, permission drift, or repeated transfer regression.",
+    "conflicts_with": [],
+    "candidate_author": "coach"
+  },
+  "transfer_preregistration": {
+    "claim": "The checkpoint freshness receipt can be safely recommended for structurally different local repositories that satisfy the explicit activation conditions, and skipped when those conditions do not hold.",
+    "activation_conditions": [
+      "durable_multi_session",
+      "verified_checkpoint_used",
+      "deterministic_completion_check",
+      "bounded_verification_files",
+      "checkpoint_receipt_supported"
+    ],
+    "contraindications": [
+      "one_shot_task",
+      "completion_check_unavailable",
+      "mutable_file_identity_unavailable"
+    ],
+    "primary_metric": "Positive shapes block stale resume and restore it after verification; the negative shape is skipped.",
+    "guardrails": [
+      "task correctness",
+      "permissions",
+      "privacy",
+      "read scope",
+      "completion checks",
+      "rollback"
+    ],
+    "falsification_condition": "Any positive shape accepts stale state or fails verified resume, the negative shape auto-applies, private data enters the adaptation, permission expands, or Project D cannot discover and verify reuse.",
+    "candidate_ref": "435a8e5",
+    "candidate_sources": [
+      {
+        "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_checkpoint.py",
+        "sha256": "sha256:4551d208b54506f0c762386d87a73b4a8255c2968617d859e74a7c23912d6fba"
+      },
+      {
+        "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/run_checkpoint_check.py",
+        "sha256": "sha256:1d6992c4db1f9f53ee5e2490c2b818ee3d05d5e988f7646cba7beca8f9ded0fb"
+      }
+    ],
+    "holdout_case_ids": [
+      "personal:node-package-transfer-1",
+      "personal:make-cli-transfer-2",
+      "personal:one-shot-skip-3"
+    ]
+  },
+  "holdout_cases": [
+    {
+      "case_id": "personal:node-package-transfer-1",
+      "project_shape": "node-package",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_transfer.py",
+      "expected_activation": true,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    },
+    {
+      "case_id": "personal:make-cli-transfer-2",
+      "project_shape": "build-tool-cli",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_transfer.py",
+      "expected_activation": true,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    },
+    {
+      "case_id": "personal:one-shot-skip-3",
+      "project_shape": "one-shot",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_transfer.py",
+      "expected_activation": false,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    }
+  ]
+}

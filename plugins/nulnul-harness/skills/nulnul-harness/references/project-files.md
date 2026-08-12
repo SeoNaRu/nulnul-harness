@@ -84,7 +84,7 @@ For a legacy durable setup, run `../scripts/migrate_legacy_checkpoint.py docs/nu
 
 Create this only for multi-session work, agent-specific feedback, or personal evolution. Start from `../assets/evolution-state.template.json`. Keep the current checkpoint, agent versions, bounded feedback, proposals, and Gate decisions. Validate it with `../scripts/validate_evolution_state.py` after every update.
 
-Keep project feedback project-local by default. Promote a rule to a user-selected private personal evolution home only after it generalizes across representative projects or the user explicitly requests that scope. Never commit a private personal-home path, raw conversation, secret, credential, personal data, or full transcript to a public repository.
+Keep project feedback project-local by default. Promote a rule to a user-selected private personal evolution home only after it passes preregistered representative transfer checks and an independent Personal Gate. The home must be an existing local directory explicitly selected by the user; otherwise fail with `PERSONAL_HOME_REQUIRED`. Use `../scripts/personal_adaptation.py` to validate, promote, discover, deduplicate, or revoke generalized adaptations. Never commit a private personal-home path, source code, raw conversation, secret, credential, personal data, full transcript, or project identity to a public repository.
 
 ## `.agents/skills/<name>/`
 

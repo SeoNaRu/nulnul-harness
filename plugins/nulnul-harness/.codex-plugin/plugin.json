@@ -1,6 +1,6 @@
 {
   "name": "nulnul-harness",
-  "version": "1.6.0",
+  "version": "1.7.0-rc.1",
   "description": "Complete project outcomes with proven capabilities, minimal additions, executable verification, and bounded evidence-gated improvement.",
   "author": {
     "name": "SeoNaRu",
@@ -37,7 +37,8 @@
       "meta-harness-evolution",
       "observable-evolution",
       "generalization-gate",
-      "bounded-autonomous-evolution"
+      "bounded-autonomous-evolution",
+      "verified-personal-adaptations"
     ],
     "brandColor": "#111111",
     "composerIcon": "./assets/nulnul-harness.svg",

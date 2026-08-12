@@ -30,6 +30,12 @@ class ReleaseGateTests(unittest.TestCase):
         self.generalization_results = json.loads(
             (ROOT / "evals/generalization/results.json").read_text(encoding="utf-8")
         )
+        self.personal_preregistration = json.loads(
+            (ROOT / "evals/personal-evolution/preregistration.json").read_text(encoding="utf-8")
+        )
+        self.personal_results = json.loads(
+            (ROOT / "evals/personal-evolution/results.json").read_text(encoding="utf-8")
+        )
 
     def test_current_score_uses_only_passed_evidence(self):
         score = MODULE.calculate(self.cases, self.results)
@@ -85,6 +91,11 @@ class ReleaseGateTests(unittest.TestCase):
         self.assertFalse(generalization["harness_wide_generalization"])
         autonomous = MODULE.validate_autonomous_gate(self.evolution)
         self.assertEqual(autonomous["episodes"][0]["decision"], "AUTONOMOUS_EVOLUTION_WIN")
+        personal = MODULE.validate_personal_gate(
+            self.personal_preregistration, self.personal_results
+        )
+        self.assertEqual(personal["decision"], "PERSONAL_PROMOTION")
+        self.assertTrue(personal["fresh_project_reuse"])
 
     def test_autonomous_gate_rejects_self_credit(self):
         altered = json.loads(json.dumps(self.evolution))
@@ -93,6 +104,12 @@ class ReleaseGateTests(unittest.TestCase):
         ] = "coach"
         with self.assertRaisesRegex(ValueError, "self-credited"):
             MODULE.validate_autonomous_gate(altered)
+
+    def test_personal_gate_rejects_self_approval(self):
+        altered = json.loads(json.dumps(self.personal_results))
+        altered["personal_gate"]["gate_agent"] = "coach"
+        with self.assertRaisesRegex(ValueError, "self-approval"):
+            MODULE.validate_personal_gate(self.personal_preregistration, altered)
 
     def test_autonomous_gate_rejects_completion_check_budget_bypass(self):
         altered = json.loads(json.dumps(self.evolution))
@@ -237,14 +254,22 @@ class ReleaseGateTests(unittest.TestCase):
             MODULE.validate_observable_evolution(stale_truth)
 
     def test_claude_evidence_fails_on_unverified_protected_write(self):
-        version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
         evidence = json.loads(
             (ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8")
         )
+        version = evidence["plugin_version"]
         MODULE.validate_claude_gate(evidence, version)
         evidence["protected_write_calls"] = [{"tool": "Write", "target": ".claude/**"}]
         with self.assertRaisesRegex(ValueError, "protected-path write"):
             MODULE.validate_claude_gate(evidence, version)
+        current = json.loads(
+            (ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8")
+        )["version"]
+        with self.assertRaisesRegex(ValueError, "plugin version is stale"):
+            MODULE.validate_claude_gate(
+                json.loads((ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8")),
+                current,
+            )
 
 
 if __name__ == "__main__":

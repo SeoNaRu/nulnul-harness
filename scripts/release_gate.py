@@ -21,6 +21,9 @@ GENERALIZATION_VALIDATOR = (
 AUTONOMOUS_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_autonomous_evolution.py"
 )
+PERSONAL_VALIDATOR = (
+    ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/personal_adaptation.py"
+)
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -71,6 +74,21 @@ def validate_autonomous_gate(evolution: dict) -> dict:
     if not episodes:
         raise ValueError("Bounded Autonomous Evolution Gate needs one recorded episode")
     return {"status": "passed", "episodes": episodes}
+
+
+def validate_personal_gate(preregistration: dict, results: dict) -> dict:
+    spec = importlib.util.spec_from_file_location("personal_adaptation", PERSONAL_VALIDATOR)
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    errors = validator.validate_evidence(preregistration, results, ROOT)
+    if errors:
+        raise ValueError("Personal Evolution Gate failed: " + "; ".join(errors))
+    return {
+        "status": "passed",
+        "decision": results["personal_gate"]["decision"],
+        "adaptation_id": results["personal_adaptation"]["adaptation_id"],
+        "fresh_project_reuse": results["fresh_project_adoption"]["completion_check_passed"],
+    }
 
 
 def _median(runs: list[dict], field: str) -> float:
@@ -370,6 +388,12 @@ def main() -> None:
     )
     evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
     evidence = json.loads((ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8"))
+    personal_preregistration = json.loads(
+        (ROOT / "evals/personal-evolution/preregistration.json").read_text(encoding="utf-8")
+    )
+    personal_results = json.loads(
+        (ROOT / "evals/personal-evolution/results.json").read_text(encoding="utf-8")
+    )
     version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
     validate_learning_gate(learning, evolution)
     validate_learning_gate(failed_holdout, evolution)
@@ -385,6 +409,9 @@ def main() -> None:
         generalization_manifest, generalization_results
     )
     score["bounded_autonomous_evolution_gate"] = validate_autonomous_gate(evolution)
+    score["personal_evolution_gate"] = validate_personal_gate(
+        personal_preregistration, personal_results
+    )
     print(json.dumps(score, ensure_ascii=False, indent=2))
 
 

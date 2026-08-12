@@ -15,7 +15,7 @@ Combine roles for low-risk execution when useful. Separate Coach and Gate for ev
 
 For work that spans sessions or needs agent-specific learning, create `docs/nulnul/evolution.json` from `../assets/evolution-state.template.json`. Validate it with `../scripts/validate_evolution_state.py` after each change.
 
-New states use schema version 4. Versions 1 through 3 remain readable for compatibility. Version 3 added an executable live-cycle threshold. Version 4 adds bounded autonomous episodes that link a reproduced feedback item, `WHERE`/`WHY` pathology, fixed search budget, rejected archive lookup, candidates, independent evidence, comparable retry baseline, cost, decision, and stop reason without duplicating proposal or promotion fields.
+New states use schema version 4. Versions 1 through 3 remain readable for compatibility. Version 3 added an executable live-cycle threshold. Version 4 adds bounded autonomous episodes that link a reproduced feedback item, `WHERE`/`WHY` pathology, fixed search budget, rejected archive lookup, candidates, independent evidence, comparable retry baseline, cost, decision, and stop reason without duplicating proposal or promotion fields. Cross-project personal adaptations use their own schema-version-1 registry so project evolution history is not copied into a personal home.
 
 The Navigator owns checkpoint intent but not verification truth. Concise checkpoints use schema version 3 and store the goal, current milestone, completion check, bounded verification file list, explicit `verified`, `failed`, or `unknown` status, last verified summary, exact next action, permission constraints and approvals, and blockers. The completion runner alone writes the sibling verification receipt after executing the check. Fast resume requires the receipt's fingerprint to match current repository reality; older schemas, missing receipts, failed, unknown, and stale states fail closed. Recheck that evidence and continue from the next action instead of reconstructing a plan from chat.
 
@@ -103,6 +103,16 @@ Stop on success, exhausted budget, uninformative feedback, repeated pathology, n
 - Promote to **core** or public plugin behavior only with cross-project evidence, full regression checks, and explicit publication approval.
 - A broader scope never inherits project data, paths, contacts, credentials, or raw examples.
 - Before a personal/core transfer claim, apply `generalization.md`; a known regression is validation evidence, not proof that the mechanism generalizes.
+
+## Reuse a verified adaptation personally
+
+Personal scope is an opt-in adaptation registry, not copied project memory. Require a user-selected existing local directory; when none is configured, return `PERSONAL_HOME_REQUIRED`. Never infer a home directory, create hidden global state, or sync it externally. Store only a generalized mechanism, activation conditions, contraindications, bounded source and transfer summaries, permissions, provenance, status, and disable condition.
+
+Project acceptance does not grant personal promotion. Freeze the source evidence and transfer claim, keep fresh cases outside the candidate snapshot, retire each used holdout, and let an independent Personal Gate decide `PERSONAL_PROMOTION`, `NARROWER_PERSONAL_SCOPE`, rejection, insufficient evidence, privacy block, or permission block. Use `scripts/personal_adaptation.py validate-evidence` before promotion.
+
+After promotion, inspect the current project and call `scripts/personal_adaptation.py discover --home <approved-directory> <project-facts.json>`. Apply only an active compatible adaptation after a small project-local check. A contraindication, revoked or stale status, missing permission, or unresolved conflict returns skip or fail-closed instead of automatic application. `promote` deduplicates the same mechanism and activation identity; `revoke` disables it without deleting its evidence.
+
+Never move source code, repository or customer identity, machine paths, credentials, contacts, prompts, responses, transcripts, full command history, raw logs, private issues, or arbitrary project files into the registry. A personal adaptation is a candidate for reuse, not a global rule. Keep Personal Gate separate from the originating Project Gate and do not aggregate or optimize multiple adaptations in this milestone.
 
 ## Resume the original work
 
