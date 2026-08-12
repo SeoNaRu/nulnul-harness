@@ -33,3 +33,5 @@ python3 scripts/pack_plugin.py
 python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .
 ```
+
+For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`.
