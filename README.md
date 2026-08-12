@@ -137,7 +137,7 @@ For personal reuse, project approval is still not enough. A generalized candidat
 - an always-on workflow engine or hosted orchestration service;
 - a system that should authenticate, deploy, publish, or write externally without approval;
 - a tool intended to improve the underlying model's reasoning ability;
-- raw personal memory, automatic global rules, or unapproved learning across unrelated projects—the 1.7 candidate stores only scoped verified adaptations in a user-selected local home.
+- raw personal memory, automatic global rules, or unapproved learning across unrelated projects—the 1.7 release stores only scoped verified adaptations in a user-selected local home.
 
 If the repository already has everything the task needs, you may not need NULNUL at all.
 
@@ -221,7 +221,7 @@ rejected directions, run one bounded improvement episode, and keep the
 current harness if no candidate wins on deterministic evidence.
 ```
 
-### Reuse a verified method in another project (1.7 release candidate)
+### Reuse a verified method in another project (1.7)
 
 ```text
 If this project produces a method worth reusing elsewhere, generalize only the
@@ -376,7 +376,7 @@ The roadmap describes user value, not an automatic release promise.
 | 1.4 Observable Evolution | Completed | See why the harness failed instead of trusting a plausible explanation. |
 | 1.5 Generalization Gate | Completed | Check whether a fix transfers or merely fits familiar evaluation cases. |
 | 1.6 Bounded Autonomous Evolution | Completed | Let the harness search a tiny candidate space under fixed budgets and stop without changing anything when evidence is weak. |
-| 1.7 Personal Evolution | Current; locally verified release candidate | Reuse a project-proven improvement elsewhere only after transfer evidence, a Personal Gate, and a new-project compatibility check. Public 1.7.0 release evidence is still pending. |
+| 1.7 Personal Evolution | Current; public adoption verified | Reuse a project-proven improvement elsewhere only after transfer evidence, a Personal Gate, and a new-project compatibility check. Exact public 1.7.0 evidence passed; main CI closure is pending. |
 | 2.0 Cross-project / Meta Evolution | Next target after 1.7 closes | Relate multiple verified personal adaptations to improve what should be tried and when, without sharing raw workloads. |
 
 ## Trust boundaries and limitations

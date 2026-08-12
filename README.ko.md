@@ -137,7 +137,7 @@ Personal reuse에서는 project 승인만으로도 부족합니다. 일반화된
 - always-on workflow engine이나 hosted orchestration service가 필요한 경우
 - AI가 승인 없이 인증·배포·공개·외부 쓰기를 해야 하는 경우
 - 기반 model의 reasoning 성능을 높여 주는 도구를 찾는 경우
-- raw personal memory, automatic global rule, 승인 없는 cross-project learning—1.7 candidate는 user-selected local home에 scoped verified adaptation만 저장합니다.
+- raw personal memory, automatic global rule, 승인 없는 cross-project learning—1.7 release는 user-selected local home에 scoped verified adaptation만 저장합니다.
 
 저장소가 작업에 필요한 것을 이미 모두 갖췄다면 NULNUL을 쓰지 않아도 됩니다.
 
@@ -221,7 +221,7 @@ bounded improvement episode를 한 번 실행해줘. Deterministic evidence로 �
 후보가 없으면 현재 하네스를 그대로 유지해줘.
 ```
 
-### 다른 프로젝트에서 검증된 방법 재사용 (1.7 release candidate)
+### 다른 프로젝트에서 검증된 방법 재사용 (1.7)
 
 ```text
 이 프로젝트에서 다른 곳에도 쓸 만한 방법이 나오면 mechanism만 일반화하고,
@@ -375,7 +375,7 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 | 1.4 Observable Evolution | 완료 | 그럴듯한 설명을 믿는 대신 하네스가 왜 실패했는지 볼 수 있습니다. |
 | 1.5 Generalization Gate | 완료 | 해결책이 전이되는지 익숙한 evaluation case에만 맞는지 구분합니다. |
 | 1.6 Bounded Autonomous Evolution | 완료 | 고정 budget 안에서 작은 후보 공간을 탐색하고 근거가 약하면 아무것도 바꾸지 않은 채 멈춥니다. |
-| 1.7 Personal Evolution | 현재; 로컬 검증 release candidate | 프로젝트에서 검증된 개선을 transfer evidence, Personal Gate, 새 프로젝트 compatibility check 뒤에만 재사용합니다. Public 1.7.0 release evidence는 아직 없습니다. |
+| 1.7 Personal Evolution | 현재; public adoption 검증 | 프로젝트에서 검증된 개선을 transfer evidence, Personal Gate, 새 프로젝트 compatibility check 뒤에만 재사용합니다. Exact public 1.7.0 evidence는 통과했고 main CI closure만 남았습니다. |
 | 2.0 Cross-project / Meta Evolution | 1.7 closure 뒤의 다음 목표 | 여러 verified personal adaptation의 관계를 이용해 무엇을 언제 시도할지 개선하되 raw workload는 공유하지 않습니다. |
 
 ## 신뢰 경계와 한계
