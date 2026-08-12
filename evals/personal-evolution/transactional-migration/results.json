@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-13",
+  "source_shape": {
+    "project_shape": "source",
+    "mechanism_id": "prepare-replace-restore-batch-v8",
+    "historical_gate": "promotion-navigator-8"
+  },
+  "transfer_results": [
+    {
+      "case_id": "personal:python-config-bundle-transfer-4",
+      "role_at_run": "holdout",
+      "mechanism_id": "prepare-replace-restore-batch-v8",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "project_shape": "python-config-bundle",
+      "activation_decision": "APPLY",
+      "application_status": "applied",
+      "completion_check_passed": true,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "completion_checks": "passed",
+        "scope": "passed"
+      },
+      "evidence": "The injected second replacement restored both original files, removed the uncommitted new file, and preserved file mode."
+    },
+    {
+      "case_id": "personal:node-workspace-transfer-5",
+      "role_at_run": "holdout",
+      "mechanism_id": "prepare-replace-restore-batch-v8",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "project_shape": "node-workspace-manifest",
+      "activation_decision": "APPLY",
+      "application_status": "applied",
+      "completion_check_passed": true,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "completion_checks": "passed",
+        "scope": "passed"
+      },
+      "evidence": "A distinct workspace manifest shape restored all local state after the same bounded failure."
+    },
+    {
+      "case_id": "personal:single-file-skip-6",
+      "role_at_run": "holdout",
+      "mechanism_id": "prepare-replace-restore-batch-v8",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "project_shape": "single-file-settings",
+      "activation_decision": "SKIP",
+      "application_status": "skipped",
+      "completion_check_passed": null,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "completion_checks": "passed",
+        "scope": "passed"
+      },
+      "evidence": "A single-file change does not need batch transaction machinery and was skipped."
+    }
+  ],
+  "exposure_updates": [
+    {
+      "case_id": "personal:python-config-bundle-transfer-4",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    },
+    {
+      "case_id": "personal:node-workspace-transfer-5",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    },
+    {
+      "case_id": "personal:single-file-skip-6",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    }
+  ],
+  "personal_gate": {
+    "decision": "PERSONAL_PROMOTION",
+    "gate_agent": "gate",
+    "candidate_author": "coach",
+    "evidence": "Both positive local multi-file shapes restored cleanly, the single-file negative skipped, and all guardrails passed.",
+    "established_scope": "Durable offline repositories performing a local multi-file state migration."
+  },
+  "rejected_personal_candidates": [
+    {
+      "candidate_id": "personal-external-transaction-v0",
+      "mechanism_id": "prepare-replace-restore-batch-v8",
+      "source_claim_id": "claim-external-state-transaction-1",
+      "decision": "PERSONAL_REJECT",
+      "reason": "Local file restoration cannot establish transactionality for external services."
+    }
+  ],
+  "personal_adaptation": {
+    "adaptation_id": "personal-transactional-migration-v1",
+    "title": "Transactional local multi-file migration",
+    "target_job": "prevent mixed-generation local state after a multi-file migration failure",
+    "mechanism_id": "prepare-replace-restore-batch-v8",
+    "mechanism": "Prepare every local replacement before committing any, then restore every replaced file if a later replacement fails.",
+    "source_scope": "core",
+    "source_evidence": {
+      "original_failure": "A failure during the second replacement left earlier project files migrated and later files unchanged.",
+      "before": "The injected second-replacement failure left one migrated file committed.",
+      "after": "The same failure left zero files partially migrated.",
+      "gate_decision": "The independent Gate accepted Navigator v8.",
+      "live_cycle": "The failure-injection live cycle restored all earlier replacements.",
+      "known_limitation": "The mechanism covers local files only and does not claim transactional external services."
+    },
+    "activation_conditions": [
+      "durable_multi_session",
+      "multi_file_state_migration",
+      "local_offline_repository"
+    ],
+    "contraindications": [
+      "one_shot_task",
+      "single_file_change",
+      "external_state_migration"
+    ],
+    "primary_metric": "An injected later replacement failure leaves zero local files at a mixed generation.",
+    "guardrails": [
+      "task correctness",
+      "permission boundary",
+      "privacy",
+      "file modes",
+      "no external transaction claim"
+    ],
+    "required_permissions": [],
+    "privacy_class": "generalized_bounded_evidence",
+    "provenance": {
+      "source_proposal_id": "proposal-navigator-8",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "source_gate_id": "promotion-navigator-8"
+    },
+    "disable_condition": "Revoke or narrow after one partial local migration, permission expansion, or external-state false activation.",
+    "conflicts_with": [],
+    "current_scope": "personal",
+    "tested_project_shapes": [
+      "source",
+      "python-config-bundle",
+      "node-workspace-manifest",
+      "single-file-settings"
+    ],
+    "transfer_results": [
+      {
+        "case_id": "personal:python-config-bundle-transfer-4",
+        "role_at_run": "holdout",
+        "mechanism_id": "prepare-replace-restore-batch-v8",
+        "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+        "project_shape": "python-config-bundle",
+        "activation_decision": "APPLY",
+        "application_status": "applied",
+        "completion_check_passed": true,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "completion_checks": "passed",
+          "scope": "passed"
+        },
+        "evidence": "The injected second replacement restored both original files, removed the uncommitted new file, and preserved file mode."
+      },
+      {
+        "case_id": "personal:node-workspace-transfer-5",
+        "role_at_run": "holdout",
+        "mechanism_id": "prepare-replace-restore-batch-v8",
+        "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+        "project_shape": "node-workspace-manifest",
+        "activation_decision": "APPLY",
+        "application_status": "applied",
+        "completion_check_passed": true,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "completion_checks": "passed",
+          "scope": "passed"
+        },
+        "evidence": "A distinct workspace manifest shape restored all local state after the same bounded failure."
+      },
+      {
+        "case_id": "personal:single-file-skip-6",
+        "role_at_run": "holdout",
+        "mechanism_id": "prepare-replace-restore-batch-v8",
+        "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+        "project_shape": "single-file-settings",
+        "activation_decision": "SKIP",
+        "application_status": "skipped",
+        "completion_check_passed": null,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "completion_checks": "passed",
+          "scope": "passed"
+        },
+        "evidence": "A single-file change does not need batch transaction machinery and was skipped."
+      }
+    ],
+    "status": "active",
+    "promoted_by": "gate",
+    "promoted_at": "2026-08-13"
+  },
+  "personal_home_evaluation": {
+    "kind": "isolated user-selected temporary directory",
+    "global_home_created": false,
+    "promotion_status": "promoted"
+  },
+  "baseline_comparison": {
+    "comparable_dimension": "deterministic inventory discovery and restoration correctness",
+    "incomparable_dimensions": [
+      "inference tokens",
+      "elapsed time"
+    ],
+    "fresh_start": {
+      "adaptation_discovered": false,
+      "completion_check_passed": true
+    },
+    "personal_reuse": {
+      "adaptation_discovered": true,
+      "completion_check_passed": true
+    },
+    "conclusion": "Both arms retain local correctness; only the approved personal inventory discovers the prior mechanism."
+  },
+  "fresh_project_adoption": {
+    "project_shape": "shell-build-contract",
+    "adaptation_id": "personal-transactional-migration-v1",
+    "inventory_discovered": true,
+    "compatibility_check_passed": true,
+    "applied": true,
+    "completion_check_passed": true,
+    "guardrails": {
+      "task_correctness": "passed",
+      "permissions": "passed",
+      "privacy": "passed",
+      "completion_checks": "passed",
+      "scope": "passed"
+    },
+    "evidence": "A fresh durable local project discovered the approved mechanism and restored every file after an injected later failure."
+  }
+}

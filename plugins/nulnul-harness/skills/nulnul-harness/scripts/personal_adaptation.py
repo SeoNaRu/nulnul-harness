@@ -23,7 +23,10 @@ ALLOWED_CONDITIONS = {
     "deterministic_completion_check", "bounded_verification_files",
     "checkpoint_receipt_supported", "one_shot_task",
     "completion_check_unavailable", "mutable_file_identity_unavailable",
-    "local_offline_repository",
+    "local_offline_repository", "multi_file_state_migration",
+    "single_file_change", "external_state_migration",
+    "machine_readable_evaluation", "measured_nonpass",
+    "evolution_state_present", "passing_only_run", "evolution_state_absent",
 }
 PROHIBITED_KEYS = {
     "project_source", "source_code", "repository_name", "customer_name",

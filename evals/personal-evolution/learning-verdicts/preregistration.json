@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "registered_at": "2026-08-13T10:05:00+09:00",
+  "approved_permissions": [],
+  "personal_candidate": {
+    "adaptation_id": "personal-learning-verdict-linkage-v1",
+    "title": "Machine-linked nonpass learning verdicts",
+    "target_job": "prevent measured nonpass results from bypassing bounded feedback and proposal follow-up",
+    "mechanism_id": "required-learning-verdict-links-v4",
+    "mechanism": "Require every machine-readable result inventory and make each nonpass identify existing feedback plus at least one proposal that links that feedback.",
+    "source_scope": "core",
+    "source_evidence": {
+      "original_failure": "A published nonpass could remain disconnected from the active feedback and proposal state, and later omission of the inventory disabled validation.",
+      "before": "Removing the learning verdict inventory bypassed the cross-file learning check.",
+      "after": "Missing inventories and disconnected nonpass links fail deterministic validation.",
+      "gate_decision": "The independent Gate accepted Coach v4 after the v3 linkage mechanism.",
+      "live_cycle": "Product and release negative controls both rejected an omitted inventory.",
+      "known_limitation": "The mechanism validates linkage; it does not judge proposal quality or invent feedback."
+    },
+    "activation_conditions": [
+      "machine_readable_evaluation",
+      "measured_nonpass",
+      "evolution_state_present"
+    ],
+    "contraindications": [
+      "passing_only_run",
+      "one_shot_task",
+      "evolution_state_absent"
+    ],
+    "primary_metric": "Published nonpass verdicts without valid feedback and proposal links remain at zero.",
+    "guardrails": [
+      "task correctness",
+      "permission boundary",
+      "privacy",
+      "proposal author cannot self-approve",
+      "passing verdicts need no invented failure"
+    ],
+    "required_permissions": [],
+    "privacy_class": "generalized_bounded_evidence",
+    "provenance": {
+      "source_proposal_id": "proposal-coach-4",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "source_gate_id": "promotion-coach-4"
+    },
+    "disable_condition": "Revoke or narrow after one unlinked nonpass passes, a passing-only run is forced into evolution, or private evidence is required.",
+    "conflicts_with": [],
+    "candidate_author": "coach"
+  },
+  "transfer_preregistration": {
+    "claim": "The accepted nonpass-linkage invariant transfers to machine-readable evaluation results across distinct local project shapes.",
+    "activation_conditions": [
+      "machine_readable_evaluation",
+      "measured_nonpass",
+      "evolution_state_present"
+    ],
+    "contraindications": [
+      "passing_only_run",
+      "one_shot_task",
+      "evolution_state_absent"
+    ],
+    "primary_metric": "Published nonpass verdicts without valid feedback and proposal links remain at zero.",
+    "guardrails": [
+      "task correctness",
+      "permission boundary",
+      "privacy",
+      "proposal author cannot self-approve",
+      "passing verdicts need no invented failure"
+    ],
+    "falsification_condition": "Any positive shape accepts a missing or disconnected link, the passing-only shape activates, or broader permissions are required.",
+    "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+    "candidate_sources": [
+      {
+        "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_learning_loop.py",
+        "sha256": "sha256:652b21b5453dd4c16433097ffff692a8dd6bcfbd0f36e6995c5e61ebce5a2fbf"
+      }
+    ],
+    "holdout_case_ids": [
+      "personal:python-eval-link-transfer-7",
+      "personal:node-ci-link-transfer-8",
+      "personal:passing-only-skip-9"
+    ]
+  },
+  "holdout_cases": [
+    {
+      "case_id": "personal:python-eval-link-transfer-7",
+      "project_shape": "python-evaluation-report",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_additional_transfers.py",
+      "expected_activation": true,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    },
+    {
+      "case_id": "personal:node-ci-link-transfer-8",
+      "project_shape": "node-ci-report",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_additional_transfers.py",
+      "expected_activation": true,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    },
+    {
+      "case_id": "personal:passing-only-skip-9",
+      "project_shape": "passing-only-report",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_additional_transfers.py",
+      "expected_activation": false,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    }
+  ]
+}

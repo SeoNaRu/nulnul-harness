@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-13",
+  "source_shape": {
+    "project_shape": "source",
+    "mechanism_id": "required-learning-verdict-links-v4",
+    "historical_gate": "promotion-coach-4"
+  },
+  "transfer_results": [
+    {
+      "case_id": "personal:python-eval-link-transfer-7",
+      "role_at_run": "holdout",
+      "mechanism_id": "required-learning-verdict-links-v4",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "project_shape": "python-evaluation-report",
+      "activation_decision": "APPLY",
+      "application_status": "applied",
+      "completion_check_passed": true,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "completion_checks": "passed",
+        "scope": "passed"
+      },
+      "evidence": "A linked Python evaluation nonpass passed while the missing-link control failed."
+    },
+    {
+      "case_id": "personal:node-ci-link-transfer-8",
+      "role_at_run": "holdout",
+      "mechanism_id": "required-learning-verdict-links-v4",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "project_shape": "node-ci-report",
+      "activation_decision": "APPLY",
+      "application_status": "applied",
+      "completion_check_passed": true,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "completion_checks": "passed",
+        "scope": "passed"
+      },
+      "evidence": "A distinct CI-report identity passed only with feedback and proposal linkage."
+    },
+    {
+      "case_id": "personal:passing-only-skip-9",
+      "role_at_run": "holdout",
+      "mechanism_id": "required-learning-verdict-links-v4",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "project_shape": "passing-only-report",
+      "activation_decision": "SKIP",
+      "application_status": "skipped",
+      "completion_check_passed": null,
+      "guardrails": {
+        "task_correctness": "passed",
+        "permissions": "passed",
+        "privacy": "passed",
+        "completion_checks": "passed",
+        "scope": "passed"
+      },
+      "evidence": "A passing-only result had no nonpass to convert and correctly skipped the adaptation."
+    }
+  ],
+  "exposure_updates": [
+    {
+      "case_id": "personal:python-eval-link-transfer-7",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    },
+    {
+      "case_id": "personal:node-ci-link-transfer-8",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    },
+    {
+      "case_id": "personal:passing-only-skip-9",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    }
+  ],
+  "personal_gate": {
+    "decision": "PERSONAL_PROMOTION",
+    "gate_agent": "gate",
+    "candidate_author": "coach",
+    "evidence": "Both nonpass report shapes enforced linkage, the passing-only negative skipped, and all guardrails passed.",
+    "established_scope": "Projects with machine-readable measured nonpasses and an active evolution state."
+  },
+  "rejected_personal_candidates": [
+    {
+      "candidate_id": "personal-auto-feedback-inference-v0",
+      "mechanism_id": "required-learning-verdict-links-v4",
+      "source_claim_id": "claim-auto-inferred-feedback-1",
+      "decision": "PERSONAL_REJECT",
+      "reason": "The validator can verify evidence identity but cannot safely invent causal feedback or approve a proposal."
+    }
+  ],
+  "personal_adaptation": {
+    "adaptation_id": "personal-learning-verdict-linkage-v1",
+    "title": "Machine-linked nonpass learning verdicts",
+    "target_job": "prevent measured nonpass results from bypassing bounded feedback and proposal follow-up",
+    "mechanism_id": "required-learning-verdict-links-v4",
+    "mechanism": "Require every machine-readable result inventory and make each nonpass identify existing feedback plus at least one proposal that links that feedback.",
+    "source_scope": "core",
+    "source_evidence": {
+      "original_failure": "A published nonpass could remain disconnected from the active feedback and proposal state, and later omission of the inventory disabled validation.",
+      "before": "Removing the learning verdict inventory bypassed the cross-file learning check.",
+      "after": "Missing inventories and disconnected nonpass links fail deterministic validation.",
+      "gate_decision": "The independent Gate accepted Coach v4 after the v3 linkage mechanism.",
+      "live_cycle": "Product and release negative controls both rejected an omitted inventory.",
+      "known_limitation": "The mechanism validates linkage; it does not judge proposal quality or invent feedback."
+    },
+    "activation_conditions": [
+      "machine_readable_evaluation",
+      "measured_nonpass",
+      "evolution_state_present"
+    ],
+    "contraindications": [
+      "passing_only_run",
+      "one_shot_task",
+      "evolution_state_absent"
+    ],
+    "primary_metric": "Published nonpass verdicts without valid feedback and proposal links remain at zero.",
+    "guardrails": [
+      "task correctness",
+      "permission boundary",
+      "privacy",
+      "proposal author cannot self-approve",
+      "passing verdicts need no invented failure"
+    ],
+    "required_permissions": [],
+    "privacy_class": "generalized_bounded_evidence",
+    "provenance": {
+      "source_proposal_id": "proposal-coach-4",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "source_gate_id": "promotion-coach-4"
+    },
+    "disable_condition": "Revoke or narrow after one unlinked nonpass passes, a passing-only run is forced into evolution, or private evidence is required.",
+    "conflicts_with": [],
+    "current_scope": "personal",
+    "tested_project_shapes": [
+      "source",
+      "python-evaluation-report",
+      "node-ci-report",
+      "passing-only-report"
+    ],
+    "transfer_results": [
+      {
+        "case_id": "personal:python-eval-link-transfer-7",
+        "role_at_run": "holdout",
+        "mechanism_id": "required-learning-verdict-links-v4",
+        "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+        "project_shape": "python-evaluation-report",
+        "activation_decision": "APPLY",
+        "application_status": "applied",
+        "completion_check_passed": true,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "completion_checks": "passed",
+          "scope": "passed"
+        },
+        "evidence": "A linked Python evaluation nonpass passed while the missing-link control failed."
+      },
+      {
+        "case_id": "personal:node-ci-link-transfer-8",
+        "role_at_run": "holdout",
+        "mechanism_id": "required-learning-verdict-links-v4",
+        "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+        "project_shape": "node-ci-report",
+        "activation_decision": "APPLY",
+        "application_status": "applied",
+        "completion_check_passed": true,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "completion_checks": "passed",
+          "scope": "passed"
+        },
+        "evidence": "A distinct CI-report identity passed only with feedback and proposal linkage."
+      },
+      {
+        "case_id": "personal:passing-only-skip-9",
+        "role_at_run": "holdout",
+        "mechanism_id": "required-learning-verdict-links-v4",
+        "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+        "project_shape": "passing-only-report",
+        "activation_decision": "SKIP",
+        "application_status": "skipped",
+        "completion_check_passed": null,
+        "guardrails": {
+          "task_correctness": "passed",
+          "permissions": "passed",
+          "privacy": "passed",
+          "completion_checks": "passed",
+          "scope": "passed"
+        },
+        "evidence": "A passing-only result had no nonpass to convert and correctly skipped the adaptation."
+      }
+    ],
+    "status": "active",
+    "promoted_by": "gate",
+    "promoted_at": "2026-08-13"
+  },
+  "personal_home_evaluation": {
+    "kind": "isolated user-selected temporary directory",
+    "global_home_created": false,
+    "promotion_status": "promoted"
+  },
+  "baseline_comparison": {
+    "comparable_dimension": "deterministic inventory discovery and nonpass-link validation",
+    "incomparable_dimensions": [
+      "inference tokens",
+      "elapsed time"
+    ],
+    "fresh_start": {
+      "adaptation_discovered": false,
+      "completion_check_passed": true
+    },
+    "personal_reuse": {
+      "adaptation_discovered": true,
+      "completion_check_passed": true
+    },
+    "conclusion": "Both arms can validate a supplied link; only the approved personal inventory discovers the prior mechanism."
+  },
+  "fresh_project_adoption": {
+    "project_shape": "make-evaluation-report",
+    "adaptation_id": "personal-learning-verdict-linkage-v1",
+    "inventory_discovered": true,
+    "compatibility_check_passed": true,
+    "applied": true,
+    "completion_check_passed": true,
+    "guardrails": {
+      "task_correctness": "passed",
+      "permissions": "passed",
+      "privacy": "passed",
+      "completion_checks": "passed",
+      "scope": "passed"
+    },
+    "evidence": "A fresh evaluation project discovered the approved mechanism, accepted a linked nonpass, and rejected a missing link."
+  }
+}

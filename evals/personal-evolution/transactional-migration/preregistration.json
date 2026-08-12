@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "registered_at": "2026-08-13T10:00:00+09:00",
+  "approved_permissions": [],
+  "personal_candidate": {
+    "adaptation_id": "personal-transactional-migration-v1",
+    "title": "Transactional local multi-file migration",
+    "target_job": "prevent mixed-generation local state after a multi-file migration failure",
+    "mechanism_id": "prepare-replace-restore-batch-v8",
+    "mechanism": "Prepare every local replacement before committing any, then restore every replaced file if a later replacement fails.",
+    "source_scope": "core",
+    "source_evidence": {
+      "original_failure": "A failure during the second replacement left earlier project files migrated and later files unchanged.",
+      "before": "The injected second-replacement failure left one migrated file committed.",
+      "after": "The same failure left zero files partially migrated.",
+      "gate_decision": "The independent Gate accepted Navigator v8.",
+      "live_cycle": "The failure-injection live cycle restored all earlier replacements.",
+      "known_limitation": "The mechanism covers local files only and does not claim transactional external services."
+    },
+    "activation_conditions": [
+      "durable_multi_session",
+      "multi_file_state_migration",
+      "local_offline_repository"
+    ],
+    "contraindications": [
+      "one_shot_task",
+      "single_file_change",
+      "external_state_migration"
+    ],
+    "primary_metric": "An injected later replacement failure leaves zero local files at a mixed generation.",
+    "guardrails": [
+      "task correctness",
+      "permission boundary",
+      "privacy",
+      "file modes",
+      "no external transaction claim"
+    ],
+    "required_permissions": [],
+    "privacy_class": "generalized_bounded_evidence",
+    "provenance": {
+      "source_proposal_id": "proposal-navigator-8",
+      "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+      "source_gate_id": "promotion-navigator-8"
+    },
+    "disable_condition": "Revoke or narrow after one partial local migration, permission expansion, or external-state false activation.",
+    "conflicts_with": [],
+    "candidate_author": "coach"
+  },
+  "transfer_preregistration": {
+    "claim": "The accepted local batch replacement mechanism transfers to distinct durable local project shapes without claiming external transactions.",
+    "activation_conditions": [
+      "durable_multi_session",
+      "multi_file_state_migration",
+      "local_offline_repository"
+    ],
+    "contraindications": [
+      "one_shot_task",
+      "single_file_change",
+      "external_state_migration"
+    ],
+    "primary_metric": "An injected later replacement failure leaves zero local files at a mixed generation.",
+    "guardrails": [
+      "task correctness",
+      "permission boundary",
+      "privacy",
+      "file modes",
+      "no external transaction claim"
+    ],
+    "falsification_condition": "Any positive shape retains a partial replacement, the negative shape activates, or the mechanism needs broader permissions.",
+    "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+    "candidate_sources": [
+      {
+        "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/migrate_legacy_checkpoint.py",
+        "sha256": "sha256:ec74a315a70d2b394ea8c5e2e1bfb28b71c23c156eea02d2f47788b852058bda"
+      }
+    ],
+    "holdout_case_ids": [
+      "personal:python-config-bundle-transfer-4",
+      "personal:node-workspace-transfer-5",
+      "personal:single-file-skip-6"
+    ]
+  },
+  "holdout_cases": [
+    {
+      "case_id": "personal:python-config-bundle-transfer-4",
+      "project_shape": "python-config-bundle",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_additional_transfers.py",
+      "expected_activation": true,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    },
+    {
+      "case_id": "personal:node-workspace-transfer-5",
+      "project_shape": "node-workspace-manifest",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_additional_transfers.py",
+      "expected_activation": true,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    },
+    {
+      "case_id": "personal:single-file-skip-6",
+      "project_shape": "single-file-settings",
+      "role_at_run": "holdout",
+      "material_path": "evals/personal-evolution/run_additional_transfers.py",
+      "expected_activation": false,
+      "current_role": "holdout",
+      "unseen": true,
+      "exposure_count": 0
+    }
+  ]
+}
