@@ -18,7 +18,7 @@
   <a href="README.md">English</a> · <strong>한국어</strong>
 </p>
 
-> Version 1.7.0은 공개됐고 정확한 GitHub tag가 fresh Claude Code 및 personal-adaptation adoption을 통과했습니다. 이제 evidence commit의 main CI만 남았습니다.
+> Version 1.7.0은 공개 및 release closure를 마쳤습니다. 정확한 GitHub tag가 fresh Claude Code와 personal-adaptation adoption을 통과했고, evidence commit은 main CI run `31651306556`에서 성공했습니다.
 >
 > **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
 
@@ -322,12 +322,12 @@ transfer claim만 → sealed unseen check → scoped decision
 | --- | --- | --- |
 | 저장소 test | **138개 통과 (138/138)** | deterministic product, state, privacy, rollback, transfer, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
-| 최종 1.7.0 Release Gate | **로컬 통과** | Exact-tag Claude Code와 personal-adaptation adoption이 통과했으며, 이 evidence의 main CI green만 남았습니다. |
+| 최종 1.7.0 Release Gate | **통과** | Exact-tag Claude Code와 personal-adaptation adoption 통과 후 main CI run `31651306556`도 green이 됐습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
 | Unseen transfer | **Narrower Scope** | mechanism 하나가 project shape 하나로 전이됐으며 harness-wide generalization은 미입증입니다. |
 | Bounded evolution | champion/retry **위반 7개**, 새 후보 **0개**, stop `SUCCESS` | 좁은 failure family 하나에서 live generation과 bounded stopping이 한 번 동작했습니다. |
 | Personal transfer candidate | **적용 2, 건너뜀 1, fresh Project D 통과** | Raw project data 없이 adaptation 하나를 transfer, compatibility check, reuse, dedup, revoke할 수 있습니다. 더 넓은 personal evolution은 미입증입니다. |
-| 1.7 release 상태 | **공개 adoption 통과, main CI 대기** | 정확한 public 1.7.0 tag가 local override 없는 fresh adoption을 통과했습니다. 더 넓은 personal evolution은 미입증입니다. |
+| 1.7 release 상태 | **공개 및 검증 완료** | 정확한 public 1.7.0 tag가 local override 없는 fresh adoption을 통과했고 evidence의 main CI도 성공했습니다. 더 넓은 personal evolution은 미입증입니다. |
 
 개선 후보가 반드시 이겨야 하는 것은 아닙니다. 거부, `NO_PROMOTION`, narrower scope, rollback은 모두 정상 결과입니다.
 
@@ -338,7 +338,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-공개된 버전이라면 두 번째 command가 `release_ready: true`를 보고해야 합니다. Version 1.7.0은 exact public-tag evidence로 로컬에서 이를 통과했으며, 같은 evidence commit의 main CI가 green이 된 뒤에만 release를 닫습니다.
+공개된 버전이라면 두 번째 command가 `release_ready: true`를 보고해야 합니다. Version 1.7.0은 exact public-tag evidence로 이를 통과했고, 같은 evidence의 main CI도 성공했습니다.
 
 근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json)을 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
 
@@ -375,8 +375,8 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 | 1.4 Observable Evolution | 완료 | 그럴듯한 설명을 믿는 대신 하네스가 왜 실패했는지 볼 수 있습니다. |
 | 1.5 Generalization Gate | 완료 | 해결책이 전이되는지 익숙한 evaluation case에만 맞는지 구분합니다. |
 | 1.6 Bounded Autonomous Evolution | 완료 | 고정 budget 안에서 작은 후보 공간을 탐색하고 근거가 약하면 아무것도 바꾸지 않은 채 멈춥니다. |
-| 1.7 Personal Evolution | 현재; public adoption 검증 | 프로젝트에서 검증된 개선을 transfer evidence, Personal Gate, 새 프로젝트 compatibility check 뒤에만 재사용합니다. Exact public 1.7.0 evidence는 통과했고 main CI closure만 남았습니다. |
-| 2.0 Cross-project / Meta Evolution | 1.7 closure 뒤의 다음 목표 | 여러 verified personal adaptation의 관계를 이용해 무엇을 언제 시도할지 개선하되 raw workload는 공유하지 않습니다. |
+| 1.7 Personal Evolution | 완료 | 프로젝트에서 검증된 개선을 transfer evidence, Personal Gate, 새 프로젝트 compatibility check 뒤에만 재사용합니다. Exact public adoption과 main CI가 통과했습니다. |
+| 2.0 Cross-project / Meta Evolution | 다음 목표 | 여러 verified personal adaptation의 관계를 이용해 무엇을 언제 시도할지 개선하되 raw workload는 공유하지 않습니다. |
 
 ## 신뢰 경계와 한계
 

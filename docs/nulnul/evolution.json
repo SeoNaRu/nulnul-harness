@@ -13,18 +13,16 @@
     "preregistration": "evals/personal-evolution/preregistration.json",
     "results": "evals/personal-evolution/results.json",
     "claim_boundary": "A privacy-safe checkpoint-freshness adaptation transferred to two bounded local project shapes, skipped incompatible and revoked cases, and was reused from an approved local home in fresh projects using the exact public 1.7.0 artifact. Personal adaptation families, cross-project aggregation, and universal generalization are not established.",
-    "next_action": "Close 1.7.0 only after the exact-version evidence commit passes main CI."
+    "next_action": "Observe ordinary 1.7 use; do not begin 2.0 cross-project aggregation until the user requests it and multiple verified adaptations justify the scope."
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 1.7.0 is public and exact-version adoption is verified; release closure awaits green main CI for the evidence commit.",
+    "milestone": "NULNUL 1.7.0 is public and release-closed after exact-version adoption and green main CI.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-13: Public tag v1.7.0 points to release commit fe6f826 and its byte-identical archive has SHA-256 8e79a4598d1358be4e26a5f8a08178e78d2d90bcf2ef9aef3bce43ed0688ba57. Exact-version personal reuse applied in a fresh project, skipped incompatible and revoked controls, and expanded no permissions. A separate fresh GitHub-marketplace Claude Code run preserved two existing agent hashes, made zero protected writes, produced fast_path_ready verified state, and passed five checks. Final Release Gate passes locally.",
-    "next_action": "Push the sanitized 1.7.0 evidence commit with approval, observe main CI to green, then record release closure.",
-    "blockers": [
-      "The exact-version evidence commit has not yet passed main CI."
-    ],
+    "last_verified": "2026-08-13: Public tag v1.7.0 points to release commit fe6f826 and its byte-identical archive has SHA-256 8e79a4598d1358be4e26a5f8a08178e78d2d90bcf2ef9aef3bce43ed0688ba57. Exact-version personal reuse applied in a fresh project, skipped incompatible and revoked controls, and expanded no permissions. A separate fresh GitHub-marketplace Claude Code run preserved two existing agent hashes, made zero protected writes, produced fast_path_ready verified state, and passed five checks. Final Release Gate returned release_ready=true and main CI run 31651306556 passed.",
+    "next_action": "Observe ordinary 1.7 use; do not begin 2.0 cross-project aggregation until the user requests it and multiple verified adaptations justify the scope.",
+    "blockers": [],
     "approved_permissions": []
   },
   "agents": {

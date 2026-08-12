@@ -18,7 +18,7 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> Version 1.7.0 is public and its exact GitHub tag passed fresh Claude Code and personal-adaptation adoption. Release closure is waiting only for the evidence commit's main CI.
+> Version 1.7.0 is public and release-closed. Its exact GitHub tag passed fresh Claude Code and personal-adaptation adoption, and the evidence commit passed main CI in run `31651306556`.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
 
@@ -323,12 +323,12 @@ Some of the strongest evidence came from failures:
 | --- | --- | --- |
 | Repository tests | **138 passed (138/138)** | Deterministic product, state, privacy, rollback, transfer, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
-| Final 1.7.0 Release Gate | **Passed locally** | Fresh exact-tag Claude Code and personal-adaptation adoption passed; release closure awaits green main CI for this evidence. |
+| Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by green main CI run `31651306556`. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one project shape; harness-wide generalization is not established. |
 | Bounded evolution | Champion/retry **7 violations**, new candidate **0**, stop `SUCCESS` | Live generation and bounded stopping worked once in a narrow failure family. |
 | Personal transfer candidate | **2 apply, 1 skip, fresh Project D pass** | One adaptation can be transferred, compatibility-checked, reused, deduplicated, and revoked without raw project data; broader personal evolution is not established. |
-| 1.7 release status | **Public adoption passed; main CI pending** | The exact public 1.7.0 tag passed fresh adoption without local overrides; broader personal evolution remains unestablished. |
+| 1.7 release status | **Released and verified** | The exact public 1.7.0 tag passed fresh adoption without local overrides and its evidence passed main CI; broader personal evolution remains unestablished. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
 
@@ -339,7 +339,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-For a released version, the second command must report `release_ready: true`. Version 1.7.0 now does so locally from exact public-tag evidence; the release is closed only after the same evidence commit passes main CI.
+For a released version, the second command must report `release_ready: true`. Version 1.7.0 does so from exact public-tag evidence, and the same evidence passed main CI.
 
 The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), and the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) plus [results](evals/personal-evolution/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -376,8 +376,8 @@ The roadmap describes user value, not an automatic release promise.
 | 1.4 Observable Evolution | Completed | See why the harness failed instead of trusting a plausible explanation. |
 | 1.5 Generalization Gate | Completed | Check whether a fix transfers or merely fits familiar evaluation cases. |
 | 1.6 Bounded Autonomous Evolution | Completed | Let the harness search a tiny candidate space under fixed budgets and stop without changing anything when evidence is weak. |
-| 1.7 Personal Evolution | Current; public adoption verified | Reuse a project-proven improvement elsewhere only after transfer evidence, a Personal Gate, and a new-project compatibility check. Exact public 1.7.0 evidence passed; main CI closure is pending. |
-| 2.0 Cross-project / Meta Evolution | Next target after 1.7 closes | Relate multiple verified personal adaptations to improve what should be tried and when, without sharing raw workloads. |
+| 1.7 Personal Evolution | Completed | Reuse a project-proven improvement elsewhere only after transfer evidence, a Personal Gate, and a new-project compatibility check. Exact public adoption and main CI passed. |
+| 2.0 Cross-project / Meta Evolution | Next target | Relate multiple verified personal adaptations to improve what should be tried and when, without sharing raw workloads. |
 
 ## Trust boundaries and limitations
 

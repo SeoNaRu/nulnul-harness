@@ -11,6 +11,7 @@ All notable changes to `nulnul harness` are recorded here.
 - In an isolated opt-in Personal Home, a fresh data-CLI Project D discovered the adaptation without user restatement, passed compatibility, applied the already shipped checkpoint mechanism, and passed its exact completion check. A no-registry baseline also passed task behavior but discovered no approved adaptation; no token, elapsed-time, or broad task-quality win is claimed.
 - Configured one explicit private local Personal Home, promoted the verified adaptation, and passed its registry and privacy validation without storing the path publicly.
 - Published annotated tag `v1.7.0`; the exact public artifact passed fresh personal-adaptation reuse, incompatible-project skip, revocation, and a separate headless Claude Code adoption that preserved two agent profiles, made zero protected writes, produced verified resumable state, and passed five executable checks.
+- Closed the release only after the exact-version evidence commit passed main CI in run `31651306556`.
 
 ## 1.6.0 — 2026-08-12
 
