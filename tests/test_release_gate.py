@@ -36,6 +36,9 @@ class ReleaseGateTests(unittest.TestCase):
         self.personal_results = json.loads(
             (ROOT / "evals/personal-evolution/results.json").read_text(encoding="utf-8")
         )
+        self.public_personal_adoption = json.loads(
+            (ROOT / "evals/personal-evolution/public-adoption.json").read_text(encoding="utf-8")
+        )
 
     def test_current_score_uses_only_passed_evidence(self):
         score = MODULE.calculate(self.cases, self.results)
@@ -96,6 +99,11 @@ class ReleaseGateTests(unittest.TestCase):
         )
         self.assertEqual(personal["decision"], "PERSONAL_PROMOTION")
         self.assertTrue(personal["fresh_project_reuse"])
+        public_personal = MODULE.validate_public_personal_adoption(
+            self.public_personal_adoption, "1.7.0"
+        )
+        self.assertEqual(public_personal["negative_project"], "SKIP")
+        self.assertEqual(public_personal["revocation_control"], "SKIP")
 
     def test_autonomous_gate_rejects_self_credit(self):
         altered = json.loads(json.dumps(self.evolution))
@@ -110,6 +118,12 @@ class ReleaseGateTests(unittest.TestCase):
         altered["personal_gate"]["gate_agent"] = "coach"
         with self.assertRaisesRegex(ValueError, "self-approval"):
             MODULE.validate_personal_gate(self.personal_preregistration, altered)
+
+    def test_public_personal_adoption_rejects_stale_version(self):
+        altered = json.loads(json.dumps(self.public_personal_adoption))
+        altered["installed_plugin"]["version"] = "1.6.0"
+        with self.assertRaisesRegex(ValueError, "version is stale"):
+            MODULE.validate_public_personal_adoption(altered, "1.7.0")
 
     def test_autonomous_gate_rejects_completion_check_budget_bypass(self):
         altered = json.loads(json.dumps(self.evolution))

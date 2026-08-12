@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "run_id": "personal-public-1.7-r1",
+  "run_date": "2026-08-12",
+  "case_id": "public-personal-adoption-1",
+  "installed_plugin": {
+    "version": "1.7.0",
+    "distribution_source": "github-tag",
+    "marketplace_ref": "v1.7.0",
+    "local_override": false,
+    "symlink": false
+  },
+  "distribution": {
+    "release_tag": "v1.7.0",
+    "release_commit": "fe6f82630f634aeb0d036b5cc31e84bed2abbbe3",
+    "asset": "nulnul-harness-1.7.0.zip",
+    "asset_sha256": "8e79a4598d1358be4e26a5f8a08178e78d2d90bcf2ef9aef3bce43ed0688ba57"
+  },
+  "personal_home": {
+    "configured": true,
+    "existing_directory": true,
+    "not_symlink": true,
+    "registry_valid": true,
+    "privacy_passed": true,
+    "path_stored": false
+  },
+  "adaptation": {
+    "adaptation_id": "personal-checkpoint-freshness-v1",
+    "mechanism_id": "checkpoint-freshness-receipt-v15",
+    "status": "active"
+  },
+  "fresh_project": {
+    "shape": "ruby-library",
+    "discovery": "APPLY",
+    "activation_match": true,
+    "contraindication_clear": true,
+    "compatibility_passed": true,
+    "application_passed": true,
+    "completion_check_passed": true,
+    "verified_resume": true,
+    "permission_delta": [],
+    "protected_writes": []
+  },
+  "negative_project": {
+    "shape": "one-shot-static-note",
+    "registry_checked": true,
+    "decision": "SKIP",
+    "reason": "conditions_not_met"
+  },
+  "revocation_control": {
+    "isolated_copy": true,
+    "decision": "SKIP",
+    "reason": "revoked",
+    "real_home_unchanged": true
+  },
+  "baseline": {
+    "comparable_dimension": "approved adaptation discovery and completion correctness",
+    "adaptation_discovered": false,
+    "completion_check_passed": true,
+    "incomparable_dimensions": [
+      "inference tokens",
+      "elapsed time",
+      "task quality"
+    ]
+  },
+  "personal_gate": {
+    "status": "passed",
+    "gate_agent": "gate",
+    "candidate_author": "coach",
+    "decision": "PERSONAL_PROMOTION",
+    "identity_match": true,
+    "no_conflict": true,
+    "not_stale_or_revoked": true
+  },
+  "privacy_result": "passed",
+  "public_positioning_violations": 0,
+  "attempts": [
+    {
+      "id": "headless-activation-1",
+      "outcome": "external_rate_limit_before_completion",
+      "product_result_used": false,
+      "raw_transcript_retained": false
+    },
+    {
+      "id": "deterministic-public-adoption-1",
+      "outcome": "passed",
+      "product_result_used": true,
+      "raw_transcript_retained": false
+    }
+  ],
+  "claim_boundary": "One approved checkpoint-freshness adaptation was discovered from a real private local home, compatibility-checked, applied, verified, skipped on an incompatible project, and blocked after revocation using the exact public 1.7.0 artifact."
+}

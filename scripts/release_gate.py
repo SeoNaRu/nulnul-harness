@@ -24,6 +24,7 @@ AUTONOMOUS_VALIDATOR = (
 PERSONAL_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/personal_adaptation.py"
 )
+PERSONAL_ADOPTION_VALIDATOR = ROOT / "scripts/personal_adopt_evidence.py"
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -88,6 +89,24 @@ def validate_personal_gate(preregistration: dict, results: dict) -> dict:
         "decision": results["personal_gate"]["decision"],
         "adaptation_id": results["personal_adaptation"]["adaptation_id"],
         "fresh_project_reuse": results["fresh_project_adoption"]["completion_check_passed"],
+    }
+
+
+def validate_public_personal_adoption(evidence: dict, version: str) -> dict:
+    spec = importlib.util.spec_from_file_location(
+        "personal_adopt_evidence", PERSONAL_ADOPTION_VALIDATOR
+    )
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    errors = validator.validate(evidence, version)
+    if errors:
+        raise ValueError("Public Personal Evolution adoption failed: " + "; ".join(errors))
+    return {
+        "status": "passed",
+        "adaptation_id": evidence["adaptation"]["adaptation_id"],
+        "fresh_project_reuse": evidence["fresh_project"]["verified_resume"],
+        "negative_project": evidence["negative_project"]["decision"],
+        "revocation_control": evidence["revocation_control"]["decision"],
     }
 
 
@@ -394,6 +413,9 @@ def main() -> None:
     personal_results = json.loads(
         (ROOT / "evals/personal-evolution/results.json").read_text(encoding="utf-8")
     )
+    public_personal_adoption = json.loads(
+        (ROOT / "evals/personal-evolution/public-adoption.json").read_text(encoding="utf-8")
+    )
     version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
     validate_learning_gate(learning, evolution)
     validate_learning_gate(failed_holdout, evolution)
@@ -411,6 +433,9 @@ def main() -> None:
     score["bounded_autonomous_evolution_gate"] = validate_autonomous_gate(evolution)
     score["personal_evolution_gate"] = validate_personal_gate(
         personal_preregistration, personal_results
+    )
+    score["public_personal_adoption_gate"] = validate_public_personal_adoption(
+        public_personal_adoption, version
     )
     print(json.dumps(score, ensure_ascii=False, indent=2))
 
