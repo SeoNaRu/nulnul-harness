@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>Build the project. NULNUL governs the harness.</strong><br>
-  A repository-native control layer for Codex and Claude Code: minimal capability assembly, executable verification, durable continuity, and independently gated evolution.
+  <strong>Start small. Let the harness grow with the project.</strong><br>
+  NULNUL gives Codex and Claude Code only the setup your project needs now, then expands it only when real work proves the next need. Every change stays verifiable, bounded, and reversible.
 </p>
 
 <p align="center">
@@ -22,7 +22,9 @@
 
 ## What is NULNUL?
 
-NULNUL is a skills-only plugin for Codex and Claude Code. It establishes the smallest project-local operating contract an agent needs: what already exists, which capabilities are justified, what may change, how completion is proved, and what state is safe to resume.
+NULNUL is an adaptive, repository-local harness for Codex and Claude Code. It keeps the AI working environment aligned with the project instead of asking you to design the final agent structure on day one.
+
+For a new project, it starts with the smallest useful contract. For an existing project, it reads the current setup first and preserves what already works. As the project gains real requirements—longer sessions, new checks, distinct responsibilities, permission boundaries, or repeated failures—the harness can add the smallest missing mechanism and verify it before keeping it.
 
 You describe the result. NULNUL then:
 
@@ -37,10 +39,42 @@ does the requested work
         ↓
 runs the repository's real checks
         ↓
-leaves verified state when the work continues later
+leaves verified state for the next stage
 ```
 
 Here, “harness” means the small set of project rules, capabilities, state, and checks that help a coding agent work reliably. It does not mean “create an agent team.” Sometimes the correct result is **zero new agents, zero new skills, and zero new infrastructure**.
+
+## A harness that grows with the project
+
+NULNUL does not install a large framework in anticipation of future complexity. On each user-triggered run, it compares the current project with the current harness.
+
+```text
+project changes
+      ↓
+new job, boundary, or reproduced failure
+      ↓
+is the current harness still enough?
+    ↙                         ↘
+  yes                         no
+keep it              propose the smallest change
+                                  ↓
+                         independent verification
+                            ↙             ↘
+                         reject       keep / roll back
+```
+
+Growth is driven by demonstrated work, not project size labels or a target agent count.
+
+| Project signal | Smallest justified harness response |
+| --- | --- |
+| A small repository with one clear check | Reuse the existing guidance and check; add no role. |
+| Work now spans sessions | Add one concise verified checkpoint instead of retaining the whole conversation. |
+| A responsibility needs independent ownership | Split that boundary; do not generate a team around it. |
+| A repeated workflow gains state or external writes | Add identity, deduplication, review state, and permission controls only where needed. |
+| A failure becomes reproducible | Register one causal candidate, compare it with the current way, and keep it only if the Gate passes. |
+| A role or mechanism loses its job | Merge or remove it. Harness growth is not append-only. |
+
+This growth is currently project-scoped. NULNUL does not yet carry adaptations automatically across unrelated projects.
 
 ## The operational problem
 
@@ -86,18 +120,18 @@ This is user-triggered, bounded improvement—not continuous self-learning, an u
 
 **Good fit:**
 
-- real development that spans several sessions;
-- projects where you do not want to keep managing the AI coding setup yourself;
-- repositories whose agent, tool, and rule configuration keeps growing;
-- work where tests, permission boundaries, review, or rollback matter;
-- recurring workflows with state, deduplication, or external-write steps;
-- projects that need the smallest useful harness rather than the largest one;
-- reproducible failures that should lead to measured, project-scoped improvement.
+- a small project expected to gain features, checks, or workflows over time;
+- a new project that should begin with a minimal AI working contract rather than a prebuilt agent team;
+- an existing project whose current rules and tools should be preserved and upgraded in place;
+- development that spans sessions and must resume from verified repository state;
+- work where tests, permissions, independent review, or rollback become more important as the project grows;
+- recurring workflows or reproducible failures that should lead to measured, project-scoped improvement;
+- projects that want the harness to add, merge, or remove structure according to demonstrated jobs.
 
 **Probably unnecessary:**
 
 - a read-only question or a tiny one-off edit;
-- a simple task with a clear, stable contract and runnable completion check already in place;
+- a simple task whose clear, stable contract and runnable completion check already cover everything needed;
 - an always-on workflow engine or hosted orchestration service;
 - a system that should authenticate, deploy, publish, or write externally without approval;
 - a tool intended to improve the underlying model's reasoning ability;
@@ -202,6 +236,8 @@ With NULNUL, the user can ask for the result. The plugin then:
 
 Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Simple work combines roles. A separate role exists only when it has a distinct job, such as independent verification.
 
+The same inspection happens again as the project changes. A new job may justify a new boundary; disappearing overlap may justify a merge or removal. NULNUL adapts the harness topology instead of treating growth as a one-way accumulation of agents and files.
+
 ## Engineering model
 
 NULNUL is deliberately skills-only. It adds no server, daemon, hosted control plane, or background self-improvement process. Reliability comes from a small set of repository-native contracts:
@@ -209,6 +245,7 @@ NULNUL is deliberately skills-only. It adds no server, daemon, hosted control pl
 | Contract | Enforcement |
 | --- | --- |
 | Repository truth | Host surface, existing guidance, capabilities, agents, tests, and permissions are inspected before assembly. |
+| Adaptive topology | Roles and mechanisms are added, merged, or removed only when a distinct project job and its check justify the change. |
 | Verified continuity | Schema-v3 checkpoints use an exact completion command, bounded verification files, and a runner-owned freshness receipt. Mutated state cannot claim verified fast resume. |
 | Governed evolution | Schema-v4 episodes freeze pathology, candidate/generation/evaluation budgets, permission delta, archive identity, deterministic credit ownership, and a stop reason before promotion. |
 | Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, and mechanism identity are machine-readable. A used holdout cannot be relabeled unseen. |
@@ -227,7 +264,7 @@ These categories can coexist. The distinction is about the default job, not a cl
 | Prompt or rule bundle | Load a prepared set of instructions | Start from current repository state and executable checks. |
 | Memory layer | Retain conversation or context | Prefer concise verified repository state; do not store raw conversations. |
 | Hosted orchestrator | Run long-lived workflows on a service | Stay project-local and skills-only; no server or daemon is required. |
-| NULNUL | Minimal harness, work execution, verification, and gated improvement | Reuse first, complete the task, and promote only measured improvements. |
+| NULNUL | Project-aligned harness, work execution, verification, and gated improvement | Start minimal, adapt only to demonstrated jobs, and promote only measured improvements. |
 
 ## What lands in the repository
 
@@ -296,7 +333,7 @@ When I started projects with coding agents, I often had to study the AI environm
 
 Adding every recommended tool made the setup larger, not necessarily better. It also felt wrong that a beginner had to design an AI organization before asking for a result.
 
-I wanted new projects to get a small working environment from the start, and existing projects to be read before anything new was added. If usage revealed a better method, I wanted it to stay only after evidence showed it was actually better.
+I wanted new projects to get a small working environment from the start, and existing projects to be read before anything new was added. As a project changed, its harness should be able to add, merge, or remove structure without making the user redesign the whole AI setup. If usage revealed a better method, I wanted it to stay only after evidence showed it was actually better.
 
 I built NULNUL so the user can spend less time maintaining the harness and more time on the project they wanted to make.
 
@@ -349,6 +386,12 @@ No. It first checks whether the repository already covers the job. Reusing the c
 <summary>Does NULNUL continuously learn by itself?</summary>
 
 No. Improvement is user-triggered, bounded, evidence-gated, and reversible. If no candidate wins, the current champion stays in place.
+</details>
+
+<details>
+<summary>Does the harness grow automatically as the repository gets bigger?</summary>
+
+Not from size alone, and not in the background. On a user-triggered task, NULNUL inspects the current repository and changes the harness only when a new job, boundary, or reproduced failure justifies it. Growth may mean adding one mechanism, merging overlap, removing an obsolete role, or changing nothing.
 </details>
 
 <details>

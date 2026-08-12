@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>프로젝트를 만드세요. 하네스는 NULNUL이 통제합니다.</strong><br>
-  Codex와 Claude Code를 위한 repository-native control layer: 최소 capability 구성, executable verification, durable continuity, independently gated evolution.
+  <strong>작게 시작하세요. 프로젝트가 자랄 때 하네스도 함께 자랍니다.</strong><br>
+  NULNUL은 지금 필요한 개발 환경만 Codex와 Claude Code에 구성하고, 실제 작업이 다음 필요를 증명할 때만 확장합니다. 모든 변경은 검증 가능하고, 범위가 제한되며, 되돌릴 수 있습니다.
 </p>
 
 <p align="center">
@@ -22,7 +22,9 @@
 
 ## NULNUL은 무엇인가요?
 
-NULNUL은 Codex와 Claude Code에서 사용하는 skills-only plugin입니다. Agent가 신뢰성 있게 작업하는 데 필요한 최소 project-local 운영 contract, 즉 이미 존재하는 것, 정당화된 capability, 허용된 변경, 완료 증명, 안전한 resume 상태를 구성합니다.
+NULNUL은 Codex와 Claude Code에서 프로젝트 안에 두고 쓰는 적응형 하네스입니다. 사용자가 첫날부터 최종 에이전트 구조를 설계하게 하는 대신, AI 개발 환경과 현재 프로젝트의 요구를 계속 맞춰 줍니다.
+
+새 프로젝트에서는 가장 작은 유용한 작업 계약으로 시작합니다. 기존 프로젝트에서는 현재 설정을 먼저 읽고 잘 작동하는 것을 보존합니다. 프로젝트가 여러 세션으로 길어지거나, 새로운 검사가 생기거나, 책임 분리·권한 경계·반복 실패가 실제로 나타나면 빠진 메커니즘만 최소한으로 추가하고 유지하기 전에 검증합니다.
 
 원하는 결과를 말하면 NULNUL이 다음을 맡습니다.
 
@@ -37,10 +39,42 @@ NULNUL은 Codex와 Claude Code에서 사용하는 skills-only plugin입니다. A
         ↓
 저장소의 실제 검사를 실행한다
         ↓
-나중에 이어갈 때 필요한 검증된 상태를 남긴다
+다음 단계에 필요한 검증된 상태를 남긴다
 ```
 
 여기서 “하네스”는 coding agent가 안정적으로 일하도록 돕는 작은 프로젝트 규칙·능력·상태·검사 묶음입니다. “agent team을 만든다”는 뜻이 아닙니다. 때로는 **새 agent 0개, 새 skill 0개, 새 infrastructure 0개**가 정답입니다.
+
+## 프로젝트와 함께 자라는 하네스
+
+NULNUL은 미래의 복잡성을 예상해 큰 프레임워크부터 설치하지 않습니다. 사용자가 실행을 요청할 때마다 현재 프로젝트와 현재 하네스가 여전히 맞는지 비교합니다.
+
+```text
+프로젝트가 변한다
+      ↓
+새로운 작업·경계·재현된 실패가 생긴다
+      ↓
+현재 하네스로 충분한가?
+    ↙                    ↘
+  충분함                 부족함
+그대로 유지       가장 작은 변경을 제안
+                              ↓
+                        독립 검증
+                       ↙       ↘
+                    거부    유지 / rollback
+```
+
+하네스의 성장은 프로젝트 규모나 목표 에이전트 수가 아니라 실제로 확인된 작업이 결정합니다.
+
+| 프로젝트에서 생긴 신호 | 정당화되는 최소 하네스 변화 |
+| --- | --- |
+| 명확한 검사 하나가 있는 작은 저장소 | 기존 지침과 검사를 재사용하고 역할을 추가하지 않습니다. |
+| 작업이 여러 세션으로 길어짐 | 전체 대화를 저장하는 대신 짧은 verified checkpoint 하나를 둡니다. |
+| 독립된 책임 주체가 필요함 | 그 경계만 분리하고 주변에 에이전트 팀을 만들지 않습니다. |
+| 반복 워크플로에 상태나 외부 쓰기가 생김 | 필요한 위치에만 식별자, 중복 제거, 검토 상태, 권한 통제를 추가합니다. |
+| 실패가 재현 가능해짐 | 인과관계가 명확한 개선 후보 하나를 등록하고 기존 방식과 비교해 Gate 통과 시에만 유지합니다. |
+| 역할이나 메커니즘의 실제 일이 사라짐 | 병합하거나 제거합니다. 하네스의 성장은 누적만을 뜻하지 않습니다. |
+
+현재 이 성장은 프로젝트 범위 안에서만 이뤄집니다. 서로 무관한 프로젝트 사이로 개선을 자동 전파하지는 않습니다.
 
 ## 실제 운영 문제
 
@@ -86,21 +120,21 @@ Bounded evolution에서는 탐색을 시작하기 전에 후보 수, generation 
 
 **잘 맞습니다:**
 
-- 여러 세션에 걸쳐 진행하는 실제 개발;
-- AI coding 환경을 직접 계속 관리하고 싶지 않은 경우;
-- agent·tool·rule 설정이 계속 커지는 저장소;
-- test, permission boundary, review, rollback이 중요한 작업;
-- state, 중복 제거, 외부 쓰기 단계가 있는 반복 workflow;
-- 가장 큰 구성이 아니라 프로젝트에 맞는 최소 하네스가 필요한 경우;
-- 재현된 실패를 측정 가능한 프로젝트 범위 개선으로 바꾸고 싶은 경우.
+- 작게 시작하지만 기능, 검사, 워크플로가 점차 늘어날 프로젝트
+- 미리 만든 에이전트 팀 대신 최소 AI 작업 계약으로 시작하고 싶은 새 프로젝트
+- 기존 규칙과 도구를 버리지 않고 현재 자리에서 보완하고 싶은 프로젝트
+- 여러 세션에 걸쳐 검증된 저장소 상태에서 작업을 이어가야 하는 개발
+- 프로젝트 성장에 따라 테스트, 권한, 독립 검토, rollback이 중요해지는 작업
+- 반복 워크플로나 재현된 실패를 측정 가능한 프로젝트 범위 개선으로 바꾸고 싶은 경우
+- 실제 작업에 따라 구조를 추가할 뿐 아니라 병합하거나 제거하고 싶은 프로젝트
 
 **아마 필요 없습니다:**
 
-- 읽기 전용 질문이나 아주 작은 일회성 수정;
-- 명확하고 안정적인 contract와 실행 가능한 completion check가 이미 있는 단순 작업;
-- always-on workflow engine이나 hosted orchestration service가 필요한 경우;
-- AI가 승인 없이 인증·배포·공개·외부 쓰기를 해야 하는 경우;
-- 기반 model의 reasoning 성능을 높여 주는 도구를 찾는 경우;
+- 읽기 전용 질문이나 아주 작은 일회성 수정
+- 명확하고 안정적인 contract와 실행 가능한 completion check가 필요한 일을 이미 모두 덮는 단순 작업
+- always-on workflow engine이나 hosted orchestration service가 필요한 경우
+- AI가 승인 없이 인증·배포·공개·외부 쓰기를 해야 하는 경우
+- 기반 model의 reasoning 성능을 높여 주는 도구를 찾는 경우
 - 서로 무관한 프로젝트 사이의 자동 personal memory나 학습—현재 capability가 아닙니다.
 
 저장소가 작업에 필요한 것을 이미 모두 갖췄다면 NULNUL을 쓰지 않아도 됩니다.
@@ -202,6 +236,8 @@ NULNUL을 사용하면 사용자는 결과를 요청할 수 있습니다. Plugin
 
 Navigator, Worker, Coach, Gate는 네 명의 필수 agent가 아니라 responsibility boundary입니다. 단순한 작업에서는 역할을 합칩니다. 독립 검증처럼 별도 job이 있을 때만 역할을 분리합니다.
 
+프로젝트가 변하면 같은 조사를 다시 합니다. 새로운 일이 생기면 새 경계가 필요할 수 있고, 중복된 책임이 사라지면 병합하거나 제거할 수 있습니다. NULNUL은 에이전트와 파일을 한 방향으로 누적하는 대신 하네스 구조를 현재 프로젝트에 맞게 조정합니다.
+
 ## Engineering model
 
 NULNUL은 의도적으로 skills-only입니다. Server, daemon, hosted control plane, background self-improvement process를 추가하지 않습니다. 신뢰성은 작은 repository-native contract 집합에서 나옵니다.
@@ -209,6 +245,7 @@ NULNUL은 의도적으로 skills-only입니다. Server, daemon, hosted control p
 | Contract | Enforcement |
 | --- | --- |
 | Repository truth | 구성 전에 host surface, 기존 guidance, capability, agent, test, permission을 조사합니다. |
+| Adaptive topology | 독립된 프로젝트 작업과 그 검사가 정당화할 때만 role과 mechanism을 추가·병합·제거합니다. |
 | Verified continuity | Schema-v3 checkpoint는 exact completion command, bounded verification files, runner-owned freshness receipt를 사용합니다. 변경된 상태는 verified fast resume를 주장할 수 없습니다. |
 | Governed evolution | Schema-v4 episode는 승격 전에 pathology, candidate/generation/evaluation budget, permission delta, archive identity, deterministic credit owner, stop reason을 고정합니다. |
 | Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, mechanism identity가 machine-readable합니다. 사용한 holdout을 unseen으로 다시 부를 수 없습니다. |
@@ -227,7 +264,7 @@ NULNUL은 의도적으로 skills-only입니다. Server, daemon, hosted control p
 | Prompt 또는 rule bundle | 준비된 지침을 불러온다 | 현재 repository state와 executable check에서 시작한다. |
 | Memory layer | 대화나 context를 보존한다 | raw conversation 대신 짧고 검증된 repository state를 선호한다. |
 | Hosted orchestrator | service에서 장기 workflow를 실행한다 | project-local, skills-only로 유지하며 server나 daemon을 요구하지 않는다. |
-| NULNUL | 최소 하네스, 실제 작업, 검증, gated improvement | 먼저 재사용하고, 작업을 끝내며, 측정된 개선만 승격한다. |
+| NULNUL | 프로젝트에 맞춘 하네스, 실제 작업, 검증, gated improvement | 작게 시작하고, 확인된 작업에만 적응하며, 측정된 개선만 승격한다. |
 
 ## 저장소에 남는 것
 
@@ -296,7 +333,7 @@ Coding agent로 프로젝트를 시작할 때 만들고 싶은 것보다 AI 환�
 
 좋다고 추천되는 도구를 모두 추가한다고 설정이 더 좋아지지는 않았습니다. 초보자가 결과를 요청하기 전에 AI 조직도부터 설계해야 한다는 점도 이상했습니다.
 
-새 프로젝트에는 처음부터 작은 작업 환경을 잡아 주고, 기존 프로젝트에는 무엇이 있는지 먼저 읽은 뒤 부족한 것만 더하고 싶었습니다. 사용 중 더 나은 방법을 발견해도 실제로 더 낫다는 근거가 있을 때만 남기고 싶었습니다.
+새 프로젝트에는 처음부터 작은 작업 환경을 잡아 주고, 기존 프로젝트에는 무엇이 있는지 먼저 읽은 뒤 부족한 것만 더하고 싶었습니다. 프로젝트가 달라지면 사용자가 AI 설정 전체를 다시 설계하지 않아도 하네스가 필요한 구조를 추가하고, 겹치면 합치고, 쓸모가 없어지면 제거할 수 있어야 한다고 생각했습니다. 사용 중 더 나은 방법을 발견해도 실제로 더 낫다는 근거가 있을 때만 남기고 싶었습니다.
 
 사용자가 하네스를 계속 관리하기보다 만들고 싶은 프로젝트에 더 집중할 수 있는 환경을 만들고 싶어서 NULNUL을 시작했습니다.
 
@@ -349,6 +386,12 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 <summary>NULNUL은 계속 혼자 학습하나요?</summary>
 
 아닙니다. Improvement는 user-triggered, bounded, evidence-gated, reversible합니다. 이기는 후보가 없으면 현재 champion을 유지합니다.
+</details>
+
+<details>
+<summary>저장소가 커지면 하네스도 자동으로 커지나요?</summary>
+
+크기만 보고 커지지 않으며 백그라운드에서 자동 실행되지도 않습니다. 사용자가 작업을 요청했을 때 현재 저장소를 조사하고, 새로운 작업·경계·재현된 실패가 있을 때만 하네스를 바꿉니다. 변화는 메커니즘 하나를 추가하는 것일 수도, 중복을 합치는 것일 수도, 낡은 역할을 제거하는 것일 수도, 아무것도 바꾸지 않는 것일 수도 있습니다.
 </details>
 
 <details>
