@@ -153,15 +153,46 @@ def lookup(payload, facts, simple=False):
     return _finish(payload, selected, len(payload["adaptations"]), checks, skipped)
 
 
+def meta_lookup(payload, facts):
+    """Shortlist on bounded summaries before opening full compatibility checks."""
+    errors = validate_evidence(payload)
+    if errors:
+        raise ValueError("; ".join(errors))
+    conditions, permissions = _facts(facts)
+    shortlisted = []
+    skipped = []
+    for row in payload["adaptations"]:
+        freshness = row["freshness"]["evidence_status"]
+        if row["status"] not in ACTIVE or freshness != "current":
+            skipped.append({"adaptation_id": row["adaptation_id"], "reason": row["status"] if row["status"] not in ACTIVE else freshness})
+        elif any(permission not in permissions for permission in row["permission_requirements"]):
+            skipped.append({"adaptation_id": row["adaptation_id"], "reason": "permission_blocked"})
+        elif set(row["contraindications"]) & conditions:
+            skipped.append({"adaptation_id": row["adaptation_id"], "reason": "contraindicated"})
+        elif not set(row["activation_conditions"]) <= conditions:
+            skipped.append({"adaptation_id": row["adaptation_id"], "reason": "conditions_not_met"})
+        else:
+            shortlisted.append(row)
+    return _finish(
+        payload,
+        shortlisted,
+        len(payload["adaptations"]),
+        len(shortlisted),
+        skipped,
+    )
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("evidence", type=Path)
     parser.add_argument("--facts", type=Path)
     parser.add_argument("--simple", action="store_true")
+    parser.add_argument("--meta", action="store_true")
     args = parser.parse_args()
     payload = json.loads(args.evidence.read_text(encoding="utf-8"))
     if args.facts:
-        output = lookup(payload, json.loads(args.facts.read_text(encoding="utf-8")), args.simple)
+        facts = json.loads(args.facts.read_text(encoding="utf-8"))
+        output = meta_lookup(payload, facts) if args.meta else lookup(payload, facts, args.simple)
     else:
         errors = validate_evidence(payload)
         output = {"valid": not errors, "errors": errors}
