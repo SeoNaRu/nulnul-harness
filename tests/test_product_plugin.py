@@ -14,6 +14,34 @@ SKILL = PLUGIN / "skills/nulnul-harness"
 
 
 class ProductPluginTests(unittest.TestCase):
+    def test_public_metadata_is_product_first(self):
+        codex = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
+        claude = json.loads((PLUGIN / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
+        marketplace = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8"))
+        listing = (ROOT / "submission/listing.md").read_text(encoding="utf-8")
+        entry = next(item for item in marketplace["plugins"] if item["name"] == "nulnul-harness")
+        descriptions = {
+            "codex description": codex["description"],
+            "codex short description": codex["interface"]["shortDescription"],
+            "codex long description": codex["interface"]["longDescription"],
+            "claude description": claude["description"],
+            "marketplace description": marketplace["description"],
+            "marketplace entry": entry["description"],
+            "listing short": re.search(r"^- Short description: (.+)$", listing, re.M).group(1),
+            "listing long": re.search(r"^- Long description: (.+)$", listing, re.M).group(1),
+        }
+        forbidden = (
+            re.compile(r"\b(?:AI|agent)[ -]team\b", re.I),
+            re.compile(r"\btask and meta[- ]agent(?: system|s)\b", re.I),
+            re.compile(r"\bassembl\w* .{0,50}\bagent system\b", re.I),
+        )
+        violations = [
+            label
+            for label, text in descriptions.items()
+            if any(pattern.search(text) for pattern in forbidden)
+        ]
+        self.assertEqual(violations, [])
+
     def test_marketplace_points_to_standalone_plugin(self):
         marketplace = json.loads((ROOT / ".agents/plugins/marketplace.json").read_text(encoding="utf-8"))
         entry = next(item for item in marketplace["plugins"] if item["name"] == "nulnul-harness")
@@ -37,7 +65,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "1.5.0")
+        self.assertEqual(manifest["version"], "1.6.0")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -198,8 +226,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "108 passed"),
-            "README.ko.md": ("README.md", "108개 통과"),
+            "README.md": ("README.ko.md", "110 passed"),
+            "README.ko.md": ("README.md", "110개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")

@@ -94,6 +94,14 @@ class ReleaseGateTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "self-credited"):
             MODULE.validate_autonomous_gate(altered)
 
+    def test_autonomous_gate_rejects_completion_check_budget_bypass(self):
+        altered = json.loads(json.dumps(self.evolution))
+        episode = altered["autonomous_episodes"][1]
+        retry = next(arm for arm in episode["baseline"]["arms"] if arm["id"] == "retry")
+        retry["completion_checks"] = 0
+        with self.assertRaisesRegex(ValueError, "retry comparison"):
+            MODULE.validate_autonomous_gate(altered)
+
     def test_generalization_gate_rejects_leakage_and_reuse(self):
         leaked = json.loads(json.dumps(self.generalization_manifest))
         perl = next(case for case in leaked["holdout_cases"] if "perl" in case["case_id"])

@@ -1,7 +1,7 @@
 {
   "name": "nulnul-harness",
-  "version": "1.5.0",
-  "description": "Build a project-fit agent team, reuse proven capabilities, and run bounded evidence-gated evolution episodes.",
+  "version": "1.6.0",
+  "description": "Complete project outcomes with proven capabilities, minimal additions, executable verification, and bounded evidence-gated improvement.",
   "author": {
     "name": "SeoNaRu",
     "url": "https://github.com/SeoNaRu"
@@ -23,8 +23,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "nulnul harness",
-    "shortDescription": "Your evolving AI team.",
-    "longDescription": "Describe the outcome, not the AI architecture. nulnul harness inspects the project, reuses suitable skills and plugins, assembles the smallest useful task and meta-agent system, preserves progress, and improves both the work and its own improvement procedure behind an independent Gate.",
+    "shortDescription": "Outcomes, verified and lean.",
+    "longDescription": "Describe the outcome. nulnul harness inspects the project, reuses suitable skills, plugins, agents, and conventions, fills only demonstrated gaps, completes the work, preserves verified progress, and improves its process only behind an independent Gate.",
     "developerName": "SeoNaRu",
     "category": "Productivity",
     "capabilities": [

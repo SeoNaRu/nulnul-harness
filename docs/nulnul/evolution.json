@@ -7,12 +7,12 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Validate one bounded autonomous evolution episode and prepare a local 1.6.0 release candidate.",
+    "milestone": "Publish the locally validated 1.6.0 bounded autonomous evolution candidate and obtain exact-version public adoption evidence.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-12: NULNUL 1.6 replayed the recorded Claude adoption inventory failure as one frozen bounded autonomous episode. The archive deduplicated rejected Navigator v16 without another evaluation; independent Gate evidence selected v17 in one model invocation and five completion checks. Champion, two-run retry, and best-of-2 produced zero primary successes. The episode stopped on SUCCESS with AUTONOMOUS_EVOLUTION_WIN, scoped only to this retrospective failure family; no HOLDOUT was read and no generalization claim was made.",
-    "next_action": "Run the complete 1.6.0 local release-candidate validation. Do not publish or claim live open-ended autonomy; begin 1.7 Personal Evolution only after this milestone closes and a separate project-to-personal transfer problem is reproduced.",
-    "blockers": [],
+    "last_verified": "2026-08-12: A new activation-metadata failure reproduced seven public-positioning violations in two unchanged champion checks. Before generation, the episode froze one generation, two candidates, two model invocations, two evaluations, no permission delta, and no HOLDOUT access. Rejected archive lookup found no matching mechanism. The first Coach invocation produced no proposal after a bounded read miss; the final allowed invocation generated one new four-file metadata candidate. Independent Gate evidence reduced the primary metric 7 to 0, product tests and Release Gate passed at the champion product identity, and a post-promotion live check stayed at 0. The episode stopped on SUCCESS with AUTONOMOUS_EVOLUTION_WIN, scoped only to this activation-metadata failure family.",
+    "next_action": "With explicit publication approval, push the 1.6.0 candidate, publish it, run a fresh GitHub-marketplace Claude adoption, and replace the retained 1.5.0 exact-version evidence. Do not begin 1.7 or claim broad autonomy before the 1.6 Release Gate passes on that public evidence.",
+    "blockers": ["Exact-version 1.6.0 public adoption evidence requires an approved push and publication."],
     "approved_permissions": []
   },
   "agents": {
@@ -35,10 +35,10 @@
       "last_promotion_id": "promotion-gate-7"
     },
     "product-builder": {
-      "version": 5,
+      "version": 6,
       "job": "Implement the smallest complete product change and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": null
+      "last_promotion_id": "promotion-product-builder-6"
     }
   },
   "feedback": [
@@ -281,6 +281,16 @@
       "observed": "The recorded Claude adoption failure required a human-triggered sequence of Navigator v16 rejection followed by v17 evaluation even though the rejected proposal and deterministic evidence were already preserved.",
       "expected": "For one reproduced failure, freeze a small budget, classify WHERE and WHY, query rejected mechanisms, let the Coach propose one generation, let an independent Gate own credit, and stop after a winner or NO_PROMOTION without reading HOLDOUT material or expanding permissions.",
       "evidence": "evals/benchmarks/claude-adopt/release-1.5-failures.json and evidence.json preserve two champion nonpasses, rejected v16, accepted v17, five checks per evaluated run, and no raw transcript.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-public-positioning-drift",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "After the product-first README became the public repository entry, seven installed and marketplace metadata surfaces still defined NULNUL as an agent or AI team builder, contradicting the product contract that zero new agents can be the correct result.",
+      "expected": "Every public acquisition surface describes the outcome-first, reuse-first, verified minimal harness without presenting agent-team creation as the product category.",
+      "evidence": "Two unchanged champion evaluations of ProductPluginTests.test_public_metadata_is_product_first each reported the same seven violating surfaces before candidate generation.",
       "scope": "core",
       "status": "converted"
     }
@@ -856,6 +866,35 @@
       },
       "mechanism_id": "branch-first-inventory-action",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-6-public-outcome-contract",
+      "feedback_ids": ["feedback-public-positioning-drift"],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 5,
+      "to_version": 6,
+      "cause": "Installed and marketplace descriptions retained the earlier agent-team category framing after the repository entry contract changed, so acquisition surfaces advertised an implementation option as the product itself.",
+      "change_target": "Align only public descriptive metadata across both plugin manifests, the Claude marketplace, and the submission listing around requested outcomes, reuse of proven capabilities, minimal demonstrated additions, executable verification, and independently gated improvement.",
+      "regression_check": "python3 -m unittest tests.test_product_plugin.ProductPluginTests.test_public_metadata_is_product_first -v && python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v && python3 scripts/release_gate.py",
+      "primary_metric": "public metadata surfaces presenting NULNUL as an agent-team generator",
+      "permission_delta": [],
+      "rollback": "Restore the four public metadata files from champion git ref 4b120e3b2b7baf4909f814b08c44da2c3e445e65.",
+      "change_level": "task",
+      "discovery_evidence": "Two unchanged champion evaluations each reported the same seven public-positioning violations; archive lookup found no matching rejected pathology and mechanism.",
+      "transfer_check": "The deterministic product test covers Codex metadata, Claude metadata, the public marketplace entry, and the submission listing; no cross-project or HOLDOUT claim is made.",
+      "prediction": "The deterministic Gate will reduce public metadata surfaces presenting NULNUL as an agent-team generator from seven to zero while preserving behavior, version, permissions, and the product-first README.",
+      "expected_delta": {
+        "public_positioning_violations": "7 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Any public-positioning violation remains; manifest parity or archive consistency breaks; any file outside the four preregistered metadata files changes; or behavior, permissions, version, tests, evidence, evolution state, or README content changes.",
+      "pathology": {
+        "where": "activation",
+        "why": "public acquisition metadata still defines agent-team creation as the product after the verified product contract became outcome-first and reuse-first"
+      },
+      "mechanism_id": "public-metadata-outcome-contract",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -1298,6 +1337,24 @@
         "rollback_value": 0,
         "evidence": "The fresh GitHub-marketplace-installed 1.5.0 run recorded roster_enumerated=true, agents_classified=true, unchanged agent hashes, zero protected writes, fast_path_ready, and five zero-exit checks."
       }
+    },
+    {
+      "id": "promotion-product-builder-6",
+      "proposal_id": "proposal-product-builder-6-public-outcome-contract",
+      "gate_agent": "gate",
+      "before": "Seven public acquisition metadata surfaces still presented agent-team creation as the product, and an unchanged retry reproduced all seven.",
+      "after": "The live Coach candidate changed only four preregistered metadata files; the independent Gate found zero public-positioning violations and the complete product suite plus Release Gate passed.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "public metadata surfaces presenting NULNUL as an agent-team generator",
+        "rollback_threshold": "roll back after one public acquisition surface returns to agent-team category framing or a product guardrail fails",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "A post-promotion deterministic live check again reported zero violations; the executable rollback threshold remains active."
+      }
     }
   ],
   "autonomous_episodes": [
@@ -1432,6 +1489,114 @@
       "selected_candidate_id": "candidate-navigator-17-branch-first",
       "stop_reason": "SUCCESS",
       "claim_boundary": "In one retrospective frozen replay of the recorded Claude adoption inventory failure, archive-aware one-generation search selected the already independently validated branch-first candidate in one model evaluation while champion retry and best-of-2 had zero successes. This does not establish live, open-ended, personal, cross-project, or harness-wide autonomous improvement."
+    },
+    {
+      "id": "episode-public-positioning-live-1",
+      "mode": "live",
+      "feedback_id": "feedback-public-positioning-drift",
+      "scope": "core_dev",
+      "pathology": {
+        "where": "activation",
+        "why": "public acquisition metadata still defines agent-team creation as the product after the verified product contract became outcome-first and reuse-first"
+      },
+      "budget": {
+        "max_candidates": 2,
+        "max_generations": 1,
+        "max_evaluation_runs": 2,
+        "max_failed_candidates": 1,
+        "max_identical_pathology_retries": 1,
+        "max_model_invocations": 2
+      },
+      "archive_lookup": [
+        "proposal-navigator-4-late-rule",
+        "proposal-navigator-4-early-rule",
+        "proposal-navigator-4-renderer",
+        "proposal-navigator-11-explicit",
+        "proposal-navigator-11-concise",
+        "proposal-navigator-13",
+        "proposal-navigator-14",
+        "proposal-navigator-16"
+      ],
+      "baseline": {
+        "comparable_dimension": "completion_checks",
+        "fair": true,
+        "arms": [
+          {
+            "id": "champion",
+            "runs": 1,
+            "primary_successes": 0,
+            "model_invocations": 0,
+            "completion_checks": 1,
+            "evidence": "The unchanged 4b120e3 champion produced seven deterministic public-positioning violations."
+          },
+          {
+            "id": "retry",
+            "runs": 2,
+            "primary_successes": 0,
+            "model_invocations": 0,
+            "completion_checks": 2,
+            "evidence": "Two unchanged champion evaluations each reproduced the same seven violations."
+          },
+          {
+            "id": "best_of_n",
+            "runs": 2,
+            "primary_successes": 0,
+            "model_invocations": 0,
+            "completion_checks": 2,
+            "evidence": "Neither deterministic champion result had a valid zero-violation result to select."
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "candidate-public-outcome-contract-1",
+          "proposal_id": "proposal-product-builder-6-public-outcome-contract",
+          "generation": 1,
+          "author_agent": "coach",
+          "parent_agent": "product-builder",
+          "parent_version": 5,
+          "pathology": {
+            "where": "activation",
+            "why": "public acquisition metadata still defines agent-team creation as the product after the verified product contract became outcome-first and reuse-first"
+          },
+          "mechanism_id": "public-metadata-outcome-contract",
+          "prediction": "The deterministic Gate will reduce public metadata surfaces presenting NULNUL as an agent-team generator from seven to zero while preserving behavior, version, permissions, and the product-first README.",
+          "falsification_condition": "Any public-positioning violation remains; manifest parity or archive consistency breaks; any file outside the four preregistered metadata files changes; or behavior, permissions, version, tests, evidence, evolution state, or README content changes.",
+          "permission_delta": [],
+          "rollback": "Restore the four public metadata files from champion git ref 4b120e3b2b7baf4909f814b08c44da2c3e445e65.",
+          "archive_match": null,
+          "evaluation": {
+            "candidate_id": "candidate-public-outcome-contract-1",
+            "owner_agent": "gate",
+            "status": "passed",
+            "runs": 1,
+            "primary_success": true,
+            "guardrails_passed": true,
+            "evidence": "The first generation attempt produced no proposal after a bounded read miss; the final allowed invocation proposed one candidate. Independent evaluation found 0/7 violations, only the four preregistered metadata files changed, product tests passed after the archive completed, Release Gate scored 100/100, documentation debt was empty, permission delta was empty, and no HOLDOUT was read.",
+            "cost": {
+              "model_invocations": 2,
+              "completion_checks": 1
+            }
+          },
+          "decision": "selected",
+          "rejection_reason": null
+        }
+      ],
+      "gate_agent": "gate",
+      "sealed_evaluation": true,
+      "holdout_case_ids_read": [],
+      "cost": {
+        "candidates_generated": 1,
+        "generations": 1,
+        "evaluation_runs": 1,
+        "failed_candidates": 0,
+        "model_invocations": 2,
+        "completion_checks": 1
+      },
+      "decision": "AUTONOMOUS_EVOLUTION_WIN",
+      "selected_candidate_id": "candidate-public-outcome-contract-1",
+      "stop_reason": "SUCCESS",
+      "claim_boundary": "In one live bounded episode for a newly reproduced public-positioning failure, archive-aware one-generation search produced one new metadata mechanism within two model invocations and beat an unchanged deterministic retry on completion checks. This establishes live candidate generation and correct bounded stopping only for this activation-metadata failure family; it does not establish open-ended, personal, cross-project, or harness-wide autonomous improvement."
     }
   ]
 }

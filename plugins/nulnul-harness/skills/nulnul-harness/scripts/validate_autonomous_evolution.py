@@ -154,8 +154,11 @@ def validate(payload):
 
         if not require(episode["baseline"], BASELINE_FIELDS, f"{label}.baseline"):
             continue
-        if episode["baseline"]["comparable_dimension"] != "model_invocations":
-            errors.append(f"{label}.baseline.comparable_dimension must be model_invocations")
+        comparable_dimension = episode["baseline"]["comparable_dimension"]
+        if comparable_dimension not in EVALUATION_COST_FIELDS:
+            errors.append(
+                f"{label}.baseline.comparable_dimension must be model_invocations or completion_checks"
+            )
         if episode["baseline"]["fair"] is not True:
             errors.append(f"{label}.baseline comparison must be fair")
         arms = episode["baseline"]["arms"]
@@ -343,7 +346,7 @@ def validate(payload):
                 len(selected) != 1
                 or episode["stop_reason"] != "SUCCESS"
                 or retry.get("primary_successes") != 0
-                or totals["model_invocations"] > retry.get("model_invocations", -1)
+                or totals.get(comparable_dimension, 0) > retry.get(comparable_dimension, -1)
             ):
                 errors.append(f"{label} autonomous win is not supported by the retry comparison")
         elif selected:

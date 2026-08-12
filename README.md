@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.5.0-111111" alt="version 1.5.0">
+  <img src="https://img.shields.io/badge/version-1.6.0-111111" alt="version 1.6.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -23,7 +23,7 @@
 
 NULNUL is a skills-only plugin for Codex and Claude Code. You describe the result you want; it inspects the repository, reuses suitable skills, plugins, agents, and project conventions, fills only the missing gaps, continues the original task, and runs the repository's real checks.
 
-If work spans sessions, it leaves a small verified checkpoint instead of asking the next session to reconstruct everything from chat. If a failure is reproducible, NULNUL can turn it into one bounded improvement proposal that an independent Gate accepts, rejects, or rolls back.
+If work spans sessions, it leaves a small verified checkpoint instead of asking the next session to reconstruct everything from chat. If a failure is reproducible, NULNUL can check already rejected directions, propose a tiny one-generation candidate set within a frozen budget, and let an independent Gate accept, reject, or keep the current champion. No improvement means no promotion.
 
 Sometimes the correct result is **zero new agents, zero new skills, and zero new infrastructure**.
 
@@ -170,11 +170,11 @@ Four examples show the difference between a plausible story and measured behavio
 
 | Evidence | Current result | What it tells us |
 | --- | --- | --- |
-| Repository tests | **108 passed (108/108)** | Deterministic product, state, privacy, rollback, and negative-control contracts still hold. |
-| Release Gate | **100/100** across 12 behavior and safety cases | The published fixtures and exact-version Claude adoption evidence pass. It is not a universal benchmark. |
+| Repository tests | **110 passed (110/110)** | Deterministic product, state, privacy, rollback, and negative-control contracts still hold. |
+| Release Gate | **100/100** across 12 behavior and safety cases | The behavior fixtures and latest published 1.5.0 adoption evidence pass. Exact-version 1.6.0 public adoption is still pending. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed by the freshness mechanism. |
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one Perl/TAP shape; the whole harness is not proven to generalize. |
-| Bounded evolution candidate | One frozen replay selected the recorded winner in 1 evaluation; retry was 0/2 | Archive-aware bounded selection works on that recorded failure family. Live candidate generation and public v1.6.0 evidence remain pending. |
+| Live bounded evolution | Champion and retry kept **7 violations**; one new candidate reached **0** and stopped on `SUCCESS` | Live candidate generation and bounded stopping worked for one activation-metadata failure family. Public v1.6.0 adoption and broader autonomy are not established. |
 
 Reproduce the public checks:
 
@@ -183,7 +183,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-The underlying records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), and the [Perl/TAP result](evals/generalization/results.json). Version-by-version detail belongs in the [`CHANGELOG.md`](CHANGELOG.md).
+The underlying records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), the [Perl/TAP result](evals/generalization/results.json), and the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json). Version-by-version detail belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Why I built NULNUL
 
@@ -202,21 +202,21 @@ Its design was later influenced by editable task/meta boundaries, generator/veri
 <details>
 <summary>Technical research behind the measured evolution work</summary>
 
-The 1.4 observability work was informed by [Agentic Harness Engineering](https://arxiv.org/abs/2604.25850). The 1.5 evaluation boundary was informed by [Rethinking the Evaluation of Harness Evolution](https://arxiv.org/abs/2607.12227). The bounded 1.6 candidate uses selected ideas from [Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683), [Hierarchical Self-Improvement](https://arxiv.org/abs/2608.08466), and [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621).
+The 1.4 observability work was informed by [Agentic Harness Engineering](https://arxiv.org/abs/2604.25850). The 1.5 evaluation boundary was informed by [Rethinking the Evaluation of Harness Evolution](https://arxiv.org/abs/2607.12227). The bounded 1.6 episodes use selected ideas from [Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683), [Hierarchical Self-Improvement](https://arxiv.org/abs/2608.08466), and [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621).
 
 Papers supply questions, candidate mechanisms, and stronger ways to falsify a claim. They do not become features without local evidence. Detailed contracts live in the [evolution](plugins/nulnul-harness/skills/nulnul-harness/references/evolution.md), [meta-evolution](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md), and [generalization](plugins/nulnul-harness/skills/nulnul-harness/references/generalization.md) references.
 </details>
 
 ## Roadmap to 2.0
 
-The public plugin is **1.5.0**. The roadmap describes user value, not an automatic release promise.
+This repository is a local **1.6.0 release candidate**. Exact-version public adoption evidence still covers 1.5.0, so publication is not yet complete. The roadmap describes user value, not an automatic release promise.
 
 | Stage | Status | User value |
 | --- | --- | --- |
 | 1.4 Observable Evolution | Completed | See where a harness failed and distinguish evidence from a plausible explanation. |
 | 1.5 Generalization Gate | Completed | Separate a fix that transfers from one tuned to familiar fixtures. |
-| 1.6 Bounded Autonomous Evolution | Current local candidate | Search a tiny candidate space within fixed budgets and stop without promotion when evidence does not support a winner. Live generation and public v1.6.0 evidence remain pending. |
-| 1.7 Personal Evolution | Next, not started | Let project-proven adaptations earn promotion into personal harness knowledge through fresh transfer evidence. |
+| 1.6 Bounded Autonomous Evolution | Local release candidate; publication pending | Search a tiny candidate space within fixed budgets and stop without promotion when evidence does not support a winner. One new live candidate was generated and gated; exact-version public adoption remains pending. |
+| 1.7 Personal Evolution | Next, not started | Carry a project-proven improvement forward only after it survives a small transfer check in another project. |
 | 2.0 Cross-project / Meta Evolution | Long-term target | Combine scoped lessons across projects without sharing raw workloads, and improve the improvement procedure itself. |
 
 ## Trust boundaries and limitations
@@ -228,7 +228,7 @@ The public plugin is **1.5.0**. The roadmap describes user value, not an automat
 - Checkpoints are rechecked against bounded repository reality before fast resume.
 - Independent Gate ownership is validated from declared state; it is not cryptographic proof of two runtime identities.
 
-This does **not** prove that NULNUL improves every project, prevents every agent error, fixes model reasoning limits, generalizes across repositories, or provides hosted-service reliability. The current unseen result covers one mechanism on one project shape. The 1.6 evidence is one retrospective frozen replay, not live open-ended autonomy.
+This does **not** prove that NULNUL improves every project, prevents every agent error, fixes model reasoning limits, generalizes across repositories, or provides hosted-service reliability. The current unseen result covers one mechanism on one project shape. The 1.6 live result covers one activation-metadata failure family; it is not continuous, open-ended, personal, cross-project, or harness-wide autonomous improvement.
 
 ## FAQ
 

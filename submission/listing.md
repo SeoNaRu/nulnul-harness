@@ -2,12 +2,12 @@
 
 - Name: nulnul harness
 - Package: `nulnul-harness`
-- Version: `1.5.0`
+- Version: `1.6.0`
 - Publisher: SeoNaRu (must match the verified OpenAI Platform identity)
 - Category: Productivity
 - Shape: Skills only; no MCP server, app, UI, hooks, authentication, or publisher-operated service
-- Short description: Your evolving AI team.
-- Long description: nulnul harness inspects the project, reuses suitable skills and plugins, assembles only the task and meta agents the work needs, completes the task, and improves its own process only when an independent Gate accepts reproducible evidence.
+- Short description: Outcomes, verified and lean.
+- Long description: nulnul harness starts from the requested result, inspects the project, reuses suitable skills, plugins, agents, and conventions, fills only demonstrated gaps, completes the work, and improves its process only when an independent Gate accepts reproducible evidence.
 - Logo: `plugins/nulnul-harness/assets/nulnul-harness.svg`
 
 ## Starter prompts

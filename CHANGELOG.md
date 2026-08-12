@@ -2,14 +2,17 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## Unreleased — 1.6 Bounded Autonomous Evolution candidate
+## Unreleased — 1.6.0 Bounded Autonomous Evolution release candidate
 
 - Tested whether one reproduced failure can drive candidate search without one-at-a-time user direction while fixed budgets, permissions, sealed evaluation, and an independent Gate remain in control.
 - Added schema-v4 autonomous episodes with machine-readable `WHERE × WHY` pathology, one-generation candidate/model/evaluation budgets, rejected-proposal archive identity, deterministic credit, comparable champion/retry/best-of-N arms, cost, decision, and stop reason.
 - Replayed the recorded Claude adoption inventory failure: the archive deduplicated rejected Navigator v16 without evaluation, v17 passed one independent model run and five checks, and the episode stopped on `SUCCESS`. Two champion retries and best-of-2 produced zero primary successes.
 - Added fail-closed controls for budget bypass, self-credit, rejected replay, HOLDOUT leakage, unapproved permission expansion, missing prediction or evidence, parent/mechanism identity mismatch, and forced promotion. A fully evidenced `NO_PROMOTION` remains valid.
-- Kept the claim narrow: this is a retrospective frozen replay, not evidence of live open-ended generation, broad autonomous improvement, personal promotion, or cross-project aggregation.
-- Kept the public version at 1.5.0 because the exact-version GitHub-marketplace adoption evidence required for 1.6.0 needs a later approved push; no release evidence was edited to manufacture a pass.
+- Ran a live one-generation episode on a newly reproduced activation failure: two unchanged champion checks each found seven public surfaces with stale agent-team positioning; archive lookup found no replay; a Coach-generated metadata candidate reduced the deterministic metric to zero within two model invocations and one candidate evaluation.
+- The independent Gate accepted only the four preregistered metadata edits after product checks, permission/privacy/read-scope guardrails, Release Gate 100/100, and a post-promotion zero-violation live cycle. The episode stopped on `SUCCESS`; the executable rollback threshold remained clear.
+- Extended fair baseline accounting only enough to compare deterministic completion checks as well as model invocations, with a negative control that rejects a completion-check budget bypass.
+- Kept the claim narrow: live candidate generation and correct bounded stopping are established for this activation-metadata failure family, not as live open-ended generation, broad autonomous improvement, personal promotion, or cross-project aggregation.
+- Aligned local product surfaces to 1.6.0. Exact-version public adoption remains pending because the candidate has not been pushed or published; no prior 1.5.0 adoption evidence was relabeled.
 
 ## 1.5.0 — 2026-08-12
 

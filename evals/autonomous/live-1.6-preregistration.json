@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "episode_id": "episode-public-positioning-live-1",
+  "mode": "live",
+  "registered_at": "2026-08-12T14:12:50+09:00",
+  "candidate_generation_started": true,
+  "candidate_generation_started_at": "2026-08-12T14:13:00+09:00",
+  "champion_git_ref": "4b120e3b2b7baf4909f814b08c44da2c3e445e65",
+  "feedback_id": "feedback-public-positioning-drift",
+  "pathology": {
+    "where": "activation",
+    "why": "public acquisition metadata still defines agent-team creation as the product after the verified product contract became outcome-first and reuse-first"
+  },
+  "archive_lookup": {
+    "rejected_proposal_ids": [
+      "proposal-navigator-4-late-rule",
+      "proposal-navigator-4-early-rule",
+      "proposal-navigator-4-renderer",
+      "proposal-navigator-11-explicit",
+      "proposal-navigator-11-concise",
+      "proposal-navigator-13",
+      "proposal-navigator-14",
+      "proposal-navigator-16"
+    ],
+    "matching_pathology_and_mechanism_ids": [],
+    "result": "new_pathology"
+  },
+  "budget": {
+    "max_candidates": 2,
+    "max_generations": 1,
+    "max_evaluation_runs": 2,
+    "max_failed_candidates": 1,
+    "max_identical_pathology_retries": 1,
+    "max_model_invocations": 2
+  },
+  "primary_metric": {
+    "name": "public metadata surfaces presenting NULNUL as an agent-team generator",
+    "baseline": 7,
+    "target": 0,
+    "reproduction": "python3 -m unittest tests.test_product_plugin.ProductPluginTests.test_public_metadata_is_product_first -v",
+    "baseline_runs": [7, 7]
+  },
+  "prediction": "One new causal candidate can reduce the seven public-positioning violations to zero in one deterministic evaluation without changing product behavior, widening permissions, or weakening the product-first README.",
+  "falsification_condition": "The candidate leaves any public-positioning violation, changes files outside bounded public metadata, changes behavior or permissions, weakens README product-first claims, breaks manifest parity or archive consistency, or needs more than the frozen budget.",
+  "guardrails": [
+    "task behavior unchanged",
+    "permission delta empty",
+    "no private data, raw transcript, or credential retained",
+    "README and product source read scope only",
+    "all product completion checks pass",
+    "one-generation and model budgets hold",
+    "rollback restores champion metadata"
+  ],
+  "permission_delta": [],
+  "holdout_access": false,
+  "allowed_candidate_files": [
+    ".claude-plugin/marketplace.json",
+    "plugins/nulnul-harness/.codex-plugin/plugin.json",
+    "plugins/nulnul-harness/.claude-plugin/plugin.json",
+    "submission/listing.md"
+  ],
+  "source_identity": {
+    "README.md": "e9ac0114b91220621cdcb3087767ad5058698d504c7dae25eb720d89c38fa37b",
+    "README.ko.md": "61e2f0b79af6eab32d0c42832135adf3b85e1c74bc6a574f2ab0e022a83270e1",
+    "plugins/nulnul-harness/.codex-plugin/plugin.json": "b1582d193f7a214a1b421d3b02dcafc2d1af85039b35d90972061996c4158949",
+    "plugins/nulnul-harness/.claude-plugin/plugin.json": "67c6e6f2acf9c6808052441ba35492456bc5bb782af28dae5ecee04d5bdadbe2",
+    ".claude-plugin/marketplace.json": "6460028e523ccc5109580a4c9cabc1e8eb289fb528f3c5c1518192367d161131",
+    "submission/listing.md": "c9840691ee08f0d5dcc911f0cd33fc2ac18c90bfd1d4719b764d1a34f4fab899",
+    "tests/test_product_plugin.py": "86aee674b1f488a870a1f5a8c38162aeae22f3fae83a61b771cc4849d3791577"
+  }
+}

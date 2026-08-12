@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.5.0-111111" alt="version 1.5.0">
+  <img src="https://img.shields.io/badge/version-1.6.0-111111" alt="version 1.6.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="Release Gate: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -23,7 +23,7 @@
 
 NULNUL은 Codex와 Claude Code를 위한 skills-only plugin입니다. 사용자가 원하는 결과를 말하면 저장소를 읽고, 이미 적합한 skill·plugin·agent·프로젝트 규칙을 재사용하고, 빠진 부분만 채운 뒤 원래 작업을 계속 수행하고 실제 저장소 검사를 실행합니다.
 
-여러 session에 걸친 작업이라면 다음 session이 chat을 처음부터 복원하지 않도록 짧고 검증된 checkpoint를 남깁니다. 재현 가능한 failure가 생기면 하나의 제한된 개선 proposal로 바꾸고, independent Gate가 accept·reject·rollback하게 할 수 있습니다.
+여러 session에 걸친 작업이라면 다음 session이 chat을 처음부터 복원하지 않도록 짧고 검증된 checkpoint를 남깁니다. 재현 가능한 failure가 생기면 이미 reject된 방향을 확인하고, 동결된 budget 안에서 한 generation의 작은 candidate set을 제안한 뒤 independent Gate가 accept·reject하거나 champion을 유지하게 할 수 있습니다. 개선이 없으면 promotion도 없습니다.
 
 때로는 **새 agent 0개, 새 skill 0개, 새 infrastructure 0개**가 정답입니다.
 
@@ -170,11 +170,11 @@ transfer claim만 → sealed unseen check → scoped decision
 
 | Evidence | 현재 결과 | 무엇을 말해 주나요? |
 | --- | --- | --- |
-| 저장소 test | **108개 통과 (108/108)** | deterministic product, state, privacy, rollback, negative-control contract가 유지됩니다. |
-| Release Gate | 12개 behavior/safety case에서 **100/100** | 공개 fixture와 exact-version Claude adoption evidence가 통과합니다. 범용 benchmark는 아닙니다. |
+| 저장소 test | **110개 통과 (110/110)** | deterministic product, state, privacy, rollback, negative-control contract가 유지됩니다. |
+| Release Gate | 12개 behavior/safety case에서 **100/100** | behavior fixture와 최신 공개 1.5.0 adoption evidence가 통과합니다. exact-version 1.6.0 public adoption은 아직 필요합니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 freshness mechanism이 닫았습니다. |
 | Unseen transfer | **Narrower Scope** | mechanism 하나가 Perl/TAP shape 하나로 전이됐지만 전체 harness 일반화는 미입증입니다. |
-| Bounded evolution candidate | frozen replay 하나가 evaluation 1회로 기록된 winner를 선택; retry는 0/2 | archive-aware bounded selection이 해당 failure family에서는 동작합니다. live candidate generation과 public v1.6.0 evidence는 아직 필요합니다. |
+| Live bounded evolution | champion과 retry는 **위반 7개**를 유지; 새 candidate 하나는 **0개**에 도달하고 `SUCCESS`로 종료 | live candidate generation과 bounded stopping이 activation-metadata failure family 하나에서 동작했습니다. public v1.6.0 adoption과 더 넓은 autonomy는 미입증입니다. |
 
 공개 검사를 직접 실행할 수 있습니다.
 
@@ -183,7 +183,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP result](evals/generalization/results.json)을 확인할 수 있습니다. 버전별 상세 내용은 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
+근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP result](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json)을 확인할 수 있습니다. 버전별 상세 내용은 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
 
 ## NULNUL을 만든 이유
 
@@ -202,21 +202,21 @@ NULNUL은 [GeekNews Weekly 353](https://news.hada.io/weekly/202615)이 던진 ha
 <details>
 <summary>측정된 evolution 작업에 영향을 준 기술 연구</summary>
 
-1.4 observability 작업은 [Agentic Harness Engineering](https://arxiv.org/abs/2604.25850)의 영향을 받았습니다. 1.5 evaluation boundary는 [Rethinking the Evaluation of Harness Evolution](https://arxiv.org/abs/2607.12227)을 참고했습니다. 제한된 1.6 candidate는 [Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683), [Hierarchical Self-Improvement](https://arxiv.org/abs/2608.08466), [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621)에서 필요한 아이디어만 골라 사용했습니다.
+1.4 observability 작업은 [Agentic Harness Engineering](https://arxiv.org/abs/2604.25850)의 영향을 받았습니다. 1.5 evaluation boundary는 [Rethinking the Evaluation of Harness Evolution](https://arxiv.org/abs/2607.12227)을 참고했습니다. 제한된 1.6 episode는 [Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683), [Hierarchical Self-Improvement](https://arxiv.org/abs/2608.08466), [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621)에서 필요한 아이디어만 골라 사용했습니다.
 
 논문은 질문, candidate mechanism, 더 강한 falsification 방법을 제공합니다. local evidence 없이 feature가 되지는 않습니다. 정확한 contract는 [evolution](plugins/nulnul-harness/skills/nulnul-harness/references/evolution.md), [meta-evolution](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md), [generalization](plugins/nulnul-harness/skills/nulnul-harness/references/generalization.md) reference에 있습니다.
 </details>
 
 ## 2.0까지의 로드맵
 
-현재 공개 plugin은 **1.5.0**입니다. Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니다.
+현재 저장소는 local **1.6.0 release candidate**입니다. exact-version public adoption evidence는 아직 1.5.0을 가리키므로 공개가 끝난 상태는 아닙니다. Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니다.
 
 | 단계 | 상태 | 사용자 가치 |
 | --- | --- | --- |
 | 1.4 Observable Evolution | 완료 | harness가 어디서 실패했는지 보고, evidence와 그럴듯한 설명을 구분합니다. |
 | 1.5 Generalization Gate | 완료 | 익숙한 fixture에 맞춘 fix와 실제로 전이되는 fix를 구분합니다. |
-| 1.6 Bounded Autonomous Evolution | 현재 local candidate | 고정 budget 안에서 작은 candidate space를 탐색하고, 승자를 지지할 evidence가 없으면 promotion 없이 멈춥니다. live generation과 public v1.6.0 evidence는 아직 필요합니다. |
-| 1.7 Personal Evolution | 다음, 시작하지 않음 | project에서 검증된 adaptation이 fresh transfer evidence로 personal harness knowledge 승격 자격을 얻습니다. |
+| 1.6 Bounded Autonomous Evolution | local release candidate; 공개 대기 | 고정 budget 안에서 작은 candidate space를 탐색하고, 승자를 지지할 evidence가 없으면 promotion 없이 멈춥니다. 새로운 live candidate 하나가 생성·검증됐고 exact-version public adoption만 남았습니다. |
+| 1.7 Personal Evolution | 다음, 시작하지 않음 | project에서 검증된 개선이 다른 project의 작은 transfer check를 통과한 뒤에만 personal harness knowledge로 이어지게 합니다. |
 | 2.0 Cross-project / Meta Evolution | 장기 목표 | raw workload를 공유하지 않고 project 사이의 scoped lesson을 합치며 improvement procedure 자체를 발전시킵니다. |
 
 ## 신뢰 경계와 한계
@@ -228,7 +228,7 @@ NULNUL은 [GeekNews Weekly 353](https://news.hada.io/weekly/202615)이 던진 ha
 - fast resume 전에 checkpoint를 제한된 repository reality와 다시 비교합니다.
 - Independent Gate ownership은 선언된 state에서 검증하며 두 runtime identity의 암호학적 분리를 증명하지 않습니다.
 
-이 근거는 NULNUL이 모든 project를 개선하거나, 모든 agent error를 막거나, model reasoning 한계를 없애거나, 여러 repository에서 일반화되거나, hosted-service reliability를 제공한다는 뜻이 **아닙니다**. 현재 unseen result는 mechanism 하나와 project shape 하나만 다룹니다. 1.6 evidence는 retrospective frozen replay 하나이지 live open-ended autonomy가 아닙니다.
+이 근거는 NULNUL이 모든 project를 개선하거나, 모든 agent error를 막거나, model reasoning 한계를 없애거나, 여러 repository에서 일반화되거나, hosted-service reliability를 제공한다는 뜻이 **아닙니다**. 현재 unseen result는 mechanism 하나와 project shape 하나만 다룹니다. 1.6 live result는 activation-metadata failure family 하나만 다루며 continuous, open-ended, personal, cross-project, harness-wide autonomous improvement가 아닙니다.
 
 ## 자주 묻는 질문
 
