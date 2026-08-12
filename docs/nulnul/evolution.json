@@ -17,11 +17,11 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 1.7.0 is public and release-closed after exact-version adoption and green main CI.",
+    "milestone": "NULNUL 2.0 entry has three independent verified personal adaptation families; flat cross-project lookup baseline and one bounded meta candidate are preregistered.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-13: Public tag v1.7.0 points to release commit fe6f826 and its byte-identical archive has SHA-256 8e79a4598d1358be4e26a5f8a08178e78d2d90bcf2ef9aef3bce43ed0688ba57. Exact-version personal reuse applied in a fresh project, skipped incompatible and revoked controls, and expanded no permissions. A separate fresh GitHub-marketplace Claude Code run preserved two existing agent hashes, made zero protected writes, produced fast_path_ready verified state, and passed five checks. Final Release Gate returned release_ready=true and main CI run 31651306556 passed.",
-    "next_action": "Observe ordinary 1.7 use; do not begin 2.0 cross-project aggregation until the user requests it and multiple verified adaptations justify the scope.",
+    "last_verified": "2026-08-13: Personal Gate promoted transactional local migration and machine-linked nonpass verdict mechanisms after two positive transfers, one negative skip, and one fresh reuse each. Together with checkpoint freshness, the 2.0 entry inventory has three independent families. Flat and status-permission baseline arms each executed nine full compatibility checks across three correct decisions, including six irrelevant checks.",
+    "next_action": "Implement only the preregistered one-generation summary shortlist, freeze its source identity, then expose the fresh HOLDOUT once for independent Meta Gate evaluation.",
     "blockers": [],
     "approved_permissions": []
   },
@@ -332,6 +332,16 @@
       "expected": "Credit explicit bounded content reads for every declared agent while continuing to reject path listing or printed-path traces.",
       "evidence": "The sanitized nonpass preserved both agent hashes, made zero protected writes, classified both roles, produced a verified checkpoint, and passed five checks; the explicit-read known-answer control passes and the paths-only control remains false.",
       "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-cross-project-flat-selection",
+      "source": "test",
+      "target_agent": "gate",
+      "observed": "Flat 1.7 lookup and a status-permission heuristic each opened nine full compatibility checks across three cross-project cases, six of them irrelevant, despite three correct final decisions.",
+      "expected": "Use privacy-safe activation summaries to open full compatibility checks only for relevant candidates while preserving apply, skip, conflict, permission, and downstream correctness.",
+      "evidence": "evals/meta-evolution/baseline.json reproduces the same selection decisions and nine checks in both baseline arms.",
+      "scope": "personal",
       "status": "converted"
     }
   ],
@@ -1007,6 +1017,31 @@
       },
       "falsification_condition": "The post-public artifact remains invalid, any declared profile is unread, a paths-only command counts as a read, any protected write appears, or any completion check fails.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-meta-selector-1",
+      "feedback_ids": ["feedback-cross-project-flat-selection"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 9,
+      "to_version": 10,
+      "cause": "Flat personal lookup does not use bounded cross-project activation evidence before opening each full compatibility check.",
+      "change_target": "Gate v10 cross-project procedure: shortlist current, permitted, non-contraindicated activation matches from privacy-safe summaries before full compatibility checks.",
+      "regression_check": "python3 -m unittest tests.test_cross_project_evolution -v",
+      "primary_metric": "full compatibility checks with identical selection and downstream correctness",
+      "permission_delta": [],
+      "rollback": "Restore flat-lookup-v1 on one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion.",
+      "change_level": "meta",
+      "discovery_evidence": "evals/meta-evolution/baseline.json records six irrelevant full compatibility checks across three bounded cases.",
+      "transfer_check": "One-shot fresh Project X, no-relevant-adaptation, and unresolved-conflict HOLDOUT cases are preregistered and sealed until candidate identity is frozen.",
+      "prediction": "The summary shortlist preserves every expected apply and skip while reducing full compatibility checks below both preregistered baselines.",
+      "expected_delta": {
+        "selection_correctness": "3/3 -> 3/3",
+        "full_compatibility_checks": "9 -> <9",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Any expected adaptation is missed, any irrelevant adaptation is applied, a conflict is auto-resolved, permissions expand, or full compatibility checks do not decrease.",
+      "status": "proposed"
     }
   ],
   "promotions": [

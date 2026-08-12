@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-13T11:00:00+09:00",
+  "entry_gate": {
+    "decision": "PASS",
+    "independent_family_count": 3
+  },
+  "adaptations": [
+    {
+      "adaptation_id": "personal-checkpoint-freshness-v1",
+      "mechanism_family": "checkpoint-verification-freshness",
+      "target_job": "prevent stale verified resume after project mutation",
+      "activation_conditions": [
+        "durable_multi_session",
+        "verified_checkpoint_used",
+        "deterministic_completion_check",
+        "bounded_verification_files",
+        "checkpoint_receipt_supported"
+      ],
+      "contraindications": [
+        "one_shot_task",
+        "completion_check_unavailable",
+        "mutable_file_identity_unavailable"
+      ],
+      "tested_project_shapes": [
+        "source",
+        "node-package",
+        "build-tool-cli",
+        "one-shot",
+        "data-cli"
+      ],
+      "positive_transfer_count": 2,
+      "negative_skip_count": 1,
+      "failed_transfer_count": 1,
+      "narrowed_scope_count": 0,
+      "source_evidence_identity": {
+        "source_proposal_id": "proposal-navigator-15",
+        "candidate_ref": "435a8e5",
+        "source_gate_id": "promotion-navigator-15"
+      },
+      "guardrails": [
+        "task correctness",
+        "permission boundary",
+        "privacy",
+        "bounded read scope",
+        "no unnecessary infrastructure",
+        "revocation"
+      ],
+      "permission_requirements": [],
+      "privacy_class": "generalized_bounded_evidence",
+      "compatibility_requirements": [
+        "durable_multi_session",
+        "verified_checkpoint_used",
+        "deterministic_completion_check",
+        "bounded_verification_files",
+        "checkpoint_receipt_supported"
+      ],
+      "known_conflicts": [],
+      "known_complements": [],
+      "cost_evaluation_summary": "No reliable cross-project token or elapsed comparison is claimed.",
+      "freshness": {
+        "evidence_status": "current",
+        "last_verified": "2026-08-13"
+      },
+      "status": "active"
+    },
+    {
+      "adaptation_id": "personal-transactional-migration-v1",
+      "mechanism_family": "local-migration-atomicity",
+      "target_job": "prevent mixed-generation local state after a multi-file migration failure",
+      "activation_conditions": [
+        "durable_multi_session",
+        "multi_file_state_migration",
+        "local_offline_repository"
+      ],
+      "contraindications": [
+        "one_shot_task",
+        "single_file_change",
+        "external_state_migration"
+      ],
+      "tested_project_shapes": [
+        "source",
+        "python-config-bundle",
+        "node-workspace-manifest",
+        "single-file-settings"
+      ],
+      "positive_transfer_count": 2,
+      "negative_skip_count": 1,
+      "failed_transfer_count": 0,
+      "narrowed_scope_count": 0,
+      "source_evidence_identity": {
+        "source_proposal_id": "proposal-navigator-8",
+        "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+        "source_gate_id": "promotion-navigator-8"
+      },
+      "guardrails": [
+        "task correctness",
+        "permission boundary",
+        "privacy",
+        "file modes",
+        "no external transaction claim"
+      ],
+      "permission_requirements": [],
+      "privacy_class": "generalized_bounded_evidence",
+      "compatibility_requirements": [
+        "durable_multi_session",
+        "multi_file_state_migration",
+        "local_offline_repository"
+      ],
+      "known_conflicts": [],
+      "known_complements": [],
+      "cost_evaluation_summary": "No reliable cross-project token or elapsed comparison is claimed.",
+      "freshness": {
+        "evidence_status": "current",
+        "last_verified": "2026-08-13"
+      },
+      "status": "active"
+    },
+    {
+      "adaptation_id": "personal-learning-verdict-linkage-v1",
+      "mechanism_family": "nonpass-learning-linkage",
+      "target_job": "prevent measured nonpass results from bypassing bounded feedback and proposal follow-up",
+      "activation_conditions": [
+        "machine_readable_evaluation",
+        "measured_nonpass",
+        "evolution_state_present"
+      ],
+      "contraindications": [
+        "passing_only_run",
+        "one_shot_task",
+        "evolution_state_absent"
+      ],
+      "tested_project_shapes": [
+        "source",
+        "python-evaluation-report",
+        "node-ci-report",
+        "passing-only-report"
+      ],
+      "positive_transfer_count": 2,
+      "negative_skip_count": 1,
+      "failed_transfer_count": 0,
+      "narrowed_scope_count": 0,
+      "source_evidence_identity": {
+        "source_proposal_id": "proposal-coach-4",
+        "candidate_ref": "5e8cd3112a965259fa8145f315922c0832349838",
+        "source_gate_id": "promotion-coach-4"
+      },
+      "guardrails": [
+        "task correctness",
+        "permission boundary",
+        "privacy",
+        "proposal author cannot self-approve",
+        "passing verdicts need no invented failure"
+      ],
+      "permission_requirements": [],
+      "privacy_class": "generalized_bounded_evidence",
+      "compatibility_requirements": [
+        "machine_readable_evaluation",
+        "measured_nonpass",
+        "evolution_state_present"
+      ],
+      "known_conflicts": [],
+      "known_complements": [],
+      "cost_evaluation_summary": "No reliable cross-project token or elapsed comparison is claimed.",
+      "freshness": {
+        "evidence_status": "current",
+        "last_verified": "2026-08-13"
+      },
+      "status": "active"
+    }
+  ],
+  "relations": [
+    {
+      "source": "personal-checkpoint-freshness-v1",
+      "target": "personal-transactional-migration-v1",
+      "type": "UNKNOWN",
+      "evidence": "No joint downstream episode had been run at baseline registration.",
+      "reason": "Independent target jobs do not establish interaction by themselves.",
+      "scope": "2.0 entry baseline"
+    },
+    {
+      "source": "personal-checkpoint-freshness-v1",
+      "target": "personal-learning-verdict-linkage-v1",
+      "type": "UNKNOWN",
+      "evidence": "No joint downstream episode had been run at baseline registration.",
+      "reason": "Independent target jobs do not establish interaction by themselves.",
+      "scope": "2.0 entry baseline"
+    },
+    {
+      "source": "personal-transactional-migration-v1",
+      "target": "personal-learning-verdict-linkage-v1",
+      "type": "UNKNOWN",
+      "evidence": "No joint downstream episode had been run at baseline registration.",
+      "reason": "Independent target jobs do not establish interaction by themselves.",
+      "scope": "2.0 entry baseline"
+    }
+  ],
+  "raw_project_data_included": false
+}

@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-13",
+  "entry_gate": {
+    "decision": "PASS",
+    "independent_family_count": 3
+  },
+  "flat_lookup": {
+    "runs": [
+      {
+        "status": "APPLY",
+        "selected": [
+          "personal-checkpoint-freshness-v1",
+          "personal-learning-verdict-linkage-v1"
+        ],
+        "adaptations_considered": 3,
+        "compatibility_checks_executed": 3,
+        "skipped": [
+          {
+            "adaptation_id": "personal-transactional-migration-v1",
+            "reason": "conditions_not_met"
+          }
+        ],
+        "conflicts": [],
+        "case_id": "dev:durable-nonpass-1",
+        "role": "DEV",
+        "correct": true
+      },
+      {
+        "status": "APPLY",
+        "selected": [
+          "personal-transactional-migration-v1"
+        ],
+        "adaptations_considered": 3,
+        "compatibility_checks_executed": 3,
+        "skipped": [
+          {
+            "adaptation_id": "personal-checkpoint-freshness-v1",
+            "reason": "conditions_not_met"
+          },
+          {
+            "adaptation_id": "personal-learning-verdict-linkage-v1",
+            "reason": "conditions_not_met"
+          }
+        ],
+        "conflicts": [],
+        "case_id": "validation:multi-file-migration-1",
+        "role": "VALIDATION",
+        "correct": true
+      },
+      {
+        "status": "NO_RELEVANT_ADAPTATION",
+        "selected": [],
+        "adaptations_considered": 3,
+        "compatibility_checks_executed": 3,
+        "skipped": [
+          {
+            "adaptation_id": "personal-checkpoint-freshness-v1",
+            "reason": "conditions_not_met"
+          },
+          {
+            "adaptation_id": "personal-transactional-migration-v1",
+            "reason": "conditions_not_met"
+          },
+          {
+            "adaptation_id": "personal-learning-verdict-linkage-v1",
+            "reason": "conditions_not_met"
+          }
+        ],
+        "conflicts": [],
+        "case_id": "validation:no-relevant-1",
+        "role": "VALIDATION",
+        "correct": true
+      }
+    ],
+    "adaptations_considered": 9,
+    "compatibility_checks_executed": 9,
+    "irrelevant_compatibility_checks": 6,
+    "correct_decisions": 3
+  },
+  "simple_status_permission_heuristic": {
+    "runs": [
+      {
+        "status": "APPLY",
+        "selected": [
+          "personal-checkpoint-freshness-v1",
+          "personal-learning-verdict-linkage-v1"
+        ],
+        "adaptations_considered": 3,
+        "compatibility_checks_executed": 3,
+        "skipped": [
+          {
+            "adaptation_id": "personal-transactional-migration-v1",
+            "reason": "conditions_not_met"
+          }
+        ],
+        "conflicts": [],
+        "case_id": "dev:durable-nonpass-1",
+        "role": "DEV",
+        "correct": true
+      },
+      {
+        "status": "APPLY",
+        "selected": [
+          "personal-transactional-migration-v1"
+        ],
+        "adaptations_considered": 3,
+        "compatibility_checks_executed": 3,
+        "skipped": [
+          {
+            "adaptation_id": "personal-checkpoint-freshness-v1",
+            "reason": "conditions_not_met"
+          },
+          {
+            "adaptation_id": "personal-learning-verdict-linkage-v1",
+            "reason": "conditions_not_met"
+          }
+        ],
+        "conflicts": [],
+        "case_id": "validation:multi-file-migration-1",
+        "role": "VALIDATION",
+        "correct": true
+      },
+      {
+        "status": "NO_RELEVANT_ADAPTATION",
+        "selected": [],
+        "adaptations_considered": 3,
+        "compatibility_checks_executed": 3,
+        "skipped": [
+          {
+            "adaptation_id": "personal-checkpoint-freshness-v1",
+            "reason": "conditions_not_met"
+          },
+          {
+            "adaptation_id": "personal-transactional-migration-v1",
+            "reason": "conditions_not_met"
+          },
+          {
+            "adaptation_id": "personal-learning-verdict-linkage-v1",
+            "reason": "conditions_not_met"
+          }
+        ],
+        "conflicts": [],
+        "case_id": "validation:no-relevant-1",
+        "role": "VALIDATION",
+        "correct": true
+      }
+    ],
+    "adaptations_considered": 9,
+    "compatibility_checks_executed": 9,
+    "irrelevant_compatibility_checks": 6,
+    "correct_decisions": 3
+  },
+  "pathology": {
+    "where": "personal adaptation selection",
+    "why": "Flat lookup opens a full compatibility check for every active adaptation even when bounded summary conditions can exclude it.",
+    "reproduced": true
+  },
+  "measurement_boundary": {
+    "comparable": [
+      "selection correctness",
+      "full compatibility checks",
+      "permission changes"
+    ],
+    "not_comparable": [
+      "inference tokens",
+      "elapsed time"
+    ],
+    "repository_reads": "One bounded evidence file per arm; no read reduction is claimed."
+  },
+  "learning_verdicts": [
+    {
+      "id": "cross-project-flat-selection-inefficiency",
+      "status": "not-established",
+      "feedback_id": "feedback-cross-project-flat-selection",
+      "proposal_ids": [
+        "proposal-meta-selector-1"
+      ]
+    }
+  ]
+}

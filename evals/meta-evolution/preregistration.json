@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "episode_id": "meta-selection-episode-1",
+  "registered_at": "2026-08-13T11:10:00+09:00",
+  "candidate_generation_started": false,
+  "champion_ref": "3e9934d",
+  "entry_gate": {
+    "required_independent_families": 3,
+    "verified_independent_families": 3,
+    "decision": "PASS"
+  },
+  "pathology": {
+    "where": "personal adaptation selection",
+    "why": "Flat lookup opens a full compatibility check for every active adaptation even when bounded summary conditions can exclude it."
+  },
+  "archive_lookup": {
+    "matching_rejected_meta_proposals": [],
+    "result": "new_pathology"
+  },
+  "budget": {
+    "max_candidates": 1,
+    "max_generations": 1,
+    "max_evaluation_runs": 9,
+    "max_model_invocations": 0,
+    "max_relation_changes": 2,
+    "max_affected_policy_surfaces": 1
+  },
+  "candidate": {
+    "candidate_id": "meta-selector-v1-summary-shortlist",
+    "author_agent": "coach",
+    "target_agent": "gate",
+    "generation": 1,
+    "change": "Apply status, freshness, permission, contraindication, and activation conditions to bounded summaries before opening full adaptation compatibility checks.",
+    "permission_delta": []
+  },
+  "primary_metric": "Full compatibility checks with identical selection and downstream correctness.",
+  "prediction": "The summary shortlist keeps every expected apply and skip while reducing full compatibility checks below flat lookup and the status-permission heuristic.",
+  "falsification_condition": "Any expected adaptation is missed, any irrelevant adaptation is applied, a conflict is auto-resolved, permissions expand, or full compatibility checks do not decrease.",
+  "evaluation_split": {
+    "DEV": ["dev:durable-nonpass-1"],
+    "VALIDATION": ["validation:multi-file-migration-1", "validation:no-relevant-1"],
+    "HOLDOUT": ["holdout:fresh-project-x-1", "holdout:no-relevant-2", "holdout:conflict-3"]
+  },
+  "holdout": {
+    "access_during_generation": false,
+    "material_path": "evals/meta-evolution/run_holdout.py",
+    "unseen": true,
+    "exposure_count": 0
+  },
+  "baselines": ["1.7 flat lookup", "status-permission heuristic"],
+  "permissions": {
+    "approved": [],
+    "external_writes": false,
+    "publication": false
+  },
+  "rollback": {
+    "active_version_before": "flat-lookup-v1",
+    "candidate_version": "meta-selector-v1",
+    "threshold": "Rollback on one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion.",
+    "operator": "gt",
+    "value": 0
+  }
+}
