@@ -97,9 +97,11 @@ Research → Question → Reproduce → Candidate → Independent Gate → Live 
 | 시작 | task agent를 개선하는 절차 자체도 수정 가능하게 만들 수 있는가? | 수정 가능한 task/meta 경계, Coach 제안, 독립 Gate, run 간 상태 축적 | HyperAgents 재현을 주장하지 않는, 통제된 [meta-evolution](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md) |
 | 1.4 Observable Evolution | 무엇을 왜 바꿨고, 그 변경 때문에 결과가 달라졌는지 관찰할 수 있는가? | 제한된 Experience Digest, 안정적인 stage/owner 분리, prediction과 falsification | 넓은 test count `[1, 1, 2]`가 Navigator `0` 대 Gate `1`을 숨겼습니다. path resolution을 반증하고 final-action ordering을 지지했으며 instruction candidate 두 개를 reject했고, stale-checkpoint 위험을 3/3에서 0/3으로 줄였습니다. |
 | 1.5 Generalization Gate | evolution이 단순 search를 이기고 candidate에 영향을 주지 않은 case에서도 살아남는가? | machine-readable exposure state, 사전 등록, one-shot holdout, champion/retry/best-of-3 control | 잘못된 Ruby fixture는 실패 후 validation이 됐습니다. 새 Perl/TAP shape는 stale state 3/3 차단과 검증 후 resume 3/3을 보였고 champion retry/best-of-3는 계속 unsafe했습니다. 판정: **Narrower Scope** |
-| 다음 | 지금 바꿀 가치가 있는 병목은 무엇인가? | 구현 전에 새로운 dogfooding 또는 evolution evidence 요구 | **근거 대기 중. 다음 milestone과 Research Watch 항목은 확정되지 않았습니다.** |
+| 1.6 Bounded Autonomous Evolution | 사용자가 candidate를 하나씩 지시하지 않아도 고정 budget 안에서 탐색하고 멈출 수 있는가? | schema-v4 episode: `WHERE × WHY`, rejected archive 조회, 1 generation, 독립 deterministic credit, retry/best-of-N baseline, 명시적 stop | frozen replay가 reject된 v16을 deduplicate하고 model evaluation 1회와 check 5개로 v17을 선택한 뒤 `SUCCESS`로 멈췄습니다. champion retry와 best-of-2는 0/2였습니다. **Local candidate이며 live generation과 공개 v1.6.0 evidence는 아직 필요합니다.** |
+| 1.7 Personal Evolution | project에서 검증된 adaptation이 fresh transfer evidence를 거쳐 personal harness knowledge로 승격될 수 있는가? | 1.6 release closure 뒤의 다음 milestone. 이번에는 구현하지 않음 | **시작하지 않음** |
+| 2.0 Cross-project / Meta Evolution | raw workload를 공유하지 않고 isolated environment의 scoped adaptation을 합성할 수 있는가? | 장기 target. aggregation과 meta-evolver는 없음 | **미구현** |
 
-위 1.4와 1.5는 연구 evidence milestone 이름입니다. 둘을 포함한 현재 공개 plugin version은 **1.5.0**입니다.
+현재 공개 plugin은 계속 **1.5.0**입니다. 1.6 구현은 로컬 검증된 release candidate입니다. **1.6.0** 공개에 필요한 exact-version GitHub-marketplace adoption evidence는 승인된 push 전에는 만들 수 없기 때문입니다. retrospective episode가 증명한 것은 recorded failure family 하나에서의 bounded archive-aware selection이지 live open-ended autonomy가 아닙니다.
 
 ### 논문 → 제품
 
@@ -126,6 +128,9 @@ Research → Question → Reproduce → Candidate → Independent Gate → Live 
 | --- | --- |
 | [Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses](https://arxiv.org/abs/2604.25850): component·experience·decision observability, prediction → evaluation | 제한된 Experience Digest, owner/stage attribution, 반증 가능한 candidate, reject 보존, checkpoint-freshness 결함 발견. [진화 규칙](plugins/nulnul-harness/skills/nulnul-harness/references/evolution.md)과 [activation evidence](evals/benchmarks/activation/results.json)를 확인하세요. |
 | [Rethinking the Evaluation of Harness Evolution for Agents](https://arxiv.org/abs/2607.12227): matched feedback/inference budget, test-time search baseline, held-out evaluation, limited generalization | DEV/VALIDATION/HOLDOUT exposure state, retry와 best-of-3 control, one-shot holdout retire, 범위가 좁은 판정. [Generalization Gate](plugins/nulnul-harness/skills/nulnul-harness/references/generalization.md), [manifest](evals/generalization/manifest.json), [result](evals/generalization/results.json)를 확인하세요. |
+| [Self-Evolving Agent Harnesses via Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683): proposal과 credit 분리, `WHERE × WHY` failure 분류, pathology 기반 candidate 보존, sealed evaluation | one-generation bounded episode가 기존 proposal archive를 재사용하고 동일한 reject mechanism을 deduplicate하며 독립 deterministic Gate만 credit합니다. candidate population이나 quality-diversity archive는 구현하지 않았습니다. |
+| [Hierarchical Self-Improvement: A Framework for Task-Specific Evolvable Agent Harnesses](https://arxiv.org/abs/2608.08466): feedback fidelity, backbone limit, task/evolver/meta-evolver 경계 | uninformative feedback과 suspected capability bound에 대한 stop을 명시했습니다. episode는 자기 search algorithm을 수정할 수 없고 meta-evolver도 추가하지 않았습니다. |
+| [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621) ([코드](https://github.com/A-EVO-Lab/a-evolve/tree/release/harness-evolution)): update 생성 능력과 그 이점을 얻는 능력은 다름 | candidate syntax나 Coach 확신에는 credit을 주지 않습니다. selection 전 task-side adoption metric과 guardrail이 통과해야 합니다. |
 
 왼쪽은 논문의 연구 질문과 보고된 mechanism이고, 오른쪽은 이 저장소가 실제 구현·측정한 것입니다. 둘을 같은 주장으로 취급하지 않습니다.
 
@@ -133,10 +138,9 @@ Research → Question → Reproduce → Candidate → Independent Gate → Live 
 
 | 연구 | 지켜보는 질문 | 상태 |
 | --- | --- | --- |
-| [Self-Evolving Agent Harnesses via Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683) | sealed credit assignment와 pathology 기반 candidate archive가 overfitting 없이 순차적인 one-off proposal보다 나은가? | Watching — candidate population, quality-diversity archive, autonomous evolution loop를 구현하지 않았습니다. |
 | [EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement](https://arxiv.org/abs/2608.04968) | raw workload를 공유하지 않고 scope-typed verified adaptation을 격리된 project 사이에 전이할 수 있는가? | Watching — cross-project adaptation 공유나 aggregation을 구현하지 않았습니다. |
 
-Research Watch는 release 계획이 아닙니다. NULNUL 자체 evidence가 병목을 보여주고, 그 아이디어로 검증할 수 있을 때만 다음 방향을 정합니다.
+Research Watch는 current capability가 아닙니다. 유지되는 roadmap은 1.6 release closure → **1.7 Personal Evolution** → 2.0 cross-project/meta evolution이지만, 각 milestone의 mechanism은 계속 evidence가 결정합니다.
 
 ## 제품 루프
 
@@ -219,7 +223,7 @@ raw log를 memory로 저장하지 않고 반복 CI failure를 묶는 하네스 �
 
 | 검사 | 현재 결과 |
 | --- | --- |
-| 저장소 테스트 | **94개 통과** |
+| 저장소 테스트 | **108개 통과** |
 | Release Gate | 12개 weighted behavior/safety case에서 **100/100**; isolated scenario는 positive 9개, negative 3개 |
 | release-blocking regression | setup, bounded workflow, activation, fast-resume cost/read scope, Claude adoption, learning loop, observable evolution, scoped generalization evidence를 검증 |
 | activation과 fast resume | positive/negative project shape 10개, 기본 3회 실행; accepted candidate는 counterbalanced 4/4에서 bounded, 비교 가능한 pair 3개에서 input −18.4% |
@@ -233,6 +237,8 @@ raw log를 memory로 저장하지 않고 반복 CI failure를 묶는 하네스 �
 | Causal candidate | path resolution 반증, final-action ordering 지지, 그럴듯한 문구만으로 Navigator instruction candidate 두 개를 승격하지 않고 reject |
 | Checkpoint freshness | runner-owned bounded receipt 전에는 unverified mutated repository state가 **3/3** fast-resumable, 이후 **0/3**. Gate 후 task behavior/read scope/verified resume는 **3/3** 통과 |
 | release adoption 학습 | sanitized v1.5.0 nonpass 세 건을 보존했고, Navigator v16은 reject, v17은 branch-first installed-roster inventory의 fresh run 통과 후 accept |
+| Bounded autonomous episode | `WHERE=discovery`, `WHY=branch decision 전 inventory 누락`; budget은 candidate 2개, generation 1회, evaluation run 1회, model invocation 최대 2회. reject된 v16은 archive에서 deduplicate했고 v17은 check 5개로 1/1 통과. decision `AUTONOMOUS_EVOLUTION_WIN`, stop `SUCCESS` |
+| No-promotion control | budget bypass, self-credit, rejected replay, HOLDOUT leakage, permission expansion, prediction/evidence 누락, identity mismatch, forced promotion이 fail closed. 충분한 evidence가 있는 `NO_PROMOTION` episode는 정상 결과로 validate |
 
 ### 일반화
 
@@ -245,6 +251,8 @@ raw log를 memory로 저장하지 않고 반복 CI failure를 묶는 하네스 �
 | 판정 | **Narrower Scope. Checkpoint freshness는 unseen local Perl/TAP CLI shape 하나로 전이됐습니다. Harness-wide generalization은 확립되지 않았습니다.** |
 
 Release Gate는 범용 benchmark가 아닙니다. Generalization Gate는 personal/core mechanism promotion, transfer claim, public generalization claim에만 붙는 별도 adjunct입니다. 일반 project-local change에는 holdout 비용을 부과하지 않습니다. development에서 본 case는 HOLDOUT으로 이름을 바꿀 수 없고, 이미 쓴 holdout은 두 번째 unseen claim의 근거가 될 수 없습니다.
+
+1.6 claim은 더 좁습니다. retrospective frozen replay 하나가 기존 v15–v17 evidence만 사용했습니다. bounded contract가 reject된 mechanism 재평가를 피하고 champion retry 2회보다 적은 evaluated model run으로 기록된 winner를 선택할 수 있음을 보였습니다. live candidate generation, 다른 failure family에서의 우위, personal learning, cross-project transfer, harness-wide autonomous improvement는 확립하지 않았습니다.
 
 공개 검사를 재현할 수 있습니다.
 

@@ -97,9 +97,11 @@ Research → Question → Reproduce → Candidate → Independent Gate → Live 
 | Origin | Can the procedure that improves a task agent also be editable? | Editable task/meta boundary; Coach proposals; independent Gate; cross-run state | Governed [meta-evolution](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md), without claiming to reproduce HyperAgents |
 | 1.4 Observable Evolution | Can we observe what changed, why, and whether that change caused the result? | Bounded Experience Digests, stable stage/owner separation, prediction and falsification | Broad test counts `[1, 1, 2]` hid Navigator `0` vs Gate `1`; path resolution was falsified, final-action ordering was supported, two instruction candidates were rejected, and a stale-checkpoint defect fell from unsafe 3/3 to 0/3 |
 | 1.5 Generalization Gate | Does evolution beat simple search and survive a case that did not shape the candidate? | Machine-readable exposure state, preregistration, one-shot holdouts, champion/retry/best-of-3 controls | Invalid Ruby fixture failed and became validation; a fresh Perl/TAP shape blocked stale state 3/3 and resumed after verification 3/3 while champion retry and best-of-3 stayed unsafe; decision: **Narrower Scope** |
-| Next | What bottleneck is now worth changing? | Require new dogfooding or evolution evidence before implementation | **Evidence pending. No milestone or research-watch item is committed.** |
+| 1.6 Bounded Autonomous Evolution | Can the harness explore candidates without one-at-a-time user direction and still stop inside a fixed budget? | Schema-v4 episode: `WHERE × WHY`, rejected archive lookup, one generation, independent deterministic credit, retry/best-of-N baseline, explicit stop | A frozen replay deduplicated rejected v16, selected v17 with 1 model evaluation and 5 checks, then stopped on `SUCCESS`; champion retry and best-of-2 were 0/2. **Local candidate; live generation and public v1.6.0 evidence remain pending.** |
+| 1.7 Personal Evolution | Can a project-proven adaptation earn promotion into personal harness knowledge through fresh transfer evidence? | Next milestone after 1.6 release closure; not implemented here | **Not started** |
+| 2.0 Cross-project / Meta Evolution | Can scoped adaptations compose across isolated environments without sharing raw workloads? | Long-term target; no aggregation or meta-evolver exists | **Not implemented** |
 
-The 1.4 and 1.5 labels above name research evidence milestones. The public plugin containing both is version **1.5.0**.
+The public plugin remains version **1.5.0**. The 1.6 implementation is a locally verified release candidate because the exact-version GitHub-marketplace adoption evidence required to publish **1.6.0** cannot exist before an approved push. The retrospective episode establishes bounded archive-aware selection on one recorded failure family, not live open-ended autonomy.
 
 ### Paper → product
 
@@ -126,6 +128,9 @@ The original project context was [GeekNews Weekly 353: “In the age of abundant
 | --- | --- |
 | [Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses](https://arxiv.org/abs/2604.25850): component, experience, and decision observability; prediction → evaluation | Bounded Experience Digest, owner/stage attribution, falsifiable candidates, rejection preservation, checkpoint-freshness discovery. See [evolution rules](plugins/nulnul-harness/skills/nulnul-harness/references/evolution.md) and [activation evidence](evals/benchmarks/activation/results.json). |
 | [Rethinking the Evaluation of Harness Evolution for Agents](https://arxiv.org/abs/2607.12227): matched feedback/inference budgets, test-time search baselines, held-out evaluation, limited generalization | DEV/VALIDATION/HOLDOUT exposure state, retry and best-of-3 controls, one-shot holdout retirement, scoped decisions. See the [Generalization Gate](plugins/nulnul-harness/skills/nulnul-harness/references/generalization.md), [manifest](evals/generalization/manifest.json), and [result](evals/generalization/results.json). |
+| [Self-Evolving Agent Harnesses via Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683): separate proposal from credit, categorize failure as `WHERE × WHY`, preserve pathology-based candidates, seal evaluation | One-generation bounded episodes reuse the existing proposal archive, deduplicate identical rejected mechanisms, and assign credit only through an independent deterministic Gate. NULNUL does not implement a candidate population or quality-diversity archive. |
+| [Hierarchical Self-Improvement: A Framework for Task-Specific Evolvable Agent Harnesses](https://arxiv.org/abs/2608.08466): feedback fidelity, backbone limits, task/evolver/meta-evolver boundaries | Explicit stops for uninformative feedback and suspected capability bounds; the episode cannot edit its own search algorithm and no meta-evolver was added. |
+| [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621) ([code](https://github.com/A-EVO-Lab/a-evolve/tree/release/harness-evolution)): producing an update and benefiting from it are different capabilities | Candidate syntax or Coach confidence earns no credit; the task-side adoption metric and guardrails must pass before selection. |
 
 The paper columns name the research questions and reported mechanisms. The right column names what this repository actually implemented and measured; the two are not interchangeable.
 
@@ -133,10 +138,9 @@ The paper columns name the research questions and reported mechanisms. The right
 
 | Research | Question being watched | Status |
 | --- | --- | --- |
-| [Self-Evolving Agent Harnesses via Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683) | Can sealed credit assignment and a pathology-based candidate archive outperform sequential one-off proposals without overfitting? | Watching — no candidate population, quality-diversity archive, or autonomous evolution loop exists here |
 | [EvolveNet: Collaborative Harness Evolution for Agent Self-Improvement](https://arxiv.org/abs/2608.04968) | Can scope-typed, verified adaptations transfer across isolated projects without sharing raw workloads? | Watching — no cross-project adaptation sharing or aggregation exists here |
 
-Research Watch is not a release plan. The next direction is chosen only when NULNUL's own evidence shows a bottleneck that one of these ideas can test.
+Research Watch is not current capability. The maintained roadmap is 1.6 release closure → **1.7 Personal Evolution** → 2.0 cross-project/meta evolution, but evidence still determines each milestone's mechanism.
 
 ## Product loop
 
@@ -219,7 +223,7 @@ Most observed failures were operational invariants, not model-reasoning failures
 
 | Check | Current result |
 | --- | --- |
-| Repository tests | **94 passed** |
+| Repository tests | **108 passed** |
 | Release Gate | **100/100** across 12 weighted behavior and safety cases; 9 positive and 3 negative isolated scenarios |
 | Release-blocking regressions | Setup, bounded workflow, activation, fast-resume cost/read scope, Claude adoption, learning loop, observable evolution, and scoped generalization evidence are validated |
 | Activation and fast resume | 10 positive/negative project shapes, 3 runs by default; accepted candidate bounded in 4/4 counterbalanced runs, paired input −18.4% across 3 comparable pairs |
@@ -233,6 +237,8 @@ Most observed failures were operational invariants, not model-reasoning failures
 | Causal candidates | Path resolution falsified; final-action ordering supported; two Navigator instruction candidates rejected rather than promoted on plausible prose |
 | Checkpoint freshness | Unverified mutated repository state was fast-resumable **3/3** before the mechanism and **0/3** after runner-owned bounded receipts; post-Gate task behavior/read scope/verified resume passed **3/3** |
 | Release adoption learning | Three sanitized v1.5.0 nonpasses were preserved; Navigator v16 was rejected and v17 accepted only after branch-first installed-roster inventory passed a fresh run |
+| Bounded autonomous episode | `WHERE=discovery`, `WHY=inventory omitted before branch decisions`; budget 2 candidates, 1 generation, 1 evaluation run, at most 2 model invocations. Rejected v16 was deduplicated from the archive; v17 passed 1/1 with 5 checks; decision `AUTONOMOUS_EVOLUTION_WIN`, stop `SUCCESS` |
+| No-promotion control | Budget bypass, self-credit, rejected replay, HOLDOUT leakage, permission expansion, missing prediction/evidence, identity mismatch, and forced promotion fail closed; a fully evidenced `NO_PROMOTION` episode validates as a normal outcome |
 
 ### Generalization
 
@@ -245,6 +251,8 @@ Most observed failures were operational invariants, not model-reasoning failures
 | Decision | **Narrower Scope. Checkpoint freshness transferred to one unseen local Perl/TAP CLI shape. Harness-wide generalization is not established.** |
 
 Release Gate is not a universal benchmark. Generalization Gate is a separate adjunct activated for personal/core mechanism promotion, transfer claims, or public generalization claims; ordinary project-local changes do not pay holdout cost. A case seen during development cannot be renamed HOLDOUT, and a used holdout cannot support a second unseen claim.
+
+The 1.6 claim is narrower still: one retrospective frozen replay used already-recorded v15–v17 evidence. It showed that the bounded contract can avoid replaying a rejected mechanism and select the recorded winner with fewer evaluated model runs than two champion retries. It did **not** establish live candidate generation, superiority across failure families, personal learning, cross-project transfer, or harness-wide autonomous improvement.
 
 Reproduce the public checks:
 

@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "history": {
     "previous_state_git_ref": "67e5ca6:docs/nulnul/evolution.json",
     "reason": "Begin an executable schema-v3 epoch without inventing live-cycle evidence for schema-v1 promotions."
@@ -7,11 +7,11 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Release the verified 1.5.0 Generalization Gate candidate through the public GitHub marketplace.",
+    "milestone": "Validate one bounded autonomous evolution episode and prepare a local 1.6.0 release candidate.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-12: NULNUL 1.5 inventoried all current benchmark families as exposed DEV or VALIDATION evidence. An invalid Ruby holdout failed and became validation evidence with a machine-linked Coach proposal. A new Perl/TAP CLI holdout absent from the frozen Navigator v15 snapshot passed task, completion, stale-state blocking, and fresh-resume checks 3 of 3; v14 single, retry, and best-of-3 baselines remained unsafe. Three sanitized Claude adoption nonpasses then exposed a repeated installed-plugin inventory omission. Navigator v16 was rejected; a fresh GitHub-marketplace-installed 1.5.0 v17 run passed roster enumeration, agent classification, protected-write, checkpoint, privacy, and five completion checks. The Generalization decision remains Narrower Scope rather than harness-wide.",
-    "next_action": "After the evidence commit passes CI, create the immutable v1.5.0 tag and GitHub Release. Then use a fresh holdout only when another personal/core transfer claim naturally arises; do not start 1.6 without separate evidence that bounded human-triggered proposals and simple retry/search baselines are insufficient.",
+    "last_verified": "2026-08-12: NULNUL 1.6 replayed the recorded Claude adoption inventory failure as one frozen bounded autonomous episode. The archive deduplicated rejected Navigator v16 without another evaluation; independent Gate evidence selected v17 in one model invocation and five completion checks. Champion, two-run retry, and best-of-2 produced zero primary successes. The episode stopped on SUCCESS with AUTONOMOUS_EVOLUTION_WIN, scoped only to this retrospective failure family; no HOLDOUT was read and no generalization claim was made.",
+    "next_action": "Run the complete 1.6.0 local release-candidate validation. Do not publish or claim live open-ended autonomy; begin 1.7 Personal Evolution only after this milestone closes and a separate project-to-personal transfer problem is reproduced.",
     "blockers": [],
     "approved_permissions": []
   },
@@ -273,6 +273,16 @@
       "scope": "project",
       "status": "converted",
       "rejected_proposals": ["proposal-navigator-16"]
+    },
+    {
+      "id": "feedback-bounded-autonomous-search",
+      "source": "user",
+      "target_agent": "coach",
+      "observed": "The recorded Claude adoption failure required a human-triggered sequence of Navigator v16 rejection followed by v17 evaluation even though the rejected proposal and deterministic evidence were already preserved.",
+      "expected": "For one reproduced failure, freeze a small budget, classify WHERE and WHY, query rejected mechanisms, let the Coach propose one generation, let an independent Gate own credit, and stop after a winner or NO_PROMOTION without reading HOLDOUT material or expanding permissions.",
+      "evidence": "evals/benchmarks/claude-adopt/release-1.5-failures.json and evidence.json preserve two champion nonpasses, rejected v16, accepted v17, five checks per evaluated run, and no raw transcript.",
+      "scope": "core",
+      "status": "converted"
     }
   ],
   "proposals": [
@@ -810,6 +820,11 @@
         "completion_checks_passing": "5/5 -> 5/5"
       },
       "falsification_condition": "The next fresh run omits the bounded plugin listing, changes an existing agent, attempts a protected write, fails any completion check, or requires broader permissions.",
+      "pathology": {
+        "where": "discovery",
+        "why": "installed capability inventory omitted before adoption branch decisions"
+      },
+      "mechanism_id": "main-workflow-inventory-reminder",
       "status": "rejected"
     },
     {
@@ -835,6 +850,11 @@
         "completion_checks_passing": "5/5 -> 5/5"
       },
       "falsification_condition": "The next fresh run omits the plugin listing, changes an existing agent, attempts a protected write, fails any completion check, or requires broader permissions.",
+      "pathology": {
+        "where": "discovery",
+        "why": "installed capability inventory omitted before adoption branch decisions"
+      },
+      "mechanism_id": "branch-first-inventory-action",
       "status": "accepted"
     }
   ],
@@ -1278,6 +1298,140 @@
         "rollback_value": 0,
         "evidence": "The fresh GitHub-marketplace-installed 1.5.0 run recorded roster_enumerated=true, agents_classified=true, unchanged agent hashes, zero protected writes, fast_path_ready, and five zero-exit checks."
       }
+    }
+  ],
+  "autonomous_episodes": [
+    {
+      "id": "episode-claude-roster-bounded-replay-1",
+      "mode": "retrospective_frozen_replay",
+      "feedback_id": "feedback-bounded-autonomous-search",
+      "scope": "core_dev",
+      "pathology": {
+        "where": "discovery",
+        "why": "installed capability inventory omitted before adoption branch decisions"
+      },
+      "budget": {
+        "max_candidates": 2,
+        "max_generations": 1,
+        "max_evaluation_runs": 1,
+        "max_failed_candidates": 1,
+        "max_identical_pathology_retries": 1,
+        "max_model_invocations": 2
+      },
+      "archive_lookup": ["proposal-navigator-16"],
+      "baseline": {
+        "comparable_dimension": "model_invocations",
+        "fair": true,
+        "arms": [
+          {
+            "id": "champion",
+            "runs": 1,
+            "primary_successes": 0,
+            "model_invocations": 1,
+            "completion_checks": 5,
+            "evidence": "claude-adopt-1.5-r1 omitted roster enumeration and failed the primary metric while five checks passed."
+          },
+          {
+            "id": "retry",
+            "runs": 2,
+            "primary_successes": 0,
+            "model_invocations": 2,
+            "completion_checks": 10,
+            "evidence": "claude-adopt-1.5-r1 and r2 both omitted roster enumeration under the same accepted champion."
+          },
+          {
+            "id": "best_of_n",
+            "runs": 2,
+            "primary_successes": 0,
+            "model_invocations": 2,
+            "completion_checks": 10,
+            "evidence": "Neither valid champion result satisfied roster_enumerated, so best-of-2 had no selectable success."
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "candidate-navigator-16-replay",
+          "proposal_id": "proposal-navigator-16",
+          "generation": 1,
+          "author_agent": "coach",
+          "parent_agent": "navigator",
+          "parent_version": 15,
+          "pathology": {
+            "where": "discovery",
+            "why": "installed capability inventory omitted before adoption branch decisions"
+          },
+          "mechanism_id": "main-workflow-inventory-reminder",
+          "prediction": "The main-workflow command makes the next fresh adoption run record roster_enumerated=true while every existing safety and completion field remains passing.",
+          "falsification_condition": "The next fresh run omits the bounded plugin listing, changes an existing agent, attempts a protected write, fails any completion check, or requires broader permissions.",
+          "permission_delta": [],
+          "rollback": "Restore Navigator v15 wording while retaining both failed sanitized runs if the candidate still misses roster enumeration or regresses any guardrail.",
+          "archive_match": "proposal-navigator-16",
+          "evaluation": {
+            "candidate_id": "candidate-navigator-16-replay",
+            "owner_agent": "gate",
+            "status": "deduplicated",
+            "runs": 0,
+            "primary_success": false,
+            "guardrails_passed": true,
+            "evidence": "Archive identity matched the same discovery pathology and main-workflow reminder already rejected by claude-adopt-1.5-v16-r1.",
+            "cost": {
+              "model_invocations": 0,
+              "completion_checks": 0
+            }
+          },
+          "decision": "deduplicated",
+          "rejection_reason": "Rejected replay: same pathology and causal mechanism as Navigator v16."
+        },
+        {
+          "id": "candidate-navigator-17-branch-first",
+          "proposal_id": "proposal-navigator-17",
+          "generation": 1,
+          "author_agent": "coach",
+          "parent_agent": "navigator",
+          "parent_version": 15,
+          "pathology": {
+            "where": "discovery",
+            "why": "installed capability inventory omitted before adoption branch decisions"
+          },
+          "mechanism_id": "branch-first-inventory-action",
+          "prediction": "Making the bounded listing the first branch action changes the next fresh run to roster_enumerated=true without changing any safety or completion outcome.",
+          "falsification_condition": "The next fresh run omits the plugin listing, changes an existing agent, attempts a protected write, fails any completion check, or requires broader permissions.",
+          "permission_delta": [],
+          "rollback": "Keep Navigator v15 and both rejected candidates if the placement-only candidate still misses roster enumeration or regresses a guardrail.",
+          "archive_match": null,
+          "evaluation": {
+            "candidate_id": "candidate-navigator-17-branch-first",
+            "owner_agent": "gate",
+            "status": "passed",
+            "runs": 1,
+            "primary_success": true,
+            "guardrails_passed": true,
+            "evidence": "evals/benchmarks/claude-adopt/evidence.json records roster_enumerated=true, unchanged agent hashes, zero protected writes, fast_path_ready, and five zero-exit checks.",
+            "cost": {
+              "model_invocations": 1,
+              "completion_checks": 5
+            }
+          },
+          "decision": "selected",
+          "rejection_reason": null
+        }
+      ],
+      "gate_agent": "gate",
+      "sealed_evaluation": true,
+      "holdout_case_ids_read": [],
+      "cost": {
+        "candidates_generated": 2,
+        "generations": 1,
+        "evaluation_runs": 1,
+        "failed_candidates": 0,
+        "model_invocations": 1,
+        "completion_checks": 5
+      },
+      "decision": "AUTONOMOUS_EVOLUTION_WIN",
+      "selected_candidate_id": "candidate-navigator-17-branch-first",
+      "stop_reason": "SUCCESS",
+      "claim_boundary": "In one retrospective frozen replay of the recorded Claude adoption inventory failure, archive-aware one-generation search selected the already independently validated branch-first candidate in one model evaluation while champion retry and best-of-2 had zero successes. This does not establish live, open-ended, personal, cross-project, or harness-wide autonomous improvement."
     }
   ]
 }

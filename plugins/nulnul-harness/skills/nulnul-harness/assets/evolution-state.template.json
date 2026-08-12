@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "",
@@ -33,5 +33,6 @@
   },
   "feedback": [],
   "proposals": [],
-  "promotions": []
+  "promotions": [],
+  "autonomous_episodes": []
 }

@@ -1,7 +1,7 @@
 {
   "name": "nulnul-harness",
   "version": "1.5.0",
-  "description": "Build a project-fit agent team, reuse proven skills and plugins, and evolve both the work and its improvement procedure.",
+  "description": "Build a project-fit agent team, reuse proven capabilities, and run bounded evidence-gated evolution episodes.",
   "author": {
     "name": "SeoNaRu",
     "url": "https://github.com/SeoNaRu"
@@ -36,7 +36,8 @@
       "personal-agent-evolution",
       "meta-harness-evolution",
       "observable-evolution",
-      "generalization-gate"
+      "generalization-gate",
+      "bounded-autonomous-evolution"
     ],
     "brandColor": "#111111",
     "composerIcon": "./assets/nulnul-harness.svg",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply schema-v3 live-cycle rollback thresholds atomically."""
+"""Apply schema-v3/v4 live-cycle rollback thresholds atomically."""
 
 import argparse
 import json
@@ -25,8 +25,8 @@ def apply(payload):
     errors = validate_evolution_state.validate(payload)
     if errors:
         raise ValueError("; ".join(errors))
-    if payload.get("schema_version") != 3:
-        raise ValueError("automatic rollback requires schema_version 3")
+    if payload.get("schema_version") not in (3, 4):
+        raise ValueError("automatic rollback requires schema_version 3 or 4")
 
     proposals = {row["id"]: row for row in payload["proposals"]}
     rolled_back = []

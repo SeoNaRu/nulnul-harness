@@ -103,6 +103,7 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/apply_live_cycle_rollback.py",
             "scripts/validate_experience_digest.py",
             "scripts/validate_generalization_gate.py",
+            "scripts/validate_autonomous_evolution.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
@@ -129,6 +130,9 @@ class ProductPluginTests(unittest.TestCase):
         generalization = (SKILL / "references/generalization.md").read_text(encoding="utf-8")
         self.assertIn("Evaluation exposure is state", generalization)
         self.assertIn("After the first result, retire the holdout", generalization)
+        personal = (SKILL / "references/personal-evolution.md").read_text(encoding="utf-8")
+        self.assertIn("Run one bounded autonomous episode", personal)
+        self.assertIn("NO_PROMOTION", personal)
 
     def test_setup_trigger_is_multilingual(self):
         description = re.search(
@@ -194,8 +198,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "94 passed"),
-            "README.ko.md": ("README.md", "94개 통과"),
+            "README.md": ("README.ko.md", "108 passed"),
+            "README.ko.md": ("README.md", "108개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")
@@ -252,6 +256,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_meta_harness_is_a_product_capability(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertIn("meta-harness-evolution", manifest["interface"]["capabilities"])
+        self.assertIn("bounded-autonomous-evolution", manifest["interface"]["capabilities"])
         reference = (SKILL / "references/meta-evolution.md").read_text(encoding="utf-8")
         for phrase in (
             "One editable project program",

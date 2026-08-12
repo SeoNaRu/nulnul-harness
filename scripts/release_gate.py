@@ -18,6 +18,9 @@ EXPERIENCE_VALIDATOR = (
 GENERALIZATION_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_generalization_gate.py"
 )
+AUTONOMOUS_VALIDATOR = (
+    ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_autonomous_evolution.py"
+)
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -53,6 +56,21 @@ def validate_generalization_gate(manifest: dict, results: dict) -> dict:
         "scope": results["scope"],
         "harness_wide_generalization": results["harness_wide_generalization"],
     }
+
+
+def validate_autonomous_gate(evolution: dict) -> dict:
+    spec = importlib.util.spec_from_file_location(
+        "validate_autonomous_evolution", AUTONOMOUS_VALIDATOR
+    )
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    errors = validator.validate(evolution)
+    if errors:
+        raise ValueError("Bounded Autonomous Evolution Gate failed: " + "; ".join(errors))
+    episodes = validator.summarize(evolution)
+    if not episodes:
+        raise ValueError("Bounded Autonomous Evolution Gate needs one recorded episode")
+    return {"status": "passed", "episodes": episodes}
 
 
 def _median(runs: list[dict], field: str) -> float:
@@ -366,6 +384,7 @@ def main() -> None:
     score["generalization_gate"] = validate_generalization_gate(
         generalization_manifest, generalization_results
     )
+    score["bounded_autonomous_evolution_gate"] = validate_autonomous_gate(evolution)
     print(json.dumps(score, ensure_ascii=False, indent=2))
 
 

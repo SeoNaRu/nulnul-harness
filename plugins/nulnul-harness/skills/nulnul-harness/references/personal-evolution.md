@@ -15,7 +15,7 @@ Combine roles for low-risk execution when useful. Separate Coach and Gate for ev
 
 For work that spans sessions or needs agent-specific learning, create `docs/nulnul/evolution.json` from `../assets/evolution-state.template.json`. Validate it with `../scripts/validate_evolution_state.py` after each change.
 
-New states use schema version 3. Versions 1 and 2 remain readable for compatibility. Version 3 keeps the task/meta and live-cycle records from version 2, then adds a numeric metric value, comparison operator, and rollback value so the threshold can execute instead of remaining prose.
+New states use schema version 4. Versions 1 through 3 remain readable for compatibility. Version 3 added an executable live-cycle threshold. Version 4 adds bounded autonomous episodes that link a reproduced feedback item, `WHERE`/`WHY` pathology, fixed search budget, rejected archive lookup, candidates, independent evidence, comparable retry baseline, cost, decision, and stop reason without duplicating proposal or promotion fields.
 
 The Navigator owns checkpoint intent but not verification truth. Concise checkpoints use schema version 3 and store the goal, current milestone, completion check, bounded verification file list, explicit `verified`, `failed`, or `unknown` status, last verified summary, exact next action, permission constraints and approvals, and blockers. The completion runner alone writes the sibling verification receipt after executing the check. Fast resume requires the receipt's fingerprint to match current repository reality; older schemas, missing receipts, failed, unknown, and stale states fail closed. Recheck that evidence and continue from the next action instead of reconstructing a plan from chat.
 
@@ -79,6 +79,16 @@ Reject or roll back otherwise. Never let an agent serve as Gate for its own upgr
 - The Coach queries rejected and rolled-back proposals for the same target before authoring a proposal, and states why this candidate differs from the one already rejected.
 - A feedback record may list `rejected_proposals` with the proposal ids already rejected for it, so the pipeline sees the history the document already holds.
 - A loop that keeps only its wins repeats its losses.
+
+## Run one bounded autonomous episode
+
+Run an episode only for reproduced feedback and only when the user requests evolution or ordinary work emits an evolution signal. Freeze `max_candidates`, `max_generations`, `max_evaluation_runs`, `max_failed_candidates`, `max_identical_pathology_retries`, and `max_model_invocations` before candidate generation. Start with one generation and the current accepted champion as parent.
+
+Classify the failure with bounded `pathology.where` and `pathology.why`; use `unknown` instead of inventing a cause. Query rejected and rolled-back proposals before generating candidates. The same pathology and causal mechanism is a rejected replay: deduplicate it without another evaluation unless the candidate records a materially different mechanism. Diversity means distinct causal mechanisms, not wording variants.
+
+The Coach proposes and the independent Gate owns credit. Prefer deterministic completion checks, validators, danger counts, guardrails, and measured costs; free-form self-evaluation cannot promote a candidate. Unapproved permission deltas become `blocked_by_permission` without execution. DEV and VALIDATION may guide the search, but HOLDOUT material remains sealed.
+
+Stop on success, exhausted budget, uninformative feedback, repeated pathology, no advantage over retry, suspected capability bound, permission block, or no promotion. `NO_PROMOTION` is a valid outcome. Validate schema-version-4 episodes with `scripts/validate_autonomous_evolution.py`; do not create a daemon, recursive Coach, multi-generation loop, personal promotion, or cross-project aggregation.
 
 ## Measure the Gate itself
 

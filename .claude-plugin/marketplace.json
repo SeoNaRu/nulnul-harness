@@ -1,6 +1,6 @@
 {
   "name": "nulnul-harness",
-  "description": "A project-fit AI team and meta-harness that discovers capabilities and improves from measured outcomes.",
+  "description": "A project-fit meta-harness that discovers capabilities and runs bounded evolution from measured outcomes.",
   "owner": {
     "name": "SeoNaRu",
     "url": "https://github.com/SeoNaRu"
@@ -9,7 +9,7 @@
     {
       "name": "nulnul-harness",
       "source": "./plugins/nulnul-harness",
-      "description": "Find proven capabilities, assemble the smallest useful task and meta agent system, preserve progress, and evolve the system from independently verified feedback.",
+      "description": "Find proven capabilities, assemble the smallest useful agent system, preserve progress, and run bounded independently verified evolution episodes.",
       "version": "1.5.0"
     }
   ]

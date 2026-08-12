@@ -2,6 +2,15 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## Unreleased — 1.6 Bounded Autonomous Evolution candidate
+
+- Tested whether one reproduced failure can drive candidate search without one-at-a-time user direction while fixed budgets, permissions, sealed evaluation, and an independent Gate remain in control.
+- Added schema-v4 autonomous episodes with machine-readable `WHERE × WHY` pathology, one-generation candidate/model/evaluation budgets, rejected-proposal archive identity, deterministic credit, comparable champion/retry/best-of-N arms, cost, decision, and stop reason.
+- Replayed the recorded Claude adoption inventory failure: the archive deduplicated rejected Navigator v16 without evaluation, v17 passed one independent model run and five checks, and the episode stopped on `SUCCESS`. Two champion retries and best-of-2 produced zero primary successes.
+- Added fail-closed controls for budget bypass, self-credit, rejected replay, HOLDOUT leakage, unapproved permission expansion, missing prediction or evidence, parent/mechanism identity mismatch, and forced promotion. A fully evidenced `NO_PROMOTION` remains valid.
+- Kept the claim narrow: this is a retrospective frozen replay, not evidence of live open-ended generation, broad autonomous improvement, personal promotion, or cross-project aggregation.
+- Kept the public version at 1.5.0 because the exact-version GitHub-marketplace adoption evidence required for 1.6.0 needs a later approved push; no release evidence was edited to manufacture a pass.
+
 ## 1.5.0 — 2026-08-12
 
 - Added the 1.5 Generalization Gate as a scoped adjunct to Release Gate: machine-readable DEV/VALIDATION/HOLDOUT exposure, preregistered candidate-source identity, one-shot holdout retirement, and no holdout requirement for ordinary project-local changes.

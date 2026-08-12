@@ -83,6 +83,16 @@ class ReleaseGateTests(unittest.TestCase):
         )
         self.assertEqual(generalization["decision"], "narrower_scope")
         self.assertFalse(generalization["harness_wide_generalization"])
+        autonomous = MODULE.validate_autonomous_gate(self.evolution)
+        self.assertEqual(autonomous["episodes"][0]["decision"], "AUTONOMOUS_EVOLUTION_WIN")
+
+    def test_autonomous_gate_rejects_self_credit(self):
+        altered = json.loads(json.dumps(self.evolution))
+        altered["autonomous_episodes"][0]["candidates"][1]["evaluation"][
+            "owner_agent"
+        ] = "coach"
+        with self.assertRaisesRegex(ValueError, "self-credited"):
+            MODULE.validate_autonomous_gate(altered)
 
     def test_generalization_gate_rejects_leakage_and_reuse(self):
         leaked = json.loads(json.dumps(self.generalization_manifest))

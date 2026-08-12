@@ -124,9 +124,17 @@ class PersonalEvolutionTests(unittest.TestCase):
 
     def test_version_three_needs_an_executable_threshold(self):
         self.add_accepted_coach_upgrade()
+        self.state["schema_version"] = 3
         self.state["promotions"][0]["live_cycle"].pop("rollback_value")
         self.assertIn(
             "promotion promotion-1 needs a complete live cycle",
+            validator.validate(self.state),
+        )
+
+    def test_version_four_needs_an_autonomous_episode_inventory(self):
+        self.state.pop("autonomous_episodes")
+        self.assertIn(
+            "autonomous_episodes must be an array",
             validator.validate(self.state),
         )
 

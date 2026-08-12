@@ -70,14 +70,16 @@ def validate(payload):
         return ["root must be an object"]
     reject_sensitive_keys(payload)
     schema_version = payload.get("schema_version")
-    if schema_version not in (1, 2, 3):
-        errors.append("schema_version must be 1, 2, or 3")
+    if schema_version not in (1, 2, 3, 4):
+        errors.append("schema_version must be 1, 2, 3, or 4")
         schema_version = 1
     proposal_fields = PROPOSAL_V2_FIELDS if schema_version >= 2 else PROPOSAL_FIELDS
     promotion_fields = PROMOTION_V2_FIELDS if schema_version >= 2 else PROMOTION_FIELDS
     evolution_home = payload.get("personal_evolution_home")
     if evolution_home is not None and (not isinstance(evolution_home, str) or not evolution_home.strip()):
         errors.append("personal_evolution_home must be null or a non-empty string")
+    if schema_version >= 4 and not isinstance(payload.get("autonomous_episodes"), list):
+        errors.append("autonomous_episodes must be an array")
 
     checkpoint = payload.get("checkpoint")
     if require_fields(checkpoint, CHECKPOINT_FIELDS, "checkpoint"):
