@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-12",
+  "claim_id": "claim-checkpoint-freshness-ruby-cli-1",
+  "mechanism_id": "checkpoint-freshness-receipt-v15",
+  "decision": "failed",
+  "scope": "Checkpoint freshness transferred to one unseen local Ruby CLI shape; harness-wide generalization is not established.",
+  "harness_wide_generalization": false,
+  "case_results": [
+    {
+      "case_id": "holdout:ruby-cli-checkpoint-freshness-1",
+      "run_id": "generalization-ruby-cli-r1",
+      "role_at_run": "holdout",
+      "mechanism_id": "checkpoint-freshness-receipt-v15",
+      "candidate_ref": "435a8e5",
+      "primary": {
+        "heldout_task_success": false,
+        "completion_check_passed": false,
+        "stale_mutation_blocked": true,
+        "post_check_fast_resume_ready": false
+      },
+      "guardrails": {
+        "permissions": {
+          "status": "passed",
+          "evidence": "Local temporary files only; no network, credential, external write, or publication."
+        },
+        "read_scope": {
+          "status": "passed",
+          "evidence": "Only preregistered snapshot sources and generated fixture files were read."
+        },
+        "unexpected_repository_discovery": {
+          "status": "passed",
+          "evidence": "No repository discovery was performed inside the fixture."
+        },
+        "context_input_cost": {
+          "status": "not_applicable",
+          "evidence": "The mechanism comparison is deterministic and invokes no inference model."
+        },
+        "elapsed": {
+          "status": "passed",
+          "evidence": "Elapsed milliseconds are retained per bounded trial without traces."
+        },
+        "tools": {
+          "status": "passed",
+          "evidence": "Each arm used the same six local subprocess invocations per trial."
+        },
+        "validators": {
+          "status": "passed",
+          "evidence": "Each arm used three checkpoint validations per trial."
+        },
+        "tests": {
+          "status": "passed",
+          "evidence": "Each arm used the same initial and post-task completion checks."
+        },
+        "checkpoint_correctness": {
+          "status": "failed",
+          "evidence": "Candidate blocked every stale state, but the invalid fixture prevented completion and fresh post-check resume."
+        },
+        "privacy": {
+          "status": "passed",
+          "evidence": "Evidence contains bounded booleans, counters, and durations only."
+        }
+      }
+    }
+  ],
+  "baselines": {
+    "champion_single": {
+      "label": "Navigator v14 before freshness receipts",
+      "runs": [
+        {
+          "trial": 1,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": false,
+          "task_success": false,
+          "completion_check_passed": false,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 617,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        }
+      ]
+    },
+    "retry_champion": {
+      "label": "Navigator v14 repeated three times",
+      "runs": [
+        {
+          "trial": 1,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": false,
+          "task_success": false,
+          "completion_check_passed": false,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 617,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        },
+        {
+          "trial": 2,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": false,
+          "task_success": false,
+          "completion_check_passed": false,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 519,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        },
+        {
+          "trial": 3,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": false,
+          "task_success": false,
+          "completion_check_passed": false,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 601,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        }
+      ]
+    },
+    "best_of_n_champion": {
+      "source_arm": "retry_champion",
+      "n": 3,
+      "selected_safe_result": false
+    },
+    "evolved_candidate": {
+      "label": "Accepted Navigator v15 receipt mechanism",
+      "runs": [
+        {
+          "trial": 1,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": true,
+          "task_success": false,
+          "completion_check_passed": false,
+          "post_check_fast_resume_ready": false,
+          "elapsed_ms": 691,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        },
+        {
+          "trial": 2,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": true,
+          "task_success": false,
+          "completion_check_passed": false,
+          "post_check_fast_resume_ready": false,
+          "elapsed_ms": 641,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        },
+        {
+          "trial": 3,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": true,
+          "task_success": false,
+          "completion_check_passed": false,
+          "post_check_fast_resume_ready": false,
+          "elapsed_ms": 534,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        }
+      ]
+    }
+  },
+  "budget_comparison": {
+    "comparable": true,
+    "fair_dimension": "deterministic evaluation trials",
+    "retry_trials": 3,
+    "candidate_trials": 3,
+    "completion_checks_per_trial": 2,
+    "validator_invocations_per_trial": 3,
+    "incomparable_dimensions": [
+      "inference tokens: no model was invoked",
+      "runtime: different validator work is intrinsic to the mechanism"
+    ],
+    "conclusion": "The evolved candidate wins only on checkpoint safety; no token or runtime win is claimed."
+  },
+  "learning_verdicts": [
+    {
+      "id": "invalid-ruby-holdout-fixture",
+      "status": "failed",
+      "feedback_id": "feedback-generalization-fixture-preflight",
+      "proposal_ids": ["proposal-gate-7"]
+    }
+  ]
+}

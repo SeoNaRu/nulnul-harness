@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-12",
+  "claim_id": "claim-checkpoint-freshness-perl-cli-2",
+  "mechanism_id": "checkpoint-freshness-receipt-v15",
+  "decision": "narrower_scope",
+  "scope": "Checkpoint freshness transferred to one unseen local Perl/TAP CLI shape; harness-wide generalization is not established.",
+  "harness_wide_generalization": false,
+  "case_results": [
+    {
+      "case_id": "holdout:perl-tap-checkpoint-freshness-2",
+      "run_id": "generalization-perl-tap-r2",
+      "role_at_run": "holdout",
+      "mechanism_id": "checkpoint-freshness-receipt-v15",
+      "candidate_ref": "435a8e5",
+      "primary": {
+        "heldout_task_success": true,
+        "completion_check_passed": true,
+        "stale_mutation_blocked": true,
+        "post_check_fast_resume_ready": true
+      },
+      "guardrails": {
+        "permissions": {
+          "status": "passed",
+          "evidence": "Local temporary files only; no network, credential, external write, or publication."
+        },
+        "read_scope": {
+          "status": "passed",
+          "evidence": "Only preregistered snapshot sources and generated fixture files were read."
+        },
+        "unexpected_repository_discovery": {
+          "status": "passed",
+          "evidence": "No repository discovery was performed inside the fixture."
+        },
+        "context_input_cost": {
+          "status": "not_applicable",
+          "evidence": "The mechanism comparison is deterministic and invokes no inference model."
+        },
+        "elapsed": {
+          "status": "not_applicable",
+          "evidence": "Elapsed milliseconds are recorded, but no comparable runtime threshold was preregistered and no runtime win is claimed."
+        },
+        "tools": {
+          "status": "passed",
+          "evidence": "Each arm used the same six local subprocess invocations per trial."
+        },
+        "validators": {
+          "status": "passed",
+          "evidence": "Each arm used three checkpoint validations per trial."
+        },
+        "tests": {
+          "status": "passed",
+          "evidence": "Fixture preflight passed and each arm used the same initial and post-task completion checks."
+        },
+        "checkpoint_correctness": {
+          "status": "passed",
+          "evidence": "Candidate blocked every stale state and resumed every freshly verified state."
+        },
+        "privacy": {
+          "status": "passed",
+          "evidence": "Evidence contains bounded booleans, counters, and durations only."
+        }
+      }
+    }
+  ],
+  "baselines": {
+    "champion_single": {
+      "label": "Navigator v14 before freshness receipts",
+      "runs": [
+        {
+          "trial": 1,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": false,
+          "task_success": true,
+          "completion_check_passed": true,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 564,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        }
+      ]
+    },
+    "retry_champion": {
+      "label": "Navigator v14 repeated three times",
+      "runs": [
+        {
+          "trial": 1,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": false,
+          "task_success": true,
+          "completion_check_passed": true,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 564,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        },
+        {
+          "trial": 2,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": false,
+          "task_success": true,
+          "completion_check_passed": true,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 548,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        },
+        {
+          "trial": 3,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": false,
+          "task_success": true,
+          "completion_check_passed": true,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 559,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        }
+      ]
+    },
+    "best_of_n_champion": {
+      "source_arm": "retry_champion",
+      "n": 3,
+      "selected_safe_result": false
+    },
+    "evolved_candidate": {
+      "label": "Accepted Navigator v15 receipt mechanism",
+      "runs": [
+        {
+          "trial": 1,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": true,
+          "task_success": true,
+          "completion_check_passed": true,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 671,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        },
+        {
+          "trial": 2,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": true,
+          "task_success": true,
+          "completion_check_passed": true,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 1032,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        },
+        {
+          "trial": 3,
+          "initial_fast_resume_ready": true,
+          "stale_mutation_blocked": true,
+          "task_success": true,
+          "completion_check_passed": true,
+          "post_check_fast_resume_ready": true,
+          "elapsed_ms": 639,
+          "subprocess_invocations": 6,
+          "validator_invocations": 3,
+          "completion_check_invocations": 2
+        }
+      ]
+    }
+  },
+  "budget_comparison": {
+    "comparable": true,
+    "fair_dimension": "deterministic evaluation trials",
+    "retry_trials": 3,
+    "candidate_trials": 3,
+    "completion_checks_per_trial": 2,
+    "validator_invocations_per_trial": 3,
+    "incomparable_dimensions": [
+      "inference tokens: no model was invoked",
+      "runtime: different validator work is intrinsic to the mechanism"
+    ],
+    "conclusion": "The evolved candidate wins only on checkpoint safety; no token or runtime win is claimed."
+  },
+  "learning_verdicts": []
+}

@@ -88,6 +88,7 @@ class ProductPluginTests(unittest.TestCase):
             "references/evolution.md",
             "references/personal-evolution.md",
             "references/meta-evolution.md",
+            "references/generalization.md",
             "assets/AGENTS.template.md",
             "assets/evolution-state.template.json",
             "assets/project-contract.template.md",
@@ -100,6 +101,7 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/migrate_legacy_checkpoint.py",
             "scripts/apply_live_cycle_rollback.py",
             "scripts/validate_experience_digest.py",
+            "scripts/validate_generalization_gate.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
@@ -123,6 +125,9 @@ class ProductPluginTests(unittest.TestCase):
         meta = (SKILL / "references/meta-evolution.md").read_text(encoding="utf-8")
         self.assertIn("Close every measured learning loop in the same run", meta)
         self.assertIn("append one `pending` proposal", meta)
+        generalization = (SKILL / "references/generalization.md").read_text(encoding="utf-8")
+        self.assertIn("Evaluation exposure is state", generalization)
+        self.assertIn("After the first result, retire the holdout", generalization)
 
     def test_setup_trigger_is_multilingual(self):
         description = re.search(
@@ -188,8 +193,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "85 passed"),
-            "README.ko.md": ("README.md", "85개 통과"),
+            "README.md": ("README.ko.md", "94 passed"),
+            "README.ko.md": ("README.md", "94개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")

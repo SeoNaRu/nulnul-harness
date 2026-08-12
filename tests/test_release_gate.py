@@ -24,6 +24,12 @@ class ReleaseGateTests(unittest.TestCase):
             (ROOT / "evals/benchmarks/activation/results.json").read_text(encoding="utf-8")
         )
         self.evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
+        self.generalization_manifest = json.loads(
+            (ROOT / "evals/generalization/manifest.json").read_text(encoding="utf-8")
+        )
+        self.generalization_results = json.loads(
+            (ROOT / "evals/generalization/results.json").read_text(encoding="utf-8")
+        )
 
     def test_current_score_uses_only_passed_evidence(self):
         score = MODULE.calculate(self.cases, self.results)
@@ -72,6 +78,66 @@ class ReleaseGateTests(unittest.TestCase):
         self.assertEqual(live["exact_runs"], 3)
         self.assertGreaterEqual(live["comparable_pairs"], 3)
         self.assertLessEqual(live["paired_input_change_percent"], 20)
+        generalization = MODULE.validate_generalization_gate(
+            self.generalization_manifest, self.generalization_results
+        )
+        self.assertEqual(generalization["decision"], "narrower_scope")
+        self.assertFalse(generalization["harness_wide_generalization"])
+
+    def test_generalization_gate_rejects_leakage_and_reuse(self):
+        leaked = json.loads(json.dumps(self.generalization_manifest))
+        perl = next(case for case in leaked["holdout_cases"] if "perl" in case["case_id"])
+        perl["material_path"] = (
+            "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_checkpoint.py"
+        )
+        with self.assertRaisesRegex(ValueError, "holdout leakage"):
+            MODULE.validate_generalization_gate(leaked, self.generalization_results)
+
+        reused = json.loads(json.dumps(self.generalization_manifest))
+        perl = next(case for case in reused["holdout_cases"] if "perl" in case["case_id"])
+        perl["exposure_count"] = 2
+        with self.assertRaisesRegex(ValueError, "reuse is prohibited"):
+            MODULE.validate_generalization_gate(reused, self.generalization_results)
+
+    def test_generalization_gate_rejects_failure_identity_and_budget_claims(self):
+        failed = json.loads(json.dumps(self.generalization_results))
+        failed["case_results"][0]["primary"]["heldout_task_success"] = False
+        with self.assertRaisesRegex(ValueError, "primary metric failed"):
+            MODULE.validate_generalization_gate(self.generalization_manifest, failed)
+
+        wrong_identity = json.loads(json.dumps(self.generalization_results))
+        wrong_identity["mechanism_id"] = "different-mechanism"
+        with self.assertRaisesRegex(ValueError, "identity does not match"):
+            MODULE.validate_generalization_gate(self.generalization_manifest, wrong_identity)
+
+        incomparable = json.loads(json.dumps(self.generalization_results))
+        incomparable["budget_comparison"]["comparable"] = False
+        with self.assertRaisesRegex(ValueError, "fair comparison"):
+            MODULE.validate_generalization_gate(self.generalization_manifest, incomparable)
+
+        not_established_manifest = json.loads(json.dumps(self.generalization_manifest))
+        claim = next(
+            item for item in not_established_manifest["claims"]
+            if item["claim_id"] == incomparable["claim_id"]
+        )
+        claim["status"] = "not_established"
+        incomparable["decision"] = "not_established"
+        MODULE.validate_generalization_gate(not_established_manifest, incomparable)
+
+        sensitive = json.loads(json.dumps(self.generalization_results))
+        sensitive["raw_transcript"] = "private"
+        with self.assertRaisesRegex(ValueError, "raw_transcript is prohibited"):
+            MODULE.validate_generalization_gate(self.generalization_manifest, sensitive)
+
+    def test_exposed_validation_case_cannot_be_renamed_holdout(self):
+        recycled = json.loads(json.dumps(self.generalization_manifest))
+        suite = recycled["suites"][0]
+        suite.update(
+            current_role="holdout", development_use=False, candidate_selection=False,
+            release_validation=False, unseen=True,
+        )
+        with self.assertRaisesRegex(ValueError, "already exposed"):
+            MODULE.validate_generalization_gate(recycled, self.generalization_results)
 
     def test_performance_gate_rejects_token_or_read_scope_regression(self):
         slower = json.loads(json.dumps(self.performance))

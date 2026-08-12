@@ -7,11 +7,11 @@
   "personal_evolution_home": null,
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Close 1.4 Observable Evolution with a verified checkpoint-truth boundary before considering the 1.5 Generalization Gate.",
+    "milestone": "Close 1.5 Generalization Gate with exposure-aware one-shot transfer evidence for one accepted mechanism.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-12: NULNUL 1.4.2 reproduced stale verified truth in 3 of 3 fresh schema-v2 interruption runs. A new process accepted every unverified mutated state for fast resume before the independent Gate. Navigator-instruction candidates remained rejected. Navigator v15 instead binds schema-v3 fast resume to a completion-runner-owned receipt over explicit bounded verification files. Candidate acceptance fell to 0 of 3, task and read-scope behavior passed 3 of 3, deterministic failed/unknown/missing/old-evidence controls failed closed, Release Gate returned 100/100, and a post-promotion live interruption blocked resume before Gate then restored it after a passing Gate check.",
-    "next_action": "Treat 1.4 Observable Evolution as closed and review the 1.5 Generalization Gate only as the next evidence-driven milestone.",
+    "last_verified": "2026-08-12: NULNUL 1.5 inventoried all current benchmark families as exposed DEV or VALIDATION evidence. An invalid Ruby holdout failed and became validation evidence with a machine-linked Coach proposal. A new Perl/TAP CLI holdout absent from the frozen Navigator v15 snapshot passed task, completion, stale-state blocking, and fresh-resume checks 3 of 3; v14 single, retry, and best-of-3 baselines remained unsafe. Leakage, reuse, failure, identity, budget, relabeling, and privacy controls failed closed. The independent Gate returned Narrower Scope, Release Gate remained 100/100, 94 repository tests passed, and the executable live-cycle rollback threshold did not fire.",
+    "next_action": "Use a fresh holdout only when the next personal/core transfer claim naturally arises; do not start 1.6 autonomous evolution without separate evidence that bounded human-triggered proposals and simple retry/search baselines are insufficient.",
     "blockers": [],
     "approved_permissions": []
   },
@@ -29,10 +29,10 @@
       "last_promotion_id": "promotion-coach-4"
     },
     "gate": {
-      "version": 6,
-      "job": "Independently compare candidates, validate bounded stage/owner evidence, require machine-verified public-run evidence, and promote, reject, or roll back.",
+      "version": 7,
+      "job": "Independently compare candidates, validate bounded evidence, separate exposed evaluation from one-shot holdouts for broad transfer claims, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-6"
+      "last_promotion_id": "promotion-gate-7"
     },
     "product-builder": {
       "version": 5,
@@ -240,6 +240,26 @@
       "observed": "In three controlled interruptions, product code changed and Navigator ran zero completion checks, yet the unchanged verified checkpoint was accepted for fast resume by a fresh validator process before the independent Gate ran.",
       "expected": "A verified checkpoint must bind to the exact declared repository files that passed its completion check, so any pre-Gate mutation blocks fresh resume until verification succeeds again.",
       "evidence": "evals/benchmarks/activation/results.json checkpoint_truth_1_4_2 records the dangerous metric as 1 in all three current-champion runs without storing commands, transcripts, or paths.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-generalization-overfit-risk",
+      "source": "user",
+      "target_agent": "gate",
+      "observed": "Release Gate 100/100 reused public fixtures that had already shaped Coach diagnosis and candidate selection, so it could not distinguish transfer from benchmark-specific adaptation.",
+      "expected": "Machine-separate DEV, VALIDATION, and candidate-frozen one-shot HOLDOUT evidence before broad transfer claims.",
+      "evidence": "evals/generalization/manifest.json inventories every current benchmark family as previously exposed and preregisters the candidate snapshot before new holdout material.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-generalization-fixture-preflight",
+      "source": "test",
+      "target_agent": "gate",
+      "observed": "The first Ruby holdout consumed its one-shot status before a language-specific fixture error made task completion impossible.",
+      "expected": "A deterministic known-answer preflight must pass before a holdout evaluates a frozen candidate; failed consumed cases become DEV or VALIDATION and cannot be recycled.",
+      "evidence": "evals/generalization/results-ruby-failed.json preserves the failed task/check result, and the replacement Perl/TAP runner performs initial and updated known-answer checks before candidate evaluation.",
       "scope": "core",
       "status": "converted"
     }
@@ -730,6 +750,31 @@
         "rollback remains executable"
       ],
       "status": "accepted"
+    },
+    {
+      "id": "proposal-gate-7",
+      "feedback_ids": ["feedback-generalization-overfit-risk", "feedback-generalization-fixture-preflight"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 6,
+      "to_version": 7,
+      "cause": "Known public fixtures served development, selection, and release roles without exposure identity, while the first holdout lacked a known-answer preflight.",
+      "change_target": "A Generalization Gate adjunct with exposure inventory, preregistered snapshot identity, fixture preflight, one-shot retirement, scoped decisions, and champion retry/best-of-N comparison.",
+      "regression_check": "python3 -B -m unittest tests.test_release_gate tests.test_product_plugin -v && python3 scripts/release_gate.py",
+      "primary_metric": "invalid, leaked, recycled, failed, identity-mismatched, or budget-incomparable core generalization claims admitted",
+      "permission_delta": [],
+      "rollback": "Restore Gate v6 and remove Generalization Gate activation while preserving both holdout outcomes and the exposure inventory as rejected knowledge.",
+      "change_level": "meta",
+      "discovery_evidence": "The user identified the development-to-same-benchmark loop, and the first one-shot Ruby holdout exposed missing fixture preflight.",
+      "transfer_check": "A fresh Perl/TAP CLI case absent from Navigator v15's candidate ref passed preflight, blocked stale resume 3 of 3, passed task checks 3 of 3, and retired after one result.",
+      "prediction": "The Gate accepts only identity-matched one-shot evidence and rejects leaked, reused, behavior-failed, identity-mismatched, or budget-incomparable claims while leaving project-local changes ungated.",
+      "expected_delta": {
+        "invalid_generalization_claims_admitted": "unknown -> 0",
+        "reused_holdouts_admitted": "unknown -> 0",
+        "project_local_gate_scope": "unchanged"
+      },
+      "falsification_condition": "Any negative control passes, a used case remains reusable, a failed task supports transfer, or the Gate activates for an ordinary project-local change.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -1125,6 +1170,24 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "After promotion, a clean verified fixture fast-resumed, a product-and-test mutation was blocked by a fresh process before Gate, and the same state fast-resumed only after the completion runner passed and refreshed its receipt."
+      }
+    },
+    {
+      "id": "promotion-gate-7",
+      "proposal_id": "proposal-gate-7",
+      "gate_agent": "product-builder",
+      "before": "All Release Gate cases were public and previously exposed; no machine state prevented renaming or recycling them as unseen, and no simple retry baseline qualified a transfer claim.",
+      "after": "The Gate validates candidate-ref absence, case lifecycle and identity, primary behavior, guardrails, and a fair deterministic retry/selection comparison; a fresh Perl/TAP case produced only a mechanism-scoped decision.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "invalid core generalization claims admitted",
+        "rollback_threshold": "roll back after one leaked, reused, failed, identity-mismatched, or budget-incomparable claim passes",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "Leakage, reuse, task failure, mechanism identity, budget, and exposed-case relabel controls failed closed; the valid holdout returned Narrower Scope."
       }
     }
   ]

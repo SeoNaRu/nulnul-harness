@@ -213,6 +213,8 @@ For multi-session work, the harness stores only bounded state in `docs/nulnul/ev
 
 The 1.4 Observable Evolution candidate adds bounded Experience Digests to the existing activation runner: stable `activation`/`resume`/`verification` stages, logical owner, elapsed time, aggregate tool/read/validator/test/completion-check counts, bounded signals, and verification status. It stores no prompt, response, transcript, command list, or machine path. The 1.4.1 runs falsified path resolution, supported final-action ordering, and rejected two Navigator-instruction candidates. The final 1.4.2 interruption test then found the real defect: all three mutated states remained fast-resumable before independent Gate verification. Schema-v3 checkpoints now require a runner-owned bounded file fingerprint; the candidate reduced unverified mutated-state acceptance from 3/3 to 0/3 without changing Navigator wording.
 
+The 1.5 Generalization Gate keeps exposed DEV/VALIDATION cases separate from candidate-frozen, one-shot HOLDOUT evidence. Its first Ruby holdout failed because the fixture itself was invalid and was permanently downgraded to validation; that failure added mandatory fixture preflight. A new Perl/TAP CLI case absent from the frozen Navigator v15 snapshot then showed 3/3 stale-state blocks and 3/3 successful post-check resumes; three champion retries and best-of-3 remained unsafe. The decision is deliberately **Narrower Scope**: checkpoint freshness transferred to this unseen shape, but harness-wide generalization is not established.
+
 ## Field-hardened rules
 
 These rules come from a full day of unattended loop operation on a real recurring workflow. Every row replaced a failure that the previous references did not prevent.
@@ -258,8 +260,8 @@ The contribution, if any, is the packaging: one portable contract that carries a
 
 | Check | Current result |
 | --- | --- |
-| Automated repository tests | 85 passed |
-| Release Gate | 100/100 behavior and safety; recorded setup, workflow, and fast-path performance budgets also pass |
+| Automated repository tests | 94 passed |
+| Release Gate | 100/100 behavior and safety; recorded setup, workflow, fast-path, and scoped generalization gates also pass |
 | Positive isolated scenarios | 9 passed |
 | Negative safety scenarios | 3 passed |
 | Two-run Codex meta-evolution | Coach v1 → v2; 0/2 relevant-method misses; 8/8 fixture tests; unnecessary infrastructure skipped |
@@ -270,11 +272,12 @@ The contribution, if any, is the packaging: one portable contract that carries a
 | Later transfer cycle | A separate slugger project changed exactly one behavior and test, passed 3/3 tests and both harness checks, and did not read the marked full contract |
 | Activation and fast-path runner | 10 positive/negative project shapes, 3 runs by default; the counterbalanced candidate was bounded in 4/4 runs and changed paired input -18.4% across 3 comparable pairs |
 | Observable evolution | 3 bounded digests separated Navigator `0` from Gate `1`; invalid-stage and raw-transcript controls failed, and the ownership-rule candidate was rejected |
+| Generalization Gate | Exposed benchmark inventory recorded; failed Ruby case retired into validation; fresh Perl/TAP case passed 3/3 while champion retry/best-of-3 stayed unsafe; decision: Narrower Scope |
 | Headless Claude Code adoption | GitHub-marketplace-installed 1.3.5 kept both agent-profile hashes unchanged, made zero `.claude/**` write calls, created a verified checkpoint with an executable completion command, and passed five machine-recorded checks |
 | Learning-loop and upgrade controls | Schema-v1 checkpoints are read-only; missing verdict inventories fail Product and Release Gates; injected migration write failure restores every earlier file |
 | Executable rollback controls | Threshold breach restored Coach v1 active-version state; healthy metric produced no write |
 
-Release Gate is not a universal performance benchmark. All twelve weighted behavior and safety cases pass, and release readiness also fails on a recorded setup, workflow, or fast-path regression. Performance evidence uses version-independent champion/candidate records; fast-path candidates run in counterbalanced paired order and are checked against a relative token budget instead of an absolute ceiling. The activation runner reports precision, recall, stage times, logical owners, and aggregate tool/read/validator/test/completion-check counts without retaining raw transcripts or command lists.
+Release Gate is not a universal performance benchmark. All twelve weighted behavior and safety cases pass, and release readiness also fails on a recorded setup, workflow, or fast-path regression. Generalization Gate is a separate adjunct activated only for personal/core promotion or transfer claims; ordinary project-local changes do not pay holdout cost. Performance evidence uses version-independent champion/candidate records; fast-path candidates run in counterbalanced paired order and are checked against a relative token budget instead of an absolute ceiling. The activation runner reports precision, recall, stage times, logical owners, and aggregate tool/read/validator/test/completion-check counts without retaining raw transcripts or command lists.
 
 Reproduce the public checks:
 
@@ -283,7 +286,7 @@ python3 scripts/release_gate.py
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-Inputs and decisions are published in [`evals/cases.json`](evals/cases.json), [`evals/results.json`](evals/results.json), the [`performance comparisons`](evals/benchmarks/performance.json), and the [`fresh Codex setup baseline`](evals/benchmarks/setup-baseline/results.json).
+Inputs and decisions are published in [`evals/cases.json`](evals/cases.json), [`evals/results.json`](evals/results.json), the [`performance comparisons`](evals/benchmarks/performance.json), the [`fresh Codex setup baseline`](evals/benchmarks/setup-baseline/results.json), and the [`generalization exposure inventory`](evals/generalization/manifest.json) with its [one-shot result](evals/generalization/results.json).
 
 ## Reference workflow: YouTube → Google Sheets
 
@@ -301,6 +304,7 @@ No real Google authentication or Sheet write is performed without explicit appro
 - **Least privilege.** Authentication, external writes, deployment, publication, and global registration remain approval boundaries.
 - **No secret persistence.** Credentials, raw conversations, and personal data do not become project memory.
 - **Independent promotion.** An agent cannot approve its own upgrade.
+- **Evaluation exposure is state.** A case seen during development cannot be relabeled as unseen; a used holdout is retired.
 - **Verified resume.** Checkpoints are rechecked against repository reality before use.
 - **Host-owned configuration stays host-owned.** Unattended sessions inspect `.claude/**` but never rewrite their own agents, skills, settings, or hooks.
 - **Removable setup.** Generated project state can be deleted without damaging product code.

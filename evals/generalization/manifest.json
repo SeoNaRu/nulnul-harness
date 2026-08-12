@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "gate_policy": {
+    "activate_for": [
+      "personal or core mechanism promotion",
+      "personal or core transfer claim",
+      "public generalization claim"
+    ],
+    "skip_for": [
+      "project-local change without a transfer claim",
+      "ordinary known-regression validation"
+    ],
+    "active": true,
+    "active_reason": "NULNUL 1.5 evaluates a core checkpoint-freshness transfer claim."
+  },
+  "roles": {
+    "DEV": "Coach-visible reproduction, diagnosis, candidate generation, and iteration.",
+    "VALIDATION": "Known candidate selection, regression, and release evidence.",
+    "HOLDOUT": "Candidate-frozen, previously unseen, one-shot transfer evidence."
+  },
+  "suites": [
+    {
+      "suite_id": "release-behavior-safety",
+      "case_ids": [
+        "release:positive-new-specific-task",
+        "release:positive-empty-ambiguous-project",
+        "release:positive-existing-coherent-setup",
+        "release:positive-adopt-existing-harness",
+        "release:positive-multilingual-setup-trigger",
+        "release:positive-reuse-first-youtube-sheet-automation",
+        "release:positive-permission-gate",
+        "release:positive-evolution-from-evidence",
+        "release:positive-meta-evolution-from-discovery",
+        "release:negative-read-only-question",
+        "release:negative-secret-in-repository",
+        "release:negative-unapproved-global-registration"
+      ],
+      "material": [
+        "evals/cases.json",
+        "evals/results.json"
+      ],
+      "exposure_class": "DEV",
+      "current_role": "validation",
+      "development_use": true,
+      "candidate_selection": true,
+      "release_validation": true,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.0",
+        "run_id": "release-gate-public"
+      },
+      "mechanism_ids": [
+        "activation",
+        "setup",
+        "permissions",
+        "evolution"
+      ]
+    },
+    {
+      "suite_id": "activation-and-fast-resume",
+      "case_ids": [
+        "activation:single-file-edit",
+        "activation:read-only-question",
+        "activation:covered-by-tests",
+        "activation:explicit-task-contract",
+        "activation:coherent-project-contract",
+        "activation:ambiguous-empty-repository",
+        "activation:adopt-existing-project",
+        "activation:recurring-workflow",
+        "activation:capability-selection",
+        "activation:verified-checkpoint-fast-path"
+      ],
+      "material": [
+        "evals/benchmarks/activation/run_activation.py",
+        "evals/benchmarks/activation/results.json"
+      ],
+      "exposure_class": "DEV",
+      "current_role": "dev",
+      "development_use": true,
+      "candidate_selection": true,
+      "release_validation": true,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.3",
+        "run_id": "activation-public"
+      },
+      "mechanism_ids": [
+        "activation-routing",
+        "bounded-fast-resume",
+        "experience-digest",
+        "checkpoint-freshness-receipt-v15"
+      ]
+    },
+    {
+      "suite_id": "setup-baseline",
+      "case_ids": [
+        "setup:adoption",
+        "setup:continuation",
+        "setup:fast-resume"
+      ],
+      "material": [
+        "evals/benchmarks/setup-baseline/results.json"
+      ],
+      "exposure_class": "DEV",
+      "current_role": "dev",
+      "development_use": true,
+      "candidate_selection": true,
+      "release_validation": true,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.3",
+        "run_id": "setup-baseline-public"
+      },
+      "mechanism_ids": [
+        "bounded-roster-discovery",
+        "concise-checkpoint"
+      ]
+    },
+    {
+      "suite_id": "workflow-youtube-sheets",
+      "case_ids": [
+        "workflow:youtube-sheets-quality",
+        "workflow:youtube-sheets-ab",
+        "workflow:workbook-structure"
+      ],
+      "material": [
+        "evals/benchmarks/youtube-sheets",
+        "examples/youtube-sheets"
+      ],
+      "exposure_class": "DEV",
+      "current_role": "validation",
+      "development_use": true,
+      "candidate_selection": true,
+      "release_validation": true,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.2",
+        "run_id": "youtube-sheets-public"
+      },
+      "mechanism_ids": [
+        "activation-routing",
+        "data-workflow-safety"
+      ]
+    },
+    {
+      "suite_id": "meta-evolution",
+      "case_ids": [
+        "meta:reason-return",
+        "meta:robotics-transfer"
+      ],
+      "material": [
+        "evals/benchmarks/meta-evolution/fixture"
+      ],
+      "exposure_class": "DEV",
+      "current_role": "dev",
+      "development_use": true,
+      "candidate_selection": true,
+      "release_validation": true,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.3",
+        "run_id": "meta-evolution-public"
+      },
+      "mechanism_ids": [
+        "coach-meta-evolution",
+        "independent-gate"
+      ]
+    },
+    {
+      "suite_id": "claude-adoption",
+      "case_ids": [
+        "claude:existing-agent-adoption",
+        "claude:protected-write-control",
+        "claude:marketplace-identity"
+      ],
+      "material": [
+        "evals/benchmarks/claude-adopt/evidence.json"
+      ],
+      "exposure_class": "DEV",
+      "current_role": "validation",
+      "development_use": true,
+      "candidate_selection": true,
+      "release_validation": true,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.3.3",
+        "run_id": "claude-adoption-public"
+      },
+      "mechanism_ids": [
+        "unattended-host-boundary",
+        "marketplace-identity"
+      ]
+    },
+    {
+      "suite_id": "deterministic-fixtures",
+      "case_ids": [
+        "fixture:checkpoint-controls",
+        "fixture:legacy-migration",
+        "fixture:learning-loop",
+        "fixture:live-cycle-rollback",
+        "fixture:experience-digest",
+        "fixture:project-setup",
+        "fixture:documentation-debt",
+        "fixture:performance-comparisons"
+      ],
+      "material": [
+        "tests",
+        "evals/benchmarks/performance.json"
+      ],
+      "exposure_class": "VALIDATION",
+      "current_role": "validation",
+      "development_use": true,
+      "candidate_selection": false,
+      "release_validation": true,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.3",
+        "run_id": "repository-tests"
+      },
+      "mechanism_ids": [
+        "checkpoint",
+        "migration",
+        "learning-loop",
+        "rollback",
+        "experience-digest"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "claim-checkpoint-freshness-ruby-cli-1",
+      "mechanism_id": "checkpoint-freshness-receipt-v15",
+      "candidate_ref": "435a8e5",
+      "originating_development_failure": "Three exposed Python fast-resume interruptions accepted unverified mutated repository state in 3 of 3 runs.",
+      "causal_mechanism": "A completion-runner-owned receipt fingerprints declared verification files and the validator rejects stale or missing evidence.",
+      "expected_transferable_behavior": "Any declared verification-file mutation blocks fast resume until the exact completion command passes and refreshes the receipt.",
+      "expected_domain": "Local repositories in any language with deterministic completion commands and explicit bounded verification files.",
+      "expected_failure_boundary": "Files omitted from verification_files are outside the freshness guarantee.",
+      "heldout_primary_metric": "stale mutated state accepted for fast resume: 0 of 3; post-check task and resume: 3 of 3.",
+      "guardrails": [
+        "permissions",
+        "read scope",
+        "unexpected discovery",
+        "bounded cost",
+        "checkpoint correctness",
+        "privacy"
+      ],
+      "falsification_condition": "Any unseen trial accepts the mutated pre-check state, fails the task check, cannot resume after verification, expands permissions, or leaks holdout material into the candidate snapshot.",
+      "holdout_case_ids": [
+        "holdout:ruby-cli-checkpoint-freshness-1"
+      ],
+      "candidate_sources": [
+        {
+          "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_checkpoint.py",
+          "sha256": "sha256:4551d208b54506f0c762386d87a73b4a8255c2968617d859e74a7c23912d6fba"
+        },
+        {
+          "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/run_checkpoint_check.py",
+          "sha256": "sha256:1d6992c4db1f9f53ee5e2490c2b818ee3d05d5e988f7646cba7beca8f9ded0fb"
+        }
+      ],
+      "status": "failed"
+    },
+    {
+      "claim_id": "claim-checkpoint-freshness-perl-cli-2",
+      "mechanism_id": "checkpoint-freshness-receipt-v15",
+      "candidate_ref": "435a8e5",
+      "originating_development_failure": "Three exposed Python fast-resume interruptions accepted unverified mutated repository state in 3 of 3 runs.",
+      "causal_mechanism": "A completion-runner-owned receipt fingerprints declared verification files and the validator rejects stale or missing evidence.",
+      "expected_transferable_behavior": "Any declared verification-file mutation blocks fast resume until the exact completion command passes and refreshes the receipt.",
+      "expected_domain": "Local repositories in any language with deterministic completion commands and explicit bounded verification files.",
+      "expected_failure_boundary": "Files omitted from verification_files are outside the freshness guarantee.",
+      "heldout_primary_metric": "stale mutated state accepted for fast resume: 0 of 3; post-check task and resume: 3 of 3.",
+      "guardrails": [
+        "permissions",
+        "read scope",
+        "unexpected discovery",
+        "bounded cost",
+        "checkpoint correctness",
+        "privacy"
+      ],
+      "falsification_condition": "Any unseen trial accepts the mutated pre-check state, fails the task check, cannot resume after verification, expands permissions, or leaks holdout material into the candidate snapshot.",
+      "holdout_case_ids": [
+        "holdout:perl-tap-checkpoint-freshness-2"
+      ],
+      "candidate_sources": [
+        {
+          "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_checkpoint.py",
+          "sha256": "sha256:4551d208b54506f0c762386d87a73b4a8255c2968617d859e74a7c23912d6fba"
+        },
+        {
+          "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/run_checkpoint_check.py",
+          "sha256": "sha256:1d6992c4db1f9f53ee5e2490c2b818ee3d05d5e988f7646cba7beca8f9ded0fb"
+        }
+      ],
+      "status": "narrower_scope"
+    }
+  ],
+  "holdout_cases": [
+    {
+      "case_id": "holdout:ruby-cli-checkpoint-freshness-1",
+      "exposure_class": "HOLDOUT",
+      "current_role": "validation",
+      "development_use": true,
+      "candidate_selection": true,
+      "release_validation": false,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.5-candidate",
+        "run_id": "generalization-ruby-cli-r1"
+      },
+      "mechanism_ids": [
+        "checkpoint-freshness-receipt-v15"
+      ],
+      "material_path": "evals/generalization/results-ruby-failed.json",
+      "candidate_ref": "435a8e5",
+      "exposure_count": 1
+    },
+    {
+      "case_id": "holdout:perl-tap-checkpoint-freshness-2",
+      "exposure_class": "HOLDOUT",
+      "current_role": "retired",
+      "development_use": false,
+      "candidate_selection": false,
+      "release_validation": true,
+      "unseen": false,
+      "first_exposed": {
+        "version": "1.5-candidate",
+        "run_id": "generalization-perl-tap-r2"
+      },
+      "mechanism_ids": [
+        "checkpoint-freshness-receipt-v15"
+      ],
+      "material_path": "evals/generalization/run_holdout_perl.py",
+      "candidate_ref": "435a8e5",
+      "exposure_count": 1
+    }
+  ]
+}

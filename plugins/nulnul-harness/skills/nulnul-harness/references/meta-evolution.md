@@ -48,6 +48,11 @@ The Coach may edit its own candidate but cannot Gate it. A Gate-targeted candida
 
 Keep a project-scoped meta improvement when it wins on the originating workflow. Promote it to personal or core scope only after a representative transfer check shows that the improvement survives another project or domain without importing private data, paths, or permissions. Preserve rejected candidates so later runs improve the search for improvements instead of repeating it.
 
+For personal or core promotion, apply `generalization.md`. A transfer fixture already
+seen during diagnosis or candidate creation is DEV or VALIDATION, never HOLDOUT.
+Freeze and preregister one mechanism before the holdout, compare a repeated/simple
+selection baseline, and retire the case after its first result.
+
 ## Accumulate across runs
 
 An accepted change is not complete until one later live cycle uses the new procedure and records the named metric, rollback threshold, and evidence. Version-3 evolution states make the threshold executable through `scripts/apply_live_cycle_rollback.py`. If the live cycle is missing, the validator rejects acceptance; if the numeric comparison fires, the script atomically records the rollback and restores the last accepted active-version state without executing arbitrary commands.

@@ -15,6 +15,9 @@ ACTIVATION_BENCHMARK = ROOT / "evals/benchmarks/activation/run_activation.py"
 EXPERIENCE_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_experience_digest.py"
 )
+GENERALIZATION_VALIDATOR = (
+    ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_generalization_gate.py"
+)
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -33,6 +36,23 @@ def validate_claude_gate(evidence_payload: dict, version: str) -> None:
     errors = validator.validate(evidence_payload, version)
     if errors:
         raise ValueError("Release Gate Claude evidence failed: " + "; ".join(errors))
+
+
+def validate_generalization_gate(manifest: dict, results: dict) -> dict:
+    spec = importlib.util.spec_from_file_location(
+        "validate_generalization_gate", GENERALIZATION_VALIDATOR
+    )
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    errors = validator.validate(manifest, results, ROOT)
+    if errors:
+        raise ValueError("Generalization Gate failed: " + "; ".join(errors))
+    return {
+        "status": "passed",
+        "decision": results["decision"],
+        "scope": results["scope"],
+        "harness_wide_generalization": results["harness_wide_generalization"],
+    }
 
 
 def _median(runs: list[dict], field: str) -> float:
@@ -321,10 +341,20 @@ def main() -> None:
     activation = json.loads(
         (ROOT / "evals/benchmarks/activation/results.json").read_text(encoding="utf-8")
     )
+    generalization_manifest = json.loads(
+        (ROOT / "evals/generalization/manifest.json").read_text(encoding="utf-8")
+    )
+    generalization_results = json.loads(
+        (ROOT / "evals/generalization/results.json").read_text(encoding="utf-8")
+    )
+    failed_holdout = json.loads(
+        (ROOT / "evals/generalization/results-ruby-failed.json").read_text(encoding="utf-8")
+    )
     evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
     evidence = json.loads((ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8"))
     version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
     validate_learning_gate(learning, evolution)
+    validate_learning_gate(failed_holdout, evolution)
     validate_claude_gate(evidence, version)
     score = calculate(cases, results)
     score["performance_gate"] = validate_performance_gate(performance)
@@ -333,6 +363,9 @@ def main() -> None:
         **validate_activation_results(activation, evolution),
     }
     score["observable_evolution_gate"] = validate_observable_evolution(activation)
+    score["generalization_gate"] = validate_generalization_gate(
+        generalization_manifest, generalization_results
+    )
     print(json.dumps(score, ensure_ascii=False, indent=2))
 
 

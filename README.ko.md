@@ -213,6 +213,8 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 1.4 Observable Evolution 후보는 기존 활성화 실행기에 제한된 Experience Digest를 추가합니다. 안정적으로 구분되는 `activation`·`resume`·`verification` 단계, 논리적 owner, 경과 시간, 도구·읽기·검증기·테스트·완료 검사 집계, 제한된 signal, 검증 상태만 남깁니다. prompt, response, transcript, command 목록, 머신 경로는 저장하지 않습니다. 1.4.1은 path resolution을 반증하고 final-action ordering을 지지했으며 Navigator instruction 후보 두 개를 reject했습니다. 마지막 1.4.2 interruption 실험은 실제 defect를 찾았습니다. 세 mutated state 모두 independent Gate 전 fast resume가 가능했습니다. schema-v3 checkpoint는 이제 runner가 기록한 제한된 파일 fingerprint를 요구하며, Navigator 문구를 바꾸지 않고 unverified mutated-state acceptance를 3/3에서 0/3으로 줄였습니다.
 
+1.5 Generalization Gate는 이미 노출된 DEV/VALIDATION case와 candidate가 고정된 뒤 한 번만 쓰는 HOLDOUT 근거를 분리합니다. 첫 Ruby holdout은 fixture 자체가 잘못되어 실패했고 영구히 validation으로 강등했으며, 이 실패로 mandatory fixture preflight를 추가했습니다. 고정된 Navigator v15 snapshot에 없던 새 Perl/TAP CLI case는 stale-state 3/3 차단과 post-check resume 3/3을 보였고, champion 3회 retry와 best-of-3는 계속 unsafe했습니다. 판정은 의도적으로 **Narrower Scope**입니다. checkpoint freshness는 이 unseen shape로 전이됐지만 harness 전체의 일반화는 확립되지 않았습니다.
+
 ## 실전에서 굳힌 규칙
 
 실제 반복 워크플로를 하루 종일 무인 루프로 돌리며 얻은 규칙입니다. 각 항목은 기존 참조 문서가 막지 못해 실제로 사고를 낸 실패를 대체합니다.
@@ -258,8 +260,8 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 
 | 검사 | 현재 결과 |
 | --- | --- |
-| 저장소 자동 검사 | 85개 통과 |
-| Release Gate | 행동·안전 100/100, 기록된 세팅·워크플로·빠른 재개 성능 예산도 통과 |
+| 저장소 자동 검사 | 94개 통과 |
+| Release Gate | 행동·안전 100/100, 기록된 세팅·워크플로·빠른 재개·제한된 일반화 Gate도 통과 |
 | 긍정 격리 시나리오 | 9개 통과 |
 | 부정 안전 시나리오 | 3개 통과 |
 | 코덱스 2회 메타 진화 | Coach v1 → v2, 관련 방법 누락 0/2, fixture 검사 8/8, 불필요한 인프라 생략 |
@@ -270,11 +272,12 @@ Worker feedback ──▶ Coach proposal ──▶ independent Gate
 | 후속 전이 실행 | 별도 slugger 프로젝트에서 행동과 검사 하나만 정확히 바꾸고 3/3 검사와 양쪽 하네스 검사를 통과했으며 표시된 전체 계약은 읽지 않음 |
 | 활성화·빠른 재개 실행기 | 긍정·부정 프로젝트 형태 10개, 기본 3회 반복; 교차 순서 후보는 4/4회 읽기 경계를 지켰고 비교 가능한 3쌍에서 paired 입력 -18.4% |
 | Observable Evolution | 6개 진단 run이 path resolution을 반증하고 final-action ordering을 지지했으며, 잘못된 event order·stage·raw transcript 대조군은 실패하고 ordering-only 후보는 기각 |
+| Generalization Gate | 노출 benchmark inventory 기록, 실패한 Ruby case는 validation으로 강등, 새 Perl/TAP case는 3/3 통과하고 champion retry/best-of-3는 unsafe; 판정은 Narrower Scope |
 | 무인 Claude Code 도입 | GitHub marketplace 설치본 1.3.5가 두 에이전트 프로필 해시를 보존하고 `.claude/**` 쓰기 호출 0건, 실행 가능한 완료 명령이 든 검증 체크포인트, 기계 기록 검사 5개 통과 |
 | 학습 루프·업그레이드 대조군 | schema v1 체크포인트는 읽기 전용, 판정 목록 누락은 Product·Release Gate 실패, 마이그레이션 쓰기 실패 주입 시 앞선 파일 전부 복원 |
 | 실행형 롤백 대조군 | 임계값 위반 시 Coach v1 활성 버전 상태 복구, 정상 지표에서는 파일을 쓰지 않음 |
 
-Release Gate은 범용 성능 벤치마크는 아닙니다. 가중 행동·안전 케이스 12개가 모두 통과하며 기록된 세팅·워크플로·빠른 재개 성능이 회귀해도 릴리스가 실패합니다. 성능 근거는 버전과 무관한 champion/candidate 형식이고, 빠른 재개는 실행 순서를 교차한 paired 상대 토큰 예산으로 검사합니다. 활성화 실행기는 정밀도·재현율·단계 시간·논리적 owner와 도구/읽기/검증/테스트/완료 검사 집계를 내되 원본 대화나 command 목록은 보존하지 않습니다.
+Release Gate은 범용 성능 벤치마크는 아닙니다. 가중 행동·안전 케이스 12개가 모두 통과하며 기록된 세팅·워크플로·빠른 재개 성능이 회귀해도 릴리스가 실패합니다. Generalization Gate는 personal/core 승격이나 전이 주장에만 붙는 별도 Gate이며, 일반 project-local 변경에는 holdout 비용을 부과하지 않습니다. 성능 근거는 버전과 무관한 champion/candidate 형식이고, 빠른 재개는 실행 순서를 교차한 paired 상대 토큰 예산으로 검사합니다. 활성화 실행기는 정밀도·재현율·단계 시간·논리적 owner와 도구/읽기/검증/테스트/완료 검사 집계를 내되 원본 대화나 command 목록은 보존하지 않습니다.
 
 공개 검증을 재현할 수 있습니다.
 
@@ -283,7 +286,7 @@ python3 scripts/release_gate.py
 python3 -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-입력과 판정은 [`evals/cases.json`](evals/cases.json), [`evals/results.json`](evals/results.json), [`성능 비교`](evals/benchmarks/performance.json), [`신규 Codex 세팅 기준선`](evals/benchmarks/setup-baseline/results.json)에 공개돼 있습니다.
+입력과 판정은 [`evals/cases.json`](evals/cases.json), [`evals/results.json`](evals/results.json), [`성능 비교`](evals/benchmarks/performance.json), [`신규 Codex 세팅 기준선`](evals/benchmarks/setup-baseline/results.json), [`일반화 노출 inventory`](evals/generalization/manifest.json)와 [one-shot 결과](evals/generalization/results.json)에 공개돼 있습니다.
 
 ## 대표 워크플로: YouTube → Google Sheets
 
@@ -301,6 +304,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 - **Least privilege.** 인증, 외부 쓰기, 배포, 공개, 전역 등록은 승인 경계로 남습니다.
 - **No secret persistence.** 자격 증명, 대화 전문, 개인 데이터를 프로젝트 기억으로 만들지 않습니다.
 - **Independent promotion.** 에이전트는 자신의 업그레이드를 승인하지 못합니다.
+- **Evaluation exposure는 state입니다.** development에서 본 case를 unseen으로 다시 부를 수 없고, 사용한 holdout은 retire합니다.
 - **Verified resume.** 체크포인트를 사용하기 전에 저장소 현실과 다시 비교합니다.
 - **호스트 소유 설정은 호스트가 관리합니다.** 무인 세션은 `.claude/**`를 검사하지만 자기 에이전트·스킬·설정·훅을 다시 쓰지 않습니다.
 - **Removable setup.** 생성된 프로젝트 상태는 제품 코드를 손상하지 않고 제거할 수 있습니다.

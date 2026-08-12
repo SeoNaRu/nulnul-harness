@@ -35,7 +35,8 @@
       "session-continuity",
       "personal-agent-evolution",
       "meta-harness-evolution",
-      "observable-evolution"
+      "observable-evolution",
+      "generalization-gate"
     ],
     "brandColor": "#111111",
     "composerIcon": "./assets/nulnul-harness.svg",

@@ -92,6 +92,7 @@ Reject or roll back otherwise. Never let an agent serve as Gate for its own upgr
 - Promote to **personal** scope only when the rule generalizes across representative projects or the user explicitly requests personal scope. Store it only in a user-selected private evolution home.
 - Promote to **core** or public plugin behavior only with cross-project evidence, full regression checks, and explicit publication approval.
 - A broader scope never inherits project data, paths, contacts, credentials, or raw examples.
+- Before a personal/core transfer claim, apply `generalization.md`; a known regression is validation evidence, not proof that the mechanism generalizes.
 
 ## Resume the original work
 
