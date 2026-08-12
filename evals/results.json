@@ -25,9 +25,9 @@
     {
       "case_id": "positive-adopt-existing-harness",
       "status": "passed",
-      "run_at": "2026-08-11",
-      "surface": "post-publication headless Claude Code session using a fresh GitHub-marketplace reinstall of nulnul-harness 1.6.0 on an isolated Node fixture with two existing agents",
-      "evidence": "The sanitized machine-checked artifact records GitHub marketplace provenance, exact installed version 1.6.0, release tag and commit, public archive SHA-256, zero public-positioning violations, zero protected-path write calls, unchanged before/after hashes for collector and reviewer, bounded installed-roster enumeration, explicit role classification, a host-loaded session entry, and fast_path_ready. The repository test, project-contract validator, checkpoint validator, exact checkpoint completion-command runner, and documentation-debt validator all exited zero. Structured, looped, and explicit bounded content reads are accepted; a paths-only negative control remains rejected. No raw transcript, private data, credential, or machine path is stored."
+      "run_at": "2026-08-13",
+      "surface": "post-publication headless Claude Code session using a fresh GitHub-marketplace reinstall of nulnul-harness 1.7.0 on an isolated Node fixture with two existing agents",
+      "evidence": "The sanitized machine-checked artifact records GitHub marketplace provenance, exact installed version 1.7.0, release tag and commit, public archive SHA-256, zero public-positioning violations, zero protected-path write calls, unchanged before/after hashes for collector and reviewer, bounded installed-roster enumeration, explicit role classification, a host-loaded session entry, and fast_path_ready. The repository test, project-contract validator, checkpoint validator, exact checkpoint completion-command runner, and documentation-debt validator all exited zero. Structured, looped, and explicit bounded content reads are accepted; a paths-only negative control remains rejected. No raw transcript, private data, credential, or machine path is stored."
     },
     {
       "case_id": "positive-multilingual-setup-trigger",

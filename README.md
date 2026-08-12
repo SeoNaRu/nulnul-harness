@@ -18,9 +18,9 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> Candidate version 1.7.0 is locally validated but not yet public. The latest public release remains 1.6.0, verified against a post-publication fresh GitHub-marketplace Claude Code adoption.
+> Version 1.7.0 is public and its exact GitHub tag passed fresh Claude Code and personal-adaptation adoption. Release closure is waiting only for the evidence commit's main CI.
 >
-> **1.7 status:** Personal Evolution is locally verified as a release candidate. Its first scoped adaptation passed two transfer shapes, skipped an incompatible shape, and was reused in one fresh project from an isolated opt-in home. No real personal home or global state was created, and exact-version public adoption is still pending.
+> **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
 
 ## What is NULNUL?
 
@@ -76,7 +76,7 @@ Growth is driven by demonstrated work, not project size labels or a target agent
 | A failure becomes reproducible | Register one causal candidate, compare it with the current way, and keep it only if the Gate passes. |
 | A role or mechanism loses its job | Merge or remove it. Harness growth is not append-only. |
 
-Public 1.6.0 growth is project-scoped. The local 1.7 candidate adds an opt-in path for carrying one independently verified adaptation across projects, but only after transfer evidence, activation checks, and a separate Personal Gate. It never copies project memory or applies an adaptation globally.
+Public 1.7.0 adds an opt-in path for carrying one independently verified adaptation across projects, but only after transfer evidence, activation checks, and a separate Personal Gate. It never copies project memory or applies an adaptation globally.
 
 ## The operational problem
 
@@ -321,14 +321,14 @@ Some of the strongest evidence came from failures:
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **132 passed (132/132)** | Deterministic product, state, privacy, rollback, transfer, and negative-control contracts hold. |
+| Repository tests | **138 passed (138/138)** | Deterministic product, state, privacy, rollback, transfer, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
-| Final 1.6.0 Release Gate | **Passed** | A post-publication fresh GitHub-marketplace 1.6.0 reinstall preserved two agent profiles, made zero protected writes, produced verified resumable state, and passed five executable checks. |
+| Final 1.7.0 Release Gate | **Passed locally** | Fresh exact-tag Claude Code and personal-adaptation adoption passed; release closure awaits green main CI for this evidence. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one project shape; harness-wide generalization is not established. |
 | Bounded evolution | Champion/retry **7 violations**, new candidate **0**, stop `SUCCESS` | Live generation and bounded stopping worked once in a narrow failure family. |
 | Personal transfer candidate | **2 apply, 1 skip, fresh Project D pass** | One adaptation can be transferred, compatibility-checked, reused, deduplicated, and revoked without raw project data; broader personal evolution is not established. |
-| 1.7 release status | **1.7.0 candidate, unpublished** | A real opt-in Personal Home and local safety evidence are verified; exact public 1.7.0 installation evidence does not exist yet. |
+| 1.7 release status | **Public adoption passed; main CI pending** | The exact public 1.7.0 tag passed fresh adoption without local overrides; broader personal evolution remains unestablished. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
 
@@ -339,7 +339,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-For a released version, the second command must report `release_ready: true`. This unpublished 1.7.0 candidate is expected to stop on stale exact-version adoption until public 1.7.0 exists; bypassing that failure would repeat the version-attribution defect the Gate is meant to prevent.
+For a released version, the second command must report `release_ready: true`. Version 1.7.0 now does so locally from exact public-tag evidence; the release is closed only after the same evidence commit passes main CI.
 
 The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), and the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) plus [results](evals/personal-evolution/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 

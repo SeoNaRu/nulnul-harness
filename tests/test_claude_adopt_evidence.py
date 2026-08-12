@@ -50,6 +50,6 @@ class ClaudeAdoptEvidenceTests(unittest.TestCase):
         )
         evidence.pop("distribution")
         evidence["public_positioning_violations"] = 1
-        errors = MODULE.validate(evidence, "1.6.0")
+        errors = MODULE.validate(evidence, "1.7.0")
         self.assertIn("Claude adopt evidence release tag is stale", errors)
         self.assertIn("Claude adopt evidence public positioning regressed", errors)

@@ -276,14 +276,12 @@ class ReleaseGateTests(unittest.TestCase):
         evidence["protected_write_calls"] = [{"tool": "Write", "target": ".claude/**"}]
         with self.assertRaisesRegex(ValueError, "protected-path write"):
             MODULE.validate_claude_gate(evidence, version)
-        current = json.loads(
-            (ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8")
-        )["version"]
+        stale = json.loads(
+            (ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8")
+        )
+        stale["plugin_version"] = "1.6.0"
         with self.assertRaisesRegex(ValueError, "plugin version is stale"):
-            MODULE.validate_claude_gate(
-                json.loads((ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8")),
-                current,
-            )
+            MODULE.validate_claude_gate(stale, "1.7.0")
 
 
 if __name__ == "__main__":
