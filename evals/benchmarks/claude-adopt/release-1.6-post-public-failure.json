@@ -3,7 +3,7 @@
   "run_date": "2026-08-12",
   "surface": "fresh isolated Claude Code session using the GitHub-marketplace-installed public 1.6.0 release",
   "plugin_version": "1.6.0",
-  "failure_classification": "ADOPTION_REGRESSION",
+  "failure_classification": "RELEASE_GATE_FAILURE",
   "observed": {
     "roster_enumerated": false,
     "agents_classified": true,
