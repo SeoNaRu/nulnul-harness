@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "episode_id": "meta-public-adoption-2.0-r1",
+  "run_id": "meta-public-2.0.0-rc.1-r1",
+  "run_date": "2026-08-13",
+  "installed_plugin": {
+    "version": "2.0.0-rc.1",
+    "distribution_source": "github-tag",
+    "marketplace_ref": "v2.0.0-rc.1",
+    "local_override": false,
+    "symlink": false
+  },
+  "distribution": {
+    "release_tag": "v2.0.0-rc.1",
+    "release_commit": "ab1948327235c2856acdf0652a847c86d2936d53",
+    "asset": "nulnul-harness-2.0.0-rc.1.zip",
+    "asset_sha256": "183b5363455bb1feb463a25e49b34026ecbb8e2a3f8448191c062935ff58ad3d",
+    "local_public_byte_identity": true,
+    "manifest_identity": true
+  },
+  "meta_candidate": {
+    "selector_version": "meta-selector-v1",
+    "candidate_id": "meta-selector-v1-summary-shortlist",
+    "candidate_ref": "b2e531068b0c8e3fefe0cb19983e40ef76348422",
+    "source_sha256": "ecc89fdd1e20f50cda79f5b28c95a1f1b8100ac1798afbf6a12901d0b4e79587"
+  },
+  "available_adaptation_families": [
+    "checkpoint-verification-freshness",
+    "local-migration-atomicity",
+    "nonpass-learning-linkage"
+  ],
+  "personal_home": {
+    "configured": true,
+    "existing_directory": true,
+    "not_symlink": true,
+    "registry_valid": true,
+    "privacy_passed": true,
+    "path_stored": false
+  },
+  "project_m": {
+    "case_id": "release:project-m-1",
+    "shape": "durable-local-json-migration",
+    "user_named_adaptation": false,
+    "available": [
+      "checkpoint-verification-freshness",
+      "local-migration-atomicity",
+      "nonpass-learning-linkage"
+    ],
+    "flat_lookup": {
+      "status": "APPLY",
+      "selected": [
+        "personal-transactional-migration-v1"
+      ],
+      "compatibility_checks_executed": 3
+    },
+    "meta_selector": {
+      "status": "APPLY",
+      "selected": [
+        "personal-transactional-migration-v1"
+      ],
+      "shortlisted": [
+        "personal-transactional-migration-v1"
+      ],
+      "excluded": [
+        {
+          "adaptation_id": "personal-checkpoint-freshness-v1",
+          "reason": "conditions_not_met"
+        },
+        {
+          "adaptation_id": "personal-learning-verdict-linkage-v1",
+          "reason": "conditions_not_met"
+        }
+      ],
+      "compatibility_checks_executed": 1
+    },
+    "false_activations": 0,
+    "relevant_omissions": 0,
+    "downstream_completion_checks": [
+      {
+        "check": "three-family registry validation",
+        "exit_code": 0
+      },
+      {
+        "check": "cross-project evidence validation",
+        "exit_code": 0
+      },
+      {
+        "check": "transactional migration failure and success",
+        "exit_code": 0
+      }
+    ],
+    "permission_delta": [],
+    "privacy_result": "passed"
+  },
+  "no_relevant_control": {
+    "case_id": "release:no-relevant-n3-1",
+    "status": "NO_RELEVANT_ADAPTATION",
+    "selected": [],
+    "flat_compatibility_checks": 3,
+    "meta_compatibility_checks": 0,
+    "forced_apply_count": 0,
+    "project_local_flow_continued": true
+  },
+  "conflict_control": {
+    "case_id": "release:conflict-1",
+    "status": "META_CONFLICT",
+    "selected": [],
+    "compatibility_checks_executed": 2,
+    "auto_apply": false,
+    "arbitrary_winner": null,
+    "permission_delta": []
+  },
+  "live_cycle": {
+    "case_id": "release:project-m-1",
+    "downstream_completion_passed": true,
+    "false_activations": 0,
+    "relevant_omissions": 0,
+    "unsupported_conflict_resolutions": 0,
+    "permission_expansions": 0
+  },
+  "rollback_control": {
+    "isolated": true,
+    "method": "The existing threshold-breach control passed before publication and the downloaded public archive was byte-identical.",
+    "threshold_breached": true,
+    "rolled_back_to": "flat-lookup-v1",
+    "unrelated_state_corruption": false
+  },
+  "exposure": {
+    "classification": "release_adoption",
+    "candidate_tuning": false,
+    "retired_local_holdouts_reused": false,
+    "candidate_modified_after_failure": false
+  },
+  "meta_gate": {
+    "decision": "META_PROMOTION",
+    "gate_agent": "product-builder",
+    "candidate_author": "coach",
+    "target_agent": "gate"
+  },
+  "generalization": {
+    "decision": "narrower_scope",
+    "harness_wide": false
+  },
+  "privacy_result": "passed",
+  "permission_result": "passed",
+  "claim_boundary": "The exact public RC reduced fresh Project M full compatibility checks from three to one while preserving the one correct apply, returned no-match and conflict without forced selection, and kept privacy, permission, exposure, and rollback boundaries. No token, runtime, universal, cross-user, or background-learning claim is made."
+}
