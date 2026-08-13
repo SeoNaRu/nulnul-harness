@@ -6,17 +6,17 @@
   },
   "personal_evolution_home": "configured-private-local-home",
   "personal_evolution": {
-    "status": "local_verified_release_candidate",
+    "status": "released",
     "home_status": "configured",
     "adaptation_id": "three-independent-personal-families",
     "decision": "PERSONAL_PROMOTION",
     "preregistration": "evals/personal-evolution/ plus two scoped 2.0-entry preregistrations",
     "results": "evals/personal-evolution/ contains the three Personal Gate result families",
-    "claim_boundary": "Checkpoint freshness, transactional local migration, and machine-linked nonpass verdicts are three independent privacy-safe personal families frozen into the 2.0 RC; exact public three-family adoption is still pending.",
-    "next_action": "Load the same three-family inventory in an isolated Personal Home through the exact public RC and record only sanitized adoption evidence."
+    "claim_boundary": "Checkpoint freshness, transactional local migration, and machine-linked nonpass verdicts are three independent privacy-safe personal families verified through an isolated exact-public 2.0.0 adoption; no raw project memory or universal benefit is claimed.",
+    "next_action": "Keep the three-family inventory stable and wait for measured post-2.0 dogfooding evidence before considering any change."
   },
   "cross_project_evolution": {
-    "status": "public_rc_frozen",
+    "status": "released",
     "entry_gate": "PASS: three independent verified personal adaptation families",
     "evidence": "evals/meta-evolution/cross-project-evidence.json",
     "baseline": "flat lookup 9 full checks; status-permission heuristic 9 full checks",
@@ -26,15 +26,15 @@
     "live_cycle": "active harness evaluation selected only nonpass linkage and passed downstream validation",
     "rollback": "Executable through apply_live_cycle_rollback.py at one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion",
     "claim_boundary": "Bounded privacy-safe evidence improved which adaptations receive full compatibility checks in one three-family episode. No token, runtime, universal, cross-user, or background-learning claim is made.",
-    "next_action": "Verify the exact public final 2.0.0 artifact with fresh Claude and representative Meta adoption without tuning the frozen selector."
+    "next_action": "Collect bounded post-2.0 dogfooding results; do not invent a new roadmap before a new bottleneck is measured."
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.0.0 final artifact is prepared from the verified RC.2 product boundary; exact public final adoption remains pending.",
+    "milestone": "NULNUL 2.0.0 is public and release-closed after exact-version Claude and cross-project Meta adoption.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
-    "status": "active",
-    "last_verified": "2026-08-13: Public RC.2 archive matched local bytes. Fresh Claude adoption created and validated the durable setup contract, preserved both agent hashes, made zero protected writes, passed all five checks, and validated exact GitHub provenance after bounded source-label normalization.",
-    "next_action": "Publish final 2.0.0 off main and obtain fresh exact-final Claude and representative Meta adoption evidence before Release Gate closure.",
+    "status": "complete",
+    "last_verified": "2026-08-13: Public v2.0.0 tag and archive matched commit 7fa8af0 and SHA-256 82b5e4e1. Fresh exact Claude adoption preserved both agents, made zero protected writes, and passed five checks. Fresh exact Meta smoke loaded three families, reduced Project M full checks 3 to 1 with the correct apply and downstream completion, retained public no-match/conflict/rollback controls, and Release Gate returned 100/100 with release_ready=true.",
+    "next_action": "Choose any next improvement only after actual post-2.0 dogfooding measures a new bottleneck; do not generate a 2.1 roadmap speculatively.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."

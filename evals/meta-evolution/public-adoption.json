@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "episode_id": "meta-public-adoption-2.0-r1",
-  "run_id": "meta-public-2.0.0-rc.1-r1",
+  "run_id": "meta-public-2.0.0-final-smoke-r1",
   "run_date": "2026-08-13",
   "installed_plugin": {
-    "version": "2.0.0-rc.1",
+    "version": "2.0.0",
     "distribution_source": "github-tag",
-    "marketplace_ref": "v2.0.0-rc.1",
+    "marketplace_ref": "v2.0.0",
     "local_override": false,
     "symlink": false
   },
   "distribution": {
-    "release_tag": "v2.0.0-rc.1",
-    "release_commit": "ab1948327235c2856acdf0652a847c86d2936d53",
-    "asset": "nulnul-harness-2.0.0-rc.1.zip",
-    "asset_sha256": "183b5363455bb1feb463a25e49b34026ecbb8e2a3f8448191c062935ff58ad3d",
+    "release_tag": "v2.0.0",
+    "release_commit": "7fa8af0e38a473405ad34285ea14563b818f6eea",
+    "asset": "nulnul-harness-2.0.0.zip",
+    "asset_sha256": "82b5e4e13da6866d96fa53cdce7763a4c67aa892610b2c2423b0a73613469502",
     "local_public_byte_identity": true,
     "manifest_identity": true
   },
@@ -38,7 +38,7 @@
     "path_stored": false
   },
   "project_m": {
-    "case_id": "release:project-m-1",
+    "case_id": "release:project-m-final-smoke-1",
     "shape": "durable-local-json-migration",
     "user_named_adaptation": false,
     "available": [
@@ -85,7 +85,7 @@
         "exit_code": 0
       },
       {
-        "check": "transactional migration failure and success",
+        "check": "public-final transactional migration and validation",
         "exit_code": 0
       }
     ],
@@ -111,7 +111,7 @@
     "permission_delta": []
   },
   "live_cycle": {
-    "case_id": "release:project-m-1",
+    "case_id": "release:project-m-final-smoke-1",
     "downstream_completion_passed": true,
     "false_activations": 0,
     "relevant_omissions": 0,
@@ -131,6 +131,7 @@
     "retired_local_holdouts_reused": false,
     "candidate_modified_after_failure": false
   },
+  "control_provenance": "Fresh exact-final Project M was rerun. No-match, conflict, and rollback remain release-only RC controls over the same frozen selector source identity; no retired holdout was reopened and no candidate tuning occurred.",
   "meta_gate": {
     "decision": "META_PROMOTION",
     "gate_agent": "product-builder",
@@ -143,5 +144,5 @@
   },
   "privacy_result": "passed",
   "permission_result": "passed",
-  "claim_boundary": "The exact public RC reduced fresh Project M full compatibility checks from three to one while preserving the one correct apply, returned no-match and conflict without forced selection, and kept privacy, permission, exposure, and rollback boundaries. No token, runtime, universal, cross-user, or background-learning claim is made."
+  "claim_boundary": "The exact public final artifact reduced fresh Project M full compatibility checks from three to one while preserving the one correct apply and downstream migration result. The byte-identical frozen selector retains public no-match, conflict, and rollback controls from the RC release-only evidence. No token, runtime, universal, cross-user, or background-learning claim is made."
 }

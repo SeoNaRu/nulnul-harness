@@ -2,7 +2,7 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## 2.0.0 — 2026-08-13 (exact final verification pending)
+## 2.0.0 — 2026-08-13
 
 - Promoted two additional privacy-safe personal adaptation families through the existing 1.7 lifecycle: transactional local multi-file migration and machine-linked nonpass verdicts. Each passed two positive transfer shapes, one negative skip, a fresh-project reuse, and an independent Personal Gate; the approved Personal Home now validates with three distinct families.
 - Added a schema-version-1 typed cross-project evidence model containing activation boundaries, contraindications, transfer/skip/failure counts, source identity, guardrails, permissions, privacy class, freshness, status, and evidence-backed relations without raw workload or repository identity.
@@ -15,6 +15,10 @@ All notable changes to `nulnul harness` are recorded here.
 - Published non-main `2.0.0-rc.1`; archive identity and fresh cross-project Meta adoption passed, including flat 3 versus meta 1 compatibility checks on Project M, no-match, conflict, live-cycle, and rollback controls.
 - Preserved two authenticated fresh Claude `2.0.0-rc.1` nonpasses: both kept the existing profiles, protected paths, permissions, checkpoint truth, and repository checks, but omitted the durable adopt-and-upgrade contract. `2.0.0-rc.2` contains only the bounded instruction correction and remains blocked on fresh exact-version adoption.
 - Fresh exact `2.0.0-rc.2` Claude adoption passed after creating the validated durable contract: both existing agent hashes were preserved, protected writes stayed zero, all five checks passed, and exact public GitHub provenance was retained across Claude's `source=git` marketplace label.
+- Published final annotated tag `v2.0.0` at `7fa8af0` with archive SHA-256 `82b5e4e13da6866d96fa53cdce7763a4c67aa892610b2c2423b0a73613469502`; the downloaded public asset was byte-identical.
+- Fresh exact `2.0.0` Claude adoption preserved both existing profiles, made zero protected writes, created the validated durable contract and verified checkpoint, and passed all five executable checks.
+- Fresh exact-final Personal/Meta smoke loaded the same three families without user-named adaptations, selected transactional migration for Project M, reduced full compatibility checks from 3 to 1, and passed downstream migration. Public no-match, conflict, exposure, permission, privacy, and rollback controls remained valid over the frozen selector identity.
+- Release Gate closed at 100/100 with `local_candidate_ready=true` and `release_ready=true`; Generalization remains `narrower_scope`, and no token, runtime, universal, cross-user, background-learning, or open-ended-improvement claim is made.
 
 ## 1.7.0 — 2026-08-13
 
