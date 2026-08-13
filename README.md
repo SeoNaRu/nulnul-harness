@@ -21,6 +21,8 @@
 > Version 1.7.0 is public and release-closed. Its exact GitHub tag passed fresh Claude Code and personal-adaptation adoption, and the evidence commit passed main CI in run `31651306556`.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
+>
+> **2.0 local status:** Three independent personal adaptation families now feed a bounded summary selector. On a sealed three-case comparison it preserved every flat-lookup decision while reducing full compatibility checks from 9 to 4. This is an unreleased local candidate, not public 2.0.0.
 
 ## What is NULNUL?
 
@@ -76,7 +78,7 @@ Growth is driven by demonstrated work, not project size labels or a target agent
 | A failure becomes reproducible | Register one causal candidate, compare it with the current way, and keep it only if the Gate passes. |
 | A role or mechanism loses its job | Merge or remove it. Harness growth is not append-only. |
 
-Public 1.7.0 adds an opt-in path for carrying one independently verified adaptation across projects, but only after transfer evidence, activation checks, and a separate Personal Gate. It never copies project memory or applies an adaptation globally.
+Public 1.7.0 adds the opt-in personal path. The unreleased 2.0 candidate builds on it: NULNUL can use privacy-safe activation summaries to decide which verified adaptations are worth a full compatibility check. Past success alone never forces application, and unresolved conflicts stop automatic selection.
 
 ## The operational problem
 
@@ -245,6 +247,7 @@ With NULNUL, the user can ask for the result. The plugin then:
 7. leaves verified state for later sessions when the project is durable;
 8. turns reproducible nonpass results into bounded improvement proposals.
 9. when explicitly opted in, can discover a Personal-Gate-approved adaptation, check it against the new project, and apply or skip it without copying the source project.
+10. when at least three independent verified families exist, can shortlist relevant adaptations from bounded summaries before opening their full compatibility checks.
 
 Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Simple work combines roles. A separate role exists only when it has a distinct job, such as independent verification.
 
@@ -262,6 +265,7 @@ NULNUL is deliberately skills-only. It adds no server, daemon, hosted control pl
 | Governed evolution | Schema-v4 episodes freeze pathology, candidate/generation/evaluation budgets, permission delta, archive identity, deterministic credit ownership, and a stop reason before promotion. |
 | Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, and mechanism identity are machine-readable. A used holdout cannot be relabeled unseen. |
 | Personal adaptation | A user-selected local registry stores generalized mechanisms, activation conditions, contraindications, transfer summaries, provenance, permissions, and revocation state. Missing home, conflicts, private data, stale status, and false activation fail closed. |
+| Cross-project selection | Typed privacy-safe summaries retain activation boundaries, failed transfers, status, permissions, and evidence-backed relations. Unknown relations stay `UNKNOWN`; raw project workloads never enter the aggregate. |
 | Release integrity | Exact plugin provenance and version, protected writes, agent hashes, validators, negative controls, archive/source parity, and documentation debt fail closed. |
 | Evidence hygiene | Stored artifacts exclude prompts, responses, raw transcripts, credentials, private project data, complete commands, and machine paths. |
 
@@ -317,17 +321,19 @@ Some of the strongest evidence came from failures:
 - **Scoped generalization.** Checkpoint freshness survived one unseen local Perl/TAP project shape. The decision was **Narrower Scope**, not “the harness generalizes.”
 - **Live bounded evolution.** Two unchanged champion checks each found seven stale public-positioning surfaces. A newly generated one-generation candidate reached zero, passed the independent Gate, and stopped on `SUCCESS`. This establishes that behavior only for that activation-metadata failure family.
 - **Personal transfer candidate.** The accepted checkpoint-freshness mechanism passed fresh Node and Make project shapes, skipped a one-shot shape, and was discovered and verified in a fresh data-CLI Project D. The Gate decision was `PERSONAL_PROMOTION` for the explicit durable-checkpoint conditions only; it does not establish a general personal-memory system.
+- **Cross-project Meta Evolution.** Transactional local migration and machine-linked nonpass verdicts passed the same Personal Gate lifecycle, creating three independent families. A frozen one-generation selector then matched flat lookup on fresh Project X, no-match, and conflict decisions while reducing full compatibility checks from 9 to 4. The independent Meta Gate promoted it, and a later live cycle passed with zero rollback triggers.
 - **Field failures became rules.** One workflow lost 12,000 decisions to concurrent writers, and an empty-cycle cursor repeatedly rescanned the same 120 items. Those incidents produced single-writer and cursor-persistence rules; they are not universal benchmarks.
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **138 passed (138/138)** | Deterministic product, state, privacy, rollback, transfer, and negative-control contracts hold. |
+| Repository tests | **161 passed (161/161)** | Deterministic product, state, privacy, rollback, transfer, cross-project, Meta Gate, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
 | Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by green main CI run `31651306556`. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one project shape; harness-wide generalization is not established. |
 | Bounded evolution | Champion/retry **7 violations**, new candidate **0**, stop `SUCCESS` | Live generation and bounded stopping worked once in a narrow failure family. |
 | Personal transfer candidate | **2 apply, 1 skip, fresh Project D pass** | One adaptation can be transferred, compatibility-checked, reused, deduplicated, and revoked without raw project data; broader personal evolution is not established. |
+| 2.0 local Meta Gate | **3 families, 9 → 4 full checks, 3/3 decisions correct** | Bounded summary evidence improved selection work in one sealed episode; token, runtime, universal, and cross-user gains are not established. |
 | 1.7 release status | **Released and verified** | The exact public 1.7.0 tag passed fresh adoption without local overrides and its evidence passed main CI; broader personal evolution remains unestablished. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
@@ -339,9 +345,9 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-For a released version, the second command must report `release_ready: true`. Version 1.7.0 does so from exact public-tag evidence, and the same evidence passed main CI.
+For a released version, the second command must report `release_ready: true`. Version 1.7.0 did so from exact public-tag evidence, and the same evidence passed main CI. In the current unreleased 2.0 development state it reports `local_candidate_ready: true` and intentionally keeps `release_ready: false` until exact-version publication and adoption exist.
 
-The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), and the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) plus [results](evals/personal-evolution/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
+The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), plus the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), and [Meta Gate result](evals/meta-evolution/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Why I built NULNUL
 
@@ -377,7 +383,7 @@ The roadmap describes user value, not an automatic release promise.
 | 1.5 Generalization Gate | Completed | Check whether a fix transfers or merely fits familiar evaluation cases. |
 | 1.6 Bounded Autonomous Evolution | Completed | Let the harness search a tiny candidate space under fixed budgets and stop without changing anything when evidence is weak. |
 | 1.7 Personal Evolution | Completed | Reuse a project-proven improvement elsewhere only after transfer evidence, a Personal Gate, and a new-project compatibility check. Exact public adoption and main CI passed. |
-| 2.0 Cross-project / Meta Evolution | Next target | Relate multiple verified personal adaptations to improve what should be tried and when, without sharing raw workloads. |
+| 2.0 Cross-project / Meta Evolution | Local functional candidate; unreleased | Three verified families feed a bounded selector. A sealed Meta Gate reduced full checks from 9 to 4 with identical decisions, then a live cycle passed. Public exact-version release and adoption remain separate. |
 
 ## Trust boundaries and limitations
 
@@ -389,7 +395,7 @@ The roadmap describes user value, not an automatic release promise.
 - Independent Gate ownership is validated from declared state; it is not cryptographic proof of separate runtime identities.
 - NULNUL does not remove the underlying model's reasoning limits or prevent every agent error.
 - One unseen transfer and one live bounded episode do not establish universal or harness-wide generalization.
-- The first Personal Gate result covers one checkpoint mechanism and four bounded shapes. It does not prove that arbitrary project lessons transfer, that multiple adaptations compose, or that personal reuse beats fresh reasoning on tokens or elapsed time.
+- The 2.0 local evidence covers three mechanism families, three sealed selector cases, one confirmed `COMPLEMENTS` relation, and one live cycle. Other relations remain `UNKNOWN`; arbitrary project lessons, token/runtime gains, and cross-user learning are not established.
 - There is no daemon, recursive Coach, candidate population, hosted evolution service, or unattended infinite loop.
 
 ## FAQ

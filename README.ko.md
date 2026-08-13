@@ -21,6 +21,8 @@
 > Version 1.7.0은 공개 및 release closure를 마쳤습니다. 정확한 GitHub tag가 fresh Claude Code와 personal-adaptation adoption을 통과했고, evidence commit은 main CI run `31651306556`에서 성공했습니다.
 >
 > **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
+>
+> **2.0 local 상태:** 서로 다른 personal adaptation family 세 개가 bounded summary selector에 연결됐습니다. Sealed 3-case 비교에서 flat lookup의 모든 결정을 유지하면서 full compatibility check를 9회에서 4회로 줄였습니다. Public 2.0.0이 아니라 미공개 local candidate입니다.
 
 ## NULNUL은 무엇인가요?
 
@@ -76,7 +78,7 @@ NULNUL은 미래의 복잡성을 예상해 큰 프레임워크부터 설치하�
 | 실패가 재현 가능해짐 | 인과관계가 명확한 개선 후보 하나를 등록하고 기존 방식과 비교해 Gate 통과 시에만 유지합니다. |
 | 역할이나 메커니즘의 실제 일이 사라짐 | 병합하거나 제거합니다. 하네스의 성장은 누적만을 뜻하지 않습니다. |
 
-공개된 1.7.0은 독립적으로 검증된 adaptation 하나를 프로젝트 사이에서 재사용하는 opt-in 경로를 추가하지만, transfer evidence, activation check, 별도 Personal Gate를 먼저 요구합니다. Project memory를 복사하거나 global rule로 적용하지 않습니다.
+공개된 1.7.0은 opt-in personal 경로를 추가했습니다. 미공개 2.0 candidate는 그 위에서 privacy-safe activation summary를 사용해 어떤 verified adaptation을 full compatibility check할 가치가 있는지 고릅니다. 과거 성공 횟수만으로 적용하지 않으며 unresolved conflict는 자동 선택을 중단시킵니다.
 
 ## 실제 운영 문제
 
@@ -244,6 +246,7 @@ NULNUL을 사용하면 사용자는 결과를 요청할 수 있습니다. Plugin
 7. 오래 진행되는 프로젝트라면 다음 세션을 위한 verified state를 남깁니다.
 8. 재현 가능한 nonpass 결과를 제한된 개선 후보로 바꿉니다.
 9. 명시적으로 opt-in한 경우 Personal Gate를 통과한 adaptation을 찾고 새 프로젝트와의 compatibility를 확인한 뒤, source project를 복사하지 않고 적용하거나 건너뜁니다.
+10. 서로 다른 verified family가 세 개 이상이면 bounded summary로 relevant adaptation을 shortlist한 뒤에만 full compatibility check를 엽니다.
 
 Navigator, Worker, Coach, Gate는 네 명의 필수 agent가 아니라 responsibility boundary입니다. 단순한 작업에서는 역할을 합칩니다. 독립 검증처럼 별도 job이 있을 때만 역할을 분리합니다.
 
@@ -261,6 +264,7 @@ NULNUL은 의도적으로 skills-only입니다. Server, daemon, hosted control p
 | Governed evolution | Schema-v4 episode는 승격 전에 pathology, candidate/generation/evaluation budget, permission delta, archive identity, deterministic credit owner, stop reason을 고정합니다. |
 | Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, mechanism identity가 machine-readable합니다. 사용한 holdout을 unseen으로 다시 부를 수 없습니다. |
 | Personal adaptation | User-selected local registry에는 generalized mechanism, activation condition, contraindication, transfer summary, provenance, permission, revocation state만 저장합니다. Home 누락, conflict, private data, stale status, false activation은 fail-closed입니다. |
+| Cross-project selection | Typed privacy-safe summary에 activation boundary, failed transfer, status, permission, evidence-backed relation을 보존합니다. 근거 없는 관계는 `UNKNOWN`으로 두고 raw project workload는 집계하지 않습니다. |
 | Release integrity | Exact plugin provenance/version, protected write, agent hash, validator, negative control, archive/source parity, documentation debt가 fail-closed로 동작합니다. |
 | Evidence hygiene | 저장 artifact에는 prompt, response, raw transcript, credential, private project data, 전체 command, machine path가 들어가지 않습니다. |
 
@@ -316,17 +320,19 @@ transfer claim만 → sealed unseen check → scoped decision
 - **범위를 좁힌 일반화.** Checkpoint freshness는 unseen local Perl/TAP 프로젝트 shape 하나에서 살아남았습니다. 판정은 “harness가 generalize한다”가 아니라 **Narrower Scope**였습니다.
 - **Live bounded evolution.** Unchanged champion 검사는 두 번 모두 stale public-positioning surface 7개를 찾았습니다. 새로 생성된 one-generation 후보는 0개에 도달하고 independent Gate를 통과한 뒤 `SUCCESS`로 종료했습니다. 이 근거는 해당 activation-metadata failure family에만 유효합니다.
 - **Personal transfer candidate.** Accepted checkpoint-freshness mechanism은 fresh Node와 Make project shape를 통과하고 one-shot shape를 건너뛴 뒤 fresh data-CLI Project D에서 발견·검증됐습니다. Gate 판정 `PERSONAL_PROMOTION`은 명시된 durable-checkpoint 조건에만 유효하며 일반 personal-memory system을 증명하지 않습니다.
+- **Cross-project Meta Evolution.** Transactional local migration과 machine-linked nonpass verdict가 같은 Personal Gate lifecycle을 통과해 독립 family 세 개가 됐습니다. Frozen one-generation selector는 fresh Project X, no-match, conflict에서 flat lookup과 같은 결정을 내리면서 full compatibility check를 9회에서 4회로 줄였습니다. Independent Meta Gate가 승격했고 이후 live cycle도 rollback trigger 0건으로 통과했습니다.
 - **Field failure를 rule로 전환.** 한 workflow에서 concurrent writer가 decision 12,000개를 잃었고 empty-cycle cursor가 같은 120개를 반복 탐색했습니다. 이 incident는 single-writer와 cursor-persistence rule이 됐지만 범용 benchmark는 아닙니다.
 
 | Evidence | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **138개 통과 (138/138)** | deterministic product, state, privacy, rollback, transfer, negative-control contract가 유지됩니다. |
+| 저장소 test | **161개 통과 (161/161)** | deterministic product, state, privacy, rollback, transfer, cross-project, Meta Gate, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
 | 최종 1.7.0 Release Gate | **통과** | Exact-tag Claude Code와 personal-adaptation adoption 통과 후 main CI run `31651306556`도 green이 됐습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
 | Unseen transfer | **Narrower Scope** | mechanism 하나가 project shape 하나로 전이됐으며 harness-wide generalization은 미입증입니다. |
 | Bounded evolution | champion/retry **위반 7개**, 새 후보 **0개**, stop `SUCCESS` | 좁은 failure family 하나에서 live generation과 bounded stopping이 한 번 동작했습니다. |
 | Personal transfer candidate | **적용 2, 건너뜀 1, fresh Project D 통과** | Raw project data 없이 adaptation 하나를 transfer, compatibility check, reuse, dedup, revoke할 수 있습니다. 더 넓은 personal evolution은 미입증입니다. |
+| 2.0 local Meta Gate | **3 family, full check 9 → 4, 결정 3/3 정답** | Bounded summary evidence가 sealed episode 하나에서 selection work를 줄였습니다. Token, runtime, universal, cross-user 개선은 미입증입니다. |
 | 1.7 release 상태 | **공개 및 검증 완료** | 정확한 public 1.7.0 tag가 local override 없는 fresh adoption을 통과했고 evidence의 main CI도 성공했습니다. 더 넓은 personal evolution은 미입증입니다. |
 
 개선 후보가 반드시 이겨야 하는 것은 아닙니다. 거부, `NO_PROMOTION`, narrower scope, rollback은 모두 정상 결과입니다.
@@ -338,9 +344,9 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-공개된 버전이라면 두 번째 command가 `release_ready: true`를 보고해야 합니다. Version 1.7.0은 exact public-tag evidence로 이를 통과했고, 같은 evidence의 main CI도 성공했습니다.
+공개된 버전이라면 두 번째 command가 `release_ready: true`를 보고해야 합니다. Version 1.7.0은 exact public-tag evidence로 이를 통과했고, 같은 evidence의 main CI도 성공했습니다. 현재 미공개 2.0 development 상태에서는 `local_candidate_ready: true`를 보고하되 exact-version publication과 adoption 전까지 `release_ready: false`를 유지합니다.
 
-근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json)을 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
+근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json), 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json)을 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
 
 ## NULNUL을 만든 이유
 
@@ -376,7 +382,7 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 | 1.5 Generalization Gate | 완료 | 해결책이 전이되는지 익숙한 evaluation case에만 맞는지 구분합니다. |
 | 1.6 Bounded Autonomous Evolution | 완료 | 고정 budget 안에서 작은 후보 공간을 탐색하고 근거가 약하면 아무것도 바꾸지 않은 채 멈춥니다. |
 | 1.7 Personal Evolution | 완료 | 프로젝트에서 검증된 개선을 transfer evidence, Personal Gate, 새 프로젝트 compatibility check 뒤에만 재사용합니다. Exact public adoption과 main CI가 통과했습니다. |
-| 2.0 Cross-project / Meta Evolution | 다음 목표 | 여러 verified personal adaptation의 관계를 이용해 무엇을 언제 시도할지 개선하되 raw workload는 공유하지 않습니다. |
+| 2.0 Cross-project / Meta Evolution | Local functional candidate, 미공개 | Verified family 세 개를 bounded selector에 연결했습니다. Sealed Meta Gate에서 동일 결정을 유지하며 full check를 9회에서 4회로 줄였고 live cycle도 통과했습니다. Public exact-version release/adoption은 별도 작업입니다. |
 
 ## 신뢰 경계와 한계
 
@@ -388,7 +394,7 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 - Independent Gate ownership은 선언된 state에서 검증하며 서로 다른 runtime identity를 암호학적으로 증명하지 않습니다.
 - NULNUL은 기반 model의 reasoning 한계를 없애거나 모든 agent error를 막지 않습니다.
 - unseen transfer 하나와 live bounded episode 하나는 universal 또는 harness-wide generalization을 증명하지 않습니다.
-- 첫 Personal Gate 결과는 checkpoint mechanism 하나와 bounded shape 네 개에만 해당합니다. 임의의 project lesson transfer, 여러 adaptation의 조합, token·elapsed 기준에서 fresh reasoning보다 우월함을 증명하지 않습니다.
+- 2.0 local evidence는 mechanism family 세 개, sealed selector case 세 개, 확인된 `COMPLEMENTS` relation 하나, live cycle 하나에만 해당합니다. 다른 관계는 `UNKNOWN`이며 arbitrary project lesson, token/runtime 개선, cross-user learning은 미입증입니다.
 - Daemon, recursive Coach, candidate population, hosted evolution service, unattended infinite loop가 없습니다.
 
 ## 자주 묻는 질문
