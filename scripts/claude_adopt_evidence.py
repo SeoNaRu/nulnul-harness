@@ -125,6 +125,14 @@ def capture(fixture, transcript, publication):
     version, source = installed_plugin()
     project = (fixture / "docs/nulnul/project.md").read_text(encoding="utf-8")
     guidance = (fixture / "CLAUDE.md").read_text(encoding="utf-8")
+    agents_guidance = fixture / "AGENTS.md"
+    agents_before = subprocess.run(
+        ["git", "show", "HEAD:AGENTS.md"], cwd=fixture, capture_output=True, check=True
+    ).stdout
+    shared_states = [
+        name for name in ("checkpoint.json", "evolution.json")
+        if (fixture / "docs/nulnul" / name).is_file()
+    ]
     return {
         "schema_version": 1,
         "run_id": publication["run_id"],
@@ -144,6 +152,14 @@ def capture(fixture, transcript, publication):
         "roster_enumerated": any(call["name"] == "Bash" and "claude plugin list" in call["input"].get("command", "") for call in calls) and roster_was_read(calls, agents),
         "agents_classified": all(name in project and re.search(rf"{re.escape(name)}[^\n]*(?:keep|upgrade|merge|remove)", project, re.I) for name in agents),
         "session_entry_present": "docs/nulnul/checkpoint.json" in guidance,
+        "host_entry_ownership": {
+            "active_host": "claude",
+            "active_entry": "CLAUDE.md",
+            "inactive_entry": "AGENTS.md",
+            "inactive_before_sha256": digest(agents_before),
+            "inactive_after_sha256": digest(agents_guidance.read_bytes()),
+            "shared_live_state_writer_count": len(shared_states),
+        },
         "checkpoint_fast_path_ready": checkpoint.get("fast_path_ready") is True,
         "checks": checks,
     }
@@ -184,6 +200,16 @@ def validate(payload, expected_version):
     for field in ("roster_enumerated", "agents_classified", "session_entry_present", "checkpoint_fast_path_ready"):
         if payload.get(field) is not True:
             errors.append(f"Claude adopt evidence {field} must be true")
+    ownership = payload.get("host_entry_ownership", {})
+    if ownership.get("active_host") != "claude" or ownership.get("active_entry") != "CLAUDE.md":
+        errors.append("Claude adopt evidence active host entry is invalid")
+    if (
+        ownership.get("inactive_entry") != "AGENTS.md"
+        or ownership.get("inactive_before_sha256") != ownership.get("inactive_after_sha256")
+    ):
+        errors.append("Claude adopt evidence changed the inactive Codex entry")
+    if ownership.get("shared_live_state_writer_count") != 1:
+        errors.append("Claude adopt evidence needs exactly one shared live-state writer")
     checks = payload.get("checks")
     for name in CHECKS:
         if not isinstance(checks, dict) or checks.get(name, {}).get("exit_code") != 0:

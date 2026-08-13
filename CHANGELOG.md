@@ -8,6 +8,7 @@ All notable changes to `nulnul harness` are recorded here.
 - Verified Codex-first, Claude-first, and both sequential adoption orders; the inactive host entry remained byte-identical, existing guidance and `.claude/**` remained unchanged, ambiguous state failed closed, and repeated sync was idempotent.
 - Promoted Navigator v20 after one post-freeze mixed-host cycle passed without rollback, permission expansion, external writes, dependencies, services, or concurrent-mutation claims.
 - Kept public 2.0.0 as the released baseline. The patch candidate requires exact-version public Claude adoption evidence before any version-changing push to `main` or final 2.0.1 release.
+- Published `v2.0.1-rc.1` outside `main`; the downloaded archive matched local bytes. A fresh GitHub-tag-installed Claude run with normal setup intent preserved `AGENTS.md` and two agent profiles, created only `CLAUDE.md` plus shared state, and passed all five adoption checks. Fresh Project M also retained the transactional migration apply while reducing full checks 3 to 1; migration, no-match, and conflict controls passed.
 
 ## Post-2.0 dogfooding — 2026-08-13
 

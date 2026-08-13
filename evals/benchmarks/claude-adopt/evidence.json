@@ -1,31 +1,39 @@
 {
   "schema_version": 1,
-  "run_id": "claude-adopt-2.0.0-public-r1",
+  "run_id": "claude-adopt-2.0.1-rc.1-public-r1",
   "run_date": "2026-08-13",
   "case_id": "positive-adopt-existing-harness",
-  "plugin_version": "2.0.0",
+  "plugin_version": "2.0.1-rc.1",
   "plugin_source": "github",
   "distribution": {
-    "release_tag": "v2.0.0",
-    "release_commit": "7fa8af0e38a473405ad34285ea14563b818f6eea",
-    "asset": "nulnul-harness-2.0.0.zip",
-    "asset_sha256": "82b5e4e13da6866d96fa53cdce7763a4c67aa892610b2c2423b0a73613469502"
+    "release_tag": "v2.0.1-rc.1",
+    "release_commit": "e43eccc908ffd09fc85fb2aa129447e12c586bab",
+    "asset": "nulnul-harness-2.0.1-rc.1.zip",
+    "asset_sha256": "fbd31d671b39054ee99a029b9e44827403d86cdba356859246c751816a6471cb"
   },
   "public_positioning_violations": 0,
   "protected_write_calls": [],
   "existing_agents": {
-    "collector": {
-      "before_sha256": "b479c51d4ba1fbdc957fbb2df8f6bbe7e365e8a3d69e0d75d954ce70c572a1ee",
-      "after_sha256": "b479c51d4ba1fbdc957fbb2df8f6bbe7e365e8a3d69e0d75d954ce70c572a1ee"
+    "auditor": {
+      "before_sha256": "03036b1d83b732bef3b326eae6078e859f6a1d6d6147a5333d43cd0706ee7bd7",
+      "after_sha256": "03036b1d83b732bef3b326eae6078e859f6a1d6d6147a5333d43cd0706ee7bd7"
     },
-    "reviewer": {
-      "before_sha256": "5df56f1ec0145d3caf9c1e9c96fe865b67c7475a0e5d271ff3268cf8c9bd1a95",
-      "after_sha256": "5df56f1ec0145d3caf9c1e9c96fe865b67c7475a0e5d271ff3268cf8c9bd1a95"
+    "planner": {
+      "before_sha256": "1d91d22e39ab411de70ed8b40a00a6f8a10e5deece83d748935ec3a4e0ea1bf9",
+      "after_sha256": "1d91d22e39ab411de70ed8b40a00a6f8a10e5deece83d748935ec3a4e0ea1bf9"
     }
   },
   "roster_enumerated": true,
   "agents_classified": true,
   "session_entry_present": true,
+  "host_entry_ownership": {
+    "active_host": "claude",
+    "active_entry": "CLAUDE.md",
+    "inactive_entry": "AGENTS.md",
+    "inactive_before_sha256": "71edd6d8f3712287003bb712bc777a4b056985d5a1a6bf312a89abe3c880c8fb",
+    "inactive_after_sha256": "71edd6d8f3712287003bb712bc777a4b056985d5a1a6bf312a89abe3c880c8fb",
+    "shared_live_state_writer_count": 1
+  },
   "checkpoint_fast_path_ready": true,
   "checks": {
     "repository": {

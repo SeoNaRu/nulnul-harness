@@ -63,3 +63,19 @@ class ClaudeAdoptEvidenceTests(unittest.TestCase):
         errors = MODULE.validate(evidence, "1.7.0")
         self.assertIn("Claude adopt evidence release tag is stale", errors)
         self.assertIn("Claude adopt evidence public positioning regressed", errors)
+
+    def test_host_entry_mutation_or_duplicate_state_is_rejected(self):
+        evidence = json.loads(
+            (ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8")
+        )
+        evidence["host_entry_ownership"] = {
+            "active_host": "claude",
+            "active_entry": "CLAUDE.md",
+            "inactive_entry": "AGENTS.md",
+            "inactive_before_sha256": "a" * 64,
+            "inactive_after_sha256": "b" * 64,
+            "shared_live_state_writer_count": 2,
+        }
+        errors = MODULE.validate(evidence, evidence["plugin_version"])
+        self.assertIn("Claude adopt evidence changed the inactive Codex entry", errors)
+        self.assertIn("Claude adopt evidence needs exactly one shared live-state writer", errors)

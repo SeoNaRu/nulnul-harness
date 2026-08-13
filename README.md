@@ -24,7 +24,7 @@
 >
 > **2.0 status:** Three independent personal adaptation families feed a bounded summary selector. It preserved every sealed decision while reducing full compatibility checks from 9 to 4; the exact public Project M smoke reduced them from 3 to 1 with the same correct apply.
 >
-> **2.0.1 candidate:** In sequential Codex/Claude Code use, Codex owns only `AGENTS.md`, Claude owns only `CLAUDE.md`, and both reuse one shared `docs/nulnul/` state. Concurrent mutation is not claimed; exact-version public adoption is still required before release.
+> **2.0.1 RC verified:** In sequential Codex/Claude Code use, Codex owns only `AGENTS.md`, Claude owns only `CLAUDE.md`, and both reuse one shared `docs/nulnul/` state. Exact public RC adoption passed; concurrent mutation is not claimed.
 
 ## What is NULNUL?
 
@@ -328,7 +328,7 @@ Some of the strongest evidence came from failures:
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **214 passed (214/214)** | Deterministic product, state, host switching, privacy, rollback, transfer, cross-project, Meta Gate, and negative-control contracts hold. |
+| Repository tests | **215 passed (215/215)** | Deterministic product, state, host switching, privacy, rollback, transfer, cross-project, Meta Gate, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
 | Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by green main CI run `31651306556`. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
