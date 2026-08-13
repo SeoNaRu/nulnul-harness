@@ -2,6 +2,18 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## Unreleased — NULNUL 2.0 local functional candidate
+
+- Promoted two additional privacy-safe personal adaptation families through the existing 1.7 lifecycle: transactional local multi-file migration and machine-linked nonpass verdicts. Each passed two positive transfer shapes, one negative skip, a fresh-project reuse, and an independent Personal Gate; the approved Personal Home now validates with three distinct families.
+- Added a schema-version-1 typed cross-project evidence model containing activation boundaries, contraindications, transfer/skip/failure counts, source identity, guardrails, permissions, privacy class, freshness, status, and evidence-backed relations without raw workload or repository identity.
+- Measured the 1.7 flat lookup and a status-permission heuristic across DEV/VALIDATION cases. Both made the same correct decisions but opened nine full compatibility checks, six irrelevant, establishing the selection pathology before candidate generation.
+- Preregistered one candidate, one generation, nine deterministic evaluation runs, zero model invocations, two relation changes, one policy surface, no new permissions, sealed HOLDOUT identity, falsification conditions, and an executable rollback threshold.
+- Froze `meta-selector-v1` before exposing fresh Project X, no-relevant-adaptation, and unresolved-conflict cases. The independent Meta Gate recorded `META_PROMOTION`: flat 9 checks, simple heuristic 9, candidate 4, with all three decisions and Project X downstream checks passing.
+- Recorded one scoped `COMPLEMENTS` relation between checkpoint freshness and nonpass linkage after their joint downstream result. Other relationships remain `UNKNOWN`; the conflict control was not promoted as a real relationship.
+- Observed one live cycle in the active harness: the selector opened one full check, selected only nonpass linkage, validated the downstream learning result, changed no permissions, and triggered no rollback. The shipped schema-v4 rollback executor also passed a threshold-breach negative control.
+- Added fail-closed controls for insufficient or duplicate families, raw/private aggregation, revoked/stale evidence, false activation, contraindications, popularity-only selection, permission mismatch, unsupported schema, hidden failed transfer, unsupported relations, cloned shapes, HOLDOUT leakage/reuse, proposer self-approval, rejected replay, unbounded generation, forced no-match, conflict auto-resolution, and missing rollback.
+- Kept public version 1.7.0 unchanged. No 2.0 tag, GitHub Release, marketplace publication, or exact-version public adoption was performed.
+
 ## 1.7.0 — 2026-08-13
 
 - Tested whether a project-verified mechanism can become a privacy-safe personal adaptation rather than copied project memory. The accepted checkpoint-freshness receipt was selected because it closed a reproduced 3/3 stale-resume defect, passed its independent Gate and live cycle, has a binary transfer metric, and needs no project identity or raw artifact.

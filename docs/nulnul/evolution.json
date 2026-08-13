@@ -6,22 +6,35 @@
   },
   "personal_evolution_home": "configured-private-local-home",
   "personal_evolution": {
-    "status": "released",
+    "status": "local_verified_release_candidate",
     "home_status": "configured",
-    "adaptation_id": "personal-checkpoint-freshness-v1",
+    "adaptation_id": "three-independent-personal-families",
     "decision": "PERSONAL_PROMOTION",
-    "preregistration": "evals/personal-evolution/preregistration.json",
-    "results": "evals/personal-evolution/results.json",
-    "claim_boundary": "A privacy-safe checkpoint-freshness adaptation transferred to two bounded local project shapes, skipped incompatible and revoked cases, and was reused from an approved local home in fresh projects using the exact public 1.7.0 artifact. Personal adaptation families, cross-project aggregation, and universal generalization are not established.",
-    "next_action": "Observe ordinary 1.7 use; do not begin 2.0 cross-project aggregation until the user requests it and multiple verified adaptations justify the scope."
+    "preregistration": "evals/personal-evolution/ plus two scoped 2.0-entry preregistrations",
+    "results": "evals/personal-evolution/ contains the three Personal Gate result families",
+    "claim_boundary": "Checkpoint freshness, transactional local migration, and machine-linked nonpass verdicts are three independent privacy-safe personal families. The latter two are local verified candidates and are not part of public 1.7.0 evidence.",
+    "next_action": "Keep the three-family Personal Home current and use only compatibility-checked summaries; public exact-version 2.0 adoption remains separate release work."
+  },
+  "cross_project_evolution": {
+    "status": "local_verified_candidate",
+    "entry_gate": "PASS: three independent verified personal adaptation families",
+    "evidence": "evals/meta-evolution/cross-project-evidence.json",
+    "baseline": "flat lookup 9 full checks; status-permission heuristic 9 full checks",
+    "meta_candidate": "meta-selector-v1 summary shortlist",
+    "meta_gate": "META_PROMOTION: 4 full checks with all three sealed decisions correct",
+    "holdout": "fresh Project X apply, no-relevant skip, and unresolved conflict all passed and retired",
+    "live_cycle": "active harness evaluation selected only nonpass linkage and passed downstream validation",
+    "rollback": "Executable through apply_live_cycle_rollback.py at one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion",
+    "claim_boundary": "Bounded privacy-safe evidence improved which adaptations receive full compatibility checks in one three-family episode. No token, runtime, universal, cross-user, or background-learning claim is made.",
+    "next_action": "Finish local 2.0 documentation and release gates; do not publish until a later exact-version public adoption lifecycle."
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.0 entry has three independent verified personal adaptation families; flat cross-project lookup baseline and one bounded meta candidate are preregistered.",
+    "milestone": "NULNUL 2.0 local functional candidate passed its three-family Entry Gate, sealed Meta Gate, fresh Project X, negative controls, live cycle, and executable rollback threshold.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-13: Personal Gate promoted transactional local migration and machine-linked nonpass verdict mechanisms after two positive transfers, one negative skip, and one fresh reuse each. Together with checkpoint freshness, the 2.0 entry inventory has three independent families. Flat and status-permission baseline arms each executed nine full compatibility checks across three correct decisions, including six irrelevant checks.",
-    "next_action": "Implement only the preregistered one-generation summary shortlist, freeze its source identity, then expose the fresh HOLDOUT once for independent Meta Gate evaluation.",
+    "last_verified": "2026-08-13: Personal Gate promoted two additional families. The frozen meta-selector candidate reduced sealed full compatibility checks from 9 to 4 while all three decisions and fresh Project X downstream checks passed. No-relevant and unresolved-conflict controls failed closed, one evidence-backed COMPLEMENTS relation was recorded, and the live cycle had zero rollback triggers.",
+    "next_action": "Run the rollback executor, full repository gates, documentation parity, archive consistency, and local candidate version checks; leave public publication and exact-version adoption for a later release lifecycle.",
     "blockers": [],
     "approved_permissions": []
   },
@@ -39,10 +52,10 @@
       "last_promotion_id": "promotion-coach-4"
     },
     "gate": {
-      "version": 9,
-      "job": "Independently compare candidates, validate semantically equivalent bounded evidence including explicit profile reads without accepting paths-only traces, separate exposed evaluation from one-shot holdouts for broad transfer claims, and promote, reject, or roll back.",
+      "version": 10,
+      "job": "Independently compare candidates, shortlist current permitted cross-project evidence before full compatibility checks, fail closed on unresolved conflicts, separate exposed evaluation from one-shot holdouts, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-9"
+      "last_promotion_id": "promotion-gate-10-meta-selector"
     },
     "product-builder": {
       "version": 6,
@@ -1041,7 +1054,7 @@
         "permission_delta": "0 -> 0"
       },
       "falsification_condition": "Any expected adaptation is missed, any irrelevant adaptation is applied, a conflict is auto-resolved, permissions expand, or full compatibility checks do not decrease.",
-      "status": "proposed"
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -1555,6 +1568,24 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "The post-public GitHub-marketplace-installed 1.6.0 evidence validates with exact release identity, unchanged agent hashes, zero protected writes, five checks, and zero positioning violations; all three roster controls pass."
+      }
+    },
+    {
+      "id": "promotion-gate-10-meta-selector",
+      "proposal_id": "proposal-meta-selector-1",
+      "gate_agent": "product-builder",
+      "before": "Flat lookup and the status-permission heuristic each opened nine full compatibility checks across the three sealed cases.",
+      "after": "The frozen summary shortlist opened four full compatibility checks, preserved all three decisions, passed fresh Project X downstream checks, returned no relevant adaptation correctly, and refused unresolved conflict auto-application.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "false activations, missed relevant adaptations, unsupported conflict resolutions, or permission expansions in the active harness evaluation",
+        "rollback_threshold": "roll back on one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The active harness evaluation selected only the nonpass-linkage adaptation from three families, validated the baseline learning verdict downstream, opened one full compatibility check, and changed no permissions."
       }
     }
   ],

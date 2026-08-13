@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "episode_id": "meta-selection-episode-1",
+  "run_date": "2026-08-13",
+  "candidate_identity": {
+    "candidate_id": "meta-selector-v1-summary-shortlist",
+    "candidate_ref": "b2e531068b0c8e3fefe0cb19983e40ef76348422",
+    "sources": [
+      {
+        "path": "plugins/nulnul-harness/skills/nulnul-harness/scripts/cross_project_evolution.py",
+        "sha256": "sha256:ecc89fdd1e20f50cda79f5b28c95a1f1b8100ac1798afbf6a12901d0b4e79587"
+      }
+    ]
+  },
+  "holdout_exposure": [
+    {
+      "case_id": "holdout:fresh-project-x-1",
+      "role_at_run": "holdout",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    },
+    {
+      "case_id": "holdout:no-relevant-2",
+      "role_at_run": "holdout",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    },
+    {
+      "case_id": "holdout:conflict-3",
+      "role_at_run": "holdout",
+      "current_role": "retired",
+      "unseen": false,
+      "exposure_count": 1
+    }
+  ],
+  "baseline_comparison": {
+    "flat_lookup": {
+      "runs": [
+        {
+          "case_id": "holdout:fresh-project-x-1",
+          "status": "APPLY",
+          "selected": [
+            "personal-checkpoint-freshness-v1",
+            "personal-learning-verdict-linkage-v1"
+          ],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 3,
+          "skipped": [
+            {
+              "adaptation_id": "personal-transactional-migration-v1",
+              "reason": "conditions_not_met"
+            }
+          ],
+          "conflicts": [],
+          "correct": true
+        },
+        {
+          "case_id": "holdout:no-relevant-2",
+          "status": "NO_RELEVANT_ADAPTATION",
+          "selected": [],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 3,
+          "skipped": [
+            {
+              "adaptation_id": "personal-checkpoint-freshness-v1",
+              "reason": "conditions_not_met"
+            },
+            {
+              "adaptation_id": "personal-transactional-migration-v1",
+              "reason": "conditions_not_met"
+            },
+            {
+              "adaptation_id": "personal-learning-verdict-linkage-v1",
+              "reason": "conditions_not_met"
+            }
+          ],
+          "conflicts": [],
+          "correct": true
+        },
+        {
+          "case_id": "holdout:conflict-3",
+          "status": "META_CONFLICT",
+          "selected": [],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 3,
+          "skipped": [
+            {
+              "adaptation_id": "personal-learning-verdict-linkage-v1",
+              "reason": "conditions_not_met"
+            }
+          ],
+          "conflicts": [
+            [
+              "personal-checkpoint-freshness-v1",
+              "personal-transactional-migration-v1"
+            ]
+          ],
+          "correct": true
+        }
+      ],
+      "compatibility_checks_executed": 9,
+      "correct_decisions": 3,
+      "permission_changes": 0
+    },
+    "status_permission_heuristic": {
+      "runs": [
+        {
+          "case_id": "holdout:fresh-project-x-1",
+          "status": "APPLY",
+          "selected": [
+            "personal-checkpoint-freshness-v1",
+            "personal-learning-verdict-linkage-v1"
+          ],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 3,
+          "skipped": [
+            {
+              "adaptation_id": "personal-transactional-migration-v1",
+              "reason": "conditions_not_met"
+            }
+          ],
+          "conflicts": [],
+          "correct": true
+        },
+        {
+          "case_id": "holdout:no-relevant-2",
+          "status": "NO_RELEVANT_ADAPTATION",
+          "selected": [],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 3,
+          "skipped": [
+            {
+              "adaptation_id": "personal-checkpoint-freshness-v1",
+              "reason": "conditions_not_met"
+            },
+            {
+              "adaptation_id": "personal-transactional-migration-v1",
+              "reason": "conditions_not_met"
+            },
+            {
+              "adaptation_id": "personal-learning-verdict-linkage-v1",
+              "reason": "conditions_not_met"
+            }
+          ],
+          "conflicts": [],
+          "correct": true
+        },
+        {
+          "case_id": "holdout:conflict-3",
+          "status": "META_CONFLICT",
+          "selected": [],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 3,
+          "skipped": [
+            {
+              "adaptation_id": "personal-learning-verdict-linkage-v1",
+              "reason": "conditions_not_met"
+            }
+          ],
+          "conflicts": [
+            [
+              "personal-checkpoint-freshness-v1",
+              "personal-transactional-migration-v1"
+            ]
+          ],
+          "correct": true
+        }
+      ],
+      "compatibility_checks_executed": 9,
+      "correct_decisions": 3,
+      "permission_changes": 0
+    },
+    "meta_selector": {
+      "runs": [
+        {
+          "case_id": "holdout:fresh-project-x-1",
+          "status": "APPLY",
+          "selected": [
+            "personal-checkpoint-freshness-v1",
+            "personal-learning-verdict-linkage-v1"
+          ],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 2,
+          "skipped": [
+            {
+              "adaptation_id": "personal-transactional-migration-v1",
+              "reason": "conditions_not_met"
+            }
+          ],
+          "conflicts": [],
+          "correct": true
+        },
+        {
+          "case_id": "holdout:no-relevant-2",
+          "status": "NO_RELEVANT_ADAPTATION",
+          "selected": [],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 0,
+          "skipped": [
+            {
+              "adaptation_id": "personal-checkpoint-freshness-v1",
+              "reason": "contraindicated"
+            },
+            {
+              "adaptation_id": "personal-transactional-migration-v1",
+              "reason": "contraindicated"
+            },
+            {
+              "adaptation_id": "personal-learning-verdict-linkage-v1",
+              "reason": "contraindicated"
+            }
+          ],
+          "conflicts": [],
+          "correct": true
+        },
+        {
+          "case_id": "holdout:conflict-3",
+          "status": "META_CONFLICT",
+          "selected": [],
+          "adaptations_considered": 3,
+          "compatibility_checks_executed": 2,
+          "skipped": [
+            {
+              "adaptation_id": "personal-learning-verdict-linkage-v1",
+              "reason": "conditions_not_met"
+            }
+          ],
+          "conflicts": [
+            [
+              "personal-checkpoint-freshness-v1",
+              "personal-transactional-migration-v1"
+            ]
+          ],
+          "correct": true
+        }
+      ],
+      "compatibility_checks_executed": 4,
+      "correct_decisions": 3,
+      "permission_changes": 0
+    }
+  },
+  "fresh_project_x": {
+    "project_shape": "durable-local-workspace-with-machine-readable-nonpass",
+    "user_named_adaptation": false,
+    "inventory_discovered": true,
+    "compatibility_check_passed": true,
+    "selected": [
+      "personal-checkpoint-freshness-v1",
+      "personal-learning-verdict-linkage-v1"
+    ],
+    "downstream_completion_passed": true,
+    "guardrails_passed": true
+  },
+  "no_relevant_control": {
+    "case_id": "holdout:no-relevant-2",
+    "status": "NO_RELEVANT_ADAPTATION",
+    "selected": [],
+    "adaptations_considered": 3,
+    "compatibility_checks_executed": 0,
+    "skipped": [
+      {
+        "adaptation_id": "personal-checkpoint-freshness-v1",
+        "reason": "contraindicated"
+      },
+      {
+        "adaptation_id": "personal-transactional-migration-v1",
+        "reason": "contraindicated"
+      },
+      {
+        "adaptation_id": "personal-learning-verdict-linkage-v1",
+        "reason": "contraindicated"
+      }
+    ],
+    "conflicts": [],
+    "correct": true
+  },
+  "conflict_control": {
+    "case_id": "holdout:conflict-3",
+    "status": "META_CONFLICT",
+    "selected": [],
+    "adaptations_considered": 3,
+    "compatibility_checks_executed": 2,
+    "skipped": [
+      {
+        "adaptation_id": "personal-learning-verdict-linkage-v1",
+        "reason": "conditions_not_met"
+      }
+    ],
+    "conflicts": [
+      [
+        "personal-checkpoint-freshness-v1",
+        "personal-transactional-migration-v1"
+      ]
+    ],
+    "correct": true
+  },
+  "relationship_changes": [
+    {
+      "source": "personal-checkpoint-freshness-v1",
+      "target": "personal-learning-verdict-linkage-v1",
+      "type": "COMPLEMENTS",
+      "evidence": "Fresh Project X selected both unnamed adaptations and both downstream completion checks passed with no guardrail regression.",
+      "reason": "One protects durable resume truth while the other closes a measured nonpass learning loop.",
+      "scope": "Durable projects that also publish machine-readable nonpass evidence."
+    }
+  ],
+  "failed_transfer_count_preserved": 1,
+  "permission_delta": [],
+  "meta_gate": {
+    "decision": "META_PROMOTION",
+    "gate_agent": "product-builder",
+    "candidate_author": "coach",
+    "target_agent": "gate",
+    "evidence": "All three sealed decisions matched both baselines, full checks decreased, and fresh downstream completion passed."
+  },
+  "generalization_gate": {
+    "decision": "narrower_scope",
+    "harness_wide_generalization": false,
+    "fresh_project_family": true,
+    "scope": "Three verified personal families under the preregistered summary fields and sealed project shapes only.",
+    "evidence": "The candidate source was frozen before the fresh Project X, no-relevant, and conflict cases; all were retired after first exposure."
+  },
+  "live_cycle": {
+    "project_shape": "active-harness-evaluation-state",
+    "selection_correct": true,
+    "selected": [
+      "personal-learning-verdict-linkage-v1"
+    ],
+    "downstream_completion_passed": true,
+    "guardrails_passed": true,
+    "false_activation_regressions": 0
+  },
+  "rollback": {
+    "active_version": "meta-selector-v1",
+    "rollback_to": "flat-lookup-v1",
+    "threshold": "Rollback on one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion.",
+    "operator": "gt",
+    "value": 0
+  },
+  "cost": {
+    "candidates_generated": 1,
+    "generations": 1,
+    "evaluation_runs": 9,
+    "model_invocations": 0,
+    "relation_changes": 1,
+    "affected_policy_surfaces": 1
+  },
+  "learning_verdicts": [],
+  "claim_boundary": "One deterministic summary shortlist reduced full compatibility checks while preserving three sealed decisions and downstream correctness. No token, runtime, universal, cross-user, or background-learning claim is made."
+}

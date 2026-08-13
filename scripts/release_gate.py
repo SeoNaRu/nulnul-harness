@@ -25,6 +25,9 @@ PERSONAL_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/personal_adaptation.py"
 )
 PERSONAL_ADOPTION_VALIDATOR = ROOT / "scripts/personal_adopt_evidence.py"
+META_EVOLUTION_VALIDATOR = (
+    ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_meta_evolution.py"
+)
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -107,6 +110,23 @@ def validate_public_personal_adoption(evidence: dict, version: str) -> dict:
         "fresh_project_reuse": evidence["fresh_project"]["verified_resume"],
         "negative_project": evidence["negative_project"]["decision"],
         "revocation_control": evidence["revocation_control"]["decision"],
+    }
+
+
+def validate_meta_evolution_gate(preregistration: dict, results: dict, evidence: dict) -> dict:
+    spec = importlib.util.spec_from_file_location("validate_meta_evolution", META_EVOLUTION_VALIDATOR)
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    errors = validator.validate(preregistration, results, evidence, ROOT)
+    if errors:
+        raise ValueError("Cross-project Meta Evolution Gate failed: " + "; ".join(errors))
+    return {
+        "status": "passed",
+        "decision": results["meta_gate"]["decision"],
+        "generalization_scope": results["generalization_gate"]["decision"],
+        "flat_checks": results["baseline_comparison"]["flat_lookup"]["compatibility_checks_executed"],
+        "meta_checks": results["baseline_comparison"]["meta_selector"]["compatibility_checks_executed"],
+        "live_cycle": results["live_cycle"]["downstream_completion_passed"],
     }
 
 
@@ -416,9 +436,20 @@ def main() -> None:
     public_personal_adoption = json.loads(
         (ROOT / "evals/personal-evolution/public-adoption.json").read_text(encoding="utf-8")
     )
+    additional_personal = [
+        (
+            json.loads((ROOT / f"evals/personal-evolution/{name}/preregistration.json").read_text(encoding="utf-8")),
+            json.loads((ROOT / f"evals/personal-evolution/{name}/results.json").read_text(encoding="utf-8")),
+        )
+        for name in ("transactional-migration", "learning-verdicts")
+    ]
+    meta_preregistration = json.loads((ROOT / "evals/meta-evolution/preregistration.json").read_text(encoding="utf-8"))
+    meta_results = json.loads((ROOT / "evals/meta-evolution/results.json").read_text(encoding="utf-8"))
+    cross_project_evidence = json.loads((ROOT / "evals/meta-evolution/cross-project-evidence.json").read_text(encoding="utf-8"))
     version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
     validate_learning_gate(learning, evolution)
     validate_learning_gate(failed_holdout, evolution)
+    validate_learning_gate(meta_results, evolution)
     validate_claude_gate(evidence, version)
     score = calculate(cases, results)
     score["performance_gate"] = validate_performance_gate(performance)
@@ -434,9 +465,33 @@ def main() -> None:
     score["personal_evolution_gate"] = validate_personal_gate(
         personal_preregistration, personal_results
     )
+    score["additional_personal_evolution_gates"] = [
+        validate_personal_gate(preregistration, result)
+        for preregistration, result in additional_personal
+    ]
+    score["cross_project_meta_evolution_gate"] = validate_meta_evolution_gate(
+        meta_preregistration, meta_results, cross_project_evidence
+    )
     score["public_personal_adoption_gate"] = validate_public_personal_adoption(
         public_personal_adoption, version
     )
+    if "## Unreleased" in (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"):
+        score["published_baseline_release_ready"] = score["release_ready"]
+        score["release_ready"] = False
+        score["local_candidate_ready"] = all(
+            gate.get("status") == "passed"
+            for gate in (
+                score["performance_gate"],
+                score["observable_evolution_gate"],
+                score["generalization_gate"],
+                score["bounded_autonomous_evolution_gate"],
+                score["personal_evolution_gate"],
+                score["cross_project_meta_evolution_gate"],
+            )
+        )
+        score["release_blockers"] = [
+            "Unreleased 2.0 development state has no exact-version public publication or adoption evidence."
+        ]
     print(json.dumps(score, ensure_ascii=False, indent=2))
 
 

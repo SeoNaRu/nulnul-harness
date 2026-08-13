@@ -42,7 +42,7 @@ class CrossProjectEvolutionTests(unittest.TestCase):
         self.assertTrue(any("repository_name is prohibited" in error for error in MODULE.validate_evidence(raw)))
 
     def test_relation_needs_evidence_and_unknown_is_supported(self):
-        self.assertTrue(all(row["type"] == "UNKNOWN" for row in self.evidence["relations"]))
+        self.assertIn("UNKNOWN", {row["type"] for row in self.evidence["relations"]})
         broken = copy.deepcopy(self.evidence)
         broken["relations"][0]["evidence"] = ""
         self.assertIn("relations[0].evidence must be non-empty", MODULE.validate_evidence(broken))

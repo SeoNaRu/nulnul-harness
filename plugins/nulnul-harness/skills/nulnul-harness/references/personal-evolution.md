@@ -112,7 +112,7 @@ Project acceptance does not grant personal promotion. Freeze the source evidence
 
 After promotion, inspect the current project and call `scripts/personal_adaptation.py discover --home <approved-directory> <project-facts.json>`. Apply only an active compatible adaptation after a small project-local check. A contraindication, revoked or stale status, missing permission, or unresolved conflict returns skip or fail-closed instead of automatic application. `promote` deduplicates the same mechanism and activation identity; `revoke` disables it without deleting its evidence.
 
-Never move source code, repository or customer identity, machine paths, credentials, contacts, prompts, responses, transcripts, full command history, raw logs, private issues, or arbitrary project files into the registry. A personal adaptation is a candidate for reuse, not a global rule. Keep Personal Gate separate from the originating Project Gate and do not aggregate or optimize multiple adaptations in this milestone.
+Never move source code, repository or customer identity, machine paths, credentials, contacts, prompts, responses, transcripts, full command history, raw logs, private issues, or arbitrary project files into the registry. A personal adaptation is a candidate for reuse, not a global rule. Keep Personal Gate separate from the originating Project Gate. Only after three independent families pass this lifecycle may `meta-evolution.md` aggregate their typed privacy-safe summaries; the projects themselves remain isolated.
 
 ## Resume the original work
 

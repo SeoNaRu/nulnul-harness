@@ -56,7 +56,9 @@
         "checkpoint_receipt_supported"
       ],
       "known_conflicts": [],
-      "known_complements": [],
+      "known_complements": [
+        "personal-learning-verdict-linkage-v1"
+      ],
       "cost_evaluation_summary": "No reliable cross-project token or elapsed comparison is claimed.",
       "freshness": {
         "evidence_status": "current",
@@ -160,7 +162,9 @@
         "evolution_state_present"
       ],
       "known_conflicts": [],
-      "known_complements": [],
+      "known_complements": [
+        "personal-checkpoint-freshness-v1"
+      ],
       "cost_evaluation_summary": "No reliable cross-project token or elapsed comparison is claimed.",
       "freshness": {
         "evidence_status": "current",
@@ -181,10 +185,10 @@
     {
       "source": "personal-checkpoint-freshness-v1",
       "target": "personal-learning-verdict-linkage-v1",
-      "type": "UNKNOWN",
-      "evidence": "No joint downstream episode had been run at baseline registration.",
-      "reason": "Independent target jobs do not establish interaction by themselves.",
-      "scope": "2.0 entry baseline"
+      "type": "COMPLEMENTS",
+      "evidence": "Fresh Project X selected both unnamed adaptations and both downstream completion checks passed with no guardrail regression.",
+      "reason": "One protects durable resume truth while the other closes a measured nonpass learning loop.",
+      "scope": "Durable projects that also publish machine-readable nonpass evidence."
     },
     {
       "source": "personal-transactional-migration-v1",

@@ -2,7 +2,8 @@
   "schema_version": 1,
   "episode_id": "meta-selection-episode-1",
   "registered_at": "2026-08-13T11:10:00+09:00",
-  "candidate_generation_started": false,
+  "candidate_generation_started": true,
+  "candidate_generation_started_at": "2026-08-13T11:20:00+09:00",
   "champion_ref": "3e9934d",
   "entry_gate": {
     "required_independent_families": 3,
