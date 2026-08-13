@@ -26,22 +26,22 @@
     "live_cycle": "active harness evaluation selected only nonpass linkage and passed downstream validation",
     "rollback": "Executable through apply_live_cycle_rollback.py at one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion",
     "claim_boundary": "Bounded privacy-safe evidence improved which adaptations receive full compatibility checks in one three-family episode. No token, runtime, universal, cross-user, or background-learning claim is made.",
-    "next_action": "Publish the corrected non-main 2.0.0-rc.2 artifact, verify byte identity, then repeat fresh Claude adoption without tuning the frozen selector."
+    "next_action": "Verify the exact public final 2.0.0 artifact with fresh Claude and representative Meta adoption without tuning the frozen selector."
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.0.0-rc.2 passed fresh exact-version Claude adoption after two bounded release corrections; final 2.0.0 publication remains pending.",
+    "milestone": "NULNUL 2.0.0 final artifact is prepared from the verified RC.2 product boundary; exact public final adoption remains pending.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
     "last_verified": "2026-08-13: Public RC.2 archive matched local bytes. Fresh Claude adoption created and validated the durable setup contract, preserved both agent hashes, made zero protected writes, passed all five checks, and validated exact GitHub provenance after bounded source-label normalization.",
-    "next_action": "Prepare final 2.0.0 from the verified RC.2 product boundary, publish it off main, and obtain fresh exact-final Claude and representative Meta adoption evidence before Release Gate closure.",
+    "next_action": "Publish final 2.0.0 off main and obtain fresh exact-final Claude and representative Meta adoption evidence before Release Gate closure.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
     ]
   },
   "agents": {
-      "navigator": {
+    "navigator": {
       "version": 19,
       "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, bounded installed-roster enumeration, green-main release sequencing, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
       "profile_path": null,

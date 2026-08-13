@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.0.0--rc.2-111111" alt="version 2.0.0-rc.2">
+  <img src="https://img.shields.io/badge/version-2.0.0-111111" alt="version 2.0.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="known behavior and safety score: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -18,7 +18,7 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> Version 2.0.0-rc.2 is the non-main publication candidate. Final 2.0.0 remains blocked until its public artifact and exact-version adoption evidence pass.
+> Version 2.0.0 is prepared from the verified RC.2 product boundary. Release closure remains blocked until the public final artifact passes exact-version Claude and Meta adoption.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
 >
@@ -345,7 +345,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-For a final released version, the second command must report `release_ready: true`. Version 2.0.0-rc.2 may report `local_candidate_ready: true` but must keep `release_ready: false`; exact final 2.0.0 Claude and cross-project Meta adoption are required.
+For a final released version, the second command must report `release_ready: true`. Until exact final 2.0.0 Claude and cross-project Meta adoption pass, `local_candidate_ready: true` with `release_ready: false` is the required state.
 
 The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), plus the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), and [Meta Gate result](evals/meta-evolution/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 

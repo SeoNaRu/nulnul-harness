@@ -2,7 +2,7 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## 2.0.0-rc.2 — public release candidate, verification pending
+## 2.0.0 — 2026-08-13 (exact final verification pending)
 
 - Promoted two additional privacy-safe personal adaptation families through the existing 1.7 lifecycle: transactional local multi-file migration and machine-linked nonpass verdicts. Each passed two positive transfer shapes, one negative skip, a fresh-project reuse, and an independent Personal Gate; the approved Personal Home now validates with three distinct families.
 - Added a schema-version-1 typed cross-project evidence model containing activation boundaries, contraindications, transfer/skip/failure counts, source identity, guardrails, permissions, privacy class, freshness, status, and evidence-backed relations without raw workload or repository identity.
