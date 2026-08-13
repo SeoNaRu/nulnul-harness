@@ -18,6 +18,10 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
+<p align="center">
+  <a href="#quick-start">Try it</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.0.1">2.0.1 release</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">Report friction</a>
+</p>
+
 > **NULNUL 2.0.1 is released.** Fresh exact-public Claude and Meta adoption passed before `main` closure.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
@@ -174,6 +178,8 @@ Fix the booking API and verify that the existing behavior still passes.
 ```
 
 You do not need to choose the agents or design the workflow first.
+
+If anything feels uncomfortable in use, report the normal request, expected result, and actual result in an [Issue](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). Do not include private code, credentials, or raw transcripts.
 
 ## Operational use cases
 

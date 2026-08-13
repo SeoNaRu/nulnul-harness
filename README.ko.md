@@ -18,6 +18,10 @@
   <a href="README.md">English</a> · <strong>한국어</strong>
 </p>
 
+<p align="center">
+  <a href="#빠른-시작">바로 사용</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.0.1">2.0.1 릴리스</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">불편 신고</a>
+</p>
+
 > **NULNUL 2.0.1이 출시됐습니다.** `main`을 닫기 전에 fresh exact-public Claude 및 Meta adoption을 통과했습니다.
 >
 > **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
@@ -174,6 +178,8 @@ claude plugin install nulnul-harness@nulnul-harness
 ```
 
 어떤 agent가 필요한지, workflow를 어떻게 나눌지 먼저 설계할 필요가 없습니다.
+
+사용 중 불편했던 순간은 내부 용어로 바꾸지 말고 평범한 요청, 기대한 결과, 실제 결과만 [Issue로 알려주세요](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). Private code, credential, raw transcript는 포함하지 마세요.
 
 ## 운영 use case
 

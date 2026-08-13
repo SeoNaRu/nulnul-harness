@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible Project Harness problem
+description: Report a reproducible NULNUL problem or uncomfortable behavior
 title: "[Bug]: "
 body:
   - type: markdown
@@ -25,8 +25,8 @@ body:
     validations:
       required: true
   - type: input
-    id: codex
+    id: host
     attributes:
-      label: Codex version and operating system
+      label: Codex or Claude Code version and operating system
     validations:
       required: true
