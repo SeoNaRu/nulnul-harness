@@ -1,26 +1,26 @@
 {
   "schema_version": 1,
-  "run_id": "claude-adopt-1.7-public-release-r1",
+  "run_id": "claude-adopt-2.0-rc.2-public-r1",
   "run_date": "2026-08-13",
   "case_id": "positive-adopt-existing-harness",
-  "plugin_version": "1.7.0",
+  "plugin_version": "2.0.0-rc.2",
   "plugin_source": "github",
   "distribution": {
-    "release_tag": "v1.7.0",
-    "release_commit": "fe6f82630f634aeb0d036b5cc31e84bed2abbbe3",
-    "asset": "nulnul-harness-1.7.0.zip",
-    "asset_sha256": "8e79a4598d1358be4e26a5f8a08178e78d2d90bcf2ef9aef3bce43ed0688ba57"
+    "release_tag": "v2.0.0-rc.2",
+    "release_commit": "180588a2da2ea4018356d2ee8cd6b52f978bcb26",
+    "asset": "nulnul-harness-2.0.0-rc.2.zip",
+    "asset_sha256": "fbefb70d46e97160ee4cdaa7f09bd2392687a05927a9068bf5bd4060c3f43855"
   },
   "public_positioning_violations": 0,
   "protected_write_calls": [],
   "existing_agents": {
     "collector": {
-      "before_sha256": "bfdc6bbbfda11f9f3e3f05c0b3fa68c739242f745d902de020b0cef389ab409a",
-      "after_sha256": "bfdc6bbbfda11f9f3e3f05c0b3fa68c739242f745d902de020b0cef389ab409a"
+      "before_sha256": "b479c51d4ba1fbdc957fbb2df8f6bbe7e365e8a3d69e0d75d954ce70c572a1ee",
+      "after_sha256": "b479c51d4ba1fbdc957fbb2df8f6bbe7e365e8a3d69e0d75d954ce70c572a1ee"
     },
     "reviewer": {
-      "before_sha256": "c3fe10da8bc5ca4ec5a23e02966ae929a82c5a31fca03dd2874324a0cc9dbe80",
-      "after_sha256": "c3fe10da8bc5ca4ec5a23e02966ae929a82c5a31fca03dd2874324a0cc9dbe80"
+      "before_sha256": "5df56f1ec0145d3caf9c1e9c96fe865b67c7475a0e5d271ff3268cf8c9bd1a95",
+      "after_sha256": "5df56f1ec0145d3caf9c1e9c96fe865b67c7475a0e5d271ff3268cf8c9bd1a95"
     }
   },
   "roster_enumerated": true,

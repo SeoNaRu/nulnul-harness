@@ -14,6 +14,7 @@ All notable changes to `nulnul harness` are recorded here.
 - Added fail-closed controls for insufficient or duplicate families, raw/private aggregation, revoked/stale evidence, false activation, contraindications, popularity-only selection, permission mismatch, unsupported schema, hidden failed transfer, unsupported relations, cloned shapes, HOLDOUT leakage/reuse, proposer self-approval, rejected replay, unbounded generation, forced no-match, conflict auto-resolution, and missing rollback.
 - Published non-main `2.0.0-rc.1`; archive identity and fresh cross-project Meta adoption passed, including flat 3 versus meta 1 compatibility checks on Project M, no-match, conflict, live-cycle, and rollback controls.
 - Preserved two authenticated fresh Claude `2.0.0-rc.1` nonpasses: both kept the existing profiles, protected paths, permissions, checkpoint truth, and repository checks, but omitted the durable adopt-and-upgrade contract. `2.0.0-rc.2` contains only the bounded instruction correction and remains blocked on fresh exact-version adoption.
+- Fresh exact `2.0.0-rc.2` Claude adoption passed after creating the validated durable contract: both existing agent hashes were preserved, protected writes stayed zero, all five checks passed, and exact public GitHub provenance was retained across Claude's `source=git` marketplace label.
 
 ## 1.7.0 — 2026-08-13
 

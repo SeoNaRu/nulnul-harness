@@ -30,22 +30,22 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.0.0-rc.1 public adoption exposed one bounded adopt-and-upgrade contract omission; a minimal Navigator candidate is under release validation.",
+    "milestone": "NULNUL 2.0.0-rc.2 passed fresh exact-version Claude adoption after two bounded release corrections; final 2.0.0 publication remains pending.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-13: Public v2.0.0-rc.1 artifact identity and three-family meta adoption passed. Two authenticated fresh Claude adoption runs preserved both agents, protected writes, permissions, checkpoint truth, and repository checks but omitted the durable setup contract required to record role and capability decisions.",
-    "next_action": "Evaluate proposal-navigator-19-adopt-contract through deterministic product checks and one fresh exact-version public RC adoption; reject or promote without changing the frozen meta selector.",
+    "last_verified": "2026-08-13: Public RC.2 archive matched local bytes. Fresh Claude adoption created and validated the durable setup contract, preserved both agent hashes, made zero protected writes, passed all five checks, and validated exact GitHub provenance after bounded source-label normalization.",
+    "next_action": "Prepare final 2.0.0 from the verified RC.2 product boundary, publish it off main, and obtain fresh exact-final Claude and representative Meta adoption evidence before Release Gate closure.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
     ]
   },
   "agents": {
-    "navigator": {
-      "version": 18,
+      "navigator": {
+      "version": 19,
       "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, bounded installed-roster enumeration, green-main release sequencing, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-18"
+      "last_promotion_id": "promotion-navigator-19"
     },
     "coach": {
       "version": 4,
@@ -54,10 +54,10 @@
       "last_promotion_id": "promotion-coach-4"
     },
     "gate": {
-      "version": 10,
+      "version": 11,
       "job": "Independently compare candidates, shortlist current permitted cross-project evidence before full compatibility checks, fail closed on unresolved conflicts, separate exposed evaluation from one-shot holdouts, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-10-meta-selector"
+      "last_promotion_id": "promotion-gate-11-github-git-source"
     },
     "product-builder": {
       "version": 6,
@@ -366,6 +366,16 @@
       "observed": "Two authenticated fresh public 2.0.0-rc.1 adopt-and-upgrade runs preserved the existing profiles and produced a verified checkpoint but omitted docs/nulnul/project.md, so durable role classification and capability decisions were absent.",
       "expected": "When adopt-and-upgrade finds an existing agent roster without a durable setup contract, preserve the root guidance and create the validated contract that records roster and capability decisions.",
       "evidence": "evals/benchmarks/claude-adopt/release-2.0-rc-failures.json records two sanitized nonpasses, zero protected writes, unchanged profiles, a passing repository check, and no raw transcript or private path.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-claude-git-marketplace-provenance",
+      "source": "gate",
+      "target_agent": "gate",
+      "observed": "The corrected fresh public RC.2 adoption satisfied every product and safety check, but Claude Code reported the exact GitHub tag marketplace as source=git plus its URL and the sanitizer rejected the historical label mismatch.",
+      "expected": "Credit source=git only when the marketplace URL is the exact public NULNUL GitHub repository, while continuing to reject local or other sources.",
+      "evidence": "evals/benchmarks/claude-adopt/release-2.0-rc2-failure.json records the sanitized nonpass with five passing checks and no raw transcript or private path.",
       "scope": "core",
       "status": "converted"
     }
@@ -1091,7 +1101,31 @@
         "completion_checks_passing": "4/5 -> 5/5"
       },
       "falsification_condition": "The fresh run omits or invalidates the contract, changes an existing profile, attempts a protected write, expands permissions, or fails a completion check.",
-      "status": "proposed"
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-gate-11-github-git-source",
+      "feedback_ids": ["feedback-claude-git-marketplace-provenance"],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 10,
+      "to_version": 11,
+      "cause": "The release sanitizer coupled public GitHub provenance to one historical Claude marketplace source label.",
+      "change_target": "Canonicalize source=git as GitHub only for the exact NULNUL GitHub repository URL before applying the unchanged public-source requirement.",
+      "regression_check": "python3 -m unittest tests.test_claude_adopt_evidence tests.test_release_gate -v and recapture the same fresh public RC.2 run.",
+      "primary_metric": "valid exact GitHub marketplace installations rejected by source-label coupling",
+      "permission_delta": [],
+      "rollback": "Restore the historical source-label check and retain the RC.2 nonpass if a non-GitHub source is credited or the exact public run remains invalid.",
+      "change_level": "meta",
+      "discovery_evidence": "The bounded plugin and marketplace inventories reported exact version 2.0.0-rc.2, source=git, the public repository URL, and ref v2.0.0-rc.2.",
+      "transfer_check": "A known-answer exact GitHub URL is accepted; the existing local-source negative evidence remains rejected.",
+      "prediction": "The same fresh public run validates with plugin_source=github while the local-source negative control remains rejected.",
+      "expected_delta": {
+        "valid_public_source_rejected": "1 -> 0",
+        "local_source_rejected": "1 -> 1"
+      },
+      "falsification_condition": "The exact GitHub run remains invalid, a different URL is canonicalized as GitHub, or any adoption guardrail changes.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -1623,6 +1657,42 @@
         "rollback_operator": "gt",
         "rollback_value": 0,
         "evidence": "The active harness evaluation selected only the nonpass-linkage adaptation from three families, validated the baseline learning verdict downstream, opened one full compatibility check, and changed no permissions."
+      }
+    },
+    {
+      "id": "promotion-navigator-19",
+      "proposal_id": "proposal-navigator-19-adopt-contract",
+      "gate_agent": "gate",
+      "before": "Two authenticated public RC.1 adoption runs omitted the durable setup contract while otherwise preserving the adoption guardrails.",
+      "after": "The fresh exact RC.2 run created and validated the contract, classified both existing roles, preserved both profile hashes, made zero protected writes, and passed all five checks.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "fresh adopt-and-upgrade runs omitting durable roster and capability decisions",
+        "rollback_threshold": "roll back after one fresh adoption omits the required contract or regresses an adoption guardrail",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "evals/benchmarks/claude-adopt/evidence.json records exact RC.2, agents_classified=true, unchanged hashes, zero protected writes, fast_path_ready, and five zero-exit checks."
+      }
+    },
+    {
+      "id": "promotion-gate-11-github-git-source",
+      "proposal_id": "proposal-gate-11-github-git-source",
+      "gate_agent": "product-builder",
+      "before": "The valid RC.2 adoption was rejected only because Claude reported its exact public GitHub marketplace as source=git plus URL rather than the historical source=github label.",
+      "after": "The sanitizer canonicalizes only the exact NULNUL GitHub repository URL, validates the public run, and retains the local-source rejection control.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "valid exact GitHub marketplace installations rejected by source-label coupling",
+        "rollback_threshold": "roll back if one non-GitHub source is credited or one exact public GitHub installation is rejected",
+        "metric_value": 0,
+        "rollback_operator": "gt",
+        "rollback_value": 0,
+        "evidence": "The exact RC.2 evidence validates with canonical plugin_source=github, while the existing wrong/local source control remains rejected."
       }
     }
   ],

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-13",
+  "surface": "fresh isolated Claude Code session using the GitHub-marketplace-installed public 2.0.0-rc.2 release",
+  "plugin_version": "2.0.0-rc.2",
+  "failure_classification": "RELEASE_GATE_FAILURE",
+  "observed": {
+    "product_adoption_passed": true,
+    "existing_agent_profiles_preserved": true,
+    "protected_write_calls": 0,
+    "completion_checks_passing": 5,
+    "reported_marketplace_source": "git"
+  },
+  "diagnosis": "Claude Code now reports a GitHub tag marketplace as source=git plus its exact GitHub URL; the sanitizer accepted only the historical source=github label.",
+  "privacy": {
+    "raw_transcript_stored": false,
+    "private_project_data_stored": false,
+    "machine_path_stored": false
+  },
+  "learning_verdicts": [
+    {
+      "id": "claude-adopt-2.0-rc.2-public-r1-initial",
+      "status": "failed",
+      "feedback_id": "feedback-claude-git-marketplace-provenance",
+      "proposal_ids": ["proposal-gate-11-github-git-source"]
+    }
+  ]
+}

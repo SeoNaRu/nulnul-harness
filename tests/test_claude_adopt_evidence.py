@@ -2,6 +2,7 @@ import json
 import importlib.util
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +14,15 @@ SPEC.loader.exec_module(MODULE)
 
 
 class ClaudeAdoptEvidenceTests(unittest.TestCase):
+    def test_git_marketplace_with_exact_github_url_is_public_source(self):
+        outputs = [
+            '[{"id":"nulnul-harness@nulnul-harness","version":"2.0.0-rc.2"}]',
+            '[{"name":"nulnul-harness","source":"git","url":"https://github.com/SeoNaRu/nulnul-harness.git"}]',
+        ]
+        with patch.object(MODULE.subprocess, "run") as run:
+            run.side_effect = [type("Result", (), {"stdout": output}) for output in outputs]
+            self.assertEqual(MODULE.installed_plugin(), ("2.0.0-rc.2", "github"))
+
     def test_bounded_shell_roster_read_counts(self):
         calls = [{
             "name": "Bash",

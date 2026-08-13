@@ -96,7 +96,10 @@ def installed_plugin():
         ["claude", "plugin", "marketplace", "list", "--json"], capture_output=True, text=True, check=True
     ).stdout)
     marketplace = next(item for item in marketplaces if item["name"] == "nulnul-harness")
-    return plugin["version"], marketplace["source"]
+    source = marketplace["source"]
+    if source == "git" and marketplace.get("url") == "https://github.com/SeoNaRu/nulnul-harness.git":
+        source = "github"
+    return plugin["version"], source
 
 
 def capture(fixture, transcript, publication):
