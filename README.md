@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.0.1--rc.1-111111" alt="version 2.0.1-rc.1">
+  <img src="https://img.shields.io/badge/version-2.0.1-111111" alt="version 2.0.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="known behavior and safety score: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -18,13 +18,13 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> **NULNUL 2.0.0 is released and verified.** The exact public artifact passed fresh Claude Code and cross-project Meta adoption with no local override.
+> **NULNUL 2.0.1 final candidate is public.** Exact RC adoption passed; exact-final adoption is required before `main` and the GitHub Release are closed.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
 >
 > **2.0 status:** Three independent personal adaptation families feed a bounded summary selector. It preserved every sealed decision while reducing full compatibility checks from 9 to 4; the exact public Project M smoke reduced them from 3 to 1 with the same correct apply.
 >
-> **2.0.1 RC verified:** In sequential Codex/Claude Code use, Codex owns only `AGENTS.md`, Claude owns only `CLAUDE.md`, and both reuse one shared `docs/nulnul/` state. Exact public RC adoption passed; concurrent mutation is not claimed.
+> **2.0.1 behavior:** In sequential Codex/Claude Code use, Codex owns only `AGENTS.md`, Claude owns only `CLAUDE.md`, and both reuse one shared `docs/nulnul/` state. Concurrent mutation is not claimed.
 
 ## What is NULNUL?
 

@@ -2,7 +2,7 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## 2.0.1-rc.1 candidate — 2026-08-13
+## 2.0.1 — 2026-08-13
 
 - Added a standard-library active-host session-entry writer: Codex updates only `AGENTS.md`, Claude Code updates only `CLAUDE.md`, and both reuse exactly one existing `docs/nulnul/` checkpoint or evolution writer.
 - Verified Codex-first, Claude-first, and both sequential adoption orders; the inactive host entry remained byte-identical, existing guidance and `.claude/**` remained unchanged, ambiguous state failed closed, and repeated sync was idempotent.
