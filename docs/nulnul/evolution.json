@@ -30,11 +30,11 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.0.0 is public and release-closed after exact-version Claude and cross-project Meta adoption.",
+    "milestone": "NULNUL 2.0.1 is public and release-closed after exact-version Claude and cross-project Meta adoption.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "complete",
-    "last_verified": "2026-08-13: Exact public 2.0.1-rc.1 Claude adoption used normal setup intent, kept AGENTS.md byte-identical, created only CLAUDE.md, retained one shared state writer and two agent profiles, and passed five checks. Fresh exact-RC Meta smoke kept the correct migration apply at 3-to-1 checks and passed migration, no-match, conflict, privacy, and permission controls.",
-    "next_action": "Publish the byte-equivalent 2.0.1 final candidate outside main, obtain fresh exact-final Claude and changed-migration Meta evidence, then fast-forward main and watch CI green. Do not claim simultaneous multi-host mutation support.",
+    "last_verified": "2026-08-13: Exact public 2.0.1 Claude adoption used normal setup intent, kept AGENTS.md and two agent profiles byte-identical, created only CLAUDE.md plus one shared state writer, and passed five checks. Fresh exact-final Meta smoke kept the correct migration apply at 3-to-1 checks and passed migration, no-match, conflict, privacy, and permission controls.",
+    "next_action": "Keep 2.0.1 stable and collect normal usage feedback. Do not claim simultaneous multi-host mutation support or invent a roadmap without a measured bottleneck.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."

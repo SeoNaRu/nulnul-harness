@@ -4,4 +4,4 @@ This patch candidate gives Codex and Claude Code separate root session-entry own
 
 The standard-library writer preserves existing user guidance outside one managed block, fails closed when shared state is missing or duplicated, and leaves the inactive host entry byte-identical. All four first-use and sequential-order cases, eight negative controls, legacy migration, and one post-freeze mixed-host cycle passed with no permission, dependency, service, or external-write change.
 
-This patch does not claim simultaneous Codex and Claude Code mutation, automatic conflict merging, other host support, or global configuration management. The exact RC passed fresh Claude and changed-migration Meta adoption; the final artifact remains gated on the same exact-version checks before `main` closure.
+This patch does not claim simultaneous Codex and Claude Code mutation, automatic conflict merging, other host support, or global configuration management. Fresh exact-public Claude and changed-migration Meta adoption both passed before `main` closure.

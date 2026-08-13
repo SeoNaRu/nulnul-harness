@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "run_id": "host-entry-ownership-2.0.1-rc.1-public-r1",
+  "run_id": "host-entry-ownership-2.0.1-public-r1",
   "run_date": "2026-08-13",
   "candidate_id": "candidate-host-entry-ownership-v1",
   "normal_user_intent": true,
   "installed_plugin": {
-    "version": "2.0.1-rc.1",
+    "version": "2.0.1",
     "source": "github-tag",
-    "tag": "v2.0.1-rc.1",
-    "release_commit": "e43eccc908ffd09fc85fb2aa129447e12c586bab",
-    "asset_sha256": "fbd31d671b39054ee99a029b9e44827403d86cdba356859246c751816a6471cb",
+    "tag": "v2.0.1",
+    "release_commit": "5198487b00ef441f4da08df18618d04f10adab39",
+    "asset_sha256": "5b0d69f1fba2df23e6d2d78a07d25128a65f0ff901754d53eadf104bfd011aed",
     "local_public_byte_identity": true
   },
   "host_entry_ownership": {
     "active_host": "claude",
     "active_entry": "CLAUDE.md",
     "inactive_entry": "AGENTS.md",
-    "inactive_before_sha256": "71edd6d8f3712287003bb712bc777a4b056985d5a1a6bf312a89abe3c880c8fb",
-    "inactive_after_sha256": "71edd6d8f3712287003bb712bc777a4b056985d5a1a6bf312a89abe3c880c8fb",
+    "inactive_before_sha256": "95dd46061538fbb5d687091a5920aab3be32a99eb93756fb203611de51ba8322",
+    "inactive_after_sha256": "95dd46061538fbb5d687091a5920aab3be32a99eb93756fb203611de51ba8322",
     "shared_live_state_writer_count": 1,
     "protected_write_calls": 0
   },
@@ -44,6 +44,6 @@
   },
   "permission_delta": [],
   "rollback_triggered": false,
-  "decision": "RC_ADOPTION_PASS",
-  "claim_boundary": "Exact public RC evidence covers sequential Claude adoption after Codex, one shared repository state, the changed local migration path, and existing Meta no-match/conflict behavior. Concurrent host mutation and other hosts remain unclaimed."
+  "decision": "PUBLIC_ADOPTION_PASS",
+  "claim_boundary": "Exact public 2.0.1 evidence covers sequential Claude adoption after Codex, one shared repository state, the changed local migration path, and existing Meta no-match/conflict behavior. Concurrent host mutation and other hosts remain unclaimed."
 }

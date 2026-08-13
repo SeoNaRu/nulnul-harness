@@ -18,7 +18,7 @@
   <a href="README.md">English</a> · <strong>한국어</strong>
 </p>
 
-> **NULNUL 2.0.1 final candidate가 공개됐습니다.** Exact RC adoption은 통과했고, `main`과 GitHub Release를 닫기 전에 exact-final adoption이 필요합니다.
+> **NULNUL 2.0.1이 출시됐습니다.** `main`을 닫기 전에 fresh exact-public Claude 및 Meta adoption을 통과했습니다.
 >
 > **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
 >

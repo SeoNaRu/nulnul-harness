@@ -34,7 +34,7 @@
     "state_writer_count": 1,
     "rollback_triggered": false
   },
-  "exact_public_rc_adoption": "evals/host-entry-ownership/public-adoption.json: RC_ADOPTION_PASS",
+  "exact_public_adoption": "evals/host-entry-ownership/public-adoption.json: PUBLIC_ADOPTION_PASS",
   "independent_gate": {
     "owner": "deterministic test and hash checks",
     "self_attested_success_accepted": false,

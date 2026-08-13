@@ -18,7 +18,7 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> **NULNUL 2.0.1 final candidate is public.** Exact RC adoption passed; exact-final adoption is required before `main` and the GitHub Release are closed.
+> **NULNUL 2.0.1 is released.** Fresh exact-public Claude and Meta adoption passed before `main` closure.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
 >
