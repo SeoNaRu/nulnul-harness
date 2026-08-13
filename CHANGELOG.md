@@ -2,6 +2,12 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## Post-2.0 dogfooding — 2026-08-13
+
+- Reproduced one post-2.0 design dogfooding correction: approved personal knowledge, project context, and `frontend-design` were all read, but the selected skill's role was not made explicit until the user raised the authority concern. The evidence retains bounded attribution only.
+- Evaluated two one-generation capability-authority candidates across six same-model runs. All arms preserved the correct project/personal design choices, zero unrelated personal reads, zero permission expansion, and an active domain skill, but neither candidate improved explicit role attribution reproducibly; the independent Gate returned `NO_ADVANTAGE`.
+- Removed both candidates, kept Navigator v19 and public version 2.0.0 unchanged, and made no Personal, cross-domain, runtime, token, or aesthetic-quality claim. A different mechanism requires new dogfooding evidence.
+
 ## 2.0.0 — 2026-08-13
 
 - Promoted two additional privacy-safe personal adaptation families through the existing 1.7 lifecycle: transactional local multi-file migration and machine-linked nonpass verdicts. Each passed two positive transfer shapes, one negative skip, a fresh-project reuse, and an independent Personal Gate; the approved Personal Home now validates with three distinct families.

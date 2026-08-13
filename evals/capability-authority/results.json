@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "episode_id": "capability-authority-dogfood-1",
+  "champion_git_ref": "83a9323a24cf36328d60dfd8cc411b59c95f8199",
+  "actual_reproduction": {
+    "personal_knowledge_read": true,
+    "project_context_read": true,
+    "domain_skill_read": true,
+    "authority_boundary_before_user_correction": false,
+    "user_correction_required": true,
+    "authority_boundary_after_user_correction": true,
+    "user_or_project_decision_override_proven": false,
+    "evidence": "The bounded event order shows all three sources were read, while the role boundary entered the project contract only after the user correction. No raw conversation, transcript, path, source, or personal note is retained."
+  },
+  "model_evaluation": {
+    "model": "gpt-5.6-sol",
+    "model_invocations": 6,
+    "evaluation_runs": 6,
+    "raw_evidence_retained": false,
+    "arms": [
+      {
+        "id": "champion",
+        "runs": 2,
+        "correct_decisions": 2,
+        "explicit_role_attribution": 1,
+        "note": "The prompted-role control passed; the unprompted control preserved project and personal choices but did not state the skill role."
+      },
+      {
+        "id": "candidate-secondary-boundary",
+        "runs": 2,
+        "correct_decisions": 2,
+        "explicit_role_attribution": 1,
+        "note": "A secondary discovery rule and soft workflow pointer matched the champion and had no advantage."
+      },
+      {
+        "id": "candidate-observable-binding",
+        "runs": 2,
+        "correct_decisions": 2,
+        "explicit_role_attribution": 1,
+        "note": "Moving role binding into activation worked once and disappeared on the identical repeat, so the result was not reproducible."
+      }
+    ]
+  },
+  "controls": [
+    {
+      "id": "positive-design",
+      "status": "passed",
+      "result": "Project low-radius direction and approved personal quiet tone were both preserved while the domain skill remained active."
+    },
+    {
+      "id": "project-override",
+      "status": "passed",
+      "result": "The project low-radius contract overrode the conflicting personal rounded preference."
+    },
+    {
+      "id": "explicit-user-override",
+      "status": "not-established",
+      "result": "Not exercised after the candidates failed the primary reproducibility gate."
+    },
+    {
+      "id": "skill-only-fallback",
+      "status": "not-established",
+      "result": "Not exercised after the candidates failed the primary reproducibility gate."
+    },
+    {
+      "id": "implementation-only",
+      "status": "not-established",
+      "result": "Not exercised after the candidates failed the primary reproducibility gate."
+    }
+  ],
+  "context_and_privacy": {
+    "approved_personal_sources_per_run": 1,
+    "unrelated_personal_reads": 0,
+    "entire_personal_store_reads": 0,
+    "permission_delta": [],
+    "external_services": 0,
+    "durable_raw_personal_content": false
+  },
+  "gate": {
+    "gate_agent": "gate",
+    "decision": "NO_ADVANTAGE",
+    "candidate_promoted": false,
+    "reason": "Both candidates preserved correctness and guardrails, but neither increased explicit authority attribution reproducibly over the champion.",
+    "rollback": "Both candidate instruction edits were removed; Navigator remains version 19."
+  },
+  "live_dogfooding": {
+    "status": "not_credited",
+    "authority_restatement_required_after_project_local_correction": false,
+    "downstream_quality_accepted": false,
+    "reason": "The project-local correction prevented another authority restatement, but the later implementation was rejected on output quality and cannot credit either core candidate."
+  },
+  "claim_boundary": "The actual design episode proves a missing explicit role boundary required one user correction. The bounded comparison does not prove that released 2.0 overrides user or project decisions, and neither candidate established a reproducible improvement. No cross-domain, Personal, core-promotion, token, runtime, or aesthetic-quality claim is made.",
+  "learning_verdicts": [
+    {
+      "id": "capability-authority-candidates",
+      "status": "not-established",
+      "feedback_id": "feedback-capability-authority-collision",
+      "proposal_ids": [
+        "proposal-navigator-20-authority-reference",
+        "proposal-navigator-20-authority-binding"
+      ]
+    }
+  ]
+}

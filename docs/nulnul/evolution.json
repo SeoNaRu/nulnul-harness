@@ -33,8 +33,8 @@
     "milestone": "NULNUL 2.0.0 is public and release-closed after exact-version Claude and cross-project Meta adoption.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "complete",
-    "last_verified": "2026-08-13: Public v2.0.0 tag and archive matched commit 7fa8af0 and SHA-256 82b5e4e1. Fresh exact Claude adoption preserved both agents, made zero protected writes, and passed five checks. Fresh exact Meta smoke loaded three families, reduced Project M full checks 3 to 1 with the correct apply and downstream completion, retained public no-match/conflict/rollback controls, and Release Gate returned 100/100 with release_ready=true.",
-    "next_action": "Choose any next improvement only after actual post-2.0 dogfooding measures a new bottleneck; do not generate a 2.1 roadmap speculatively.",
+    "last_verified": "2026-08-13: Public 2.0.0 remains release-closed. A post-2.0 design dogfooding run reproduced one missing explicit capability-role boundary, but two bounded core candidates returned NO_ADVANTAGE after six same-model evaluations; both were removed, privacy and permissions stayed unchanged, and no version or product claim changed.",
+    "next_action": "Keep 2.0.0 unchanged and wait for new dogfooding evidence that reproduces an actual decision override or supports a different authority mechanism; do not generate a 2.1 roadmap speculatively.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
@@ -376,6 +376,16 @@
       "observed": "The corrected fresh public RC.2 adoption satisfied every product and safety check, but Claude Code reported the exact GitHub tag marketplace as source=git plus its URL and the sanitizer rejected the historical label mismatch.",
       "expected": "Credit source=git only when the marketplace URL is the exact public NULNUL GitHub repository, while continuing to reject local or other sources.",
       "evidence": "evals/benchmarks/claude-adopt/release-2.0-rc2-failure.json records the sanitized nonpass with five passing checks and no raw transcript or private path.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-capability-authority-collision",
+      "source": "user",
+      "target_agent": "navigator",
+      "observed": "An actual design run read approved personal knowledge, project context, and a relevant domain skill, but recorded no authority boundary until the user raised the collision concern.",
+      "expected": "Select relevant domain skills without silently granting them control over current user, accepted project, or approved bounded personal design decisions.",
+      "evidence": "evals/capability-authority/results.json retains only bounded attribution and six sanitized comparison outcomes; it contains no raw conversation, transcript, private path, source, or personal note.",
       "scope": "core",
       "status": "converted"
     }
@@ -1126,6 +1136,56 @@
       },
       "falsification_condition": "The exact GitHub run remains invalid, a different URL is canonicalized as GitHub, or any adoption guardrail changes.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-20-authority-reference",
+      "feedback_ids": ["feedback-capability-authority-collision"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 19,
+      "to_version": 20,
+      "cause": "Capability discovery recorded relevance and reuse without a bounded decision-authority role for domain skills.",
+      "change_target": "Add one relevance-versus-authority rule to capability discovery and point the selection workflow at it.",
+      "regression_check": "Six-run bounded capability-authority comparison plus python3 check.py in each isolated fixture.",
+      "primary_metric": "correct explicit role attribution without changing design correctness",
+      "permission_delta": [],
+      "rollback": "Remove the two candidate instruction edits and keep Navigator v19.",
+      "change_level": "task",
+      "discovery_evidence": "The actual dogfooding event order showed the authority boundary entered only after one user correction.",
+      "transfer_check": "Not run because the originating comparison found no advantage.",
+      "prediction": "Every unprompted design collision states the domain skill role while preserving project and approved personal decisions.",
+      "expected_delta": {
+        "correct_decisions": "unchanged",
+        "explicit_role_attribution": "increase reproducibly",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Role attribution matches the champion, disappears on repeat, a decision changes incorrectly, personal reads widen, or permissions expand.",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-20-authority-binding",
+      "feedback_ids": ["feedback-capability-authority-collision"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 19,
+      "to_version": 20,
+      "cause": "The secondary discovery rule did not reliably produce observable role attribution at activation time.",
+      "change_target": "Move the same bounded role binding into the main activation step and require a current or durable attribution result.",
+      "regression_check": "Repeat the same unprompted project-versus-personal design fixture twice with the same model and completion check.",
+      "primary_metric": "reproducible explicit role attribution with correct downstream decision",
+      "permission_delta": [],
+      "rollback": "Remove the activation-step candidate and keep Navigator v19.",
+      "change_level": "task",
+      "discovery_evidence": "The first candidate preserved decisions but failed to state the role in the unprompted control.",
+      "transfer_check": "Not run because the repeated originating case falsified the candidate.",
+      "prediction": "Both identical unprompted repeats state the domain skill as advisor while preserving the same correct decision and guardrails.",
+      "expected_delta": {
+        "correct_decisions": "2/2 -> 2/2",
+        "explicit_role_attribution": "0/1 champion -> 2/2 candidate",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Either repeat omits role attribution, changes the correct project or personal choice, disables the skill, widens personal reads, or expands permissions.",
+      "status": "rejected"
     }
   ],
   "promotions": [
@@ -1694,6 +1754,26 @@
         "rollback_value": 0,
         "evidence": "The exact RC.2 evidence validates with canonical plugin_source=github, while the existing wrong/local source control remains rejected."
       }
+    },
+    {
+      "id": "promotion-navigator-20-authority-reference-rejected",
+      "proposal_id": "proposal-navigator-20-authority-reference",
+      "gate_agent": "gate",
+      "before": "The actual run required one user correction to add an explicit authority boundary.",
+      "after": "The candidate preserved both measured decisions but matched the champion's explicit-role attribution across the paired controls.",
+      "regressions_passed": true,
+      "decision": "rejected",
+      "live_cycle": null
+    },
+    {
+      "id": "promotion-navigator-20-authority-binding-rejected",
+      "proposal_id": "proposal-navigator-20-authority-binding",
+      "gate_agent": "gate",
+      "before": "The unprompted champion preserved the right project and personal choices but did not state a skill role.",
+      "after": "The activation-bound candidate stated advisor once but omitted the role on the identical repeat, so the primary result was not reproducible.",
+      "regressions_passed": true,
+      "decision": "rejected",
+      "live_cycle": null
     }
   ],
   "autonomous_episodes": [

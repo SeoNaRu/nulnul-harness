@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "episode_id": "capability-authority-dogfood-1",
+  "registered_at": "2026-08-13T11:08:22+09:00",
+  "champion_git_ref": "83a9323a24cf36328d60dfd8cc411b59c95f8199",
+  "observed_failure": {
+    "task_family": "design direction followed by frontend implementation",
+    "personal_knowledge_read": true,
+    "project_context_read": true,
+    "domain_skill_read": true,
+    "authority_boundary_before_user_correction": false,
+    "user_correction_required": true,
+    "authority_boundary_after_user_correction": true,
+    "durable_evidence": "A bounded event reduction of the actual dogfooding run; no prompt, response, transcript, path, source, or private note content is retained."
+  },
+  "pathology": {
+    "where": "capability selection and context assembly",
+    "why": "The selected domain skill had a relevance decision but no explicit role boundary beneath current user, project, and approved personal design authority."
+  },
+  "hypotheses": {
+    "personal_retrieval_missing": "falsified",
+    "skill_authority_unbounded": "supported",
+    "project_context_ambiguous": "falsified",
+    "skill_trigger_too_broad": "falsified"
+  },
+  "budget": {
+    "max_candidates": 2,
+    "max_generations": 1,
+    "max_evaluation_runs": 6,
+    "max_failed_candidates": 2,
+    "max_identical_pathology_retries": 1,
+    "max_model_invocations": 6,
+    "permission_delta": [],
+    "new_external_services": 0,
+    "raw_personal_export": false,
+    "holdout_access": false
+  },
+  "primary_metric": "correct authority attribution in every conflicting design case without disabling the relevant domain skill",
+  "prediction": "One bounded context-assembly rule will preserve the current user, project, and approved personal design decisions in all five cases while keeping frontend-design active as advisor or executor and adding no permission or broad personal-data read.",
+  "falsification_condition": "Any case lets generic skill guidance override current user or project direction, lets personal guidance override a current explicit request, disables the skill, re-decides an implementation-only specification, reads unrelated personal material, expands permissions, or claims cross-domain generality.",
+  "cases": [
+    {
+      "id": "positive-design",
+      "expected_authority": "project_then_approved_personal",
+      "expected_skill_role": "advisor"
+    },
+    {
+      "id": "explicit-user-override",
+      "expected_authority": "current_user",
+      "expected_skill_role": "advisor"
+    },
+    {
+      "id": "project-override",
+      "expected_authority": "current_project",
+      "expected_skill_role": "advisor"
+    },
+    {
+      "id": "skill-only-fallback",
+      "expected_authority": "domain_skill_default",
+      "expected_skill_role": "advisor"
+    },
+    {
+      "id": "implementation-only",
+      "expected_authority": "accepted_design_spec",
+      "expected_skill_role": "executor"
+    }
+  ],
+  "guardrails": [
+    "bounded relevant personal lookup only",
+    "no raw personal content in durable evidence",
+    "no permission expansion",
+    "frontend-design remains usable",
+    "no new service, schema engine, role system, or capability-specific hardcode",
+    "claim remains limited to design and task-context collisions"
+  ],
+  "allowed_candidate_files": [
+    "plugins/nulnul-harness/skills/nulnul-harness/SKILL.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/capability-discovery.md",
+    "tests/test_capability_authority.py",
+    "evals/capability-authority/results.json",
+    "docs/nulnul/evolution.json",
+    "README.md",
+    "README.ko.md",
+    "CHANGELOG.md"
+  ]
+}
