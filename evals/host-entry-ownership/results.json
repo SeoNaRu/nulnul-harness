@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "episode_id": "host-entry-ownership-1",
+  "candidate_id": "candidate-host-entry-ownership-v1",
+  "candidate_identity_unchanged": true,
+  "evaluation": {
+    "sequence_cases": {
+      "codex_first": "PASS",
+      "claude_first": "PASS",
+      "codex_then_claude": "PASS",
+      "claude_then_codex": "PASS"
+    },
+    "active_host_entry_valid_count": 4,
+    "active_host_entry_case_count": 4,
+    "other_host_entry_change_count": 0,
+    "shared_live_state_writer_count": 1,
+    "existing_guidance_preserved": true,
+    "idempotent": true,
+    "negative_controls_passed": 8,
+    "negative_controls_total": 8,
+    "permission_delta": [],
+    "external_writes": 0,
+    "new_dependencies": 0
+  },
+  "post_freeze_holdout": {
+    "case_id": "mixed-host-sequential-20260813",
+    "exposed_before_freeze": false,
+    "retired": true,
+    "active_host": "claude",
+    "result": "PASS",
+    "inactive_entry_sha256_before": "11e93b0c0d4e8a266425452968caddefe0ffa112e68ab2056b0c26a71e2d3ef5",
+    "inactive_entry_sha256_after": "11e93b0c0d4e8a266425452968caddefe0ffa112e68ab2056b0c26a71e2d3ef5",
+    "shared_state": "docs/nulnul/evolution.json",
+    "state_writer_count": 1,
+    "rollback_triggered": false
+  },
+  "independent_gate": {
+    "owner": "deterministic test and hash checks",
+    "self_attested_success_accepted": false,
+    "decision": "PROMOTION",
+    "reason": "All four preregistered orders, all eight controls, and the post-freeze mixed-host cycle passed without inactive-entry mutation, duplicate state, permission change, or rollback."
+  },
+  "promotion": {
+    "navigator_from": 19,
+    "navigator_to": 20,
+    "product_integration": "accepted",
+    "release_decision": "2.0.1 publication candidate after exact-version public adoption evidence",
+    "public_version_before_adoption": "2.0.0"
+  },
+  "rollback_threshold": {
+    "metric": "inactive host entry mutations or duplicate live-state writers",
+    "operator": "gte",
+    "value": 1,
+    "observed": 0,
+    "status": "healthy"
+  },
+  "claim_boundary": "Verified only for sequential Codex and Claude Code root-entry ownership over one repository-local shared NULNUL state. Concurrent sessions, conflict merging, other hosts, global configuration changes, and repository-receipt promotion remain unclaimed."
+}

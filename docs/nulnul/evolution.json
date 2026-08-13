@@ -33,8 +33,8 @@
     "milestone": "NULNUL 2.0.0 is public and release-closed after exact-version Claude and cross-project Meta adoption.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "complete",
-    "last_verified": "2026-08-13: Public 2.0.0 remains release-closed. A frozen repository-receipt candidate passed both repeated design, both repeated web, explicit user override, backend challenge, and sixteen evidence controls with bounded reads and no permission change, but no fresh normal-intent real design/web task was in scope for the mandatory live cycle. The Gate returned NO_PROMOTION and left the candidate evaluation-only.",
-    "next_action": "Keep 2.0.0 and Navigator v19 unchanged. On the next real normal-intent design or web task, run the frozen repository-receipt candidate without changing it; do not build another schema or call validation evidence live evidence.",
+    "last_verified": "2026-08-13: Navigator v20 accepted one bounded active-host entry writer after all four Codex/Claude sequential orders, eight controls, and one post-freeze mixed-host cycle passed with the inactive entry byte-identical, one shared state writer, and no permission change. Public NULNUL remains 2.0.0 pending exact-version adoption evidence for a 2.0.1 publication candidate.",
+    "next_action": "Keep the sequential host-entry contract stable. Before any version-changing main publication, build a 2.0.1 candidate and obtain exact-version public Claude adoption evidence; do not claim simultaneous multi-host mutation support.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
@@ -42,10 +42,10 @@
   },
   "agents": {
     "navigator": {
-      "version": 19,
-      "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, bounded installed-roster enumeration, green-main release sequencing, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
+      "version": 20,
+      "job": "Own checkpoint intent, verified-only fresh resume, explicit compatibility, transactional migration, bounded installed-roster enumeration, green-main release sequencing, active-host root-entry ownership, unattended host boundaries, permissions, and final synthesis; verification receipts remain completion-runner-owned.",
       "profile_path": null,
-      "last_promotion_id": "promotion-navigator-19"
+      "last_promotion_id": "promotion-navigator-20-host-entry-ownership"
     },
     "coach": {
       "version": 4,
@@ -422,6 +422,16 @@
         "proposal-navigator-20-intent-means-gate",
         "proposal-navigator-20-scoped-decision-artifact"
       ]
+    },
+    {
+      "id": "feedback-host-entry-ownership",
+      "source": "user",
+      "target_agent": "navigator",
+      "observed": "An inspected project used both Codex and Claude Code but its Claude entry duplicated shared guidance while declaring the Codex entry canonical; the shipped contract did not deterministically preserve the inactive host entry during sequential adoption.",
+      "expected": "Codex updates only AGENTS.md, Claude Code updates only CLAUDE.md, both reuse exactly one docs/nulnul live state, and switching hosts preserves the inactive entry byte-for-byte.",
+      "evidence": "evals/host-entry-ownership/results.json records four sequential-order outcomes, eight controls, and one retired post-freeze mixed-host cycle without private paths or raw project content.",
+      "scope": "core",
+      "status": "converted"
     }
   ],
   "proposals": [
@@ -1313,6 +1323,36 @@
       },
       "mechanism_id": "bounded-repository-receipt-v1",
       "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-20-host-entry-ownership",
+      "feedback_ids": ["feedback-host-entry-ownership"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 19,
+      "to_version": 20,
+      "cause": "Root session-entry ownership was ambiguous when one repository was used sequentially by Codex and Claude Code.",
+      "change_target": "Add one deterministic active-host entry writer: Codex may update only AGENTS.md, Claude Code may update only CLAUDE.md, and both point to the existing single docs/nulnul live state.",
+      "regression_check": "python3 -B -m unittest tests.test_host_entry_ownership tests.test_legacy_migration tests.test_product_plugin",
+      "primary_metric": "inactive host entry mutations across Codex-first, Claude-first, and both sequential adoption orders",
+      "permission_delta": [],
+      "rollback": "Remove the active-host writer and Navigator v20 guidance, restore Navigator v19, and retain the failed evidence if one run changes the inactive entry or creates a second state writer.",
+      "change_level": "task",
+      "discovery_evidence": "Two inspected user projects and the shipped contract exposed one dual-host canonicality conflict and one correct single-host shape; reciprocal host ownership was untested.",
+      "transfer_check": "A post-freeze fresh mixed-host repository retained its existing Codex entry SHA while Claude updated only CLAUDE.md and reused evolution.json.",
+      "prediction": "All four sequential host orders preserve inactive entries byte-for-byte, retain one state writer, preserve user guidance, and add no dependency or permission.",
+      "expected_delta": {
+        "verified_sequential_orders": "0/4 -> 4/4",
+        "inactive_entry_mutations": "unknown -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Any required sequence or control fails, the inactive root entry changes, shared state is duplicated, user guidance is lost, permissions expand, or the post-freeze mixed-host cycle rolls back.",
+      "pathology": {
+        "where": "project setup / host surface mutation",
+        "why": "root session-entry ownership is ambiguous when Codex and Claude Code are used sequentially in one repository"
+      },
+      "mechanism_id": "active-host-entry-writer-v1",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -1931,6 +1971,24 @@
       "regressions_passed": true,
       "decision": "rejected",
       "live_cycle": null
+    },
+    {
+      "id": "promotion-navigator-20-host-entry-ownership",
+      "proposal_id": "proposal-navigator-20-host-entry-ownership",
+      "gate_agent": "gate",
+      "before": "The shipped contract named detected-host files but left AGENTS.md canonical when both hosts existed and had no reciprocal inactive-entry preservation check.",
+      "after": "One standard-library writer updates only the active host entry, both entries reuse one docs/nulnul state, all four orders and eight controls pass, and a post-freeze Claude switch preserved the Codex entry SHA.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "inactive host entry mutations or duplicate live-state writers",
+        "rollback_threshold": "roll back on one inactive-entry mutation or second live-state writer",
+        "metric_value": 0,
+        "rollback_operator": "gte",
+        "rollback_value": 1,
+        "evidence": "evals/host-entry-ownership/results.json records the retired post-freeze mixed-host cycle and exact before/after inactive-entry SHA equality."
+      }
     }
   ],
   "autonomous_episodes": [
@@ -2482,6 +2540,109 @@
       "selected_candidate_id": null,
       "stop_reason": "NO_PROMOTION",
       "claim_boundary": "Repository binding passed the repeated low-radius and Python WSGI validation cases and their declared controls but is not a shipped, live-task, Personal/Core, universal architecture, best-stack, or token-improvement result."
+    },
+    {
+      "id": "episode-host-entry-ownership-1",
+      "mode": "live",
+      "feedback_id": "feedback-host-entry-ownership",
+      "scope": "core_dev",
+      "pathology": {
+        "where": "project setup / host surface mutation",
+        "why": "root session-entry ownership is ambiguous when Codex and Claude Code are used sequentially in one repository"
+      },
+      "budget": {
+        "max_candidates": 1,
+        "max_generations": 1,
+        "max_evaluation_runs": 6,
+        "max_failed_candidates": 1,
+        "max_identical_pathology_retries": 1,
+        "max_model_invocations": 1
+      },
+      "archive_lookup": [
+        "proposal-navigator-6",
+        "proposal-navigator-9",
+        "proposal-navigator-19-adopt-contract"
+      ],
+      "baseline": {
+        "comparable_dimension": "completion_checks",
+        "fair": true,
+        "arms": [
+          {
+            "id": "champion",
+            "runs": 1,
+            "primary_successes": 0,
+            "model_invocations": 0,
+            "completion_checks": 1,
+            "evidence": "The shipped dual-host contract declared AGENTS.md canonical and had no reciprocal inactive-entry preservation check."
+          },
+          {
+            "id": "retry",
+            "runs": 4,
+            "primary_successes": 0,
+            "model_invocations": 0,
+            "completion_checks": 4,
+            "evidence": "Repeating the unchanged contract cannot establish four deterministic host-order guarantees that it neither specifies nor checks."
+          },
+          {
+            "id": "best_of_n",
+            "runs": 4,
+            "primary_successes": 0,
+            "model_invocations": 0,
+            "completion_checks": 4,
+            "evidence": "Selection among unchanged contract retries cannot guarantee the inactive entry remains byte-identical."
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "candidate-host-entry-ownership-v1",
+          "proposal_id": "proposal-navigator-20-host-entry-ownership",
+          "generation": 1,
+          "author_agent": "coach",
+          "parent_agent": "navigator",
+          "parent_version": 19,
+          "pathology": {
+            "where": "project setup / host surface mutation",
+            "why": "root session-entry ownership is ambiguous when Codex and Claude Code are used sequentially in one repository"
+          },
+          "mechanism_id": "active-host-entry-writer-v1",
+          "prediction": "All four sequential host orders preserve inactive entries byte-for-byte, retain one state writer, preserve user guidance, and add no dependency or permission.",
+          "falsification_condition": "Any required sequence or control fails, the inactive root entry changes, shared state is duplicated, user guidance is lost, permissions expand, or the post-freeze mixed-host cycle rolls back.",
+          "permission_delta": [],
+          "rollback": "Remove the active-host writer and Navigator v20 guidance, restore Navigator v19, and retain the failed evidence if one run changes the inactive entry or creates a second state writer.",
+          "archive_match": null,
+          "evaluation": {
+            "candidate_id": "candidate-host-entry-ownership-v1",
+            "owner_agent": "gate",
+            "status": "passed",
+            "runs": 6,
+            "primary_success": true,
+            "guardrails_passed": true,
+            "evidence": "Four sequential-order cases, eight controls, and one post-freeze mixed-host cycle passed; inactive-entry mutations, duplicate state writers, permission changes, external writes, and rollback triggers remained zero.",
+            "cost": {
+              "model_invocations": 0,
+              "completion_checks": 2
+            }
+          },
+          "decision": "selected",
+          "rejection_reason": null
+        }
+      ],
+      "gate_agent": "gate",
+      "sealed_evaluation": true,
+      "holdout_case_ids_read": [],
+      "cost": {
+        "candidates_generated": 1,
+        "generations": 1,
+        "evaluation_runs": 6,
+        "failed_candidates": 0,
+        "model_invocations": 0,
+        "completion_checks": 2
+      },
+      "decision": "AUTONOMOUS_EVOLUTION_WIN",
+      "selected_candidate_id": "candidate-host-entry-ownership-v1",
+      "stop_reason": "SUCCESS",
+      "claim_boundary": "Sequential Codex and Claude Code root-entry ownership is verified over one repository-local shared NULNUL state. Concurrent mutation, conflict merging, other hosts, global configuration, and repository-receipt promotion are not claimed."
     }
   ]
 }

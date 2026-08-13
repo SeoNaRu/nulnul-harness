@@ -42,7 +42,7 @@ When a signal identifies an agent, a bad handoff, a session-loss failure, or the
 Change the nearest durable layer:
 
 - fix product code or a mechanical test for a product defect
-- update `AGENTS.md` for a stable repository-wide convention
+- update only the detected host entry for host-specific session routing; keep stable cross-host repository conventions in `docs/nulnul/project.md`
 - replace, configure, or update an existing capability before creating a new one
 - update or create a skill only for a reusable workflow gap
 - change agent ownership only for a demonstrated coordination problem

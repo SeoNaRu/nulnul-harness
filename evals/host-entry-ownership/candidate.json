@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "candidate_id": "candidate-host-entry-ownership-v1",
+  "mechanism_id": "active-host-entry-writer-v1",
+  "frozen_at": "2026-08-13T16:30:00+09:00",
+  "parent": {
+    "product_version": "2.0.0",
+    "navigator_version": 19,
+    "git_ref": "7aab71f4904dcd40c5100c0ad51c51fae4cd68fa"
+  },
+  "source_sha256": {
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/sync_host_entry.py": "a9123af8b10ae542a893b66edd691d947c3e7dfbcc7360d6da40d9c57fa6b358",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/migrate_legacy_checkpoint.py": "bd0a801c2bb5d4e4f8720e42d92063cadf1d678d68d3ed696ed2c5d6644aae46",
+    "plugins/nulnul-harness/skills/nulnul-harness/SKILL.md": "0934f51cff79155aceecbc3958612c8eddf72356728bd441f9f338b515251022",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/project-files.md": "d36092f6fcacbe0b3f607bb3952d0ad3340122b51a6c1e2f970f84fb5d8e7260",
+    "tests/test_host_entry_ownership.py": "4e45530701ac72453c36f23a63d57b1f8a3c5310151d2f38719f95864769f47e",
+    "tests/test_legacy_migration.py": "34f38f735bbbe4f45396f7d86fa7e03052cb1cfd26bdfa41e3950a6d230ea842"
+  },
+  "prediction": "Codex-first, Claude-first, and both sequential adoption orders update only the active host entry, retain exactly one shared docs/nulnul state writer, preserve inactive entries byte-for-byte, and require no new dependency or permission.",
+  "permission_delta": [],
+  "concurrent_mutation_support": false,
+  "status": "frozen"
+}

@@ -8,7 +8,7 @@ The file names below are the Codex layout. Detect the host before inspecting or 
 
 | Role | Codex | Claude Code |
 | --- | --- | --- |
-| Repo-wide instructions | `AGENTS.md` | `CLAUDE.md` (a repository may keep both; `AGENTS.md` stays canonical here and `CLAUDE.md` points at it) |
+| Repo-wide instructions | `AGENTS.md`, owned by Codex | `CLAUDE.md`, owned by Claude Code |
 | Project-local workflow | `.agents/skills/<name>/` | `docs/nulnul/workflows/<name>.md`, referenced from `CLAUDE.md` |
 | Existing agent definitions to inspect | project contract roles | `.claude/agents/<name>.md` with YAML frontmatter; read-only in unattended sessions |
 | Session entry | `AGENTS.md` points to the verified checkpoint | `CLAUDE.md` points to the verified checkpoint |
@@ -16,6 +16,8 @@ The file names below are the Codex layout. Detect the host before inspecting or 
 | Installed capabilities to enumerate | installed skills and plugins | session skill and agent listings, `.claude/`, `~/.claude/plugins/` |
 
 Treat a path that does not exist on the detected host as not applicable, not as a missing file to create. Presence does not imply write authority: Claude Code's `.claude/**` tree is a discovery surface, not an unattended write target. Do not probe that boundary by attempting a write. Put generated Claude Code setup in repository-owned guidance, `docs/nulnul/`, or another existing product path instead.
+
+The root entries are peers, not copies and not shared writers. A Codex run never creates or edits `CLAUDE.md`; a Claude Code run never creates or edits `AGENTS.md`. When both hosts are used sequentially, each entry points to the same shared `docs/nulnul/project.md` and exactly one checkpoint or evolution state. A host switch changes the new active host entry only. Concurrent sessions need separate coordination evidence and are outside this contract.
 
 ## Day-one setup output
 
@@ -30,7 +32,7 @@ Include, before any extra agent:
 
 Record an omitted mechanism as `not applicable` with one reason. The Coach may add it later when a live run reveals the job; that evidence-driven construction is part of the meta-harness rather than a setup failure. These mechanisms matter more than a large agent roster when their jobs exist.
 
-One durable **session entry instruction** and one concise checkpoint belong in day-one output. Put the instruction in the repository file the detected host already loads: `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code. For a project without agent-specific evolution, create `docs/nulnul/checkpoint.json` from `assets/checkpoint.template.json`, validate it, and point the session entry there rather than at the full setup contract. The checkpoint owns only the current goal, milestone, completion check, bounded verification files, explicit verification status, last verified result, next action, permission constraints and approvals, and blockers; `project.md` keeps stable setup evidence and does not duplicate those live fields. The completion runner alone owns the sibling verification receipt. When `evolution.json` already owns the checkpoint, do not create a second writer. Existing Claude Code agents still get classified and may be upgraded through shared repository guidance, but an unattended session must not create or edit `.claude/**`. Worker, Coach, and Gate stay merged until concrete evidence splits them.
+One durable **session entry instruction** and one concise checkpoint belong in day-one output. Put the instruction in the repository file the detected host already loads: `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code. For a project without agent-specific evolution, create `docs/nulnul/checkpoint.json` from `assets/checkpoint.template.json`, validate it, then run `../scripts/sync_host_entry.py <codex|claude> --root .`; do not write the inactive host entry. The checkpoint owns only the current goal, milestone, completion check, bounded verification files, explicit verification status, last verified result, next action, permission constraints and approvals, and blockers; `project.md` keeps stable setup evidence and does not duplicate those live fields. The completion runner alone owns the sibling verification receipt. When `evolution.json` already owns the checkpoint, do not create a second writer. Existing Claude Code agents still get classified and may be upgraded through shared repository guidance, but an unattended session must not create or edit `.claude/**`. Worker, Coach, and Gate stay merged until concrete evidence splits them.
 
 ## Documentation debt detection
 
@@ -48,15 +50,16 @@ python3 ../scripts/check_doc_debt.py . --document AGENTS.md  # narrow it to one 
 
 It exits non-zero when a listed document is older than the newest tracked source file, so it works as a pre-push hook or a final check before ending a session.
 
-## `AGENTS.md`
+## Root host entries
 
-Use for short repo-wide guidance that matters in most sessions:
+Use `AGENTS.md` for Codex and `CLAUDE.md` for Claude Code. Keep each entry short:
 
-- project purpose and canonical boundaries
-- exact build, test, and verification commands
-- a pointer to `docs/nulnul/checkpoint.json` when it exists, otherwise the active evolution checkpoint or detailed project contract
+- identify its owning host;
+- point to the stable shared project contract;
+- point to the single active checkpoint or evolution state;
+- forbid modifying the other host entry.
 
-Do not copy directory tours, temporary plans, generated capability lists, or model-specific retry advice into it.
+Do not copy one host entry into the other or duplicate directory tours, temporary plans, generated capability lists, live checkpoint values, or model-specific retry advice. Keep shared repository truth in `docs/nulnul/`.
 
 ## `docs/nulnul/project.md`
 
@@ -78,7 +81,7 @@ Start from `../assets/project-contract.template.md`, remove unused optional cont
 
 Use the concise checkpoint for durable projects that do not need agent-specific feedback or promotion history. New checkpoints use schema version 3. Versions 1 and 2 remain readable for migration but cannot take the fast path; unknown future versions fail validation. Start from `../assets/checkpoint.template.json`, give `checkpoint.json` one Navigator writer, record `completion_check` as the exact repository command, and list only the relative files whose state that check verifies. Run the command through `../scripts/run_checkpoint_check.py`; it is the sole writer of `checkpoint.verification.json`, a bounded receipt containing only status, file names, and a SHA-256 state fingerprint. Never edit that receipt directly. Fast resume requires schema-version-3 `verified`, a verified receipt over the same file list, and a current fingerprint match. `failed`, `unknown`, missing evidence, and stale evidence remain valid diagnostic states that fall through to the full workflow. Session entry files point here so ordinary continuation does not reload the full roster and setup evidence. Remove both checkpoint files when continuity is no longer needed; replace them with `evolution.json`, rather than duplicating them, when governed agent evolution begins.
 
-For a legacy durable setup, run `../scripts/migrate_legacy_checkpoint.py docs/nulnul/project.md AGENTS.md` or use the detected root `CLAUDE.md` instead. The migrator never writes under `.claude/**` and skips when `evolution.json` already owns live state. It preserves legacy contract values and permission constraints, creates schema version 3 as `unknown`, and updates the existing session entry. Add the bounded verification file list, then run the recorded completion check to create verified evidence. All target files are prepared before replacement; if any replacement fails, earlier replacements are restored.
+For a legacy durable setup, run `../scripts/migrate_legacy_checkpoint.py docs/nulnul/project.md AGENTS.md` on Codex or use the detected root `CLAUDE.md` on Claude Code. The migrator uses the same managed host-entry block, never writes the inactive root entry or `.claude/**`, and skips when `evolution.json` already owns live state. It preserves legacy contract values and permission constraints, creates schema version 3 as `unknown`, and updates only the active session entry. Add the bounded verification file list, then run the recorded completion check to create verified evidence. All target files are prepared before replacement; if any replacement fails, earlier replacements are restored.
 
 ## `docs/nulnul/evolution.json`
 

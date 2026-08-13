@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.0.0-111111" alt="version 2.0.0">
+  <img src="https://img.shields.io/badge/version-2.0.1--rc.1-111111" alt="version 2.0.1-rc.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="확인된 동작과 안전 점수: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -23,6 +23,8 @@
 > **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
 >
 > **2.0 상태:** 서로 다른 personal adaptation family 세 개가 bounded summary selector에 연결됐습니다. Sealed decision을 모두 유지하면서 full compatibility check를 9회에서 4회로 줄였고, exact public Project M smoke에서도 같은 정답을 유지하며 3회에서 1회로 줄였습니다.
+>
+> **2.0.1 후보:** Codex와 Claude Code를 순차적으로 사용할 때 Codex는 `AGENTS.md`, Claude는 `CLAUDE.md`만 소유하고 둘은 하나의 `docs/nulnul/` 상태를 공유합니다. 동시 변경은 보장하지 않으며, 공개 전 exact-version adoption 증거가 필요합니다.
 
 ## NULNUL은 무엇인가요?
 
@@ -325,7 +327,7 @@ transfer claim만 → sealed unseen check → scoped decision
 
 | Evidence | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **207개 통과 (207/207)** | deterministic product, state, privacy, rollback, transfer, cross-project, Meta Gate, negative-control contract가 유지됩니다. |
+| 저장소 test | **214개 통과 (214/214)** | deterministic product, state, host switching, privacy, rollback, transfer, cross-project, Meta Gate, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
 | 최종 1.7.0 Release Gate | **통과** | Exact-tag Claude Code와 personal-adaptation adoption 통과 후 main CI run `31651306556`도 green이 됐습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |

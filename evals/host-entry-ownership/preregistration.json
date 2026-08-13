@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "episode_id": "host-entry-ownership-1",
+  "registered_at": "2026-08-13T16:00:00+09:00",
+  "champion_git_ref": "7aab71f4904dcd40c5100c0ad51c51fae4cd68fa",
+  "release_state": {
+    "product_version": "2.0.0",
+    "navigator_version": 19
+  },
+  "development_evidence": [
+    "One inspected Codex project had both root entries, with the Claude entry duplicating substantially more guidance while declaring the Codex entry canonical.",
+    "One inspected Codex project had only AGENTS.md and one shared docs/nulnul state, which is the desired first-host shape.",
+    "The shipped contract names the detected-host entry but also says AGENTS.md remains canonical when both hosts are present; deterministic tests cover AGENTS.md migration but not reciprocal host ownership."
+  ],
+  "pathology": {
+    "where": "project setup / host surface mutation",
+    "why": "root session-entry ownership is ambiguous when Codex and Claude Code are used sequentially in one repository"
+  },
+  "hypothesis": "A deterministic active-host session-entry writer, backed by reciprocal preservation checks and one shared docs/nulnul state, will let Codex and Claude Code alternate in one repository without either host creating, rewriting, or becoming canonical over the other host's root entry.",
+  "archive_lookup": [
+    "proposal-navigator-6",
+    "proposal-navigator-9",
+    "proposal-navigator-19-adopt-contract"
+  ],
+  "budget": {
+    "max_candidates": 1,
+    "max_generations": 1,
+    "max_evaluation_runs": 6,
+    "max_failed_candidates": 1,
+    "max_identical_pathology_retries": 1,
+    "max_model_invocations": 0,
+    "permission_delta": [],
+    "external_writes": 0,
+    "new_agents": 0,
+    "new_mcp_servers": 0,
+    "new_services": 0
+  },
+  "evaluation_roles": {
+    "development": "The two inspected user projects and the existing host/migration contract.",
+    "validation": "Fresh temporary Codex-only, Claude-only, and both sequential-order repositories generated after candidate implementation.",
+    "holdout": "One fresh temporary mixed-host repository shape created only after the candidate source hash is frozen, then retired after one run."
+  },
+  "primary_metrics": {
+    "other_host_entry_change_count": 0,
+    "active_host_entry_valid_count": 4,
+    "shared_live_state_writer_count": 1,
+    "required_sequence_cases": [
+      "Codex first",
+      "Claude Code first",
+      "Codex then Claude Code",
+      "Claude Code then Codex"
+    ]
+  },
+  "negative_controls": [
+    "unsupported host fails closed",
+    "missing shared state fails closed",
+    "checkpoint.json plus evolution.json fails closed",
+    "host-protected .claude path is never targeted",
+    "existing user guidance outside the managed entry is preserved",
+    "repeated active-host synchronization is idempotent",
+    "simultaneous multi-host mutation is not claimed or implemented",
+    "permission expansion fails"
+  ],
+  "promotion_gate": [
+    "all four sequence cases pass",
+    "the inactive host entry remains byte-identical",
+    "both root entries point to the same single shared state when both hosts are present",
+    "all negative controls pass",
+    "full repository tests and Release Gate pass",
+    "one post-freeze mixed-host live cycle passes without rollback",
+    "permissions remain unchanged"
+  ],
+  "rollback_threshold": "Roll back after one active-host run changes the inactive host entry, creates a second live-state writer, loses existing host guidance, accepts an unsupported host or ambiguous shared state, or expands permissions.",
+  "falsification_condition": "Any required sequence or negative control fails, another root entry is changed, shared state is duplicated, existing guidance is lost, the helper needs a dependency or global registration, or a post-freeze mixed-host cycle fails.",
+  "claim_boundary": "This episode may establish sequential Codex and Claude Code root-entry ownership over one repository-local shared NULNUL state. It does not establish concurrent multi-host editing, cross-host conflict merging, universal host support, or repository-receipt promotion."
+}

@@ -1,5 +1,7 @@
 # Repository working agreement
 
+This is the Codex-owned root entry. Shared stable setup belongs in `docs/nulnul/project.md`; Claude Code owns `CLAUDE.md` if that host is later used.
+
 ## What
 
 - Product outcome: {outcome}

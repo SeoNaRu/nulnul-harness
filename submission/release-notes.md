@@ -1,9 +1,7 @@
-# nulnul harness 2.0.0
+# nulnul harness 2.0.1-rc.1
 
-This release adds bounded cross-project selection on top of opt-in Personal Evolution. NULNUL uses privacy-safe activation and contraindication summaries to narrow which verified personal adaptations deserve a full compatibility check in the current project; past success never forces application.
+This patch candidate gives Codex and Claude Code separate root session-entry ownership when they are used sequentially in one repository. Codex creates or updates only `AGENTS.md`; Claude Code creates or updates only `CLAUDE.md`; both point to the existing single `docs/nulnul/checkpoint.json` or `docs/nulnul/evolution.json` writer.
 
-Three independent families passed the existing Personal Gate lifecycle: checkpoint verification freshness, local migration atomicity, and nonpass learning linkage. On the sealed local episode, `meta-selector-v1` preserved all three flat-lookup decisions while reducing full compatibility checks from 9 to 4. Fresh no-relevant and unresolved-conflict controls failed closed, and the promoted selector passed one live cycle plus an executable rollback control.
+The standard-library writer preserves existing user guidance outside one managed block, fails closed when shared state is missing or duplicated, and leaves the inactive host entry byte-identical. All four first-use and sequential-order cases, eight negative controls, legacy migration, and one post-freeze mixed-host cycle passed with no permission, dependency, service, or external-write change.
 
-The registry remains a user-selected local privacy boundary. Raw project data, project identity, cross-user learning, cloud memory, background learning, arbitrary conflict resolution, permission expansion, and open-ended recursion are excluded.
-
-The exact public 2.0.0 archive matched the validated local bytes. Fresh Claude Code adoption preserved two existing profiles, made zero protected writes, and passed five checks. Fresh exact-final Meta adoption loaded the three-family registry without user-named adaptations and reduced Project M full compatibility checks from 3 to 1 with the same correct apply and downstream result. No-match, conflict, privacy, permission, exposure, and rollback controls passed; Generalization remains `narrower_scope`.
+This release candidate does not claim simultaneous Codex and Claude Code mutation, automatic conflict merging, other host support, or global configuration management. Public 2.0.0 remains the released baseline until exact-version public adoption evidence closes the patch gate.

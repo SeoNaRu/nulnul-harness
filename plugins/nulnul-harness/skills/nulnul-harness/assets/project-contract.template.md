@@ -19,7 +19,7 @@ Observable completion check: {user-visible or machine-verifiable result}
 
 ## Inspected roster
 
-- Host surface: {Codex, Claude Code, or another detected host}
+- Host surface: {Codex, Claude Code, both sequentially, or another detected host}; each detected host owns only its root entry and all hosts share this contract plus one live-state writer
 - Skills: {inspected installed skills, or none}
 - Plugins: {inspected installed plugins, or none}
 - Agents: {inspected existing agents, or none}

@@ -65,7 +65,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "2.0.0")
+        self.assertEqual(manifest["version"], "2.0.1-rc.1")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -106,6 +106,9 @@ class ProductPluginTests(unittest.TestCase):
         self.assertIn("external-write planning, multi-session checkpointing, or evidence-gated agent evolution", text)
         self.assertIn("stop when every uncovered job has one adequate verified candidate", text)
         self.assertIn("first run the bounded `claude plugin list --json` command", text)
+        self.assertIn("A Codex run may create or update only `AGENTS.md`", text)
+        self.assertIn("a Claude Code run may create or update only `CLAUDE.md`", text)
+        self.assertIn("scripts/sync_host_entry.py", text)
         for path in (
             "references/discovery-and-questions.md",
             "references/baseline-kernel.md",
@@ -128,6 +131,7 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/run_checkpoint_check.py",
             "scripts/validate_learning_loop.py",
             "scripts/migrate_legacy_checkpoint.py",
+            "scripts/sync_host_entry.py",
             "scripts/apply_live_cycle_rollback.py",
             "scripts/validate_experience_digest.py",
             "scripts/validate_generalization_gate.py",
@@ -231,8 +235,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "207 passed"),
-            "README.ko.md": ("README.md", "207개 통과"),
+            "README.md": ("README.ko.md", "214 passed"),
+            "README.ko.md": ("README.md", "214개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")

@@ -2,6 +2,13 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 2.0.1-rc.1 candidate — 2026-08-13
+
+- Added a standard-library active-host session-entry writer: Codex updates only `AGENTS.md`, Claude Code updates only `CLAUDE.md`, and both reuse exactly one existing `docs/nulnul/` checkpoint or evolution writer.
+- Verified Codex-first, Claude-first, and both sequential adoption orders; the inactive host entry remained byte-identical, existing guidance and `.claude/**` remained unchanged, ambiguous state failed closed, and repeated sync was idempotent.
+- Promoted Navigator v20 after one post-freeze mixed-host cycle passed without rollback, permission expansion, external writes, dependencies, services, or concurrent-mutation claims.
+- Kept public 2.0.0 as the released baseline. The patch candidate requires exact-version public Claude adoption evidence before any version-changing push to `main` or final 2.0.1 release.
+
 ## Post-2.0 dogfooding — 2026-08-13
 
 - Reproduced one post-2.0 design dogfooding correction: approved personal knowledge, project context, and `frontend-design` were all read, but the selected skill's role was not made explicit until the user raised the authority concern. The evidence retains bounded attribution only.

@@ -66,6 +66,19 @@ class LegacyMigrationTests(unittest.TestCase):
             self.assertFalse(contract.with_name("checkpoint.json").exists())
             self.assertEqual(contract.read_text(encoding="utf-8"), before)
 
+    def test_claude_migration_preserves_existing_agents_entry(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = self.copy_fixture(directory)
+            contract = target / "docs/nulnul/project.md"
+            agents = target / "AGENTS.md"
+            agents_before = agents.read_bytes()
+            claude = target / "CLAUDE.md"
+            claude.write_text("# Claude guidance\n", encoding="utf-8")
+            result = self.migrate(contract, claude)
+            self.assertEqual(result["status"], "created")
+            self.assertEqual(agents.read_bytes(), agents_before)
+            self.assertIn("Claude Code-owned", claude.read_text(encoding="utf-8"))
+
     def test_host_protected_guidance_is_never_modified(self):
         with tempfile.TemporaryDirectory() as directory:
             target = self.copy_fixture(directory)

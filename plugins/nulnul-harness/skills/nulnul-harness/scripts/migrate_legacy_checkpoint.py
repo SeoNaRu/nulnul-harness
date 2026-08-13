@@ -3,13 +3,11 @@
 
 import argparse
 import json
-import os
 import re
-import stat
-import tempfile
 from pathlib import Path
 
 import validate_checkpoint
+from sync_host_entry import atomic_batch_write, managed_block, merge_entry
 
 
 def section(text, heading):
@@ -59,59 +57,6 @@ def build_checkpoint(contract):
     return payload
 
 
-def temporary_file(path, text, mode):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
-        handle.write(text)
-        temporary = Path(handle.name)
-    temporary.chmod(mode)
-    return temporary
-
-
-def atomic_write(path, text):
-    mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o644
-    temporary = temporary_file(path, text, mode)
-    try:
-        os.replace(temporary, path)
-    finally:
-        temporary.unlink(missing_ok=True)
-
-
-def atomic_batch_write(updates, replace=os.replace):
-    originals = {
-        path: (path.read_text(encoding="utf-8"), stat.S_IMODE(path.stat().st_mode))
-        if path.exists() else None
-        for path in updates
-    }
-    temporaries = {}
-    try:
-        for path, text in updates.items():
-            temporaries[path] = temporary_file(
-                path, text, originals[path][1] if originals[path] else 0o644
-            )
-    except OSError:
-        for temporary in temporaries.values():
-            temporary.unlink(missing_ok=True)
-        raise
-    replaced = []
-    try:
-        for path, temporary in temporaries.items():
-            replace(temporary, path)
-            replaced.append(path)
-    except OSError:
-        for path in reversed(replaced):
-            original = originals[path]
-            if original is None:
-                path.unlink(missing_ok=True)
-            else:
-                atomic_write(path, original[0])
-                path.chmod(original[1])
-        raise
-    finally:
-        for temporary in temporaries.values():
-            temporary.unlink(missing_ok=True)
-
-
 def migrate(contract_path, guidance_path):
     checkpoint_path = contract_path.with_name("checkpoint.json")
     evolution_path = contract_path.with_name("evolution.json")
@@ -122,11 +67,16 @@ def migrate(contract_path, guidance_path):
 
     contract = contract_path.read_text(encoding="utf-8")
     guidance = guidance_path.read_text(encoding="utf-8")
-    entry = (
-        "Validate `docs/nulnul/checkpoint.json` before repository-wide inspection; when "
-        "`fast_path_ready` is true, read only it and task files."
+    if guidance_path.name == "AGENTS.md":
+        host = "codex"
+    elif guidance_path.name == "CLAUDE.md":
+        host = "claude"
+    else:
+        raise ValueError("guidance must be the active host root AGENTS.md or CLAUDE.md")
+    updated_guidance = merge_entry(
+        guidance,
+        managed_block(host, Path("docs/nulnul/checkpoint.json")),
     )
-    updated_guidance = guidance if "docs/nulnul/checkpoint.json" in guidance else guidance.rstrip() + "\n\n" + entry + "\n"
     if checkpoint_path.exists():
         checkpoint = json.loads(checkpoint_path.read_text(encoding="utf-8"))
         if not isinstance(checkpoint, dict) or checkpoint.get("schema_version") not in {1, 2, 3}:
