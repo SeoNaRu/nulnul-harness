@@ -1,6 +1,6 @@
 {
   "name": "nulnul-harness",
-  "description": "A project-fit meta-harness that discovers capabilities and runs bounded evolution from measured outcomes.",
+  "description": "A project-fit meta-harness that reuses proven capabilities and narrows verified personal adaptations with bounded evidence.",
   "owner": {
     "name": "SeoNaRu",
     "url": "https://github.com/SeoNaRu"
@@ -9,8 +9,8 @@
     {
       "name": "nulnul-harness",
       "source": "./plugins/nulnul-harness",
-      "description": "Turn a requested project outcome into verified work by reusing proven capabilities, filling only demonstrated gaps, preserving progress, and gating bounded improvements independently.",
-      "version": "1.7.0"
+      "description": "Complete project outcomes by reusing proven capabilities and compatibility-checking only relevant verified personal adaptations behind independent Gates.",
+      "version": "2.0.0-rc.1"
     }
   ]
 }

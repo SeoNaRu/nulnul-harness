@@ -2,12 +2,12 @@
 
 - Name: nulnul harness
 - Package: `nulnul-harness`
-- Version: `1.7.0`
+- Version: `2.0.0-rc.1`
 - Publisher: SeoNaRu (must match the verified OpenAI Platform identity)
 - Category: Productivity
 - Shape: Skills only; no MCP server, app, UI, hooks, authentication, or publisher-operated service
 - Short description: Outcomes, verified and lean.
-- Long description: nulnul harness starts from the requested result, inspects the project, reuses suitable skills, plugins, agents, and conventions, fills only demonstrated gaps, completes the work, and improves its process only when an independent Gate accepts reproducible evidence.
+- Long description: nulnul harness starts from the requested result, reuses proven capabilities, narrows verified personal adaptations with privacy-safe evidence, compatibility-checks relevant candidates, completes the work, and changes its selection procedure only when an independent Gate accepts reproducible evidence.
 - Logo: `plugins/nulnul-harness/assets/nulnul-harness.svg`
 
 ## Starter prompts

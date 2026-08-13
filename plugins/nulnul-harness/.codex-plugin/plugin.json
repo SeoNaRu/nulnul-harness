@@ -1,7 +1,7 @@
 {
   "name": "nulnul-harness",
-  "version": "1.7.0",
-  "description": "Complete project outcomes with proven capabilities, minimal additions, executable verification, and bounded evidence-gated improvement.",
+  "version": "2.0.0-rc.1",
+  "description": "Complete project outcomes by reusing proven capabilities and compatibility-checking only relevant verified personal adaptations behind independent Gates.",
   "author": {
     "name": "SeoNaRu",
     "url": "https://github.com/SeoNaRu"
@@ -24,7 +24,7 @@
   "interface": {
     "displayName": "nulnul harness",
     "shortDescription": "Outcomes, verified and lean.",
-    "longDescription": "Describe the outcome. nulnul harness inspects the project, reuses suitable skills, plugins, agents, and conventions, fills only demonstrated gaps, completes the work, preserves verified progress, and improves its process only behind an independent Gate.",
+    "longDescription": "Describe the outcome. nulnul harness inspects the project, reuses proven capabilities, narrows verified personal adaptations with privacy-safe evidence, compatibility-checks relevant candidates, completes the work, and changes its selection procedure only behind an independent Gate.",
     "developerName": "SeoNaRu",
     "category": "Productivity",
     "capabilities": [
@@ -38,7 +38,8 @@
       "observable-evolution",
       "generalization-gate",
       "bounded-autonomous-evolution",
-      "verified-personal-adaptations"
+      "verified-personal-adaptations",
+      "cross-project-meta-selection"
     ],
     "brandColor": "#111111",
     "composerIcon": "./assets/nulnul-harness.svg",

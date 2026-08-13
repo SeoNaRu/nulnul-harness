@@ -2,7 +2,7 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## Unreleased — NULNUL 2.0 local functional candidate
+## 2.0.0-rc.1 — public release candidate, verification pending
 
 - Promoted two additional privacy-safe personal adaptation families through the existing 1.7 lifecycle: transactional local multi-file migration and machine-linked nonpass verdicts. Each passed two positive transfer shapes, one negative skip, a fresh-project reuse, and an independent Personal Gate; the approved Personal Home now validates with three distinct families.
 - Added a schema-version-1 typed cross-project evidence model containing activation boundaries, contraindications, transfer/skip/failure counts, source identity, guardrails, permissions, privacy class, freshness, status, and evidence-backed relations without raw workload or repository identity.
@@ -12,7 +12,7 @@ All notable changes to `nulnul harness` are recorded here.
 - Recorded one scoped `COMPLEMENTS` relation between checkpoint freshness and nonpass linkage after their joint downstream result. Other relationships remain `UNKNOWN`; the conflict control was not promoted as a real relationship.
 - Observed one live cycle in the active harness: the selector opened one full check, selected only nonpass linkage, validated the downstream learning result, changed no permissions, and triggered no rollback. The shipped schema-v4 rollback executor also passed a threshold-breach negative control.
 - Added fail-closed controls for insufficient or duplicate families, raw/private aggregation, revoked/stale evidence, false activation, contraindications, popularity-only selection, permission mismatch, unsupported schema, hidden failed transfer, unsupported relations, cloned shapes, HOLDOUT leakage/reuse, proposer self-approval, rejected replay, unbounded generation, forced no-match, conflict auto-resolution, and missing rollback.
-- Kept public version 1.7.0 unchanged. No 2.0 tag, GitHub Release, marketplace publication, or exact-version public adoption was performed.
+- Prepared non-main `2.0.0-rc.1` publication so the exact public artifact can be verified before any version-changing `main` push. Final 2.0.0 remains blocked on fresh Claude Code and fresh cross-project Meta adoption evidence.
 
 ## 1.7.0 — 2026-08-13
 

@@ -12,11 +12,11 @@
     "decision": "PERSONAL_PROMOTION",
     "preregistration": "evals/personal-evolution/ plus two scoped 2.0-entry preregistrations",
     "results": "evals/personal-evolution/ contains the three Personal Gate result families",
-    "claim_boundary": "Checkpoint freshness, transactional local migration, and machine-linked nonpass verdicts are three independent privacy-safe personal families. The latter two are local verified candidates and are not part of public 1.7.0 evidence.",
-    "next_action": "Keep the three-family Personal Home current and use only compatibility-checked summaries; public exact-version 2.0 adoption remains separate release work."
+    "claim_boundary": "Checkpoint freshness, transactional local migration, and machine-linked nonpass verdicts are three independent privacy-safe personal families frozen into the 2.0 RC; exact public three-family adoption is still pending.",
+    "next_action": "Load the same three-family inventory in an isolated Personal Home through the exact public RC and record only sanitized adoption evidence."
   },
   "cross_project_evolution": {
-    "status": "local_verified_candidate",
+    "status": "public_rc_frozen",
     "entry_gate": "PASS: three independent verified personal adaptation families",
     "evidence": "evals/meta-evolution/cross-project-evidence.json",
     "baseline": "flat lookup 9 full checks; status-permission heuristic 9 full checks",
@@ -26,17 +26,19 @@
     "live_cycle": "active harness evaluation selected only nonpass linkage and passed downstream validation",
     "rollback": "Executable through apply_live_cycle_rollback.py at one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion",
     "claim_boundary": "Bounded privacy-safe evidence improved which adaptations receive full compatibility checks in one three-family episode. No token, runtime, universal, cross-user, or background-learning claim is made.",
-    "next_action": "Finish local 2.0 documentation and release gates; do not publish until a later exact-version public adoption lifecycle."
+    "next_action": "Publish the non-main 2.0.0-rc.1 artifact, verify byte identity, then run fresh Claude and release-only Project M/no-match/conflict adoption without tuning the frozen selector."
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.0 local functional candidate passed its three-family Entry Gate, sealed Meta Gate, fresh Project X, negative controls, live cycle, and executable rollback threshold.",
+    "milestone": "NULNUL 2.0.0-rc.1 is frozen on a non-main branch after local functional closure and pre-release validation.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-13: Personal Gate promoted two additional families. The frozen meta-selector candidate reduced sealed full compatibility checks from 9 to 4 while all three decisions and fresh Project X downstream checks passed. No-relevant and unresolved-conflict controls failed closed, one evidence-backed COMPLEMENTS relation was recorded, and the live cycle had zero rollback triggers.",
-    "next_action": "Run the rollback executor, full repository gates, documentation parity, archive consistency, and local candidate version checks; leave public publication and exact-version adoption for a later release lifecycle.",
+    "last_verified": "2026-08-13: The frozen three-family selector retained its 9-to-4 sealed result. Pre-release product, Personal, Meta, Generalization, Autonomous, rollback, privacy, documentation, archive, and Release Gate checks passed; public exact-version evidence remains intentionally absent.",
+    "next_action": "Publish v2.0.0-rc.1 from the non-main release branch and verify the downloaded public artifact before fresh adoption.",
     "blockers": [],
-    "approved_permissions": []
+    "approved_permissions": [
+      "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
+    ]
   },
   "agents": {
     "navigator": {

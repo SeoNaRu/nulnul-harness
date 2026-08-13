@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-1.7.0-111111" alt="version 1.7.0">
+  <img src="https://img.shields.io/badge/version-2.0.0--rc.1-111111" alt="version 2.0.0-rc.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="known behavior and safety score: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -18,11 +18,11 @@
   <strong>English</strong> · <a href="README.ko.md">한국어</a>
 </p>
 
-> Version 1.7.0 is public and release-closed. Its exact GitHub tag passed fresh Claude Code and personal-adaptation adoption, and the evidence commit passed main CI in run `31651306556`.
+> Version 2.0.0-rc.1 is the non-main publication candidate. Final 2.0.0 remains blocked until its public artifact and exact-version adoption evidence pass.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
 >
-> **2.0 local status:** Three independent personal adaptation families now feed a bounded summary selector. On a sealed three-case comparison it preserved every flat-lookup decision while reducing full compatibility checks from 9 to 4. This is an unreleased local candidate, not public 2.0.0.
+> **2.0 candidate status:** Three independent personal adaptation families now feed a bounded summary selector. On a sealed three-case comparison it preserved every flat-lookup decision while reducing full compatibility checks from 9 to 4. RC publication does not make final 2.0.0 release-ready.
 
 ## What is NULNUL?
 
@@ -78,7 +78,7 @@ Growth is driven by demonstrated work, not project size labels or a target agent
 | A failure becomes reproducible | Register one causal candidate, compare it with the current way, and keep it only if the Gate passes. |
 | A role or mechanism loses its job | Merge or remove it. Harness growth is not append-only. |
 
-Public 1.7.0 adds the opt-in personal path. The unreleased 2.0 candidate builds on it: NULNUL can use privacy-safe activation summaries to decide which verified adaptations are worth a full compatibility check. Past success alone never forces application, and unresolved conflicts stop automatic selection.
+Public 1.7.0 added the opt-in personal path. The 2.0 RC builds on it: NULNUL can use privacy-safe activation summaries to decide which verified adaptations are worth a full compatibility check. Past success alone never forces application, and unresolved conflicts stop automatic selection.
 
 ## The operational problem
 
@@ -345,7 +345,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-For a released version, the second command must report `release_ready: true`. Version 1.7.0 did so from exact public-tag evidence, and the same evidence passed main CI. In the current unreleased 2.0 development state it reports `local_candidate_ready: true` and intentionally keeps `release_ready: false` until exact-version publication and adoption exist.
+For a final released version, the second command must report `release_ready: true`. Version 2.0.0-rc.1 may report `local_candidate_ready: true` but must keep `release_ready: false`; exact final 2.0.0 Claude and cross-project Meta adoption are required.
 
 The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), plus the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), and [Meta Gate result](evals/meta-evolution/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
