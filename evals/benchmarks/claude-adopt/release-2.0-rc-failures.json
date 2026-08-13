@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-13",
+  "surface": "fresh isolated Claude Code sessions using the GitHub-marketplace-installed public 2.0.0-rc.1 release",
+  "plugin_version": "2.0.0-rc.1",
+  "failure_classification": "CLAUDE_ADOPTION_REGRESSION",
+  "observed": {
+    "authenticated_runs": 2,
+    "durable_setup_contract_created": 0,
+    "existing_agent_profiles_preserved": 2,
+    "protected_write_calls": 0,
+    "checkpoint_fast_path_ready": true,
+    "repository_check_passed": true
+  },
+  "diagnosis": "The adopt-and-upgrade workflow treated existing root guidance as sufficient and omitted the durable setup contract that records roster classification and capability decisions.",
+  "privacy": {
+    "raw_transcript_stored": false,
+    "private_project_data_stored": false,
+    "machine_path_stored": false
+  },
+  "learning_verdicts": [
+    {
+      "id": "claude-adopt-2.0-rc.1-r1",
+      "status": "failed",
+      "feedback_id": "feedback-claude-adopt-durable-contract",
+      "proposal_ids": ["proposal-navigator-19-adopt-contract"]
+    },
+    {
+      "id": "claude-adopt-2.0-rc.1-r2",
+      "status": "failed",
+      "feedback_id": "feedback-claude-adopt-durable-contract",
+      "proposal_ids": ["proposal-navigator-19-adopt-contract"]
+    }
+  ]
+}

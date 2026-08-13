@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.0.0--rc.1-111111" alt="version 2.0.0-rc.1">
+  <img src="https://img.shields.io/badge/version-2.0.0--rc.2-111111" alt="version 2.0.0-rc.2">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="확인된 동작과 안전 점수: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -18,7 +18,7 @@
   <a href="README.md">English</a> · <strong>한국어</strong>
 </p>
 
-> Version 2.0.0-rc.1은 non-main publication candidate입니다. Public artifact와 exact-version adoption evidence가 통과하기 전까지 final 2.0.0은 닫지 않습니다.
+> Version 2.0.0-rc.2는 non-main publication candidate입니다. Public artifact와 exact-version adoption evidence가 통과하기 전까지 final 2.0.0은 닫지 않습니다.
 >
 > **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
 >
@@ -344,7 +344,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-최종 공개 버전이라면 두 번째 command가 `release_ready: true`를 보고해야 합니다. Version 2.0.0-rc.1은 `local_candidate_ready: true`여도 `release_ready: false`를 유지해야 하며, exact final 2.0.0 Claude와 cross-project Meta adoption이 필요합니다.
+최종 공개 버전이라면 두 번째 command가 `release_ready: true`를 보고해야 합니다. Version 2.0.0-rc.2는 `local_candidate_ready: true`여도 `release_ready: false`를 유지해야 하며, exact final 2.0.0 Claude와 cross-project Meta adoption이 필요합니다.
 
 근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json), 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json)을 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
 

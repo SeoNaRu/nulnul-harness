@@ -1,4 +1,4 @@
-# nulnul harness 2.0.0-rc.1
+# nulnul harness 2.0.0-rc.2
 
 This release candidate adds bounded cross-project selection on top of opt-in Personal Evolution. NULNUL uses privacy-safe activation and contraindication summaries to narrow which verified personal adaptations deserve a full compatibility check in the current project; past success never forces application.
 

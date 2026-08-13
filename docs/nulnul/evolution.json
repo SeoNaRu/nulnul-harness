@@ -26,15 +26,15 @@
     "live_cycle": "active harness evaluation selected only nonpass linkage and passed downstream validation",
     "rollback": "Executable through apply_live_cycle_rollback.py at one false activation, missed relevant adaptation, unsupported conflict resolution, or permission expansion",
     "claim_boundary": "Bounded privacy-safe evidence improved which adaptations receive full compatibility checks in one three-family episode. No token, runtime, universal, cross-user, or background-learning claim is made.",
-    "next_action": "Publish the non-main 2.0.0-rc.1 artifact, verify byte identity, then run fresh Claude and release-only Project M/no-match/conflict adoption without tuning the frozen selector."
+    "next_action": "Publish the corrected non-main 2.0.0-rc.2 artifact, verify byte identity, then repeat fresh Claude adoption without tuning the frozen selector."
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.0.0-rc.1 is frozen on a non-main branch after local functional closure and pre-release validation.",
+    "milestone": "NULNUL 2.0.0-rc.1 public adoption exposed one bounded adopt-and-upgrade contract omission; a minimal Navigator candidate is under release validation.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "active",
-    "last_verified": "2026-08-13: The frozen three-family selector retained its 9-to-4 sealed result. Pre-release product, Personal, Meta, Generalization, Autonomous, rollback, privacy, documentation, archive, and Release Gate checks passed; public exact-version evidence remains intentionally absent.",
-    "next_action": "Publish v2.0.0-rc.1 from the non-main release branch and verify the downloaded public artifact before fresh adoption.",
+    "last_verified": "2026-08-13: Public v2.0.0-rc.1 artifact identity and three-family meta adoption passed. Two authenticated fresh Claude adoption runs preserved both agents, protected writes, permissions, checkpoint truth, and repository checks but omitted the durable setup contract required to record role and capability decisions.",
+    "next_action": "Evaluate proposal-navigator-19-adopt-contract through deterministic product checks and one fresh exact-version public RC adoption; reject or promote without changing the frozen meta selector.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
@@ -357,6 +357,16 @@
       "expected": "Use privacy-safe activation summaries to open full compatibility checks only for relevant candidates while preserving apply, skip, conflict, permission, and downstream correctness.",
       "evidence": "evals/meta-evolution/baseline.json reproduces the same selection decisions and nine checks in both baseline arms.",
       "scope": "personal",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-claude-adopt-durable-contract",
+      "source": "gate",
+      "target_agent": "navigator",
+      "observed": "Two authenticated fresh public 2.0.0-rc.1 adopt-and-upgrade runs preserved the existing profiles and produced a verified checkpoint but omitted docs/nulnul/project.md, so durable role classification and capability decisions were absent.",
+      "expected": "When adopt-and-upgrade finds an existing agent roster without a durable setup contract, preserve the root guidance and create the validated contract that records roster and capability decisions.",
+      "evidence": "evals/benchmarks/claude-adopt/release-2.0-rc-failures.json records two sanitized nonpasses, zero protected writes, unchanged profiles, a passing repository check, and no raw transcript or private path.",
+      "scope": "core",
       "status": "converted"
     }
   ],
@@ -1057,6 +1067,31 @@
       },
       "falsification_condition": "Any expected adaptation is missed, any irrelevant adaptation is applied, a conflict is auto-resolved, permissions expand, or full compatibility checks do not decrease.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-19-adopt-contract",
+      "feedback_ids": ["feedback-claude-adopt-durable-contract"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 18,
+      "to_version": 19,
+      "cause": "The main adopt-and-upgrade workflow left durable contract creation conditional enough that two fresh runs treated existing root guidance as complete setup evidence.",
+      "change_target": "Require docs/nulnul/project.md only when adopt-and-upgrade finds an existing roster whose role classifications and capability decisions have no durable setup contract.",
+      "regression_check": "python3 -m unittest tests.test_product_plugin tests.test_claude_adopt_evidence -v plus one fresh GitHub-marketplace-installed RC adoption.",
+      "primary_metric": "fresh adopt-and-upgrade runs omitting durable roster and capability decisions",
+      "permission_delta": [],
+      "rollback": "Restore Navigator v18 wording and retain both RC nonpasses if the next fresh run omits the contract or regresses any adoption guardrail.",
+      "change_level": "task",
+      "discovery_evidence": "Two authenticated exact-RC runs independently produced the same omission while preserving agents, protected paths, checkpoint truth, and repository correctness.",
+      "transfer_check": "The release adoption fixture contains two protected existing agents, user-owned root guidance, a local completion check, and no prior durable setup contract.",
+      "prediction": "One fresh exact-RC run creates and validates the durable contract, classifies both roles, preserves both profile hashes, makes zero protected writes, and passes all five checks.",
+      "expected_delta": {
+        "durable_contract_created": "0/2 -> 1/1",
+        "protected_write_calls": "0 -> 0",
+        "completion_checks_passing": "4/5 -> 5/5"
+      },
+      "falsification_condition": "The fresh run omits or invalidates the contract, changes an existing profile, attempts a protected write, expands permissions, or fails a completion check.",
+      "status": "proposed"
     }
   ],
   "promotions": [

@@ -65,7 +65,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "2.0.0-rc.1")
+        self.assertEqual(manifest["version"], "2.0.0-rc.2")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -149,6 +149,7 @@ class ProductPluginTests(unittest.TestCase):
         self.assertIn("entire allowed read set", text)
         self.assertIn("repeat an unchanged passing check", text)
         self.assertIn("when a legacy `project.md` has durable continuity", text)
+        self.assertIn("existing root guidance alone does not preserve that evidence", text)
         self.assertIn("Never create `checkpoint.json` when `evolution.json` exists", text)
         discovery = (SKILL / "references/capability-discovery.md").read_text(encoding="utf-8")
         self.assertIn("Never recursively scan a home directory", discovery)
