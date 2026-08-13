@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "episode_id": "repository-receipts-dogfood-1",
+  "generated_after_preregistration": true,
+  "generation": 1,
+  "archive_lookup": [
+    {"proposal_id": "proposal-navigator-20-authority-reference", "decision": "do_not_replay"},
+    {"proposal_id": "proposal-navigator-20-authority-binding", "decision": "do_not_replay"},
+    {"proposal_id": "proposal-navigator-20-intent-means-gate", "decision": "do_not_replay"},
+    {"proposal_id": "proposal-navigator-20-scoped-decision-artifact", "decision": "do_not_replay"}
+  ],
+  "candidates": [
+    {
+      "id": "candidate-repository-receipt-v1",
+      "mechanism_id": "bounded-repository-receipt-v1",
+      "class": "repository-derived receipt plus deterministic revalidation and bounded freshness",
+      "source": "evals/repository-receipts/candidate_repository_receipt.py",
+      "source_sha256": "85d14cabe7978e45c6977510e20b42812d00d3317cc23b4453ac000d524cd3ce",
+      "reason_combined": "Derivation, independent revalidation, and anchor freshness are one causal boundary: removing any one restores self-authored facts, unverifiable facts, or permanent stale truth.",
+      "supported_scopes": ["design.component_shape", "backend.architecture"],
+      "prediction": "Both repeated design and both repeated web cases pass; explicit user override and verified backend challenge controls pass; all sixteen negative controls satisfy their expected result with no permission expansion.",
+      "falsification_condition": "Any preregistered primary or negative control fails, the tool needs a repository-wide scan, or candidate decisions do not beat both historical baselines.",
+      "permission_delta": [],
+      "rollback": "Remove the candidate receipt script and its activation guidance; keep Navigator v19, both prior rejections, and this episode evidence."
+    }
+  ],
+  "model_contract": [
+    "Treat a valid receipt as the current repository truth only for receipt.scope.",
+    "When derived_decision is preserve, preserve that scope unless the current user explicitly overrides that exact scope.",
+    "When derived_decision is challenge, a bounded change in that scope is allowed but is not automatically required.",
+    "Do not project one scope's decision onto adjacent layers or undecided dimensions.",
+    "Approved personal guidance may fill an undecided design dimension but cannot replace repository truth in another dimension.",
+    "Keep frontend-design active for frontend design work.",
+    "Stack uniformity alone is not evidence to change a working backend.",
+    "Return only the requested bounded decision fields; permission_delta stays empty."
+  ],
+  "skipped": "No policy engine, ontology, registry, DSL, graph, new dependency, service, MCP server, agent, whole-repository hash, or second candidate."
+}

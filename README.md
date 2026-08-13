@@ -326,7 +326,7 @@ Some of the strongest evidence came from failures:
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **167 passed (167/167)** | Deterministic product, state, privacy, rollback, transfer, cross-project, Meta Gate, and negative-control contracts hold. |
+| Repository tests | **207 passed (207/207)** | Deterministic product, state, privacy, rollback, transfer, cross-project, Meta Gate, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
 | Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by green main CI run `31651306556`. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
@@ -347,17 +347,17 @@ python3 scripts/release_gate.py
 
 For the released 2.0.0 evidence, the second command reports `release_ready: true`.
 
-The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), plus a post-2.0 [capability-authority `NO_ADVANTAGE` result](evals/capability-authority/results.json). Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
+The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), plus post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), and [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) results. Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
-## Why I built NULNUL
+## Who I built NULNUL for
 
-When I started projects with coding agents, I often had to study the AI environment before building the project. Which skill should I use? How many agents are useful? Which rules belong in context? Am I wasting tokens? How will the next session continue? What actually proves the task is complete?
+NULNUL is for people who want to build something with AI without first becoming experts in AI coding infrastructure. That includes non-developers, people starting development, and experienced developers who do not want to keep tuning skills, plugins, agent layouts, context, and stacks before every project.
 
-Adding every recommended tool made the setup larger, not necessarily better. It also felt wrong that a beginner had to design an AI organization before asking for a result.
+It looks for useful existing skills and tools, and respects what already works in a project. But reuse should not trap someone in the first available method. The user owns the intended outcome and deliberate direction; NULNUL should examine the implementation means and explain important choices briefly.
 
-I wanted new projects to get a small working environment from the start, and existing projects to be read before anything new was added. As a project changed, its harness should be able to add, merge, or remove structure without making the user redesign the whole AI setup. If usage revealed a better method, I wanted it to stay only after evidence showed it was actually better.
+**NULNUL looks for better tools, but does not choose what the user should want.**
 
-I built NULNUL so the user can spend less time maintaining the harness and more time on the project they wanted to make.
+This is product philosophy, not a guarantee that the current release resolves every design or architecture decision correctly. The verified behavior above and the linked accepted and rejected evidence define what NULNUL currently proves.
 
 ## Roots and influences
 

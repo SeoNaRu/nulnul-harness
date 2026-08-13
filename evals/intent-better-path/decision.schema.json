@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id", "direction_authority", "skill_used", "skill_role",
+    "current_fit_assessed", "alternative_considered", "switching_cost_considered",
+    "explicit_constraints", "suggested_means", "final_path", "popularity_only",
+    "brief_reason", "personal_sources_read", "unrelated_personal_reads", "permission_delta"
+  ],
+  "properties": {
+    "case_id": {"type": "string"},
+    "direction_authority": {
+      "type": "array",
+      "items": {"enum": ["current_user", "current_project", "approved_personal", "capability_default", "none"]}
+    },
+    "skill_used": {"type": "boolean"},
+    "skill_role": {"enum": ["advisor", "executor", "advisor_executor", "authority", "unused"]},
+    "current_fit_assessed": {"type": "boolean"},
+    "alternative_considered": {"type": "boolean"},
+    "switching_cost_considered": {"type": "boolean"},
+    "explicit_constraints": {"type": "array", "items": {"type": "string"}},
+    "suggested_means": {"type": "array", "items": {"type": "string"}},
+    "final_path": {
+      "enum": [
+        "project_design_with_external_expertise",
+        "component_frontend_python_backend",
+        "flask_only",
+        "existing_python",
+        "existing_spring_react",
+        "react_ts_vite",
+        "static_minimum"
+      ]
+    },
+    "popularity_only": {"type": "boolean"},
+    "brief_reason": {"type": "string"},
+    "personal_sources_read": {"type": "integer", "minimum": 0},
+    "unrelated_personal_reads": {"type": "integer", "minimum": 0},
+    "permission_delta": {"type": "array", "items": {"type": "string"}}
+  }
+}

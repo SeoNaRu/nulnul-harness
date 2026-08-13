@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id", "surface_radius", "visual_tone", "skill_used",
+    "frontend_architecture", "backend", "brief_reason",
+    "personal_sources_read", "unrelated_personal_reads", "permission_delta"
+  ],
+  "properties": {
+    "case_id": {"type": "string"},
+    "surface_radius": {"enum": ["low", "rounded", "not_applicable"]},
+    "visual_tone": {"enum": ["quiet", "expressive", "not_applicable"]},
+    "skill_used": {"type": "boolean"},
+    "frontend_architecture": {"enum": ["component_frontend", "python_templates", "static", "not_applicable"]},
+    "backend": {"enum": ["existing_python", "new_javascript", "none", "not_applicable"]},
+    "brief_reason": {"type": "string"},
+    "personal_sources_read": {"type": "integer", "minimum": 0},
+    "unrelated_personal_reads": {"type": "integer", "minimum": 0},
+    "permission_delta": {"type": "array", "items": {"type": "string"}}
+  }
+}

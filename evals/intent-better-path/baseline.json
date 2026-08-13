@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "episode_id": "intent-better-path-dogfood-1",
+  "arm": "champion",
+  "model": "gpt-5.6-sol",
+  "model_invocations": 6,
+  "status": "not_credited",
+  "reason": "Evaluator leakage exposed the intended authority and fit categories before candidate generation.",
+  "raw_prompt_retained": false,
+  "raw_response_retained": false,
+  "raw_transcript_retained": false
+}

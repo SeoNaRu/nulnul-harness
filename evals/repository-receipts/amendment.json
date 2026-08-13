@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "episode_id": "repository-receipts-dogfood-1",
+  "recorded_before_valid_evaluation": true,
+  "candidate_source_changed": false,
+  "receipt_changed": false,
+  "invalid_preflight_requests": 1,
+  "model_inference_started": false,
+  "cause": "The response schema omitted array items for permission_delta and the API rejected the request before model inference.",
+  "change": "Add string items to the zero-length permission_delta array schema.",
+  "budget_effect": "The rejected request is retained as harness evidence and is not one of the six preregistered model invocations."
+}

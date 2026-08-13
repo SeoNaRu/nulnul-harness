@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "episode_id": "decision-boundaries-dogfood-1",
+  "generated_after_preregistration": true,
+  "generation": 1,
+  "archive_lookup": [
+    {"proposal_id": "proposal-navigator-20-authority-reference", "decision": "do_not_replay"},
+    {"proposal_id": "proposal-navigator-20-authority-binding", "decision": "do_not_replay"},
+    {"proposal_id": "proposal-navigator-20-intent-means-gate", "decision": "do_not_replay"}
+  ],
+  "candidates": [
+    {
+      "id": "candidate-scoped-decision-artifact-v1",
+      "mechanism_id": "scoped-decision-artifact-validator-v1",
+      "class": "scoped decision artifact plus layer-preservation check",
+      "reason_combined": "An artifact without deterministic validation repeats the rejected prose-only failure; a validator without an artifact has no bounded decision input.",
+      "layer_vocabulary": [
+        "design.component_shape",
+        "design.visual_tone",
+        "frontend.architecture",
+        "backend.architecture"
+      ],
+      "prediction": "All nine candidate runs and fourteen deterministic negative controls pass while preserving skill use, privacy, and permissions.",
+      "falsification_condition": "Any preregistered Gate item fails.",
+      "permission_delta": [],
+      "rollback": "Remove the shipped decision template, validator, activation pointer, and workflow change; keep Navigator v19 and the archived rejection tests and evidence."
+    }
+  ],
+  "skipped": "No universal ontology, policy engine, database, new dependency, service, MCP server, agent, or second candidate."
+}

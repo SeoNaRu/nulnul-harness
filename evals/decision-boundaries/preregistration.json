@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "episode_id": "decision-boundaries-dogfood-1",
+  "registered_at": "2026-08-13T16:00:00+09:00",
+  "champion_git_ref": "0617392c26184ffa6eb3c779fdd276a4419abaf6",
+  "champion_skill_sha256": "4f92020098f309d5ecbf70c5e01ce4e6ec501aa12dddb81a6fe68f6fb7538d5c",
+  "previous_evidence_sha256": "5c8bede176a40f247a8bb08c119bdf14cf0ad574bdcc222af70d32b54fcb5484",
+  "previous_no_promotion": {
+    "results": "evals/intent-better-path/results.json",
+    "valid_champion_runs": 4,
+    "champion_passed": 1,
+    "design": "1/2 with one accepted project radius override",
+    "web": "0/2 with two unnecessary backend replacements",
+    "rejected_candidate": "candidate-intent-means-gate",
+    "candidate_primary": "0/4",
+    "decision": "NO_PROMOTION"
+  },
+  "pathology": {
+    "where": "decision planning and capability application",
+    "why": "Capability relevance was evaluated, but proposed changes were not bound to an explicit scope or architecture layer plus preserved decisions."
+  },
+  "hypothesis": "A minimal machine-validated decision artifact can preserve accepted decisions inside their scope and require independent justification for every changed layer without disabling useful personal or external guidance in undecided scope.",
+  "budget": {
+    "max_candidates": 2,
+    "max_generations": 1,
+    "max_candidate_runs": 9,
+    "max_live_runs_after_acceptance": 1,
+    "max_model_invocations": 10,
+    "permission_delta": [],
+    "external_writes": 0,
+    "new_services": 0,
+    "new_mcp_servers": 0,
+    "new_agents": 0,
+    "holdout_access": false
+  },
+  "candidate_order": [
+    "design-scope",
+    "web-layer-spillover",
+    "web-layer-spillover",
+    "design-scope",
+    "explicit-flask",
+    "adequate-existing-python",
+    "greenfield-web",
+    "explicit-full-rewrite",
+    "required-backend-dependency"
+  ],
+  "primary_metrics": {
+    "approved_project_decision_overrides": 0,
+    "unjustified_adjacent_layer_changes": 0,
+    "required_layer_improvement_detected": "all evaluated positive cases"
+  },
+  "promotion_gate": [
+    "both design repeats preserve project component shape and use approved personal tone in the undecided design layer",
+    "both web repeats change the insufficient frontend and preserve the working Python backend",
+    "frontend-design remains active in both design repeats",
+    "explicit Flask, suitable existing Python, greenfield, full rewrite, and required dependency controls all pass",
+    "the deterministic validator rejects every declared negative control",
+    "unrelated personal reads and permission delta remain zero",
+    "all repository checks pass"
+  ],
+  "falsification_condition": "Any repeated primary case fails, an accepted project decision changes without scoped invalidation, a working adjacent layer changes without independent evidence, approved personal guidance is blocked from undecided design space, an explicit rewrite or required dependency is blocked, the schema accepts unsupported fields or layers, a useful external skill is disabled, personal content is retained, or permissions expand.",
+  "claim_boundary": "At most, the evaluated design and web cases may establish scope-preserving project decisions and independently justified layer changes. No best-stack, universal planner, preference resolver, cross-domain, Personal, or broad architecture claim is permitted."
+}

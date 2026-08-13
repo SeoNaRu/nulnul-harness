@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "episode_id": "repository-receipts-dogfood-1",
+  "arm": "candidate-repository-receipt-v1",
+  "model": "gpt-5.6-sol",
+  "model_invocations": 6,
+  "invalid_preflight_requests": 2,
+  "invalid_preflight_model_inferences": 0,
+  "raw_prompt_retained": false,
+  "raw_response_retained": false,
+  "raw_transcript_retained": false,
+  "runs": [
+    {
+      "run": 1,
+      "case_id": "design-primary",
+      "passed": true,
+      "receipt_valid": true,
+      "repository_files_inspected": 1,
+      "anchors_retained": 1,
+      "unrelated_repository_reads": 0,
+      "observed": {
+        "component_shape": "low_radius",
+        "visual_tone": "quiet",
+        "frontend_action": "change",
+        "skill_used": true,
+        "receipt_used": true,
+        "personal_sources_read": 1,
+        "unrelated_personal_reads": 0,
+        "permission_delta": []
+      }
+    },
+    {
+      "run": 2,
+      "case_id": "web-primary",
+      "passed": true,
+      "receipt_valid": true,
+      "repository_files_inspected": 2,
+      "anchors_retained": 2,
+      "unrelated_repository_reads": 0,
+      "observed": {
+        "frontend_action": "change",
+        "backend_action": "preserve",
+        "backend_identity": "python:wsgi",
+        "skill_used": true,
+        "receipt_used": true,
+        "unrelated_personal_reads": 0,
+        "permission_delta": []
+      }
+    },
+    {
+      "run": 3,
+      "case_id": "web-primary",
+      "passed": true,
+      "receipt_valid": true,
+      "repository_files_inspected": 2,
+      "anchors_retained": 2,
+      "unrelated_repository_reads": 0,
+      "observed": {
+        "frontend_action": "change",
+        "backend_action": "preserve",
+        "backend_identity": "python:wsgi",
+        "stack_uniformity_ignored": true,
+        "skill_used": true,
+        "receipt_used": true,
+        "unrelated_personal_reads": 0,
+        "permission_delta": []
+      }
+    },
+    {
+      "run": 4,
+      "case_id": "design-primary",
+      "passed": true,
+      "receipt_valid": true,
+      "repository_files_inspected": 1,
+      "anchors_retained": 1,
+      "unrelated_repository_reads": 0,
+      "observed": {
+        "component_shape": "low_radius",
+        "visual_tone": "quiet",
+        "frontend_action": "change",
+        "skill_used": true,
+        "receipt_used": true,
+        "personal_sources_read": 1,
+        "unrelated_personal_reads": 0,
+        "permission_delta": []
+      }
+    },
+    {
+      "run": 5,
+      "case_id": "explicit-user-override",
+      "passed": true,
+      "receipt_valid": true,
+      "repository_files_inspected": 1,
+      "anchors_retained": 1,
+      "unrelated_repository_reads": 0,
+      "observed": {
+        "component_shape": "rounded",
+        "visual_tone": "quiet",
+        "override_source": "current_user",
+        "override_scope": "design.component_shape",
+        "skill_used": true,
+        "receipt_used": true,
+        "personal_sources_read": 1,
+        "unrelated_personal_reads": 0,
+        "permission_delta": []
+      }
+    },
+    {
+      "run": 6,
+      "case_id": "backend-challenge",
+      "passed": true,
+      "receipt_valid": true,
+      "repository_files_inspected": 3,
+      "anchors_retained": 3,
+      "unrelated_repository_reads": 0,
+      "observed": {
+        "frontend_action": "change",
+        "backend_action": "change",
+        "backend_identity": "python:wsgi",
+        "current_backend_check": "passed",
+        "required_capability_check": "failed",
+        "skill_used": true,
+        "receipt_used": true,
+        "unrelated_personal_reads": 0,
+        "permission_delta": []
+      }
+    }
+  ],
+  "bounded_receipt_validation": {
+    "tests": 10,
+    "passed": 10,
+    "whole_repository_hash": false,
+    "dependency_delta": [],
+    "source_sha256": "85d14cabe7978e45c6977510e20b42812d00d3317cc23b4453ac000d524cd3ce"
+  }
+}

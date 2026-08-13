@@ -33,8 +33,8 @@
     "milestone": "NULNUL 2.0.0 is public and release-closed after exact-version Claude and cross-project Meta adoption.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "complete",
-    "last_verified": "2026-08-13: Public 2.0.0 remains release-closed. A post-2.0 design dogfooding run reproduced one missing explicit capability-role boundary, but two bounded core candidates returned NO_ADVANTAGE after six same-model evaluations; both were removed, privacy and permissions stayed unchanged, and no version or product claim changed.",
-    "next_action": "Keep 2.0.0 unchanged and wait for new dogfooding evidence that reproduces an actual decision override or supports a different authority mechanism; do not generate a 2.1 roadmap speculatively.",
+    "last_verified": "2026-08-13: Public 2.0.0 remains release-closed. A frozen repository-receipt candidate passed both repeated design, both repeated web, explicit user override, backend challenge, and sixteen evidence controls with bounded reads and no permission change, but no fresh normal-intent real design/web task was in scope for the mandatory live cycle. The Gate returned NO_PROMOTION and left the candidate evaluation-only.",
+    "next_action": "Keep 2.0.0 and Navigator v19 unchanged. On the next real normal-intent design or web task, run the frozen repository-receipt candidate without changing it; do not build another schema or call validation evidence live evidence.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
@@ -388,6 +388,40 @@
       "evidence": "evals/capability-authority/results.json retains only bounded attribution and six sanitized comparison outcomes; it contains no raw conversation, transcript, private path, source, or personal note.",
       "scope": "core",
       "status": "converted"
+    },
+    {
+      "id": "feedback-intent-means-instability",
+      "source": "user",
+      "target_agent": "navigator",
+      "observed": "Natural design evaluation let an approved personal rounded preference override the accepted project low-radius system in one of two champion runs; both champion web runs selected a suitable component frontend but unnecessarily replaced the still-fit Python API.",
+      "expected": "Preserve current user and accepted project direction while challenging implementation means only at the mismatched layer, keeping still-fit layers and explicit constraints unchanged.",
+      "evidence": "evals/intent-better-path/results.json records 16 bounded invocations, the evaluator-leakage preflight, four valid champion runs, six candidate runs, no raw transcript, zero unrelated personal reads, and zero permission delta.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-decision-boundary-truth-binding",
+      "source": "gate",
+      "target_agent": "navigator",
+      "observed": "A scoped design/web decision artifact passed internal validation while misclassifying or failing to bind current project values, sources, and statuses; the nine-run candidate failed all four repeated primary cases and the Flask artifact control.",
+      "expected": "Any future decision boundary must derive or verify preserved current facts from bounded repository evidence before a capability can change or preserve that layer.",
+      "evidence": "evals/decision-boundaries/results.json retains structural outcomes from nine model runs and fourteen deterministic controls without raw prompts, responses, transcripts, personal content, or permission changes.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-repository-receipt-live-cycle",
+      "source": "gate",
+      "target_agent": "navigator",
+      "observed": "The frozen repository-receipt candidate passed four repeated primary cases, two model controls, and sixteen declared evidence controls, but the repository-scoped experiment contained no fresh normal-intent real design/web task for the mandatory post-selection live cycle.",
+      "expected": "A candidate that wins bounded validation remains frozen and evaluation-only until one genuine normal-intent design or web task uses it, preserves repository-bound scope, passes the task check, and observes the executable rollback threshold.",
+      "evidence": "evals/repository-receipts/results.json records the candidate advantage, bounded reads, zero permission delta, NO_PROMOTION, and absence of falsely credited live evidence without prompts, responses, transcripts, or personal content.",
+      "scope": "core",
+      "status": "converted",
+      "rejected_proposals": [
+        "proposal-navigator-20-intent-means-gate",
+        "proposal-navigator-20-scoped-decision-artifact"
+      ]
     }
   ],
   "proposals": [
@@ -1186,6 +1220,99 @@
       },
       "falsification_condition": "Either repeat omits role attribution, changes the correct project or personal choice, disables the skill, widens personal reads, or expands permissions.",
       "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-20-intent-means-gate",
+      "feedback_ids": ["feedback-intent-means-instability"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 19,
+      "to_version": 20,
+      "cause": "Capability and stack selection lacked one shared decision point for direction precedence and per-layer means fit.",
+      "change_target": "Add one main-workflow intent/means gate before capability mapping, without a policy engine or framework-specific rule.",
+      "regression_check": "python3 -m unittest tests.test_intent_better_path -v",
+      "primary_metric": "all repeated natural design and early web-stack decisions satisfy the preregistered project-direction and per-layer fit oracles",
+      "permission_delta": [],
+      "rollback": "Remove the intent/means gate and workflow pointer; keep Navigator v19 and all failed evidence.",
+      "change_level": "task",
+      "discovery_evidence": "The corrected natural champion scored 1/4 after a six-run evaluator-leakage preflight was excluded before candidate generation.",
+      "transfer_check": "Not run because the candidate failed every repeated originating primary case.",
+      "prediction": "Both design repeats preserve low-radius plus quiet direction with frontend-design active; both web repeats choose a component frontend while retaining the adequate Python API; explicit Flask and suitable existing Python remain unchanged.",
+      "expected_delta": {
+        "valid_primary_runs": "1/4 champion -> 4/4 candidate",
+        "explicit_and_suitable_python_controls": "not credited -> 2/2",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Any candidate run fails its oracle, reads unrelated personal material, expands permissions, disables frontend-design, violates explicit Flask, or migrates the suitable existing Python project.",
+      "pathology": {
+        "where": "intent classification and capability or implementation selection",
+        "why": "The champion records capability relevance and reuse, but does not require current outcome fit or distinguish direction authority and explicit constraints from suggested implementation means."
+      },
+      "mechanism_id": "main-workflow-intent-means-gate",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-20-scoped-decision-artifact",
+      "feedback_ids": ["feedback-decision-boundary-truth-binding"],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 19,
+      "to_version": 20,
+      "cause": "Relevant capabilities and better paths could rewrite adjacent or higher-scope decisions because planned changes had no machine-validated layer boundary.",
+      "change_target": "Add one temporary scoped decision artifact plus a deterministic validator for the four evaluated design/frontend/backend layers.",
+      "regression_check": "python3 -m unittest tests.test_decision_boundaries tests.test_decision_boundary_evidence -v",
+      "primary_metric": "zero accepted-project overrides and zero unjustified adjacent-layer changes across all repeated primary cases",
+      "permission_delta": [],
+      "rollback": "Remove the shipped artifact template, validator, skill activation section, and workflow pointer; keep Navigator v19 and archived structural evidence.",
+      "change_level": "task",
+      "discovery_evidence": "The previous prose candidate scored 0/4 on repeated primary cases, and the prior champion reproduced one design override plus two backend spillovers.",
+      "transfer_check": "Not run because the originating candidate failed every repeated primary case.",
+      "prediction": "Both design and both web repeats plus Flask, existing Python, greenfield, full rewrite, required dependency, privacy, permission, and schema controls pass.",
+      "expected_delta": {
+        "valid_primary_runs": "0/4 prose candidate -> 4/4 structured candidate",
+        "structural_negative_controls": "unavailable -> 14/14",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Any repeated primary case or required control fails, repository facts remain self-attested, personal reads widen, permissions expand, or an unsupported schema/layer is accepted.",
+      "pathology": {
+        "where": "decision planning and capability application",
+        "why": "Capability relevance was evaluated, but proposed changes were not bound to an explicit scope or architecture layer plus preserved decisions."
+      },
+      "mechanism_id": "scoped-decision-artifact-validator-v1",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-navigator-20-repository-receipt",
+      "feedback_ids": [
+        "feedback-decision-boundary-truth-binding",
+        "feedback-repository-receipt-live-cycle"
+      ],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 19,
+      "to_version": 20,
+      "cause": "Preserve and change decisions were self-authored rather than independently re-derived from current bounded repository evidence.",
+      "change_target": "Freeze one evaluation-only repository receipt that derives component-shape or backend identity from re-readable anchors, reruns declared checks, and fingerprints only those anchors.",
+      "regression_check": "python3 -m unittest tests.test_repository_receipts tests.test_repository_receipt_evidence -v",
+      "primary_metric": "zero project-radius overrides and zero unjustified backend changes across both repeated primary cases",
+      "permission_delta": [],
+      "rollback": "Remove the candidate receipt and activation guidance; keep Navigator v19, both previous rejections, and all bounded evidence.",
+      "change_level": "task",
+      "discovery_evidence": "The previous self-authored artifact passed internal consistency controls but failed all four primary cases; repository receipt validation passed 4/4 primary cases and sixteen controls.",
+      "transfer_check": "Not credited: no fresh normal-intent real design/web live task was available inside the repository-scoped experiment.",
+      "prediction": "Both design repeats preserve repository-derived low-radius plus personal quiet tone; both web repeats improve frontend while preserving the checked Python WSGI backend; explicit scoped override and failing required-capability challenge remain possible.",
+      "expected_delta": {
+        "valid_primary_runs": "1/4 champion and 0/4 artifact -> 4/4 receipt validation",
+        "repository_binding_controls": "unavailable -> 16/16",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Any repeated primary or declared control fails, evidence cannot be independently re-derived, reads become repository-wide, permissions expand, or a fixture is mislabeled as a live task.",
+      "pathology": {
+        "where": "decision planning / context assembly",
+        "why": "preserve/change decisions are self-asserted rather than bound to repository-derived evidence"
+      },
+      "mechanism_id": "bounded-repository-receipt-v1",
+      "status": "rejected"
     }
   ],
   "promotions": [
@@ -1774,6 +1901,36 @@
       "regressions_passed": true,
       "decision": "rejected",
       "live_cycle": null
+    },
+    {
+      "id": "promotion-navigator-20-intent-means-gate-rejected",
+      "proposal_id": "proposal-navigator-20-intent-means-gate",
+      "gate_agent": "gate",
+      "before": "The valid natural champion passed one of four primary runs, with one project-direction override and two unnecessary backend switches.",
+      "after": "The candidate passed explicit and suitable Python controls but failed all four repeated primary runs with the same project-direction and backend-fit errors.",
+      "regressions_passed": true,
+      "decision": "rejected",
+      "live_cycle": null
+    },
+    {
+      "id": "promotion-navigator-20-scoped-decision-artifact-rejected",
+      "proposal_id": "proposal-navigator-20-scoped-decision-artifact",
+      "gate_agent": "gate",
+      "before": "The previous structured-free baseline retained one design override and two backend spillovers; the prose candidate passed none of four repeated primary cases.",
+      "after": "The structured candidate passed 14 deterministic controls and four model controls but failed every repeated primary case and its Flask artifact was invalid.",
+      "regressions_passed": false,
+      "decision": "rejected",
+      "live_cycle": null
+    },
+    {
+      "id": "promotion-navigator-20-repository-receipt-rejected",
+      "proposal_id": "proposal-navigator-20-repository-receipt",
+      "gate_agent": "gate",
+      "before": "The champion passed one of four repeated primary cases and the self-authored artifact passed none because repository facts were not independently bound.",
+      "after": "The frozen receipt passed all repeated primary and declared controls, but no fresh normal-intent real design/web task was available for the mandatory live cycle, so validation advantage was not promoted.",
+      "regressions_passed": true,
+      "decision": "rejected",
+      "live_cycle": null
     }
   ],
   "autonomous_episodes": [
@@ -2016,6 +2173,315 @@
       "selected_candidate_id": "candidate-public-outcome-contract-1",
       "stop_reason": "SUCCESS",
       "claim_boundary": "In one live bounded episode for a newly reproduced public-positioning failure, archive-aware one-generation search produced one new metadata mechanism within two model invocations and beat an unchanged deterministic retry on completion checks. This establishes live candidate generation and correct bounded stopping only for this activation-metadata failure family; it does not establish open-ended, personal, cross-project, or harness-wide autonomous improvement."
+    },
+    {
+      "id": "episode-intent-better-path-live-1",
+      "mode": "live",
+      "feedback_id": "feedback-intent-means-instability",
+      "scope": "core_dev",
+      "pathology": {
+        "where": "intent classification and capability or implementation selection",
+        "why": "The champion records capability relevance and reuse, but does not require current outcome fit or distinguish direction authority and explicit constraints from suggested implementation means."
+      },
+      "budget": {
+        "max_candidates": 2,
+        "max_generations": 1,
+        "max_evaluation_runs": 6,
+        "max_failed_candidates": 1,
+        "max_identical_pathology_retries": 1,
+        "max_model_invocations": 16
+      },
+      "archive_lookup": [
+        "proposal-navigator-20-authority-reference",
+        "proposal-navigator-20-authority-binding"
+      ],
+      "baseline": {
+        "comparable_dimension": "model_invocations",
+        "fair": true,
+        "arms": [
+          {
+            "id": "champion",
+            "runs": 1,
+            "primary_successes": 0,
+            "model_invocations": 1,
+            "completion_checks": 1,
+            "evidence": "The first valid natural design run let approved personal rounded taste override accepted project low-radius direction."
+          },
+          {
+            "id": "retry",
+            "runs": 4,
+            "primary_successes": 1,
+            "model_invocations": 4,
+            "completion_checks": 4,
+            "evidence": "Four corrected natural champion runs passed 1/4 after the evaluator-leakage preflight was excluded."
+          },
+          {
+            "id": "best_of_n",
+            "runs": 4,
+            "primary_successes": 1,
+            "model_invocations": 4,
+            "completion_checks": 4,
+            "evidence": "Best-of-4 could select one valid design result but had no valid technology result and did not satisfy the complete primary metric."
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "candidate-intent-means-gate",
+          "proposal_id": "proposal-navigator-20-intent-means-gate",
+          "generation": 1,
+          "author_agent": "coach",
+          "parent_agent": "navigator",
+          "parent_version": 19,
+          "pathology": {
+            "where": "intent classification and capability or implementation selection",
+            "why": "The champion records capability relevance and reuse, but does not require current outcome fit or distinguish direction authority and explicit constraints from suggested implementation means."
+          },
+          "mechanism_id": "main-workflow-intent-means-gate",
+          "prediction": "Both design repeats preserve low-radius plus quiet direction with frontend-design active; both web repeats choose a component frontend while retaining the adequate Python API; explicit Flask and suitable existing Python remain unchanged.",
+          "falsification_condition": "Any candidate run fails its oracle, reads unrelated personal material, expands permissions, disables frontend-design, violates explicit Flask, or migrates the suitable existing Python project.",
+          "permission_delta": [],
+          "rollback": "Remove the intent/means gate and workflow pointer; keep Navigator v19 and all failed evidence.",
+          "archive_match": null,
+          "evaluation": {
+            "candidate_id": "candidate-intent-means-gate",
+            "owner_agent": "gate",
+            "status": "failed",
+            "runs": 6,
+            "primary_success": false,
+            "guardrails_passed": true,
+            "evidence": "Candidate results passed explicit Flask and suitable existing Python controls but failed both design and both technology repeats; no raw transcript, unrelated personal read, permission delta, or skill-disable regression was retained.",
+            "cost": {
+              "model_invocations": 6,
+              "completion_checks": 6
+            }
+          },
+          "decision": "rejected",
+          "rejection_reason": "No advantage: every repeated primary run failed."
+        }
+      ],
+      "gate_agent": "gate",
+      "sealed_evaluation": true,
+      "holdout_case_ids_read": [],
+      "cost": {
+        "candidates_generated": 1,
+        "generations": 1,
+        "evaluation_runs": 6,
+        "failed_candidates": 1,
+        "model_invocations": 6,
+        "completion_checks": 6
+      },
+      "decision": "NO_PROMOTION",
+      "selected_candidate_id": null,
+      "stop_reason": "NO_PROMOTION",
+      "claim_boundary": "This episode establishes one unstable design-precedence result and an unnecessary backend switch across design and early web-stack fixtures. It does not establish Python inertia, automatic best-technology choice, broad intent preservation, aesthetic quality, or cross-domain generality."
+    },
+    {
+      "id": "episode-decision-boundaries-live-1",
+      "mode": "live",
+      "feedback_id": "feedback-decision-boundary-truth-binding",
+      "scope": "core_dev",
+      "pathology": {
+        "where": "decision planning and capability application",
+        "why": "Capability relevance was evaluated, but proposed changes were not bound to an explicit scope or architecture layer plus preserved decisions."
+      },
+      "budget": {
+        "max_candidates": 2,
+        "max_generations": 1,
+        "max_evaluation_runs": 9,
+        "max_failed_candidates": 1,
+        "max_identical_pathology_retries": 1,
+        "max_model_invocations": 10
+      },
+      "archive_lookup": [
+        "proposal-navigator-20-authority-reference",
+        "proposal-navigator-20-authority-binding",
+        "proposal-navigator-20-intent-means-gate"
+      ],
+      "baseline": {
+        "comparable_dimension": "model_invocations",
+        "fair": true,
+        "arms": [
+          {
+            "id": "champion",
+            "runs": 1,
+            "primary_successes": 0,
+            "model_invocations": 1,
+            "completion_checks": 1,
+            "evidence": "The first corrected natural design champion run overrode the accepted project component shape."
+          },
+          {
+            "id": "retry",
+            "runs": 4,
+            "primary_successes": 1,
+            "model_invocations": 4,
+            "completion_checks": 4,
+            "evidence": "The four corrected natural champion runs passed 1/4, with one design override and two backend spillovers."
+          },
+          {
+            "id": "best_of_n",
+            "runs": 4,
+            "primary_successes": 1,
+            "model_invocations": 4,
+            "completion_checks": 4,
+            "evidence": "Best-of-4 had no valid web result and could not satisfy the complete primary metric."
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "candidate-scoped-decision-artifact-v1",
+          "proposal_id": "proposal-navigator-20-scoped-decision-artifact",
+          "generation": 1,
+          "author_agent": "coach",
+          "parent_agent": "navigator",
+          "parent_version": 19,
+          "pathology": {
+            "where": "decision planning and capability application",
+            "why": "Capability relevance was evaluated, but proposed changes were not bound to an explicit scope or architecture layer plus preserved decisions."
+          },
+          "mechanism_id": "scoped-decision-artifact-validator-v1",
+          "prediction": "Both design and both web repeats plus Flask, existing Python, greenfield, full rewrite, required dependency, privacy, permission, and schema controls pass.",
+          "falsification_condition": "Any repeated primary case or required control fails, repository facts remain self-attested, personal reads widen, permissions expand, or an unsupported schema/layer is accepted.",
+          "permission_delta": [],
+          "rollback": "Remove the shipped artifact template, validator, skill activation section, and workflow pointer; keep Navigator v19 and archived structural evidence.",
+          "archive_match": null,
+          "evaluation": {
+            "candidate_id": "candidate-scoped-decision-artifact-v1",
+            "owner_agent": "gate",
+            "status": "failed",
+            "runs": 9,
+            "primary_success": false,
+            "guardrails_passed": false,
+            "evidence": "Four of nine model cases passed and all fourteen deterministic controls passed, but design 0/2, web 0/2, and Flask artifact 0/1 falsified promotion; the unused tenth invocation remained reserved for accepted-only live dogfooding.",
+            "cost": {
+              "model_invocations": 9,
+              "completion_checks": 23
+            }
+          },
+          "decision": "rejected",
+          "rejection_reason": "The artifact validated self-attested internal consistency rather than repository truth, so it failed all repeated primary cases."
+        }
+      ],
+      "gate_agent": "gate",
+      "sealed_evaluation": true,
+      "holdout_case_ids_read": [],
+      "cost": {
+        "candidates_generated": 1,
+        "generations": 1,
+        "evaluation_runs": 9,
+        "failed_candidates": 1,
+        "model_invocations": 9,
+        "completion_checks": 23
+      },
+      "decision": "NO_PROMOTION",
+      "selected_candidate_id": null,
+      "stop_reason": "NO_PROMOTION",
+      "claim_boundary": "The evaluated artifact expresses valid scoped controls but does not bind current decision facts to repository truth. No released decision-boundary, best-stack, universal planning, preference-resolution, Personal, or cross-domain claim is made."
+    },
+    {
+      "id": "episode-repository-receipts-live-1",
+      "mode": "live",
+      "feedback_id": "feedback-repository-receipt-live-cycle",
+      "scope": "core_dev",
+      "pathology": {
+        "where": "decision planning / context assembly",
+        "why": "preserve/change decisions are self-asserted rather than bound to repository-derived evidence"
+      },
+      "budget": {
+        "max_candidates": 2,
+        "max_generations": 1,
+        "max_evaluation_runs": 6,
+        "max_failed_candidates": 1,
+        "max_identical_pathology_retries": 1,
+        "max_model_invocations": 6
+      },
+      "archive_lookup": [
+        "proposal-navigator-20-authority-reference",
+        "proposal-navigator-20-authority-binding",
+        "proposal-navigator-20-intent-means-gate",
+        "proposal-navigator-20-scoped-decision-artifact"
+      ],
+      "baseline": {
+        "comparable_dimension": "model_invocations",
+        "fair": true,
+        "arms": [
+          {
+            "id": "champion",
+            "runs": 1,
+            "primary_successes": 0,
+            "model_invocations": 1,
+            "completion_checks": 1,
+            "evidence": "The first valid natural design champion run overrode repository-confirmed low-radius."
+          },
+          {
+            "id": "retry",
+            "runs": 4,
+            "primary_successes": 1,
+            "model_invocations": 4,
+            "completion_checks": 4,
+            "evidence": "Four historical same-model champion runs passed one complete primary decision and retained one design override plus two backend spillovers."
+          },
+          {
+            "id": "best_of_n",
+            "runs": 4,
+            "primary_successes": 1,
+            "model_invocations": 4,
+            "completion_checks": 4,
+            "evidence": "Best-of-4 could select one correct design result but no correct web result and could not satisfy the combined primary metric."
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "candidate-repository-receipt-v1",
+          "proposal_id": "proposal-navigator-20-repository-receipt",
+          "generation": 1,
+          "author_agent": "coach",
+          "parent_agent": "navigator",
+          "parent_version": 19,
+          "pathology": {
+            "where": "decision planning / context assembly",
+            "why": "preserve/change decisions are self-asserted rather than bound to repository-derived evidence"
+          },
+          "mechanism_id": "bounded-repository-receipt-v1",
+          "prediction": "Both design repeats preserve repository-derived low-radius plus personal quiet tone; both web repeats improve frontend while preserving the checked Python WSGI backend; explicit scoped override and failing required-capability challenge remain possible.",
+          "falsification_condition": "Any repeated primary or declared control fails, evidence cannot be independently re-derived, reads become repository-wide, permissions expand, or a fixture is mislabeled as a live task.",
+          "permission_delta": [],
+          "rollback": "Remove the candidate receipt and activation guidance; keep Navigator v19, both previous rejections, and all bounded evidence.",
+          "archive_match": null,
+          "evaluation": {
+            "candidate_id": "candidate-repository-receipt-v1",
+            "owner_agent": "gate",
+            "status": "passed",
+            "runs": 6,
+            "primary_success": true,
+            "guardrails_passed": true,
+            "evidence": "The frozen candidate passed design 2/2, web 2/2, explicit override 1/1, backend challenge 1/1, and sixteen declared controls with bounded reads and zero permission delta; no fresh real task was credited as live evidence.",
+            "cost": {
+              "model_invocations": 6,
+              "completion_checks": 16
+            }
+          },
+          "decision": "rejected",
+          "rejection_reason": "Validation won, but mandatory fresh normal-intent live evidence was unavailable and known fixtures cannot self-prove that condition."
+        }
+      ],
+      "gate_agent": "gate",
+      "sealed_evaluation": true,
+      "holdout_case_ids_read": [],
+      "cost": {
+        "candidates_generated": 1,
+        "generations": 1,
+        "evaluation_runs": 6,
+        "failed_candidates": 0,
+        "model_invocations": 6,
+        "completion_checks": 16
+      },
+      "decision": "NO_PROMOTION",
+      "selected_candidate_id": null,
+      "stop_reason": "NO_PROMOTION",
+      "claim_boundary": "Repository binding passed the repeated low-radius and Python WSGI validation cases and their declared controls but is not a shipped, live-task, Personal/Core, universal architecture, best-stack, or token-improvement result."
     }
   ]
 }

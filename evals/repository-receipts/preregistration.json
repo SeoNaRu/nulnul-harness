@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "episode_id": "repository-receipts-dogfood-1",
+  "registered_at": "2026-08-13T18:00:00+09:00",
+  "champion_git_ref": "0617392c26184ffa6eb3c779fdd276a4419abaf6",
+  "release_state": {
+    "product_version": "2.0.0",
+    "navigator_version": 19
+  },
+  "previous_rejections": [
+    {
+      "proposal_id": "proposal-navigator-20-intent-means-gate",
+      "mechanism_id": "main-workflow-intent-means-gate",
+      "result": "NO_PROMOTION",
+      "evidence": "evals/intent-better-path/results.json"
+    },
+    {
+      "proposal_id": "proposal-navigator-20-scoped-decision-artifact",
+      "mechanism_id": "scoped-decision-artifact-validator-v1",
+      "result": "NO_PROMOTION",
+      "evidence": "evals/decision-boundaries/results.json"
+    }
+  ],
+  "pathology": {
+    "where": "decision planning / context assembly",
+    "why": "preserve/change decisions are self-asserted rather than bound to repository-derived evidence"
+  },
+  "hypothesis": "One bounded receipt that derives current design or backend truth from independently re-readable repository anchors, reruns relevant checks, and fingerprints only those anchors will eliminate project-radius overrides and unjustified backend replacement without blocking undecided personal guidance, frontend skill use, explicit user overrides, or evidence-backed backend challenges.",
+  "budget": {
+    "max_candidates": 2,
+    "max_generations": 1,
+    "max_evaluation_runs": 6,
+    "max_failed_candidates": 1,
+    "max_identical_pathology_retries": 1,
+    "max_model_invocations": 6,
+    "max_live_runs_after_acceptance": 1,
+    "permission_delta": [],
+    "external_writes": 0,
+    "new_agents": 0,
+    "new_mcp_servers": 0,
+    "new_services": 0,
+    "holdout_access": false
+  },
+  "primary_cases": {
+    "design_runs": 2,
+    "web_runs": 2,
+    "historical_champion": "design 1/2 and web 0/2",
+    "historical_self_authored_artifact": "design 0/2 and web 0/2"
+  },
+  "candidate_order": [
+    "design-primary",
+    "web-primary",
+    "web-primary",
+    "design-primary",
+    "explicit-user-override",
+    "backend-challenge"
+  ],
+  "evidence_strengths": ["authoritative", "supporting", "insufficient"],
+  "promotion_gate": [
+    "both design repeats derive and preserve the repository low-radius value",
+    "both design repeats retain approved quiet tone guidance and frontend-design use",
+    "both web repeats derive the real working Python backend identity and preserve it while allowing the frontend change",
+    "explicit current-user radius override is allowed only in its requested scope",
+    "a failing required-capability check permits a bounded backend challenge",
+    "all sixteen declared evidence, scope, skill, privacy, permission, and complexity controls fail or pass as expected",
+    "candidate beats both historical baselines on the four repeated primary runs",
+    "repository checks pass"
+  ],
+  "negative_controls": [
+    "fabricated repository evidence",
+    "claimed value differs from file",
+    "stale receipt after anchor mutation",
+    "isolated implementation treated as project policy",
+    "raw personal note used as repository truth",
+    "generic backend mislabeled as current backend",
+    "backend check fails while receipt says working",
+    "explicit user override blocked",
+    "radius preservation leaks outside its scope",
+    "personal guidance blocked from undecided tone",
+    "frontend-design disabled",
+    "backend migration from stack uniformity alone",
+    "actual backend incompatibility cannot challenge",
+    "whole-repository scan or hash required",
+    "unsupported receipt schema",
+    "permission expansion"
+  ],
+  "context_budget": {
+    "design_repository_files": 1,
+    "web_repository_files": 4,
+    "unrelated_repository_reads": 0,
+    "whole_repository_hash": false,
+    "token_claim": "not measured"
+  },
+  "falsification_condition": "Any repeated primary case fails; a fake, mismatched, stale, unsupported, insufficient, personal, or failed-check receipt validates; the receipt becomes immutable against an explicit scoped user override; a legitimate failing capability check cannot challenge the backend; personal tone or frontend-design becomes unavailable; reads or permissions exceed the preregistered boundary; or the candidate does not beat the historical retry baseline.",
+  "claim_boundary": "This DEV/VALIDATION episode can establish only repository-bound low-radius and working-Python preservation on the repeated design/web cases plus their declared controls. It cannot establish a universal decision schema, best-stack selection, all architecture layers, token savings, Personal transfer, core generalization, or release readiness."
+}

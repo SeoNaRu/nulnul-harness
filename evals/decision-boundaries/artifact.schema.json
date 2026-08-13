@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "decision_id", "target", "required_layers", "decisions", "capabilities_used", "personal_sources_read", "unrelated_personal_reads", "permission_delta"],
+  "properties": {
+    "schema_version": {"type": "integer"},
+    "decision_id": {"type": "string"},
+    "target": {"type": "string"},
+    "required_layers": {"type": "array", "items": {"enum": ["design.component_shape", "design.visual_tone", "frontend.architecture", "backend.architecture"]}},
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["layer", "current", "action", "proposed", "basis"],
+        "properties": {
+          "layer": {"enum": ["design.component_shape", "design.visual_tone", "frontend.architecture", "backend.architecture"]},
+          "current": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["status", "source", "value"],
+            "properties": {
+              "status": {"enum": ["absent", "undecided", "accepted", "working", "insufficient", "invalid"]},
+              "source": {"enum": ["none", "current_user", "project", "approved_personal", "external_capability", "outcome_fit"]},
+              "value": {"type": ["string", "null"]}
+            }
+          },
+          "action": {"enum": ["preserve", "change"]},
+          "proposed": {"type": ["string", "null"]},
+          "basis": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "source", "evidence", "depends_on"],
+            "properties": {
+              "kind": {"enum": ["accepted_contract", "approved_preference", "observed_failure", "explicit_user_request", "required_dependency", "measurable_incompatibility", "migration_benefit", "outcome_fit"]},
+              "source": {"enum": ["none", "current_user", "project", "approved_personal", "external_capability", "outcome_fit"]},
+              "evidence": {"type": "string"},
+              "depends_on": {"type": ["string", "null"]}
+            }
+          }
+        }
+      }
+    },
+    "capabilities_used": {"type": "array", "items": {"type": "string"}},
+    "personal_sources_read": {"type": "integer"},
+    "unrelated_personal_reads": {"type": "integer"},
+    "permission_delta": {"type": "array", "items": {"type": "string"}}
+  }
+}

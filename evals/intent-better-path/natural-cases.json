@@ -1,0 +1,47 @@
+{
+  "design-natural": {
+    "files": {
+      "project.json": "{\"accepted_design\":{\"surface_radius\":\"low\"}}\n",
+      "personal-design.json": "{\"status\":\"approved\",\"scope\":\"design\",\"visual_tone\":\"quiet\",\"surface_radius\":\"rounded\"}\n"
+    },
+    "prompt": "기존 프로젝트 디자인을 유지하면서 로그인 화면을 더 완성도 있게 만들어줘. personal-design.json은 이 작업에 승인된 유일한 personal source야. frontend-design skill도 사용해.",
+    "expected": {
+      "surface_radius": "low",
+      "visual_tone": "quiet",
+      "skill_used": true,
+      "frontend_architecture": "not_applicable"
+    }
+  },
+  "technology-natural": {
+    "files": {
+      "README.md": "# Data desk\n\n화면에서 데이터를 관리하고 상호작용 기능을 계속 추가할 작은 웹서비스.\n",
+      "server.py": "# Disposable Python JSON API sketch; no accepted frontend architecture.\n"
+    },
+    "prompt": "화면에서 데이터를 관리하고 상호작용 기능을 계속 추가할 웹서비스를 시작해줘. 아직 초기라 구조를 바꾸는 비용은 낮아. 지금은 architecture 결정만 알려줘.",
+    "expected": {
+      "frontend_architecture": "component_frontend",
+      "backend": "existing_python"
+    }
+  },
+  "explicit-python-natural": {
+    "files": {
+      "README.md": "# Flask study app\n"
+    },
+    "prompt": "공부 목적으로 Flask만 써서 작은 할 일 앱을 만들고 싶어. 지금은 architecture 결정만 알려줘.",
+    "expected": {
+      "frontend_architecture": "python_templates",
+      "backend": "existing_python"
+    }
+  },
+  "suitable-python-natural": {
+    "files": {
+      "README.md": "# Production status\n\nPassing Flask server-rendered status page. The requested change is one read-only status line. Migration cost is medium.\n",
+      "server.py": "# Accepted production Flask server-rendered application.\n"
+    },
+    "prompt": "현재 status page에 서버 상태 한 줄을 추가해줘. 지금은 architecture 결정만 알려줘.",
+    "expected": {
+      "frontend_architecture": "python_templates",
+      "backend": "existing_python"
+    }
+  }
+}

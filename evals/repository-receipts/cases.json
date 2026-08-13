@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "cases": {
+    "design-primary": {
+      "files": {
+        "project-design.json": "{\"accepted\":{\"component_shape\":\"low_radius\"},\"undecided\":[\"visual_tone\"]}\n",
+        "personal-design.json": "{\"status\":\"approved\",\"scope\":\"design\",\"component_shape\":\"rounded\",\"visual_tone\":\"quiet\"}\n"
+      },
+      "repository_files": ["project-design.json"],
+      "scope": "design.component_shape",
+      "expected_value": "low_radius"
+    },
+    "web-primary": {
+      "files": {
+        "README.md": "# Data desk\n\nThe server-rendered frontend is insufficient for the requested interactions. The current Python WSGI JSON API is working.\n",
+        "server.py": "import json\nfrom wsgiref.simple_server import make_server\n\ndef app(environ, start_response):\n    start_response('200 OK', [('Content-Type', 'application/json')])\n    return [json.dumps({'status': 'ok'}).encode()]\n",
+        "check_backend.py": "from server import app\n\nstatus = []\ndef start_response(value, _headers): status.append(value)\nassert app({}, start_response) == [b'{\"status\": \"ok\"}']\nassert status == ['200 OK']\n",
+        "frontend.html": "<form><button>Refresh</button></form>\n"
+      },
+      "repository_files": ["server.py", "check_backend.py", "README.md", "frontend.html"],
+      "scope": "backend.architecture",
+      "expected_value": "python:wsgi",
+      "check": "python3 check_backend.py",
+      "check_files": ["server.py", "check_backend.py"]
+    },
+    "backend-challenge": {
+      "files": {
+        "README.md": "# Live monitor\n\nThe requested realtime frontend requires a WebSocket event contract.\n",
+        "server.py": "import json\nfrom wsgiref.simple_server import make_server\n\ndef app(environ, start_response):\n    start_response('200 OK', [('Content-Type', 'application/json')])\n    return [json.dumps({'status': 'ok'}).encode()]\n",
+        "check_backend.py": "from server import app\n\nstatus = []\ndef start_response(value, _headers): status.append(value)\nassert app({}, start_response) == [b'{\"status\": \"ok\"}']\nassert status == ['200 OK']\n",
+        "check_realtime.py": "from server import app\nassert hasattr(app, 'websocket_event_contract')\n"
+      },
+      "repository_files": ["server.py", "check_backend.py", "check_realtime.py", "README.md"],
+      "scope": "backend.architecture",
+      "expected_value": "python:wsgi",
+      "check": "python3 check_backend.py",
+      "check_files": ["server.py", "check_backend.py"],
+      "required_check": "python3 check_realtime.py",
+      "required_check_files": ["server.py", "check_realtime.py"]
+    }
+  }
+}

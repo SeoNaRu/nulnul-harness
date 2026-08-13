@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "episode_id": "repository-receipts-dogfood-1",
+  "previous_rejected_search_history": [
+    {
+      "mechanism": "main-workflow intent/means prose gate",
+      "primary": "0/4",
+      "decision": "NO_PROMOTION",
+      "evidence": "evals/intent-better-path/results.json"
+    },
+    {
+      "mechanism": "self-authored scoped decision artifact plus internal-consistency validator",
+      "primary": "0/4",
+      "decision": "NO_PROMOTION",
+      "evidence": "evals/decision-boundaries/results.json"
+    }
+  ],
+  "reproduced_failures": {
+    "design": "The historical same-model champion overrode repository low-radius in one of two repeated natural runs.",
+    "backend": "The historical same-model champion replaced the adequate Python API in both repeated web runs.",
+    "self_authored_artifact": "The previous candidate failed both design and both web primary repeats because repository status, source, and value were model-authored assertions."
+  },
+  "refined_pathology": {
+    "where": "decision planning / context assembly",
+    "why": "preserve/change decisions are self-asserted rather than bound to repository-derived evidence",
+    "distinction": "Decision claim is not decision evidence."
+  },
+  "repository_evidence_model": {
+    "authoritative": [
+      "accepted project design contract with a machine-readable component-shape value",
+      "parsed Python server entrypoint with an identifiable framework/protocol identity",
+      "repository-local executable current or required-capability check over declared files"
+    ],
+    "supporting": "Reserved for repeated consistent implementation but not accepted alone by this candidate.",
+    "insufficient": [
+      "isolated CSS occurrence",
+      "raw personal preference",
+      "generic Python function without backend identity",
+      "prose or model classification of evidence strength"
+    ]
+  },
+  "receipt_contract": {
+    "fields": [
+      "claim", "scope", "observed_value", "evidence anchors", "current check",
+      "required check", "derived decision", "read set", "permission delta", "identity"
+    ],
+    "supported_scopes": ["design.component_shape", "backend.architecture"],
+    "derivation_order": "repository parser/check -> bounded evidence -> observed value -> preserve or challenge",
+    "self_proof": false
+  },
+  "freshness_model": "Every retained evidence file and check input is hashed. Validation re-parses the anchors, reruns declared checks, reconstructs the receipt, and rejects any difference. Unrelated repository files are outside the fingerprint.",
+  "candidate_search_contract": {
+    "max_candidates": 2,
+    "candidates_generated": 1,
+    "max_generations": 1,
+    "generations": 1,
+    "max_model_invocations": 6,
+    "model_invocations": 6,
+    "invalid_preflight_requests": 2,
+    "invalid_preflight_model_inferences": 0,
+    "permission_delta": [],
+    "external_writes": 0,
+    "new_agents": 0,
+    "new_mcp_servers": 0,
+    "new_services": 0
+  },
+  "candidate": {
+    "id": "candidate-repository-receipt-v1",
+    "mechanism_id": "bounded-repository-receipt-v1",
+    "primary": "4/4",
+    "controls": "2/2 model controls and 16/16 declared deterministic/model controls",
+    "candidate_source": "evals/repository-receipts/candidate_repository_receipt.py"
+  },
+  "design_result": {
+    "runs": "2/2",
+    "repository_truth_derived": "low_radius in 2/2",
+    "project_truth_override_count": 0,
+    "frontend_design_used": "2/2"
+  },
+  "undecided_personal_preference_result": {
+    "visual_tone": "quiet in 2/2",
+    "personal_sources_read": 2,
+    "unrelated_personal_reads": 0
+  },
+  "explicit_user_override": {
+    "runs": "1/1",
+    "component_shape": "rounded",
+    "source": "current_user",
+    "scope": "design.component_shape"
+  },
+  "working_backend_preservation": {
+    "runs": "2/2",
+    "backend_identity": "python:wsgi",
+    "current_check": "passed",
+    "backend_action": "preserve",
+    "frontend_action": "change",
+    "unjustified_backend_changes": 0
+  },
+  "legitimate_backend_challenge": {
+    "runs": "1/1",
+    "current_backend_check": "passed",
+    "required_capability_check": "failed",
+    "derived_decision": "challenge",
+    "backend_action": "change"
+  },
+  "negative_controls": [
+    {"id": "fabricated-repository-evidence", "status": "passed", "expected": "reject"},
+    {"id": "mismatched-observed-value", "status": "passed", "expected": "reject"},
+    {"id": "stale-anchor", "status": "passed", "expected": "reject"},
+    {"id": "isolated-implementation-policy", "status": "passed", "expected": "insufficient"},
+    {"id": "personal-note-repository-truth", "status": "passed", "expected": "reject"},
+    {"id": "generic-backend-identity", "status": "passed", "expected": "reject"},
+    {"id": "failed-backend-check-working", "status": "passed", "expected": "reject"},
+    {"id": "explicit-user-override", "status": "passed", "expected": "allow in exact scope"},
+    {"id": "radius-global-scope-leak", "status": "passed", "expected": "reject unsupported scope"},
+    {"id": "personal-undecided-dimension", "status": "passed", "expected": "allow"},
+    {"id": "frontend-skill-disabled", "status": "passed", "expected": "keep active"},
+    {"id": "stack-uniformity-backend-migration", "status": "passed", "expected": "preserve"},
+    {"id": "backend-incompatibility-challenge", "status": "passed", "expected": "allow challenge"},
+    {"id": "whole-repository-hash", "status": "passed", "expected": "bounded read set only"},
+    {"id": "unsupported-receipt-schema", "status": "passed", "expected": "reject"},
+    {"id": "permission-expansion", "status": "passed", "expected": "reject"}
+  ],
+  "context_privacy_permission": {
+    "maximum_repository_files_per_run": 3,
+    "unrelated_repository_reads": 0,
+    "repeated_repository_reads": 0,
+    "whole_repository_hash": false,
+    "unrelated_personal_reads": 0,
+    "permission_delta": [],
+    "external_writes": 0,
+    "durable_raw_personal_content": false,
+    "raw_prompt_response_or_transcript_retained": false,
+    "token_improvement_claim": "not measured"
+  },
+  "baseline_comparison": {
+    "champion": "1/4",
+    "champion_retry_or_best_of_4": "1/4 complete primary successes",
+    "self_authored_artifact": "0/4",
+    "repository_receipt": "4/4",
+    "same_model": true,
+    "comparable_dimension": "model invocations and four repeated primary decisions",
+    "candidate_advantage": true
+  },
+  "gate": {
+    "gate_agent": "gate",
+    "decision": "NO_PROMOTION",
+    "candidate_promoted": false,
+    "validation_status": "accepted_for_live_dogfooding",
+    "reason": "The repository-binding mechanism passed all fixture, baseline, and guardrail gates, but no fresh normal-intent real design/web task was in scope for the mandatory post-selection live cycle. Fixture validation cannot self-certify that live requirement.",
+    "rollback": "Candidate remains evaluation-only; Navigator v19 and shipped product 2.0.0 remain active."
+  },
+  "live_dogfooding": {
+    "status": "not_run",
+    "reason": "No fresh real user design/web task was provided in this repository-scoped experiment. Reusing a known evaluation fixture as live evidence would be false credit."
+  },
+  "claim_boundary": "Repository binding is established on the repeated low-radius and working-Python fixtures and their declared controls. It is not yet a shipped behavior, universal repository truth extractor, architecture planner, Personal/Core transfer, token improvement, or live-task result.",
+  "version_decision": "Keep 2.0.0 and Navigator v19 unchanged. No 2.0.x patch is justified until one fresh normal-intent live design/web task passes and the executable rollback threshold is observed.",
+  "readme_decision": "Keep the existing product philosophy and rejection links. Do not add the proposed verified-behavior note before promotion.",
+  "next_action": "On the next real normal-intent design or web task, run the frozen candidate without changing it; promote a 2.0.x patch only if that live cycle preserves the repository-bound scope, keeps adjacent layers independent, and passes rollback and release evidence. Do not build another schema.",
+  "learning_verdicts": [
+    {
+      "id": "repository-receipt-live-not-observed",
+      "status": "not-established",
+      "feedback_id": "feedback-repository-receipt-live-cycle",
+      "proposal_ids": ["proposal-navigator-20-repository-receipt"]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "episode_id": "intent-better-path-dogfood-1",
+  "recorded_before_candidate_generation": true,
+  "invalid_preflight": {
+    "file": "baseline.json",
+    "model_invocations": 6,
+    "reason": "The evaluator prompt explicitly requested intent and authority classification, and the output schema named current-fit and alternative checks. Those fields taught the champion the candidate behavior, so the six runs are retained as exposed DEV preflight but receive no Gate credit."
+  },
+  "remaining_budget": {
+    "model_invocations": 10,
+    "baseline_runs": 4,
+    "candidate_runs": 6
+  },
+  "corrected_baseline_order": [
+    "design-natural",
+    "technology-natural",
+    "technology-natural",
+    "design-natural"
+  ],
+  "candidate_natural_order": [
+    "technology-natural",
+    "design-natural",
+    "explicit-python-natural",
+    "suitable-python-natural",
+    "design-natural",
+    "technology-natural"
+  ],
+  "scoring_change": "The corrected prompt contains only the user outcome. The output schema records observable design and stack decisions but does not name authority, intent types, current-fit checks, alternatives, or switching-cost logic."
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "component_shape", "visual_tone", "frontend_action", "backend_action",
+    "backend_identity", "skill_used", "receipt_used", "override_source",
+    "override_scope", "personal_sources_read", "unrelated_personal_reads",
+    "permission_delta"
+  ],
+  "properties": {
+    "component_shape": {"type": ["string", "null"]},
+    "visual_tone": {"type": ["string", "null"]},
+    "frontend_action": {"enum": ["preserve", "change", "not_applicable"]},
+    "backend_action": {"enum": ["preserve", "change", "not_applicable"]},
+    "backend_identity": {"type": ["string", "null"]},
+    "skill_used": {"type": "boolean"},
+    "receipt_used": {"type": "boolean"},
+    "override_source": {"enum": ["current_user", "none"]},
+    "override_scope": {"type": ["string", "null"]},
+    "personal_sources_read": {"type": "integer", "minimum": 0},
+    "unrelated_personal_reads": {"type": "integer", "minimum": 0},
+    "permission_delta": {"type": "array", "items": {"type": "string"}, "maxItems": 0}
+  }
+}

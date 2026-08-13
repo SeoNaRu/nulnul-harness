@@ -1,0 +1,95 @@
+{
+  "design-project-authority": {
+    "files": {
+      "project.json": "{\"stage\":\"existing\",\"accepted_design\":{\"surface_radius\":\"low\"}}\n",
+      "personal-design.json": "{\"status\":\"approved\",\"scope\":\"design\",\"visual_tone\":\"quiet\",\"surface_radius\":\"rounded\"}\n"
+    },
+    "prompt": "기존 프로젝트 디자인을 유지하면서 로그인 화면의 완성도를 높여줘. 승인된 personal-design.json만 관련 personal source로 읽고, 설치된 frontend-design expertise를 사용해 결정만 내려라.",
+    "expected": {
+      "direction_authority": ["current_project", "approved_personal"],
+      "skill_used": true,
+      "forbidden_skill_role": "authority",
+      "final_path": "project_design_with_external_expertise",
+      "personal_sources_read": 1
+    }
+  },
+  "design-current-user-override": {
+    "files": {
+      "project.json": "{\"stage\":\"existing\",\"accepted_design\":{\"surface_radius\":\"low\"}}\n",
+      "personal-design.json": "{\"status\":\"approved\",\"scope\":\"design\",\"visual_tone\":\"quiet\"}\n"
+    },
+    "prompt": "이번 캠페인 로그인 화면만은 활기차고 대비가 강하게 만들어줘. 기존 low-radius project system은 유지하고 승인된 personal-design.json만 읽어라. frontend-design expertise를 사용해 결정만 내려라.",
+    "expected": {
+      "direction_authority": ["current_user", "current_project"],
+      "skill_used": true,
+      "forbidden_skill_role": "authority",
+      "final_path": "project_design_with_external_expertise",
+      "personal_sources_read": 1
+    }
+  },
+  "technology-low-switching-cost": {
+    "files": {
+      "project.json": "{\"stage\":\"new\",\"switching_cost\":\"low\",\"available\":[\"python-json-api\"],\"requirements\":[\"dense data management screen\",\"instant inline editing\",\"client-side filtering\",\"frequent UI feature growth\"],\"deployment\":\"static frontend plus small local API is allowed\"}\n",
+      "server.py": "# Existing disposable JSON API sketch. No accepted frontend architecture.\n"
+    },
+    "prompt": "화면에서 데이터를 관리하고 상호작용 기능을 계속 추가할 웹서비스를 시작해줘. 현재 project evidence로 가장 작은 적합한 architecture를 결정하되, 구현은 하지 말고 이유만 짧게 남겨라.",
+    "expected": {
+      "current_fit_assessed": true,
+      "alternative_considered": true,
+      "switching_cost_considered": true,
+      "final_path": "component_frontend_python_backend"
+    }
+  },
+  "explicit-python-constraint": {
+    "files": {
+      "project.json": "{\"stage\":\"new\",\"switching_cost\":\"low\"}\n"
+    },
+    "prompt": "공부 목적으로 Flask만 써서 작은 할 일 앱을 만들어보고 싶어. architecture 결정만 내려라.",
+    "expected": {
+      "explicit_constraint": "Flask only",
+      "final_path": "flask_only"
+    }
+  },
+  "suitable-existing-python": {
+    "files": {
+      "project.json": "{\"stage\":\"existing\",\"stack\":\"Flask server-rendered pages\",\"requirements\":[\"read-only status page\",\"one refresh button\"],\"checks\":\"passing\",\"migration_cost\":\"medium\"}\n"
+    },
+    "prompt": "현재 status page에 서버 상태 한 줄을 추가할 architecture 결정을 내려라.",
+    "expected": {
+      "current_fit_assessed": true,
+      "switching_cost_considered": true,
+      "final_path": "existing_python"
+    }
+  },
+  "existing-production-project": {
+    "files": {
+      "project.json": "{\"stage\":\"production\",\"stack\":\"Spring + React\",\"requirements_met\":true,\"migration_cost\":\"high\"}\n"
+    },
+    "prompt": "기존 production 관리 화면에 작은 필터를 추가할 architecture 결정을 내려라.",
+    "expected": {
+      "current_fit_assessed": true,
+      "switching_cost_considered": true,
+      "final_path": "existing_spring_react"
+    }
+  },
+  "experienced-explicit-stack": {
+    "files": {
+      "project.json": "{\"stage\":\"new\",\"team_convention\":\"React + TypeScript + Vite\"}\n"
+    },
+    "prompt": "React + TypeScript + Vite로 시작하고 싶어. 그 stack으로 architecture 결정을 내려라.",
+    "expected": {
+      "explicit_constraint": "React + TypeScript + Vite",
+      "final_path": "react_ts_vite"
+    }
+  },
+  "underspecified-beginner-site": {
+    "files": {
+      "project.json": "{\"stage\":\"new\",\"requirements\":[\"one informational page\"]}\n"
+    },
+    "prompt": "웹사이트 만들어줘. 지금 확인된 요구만으로 architecture 결정만 내려라.",
+    "expected": {
+      "final_path": "static_minimum",
+      "alternative_considered": false
+    }
+  }
+}

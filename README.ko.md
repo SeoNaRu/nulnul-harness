@@ -325,7 +325,7 @@ transfer claim만 → sealed unseen check → scoped decision
 
 | Evidence | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **167개 통과 (167/167)** | deterministic product, state, privacy, rollback, transfer, cross-project, Meta Gate, negative-control contract가 유지됩니다. |
+| 저장소 test | **207개 통과 (207/207)** | deterministic product, state, privacy, rollback, transfer, cross-project, Meta Gate, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
 | 최종 1.7.0 Release Gate | **통과** | Exact-tag Claude Code와 personal-adaptation adoption 통과 후 main CI run `31651306556`도 green이 됐습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
@@ -346,17 +346,17 @@ python3 scripts/release_gate.py
 
 공개된 2.0.0 evidence에서는 두 번째 command가 `release_ready: true`를 보고합니다.
 
-근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json), 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), post-2.0 [capability-authority `NO_ADVANTAGE` 결과](evals/capability-authority/results.json)를 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
+근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json), 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) 결과를 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
 
-## NULNUL을 만든 이유
+## 이런 사람을 위해 만들었습니다
 
-Coding agent로 프로젝트를 시작할 때 만들고 싶은 것보다 AI 환경을 먼저 공부하게 되는 경우가 있었습니다. 어떤 skill을 써야 하는지, agent가 몇 개나 필요한지, 어떤 rule을 context에 넣을지, token을 낭비하는 건 아닌지, 다음 세션을 어떻게 이어갈지, 무엇이 실제 완료를 증명하는지부터 정해야 했습니다.
+NULNUL은 AI로 무언가를 만들고 싶지만 그 전에 AI 개발 환경부터 공부하고 싶지는 않은 사람을 위해 만들었습니다. 비개발자나 개발을 처음 시작한 사람뿐 아니라, skill·plugin·agent 구성·context·stack을 매번 직접 최적화하고 싶지 않은 개발자도 포함합니다.
 
-좋다고 추천되는 도구를 모두 추가한다고 설정이 더 좋아지지는 않았습니다. 초보자가 결과를 요청하기 전에 AI 조직도부터 설계해야 한다는 점도 이상했습니다.
+좋은 skill과 도구가 있으면 가져다 쓰고, 기존 프로젝트에서 잘 작동하는 것은 먼저 존중합니다. 하지만 이미 있다는 이유만으로 첫 방법에 사용자를 가두는 것도 목표가 아닙니다. 사용자는 만들고 싶은 결과와 의도한 방향을 정하고, NULNUL은 구현 방법을 검토해 중요한 선택 이유만 짧게 보여주는 쪽을 지향합니다.
 
-새 프로젝트에는 처음부터 작은 작업 환경을 잡아 주고, 기존 프로젝트에는 무엇이 있는지 먼저 읽은 뒤 부족한 것만 더하고 싶었습니다. 프로젝트가 달라지면 사용자가 AI 설정 전체를 다시 설계하지 않아도 하네스가 필요한 구조를 추가하고, 겹치면 합치고, 쓸모가 없어지면 제거할 수 있어야 한다고 생각했습니다. 사용 중 더 나은 방법을 발견해도 실제로 더 낫다는 근거가 있을 때만 남기고 싶었습니다.
+**좋은 도구는 대신 찾되, 만들고 싶은 방향까지 대신 정하지 않습니다.**
 
-사용자가 하네스를 계속 관리하기보다 만들고 싶은 프로젝트에 더 집중할 수 있는 환경을 만들고 싶어서 NULNUL을 시작했습니다.
+이것은 제품 철학이지 현재 release가 모든 디자인·architecture 결정을 올바르게 해결한다고 보장하는 문장이 아닙니다. 현재 검증된 동작은 위 evidence와 연결된 accepted/rejected 기록이 정합니다.
 
 ## 뿌리와 영향
 

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "episode_id": "decision-boundaries-dogfood-1",
+  "arm": "candidate-scoped-decision-artifact-v1",
+  "model": "gpt-5.6-sol",
+  "model_invocations": 9,
+  "raw_prompt_retained": false,
+  "raw_response_retained": false,
+  "raw_transcript_retained": false,
+  "runs": [
+    {"run": 1, "case_id": "design-scope", "passed": false, "validator_passed": true, "observed": {"shape_action": "preserve", "shape_bound_to_project_value": false, "personal_undecided_tone_used": false, "skill_used": true, "personal_sources_read": 1, "unrelated_personal_reads": 0, "permission_delta": []}},
+    {"run": 2, "case_id": "web-layer-spillover", "passed": false, "validator_passed": true, "observed": {"frontend_action": "change", "backend_action": "change", "backend_bound_to_working_python": false, "unrelated_personal_reads": 0, "permission_delta": []}},
+    {"run": 3, "case_id": "web-layer-spillover", "passed": false, "validator_passed": true, "observed": {"frontend_action": "change", "backend_action": "preserve", "backend_bound_to_working_python": false, "unrelated_personal_reads": 0, "permission_delta": []}},
+    {"run": 4, "case_id": "design-scope", "passed": false, "validator_passed": false, "observed": {"shape_action": "preserve", "shape_bound_to_project_value": false, "personal_preference_misclassified_as_accepted": true, "skill_used": true, "personal_sources_read": 1, "unrelated_personal_reads": 0, "permission_delta": []}},
+    {"run": 5, "case_id": "explicit-flask", "passed": false, "validator_passed": false, "observed": {"flask_selected": true, "invalid_dependency_edges": 2, "unrelated_personal_reads": 0, "permission_delta": []}},
+    {"run": 6, "case_id": "adequate-existing-python", "passed": true, "validator_passed": true, "observed": {"frontend_action": "preserve", "backend_action": "preserve", "unrelated_personal_reads": 0, "permission_delta": []}},
+    {"run": 7, "case_id": "greenfield-web", "passed": true, "validator_passed": true, "observed": {"frontend_action": "change", "backend_action": "change", "both_current_status": "absent", "unrelated_personal_reads": 0, "permission_delta": []}},
+    {"run": 8, "case_id": "explicit-full-rewrite", "passed": true, "validator_passed": true, "observed": {"frontend_action": "change", "backend_action": "change", "both_basis": "explicit_user_request", "unrelated_personal_reads": 0, "permission_delta": []}},
+    {"run": 9, "case_id": "required-backend-dependency", "passed": true, "validator_passed": true, "observed": {"frontend_action": "change", "backend_action": "change", "backend_basis": "required_dependency", "depends_on": "frontend.architecture", "unrelated_personal_reads": 0, "permission_delta": []}}
+  ]
+}

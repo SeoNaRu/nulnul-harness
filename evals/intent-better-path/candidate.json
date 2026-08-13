@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "episode_id": "intent-better-path-dogfood-1",
+  "generated_after_valid_baseline": true,
+  "generation": 1,
+  "archive_lookup": [
+    {
+      "proposal_id": "proposal-navigator-20-authority-reference",
+      "decision": "do_not_replay",
+      "reason": "A secondary relevance-versus-authority reference did not improve attribution over the champion."
+    },
+    {
+      "proposal_id": "proposal-navigator-20-authority-binding",
+      "decision": "do_not_replay",
+      "reason": "An activation-time role label disappeared on the identical repeat."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "candidate-intent-means-gate",
+      "mechanism": "One main-workflow decision gate separates outcome, direction, explicit constraints, and suggested means; it binds external expertise beneath current user and accepted project direction, then outcome-fit checks existing means before a triggered bounded alternative comparison.",
+      "files": [
+        "plugins/nulnul-harness/skills/nulnul-harness/SKILL.md"
+      ],
+      "prediction": "Both design repeats preserve low-radius plus quiet direction with frontend-design active; both web repeats choose a component frontend while retaining the adequate existing Python API; explicit Flask and suitable existing Python controls remain unchanged.",
+      "falsification_condition": "Any candidate run fails its case oracle, reads unrelated personal material, expands permissions, disables the external skill, violates explicit Flask, or migrates the suitable existing Python project.",
+      "permission_delta": [],
+      "rollback": "Remove the Intent and means gate section and its workflow pointer; restore Navigator v19."
+    }
+  ],
+  "skipped": "No policy engine, role registry, framework table, new agent, dependency, service, or second candidate was generated because the single shared decision point directly covers both reproduced failures."
+}

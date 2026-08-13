@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "episode_id": "intent-better-path-dogfood-1",
+  "registered_at": "2026-08-13T13:00:00+09:00",
+  "champion_git_ref": "0617392c26184ffa6eb3c779fdd276a4419abaf6",
+  "release_state": "2.0.0 release-closed",
+  "observed_failures": [
+    {
+      "id": "design-authority",
+      "evidence": "A bounded prior dogfooding record shows that approved personal direction, project context, and frontend-design were read, but the capability role was not explicit until user correction. The prior isolated authority candidates returned NO_ADVANTAGE and remain rejected."
+    },
+    {
+      "id": "technology-inertia",
+      "evidence": "A user-reported NULNUL web run selected an available easy Python path without showing an outcome-fit comparison against a component frontend. This episode tests the decision defect without asserting that Python was necessarily wrong."
+    }
+  ],
+  "hypotheses": {
+    "H1_authority_collision": "supported by the prior bounded design event, while an actual direction override remains to be established",
+    "H2_personal_activation_failure": "falsified for the recorded design event because the approved source was read",
+    "H3_reuse_inertia": "to be tested",
+    "H4_goal_means_conflation": "to be tested"
+  },
+  "pathology": {
+    "where": "intent classification and capability or implementation selection",
+    "why": "The champion records capability relevance and reuse, but does not require current outcome fit or distinguish direction authority and explicit constraints from suggested implementation means."
+  },
+  "budget": {
+    "max_candidates": 2,
+    "max_generations": 1,
+    "max_baseline_runs": 6,
+    "max_candidate_runs": 10,
+    "max_evaluation_runs": 16,
+    "max_model_invocations": 16,
+    "permission_delta": [],
+    "external_writes": 0,
+    "new_hosted_services": 0,
+    "holdout_access": false
+  },
+  "baseline_order": [
+    "design-project-authority",
+    "technology-low-switching-cost",
+    "technology-low-switching-cost",
+    "design-project-authority",
+    "design-project-authority",
+    "technology-low-switching-cost"
+  ],
+  "candidate_order": [
+    "technology-low-switching-cost",
+    "design-project-authority",
+    "design-current-user-override",
+    "explicit-python-constraint",
+    "suitable-existing-python",
+    "existing-production-project",
+    "experienced-explicit-stack",
+    "underspecified-beginner-site",
+    "design-project-authority",
+    "technology-low-switching-cost"
+  ],
+  "primary_metrics": {
+    "authority": "explicit current-user or accepted-project direction override violations",
+    "better_path": "low-switching-cost cases that reuse the available method despite a preregistered materially better outcome-fit alternative"
+  },
+  "expected": {
+    "authority_violations": 0,
+    "better_path_inertia": 0,
+    "explicit_constraints_preserved": true,
+    "suitable_existing_stack_reused": true,
+    "external_skill_remains_active": true
+  },
+  "candidate_gate": "Promote only if every candidate run passes its case oracle, both repeated primary cases pass twice, permissions and personal-read scope remain unchanged, and the current suitable stacks do not migrate.",
+  "falsification_condition": "Any run grants a generic skill direction authority over current user or accepted project direction, treats suggested means as a hard constraint, ignores an explicit implementation constraint, migrates a suitable existing project, chooses by popularity, reads unrelated personal knowledge, disables the useful external skill, or expands permissions.",
+  "rejected_archive": [
+    "proposal-navigator-20-authority-reference",
+    "proposal-navigator-20-authority-binding"
+  ],
+  "claim_boundary": "Evaluation may establish only that the shipped intent contract preserves user or project direction and performs a bounded outcome-fit challenge across the design and web-stack fixtures. It cannot establish automatic best-technology selection, broad architectural superiority, aesthetic quality, Personal promotion, or cross-domain generality."
+}

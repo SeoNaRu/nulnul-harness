@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "episode_id": "intent-better-path-dogfood-1",
+  "champion_git_ref": "0617392c26184ffa6eb3c779fdd276a4419abaf6",
+  "reproduced_failures": {
+    "design": {
+      "valid_runs": 2,
+      "correct_runs": 1,
+      "authority_override_violations": 1,
+      "result": "One natural run let approved personal rounded taste override the accepted project low-radius system while frontend-design remained active."
+    },
+    "technology": {
+      "valid_runs": 2,
+      "correct_runs": 0,
+      "better_path_inertia": 0,
+      "unnecessary_switches": 2,
+      "result": "Both natural runs selected a justified component frontend, so existing-Python inertia was not reproduced. Both unnecessarily replaced the adequate disposable Python JSON API with a new JavaScript backend, reproducing a broader means-fit failure."
+    }
+  },
+  "root_cause": {
+    "H1_authority_collision": "supported in one of two natural design runs",
+    "H2_personal_activation_failure": "falsified because the approved source was read in every design run",
+    "H3_reuse_inertia": "falsified for the component-frontend decision; the champion did not stay on Python templates",
+    "H4_goal_means_conflation": "supported more narrowly because the champion and candidate both replaced a still-fit backend while changing the frontend means",
+    "combined": "Direction precedence and per-layer means fit are unstable, but the evaluated prose gate did not correct either instability."
+  },
+  "evaluation": {
+    "model": "gpt-5.6-sol",
+    "total_model_invocations": 16,
+    "invalid_preflight_invocations": 6,
+    "valid_baseline_invocations": 4,
+    "candidate_invocations": 6,
+    "raw_transcript_retained": false,
+    "preflight": {
+      "status": "not_credited",
+      "reason": "The evaluator leaked intent and authority categories into the prompt and schema; the exposed DEV artifact remains in baseline.json."
+    },
+    "baseline": {
+      "passed": 1,
+      "runs": 4,
+      "design": "1/2",
+      "technology": "0/2"
+    },
+    "candidate": {
+      "id": "candidate-intent-means-gate",
+      "passed": 2,
+      "runs": 6,
+      "design": "0/2",
+      "technology": "0/2",
+      "explicit_python_constraint": "1/1",
+      "suitable_existing_python": "1/1"
+    }
+  },
+  "controls": [
+    {"id": "external-skill-project-override", "status": "failed", "evidence": "Candidate chose rounded over accepted low-radius in both repeats."},
+    {"id": "approved-personal-read", "status": "passed", "evidence": "Exactly one approved source was read in every design run."},
+    {"id": "unrelated-personal-read", "status": "passed", "evidence": "Zero unrelated personal reads in all valid runs."},
+    {"id": "skill-disabled", "status": "passed", "evidence": "frontend-design remained active in every design run."},
+    {"id": "explicit-python-constraint", "status": "passed", "evidence": "Candidate retained Flask/Python templates."},
+    {"id": "suitable-existing-python", "status": "passed", "evidence": "Candidate retained the production Flask server-rendered architecture."},
+    {"id": "low-switching-cost-alternative", "status": "passed", "evidence": "All valid technology runs selected a component frontend."},
+    {"id": "per-layer-reuse-fit", "status": "failed", "evidence": "All technology runs replaced the adequate Python API with a new JavaScript backend."},
+    {"id": "permission-expansion", "status": "passed", "evidence": "Permission delta was empty in all valid runs."},
+    {"id": "personal-vault-wide-read", "status": "passed", "evidence": "Only the named fixture source was available and read."},
+    {"id": "expensive-every-task-research", "status": "not_established", "evidence": "No runtime or context comparison was credited after primary failure."},
+    {"id": "popularity-only", "status": "not_established", "evidence": "The natural schema did not expose a reliable deterministic popularity attribution."},
+    {"id": "switching-cost-ignored", "status": "failed", "evidence": "The low-cost frontend switch was justified, but the separate backend switch had no outcome-fit need."},
+    {"id": "experienced-explicit-stack", "status": "not_run", "evidence": "Candidate hit the primary falsification condition before optional controls."},
+    {"id": "existing-spring-react", "status": "not_run", "evidence": "Candidate hit the primary falsification condition before optional controls."}
+  ],
+  "context_privacy_permission": {
+    "unrelated_personal_reads": 0,
+    "entire_personal_store_reads": 0,
+    "permission_delta": [],
+    "external_writes": 0,
+    "durable_raw_personal_content": false,
+    "raw_transcript_retained": false
+  },
+  "gate": {
+    "gate_agent": "gate",
+    "decision": "NO_PROMOTION",
+    "candidate_promoted": false,
+    "reason": "The candidate passed both guard controls but failed every repeated primary case and had no advantage over the champion.",
+    "rollback": "The Intent and means gate and its workflow pointer were removed; Navigator remains version 19."
+  },
+  "live_dogfooding": {
+    "status": "not_run",
+    "reason": "A rejected candidate cannot enter a credited live cycle."
+  },
+  "version_decision": "Keep public 2.0.0 unchanged. No 2.0.1 candidate is justified until a different mechanism wins and then passes exact-version publication evidence.",
+  "readme_decision": "Do not add the proposed philosophy as an established behavior in README.md or README.ko.md because the mechanism was not accepted. Keep the author wording as future product intent, not a current capability claim.",
+  "claim_boundary": "This episode establishes one unstable design-precedence result and an unnecessary backend switch across design and early web-stack fixtures. It does not establish Python inertia, automatic best-technology choice, broad intent preservation, aesthetic quality, or cross-domain generality.",
+  "next_action": "Wait for the next real design or web dogfooding episode and test a mechanism that binds precedence to the concrete decision artifact or checks fit per architecture layer; do not create a roadmap or another prose-only candidate now.",
+  "learning_verdicts": [
+    {
+      "id": "intent-means-gate-candidate",
+      "status": "failed",
+      "feedback_id": "feedback-intent-means-instability",
+      "proposal_ids": ["proposal-navigator-20-intent-means-gate"]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "episode_id": "decision-boundaries-dogfood-1",
+  "previous_no_promotion": {
+    "preserved": true,
+    "champion": "1/4 corrected natural-language baseline",
+    "rejected_prose_candidate": "0/4 repeated primary cases",
+    "navigator_version": 19,
+    "product_version": "2.0.0"
+  },
+  "reproduced_failures": {
+    "design": "Previous natural champion retained one project-radius override in two runs.",
+    "architecture": "Previous natural champion retained two unnecessary backend replacements in two runs."
+  },
+  "refined_root_cause": "Scope/layer representation is necessary but not sufficient. The candidate artifact was self-attested rather than bound to repository facts, so internally consistent but false current status, source, or value claims could pass validation.",
+  "candidate": {
+    "id": "candidate-scoped-decision-artifact-v1",
+    "generation": 1,
+    "class": "scoped artifact plus deterministic layer-preservation validator",
+    "model_runs": 9,
+    "passed_runs": 4,
+    "validator_passed_runs": 7,
+    "design_primary": "0/2",
+    "web_primary": "0/2",
+    "explicit_flask": "0/1 because the selected Flask plan produced an invalid artifact",
+    "adequate_existing_python": "1/1",
+    "greenfield": "1/1",
+    "explicit_full_rewrite": "1/1",
+    "required_dependency": "1/1"
+  },
+  "structural_controls": {
+    "passed": 14,
+    "total": 14,
+    "covered": [
+      "project decision versus personal preference",
+      "project decision versus external skill",
+      "personal preference in undecided design scope",
+      "frontend-to-backend spillover",
+      "invalid backend preservation",
+      "required cross-layer dependency",
+      "explicit full rewrite",
+      "greenfield selection",
+      "stack uniformity or popularity",
+      "explicit current-user project change",
+      "prose-only input",
+      "raw personal content",
+      "permission expansion",
+      "unsupported schema, layer, and missing required layer"
+    ]
+  },
+  "primary_metrics": {
+    "approved_project_decision_overrides": "not reduced reproducibly; neither design run bound the accepted project value correctly",
+    "unjustified_adjacent_layer_changes": "one web repeat changed backend and the other preserved an unverified generic backend claim; 0/2 met the bound working-Python oracle",
+    "required_layer_improvement_detected": "frontend change was selected in both web repeats"
+  },
+  "context_privacy_permission": {
+    "unrelated_personal_reads": 0,
+    "permission_delta": [],
+    "external_writes": 0,
+    "raw_personal_content_retained": false,
+    "raw_prompt_response_or_transcript_retained": false
+  },
+  "gate": {
+    "gate_agent": "gate",
+    "decision": "NO_PROMOTION",
+    "candidate_promoted": false,
+    "reason": "The candidate failed all four repeated primary cases and the explicit Flask artifact control. Its validator proved internal consistency, not repository-truth binding.",
+    "rollback": "The shipped validator, template, skill activation section, and workflow pointer were removed; Navigator remains version 19."
+  },
+  "live_dogfooding": {
+    "status": "not_run",
+    "unused_reserved_model_invocations": 1,
+    "reason": "Only an accepted candidate may use the reserved live slot."
+  },
+  "claim_boundary": "This episode shows that a small scope/layer artifact can express valid greenfield, rewrite, preservation, and dependency decisions, but cannot yet bind those decisions to repository truth. It establishes no released decision-boundary behavior, best-stack selection, universal architecture planning, or preference resolution.",
+  "version_decision": "Keep 2.0.0 and Navigator v19 unchanged; no 2.0.x candidate is justified.",
+  "next_action": "Wait for actual dogfooding evidence. A future candidate must bind current decision facts to a repository-derived receipt or deterministic source, not add more prose or another self-attested schema.",
+  "learning_verdicts": [
+    {
+      "id": "scoped-decision-artifact-candidate",
+      "status": "failed",
+      "feedback_id": "feedback-decision-boundary-truth-binding",
+      "proposal_ids": ["proposal-navigator-20-scoped-decision-artifact"]
+    }
+  ]
+}
