@@ -28,6 +28,7 @@ PERSONAL_ADOPTION_VALIDATOR = ROOT / "scripts/personal_adopt_evidence.py"
 META_EVOLUTION_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_meta_evolution.py"
 )
+META_ADOPTION_VALIDATOR = ROOT / "scripts/meta_adopt_evidence.py"
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -127,6 +128,25 @@ def validate_meta_evolution_gate(preregistration: dict, results: dict, evidence:
         "flat_checks": results["baseline_comparison"]["flat_lookup"]["compatibility_checks_executed"],
         "meta_checks": results["baseline_comparison"]["meta_selector"]["compatibility_checks_executed"],
         "live_cycle": results["live_cycle"]["downstream_completion_passed"],
+    }
+
+
+def validate_public_meta_adoption(evidence: dict, preregistration: dict, version: str) -> dict:
+    spec = importlib.util.spec_from_file_location("meta_adopt_evidence", META_ADOPTION_VALIDATOR)
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    errors = validator.validate(evidence, preregistration, version)
+    if errors:
+        raise ValueError("Public Meta Evolution adoption failed: " + "; ".join(errors))
+    project = evidence["project_m"]
+    return {
+        "status": "passed",
+        "version": version,
+        "flat_checks": project["flat_lookup"]["compatibility_checks_executed"],
+        "meta_checks": project["meta_selector"]["compatibility_checks_executed"],
+        "no_relevant": evidence["no_relevant_control"]["status"],
+        "conflict": evidence["conflict_control"]["status"],
+        "rollback": evidence["rollback_control"]["rolled_back_to"],
     }
 
 
@@ -446,11 +466,14 @@ def main() -> None:
     meta_preregistration = json.loads((ROOT / "evals/meta-evolution/preregistration.json").read_text(encoding="utf-8"))
     meta_results = json.loads((ROOT / "evals/meta-evolution/results.json").read_text(encoding="utf-8"))
     cross_project_evidence = json.loads((ROOT / "evals/meta-evolution/cross-project-evidence.json").read_text(encoding="utf-8"))
+    meta_release_preregistration = json.loads(
+        (ROOT / "evals/meta-evolution/release-preregistration.json").read_text(encoding="utf-8")
+    )
     version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
     validate_learning_gate(learning, evolution)
     validate_learning_gate(failed_holdout, evolution)
     validate_learning_gate(meta_results, evolution)
-    validate_claude_gate(evidence, version)
+    validate_claude_gate(evidence, evidence["plugin_version"])
     score = calculate(cases, results)
     score["performance_gate"] = validate_performance_gate(performance)
     score["activation_gate"] = {
@@ -473,25 +496,61 @@ def main() -> None:
         meta_preregistration, meta_results, cross_project_evidence
     )
     score["public_personal_adoption_gate"] = validate_public_personal_adoption(
-        public_personal_adoption, version
+        public_personal_adoption, public_personal_adoption["installed_plugin"]["version"]
     )
-    if "## Unreleased" in (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"):
-        score["published_baseline_release_ready"] = score["release_ready"]
-        score["release_ready"] = False
-        score["local_candidate_ready"] = all(
-            gate.get("status") == "passed"
-            for gate in (
-                score["performance_gate"],
-                score["observable_evolution_gate"],
-                score["generalization_gate"],
-                score["bounded_autonomous_evolution_gate"],
-                score["personal_evolution_gate"],
-                score["cross_project_meta_evolution_gate"],
-            )
+    local_candidate_ready = all(
+        gate.get("status") == "passed"
+        for gate in (
+            score["performance_gate"],
+            score["observable_evolution_gate"],
+            score["generalization_gate"],
+            score["bounded_autonomous_evolution_gate"],
+            score["personal_evolution_gate"],
+            score["cross_project_meta_evolution_gate"],
         )
-        score["release_blockers"] = [
-            "Unreleased 2.0 development state has no exact-version public publication or adoption evidence."
-        ]
+    )
+    score["published_baseline_release_ready"] = score["release_ready"]
+    score["local_candidate_ready"] = local_candidate_ready
+    blockers = []
+    claude_current = evidence["plugin_version"] == version
+    score["public_claude_adoption_gate"] = {
+        "status": "passed" if claude_current else "stale",
+        "version": evidence["plugin_version"],
+    }
+    public_meta_path = ROOT / "evals/meta-evolution/public-adoption.json"
+    meta_current = False
+    if public_meta_path.is_file():
+        public_meta = json.loads(public_meta_path.read_text(encoding="utf-8"))
+        meta_version = public_meta.get("installed_plugin", {}).get("version")
+        score["public_meta_adoption_gate"] = validate_public_meta_adoption(
+            public_meta, meta_release_preregistration, meta_version
+        )
+        meta_current = meta_version == version
+        if not meta_current:
+            score["public_meta_adoption_gate"]["status"] = "stale"
+    else:
+        score["public_meta_adoption_gate"] = {"status": "missing"}
+    changelog_unreleased = "## Unreleased" in (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    prerelease = "-" in version
+    if not claude_current:
+        blockers.append("Exact-version public Claude adoption evidence is missing.")
+    if not meta_current:
+        blockers.append("Exact-version public cross-project Meta adoption evidence is missing.")
+    if changelog_unreleased:
+        blockers.append("The 2.0 changelog is still marked Unreleased.")
+    if prerelease:
+        blockers.append("A prerelease cannot close the final 2.0.0 Release Gate.")
+    score["release_ready"] = bool(
+        score["published_baseline_release_ready"]
+        and local_candidate_ready
+        and claude_current
+        and meta_current
+        and not changelog_unreleased
+        and not prerelease
+    )
+    if blockers:
+        score["release_ready"] = False
+        score["release_blockers"] = blockers
     print(json.dumps(score, ensure_ascii=False, indent=2))
 
 

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "episode_id": "meta-public-adoption-2.0-r1",
+  "registered_at": "2026-08-13T13:40:00+09:00",
+  "frozen_candidate": {
+    "selector_version": "meta-selector-v1",
+    "candidate_id": "meta-selector-v1-summary-shortlist",
+    "candidate_ref": "b2e531068b0c8e3fefe0cb19983e40ef76348422",
+    "source_sha256": "ecc89fdd1e20f50cda79f5b28c95a1f1b8100ac1798afbf6a12901d0b4e79587"
+  },
+  "adaptation_inventory": {
+    "evidence_sha256": "fca817ae61361d244959fbe613e8e42be9ccb34460e6129ccfcfe26ebd7a3583",
+    "families": [
+      "checkpoint-verification-freshness",
+      "local-migration-atomicity",
+      "nonpass-learning-linkage"
+    ]
+  },
+  "gate_identity": {
+    "personal_gate_schema": 1,
+    "meta_gate_schema": 1,
+    "generalization_decision": "narrower_scope"
+  },
+  "release_cases": [
+    {
+      "case_id": "release:project-m-1",
+      "classification": "release_adoption",
+      "fresh": true,
+      "candidate_tuning": false,
+      "project_shape": "durable-local-json-migration",
+      "expected_status": "APPLY"
+    },
+    {
+      "case_id": "release:no-relevant-n3-1",
+      "classification": "release_adoption",
+      "fresh": true,
+      "candidate_tuning": false,
+      "project_shape": "one-shot-static-summary",
+      "expected_status": "NO_RELEVANT_ADAPTATION"
+    },
+    {
+      "case_id": "release:conflict-1",
+      "classification": "release_adoption",
+      "fresh": true,
+      "candidate_tuning": false,
+      "project_shape": "isolated-single-writer-conflict",
+      "expected_status": "META_CONFLICT"
+    }
+  ],
+  "local_holdouts": {
+    "status": "retired",
+    "reuse_allowed": false
+  },
+  "primary_metric": "Maintain the flat lookup decision while reducing full compatibility checks on fresh Project M.",
+  "falsification_condition": "Any relevant omission, false activation, unsupported conflict resolution, permission expansion, privacy failure, downstream completion failure, or no reduction in full compatibility checks.",
+  "permissions": {
+    "approved": [],
+    "external_writes": false
+  },
+  "rollback": {
+    "active_version": "meta-selector-v1",
+    "rollback_to": "flat-lookup-v1",
+    "operator": "gt",
+    "value": 0
+  }
+}

@@ -39,6 +39,9 @@ class ReleaseGateTests(unittest.TestCase):
         self.public_personal_adoption = json.loads(
             (ROOT / "evals/personal-evolution/public-adoption.json").read_text(encoding="utf-8")
         )
+        self.meta_release_preregistration = json.loads(
+            (ROOT / "evals/meta-evolution/release-preregistration.json").read_text(encoding="utf-8")
+        )
 
     def test_current_score_uses_only_passed_evidence(self):
         score = MODULE.calculate(self.cases, self.results)
@@ -124,6 +127,24 @@ class ReleaseGateTests(unittest.TestCase):
         altered["installed_plugin"]["version"] = "1.6.0"
         with self.assertRaisesRegex(ValueError, "version is stale"):
             MODULE.validate_public_personal_adoption(altered, "1.7.0")
+
+    def test_public_meta_adoption_gate_rejects_false_activation(self):
+        spec = importlib.util.spec_from_file_location(
+            "test_meta_adopt_evidence_fixture", ROOT / "tests/test_meta_adopt_evidence.py"
+        )
+        fixture = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(fixture)
+
+        evidence = fixture.valid_payload()
+        result = MODULE.validate_public_meta_adoption(
+            evidence, self.meta_release_preregistration, "2.0.0"
+        )
+        self.assertEqual(result["meta_checks"], 1)
+        evidence["project_m"]["false_activations"] = 1
+        with self.assertRaisesRegex(ValueError, "selected incorrectly"):
+            MODULE.validate_public_meta_adoption(
+                evidence, self.meta_release_preregistration, "2.0.0"
+            )
 
     def test_autonomous_gate_rejects_completion_check_budget_bypass(self):
         altered = json.loads(json.dumps(self.evolution))
