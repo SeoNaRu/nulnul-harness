@@ -351,7 +351,7 @@ Some of the strongest evidence came from failures:
 | Personal transfer candidate | **2 apply, 1 skip, fresh Project D pass** | One adaptation can be transferred, compatibility-checked, reused, deduplicated, and revoked without raw project data; broader personal evolution is not established. |
 | 2.0 local Meta Gate | **3 families, 9 → 4 full checks, 3/3 decisions correct** | Bounded summary evidence improved selection work in one sealed episode; token, runtime, universal, and cross-user gains are not established. |
 | 2.1 release status | **Released and verified** | Exact public 2.1.0 Claude adoption passed five checks with protected writes 0; the active evolution fixture shrank **87.48%**, and exact Project M kept the correct apply with full checks **3 → 1**. Generalization remains narrower scope. |
-| 2.1.1 release candidate | **RC public adoption passed** | Four counterbalanced rounds preserved the same debt result and reduced median detector time **17.73645 s → 0.2308 s (−98.70%)**; exact public RC Claude and Meta adoption also passed. Final-tag evidence is the remaining release gate. |
+| 2.1.1 release status | **Released and verified** | Four counterbalanced rounds preserved the same debt result and reduced median detector time **17.73645 s → 0.2308 s (−98.70%)**. Fresh exact-final Claude and Meta adoption passed, and Release Gate closed at **100/100**. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
 
@@ -362,7 +362,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-The public RC evidence passed; 2.1.1 remains outside `main` until fresh exact-final Claude and Meta adoption closes Release Gate.
+The current public 2.1.1 evidence reports `release_ready: true`; the tagged archive SHA-256 is `dc7718ea2f7894a411ee2e179fb015d10621e5d684d9e6f228e298a3ed131b03`.
 
 The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [documentation-debt A/B](evals/benchmarks/doc-debt/results.json), [rejected context-routing A/B](evals/benchmarks/context-routing/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), plus post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), and [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) results. Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 

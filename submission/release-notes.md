@@ -8,6 +8,8 @@ Four counterbalanced A/B rounds against exact `v2.1.0` returned the same debt in
 
 No dependency, service, permission, credential, or external-write scope was added.
 
+Fresh exact-tag Claude adoption preserved the inactive host entry and both existing agent profiles while all five executable checks passed. Exact-final Meta adoption retained the correct apply with full compatibility checks reduced from three to one, and Release Gate closed at 100/100.
+
 ```bash
 codex plugin marketplace add SeoNaRu/nulnul-harness --ref main
 codex plugin add nulnul-harness@nulnul-harness
