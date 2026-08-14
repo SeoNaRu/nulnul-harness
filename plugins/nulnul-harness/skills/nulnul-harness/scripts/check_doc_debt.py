@@ -44,7 +44,7 @@ def newest_source_by_mtime(root):
 def check(root, documents=DOCUMENTS):
     root = Path(root).resolve()
     # ponytail: commit order, not timestamps, so commits made in the same second still compare.
-    newest = newest_source_by_mtime(root)
+    newest = None
     stale = []
     for name in documents:
         document = root / name
@@ -53,10 +53,14 @@ def check(root, documents=DOCUMENTS):
         document_commit = git(root, "log", "-1", "--format=%H", "--", name)
         if document_commit:
             source = sources_changed_since(root, document_commit)
-        elif newest is not None and newest.stat().st_mtime > document.stat().st_mtime:
-            source = str(newest.relative_to(root))
         else:
-            source = None
+            if newest is None:
+                newest = newest_source_by_mtime(root)
+            source = (
+                str(newest.relative_to(root))
+                if newest is not None and newest.stat().st_mtime > document.stat().st_mtime
+                else None
+            )
         if source:
             stale.append({"document": name, "newest_source": source})
     return stale

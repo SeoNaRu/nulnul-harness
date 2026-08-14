@@ -342,6 +342,29 @@
           "proposal-navigator-20-intent-means-gate",
           "proposal-navigator-20-scoped-decision-artifact"
         ]
+      },
+      {
+        "id": "feedback-public-positioning-drift",
+        "source": "test",
+        "target_agent": "product-builder",
+        "observed": "After the product-first README became the public repository entry, seven installed and marketplace metadata surfaces still defined NULNUL as an agent or AI team builder, contradicting the product contract that zero new agents can be the correct result.",
+        "expected": "Every public acquisition surface describes the outcome-first, reuse-first, verified minimal harness without presenting agent-team creation as the product category.",
+        "evidence": "Two unchanged champion evaluations of ProductPluginTests.test_public_metadata_is_product_first each reported the same seven violating surfaces before candidate generation.",
+        "scope": "core",
+        "status": "converted"
+      },
+      {
+        "id": "feedback-validation-reference-split",
+        "source": "test",
+        "target_agent": "coach",
+        "observed": "The always-loaded skill entry measured 21656 bytes, suggesting that conditional validation might be moved out of ordinary fast-resume context.",
+        "expected": "A context-routing change must reduce same-model paired input cost while preserving exact fast-path behavior and read scope.",
+        "evidence": "Four counterbalanced paired gpt-5.6-sol runs kept both arms correct 4/4, but the 16033-byte candidate increased paired input tokens by 11.07 percent and elapsed time by 5.44 percent.",
+        "scope": "project",
+        "status": "converted",
+        "rejected_proposals": [
+          "proposal-coach-6-validation-reference-split"
+        ]
       }
     ],
     "proposals": [
@@ -1255,6 +1278,64 @@
         },
         "mechanism_id": "bounded-repository-receipt-v1",
         "status": "rejected"
+      },
+      {
+        "id": "proposal-product-builder-6-public-outcome-contract",
+        "feedback_ids": [
+          "feedback-public-positioning-drift"
+        ],
+        "target_agent": "product-builder",
+        "author_agent": "coach",
+        "from_version": 5,
+        "to_version": 6,
+        "cause": "Installed and marketplace descriptions retained the earlier agent-team category framing after the repository entry contract changed, so acquisition surfaces advertised an implementation option as the product itself.",
+        "change_target": "Align only public descriptive metadata across both plugin manifests, the Claude marketplace, and the submission listing around requested outcomes, reuse of proven capabilities, minimal demonstrated additions, executable verification, and independently gated improvement.",
+        "regression_check": "python3 -m unittest tests.test_product_plugin.ProductPluginTests.test_public_metadata_is_product_first -v && python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v && python3 scripts/release_gate.py",
+        "primary_metric": "public metadata surfaces presenting NULNUL as an agent-team generator",
+        "permission_delta": [],
+        "rollback": "Restore the four public metadata files from champion git ref 4b120e3b2b7baf4909f814b08c44da2c3e445e65.",
+        "change_level": "task",
+        "discovery_evidence": "Two unchanged champion evaluations each reported the same seven public-positioning violations; archive lookup found no matching rejected pathology and mechanism.",
+        "transfer_check": "The deterministic product test covers Codex metadata, Claude metadata, the public marketplace entry, and the submission listing; no cross-project or HOLDOUT claim is made.",
+        "prediction": "The deterministic Gate will reduce public metadata surfaces presenting NULNUL as an agent-team generator from seven to zero while preserving behavior, version, permissions, and the product-first README.",
+        "expected_delta": {
+          "public_positioning_violations": "7 -> 0",
+          "permission_delta": "0 -> 0"
+        },
+        "falsification_condition": "Any public-positioning violation remains; manifest parity or archive consistency breaks; any file outside the four preregistered metadata files changes; or behavior, permissions, version, tests, evidence, evolution state, or README content changes.",
+        "pathology": {
+          "where": "activation",
+          "why": "public acquisition metadata still defines agent-team creation as the product after the verified product contract became outcome-first and reuse-first"
+        },
+        "mechanism_id": "public-metadata-outcome-contract",
+        "status": "accepted"
+      },
+      {
+        "id": "proposal-coach-6-validation-reference-split",
+        "feedback_ids": [
+          "feedback-validation-reference-split"
+        ],
+        "target_agent": "coach",
+        "author_agent": "coach",
+        "from_version": 5,
+        "to_version": 6,
+        "cause": "Conditional final validation occupied 6081 bytes of the always-loaded skill entry even though fast resume forbids loading setup references.",
+        "change_target": "Move the validation checklist to one conditional reference and keep only the fast-path and full-workflow routing rules in SKILL.md.",
+        "regression_check": "python3 evals/benchmarks/activation/run_activation.py --rounds 4 --case verified-checkpoint-fast-path with counterbalanced champion and candidate arms",
+        "primary_metric": "same-model paired input tokens with exact fast-path behavior and bounded reads",
+        "permission_delta": [],
+        "rollback": "Delete the temporary candidate and keep Coach v5 unchanged.",
+        "change_level": "meta",
+        "discovery_evidence": "The active skill entry measured 21656 bytes and archive lookup returned no rejected Coach proposal for this mechanism.",
+        "transfer_check": null,
+        "prediction": "Reducing the always-loaded entry to 16033 bytes lowers paired input tokens without changing behavior, read scope, or completion-check ownership.",
+        "expected_delta": {
+          "skill_entry_bytes": "21656 -> 16033",
+          "paired_input_tokens": "<0 percent",
+          "correct_runs": "4/4 -> 4/4"
+        },
+        "falsification_condition": "Reject if candidate behavior or read scope differs, or any paired cost metric increases.",
+        "status": "rejected"
       }
     ],
     "promotions": [
@@ -1835,6 +1916,34 @@
         "before": "The champion passed one of four repeated primary cases and the self-authored artifact passed none because repository facts were not independently bound.",
         "after": "The frozen receipt passed all repeated primary and declared controls, but no fresh normal-intent real design/web task was available for the mandatory live cycle, so validation advantage was not promoted.",
         "regressions_passed": true,
+        "decision": "rejected",
+        "live_cycle": null
+      },
+      {
+        "id": "promotion-product-builder-6",
+        "proposal_id": "proposal-product-builder-6-public-outcome-contract",
+        "gate_agent": "gate",
+        "before": "Seven public acquisition metadata surfaces still presented agent-team creation as the product, and an unchanged retry reproduced all seven.",
+        "after": "The live Coach candidate changed only four preregistered metadata files; the independent Gate found zero public-positioning violations and the complete product suite plus Release Gate passed.",
+        "regressions_passed": true,
+        "decision": "accepted",
+        "live_cycle": {
+          "status": "observed",
+          "metric": "public metadata surfaces presenting NULNUL as an agent-team generator",
+          "rollback_threshold": "roll back after one public acquisition surface returns to agent-team category framing or a product guardrail fails",
+          "metric_value": 0,
+          "rollback_operator": "gt",
+          "rollback_value": 0,
+          "evidence": "A post-promotion deterministic live check again reported zero violations; the executable rollback threshold remains active."
+        }
+      },
+      {
+        "id": "promotion-coach-6-validation-reference-split",
+        "proposal_id": "proposal-coach-6-validation-reference-split",
+        "gate_agent": "gate",
+        "before": "The champion skill entry measured 21656 bytes and passed all four fast-path runs.",
+        "after": "The 16033-byte candidate also passed 4/4, but paired elapsed, input, output, and reasoning costs increased by 5.44, 11.07, 16.21, and 36.27 percent respectively.",
+        "regressions_passed": false,
         "decision": "rejected",
         "live_cycle": null
       }

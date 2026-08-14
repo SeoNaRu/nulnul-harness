@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-14",
+  "champion_ref": "v2.1.0",
+  "method": "four counterbalanced in-process checks on the same tracked repository",
+  "primary_metric": "median elapsed seconds",
+  "runs": [
+    {
+      "round": 1,
+      "arm": "champion",
+      "elapsed_seconds": 17.5286,
+      "result": []
+    },
+    {
+      "round": 1,
+      "arm": "candidate",
+      "elapsed_seconds": 0.2255,
+      "result": []
+    },
+    {
+      "round": 2,
+      "arm": "candidate",
+      "elapsed_seconds": 0.226,
+      "result": []
+    },
+    {
+      "round": 2,
+      "arm": "champion",
+      "elapsed_seconds": 17.5272,
+      "result": []
+    },
+    {
+      "round": 3,
+      "arm": "champion",
+      "elapsed_seconds": 18.154,
+      "result": []
+    },
+    {
+      "round": 3,
+      "arm": "candidate",
+      "elapsed_seconds": 0.2371,
+      "result": []
+    },
+    {
+      "round": 4,
+      "arm": "candidate",
+      "elapsed_seconds": 0.2356,
+      "result": []
+    },
+    {
+      "round": 4,
+      "arm": "champion",
+      "elapsed_seconds": 17.9443,
+      "result": []
+    }
+  ],
+  "medians": {
+    "champion": 17.736449999999998,
+    "candidate": 0.2308
+  },
+  "improvement_percent": 98.7,
+  "behavior_equal": true,
+  "decision": "accepted",
+  "learning_verdicts": [
+    {
+      "id": "doc-debt-lazy-scan",
+      "status": "accepted"
+    }
+  ]
+}
