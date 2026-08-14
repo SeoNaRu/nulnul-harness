@@ -1,5 +1,6 @@
 import json
 import importlib.util
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -14,6 +15,16 @@ SPEC.loader.exec_module(MODULE)
 
 
 class ClaudeAdoptEvidenceTests(unittest.TestCase):
+    def test_non_object_stream_messages_are_ignored(self):
+        with tempfile.TemporaryDirectory() as directory:
+            transcript = Path(directory) / "transcript.jsonl"
+            transcript.write_text(
+                '{"message":"status"}\n'
+                '{"message":{"content":[{"type":"tool_use","name":"Read","input":{}}]}}\n',
+                encoding="utf-8",
+            )
+            self.assertEqual(MODULE.tool_calls(transcript), [{"name": "Read", "input": {}}])
+
     def test_git_marketplace_with_exact_github_url_is_public_source(self):
         outputs = [
             '[{"id":"nulnul-harness@nulnul-harness","version":"2.0.0-rc.2"}]',

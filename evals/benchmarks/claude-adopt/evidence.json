@@ -1,26 +1,26 @@
 {
   "schema_version": 1,
-  "run_id": "claude-adopt-2.0.1-public-r1",
-  "run_date": "2026-08-13",
+  "run_id": "claude-adopt-2.1.0-public-r1",
+  "run_date": "2026-08-14",
   "case_id": "positive-adopt-existing-harness",
-  "plugin_version": "2.0.1",
+  "plugin_version": "2.1.0",
   "plugin_source": "github",
   "distribution": {
-    "release_tag": "v2.0.1",
-    "release_commit": "5198487b00ef441f4da08df18618d04f10adab39",
-    "asset": "nulnul-harness-2.0.1.zip",
-    "asset_sha256": "5b0d69f1fba2df23e6d2d78a07d25128a65f0ff901754d53eadf104bfd011aed"
+    "release_tag": "v2.1.0",
+    "release_commit": "e4a402fe2406f01137573831c396dac76d68405e",
+    "asset": "nulnul-harness-2.1.0.zip",
+    "asset_sha256": "be76a1afa14c91f7a613aa04fba7b4058eb8c37e291879183cda270a76f43811"
   },
   "public_positioning_violations": 0,
   "protected_write_calls": [],
   "existing_agents": {
-    "checker": {
-      "before_sha256": "c540f7214b34328cecd6d068e7ff8a2bf7f47656e98f1b878731a8022e10fe4e",
-      "after_sha256": "c540f7214b34328cecd6d068e7ff8a2bf7f47656e98f1b878731a8022e10fe4e"
+    "collector": {
+      "before_sha256": "0efb931be2b8942aad9da1de12b5142932b6a719597ff07ca4031f685ad1a42c",
+      "after_sha256": "0efb931be2b8942aad9da1de12b5142932b6a719597ff07ca4031f685ad1a42c"
     },
-    "formatter": {
-      "before_sha256": "9950aee93d3e30a15ea6961a558861a144d61edeeb40c9a5114beb8471997bc6",
-      "after_sha256": "9950aee93d3e30a15ea6961a558861a144d61edeeb40c9a5114beb8471997bc6"
+    "reviewer": {
+      "before_sha256": "ae25efe17b7897926d75e117a8522bdb24dd75487ec79849ffd6677a6a979b66",
+      "after_sha256": "ae25efe17b7897926d75e117a8522bdb24dd75487ec79849ffd6677a6a979b66"
     }
   },
   "roster_enumerated": true,
@@ -30,8 +30,8 @@
     "active_host": "claude",
     "active_entry": "CLAUDE.md",
     "inactive_entry": "AGENTS.md",
-    "inactive_before_sha256": "95dd46061538fbb5d687091a5920aab3be32a99eb93756fb203611de51ba8322",
-    "inactive_after_sha256": "95dd46061538fbb5d687091a5920aab3be32a99eb93756fb203611de51ba8322",
+    "inactive_before_sha256": "69b064c6b90af868c5fa79fcdce832d953c4e133036fd8ac6f4fbd5415fa75dd",
+    "inactive_after_sha256": "69b064c6b90af868c5fa79fcdce832d953c4e133036fd8ac6f4fbd5415fa75dd",
     "shared_live_state_writer_count": 1
   },
   "checkpoint_fast_path_ready": true,

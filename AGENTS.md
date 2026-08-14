@@ -14,6 +14,7 @@ This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds prov
 - Prefer direct or single-agent execution. Add roles only from concrete independent work or verification boundaries, with one synthesis owner.
 - Never register global tools, use credentials, deploy, or publish without explicit user approval.
 - Keep generated setup removable. Accept an evolution only when a reproducible before/after check improves the primary outcome without violating guardrails, and observe one live cycle after promotion with an executable automatic rollback threshold; schema-v3/v4 states must run the shipped rollback executor before final validation.
+- Keep ordinary resume context bounded: compact closed evolution history into the digest-bound adjacent archive, validate deterministic full-state reconstruction, and query rejected history only when a matching proposal needs it.
 - Give durable projects one validated concise resume checkpoint; keep stable setup evidence outside the host-loaded entry, and convert every reproducible nonpass verdict into Coach feedback and one bounded proposal in the same run.
 - Allow fast resume only from an explicitly verified checkpoint; machine-link every nonpass verdict to its feedback and proposal, and migrate legacy durable contracts without creating a second live-state writer.
 - Version concise checkpoint shapes explicitly, fail release on a missing learning-verdict inventory, and restore all earlier project files when a migration replacement fails.

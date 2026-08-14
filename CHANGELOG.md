@@ -7,6 +7,9 @@ All notable changes to `nulnul harness` are recorded here.
 - Added a standard-library evolution compactor that keeps open work and the latest accepted rollback point per agent in the active state while moving closed feedback, proposals, promotions, and autonomous episodes to an adjacent digest-bound archive.
 - Added deterministic full-state reconstruction, archive integrity and count checks, idempotent rollback-safe batch writes, targeted rejected-history lookup, legacy schema compatibility, and an archive-tampering negative control.
 - Reduced the real 164,211-byte evolution fixture to a 20,560-byte active resume state (87.48%) without losing any record identity; local active parse-and-validation median fell from about 5.5 ms to 0.2 ms while one-time compaction took about 13 ms.
+- Fresh exact `v2.1.0` GitHub-tag Claude adoption preserved `AGENTS.md` and both existing agent profiles, made zero protected writes, left one verified shared state writer, and passed all five executable checks. The evidence reader now ignores non-object status messages emitted by newer Claude streams.
+- Fresh exact-version Project M retained the correct transactional migration apply while reducing full compatibility checks from 3 to 1; no-match, conflict, privacy, permission, and rollback controls passed without reopening retired holdouts.
+- The full 218-test suite passed and Release Gate closed at 100/100 with `release_ready=true`; the packaged archive remained byte-identical at SHA-256 `be76a1afa14c91f7a613aa04fba7b4058eb8c37e291879183cda270a76f43811`.
 
 ## 2.0.1 — 2026-08-13
 

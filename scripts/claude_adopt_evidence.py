@@ -43,7 +43,10 @@ def tool_calls(transcript):
             event = json.loads(line)
         except json.JSONDecodeError:
             continue
-        for item in (event.get("message") or {}).get("content", []):
+        message = event.get("message")
+        if not isinstance(message, dict):
+            continue
+        for item in message.get("content", []):
             if isinstance(item, dict) and item.get("type") == "tool_use":
                 calls.append({"name": item.get("name"), "input": item.get("input") or {}})
     return calls

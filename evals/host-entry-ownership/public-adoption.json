@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "run_id": "host-entry-ownership-2.0.1-public-r1",
-  "run_date": "2026-08-13",
+  "run_id": "host-entry-ownership-2.1.0-public-r1",
+  "run_date": "2026-08-14",
   "candidate_id": "candidate-host-entry-ownership-v1",
   "normal_user_intent": true,
   "installed_plugin": {
-    "version": "2.0.1",
+    "version": "2.1.0",
     "source": "github-tag",
-    "tag": "v2.0.1",
-    "release_commit": "5198487b00ef441f4da08df18618d04f10adab39",
-    "asset_sha256": "5b0d69f1fba2df23e6d2d78a07d25128a65f0ff901754d53eadf104bfd011aed",
+    "tag": "v2.1.0",
+    "release_commit": "e4a402fe2406f01137573831c396dac76d68405e",
+    "asset_sha256": "be76a1afa14c91f7a613aa04fba7b4058eb8c37e291879183cda270a76f43811",
     "local_public_byte_identity": true
   },
   "host_entry_ownership": {
@@ -45,5 +45,5 @@
   "permission_delta": [],
   "rollback_triggered": false,
   "decision": "PUBLIC_ADOPTION_PASS",
-  "claim_boundary": "Exact public 2.0.1 evidence covers sequential Claude adoption after Codex, one shared repository state, the changed local migration path, and existing Meta no-match/conflict behavior. Concurrent host mutation and other hosts remain unclaimed."
+  "claim_boundary": "Exact public 2.1.0 evidence covers sequential Claude adoption after Codex, one shared repository state, the local migration path, and existing Meta no-match/conflict behavior. Concurrent host mutation and other hosts remain unclaimed."
 }
