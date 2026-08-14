@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-14",
+  "candidate_id": "validation-reference-split",
+  "method": {
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "case": "verified-checkpoint-fast-path",
+    "rounds": 4,
+    "order": "counterbalanced paired champion/candidate"
+  },
+  "prediction": "Moving conditional validation out of the always-loaded skill entry reduces fast-resume input tokens without changing behavior or read scope.",
+  "champion_skill_bytes": 21656,
+  "candidate_skill_bytes": 16033,
+  "champion_correct": 4,
+  "candidate_correct": 4,
+  "paired_change_percent": {
+    "elapsed_seconds": 5.44,
+    "input_tokens": 11.07,
+    "output_tokens": 16.21,
+    "reasoning_output_tokens": 36.27
+  },
+  "permission_delta": [],
+  "decision": "NO_PROMOTION",
+  "reason": "The candidate preserved behavior but increased every paired cost metric; smaller instruction bytes were not a reliable runtime proxy.",
+  "learning_verdicts": [
+    {
+      "id": "verdict-validation-reference-split",
+      "status": "regressed",
+      "feedback_id": "feedback-validation-reference-split",
+      "proposal_ids": [
+        "proposal-coach-6-validation-reference-split"
+      ]
+    }
+  ]
+}

@@ -1,10 +1,14 @@
-# nulnul harness 2.1.0
+# nulnul harness 2.1.1
 
-Keep governed evolution history without loading all of it into every resumed task.
+Make the required documentation-debt check fast on tracked repositories without weakening its fallback.
 
-The standard-library compactor leaves open work and each agent's latest accepted rollback point in `evolution.json`, moves closed feedback, proposals, promotions, and autonomous episodes to an adjacent `evolution.archive.json`, and binds the two with SHA-256. Deterministic validation reconstructs the complete state without exposing the archive to normal model context. Targeted rejected-history lookup remains available before the Coach proposes a matching change.
+The detector now scans the repository by modification time only when it encounters a document with no Git history. Tracked documents continue to use commit order, and repositories without usable history retain the existing modification-time behavior.
 
-The real 164,211-byte project state compacted to a 20,560-byte active state in the regression check, with every record identity preserved. Compaction is idempotent, archive tampering fails closed, legacy schema versions remain supported, and no dependency, service, permission, credential, or external-write scope was added.
+Four counterbalanced A/B rounds against exact `v2.1.0` returned the same debt inventory in every pair while median elapsed time fell from 17.73645 seconds to 0.2308 seconds, a 98.70% reduction on the release repository. Seven focused controls cover Git-history and modification-time paths. A separate same-model context-routing candidate was rejected because it increased paired input tokens by 11.07%; the shipped skill entry remains unchanged.
+
+No dependency, service, permission, credential, or external-write scope was added.
+
+Fresh exact-tag Claude adoption preserved the inactive host entry and both existing agent profiles while all five executable checks passed. Exact-final Meta adoption retained the correct apply with full compatibility checks reduced from three to one, and Release Gate closed at 100/100.
 
 ```bash
 codex plugin marketplace add SeoNaRu/nulnul-harness --ref main

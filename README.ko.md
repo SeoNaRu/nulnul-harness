@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.1.0-111111" alt="version 2.1.0">
+  <img src="https://img.shields.io/badge/version-2.1.1-111111" alt="version 2.1.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="확인된 동작과 안전 점수: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -19,10 +19,12 @@
 </p>
 
 <p align="center">
-  <a href="#빠른-시작">바로 사용</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.0">2.1.0 릴리스</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">불편 신고</a>
+  <a href="#빠른-시작">바로 사용</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.1">2.1.1</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">불편 신고</a>
 </p>
 
-> **NULNUL 2.1.0은 evolution context를 bounded 상태로 유지합니다.** 종료된 history는 일반 resume context에 넣지 않고 integrity-checked local archive로 옮깁니다.
+> **NULNUL 2.1.1은 필수 documentation-debt 검사를 lazy하게 실행합니다.** 이 tracked release 저장소에서 동일 결과의 median이 counterbalanced A/B 4회 기준 17.73645초에서 0.2308초로 줄었습니다.
+>
+> **2.1은 evolution context를 bounded 상태로 유지합니다.** 종료된 history는 일반 resume context에 넣지 않고 integrity-checked local archive로 옮깁니다.
 >
 > **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
 >
@@ -339,7 +341,7 @@ transfer claim만 → sealed unseen check → scoped decision
 
 | Evidence | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **218개 통과 (218/218)** | deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, negative-control contract가 유지됩니다. |
+| 저장소 test | **219개 통과 (219/219)** | deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, documentation-debt A/B, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
 | 최종 1.7.0 Release Gate | **통과** | Exact-tag Claude Code와 personal-adaptation adoption 통과 후 main CI run `31651306556`도 green이 됐습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
@@ -348,6 +350,7 @@ transfer claim만 → sealed unseen check → scoped decision
 | Personal transfer candidate | **적용 2, 건너뜀 1, fresh Project D 통과** | Raw project data 없이 adaptation 하나를 transfer, compatibility check, reuse, dedup, revoke할 수 있습니다. 더 넓은 personal evolution은 미입증입니다. |
 | 2.0 local Meta Gate | **3 family, full check 9 → 4, 결정 3/3 정답** | Bounded summary evidence가 sealed episode 하나에서 selection work를 줄였습니다. Token, runtime, universal, cross-user 개선은 미입증입니다. |
 | 2.1 release 상태 | **공개 및 검증 완료** | Exact public 2.1.0 Claude adoption이 protected write 0건과 check 5개를 통과했고, active evolution fixture는 **87.48%** 작아졌으며 exact Project M은 정답을 유지하며 full check를 **3 → 1**로 줄였습니다. Generalization은 narrower scope를 유지합니다. |
+| 2.1.1 release 상태 | **공개 및 검증 완료** | Counterbalanced 4회에서 동일 debt 결과를 유지하고 detector median을 **17.73645초 → 0.2308초(−98.70%)**로 줄였습니다. Fresh exact-final Claude·Meta adoption이 통과했고 Release Gate는 **100/100**으로 닫혔습니다. |
 
 개선 후보가 반드시 이겨야 하는 것은 아닙니다. 거부, `NO_PROMOTION`, narrower scope, rollback은 모두 정상 결과입니다.
 
@@ -358,9 +361,9 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-공개된 2.1.0 evidence에서는 두 번째 command가 `release_ready: true`를 보고합니다.
+현재 공개된 2.1.1 evidence는 `release_ready: true`를 보고합니다. Tagged archive SHA-256은 `dc7718ea2f7894a411ee2e179fb015d10621e5d684d9e6f228e298a3ed131b03`입니다.
 
-근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json), 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) 결과를 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
+근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [documentation-debt A/B](evals/benchmarks/doc-debt/results.json), [rejected context-routing A/B](evals/benchmarks/context-routing/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json), 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) 결과를 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
 
 ## 이런 사람을 위해 만들었습니다
 

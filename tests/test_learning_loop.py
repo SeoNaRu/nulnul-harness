@@ -26,7 +26,14 @@ class LearningLoopTests(unittest.TestCase):
         self.evolution = COMPACTOR_MODULE.read_full(ROOT / "docs/nulnul/evolution.json")
 
     def test_all_published_nonpass_verdicts_entered_the_coach_loop(self):
-        self.assertEqual(validator.validate(self.results, self.evolution), [])
+        result_files = (
+            ROOT / "evals/benchmarks/setup-baseline/results.json",
+            ROOT / "evals/benchmarks/context-routing/results.json",
+        )
+        for path in result_files:
+            with self.subTest(path=path):
+                results = json.loads(path.read_text(encoding="utf-8"))
+                self.assertEqual(validator.validate(results, self.evolution), [])
 
     def test_unlinked_nonpass_verdict_fails_closed(self):
         broken = copy.deepcopy(self.results)

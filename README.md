@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.1.0-111111" alt="version 2.1.0">
+  <img src="https://img.shields.io/badge/version-2.1.1-111111" alt="version 2.1.1">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="known behavior and safety score: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -19,10 +19,12 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Try it</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.0">2.1.0 release</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">Report friction</a>
+  <a href="#quick-start">Try it</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.1">2.1.1</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">Report friction</a>
 </p>
 
-> **NULNUL 2.1.0 keeps evolution context bounded.** Closed history moves to an integrity-checked local archive instead of loading into ordinary resume context.
+> **NULNUL 2.1.1 makes the required documentation-debt check lazy.** On this tracked release repository, the same result moved from a 17.73645-second median to 0.2308 seconds across four counterbalanced A/B rounds.
+>
+> **2.1 keeps evolution context bounded.** Closed history moves to an integrity-checked local archive instead of loading into ordinary resume context.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
 >
@@ -340,7 +342,7 @@ Some of the strongest evidence came from failures:
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **218 passed (218/218)** | Deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, and negative-control contracts hold. |
+| Repository tests | **219 passed (219/219)** | Deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, documentation-debt A/B, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
 | Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by green main CI run `31651306556`. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
@@ -349,6 +351,7 @@ Some of the strongest evidence came from failures:
 | Personal transfer candidate | **2 apply, 1 skip, fresh Project D pass** | One adaptation can be transferred, compatibility-checked, reused, deduplicated, and revoked without raw project data; broader personal evolution is not established. |
 | 2.0 local Meta Gate | **3 families, 9 → 4 full checks, 3/3 decisions correct** | Bounded summary evidence improved selection work in one sealed episode; token, runtime, universal, and cross-user gains are not established. |
 | 2.1 release status | **Released and verified** | Exact public 2.1.0 Claude adoption passed five checks with protected writes 0; the active evolution fixture shrank **87.48%**, and exact Project M kept the correct apply with full checks **3 → 1**. Generalization remains narrower scope. |
+| 2.1.1 release status | **Released and verified** | Four counterbalanced rounds preserved the same debt result and reduced median detector time **17.73645 s → 0.2308 s (−98.70%)**. Fresh exact-final Claude and Meta adoption passed, and Release Gate closed at **100/100**. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
 
@@ -359,9 +362,9 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-For the released 2.1.0 evidence, the second command reports `release_ready: true`.
+The current public 2.1.1 evidence reports `release_ready: true`; the tagged archive SHA-256 is `dc7718ea2f7894a411ee2e179fb015d10621e5d684d9e6f228e298a3ed131b03`.
 
-The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), plus post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), and [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) results. Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
+The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [documentation-debt A/B](evals/benchmarks/doc-debt/results.json), [rejected context-routing A/B](evals/benchmarks/context-routing/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), plus post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), and [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) results. Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Who I built NULNUL for
 

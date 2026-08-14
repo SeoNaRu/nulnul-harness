@@ -30,11 +30,11 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.0.1 is public and release-closed after exact-version Claude and cross-project Meta adoption.",
+    "milestone": "NULNUL 2.1.1 passed local A/B, exact public RC and final adoption, and Release Gate 100/100.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
     "status": "complete",
-    "last_verified": "2026-08-13: Exact public 2.0.1 Claude adoption used normal setup intent, kept AGENTS.md and two agent profiles byte-identical, created only CLAUDE.md plus one shared state writer, and passed five checks. Fresh exact-final Meta smoke kept the correct migration apply at 3-to-1 checks and passed migration, no-match, conflict, privacy, and permission controls.",
-    "next_action": "Keep 2.0.1 stable and collect normal usage feedback. Do not claim simultaneous multi-host mutation support or invent a roadmap without a measured bottleneck.",
+    "last_verified": "2026-08-14: 219 tests passed; four counterbalanced v2.1.0/current documentation-debt A/B rounds preserved behavior and reduced median time 17.73645 to 0.2308 seconds. A four-pair same-model context-routing candidate regressed input tokens 11.07 percent and was rejected. Fresh exact v2.1.1 Claude and Meta adoption passed and Release Gate reported release_ready true.",
+    "next_action": "Promote the exact-version evidence commit to main, watch CI to green, and publish the tagged 2.1.1 archive.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
@@ -60,23 +60,13 @@
       "last_promotion_id": "promotion-gate-11-github-git-source"
     },
     "product-builder": {
-      "version": 6,
-      "job": "Implement the smallest complete product change and leave executable verification.",
+      "version": 7,
+      "job": "Implement the smallest complete product change, remove measured avoidable work, and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": "promotion-product-builder-6"
+      "last_promotion_id": "promotion-product-builder-7-lazy-doc-debt-scan"
     }
   },
   "feedback": [
-    {
-      "id": "feedback-public-positioning-drift",
-      "source": "test",
-      "target_agent": "product-builder",
-      "observed": "After the product-first README became the public repository entry, seven installed and marketplace metadata surfaces still defined NULNUL as an agent or AI team builder, contradicting the product contract that zero new agents can be the correct result.",
-      "expected": "Every public acquisition surface describes the outcome-first, reuse-first, verified minimal harness without presenting agent-team creation as the product category.",
-      "evidence": "Two unchanged champion evaluations of ProductPluginTests.test_public_metadata_is_product_first each reported the same seven violating surfaces before candidate generation.",
-      "scope": "core",
-      "status": "converted"
-    },
     {
       "id": "feedback-claude-git-marketplace-provenance",
       "source": "gate",
@@ -106,40 +96,19 @@
       "evidence": "The real state compaction regression preserved every full record, reduced active bytes from 164211 to 20560, was idempotent, and rejected archive digest and count tampering.",
       "scope": "project",
       "status": "converted"
+    },
+    {
+      "id": "feedback-doc-debt-eager-scan",
+      "source": "user",
+      "target_agent": "product-builder",
+      "observed": "The required documentation-debt check spent 17.56 seconds on this tracked repository because it recursively scanned every source path before checking whether Git history already answered the question.",
+      "expected": "Tracked documents use Git history directly; the recursive modification-time fallback runs only for a document without Git history and preserves the same stale-document result.",
+      "evidence": "Four counterbalanced v2.1.0/current A/B rounds preserved identical empty debt results while median elapsed time fell from 17.73645 to 0.2308 seconds.",
+      "scope": "core",
+      "status": "converted"
     }
   ],
   "proposals": [
-    {
-      "id": "proposal-product-builder-6-public-outcome-contract",
-      "feedback_ids": [
-        "feedback-public-positioning-drift"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 5,
-      "to_version": 6,
-      "cause": "Installed and marketplace descriptions retained the earlier agent-team category framing after the repository entry contract changed, so acquisition surfaces advertised an implementation option as the product itself.",
-      "change_target": "Align only public descriptive metadata across both plugin manifests, the Claude marketplace, and the submission listing around requested outcomes, reuse of proven capabilities, minimal demonstrated additions, executable verification, and independently gated improvement.",
-      "regression_check": "python3 -m unittest tests.test_product_plugin.ProductPluginTests.test_public_metadata_is_product_first -v && python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v && python3 scripts/release_gate.py",
-      "primary_metric": "public metadata surfaces presenting NULNUL as an agent-team generator",
-      "permission_delta": [],
-      "rollback": "Restore the four public metadata files from champion git ref 4b120e3b2b7baf4909f814b08c44da2c3e445e65.",
-      "change_level": "task",
-      "discovery_evidence": "Two unchanged champion evaluations each reported the same seven public-positioning violations; archive lookup found no matching rejected pathology and mechanism.",
-      "transfer_check": "The deterministic product test covers Codex metadata, Claude metadata, the public marketplace entry, and the submission listing; no cross-project or HOLDOUT claim is made.",
-      "prediction": "The deterministic Gate will reduce public metadata surfaces presenting NULNUL as an agent-team generator from seven to zero while preserving behavior, version, permissions, and the product-first README.",
-      "expected_delta": {
-        "public_positioning_violations": "7 -> 0",
-        "permission_delta": "0 -> 0"
-      },
-      "falsification_condition": "Any public-positioning violation remains; manifest parity or archive consistency breaks; any file outside the four preregistered metadata files changes; or behavior, permissions, version, tests, evidence, evolution state, or README content changes.",
-      "pathology": {
-        "where": "activation",
-        "why": "public acquisition metadata still defines agent-team creation as the product after the verified product contract became outcome-first and reuse-first"
-      },
-      "mechanism_id": "public-metadata-outcome-contract",
-      "status": "accepted"
-    },
     {
       "id": "proposal-gate-11-github-git-source",
       "feedback_ids": [
@@ -224,27 +193,36 @@
       },
       "falsification_condition": "Active bytes remain above one quarter of baseline, any record content changes, compaction is not idempotent, archive tampering passes, legacy state fails, or active validation becomes slower.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-7-lazy-doc-debt-scan",
+      "feedback_ids": [
+        "feedback-doc-debt-eager-scan"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 6,
+      "to_version": 7,
+      "cause": "The modification-time fallback was computed eagerly even when every inspected document had a Git commit and the fallback result could not be used.",
+      "change_target": "Initialize the fallback lazily and scan source paths only when the first untracked document actually needs modification-time comparison.",
+      "regression_check": "python3 -B -m unittest tests.test_doc_debt tests.test_doc_debt_benchmark -v && python3 evals/benchmarks/doc-debt/run_ab.py --out /tmp/doc-debt-ab.json",
+      "primary_metric": "counterbalanced median elapsed seconds for the tracked-repository documentation-debt check",
+      "permission_delta": [],
+      "rollback": "Restore the eager newest_source_by_mtime call from v2.1.0 if behavior differs or the post-promotion median exceeds half of the v2.1.0 champion median.",
+      "change_level": "task",
+      "discovery_evidence": "Direct stage timing isolated check_doc_debt.py at 17.56 seconds while evolution validation took 0.20 seconds, personal registry validation 0.18 seconds, and Release Gate 1.68 seconds.",
+      "transfer_check": null,
+      "prediction": "The same tracked-repository debt result remains byte-for-byte equivalent while median elapsed time falls by at least 50 percent with no dependency or permission change.",
+      "expected_delta": {
+        "median_elapsed_seconds": "17.73645 -> <8.868225",
+        "behavior_mismatch": "0 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Reject if any paired result differs, candidate median is not lower, tests regress, or the fallback stops detecting newer source in a repository without document history.",
+      "status": "accepted"
     }
   ],
   "promotions": [
-    {
-      "id": "promotion-product-builder-6",
-      "proposal_id": "proposal-product-builder-6-public-outcome-contract",
-      "gate_agent": "gate",
-      "before": "Seven public acquisition metadata surfaces still presented agent-team creation as the product, and an unchanged retry reproduced all seven.",
-      "after": "The live Coach candidate changed only four preregistered metadata files; the independent Gate found zero public-positioning violations and the complete product suite plus Release Gate passed.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "public metadata surfaces presenting NULNUL as an agent-team generator",
-        "rollback_threshold": "roll back after one public acquisition surface returns to agent-team category framing or a product guardrail fails",
-        "metric_value": 0,
-        "rollback_operator": "gt",
-        "rollback_value": 0,
-        "evidence": "A post-promotion deterministic live check again reported zero violations; the executable rollback threshold remains active."
-      }
-    },
     {
       "id": "promotion-gate-11-github-git-source",
       "proposal_id": "proposal-gate-11-github-git-source",
@@ -298,17 +276,35 @@
         "rollback_value": 41052,
         "evidence": "The post-selection run compacted a second fresh copy in about 13 ms, preserved full per-id record content, reduced active bytes by 87.48%, and passed digest, count, idempotence, legacy, and full-state checks."
       }
+    },
+    {
+      "id": "promotion-product-builder-7-lazy-doc-debt-scan",
+      "proposal_id": "proposal-product-builder-7-lazy-doc-debt-scan",
+      "gate_agent": "gate",
+      "before": "The tracked-repository debt check returned no debt but spent 17.73645 median seconds across four counterbalanced v2.1.0 runs.",
+      "after": "The candidate returned the identical result in every pair with a 0.2308-second median, a 98.70 percent reduction, and all Git and modification-time controls passing.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "tracked-repository documentation-debt check elapsed seconds",
+        "rollback_threshold": "roll back if a post-promotion run exceeds 50 percent of the v2.1.0 median or returns a different debt result",
+        "metric_value": 0.56,
+        "rollback_operator": "gt",
+        "rollback_value": 8.868225,
+        "evidence": "A separate post-selection command returned the same empty debt inventory in 0.56 seconds; seven focused controls passed."
+      }
     }
   ],
   "autonomous_episodes": [],
   "archive": {
     "schema_version": 1,
     "path": "evolution.archive.json",
-    "sha256": "36cb84c1cfd6bbdb8f236418fc8b2dd2de092e2300b08564b5b5259bd213e872",
+    "sha256": "3a85a217235717c33e694ffa7c06e0dd47bd392ce99a0edb0d3033c819267aaa",
     "counts": {
-      "feedback": 33,
-      "proposals": 38,
-      "promotions": 38,
+      "feedback": 35,
+      "proposals": 40,
+      "promotions": 40,
       "autonomous_episodes": 6
     }
   }

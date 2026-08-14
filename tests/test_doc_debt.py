@@ -4,6 +4,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -73,7 +74,10 @@ class DocDebtGitTests(unittest.TestCase):
 
     def test_document_committed_with_its_code_is_not_reported(self):
         self.commit("first", AGENTS__md="guidance", app__py="print('hi')\n")
-        self.assertEqual(detector.check(self.workspace, ("AGENTS.md",)), [])
+        with mock.patch.object(
+            detector, "newest_source_by_mtime", side_effect=AssertionError("unneeded scan")
+        ):
+            self.assertEqual(detector.check(self.workspace, ("AGENTS.md",)), [])
 
     def test_code_committed_after_the_document_is_reported(self):
         self.commit("first", AGENTS__md="guidance")

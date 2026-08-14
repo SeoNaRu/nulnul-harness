@@ -2,6 +2,14 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 2.1.1 — 2026-08-14
+
+- Made the documentation-debt detector defer its recursive modification-time fallback until a document without Git history actually needs it; tracked documents continue to use commit order and the non-Git path remains covered.
+- Four counterbalanced exact-`v2.1.0`/candidate A/B rounds preserved the same debt result while median elapsed time fell from 17.73645 seconds to 0.2308 seconds (98.70%).
+- Rejected a 26.0%-smaller skill-entry candidate after four same-model paired fast-resume rounds increased input tokens 11.07%, elapsed time 5.44%, output tokens 16.21%, and reasoning output tokens 36.27%; byte size was not promoted as a runtime proxy.
+- Added no dependency, service, permission, credential, or external-write scope. Fresh exact public `2.1.1-rc.1` adoption passed before the final candidate was frozen; fresh exact `v2.1.1` Claude adoption then preserved both agent profiles and the inactive host entry while all five executable checks passed.
+- Exact-final Project M retained the correct transactional migration apply while reducing full compatibility checks from 3 to 1; no-match, conflict, privacy, permission, migration, and rollback controls passed. Release Gate closed at 100/100 with `release_ready=true`, and the tagged archive is SHA-256 `dc7718ea2f7894a411ee2e179fb015d10621e5d684d9e6f228e298a3ed131b03`.
+
 ## 2.1.0 — 2026-08-14
 
 - Added a standard-library evolution compactor that keeps open work and the latest accepted rollback point per agent in the active state while moving closed feedback, proposals, promotions, and autonomous episodes to an adjacent digest-bound archive.
