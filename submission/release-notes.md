@@ -1,4 +1,4 @@
-# nulnul harness 2.1.1-rc.1
+# nulnul harness 2.1.1
 
 Make the required documentation-debt check fast on tracked repositories without weakening its fallback.
 

@@ -7,7 +7,7 @@ All notable changes to `nulnul harness` are recorded here.
 - Made the documentation-debt detector defer its recursive modification-time fallback until a document without Git history actually needs it; tracked documents continue to use commit order and the non-Git path remains covered.
 - Four counterbalanced exact-`v2.1.0`/candidate A/B rounds preserved the same debt result while median elapsed time fell from 17.73645 seconds to 0.2308 seconds (98.70%).
 - Rejected a 26.0%-smaller skill-entry candidate after four same-model paired fast-resume rounds increased input tokens 11.07%, elapsed time 5.44%, output tokens 16.21%, and reasoning output tokens 36.27%; byte size was not promoted as a runtime proxy.
-- Added no dependency, service, permission, credential, or external-write scope. Exact public `2.1.1-rc.1` adoption remains required before final promotion.
+- Added no dependency, service, permission, credential, or external-write scope. Fresh exact public `2.1.1-rc.1` Claude and Meta adoption passed before the final candidate was frozen.
 
 ## 2.1.0 — 2026-08-14
 

@@ -33,6 +33,8 @@ This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds prov
 
 Validate product changes with:
 
+The documentation-debt check uses Git commit order for tracked documents and only falls back to a repository modification-time scan when Git history is unavailable.
+
 ```bash
 python3 scripts/pack_plugin.py
 python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
