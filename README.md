@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.0.1-111111" alt="version 2.0.1">
+  <img src="https://img.shields.io/badge/version-2.1.0-111111" alt="version 2.1.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="known behavior and safety score: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
@@ -19,16 +19,18 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Try it</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.0.1">2.0.1 release</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">Report friction</a>
+  <a href="#quick-start">Try it</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.0">2.1.0 release</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">Report friction</a>
 </p>
 
-> **NULNUL 2.0.1 is released.** Fresh exact-public Claude and Meta adoption passed before `main` closure.
+> **NULNUL 2.1.0 keeps evolution context bounded.** Closed history moves to an integrity-checked local archive instead of loading into ordinary resume context.
 >
 > **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
 >
 > **2.0 status:** Three independent personal adaptation families feed a bounded summary selector. It preserved every sealed decision while reducing full compatibility checks from 9 to 4; the exact public Project M smoke reduced them from 3 to 1 with the same correct apply.
 >
 > **2.0.1 behavior:** In sequential Codex/Claude Code use, Codex owns only `AGENTS.md`, Claude owns only `CLAUDE.md`, and both reuse one shared `docs/nulnul/` state. Concurrent mutation is not claimed.
+>
+> **2.1 behavior:** The active evolution state retains open work and current rollback points. Full closed evidence remains recoverable and queryable in a digest-bound archive.
 
 ## What is NULNUL?
 
@@ -79,6 +81,7 @@ Growth is driven by demonstrated work, not project size labels or a target agent
 | --- | --- |
 | A small repository with one clear check | Reuse the existing guidance and check; add no role. |
 | Work now spans sessions | Add one concise verified checkpoint instead of retaining the whole conversation. |
+| Governed evolution history keeps growing | Keep open work and latest rollback points active; move closed evidence to a digest-bound archive that is queried only when relevant. |
 | A responsibility needs independent ownership | Split that boundary; do not generate a team around it. |
 | A repeated workflow gains state or external writes | Add identity, deduplication, review state, and permission controls only where needed. |
 | A failure becomes reproducible | Register one causal candidate, compare it with the current way, and keep it only if the Gate passes. |
@@ -301,13 +304,16 @@ your-project/
 ├── docs/nulnul/
 │   ├── project.md             # stable goal, check, decisions, permissions
 │   ├── checkpoint.json        # concise verified multi-session state
-│   └── evolution.json         # governed improvement history, when needed
+│   ├── evolution.json         # bounded active improvement state, when needed
+│   └── evolution.archive.json # closed evidence, outside normal resume context
 ├── .agents/skills/<name>/     # only when no adequate capability exists
 └── docs/nulnul/workflows/<name>.md
                                 # reusable workflow, when justified
 ```
 
 Ordinary continuity uses `checkpoint.json`; governed evolution uses `evolution.json`, never both as live writers. Generated setup remains removable without changing product code.
+
+Closed feedback, proposals, promotions, and autonomous episodes are not summarized away. The standard-library compactor keeps the active state small, binds the adjacent archive by digest, reconstructs the full graph for deterministic validation, and supports targeted rejected-history lookup without loading the archive into every model turn.
 
 ## How NULNUL is validated
 
@@ -334,7 +340,7 @@ Some of the strongest evidence came from failures:
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **215 passed (215/215)** | Deterministic product, state, host switching, privacy, rollback, transfer, cross-project, Meta Gate, and negative-control contracts hold. |
+| Repository tests | **217 passed (217/217)** | Deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
 | Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by green main CI run `31651306556`. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
@@ -400,6 +406,7 @@ The roadmap describes user value, not an automatic release promise.
 - Personal Evolution requires an explicitly selected existing local directory. One real private local home is configured and validates; its machine path is deliberately absent from public evidence.
 - Unattended Claude Code sessions may inspect host-owned `.claude/**` configuration but do not rewrite it.
 - Checkpoints are compared with bounded repository reality before fast resume.
+- Compacted evolution archives remain local project evidence and are integrity-checked before the active state is trusted; they are not loaded into ordinary resume context.
 - Independent Gate ownership is validated from declared state; it is not cryptographic proof of separate runtime identities.
 - NULNUL does not remove the underlying model's reasoning limits or prevent every agent error.
 - One unseen transfer and one live bounded episode do not establish universal or harness-wide generalization.

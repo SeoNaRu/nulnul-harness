@@ -80,6 +80,12 @@ Reject or roll back otherwise. Never let an agent serve as Gate for its own upgr
 - A feedback record may list `rejected_proposals` with the proposal ids already rejected for it, so the pipeline sees the history the document already holds.
 - A loop that keeps only its wins repeats its losses.
 
+## Keep the active state bounded
+
+After a promotion, rejection, rollback, or completed autonomous episode, run `scripts/compact_evolution_state.py docs/nulnul/evolution.json`. It leaves open work and each agent's latest accepted rollback point in `evolution.json`, moves closed records to the adjacent digest-bound `evolution.archive.json`, and writes both as one rollback-safe batch. Run it again safely after later cycles; unchanged state is idempotent.
+
+On resume, run the same command with `--check` and read only `evolution.json`. The check verifies the archive digest and reconstructs the complete graph through deterministic code, so the model does not need the archive in its default context. Before proposing a change, query only matching rejected history with `--rejected-for <agent>`. Never summarize away, overwrite, or delete the archive merely to reduce context.
+
 ## Run one bounded autonomous episode
 
 Run an episode only for reproduced feedback and only when the user requests evolution or ordinary work emits an evolution signal. Freeze `max_candidates`, `max_generations`, `max_evaluation_runs`, `max_failed_candidates`, `max_identical_pathology_retries`, and `max_model_invocations` before candidate generation. Start with one generation and the current accepted champion as parent.

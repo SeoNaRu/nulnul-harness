@@ -2,7 +2,7 @@
 
 - Name: nulnul harness
 - Package: `nulnul-harness`
-- Version: `2.0.1`
+- Version: `2.1.0`
 - Publisher: SeoNaRu (must match the verified OpenAI Platform identity)
 - Category: Productivity
 - Shape: Skills only; no MCP server, app, UI, hooks, authentication, or publisher-operated service

@@ -2,6 +2,12 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 2.1.0 — 2026-08-14
+
+- Added a standard-library evolution compactor that keeps open work and the latest accepted rollback point per agent in the active state while moving closed feedback, proposals, promotions, and autonomous episodes to an adjacent digest-bound archive.
+- Added deterministic full-state reconstruction, archive integrity and count checks, idempotent rollback-safe batch writes, targeted rejected-history lookup, legacy schema compatibility, and an archive-tampering negative control.
+- Reduced the real 164,211-byte evolution fixture to a 20,560-byte active resume state (87.48%) without losing any record identity; local active parse-and-validation median fell from about 5.5 ms to 0.2 ms while one-time compaction took about 13 ms.
+
 ## 2.0.1 — 2026-08-13
 
 - Added a standard-library active-host session-entry writer: Codex updates only `AGENTS.md`, Claude Code updates only `CLAUDE.md`, and both reuse exactly one existing `docs/nulnul/` checkpoint or evolution writer.

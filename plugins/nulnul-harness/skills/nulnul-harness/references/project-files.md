@@ -87,6 +87,8 @@ For a legacy durable setup, run `../scripts/migrate_legacy_checkpoint.py docs/nu
 
 Create this only for multi-session work, agent-specific feedback, or personal evolution. Start from `../assets/evolution-state.template.json`. Keep the current checkpoint, agent versions, bounded feedback, proposals, and Gate decisions. Validate it with `../scripts/validate_evolution_state.py` after every update.
 
+After terminal decisions accumulate, run `../scripts/compact_evolution_state.py docs/nulnul/evolution.json`. The active file keeps open work and the latest accepted rollback point per agent; the adjacent `evolution.archive.json` keeps full closed records behind a digest. Validate both with `--check`, keep the archive out of normal resume context, and use `--rejected-for <agent>` for bounded replay checks. The compactor is the only writer of the archive and updates active state plus archive as one rollback-safe batch.
+
 Keep project feedback project-local by default. Promote a rule to a user-selected private personal evolution home only after it passes preregistered representative transfer checks and an independent Personal Gate. The home must be an existing local directory explicitly selected by the user; otherwise fail with `PERSONAL_HOME_REQUIRED`. Use `../scripts/personal_adaptation.py` to validate, promote, discover, deduplicate, or revoke generalized adaptations. Never commit a private personal-home path, source code, raw conversation, secret, credential, personal data, full transcript, or project identity to a public repository.
 
 ## `.agents/skills/<name>/`

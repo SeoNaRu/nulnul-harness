@@ -3,6 +3,7 @@
 
 import importlib.util
 import json
+import sys
 from pathlib import Path
 
 
@@ -21,6 +22,9 @@ GENERALIZATION_VALIDATOR = (
 AUTONOMOUS_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_autonomous_evolution.py"
 )
+EVOLUTION_COMPACTOR = (
+    ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/compact_evolution_state.py"
+)
 PERSONAL_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/personal_adaptation.py"
 )
@@ -29,6 +33,14 @@ META_EVOLUTION_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_meta_evolution.py"
 )
 META_ADOPTION_VALIDATOR = ROOT / "scripts/meta_adopt_evidence.py"
+
+
+def load_evolution():
+    sys.path.insert(0, str(EVOLUTION_COMPACTOR.parent))
+    spec = importlib.util.spec_from_file_location("compact_evolution_state", EVOLUTION_COMPACTOR)
+    loader = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(loader)
+    return loader.read_full(ROOT / "docs/nulnul/evolution.json")
 
 
 def validate_learning_gate(results_payload: dict, evolution_payload: dict) -> None:
@@ -445,7 +457,7 @@ def main() -> None:
     failed_holdout = json.loads(
         (ROOT / "evals/generalization/results-ruby-failed.json").read_text(encoding="utf-8")
     )
-    evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
+    evolution = load_evolution()
     evidence = json.loads((ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8"))
     personal_preregistration = json.loads(
         (ROOT / "evals/personal-evolution/preregistration.json").read_text(encoding="utf-8")

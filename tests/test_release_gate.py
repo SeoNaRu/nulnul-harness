@@ -23,7 +23,7 @@ class ReleaseGateTests(unittest.TestCase):
         self.activation = json.loads(
             (ROOT / "evals/benchmarks/activation/results.json").read_text(encoding="utf-8")
         )
-        self.evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
+        self.evolution = MODULE.load_evolution()
         self.generalization_manifest = json.loads(
             (ROOT / "evals/generalization/manifest.json").read_text(encoding="utf-8")
         )
@@ -74,7 +74,7 @@ class ReleaseGateTests(unittest.TestCase):
 
     def test_missing_learning_verdict_inventory_fails_release(self):
         learning = json.loads(json.dumps(self.setup))
-        evolution = json.loads((ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8"))
+        evolution = MODULE.load_evolution()
         learning.pop("learning_verdicts")
         with self.assertRaisesRegex(ValueError, "learning_verdicts must be an array"):
             MODULE.validate_learning_gate(learning, evolution)

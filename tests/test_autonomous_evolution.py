@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import json
+import sys
 import unittest
 from pathlib import Path
 
@@ -13,13 +14,16 @@ VALIDATOR = (
 SPEC = importlib.util.spec_from_file_location("validate_autonomous_evolution", VALIDATOR)
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
+COMPACTOR = ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/compact_evolution_state.py"
+sys.path.insert(0, str(COMPACTOR.parent))
+COMPACTOR_SPEC = importlib.util.spec_from_file_location("compact_evolution_state", COMPACTOR)
+COMPACTOR_MODULE = importlib.util.module_from_spec(COMPACTOR_SPEC)
+COMPACTOR_SPEC.loader.exec_module(COMPACTOR_MODULE)
 
 
 class AutonomousEvolutionTests(unittest.TestCase):
     def setUp(self):
-        self.state = json.loads(
-            (ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8")
-        )
+        self.state = COMPACTOR_MODULE.read_full(ROOT / "docs/nulnul/evolution.json")
         self.episode = self.state["autonomous_episodes"][0]
 
     def test_current_bounded_episode_is_valid(self):

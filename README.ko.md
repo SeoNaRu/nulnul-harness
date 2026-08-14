@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.0.1-111111" alt="version 2.0.1">
+  <img src="https://img.shields.io/badge/version-2.1.0-111111" alt="version 2.1.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="확인된 동작과 안전 점수: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -19,16 +19,18 @@
 </p>
 
 <p align="center">
-  <a href="#빠른-시작">바로 사용</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.0.1">2.0.1 릴리스</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">불편 신고</a>
+  <a href="#빠른-시작">바로 사용</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.0">2.1.0 릴리스</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">불편 신고</a>
 </p>
 
-> **NULNUL 2.0.1이 출시됐습니다.** `main`을 닫기 전에 fresh exact-public Claude 및 Meta adoption을 통과했습니다.
+> **NULNUL 2.1.0은 evolution context를 bounded 상태로 유지합니다.** 종료된 history는 일반 resume context에 넣지 않고 integrity-checked local archive로 옮깁니다.
 >
 > **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
 >
 > **2.0 상태:** 서로 다른 personal adaptation family 세 개가 bounded summary selector에 연결됐습니다. Sealed decision을 모두 유지하면서 full compatibility check를 9회에서 4회로 줄였고, exact public Project M smoke에서도 같은 정답을 유지하며 3회에서 1회로 줄였습니다.
 >
 > **2.0.1 동작:** Codex와 Claude Code를 순차적으로 사용할 때 Codex는 `AGENTS.md`, Claude는 `CLAUDE.md`만 소유하고 둘은 하나의 `docs/nulnul/` 상태를 공유합니다. 동시 변경은 보장하지 않습니다.
+>
+> **2.1 동작:** Active evolution state에는 열린 작업과 현재 rollback 지점만 남깁니다. 종료된 전체 근거는 digest-bound archive에서 복구하고 필요한 대상만 조회할 수 있습니다.
 
 ## NULNUL은 무엇인가요?
 
@@ -79,6 +81,7 @@ NULNUL은 미래의 복잡성을 예상해 큰 프레임워크부터 설치하�
 | --- | --- |
 | 명확한 검사 하나가 있는 작은 저장소 | 기존 지침과 검사를 재사용하고 역할을 추가하지 않습니다. |
 | 작업이 여러 세션으로 길어짐 | 전체 대화를 저장하는 대신 짧은 verified checkpoint 하나를 둡니다. |
+| Governed evolution 기록이 계속 커짐 | 열린 작업과 최신 rollback 지점만 active에 두고, 종료된 근거는 필요할 때만 조회하는 digest-bound archive로 옮깁니다. |
 | 독립된 책임 주체가 필요함 | 그 경계만 분리하고 주변에 에이전트 팀을 만들지 않습니다. |
 | 반복 워크플로에 상태나 외부 쓰기가 생김 | 필요한 위치에만 식별자, 중복 제거, 검토 상태, 권한 통제를 추가합니다. |
 | 실패가 재현 가능해짐 | 인과관계가 명확한 개선 후보 하나를 등록하고 기존 방식과 비교해 Gate 통과 시에만 유지합니다. |
@@ -300,13 +303,16 @@ your-project/
 ├── docs/nulnul/
 │   ├── project.md             # stable goal, check, decision, permission
 │   ├── checkpoint.json        # 짧고 검증된 multi-session state
-│   └── evolution.json         # 필요한 경우의 governed improvement history
+│   ├── evolution.json         # 필요한 경우의 bounded active improvement state
+│   └── evolution.archive.json # 일반 resume context 밖의 종료된 근거
 ├── .agents/skills/<name>/     # 적합한 기존 capability가 없을 때만
 └── docs/nulnul/workflows/<name>.md
                                 # 필요성이 입증된 reusable workflow
 ```
 
 일반 continuity는 `checkpoint.json`, governed evolution은 `evolution.json`을 사용하며 둘을 동시에 live writer로 두지 않습니다. 생성된 설정은 product code를 바꾸지 않고 제거할 수 있습니다.
+
+종료된 feedback, proposal, promotion, autonomous episode를 요약으로 덮어쓰지는 않습니다. 표준 라이브러리 compactor가 active state를 작게 유지하고 인접 archive를 digest로 연결하며, 전체 graph는 deterministic validation 때 재구성합니다. 거절 이력도 archive 전체를 매번 model context에 넣지 않고 필요한 agent에 대해서만 조회합니다.
 
 ## NULNUL은 어떻게 검증하나요?
 
@@ -333,7 +339,7 @@ transfer claim만 → sealed unseen check → scoped decision
 
 | Evidence | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **215개 통과 (215/215)** | deterministic product, state, host switching, privacy, rollback, transfer, cross-project, Meta Gate, negative-control contract가 유지됩니다. |
+| 저장소 test | **217개 통과 (217/217)** | deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
 | 최종 1.7.0 Release Gate | **통과** | Exact-tag Claude Code와 personal-adaptation adoption 통과 후 main CI run `31651306556`도 green이 됐습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
@@ -399,6 +405,7 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 - Personal Evolution은 사용자가 명시적으로 선택한 기존 local directory를 요구합니다. 실제 private local home 하나가 설정되어 validator를 통과했으며, machine path는 public evidence에 남기지 않습니다.
 - 무인 Claude Code 세션은 host-owned `.claude/**` configuration을 검사할 수 있지만 다시 쓰지 않습니다.
 - Fast resume 전에 checkpoint를 제한된 repository reality와 비교합니다.
+- Compacted evolution archive는 local project evidence로 유지하고 active state를 신뢰하기 전에 integrity를 검사하지만, 일반 resume context에는 로드하지 않습니다.
 - Independent Gate ownership은 선언된 state에서 검증하며 서로 다른 runtime identity를 암호학적으로 증명하지 않습니다.
 - NULNUL은 기반 model의 reasoning 한계를 없애거나 모든 agent error를 막지 않습니다.
 - unseen transfer 하나와 live bounded episode 하나는 universal 또는 harness-wide generalization을 증명하지 않습니다.

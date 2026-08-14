@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import json
+import sys
 import unittest
 from pathlib import Path
 
@@ -10,6 +11,11 @@ SCRIPT = ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_l
 SPEC = importlib.util.spec_from_file_location("validate_learning_loop", SCRIPT)
 validator = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(validator)
+COMPACTOR = ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/compact_evolution_state.py"
+sys.path.insert(0, str(COMPACTOR.parent))
+COMPACTOR_SPEC = importlib.util.spec_from_file_location("compact_evolution_state", COMPACTOR)
+COMPACTOR_MODULE = importlib.util.module_from_spec(COMPACTOR_SPEC)
+COMPACTOR_SPEC.loader.exec_module(COMPACTOR_MODULE)
 
 
 class LearningLoopTests(unittest.TestCase):
@@ -17,9 +23,7 @@ class LearningLoopTests(unittest.TestCase):
         self.results = json.loads(
             (ROOT / "evals/benchmarks/setup-baseline/results.json").read_text(encoding="utf-8")
         )
-        self.evolution = json.loads(
-            (ROOT / "docs/nulnul/evolution.json").read_text(encoding="utf-8")
-        )
+        self.evolution = COMPACTOR_MODULE.read_full(ROOT / "docs/nulnul/evolution.json")
 
     def test_all_published_nonpass_verdicts_entered_the_coach_loop(self):
         self.assertEqual(validator.validate(self.results, self.evolution), [])

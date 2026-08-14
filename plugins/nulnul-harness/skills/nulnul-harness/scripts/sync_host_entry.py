@@ -79,8 +79,8 @@ def managed_block(host, state):
         )
     else:
         resume = (
-            f"Validate `{state.as_posix()}` before relying on its checkpoint, then resume "
-            "from its recorded next action."
+            f"Validate `{state.as_posix()}` and its archive receipt before relying on its "
+            "checkpoint; keep closed history out of ordinary resume context."
         )
     return (
         f"{START}\n"

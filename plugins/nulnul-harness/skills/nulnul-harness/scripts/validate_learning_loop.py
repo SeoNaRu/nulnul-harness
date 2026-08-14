@@ -73,6 +73,9 @@ def main():
     try:
         results = json.loads(args.results.read_text(encoding="utf-8"))
         evolution = json.loads(args.evolution.read_text(encoding="utf-8"))
+        if "archive" in evolution:
+            import compact_evolution_state
+            evolution = compact_evolution_state.read_full(args.evolution)
         errors = validate(results, evolution)
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         errors = [f"cannot read learning loop: {error}"]

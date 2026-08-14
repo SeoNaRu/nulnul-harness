@@ -68,3 +68,5 @@ For a product release, behavior passing is necessary but does not excuse a measu
 ## Prune
 
 Remove or replace a capability or role when its job disappears, overlaps another, loses maintenance or compatibility, adds more coordination than value, or no longer improves the baseline. Installed availability does not justify activation.
+
+Prune context, not evidence. After terminal evolution decisions, run `scripts/compact_evolution_state.py docs/nulnul/evolution.json`; ordinary resume reads the bounded active state while the digest-bound archive preserves full accepted, rejected, rolled-back, and episode evidence for targeted lookup.
