@@ -30,11 +30,11 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.1.1 passed local A/B, exact public RC and final adoption, and Release Gate 100/100.",
-    "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .",
-    "status": "complete",
-    "last_verified": "2026-08-14: 219 tests passed; four counterbalanced v2.1.0/current documentation-debt A/B rounds preserved behavior and reduced median time 17.73645 to 0.2308 seconds. A four-pair same-model context-routing candidate regressed input tokens 11.07 percent and was rejected. Fresh exact v2.1.1 Claude and Meta adoption passed, Release Gate reported release_ready true, main CI run 31772275214 passed, and the downloaded public archive matched local bytes.",
-    "next_action": "Observe normal 2.1.1 dogfooding and open another bounded evolution only when a new reproducible bottleneck appears.",
+    "milestone": "NULNUL 2.2.0 is locally ready with exact-byte release attribution, executable provisional evolution, and active-host dirty-worktree documentation checks; the behavior candidate was rejected and removed.",
+    "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
+    "status": "active",
+    "last_verified": "2026-08-20: 233 tests passed, documentation debt was empty for the active Codex host, and Release Gate scored 100/100 with local_candidate_ready true and release_ready false. The local final 2.2.0 archive SHA-256 is 779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0. The frozen consent/continuity candidate returned NO_PROMOTION and was removed; Gate v12 remains provisional without behavior or public-release credit.",
+    "next_action": "Observe one distinct real Gate cycle for provisional Gate v12 and execute confirmation or rollback; publish or collect exact-version public adoption only after explicit user approval.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
@@ -57,7 +57,9 @@
       "version": 11,
       "job": "Independently compare candidates, shortlist current permitted cross-project evidence before full compatibility checks, fail closed on unresolved conflicts, separate exposed evaluation from one-shot holdouts, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-11-github-git-source"
+      "last_promotion_id": "promotion-gate-11-github-git-source",
+      "trial_version": 12,
+      "trial_promotion_id": "promotion-gate-12-candidate-stage-identity"
     },
     "product-builder": {
       "version": 7,
@@ -104,6 +106,16 @@
       "observed": "The required documentation-debt check spent 17.56 seconds on this tracked repository because it recursively scanned every source path before checking whether Git history already answered the question.",
       "expected": "Tracked documents use Git history directly; the recursive modification-time fallback runs only for a document without Git history and preserves the same stale-document result.",
       "evidence": "Four counterbalanced v2.1.0/current A/B rounds preserved identical empty debt results while median elapsed time fell from 17.73645 to 0.2308 seconds.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-candidate-stage-identity",
+      "source": "test",
+      "target_agent": "gate",
+      "observed": "The accepted-state contract required an already observed live cycle before a candidate could be activated, while public release evidence could match a version label without proving the exact candidate archive bytes.",
+      "expected": "Keep the confirmed version active during a bounded provisional trial, confirm or roll back only after an observed cycle, and bind release credit to the exact plugin tree and distribution archive.",
+      "evidence": "Schema-v4 lifecycle controls exercise pending, healthy, and breached trials; Release Gate negative controls reject a same-version different archive and stale public evidence.",
       "scope": "core",
       "status": "converted"
     }
@@ -220,6 +232,33 @@
       },
       "falsification_condition": "Reject if any paired result differs, candidate median is not lower, tests regress, or the fallback stops detecting newer source in a repository without document history.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-gate-12-candidate-stage-identity",
+      "feedback_ids": [
+        "feedback-candidate-stage-identity"
+      ],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 11,
+      "to_version": 12,
+      "cause": "Candidate lifecycle stage and candidate byte identity were not represented as independent release facts.",
+      "change_target": "Add schema-v4 provisional trial pointers and executor confirmation, then require exact plugin-tree and distribution-archive hashes for candidate and public release evidence.",
+      "regression_check": "python3 -B -m unittest tests.test_personal_evolution tests.test_live_cycle_rollback tests.test_release_gate -v && python3 scripts/release_gate.py",
+      "primary_metric": "candidate-stage or candidate-identity attribution regressions in the next real Gate cycle",
+      "permission_delta": [],
+      "rollback": "Remove the trial pointers and exact-byte candidate mechanism, restore Gate v11 and the prior accepted-state contract, and retain the failed cycle evidence.",
+      "change_level": "meta",
+      "discovery_evidence": "A same-version archive substitution negative control and the prior live-cycle state transition exposed two independent false-attribution paths at the Gate boundary.",
+      "transfer_check": "Schema-v3 accepted-state rollback remains executable, a same-version different archive is rejected, and stale exact-public evidence receives no candidate release credit.",
+      "prediction": "The exact local RC is attributable and locally ready, stale 2.1.1 public evidence remains non-creditable for 2.2, and the confirmed Gate stays v11 until a later observed cycle confirms or rolls back v12.",
+      "expected_delta": {
+        "pre-observation_version_activation": "1 path -> 0 paths",
+        "same_version_archive_substitution_accepted": "1 path -> 0 paths",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Any lifecycle negative control fails, a same-version different archive or stale public run receives credit, the confirmed version changes before observation, or any permission expands.",
+      "status": "provisional"
     }
   ],
   "promotions": [
@@ -294,17 +333,35 @@
         "rollback_value": 8.868225,
         "evidence": "A separate post-selection command returned the same empty debt inventory in 0.56 seconds; seven focused controls passed."
       }
+    },
+    {
+      "id": "promotion-gate-12-candidate-stage-identity",
+      "proposal_id": "proposal-gate-12-candidate-stage-identity",
+      "gate_agent": "product-builder",
+      "before": "Gate v11 could not represent a safe unconfirmed trial and did not bind all release credit to exact candidate bytes.",
+      "after": "Gate v12 is provisional: lifecycle and exact-byte regressions pass, Gate v11 remains confirmed, and the next real Gate cycle will confirm or roll back the trial.",
+      "regressions_passed": true,
+      "decision": "provisional",
+      "live_cycle": {
+        "status": "pending",
+        "metric": "candidate-stage or candidate-identity attribution regressions in the next real Gate cycle",
+        "rollback_threshold": "roll back on one premature activation, stale-evidence credit, archive-identity mismatch, or permission expansion",
+        "metric_value": null,
+        "rollback_operator": "gte",
+        "rollback_value": 1,
+        "evidence": "Deterministic regression and negative controls pass; a distinct post-promotion real Gate cycle is intentionally still pending."
+      }
     }
   ],
   "autonomous_episodes": [],
   "archive": {
     "schema_version": 1,
     "path": "evolution.archive.json",
-    "sha256": "3a85a217235717c33e694ffa7c06e0dd47bd392ce99a0edb0d3033c819267aaa",
+    "sha256": "a54be9dd2e43c876b626989e0e9f892f342fe6151a918a3f26d3558c9880b69d",
     "counts": {
-      "feedback": 35,
-      "proposals": 40,
-      "promotions": 40,
+      "feedback": 36,
+      "proposals": 41,
+      "promotions": 41,
       "autonomous_episodes": 6
     }
   }

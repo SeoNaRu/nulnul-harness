@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply schema-v3/v4 live-cycle rollback thresholds atomically."""
+"""Confirm healthy provisional versions or apply live-cycle rollback atomically."""
 
 import argparse
 import json
@@ -29,19 +29,43 @@ def apply(payload):
         raise ValueError("automatic rollback requires schema_version 3 or 4")
 
     proposals = {row["id"]: row for row in payload["proposals"]}
+    confirmed = []
     rolled_back = []
     for promotion in payload["promotions"]:
-        if promotion["decision"] != "accepted":
+        if promotion["decision"] not in ("provisional", "accepted"):
             continue
         live_cycle = promotion["live_cycle"]
         if live_cycle["status"] != "observed":
             continue
         compare = OPERATORS[live_cycle["rollback_operator"]]
-        if not compare(live_cycle["metric_value"], live_cycle["rollback_value"]):
-            continue
-
         proposal = proposals[promotion["proposal_id"]]
         agent = payload["agents"][proposal["target_agent"]]
+        breached = compare(live_cycle["metric_value"], live_cycle["rollback_value"])
+
+        if promotion["decision"] == "provisional":
+            if (
+                agent["version"] != proposal["from_version"]
+                or agent.get("trial_version") != proposal["to_version"]
+                or agent.get("trial_promotion_id") != promotion["id"]
+            ):
+                raise ValueError(f"promotion {promotion['id']} is not the active provisional version")
+            agent["trial_version"] = None
+            agent["trial_promotion_id"] = None
+            if breached:
+                proposal["status"] = "rolled_back"
+                promotion["decision"] = "rolled_back"
+                live_cycle["status"] = "rolled_back"
+                rolled_back.append(promotion["id"])
+            else:
+                proposal["status"] = "accepted"
+                promotion["decision"] = "accepted"
+                agent["version"] = proposal["to_version"]
+                agent["last_promotion_id"] = promotion["id"]
+                confirmed.append(promotion["id"])
+            continue
+
+        if not breached:
+            continue
         if agent["version"] != proposal["to_version"] or agent["last_promotion_id"] != promotion["id"]:
             raise ValueError(f"promotion {promotion['id']} is not the active target version")
 
@@ -66,7 +90,7 @@ def apply(payload):
     errors = validate_evolution_state.validate(payload)
     if errors:
         raise ValueError("rollback produced invalid state: " + "; ".join(errors))
-    return rolled_back
+    return {"confirmed": confirmed, "rolled_back": rolled_back}
 
 
 def write_atomic(path, payload):
@@ -90,10 +114,10 @@ def main():
     parser.add_argument("state", type=Path)
     args = parser.parse_args()
     payload = json.loads(args.state.read_text(encoding="utf-8"))
-    rolled_back = apply(payload)
-    if rolled_back:
+    result = apply(payload)
+    if result["confirmed"] or result["rolled_back"]:
         write_atomic(args.state, payload)
-    print(json.dumps({"rolled_back": rolled_back}, ensure_ascii=False, indent=2))
+    print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

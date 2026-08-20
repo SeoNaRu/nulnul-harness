@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "episode_id": "consent-continuity-boundary-1",
+  "validity": "invalid_evaluator",
+  "decision": "NO_CREDIT",
+  "model": "gpt-5.6-sol",
+  "completed_model_invocations": 9,
+  "raw_transcript_retained": false,
+  "permission_delta": [],
+  "candidate_changed_after_exposure": false,
+  "frozen_inputs": {
+    "preregistration_sha256": "de8c18e56d84268dc0528f8128421fa6531b309dd4552ba781052487128dd204",
+    "cases_sha256": "45b0fbdcdfa3a2fe08282251fd5871e5e0046e9699d6988d7a301b3c63f2c77a",
+    "schema_sha256": "abe8315e7d3fe2f60d8e825057b4597d25ced07722be765e838eee434ffabef5",
+    "runner_sha256": "eab05d56abc61d7eb5805c6106fc04566f99d744246910b1412a23e59be33c32",
+    "sanitized_result_sha256": "8d622d0b54c48494d9aaea800fddb7b5ea33f14f63d3715d5efdeee43ba157e1"
+  },
+  "invalidity_reasons": [
+    "The gameplay prompts directly instructed both arms to present choices, so they could not measure whether the skill itself created a consent boundary.",
+    "direct_execution_option and choice_scope lacked evaluator definitions, making structurally correct pending-choice decisions score as failures.",
+    "The HUD control prohibited a game-specific alternative even though the candidate only requires frontend-design to be offered for UI and HUD work.",
+    "The Ponytail control required a full instruction read while asking only for a future procedure, before the selected skill was applied to work."
+  ],
+  "bounded_observations_not_used_for_promotion": {
+    "candidate_ordinary_product_routes_without_evolution": "4/4",
+    "candidate_unselected_optional_skill_reads": 0,
+    "candidate_explicit_ponytail_structured_selections": "1/1",
+    "candidate_explicit_ponytail_instruction_reads": "0/1"
+  },
+  "exposure": "All four episode-1 cases are retired from promotion credit. Episode 2 uses fresh prompts and identifiers; neither episode is a HOLDOUT."
+}

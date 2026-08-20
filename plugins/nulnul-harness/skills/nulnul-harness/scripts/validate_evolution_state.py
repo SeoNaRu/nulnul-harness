@@ -17,6 +17,7 @@ CHECKPOINT_FIELDS = {
     "approved_permissions",
 }
 AGENT_FIELDS = {"version", "job", "profile_path", "last_promotion_id"}
+AGENT_TRIAL_FIELDS = {"trial_version", "trial_promotion_id"}
 FEEDBACK_FIELDS = {"id", "source", "target_agent", "observed", "expected", "evidence", "scope", "status"}
 PROPOSAL_FIELDS = {
     "id",
@@ -115,10 +116,29 @@ def validate(payload):
             errors.append(f"agents.{required} is required")
     for agent_id, agent in agents.items():
         if require_fields(agent, AGENT_FIELDS, f"agents.{agent_id}"):
-            if not isinstance(agent["version"], int) or agent["version"] < 1:
+            if isinstance(agent["version"], bool) or not isinstance(agent["version"], int) or agent["version"] < 1:
                 errors.append(f"agents.{agent_id}.version must be a positive integer")
             if not isinstance(agent["job"], str) or not agent["job"].strip():
                 errors.append(f"agents.{agent_id}.job must be non-empty")
+            trial_fields = AGENT_TRIAL_FIELDS & agent.keys()
+            if trial_fields and trial_fields != AGENT_TRIAL_FIELDS:
+                errors.append(f"agents.{agent_id} needs both trial fields")
+            elif trial_fields:
+                trial_version = agent["trial_version"]
+                trial_promotion_id = agent["trial_promotion_id"]
+                if (trial_version is None) != (trial_promotion_id is None):
+                    errors.append(f"agents.{agent_id} trial fields must both be null or set")
+                elif trial_version is not None:
+                    if (
+                        isinstance(trial_version, bool)
+                        or not isinstance(trial_version, int)
+                        or isinstance(agent["version"], bool)
+                        or not isinstance(agent["version"], int)
+                        or trial_version <= agent["version"]
+                    ):
+                        errors.append(f"agents.{agent_id}.trial_version must exceed its confirmed version")
+                    if not isinstance(trial_promotion_id, str) or not trial_promotion_id:
+                        errors.append(f"agents.{agent_id}.trial_promotion_id must be non-empty")
 
     collections = {}
     for name, fields in (("feedback", FEEDBACK_FIELDS), ("proposals", proposal_fields), ("promotions", promotion_fields)):
@@ -187,8 +207,10 @@ def validate(payload):
             errors.append(f"proposal {proposal_id} has an unknown author agent")
         if not isinstance(agents[row["target_agent"]], dict):
             continue
-        if not isinstance(row["status"], str) or row["status"] not in ("proposed", "gated", "accepted", "rejected", "rolled_back"):
+        if not isinstance(row["status"], str) or row["status"] not in ("proposed", "gated", "provisional", "accepted", "rejected", "rolled_back"):
             errors.append(f"proposal {proposal_id} has invalid status")
+        if row.get("status") == "provisional" and schema_version < 4:
+            errors.append(f"proposal {proposal_id} provisional status requires schema version 4")
         prediction_fields = PREDICTION_FIELDS & row.keys()
         if schema_version == 3 and row.get("status") in ("proposed", "gated"):
             prediction_fields = PREDICTION_FIELDS
@@ -249,7 +271,7 @@ def validate(payload):
                 ):
                     errors.append(f"broad meta proposal {proposal_id} needs a transfer check")
         current_version = agents[row["target_agent"]].get("version")
-        if row["status"] in ("proposed", "gated") and current_version != row["from_version"]:
+        if row["status"] in ("proposed", "gated", "provisional") and current_version != row["from_version"]:
             errors.append(f"proposal {proposal_id} disagrees with the target agent version")
         elif row["status"] in ("accepted", "rejected", "rolled_back") and (
             not isinstance(current_version, int) or current_version < row["from_version"]
@@ -276,43 +298,87 @@ def validate(payload):
             errors.append(f"promotion {promotion_id} is self-approved")
         if gate_agent == proposal.get("author_agent"):
             errors.append(f"promotion {promotion_id} is approved by its proposal author")
-        if not isinstance(row["decision"], str) or row["decision"] not in ("accepted", "rejected", "rolled_back"):
+        if not isinstance(row["decision"], str) or row["decision"] not in ("provisional", "accepted", "rejected", "rolled_back"):
             errors.append(f"promotion {promotion_id} has invalid decision")
         elif proposal.get("status") != row["decision"]:
             errors.append(f"promotion {promotion_id} disagrees with the proposal status")
+        if row.get("decision") == "provisional" and schema_version < 4:
+            errors.append(f"promotion {promotion_id} provisional decision requires schema version 4")
         if not isinstance(row["regressions_passed"], bool):
             errors.append(f"promotion {promotion_id}.regressions_passed must be boolean")
-        if row["decision"] == "accepted" and row["regressions_passed"] is not True:
-            errors.append(f"promotion {promotion_id} accepted with failing regressions")
-        if row["decision"] == "accepted":
+        if row["decision"] in ("provisional", "accepted") and row["regressions_passed"] is not True:
+            errors.append(f"promotion {promotion_id} {row['decision']} with failing regressions")
+        if row["decision"] in ("provisional", "accepted"):
             approved = checkpoint.get("approved_permissions", []) if isinstance(checkpoint, dict) else []
             permission_delta = proposal.get("permission_delta", [])
             if isinstance(permission_delta, list) and any(permission not in approved for permission in permission_delta):
                 errors.append(f"promotion {promotion_id} expands permission without approval")
         if schema_version >= 2:
             live_cycle = row["live_cycle"]
-            if row["decision"] in ("accepted", "rolled_back"):
-                required_live_fields = LIVE_CYCLE_V3_FIELDS if schema_version == 3 else LIVE_CYCLE_FIELDS
+            if row["decision"] in ("provisional", "accepted", "rolled_back"):
+                required_live_fields = LIVE_CYCLE_V3_FIELDS if schema_version >= 3 else LIVE_CYCLE_FIELDS
                 if not isinstance(live_cycle, dict) or not required_live_fields <= live_cycle.keys():
                     errors.append(f"promotion {promotion_id} needs a complete live cycle")
                 else:
-                    expected_status = "observed" if row["decision"] == "accepted" else "rolled_back"
-                    if live_cycle["status"] != expected_status:
-                        errors.append(f"promotion {promotion_id} live cycle status must be {expected_status}")
+                    expected_statuses = {
+                        "provisional": {"pending", "observed"},
+                        "accepted": {"observed"},
+                        "rolled_back": {"rolled_back"},
+                    }[row["decision"]]
+                    if not isinstance(live_cycle["status"], str) or live_cycle["status"] not in expected_statuses:
+                        expected = " or ".join(sorted(expected_statuses))
+                        errors.append(f"promotion {promotion_id} live cycle status must be {expected}")
                     for field in ("metric", "rollback_threshold", "evidence"):
                         if not isinstance(live_cycle[field], str) or not live_cycle[field].strip():
                             errors.append(f"promotion {promotion_id}.live_cycle.{field} must be non-empty")
-                    if schema_version == 3:
-                        for field in ("metric_value", "rollback_value"):
-                            value = live_cycle[field]
-                            if isinstance(value, bool) or not isinstance(value, (int, float)):
-                                errors.append(f"promotion {promotion_id}.live_cycle.{field} must be a number")
-                        if live_cycle["rollback_operator"] not in ROLLBACK_OPERATORS:
+                    if schema_version >= 3:
+                        metric_value = live_cycle["metric_value"]
+                        if live_cycle["status"] == "pending":
+                            if metric_value is not None:
+                                errors.append(f"promotion {promotion_id}.live_cycle.metric_value must be null while pending")
+                        elif isinstance(metric_value, bool) or not isinstance(metric_value, (int, float)):
+                            errors.append(f"promotion {promotion_id}.live_cycle.metric_value must be a number")
+                        rollback_value = live_cycle["rollback_value"]
+                        if isinstance(rollback_value, bool) or not isinstance(rollback_value, (int, float)):
+                            errors.append(f"promotion {promotion_id}.live_cycle.rollback_value must be a number")
+                        if not isinstance(live_cycle["rollback_operator"], str) or live_cycle["rollback_operator"] not in ROLLBACK_OPERATORS:
                             errors.append(
                                 f"promotion {promotion_id}.live_cycle.rollback_operator is invalid"
                             )
             elif live_cycle is not None:
                 errors.append(f"rejected promotion {promotion_id}.live_cycle must be null")
+
+    provisional_by_agent = {}
+    for proposal_id, proposal in proposal_by_id.items():
+        if not isinstance(proposal, dict) or proposal.get("status") != "provisional":
+            continue
+        provisional = [
+            row for row in promotions_by_proposal.get(proposal_id, [])
+            if row.get("decision") == "provisional"
+        ]
+        if len(provisional) != 1:
+            errors.append(f"provisional proposal {proposal_id} needs exactly one provisional promotion")
+            continue
+        agent_id = proposal.get("target_agent")
+        if agent_id in agents:
+            provisional_by_agent.setdefault(agent_id, []).append((proposal, provisional[0]))
+
+    for agent_id, history in provisional_by_agent.items():
+        if len(history) != 1:
+            errors.append(f"agents.{agent_id} has more than one provisional promotion")
+            continue
+        proposal, promotion = history[0]
+        agent = agents.get(agent_id, {})
+        if not isinstance(agent, dict):
+            continue
+        if agent.get("trial_version") != proposal.get("to_version"):
+            errors.append(f"agents.{agent_id}.trial_version does not match its provisional proposal")
+        if agent.get("trial_promotion_id") != promotion.get("id"):
+            errors.append(f"agents.{agent_id}.trial_promotion_id does not match its provisional promotion")
+
+    for agent_id, agent in agents.items():
+        if isinstance(agent, dict) and agent.get("trial_promotion_id") is not None and agent_id not in provisional_by_agent:
+            errors.append(f"agents.{agent_id} trial fields need a provisional promotion")
 
     accepted_by_agent = {}
     for proposal_id, proposal in proposal_by_id.items():

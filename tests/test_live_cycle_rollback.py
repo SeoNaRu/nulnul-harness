@@ -12,7 +12,7 @@ SCRIPT = SKILL / "scripts/apply_live_cycle_rollback.py"
 VALIDATOR = SKILL / "scripts/validate_evolution_state.py"
 
 
-def state(metric_value):
+def state(metric_value, live_status="observed"):
     payload = json.loads(TEMPLATE.read_text(encoding="utf-8"))
     payload["feedback"].append(
         {
@@ -43,7 +43,7 @@ def state(metric_value):
             "change_level": "meta",
             "discovery_evidence": "The next live cycle exposed the drop.",
             "transfer_check": None,
-            "status": "accepted",
+            "status": "provisional",
         }
     )
     payload["promotions"].append(
@@ -54,9 +54,9 @@ def state(metric_value):
             "before": "completion rate 0.9",
             "after": f"completion rate {metric_value}",
             "regressions_passed": True,
-            "decision": "accepted",
+            "decision": "provisional",
             "live_cycle": {
-                "status": "observed",
+                "status": live_status,
                 "metric": "completion rate",
                 "rollback_threshold": "roll back below 0.9",
                 "metric_value": metric_value,
@@ -66,7 +66,22 @@ def state(metric_value):
             },
         }
     )
-    payload["agents"]["coach"].update(version=2, last_promotion_id="promotion-rollback")
+    payload["agents"]["coach"].update(
+        trial_version=2, trial_promotion_id="promotion-rollback"
+    )
+    return payload
+
+
+def accepted_state(metric_value):
+    payload = state(metric_value)
+    payload["proposals"][0]["status"] = "accepted"
+    payload["promotions"][0]["decision"] = "accepted"
+    payload["agents"]["coach"].update(
+        version=2,
+        last_promotion_id="promotion-rollback",
+        trial_version=None,
+        trial_promotion_id=None,
+    )
     return payload
 
 
@@ -90,17 +105,36 @@ class LiveCycleRollbackTests(unittest.TestCase):
         self.assertEqual(validation.returncode, 0, validation.stdout)
         self.assertEqual(updated["agents"]["coach"]["version"], 1)
         self.assertIsNone(updated["agents"]["coach"]["last_promotion_id"])
+        self.assertIsNone(updated["agents"]["coach"]["trial_version"])
         self.assertEqual(updated["proposals"][0]["status"], "rolled_back")
         self.assertEqual(updated["promotions"][0]["decision"], "rolled_back")
         self.assertEqual(updated["promotions"][0]["live_cycle"]["status"], "rolled_back")
 
-    def test_healthy_live_cycle_leaves_state_unchanged(self):
-        original = state(0.95)
+    def test_healthy_live_cycle_confirms_provisional_version(self):
+        result, updated, validation = self.run_rollback(state(0.95))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(validation.returncode, 0, validation.stdout)
+        self.assertEqual(updated["agents"]["coach"]["version"], 2)
+        self.assertEqual(updated["agents"]["coach"]["last_promotion_id"], "promotion-rollback")
+        self.assertIsNone(updated["agents"]["coach"]["trial_version"])
+        self.assertEqual(updated["proposals"][0]["status"], "accepted")
+        self.assertEqual(updated["promotions"][0]["decision"], "accepted")
+        self.assertEqual(json.loads(result.stdout)["confirmed"], ["promotion-rollback"])
+
+    def test_pending_live_cycle_leaves_provisional_state_unchanged(self):
+        original = state(None, live_status="pending")
         result, updated, validation = self.run_rollback(original)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(validation.returncode, 0, validation.stdout)
         self.assertEqual(updated, original)
-        self.assertEqual(json.loads(result.stdout)["rolled_back"], [])
+        self.assertEqual(json.loads(result.stdout), {"confirmed": [], "rolled_back": []})
+
+    def test_legacy_accepted_version_still_rolls_back_on_breach(self):
+        result, updated, validation = self.run_rollback(accepted_state(0.7))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(validation.returncode, 0, validation.stdout)
+        self.assertEqual(updated["agents"]["coach"]["version"], 1)
+        self.assertEqual(updated["promotions"][0]["decision"], "rolled_back")
 
 
 if __name__ == "__main__":

@@ -86,11 +86,27 @@ class DocDebtGitTests(unittest.TestCase):
         self.assertEqual([entry["document"] for entry in stale], ["AGENTS.md"])
         self.assertEqual(stale[0]["newest_source"], "app.py")
 
-    def test_uncommitted_document_edit_does_not_clear_the_debt(self):
+    def test_uncommitted_document_edit_clears_the_debt(self):
         self.commit("first", AGENTS__md="guidance")
         self.commit("second", app__py="print('hi')\n")
         (self.workspace / "AGENTS.md").write_text("touched but not committed", encoding="utf-8")
-        self.assertEqual(len(detector.check(self.workspace, ("AGENTS.md",))), 1)
+        self.assertEqual(detector.check(self.workspace, ("AGENTS.md",)), [])
+
+    def test_uncommitted_source_with_clean_document_is_reported(self):
+        self.commit("first", AGENTS__md="guidance", app__py="print('hi')\n")
+        (self.workspace / "app.py").write_text("print('changed')\n", encoding="utf-8")
+        stale = detector.check(self.workspace, ("AGENTS.md",))
+        self.assertEqual(stale, [{"document": "AGENTS.md", "newest_source": "app.py"}])
+
+    def test_active_host_excludes_the_inactive_root_entry(self):
+        self.commit("roots", AGENTS__md="codex", CLAUDE__md="claude")
+        self.commit("source", app__py="print('hi')\n")
+        self.commit("codex docs", AGENTS__md="codex updated")
+        self.assertEqual(detector.check(self.workspace, host="codex"), [])
+        self.assertEqual(
+            [entry["document"] for entry in detector.check(self.workspace, host="claude")],
+            ["CLAUDE.md"],
+        )
 
 
 if __name__ == "__main__":

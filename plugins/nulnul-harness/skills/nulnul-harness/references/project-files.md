@@ -44,11 +44,12 @@ A fix that lands in code but not in the harness documents is knowledge the next 
 Run the shipped detector instead of writing one:
 
 ```bash
-python3 ../scripts/check_doc_debt.py .                       # AGENTS.md, CLAUDE.md, docs/nulnul/project.md, README.md
-python3 ../scripts/check_doc_debt.py . --document AGENTS.md  # narrow it to one document
+python3 ../scripts/check_doc_debt.py . --host codex           # AGENTS.md plus shared documents
+python3 ../scripts/check_doc_debt.py . --host claude          # CLAUDE.md plus shared documents
+python3 ../scripts/check_doc_debt.py . --document AGENTS.md   # narrow it to one document
 ```
 
-It exits non-zero when a listed document is older than the newest tracked source file, so it works as a pre-push hook or a final check before ending a session.
+The active-host option excludes the inactive root entry. Dirty working-tree documents take precedence over commit order, so a document already updated in the current change is not falsely reported as stale; dirty source with a clean document is still reported. The command exits non-zero when a listed document is older than the newest source file, so it works as a pre-push hook or a final check before ending a session.
 
 ## Root host entries
 
@@ -85,7 +86,7 @@ For a legacy durable setup, run `../scripts/migrate_legacy_checkpoint.py docs/nu
 
 ## `docs/nulnul/evolution.json`
 
-Create this only for multi-session work, agent-specific feedback, or personal evolution. Start from `../assets/evolution-state.template.json`. Keep the current checkpoint, agent versions, bounded feedback, proposals, and Gate decisions. Validate it with `../scripts/validate_evolution_state.py` after every update.
+Create this only for multi-session work, agent-specific feedback, or personal evolution. Start from `../assets/evolution-state.template.json`. Keep the current checkpoint, confirmed and provisional agent versions, bounded feedback, proposals, and Gate decisions. Validate it with `../scripts/validate_evolution_state.py` after every update.
 
 After terminal decisions accumulate, run `../scripts/compact_evolution_state.py docs/nulnul/evolution.json`. The active file keeps open work and the latest accepted rollback point per agent; the adjacent `evolution.archive.json` keeps full closed records behind a digest. Validate both with `--check`, keep the archive out of normal resume context, and use `--rejected-for <agent>` for bounded replay checks. The compactor is the only writer of the archive and updates active state plus archive as one rollback-safe batch.
 

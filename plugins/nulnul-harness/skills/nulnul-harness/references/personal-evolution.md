@@ -7,7 +7,7 @@ Turn user corrections and agent feedback into tested agent versions, not free-fo
 - **Navigator** owns the outcome, verified checkpoint, next action, blockers, permissions, and session resume.
 - **Worker** completes one bounded job and reports an observable result, failure, workaround, or critique.
 - **Coach** is the meta-agent. It reproduces feedback, discovers credible better methods when the current frame is insufficient, and proposes one causal task- or meta-level change plus a regression check and rollback.
-- **Gate** is independent from the proposal author. It compares the candidate with the last accepted version and records promote, reject, or rollback.
+- **Gate** is independent from the proposal author. It compares the candidate with the last accepted version, marks a passing candidate provisional, and records confirmation, rejection, or rollback after the live-cycle result.
 
 Combine roles for low-risk execution when useful. Separate Coach and Gate for every promotion. When the Coach or Gate is the target, use a fresh evaluator or deterministic check that did not author the candidate. Do not create recursive coaches.
 
@@ -49,7 +49,7 @@ Apply `meta-evolution.md` when the feedback says the user had to find a better m
 
 ## Gate and promote
 
-Promote only when all are true:
+Move a candidate to `provisional` only when conditions 1 through 7 are true:
 
 1. the original failure reproduces on the accepted version;
 2. the candidate fixes it or improves the named metric;
@@ -58,11 +58,11 @@ Promote only when all are true:
 5. no unapproved permission, cost, credential, external-write, deployment, or publication scope is added;
 6. rollback points to the last accepted version;
 7. the Gate is neither the target agent nor the proposal author;
-8. one live cycle after promotion is observed against the recorded metric, and the promotion is rolled back automatically when the metric drops past the stated threshold.
+8. after provisional activation, one live cycle is observed against the recorded metric; a healthy cycle confirms the candidate as `accepted`, while the executor records `rolled_back` when the metric crosses the stated threshold.
 
-Condition 8 is not optional. A frozen sample judges stored records only; it cannot reproduce what appears at run time — resolver behaviour, load, execution order, or input that grew longer than the sample. Record the metric value at promotion, compare it at the start of the next cycle, and deactivate the candidate on a drop. The frozen sample catches regressions against known cases; the live cycle catches the ones the sample cannot contain. Both are required.
+Condition 8 is not optional for acceptance. A frozen sample judges stored records only; it cannot reproduce what appears at run time — resolver behaviour, load, execution order, or input that grew longer than the sample. Keep `agents.<id>.version` and `last_promotion_id` at the confirmed version while `trial_version` and `trial_promotion_id` identify the provisional candidate. Record the observed metric on the next cycle. The frozen sample catches regressions against known cases; the live cycle catches the ones the sample cannot contain. Both are required before the confirmed version pointer advances.
 
-For schema-version-3 state, record `metric_value`, `rollback_operator` (`lt`, `lte`, `gt`, `gte`, `eq`, or `ne`), and `rollback_value`, then run the currently loaded skill's `scripts/apply_live_cycle_rollback.py` against the state. It atomically restores the previous active agent-version pointer when the comparison is true and leaves the state untouched otherwise. Validate the result afterward. The executor intentionally does not run arbitrary rollback commands or edit product files; candidate artifacts must remain versioned and the Gate restores them through the proposal's recorded, permission-safe rollback path.
+For schema-version-3 or schema-version-4 state, record `rollback_operator` (`lt`, `lte`, `gt`, `gte`, `eq`, or `ne`) and numeric `rollback_value` before provisional activation. After the live cycle, set numeric `metric_value`, status `observed`, and bounded evidence, then run the currently loaded skill's `scripts/apply_live_cycle_rollback.py` against the state. It atomically confirms a healthy provisional version or clears the trial and records rollback when the comparison is true. It also preserves rollback compatibility for already accepted legacy states. Validate the result afterward. The executor intentionally does not run arbitrary rollback commands or edit product files; candidate artifacts must remain versioned and the Gate restores them through the proposal's recorded, permission-safe rollback path.
 
 Reject or roll back otherwise. Never let an agent serve as Gate for its own upgrade. If no independent Gate or valid check is available, leave the proposal pending and continue the project with the last accepted version.
 
@@ -122,4 +122,4 @@ Never move source code, repository or customer identity, machine paths, credenti
 
 ## Resume the original work
 
-After a promotion, rejection, or rollback, the Navigator records the decision, updates the target version when accepted, checkpoints the verified state, and resumes the unfinished user outcome. Evolution is not task completion.
+After a provisional decision, confirmation, rejection, or rollback, the Navigator records the decision, updates the confirmed target version only after a healthy observed live cycle, checkpoints the verified state, and resumes the unfinished user outcome. Evolution is not task completion.

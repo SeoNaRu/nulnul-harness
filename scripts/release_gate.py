@@ -2,6 +2,7 @@
 """Calculate the evidence-backed nulnul Release Gate release score."""
 
 import importlib.util
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -33,6 +34,173 @@ META_EVOLUTION_VALIDATOR = (
     ROOT / "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_meta_evolution.py"
 )
 META_ADOPTION_VALIDATOR = ROOT / "scripts/meta_adopt_evidence.py"
+PLUGIN = ROOT / "plugins/nulnul-harness"
+BEHAVIOR_BOUNDARIES = ROOT / "evals/behavior-boundaries"
+RELEASE_GATE = ROOT / "scripts/release_gate.py"
+BEHAVIOR_RUNNER = BEHAVIOR_BOUNDARIES / "run_ab.py"
+BEHAVIOR_SCHEMA = BEHAVIOR_BOUNDARIES / "decision.schema.json"
+
+
+def file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def plugin_tree_sha256(root: Path = PLUGIN) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(
+        item for item in root.rglob("*")
+        if item.is_file() and "__pycache__" not in item.parts and item.suffix != ".pyc"
+    ):
+        relative = path.relative_to(root).as_posix().encode("utf-8")
+        digest.update(len(relative).to_bytes(4, "big"))
+        digest.update(relative)
+        content = path.read_bytes()
+        digest.update(len(content).to_bytes(8, "big"))
+        digest.update(content)
+    return digest.hexdigest()
+
+
+def public_evidence_is_current(evidence: dict, version: str, archive_sha256: str) -> bool:
+    installed_version = evidence.get("plugin_version") or evidence.get("installed_plugin", {}).get("version")
+    return (
+        installed_version == version
+        and evidence.get("distribution", {}).get("asset_sha256") == archive_sha256
+    )
+
+
+def validate_behavior_boundary_gate(
+    preregistration: dict,
+    cases: dict,
+    results: dict,
+    version: str,
+    archive_sha256: str,
+) -> dict:
+    if preregistration.get("schema_version") != 1 or results.get("schema_version") != 1:
+        raise ValueError("Behavior boundary evidence must use schema version 1")
+    if results.get("episode_id") != preregistration.get("episode_id"):
+        raise ValueError("Behavior boundary episode identity mismatch")
+    budget = preregistration.get("budget", {})
+    if (
+        budget.get("max_candidates") != 1
+        or budget.get("max_generations") != 1
+        or budget.get("counterbalanced_rounds", 0) < 4
+        or budget.get("max_model_invocations", 0) > 17
+        or budget.get("permission_delta") != []
+        or budget.get("external_writes") != 0
+        or budget.get("new_dependencies") != 0
+        or budget.get("new_services") != 0
+        or budget.get("holdout_access") is not False
+    ):
+        raise ValueError("Behavior boundary budget is not bounded")
+    expected_cases = set(preregistration.get("primary_cases", [])) | set(
+        preregistration.get("candidate_controls", [])
+    )
+    if set(cases) != expected_cases:
+        raise ValueError("Behavior boundary case inventory mismatch")
+    candidate = results.get("candidate", {})
+    if results.get("decision") == "NO_PROMOTION":
+        evaluated_version = candidate.get("plugin_version")
+        digest_fields = {
+            "skill_sha256", "plugin_tree_sha256", "archive_sha256",
+            "preregistration_sha256", "cases_sha256", "release_gate_sha256",
+            "behavior_runner_sha256", "behavior_schema_sha256",
+            "activation_runner_sha256", "sanitized_result_sha256",
+        }
+        behavior = results.get("behavior", {})
+        invocations = results.get("model_invocations")
+        if (
+            results.get("status") != "rejected"
+            or results.get("candidate_removed") is not True
+            or results.get("raw_transcript_retained") is not False
+            or results.get("permission_delta") != []
+            or not isinstance(evaluated_version, str)
+            or not evaluated_version
+            or candidate.get("plugin_tree_sha256") == plugin_tree_sha256()
+            or any(
+                not isinstance(candidate.get(field), str)
+                or len(candidate[field]) != 64
+                or any(character not in "0123456789abcdef" for character in candidate[field])
+                for field in digest_fields
+            )
+            or isinstance(invocations, bool)
+            or not isinstance(invocations, int)
+            or not 0 < invocations <= budget["max_model_invocations"]
+            or behavior.get("candidate_correct_runs", budget["counterbalanced_rounds"])
+            >= budget["counterbalanced_rounds"]
+            or results.get("fast_resume_performance", {}).get("status") != "not_run"
+        ):
+            raise ValueError("Rejected behavior candidate was not closed safely")
+        verdicts = results.get("learning_verdicts")
+        if not isinstance(verdicts, list) or not verdicts:
+            raise ValueError("Rejected behavior candidate lacks its learning verdict")
+        return {
+            "status": "passed",
+            "decision": "NO_PROMOTION",
+            "product_behavior_promoted": False,
+            "candidate_id": results.get("candidate_id"),
+            "evaluated_version": evaluated_version,
+            "candidate_removed": True,
+            "completed_model_invocations": invocations,
+        }
+    skill = PLUGIN / "skills/nulnul-harness/SKILL.md"
+    expected_identity = {
+        "plugin_version": version,
+        "skill_sha256": file_sha256(skill),
+        "plugin_tree_sha256": plugin_tree_sha256(),
+        "archive_sha256": archive_sha256,
+        "preregistration_sha256": file_sha256(BEHAVIOR_BOUNDARIES / "preregistration.json"),
+        "cases_sha256": file_sha256(BEHAVIOR_BOUNDARIES / "cases.json"),
+        "release_gate_sha256": file_sha256(RELEASE_GATE),
+        "behavior_runner_sha256": file_sha256(BEHAVIOR_RUNNER),
+        "behavior_schema_sha256": file_sha256(BEHAVIOR_SCHEMA),
+        "activation_runner_sha256": file_sha256(ACTIVATION_BENCHMARK),
+    }
+    for field, expected in expected_identity.items():
+        if candidate.get(field) != expected:
+            raise ValueError(f"Behavior boundary candidate identity mismatch: {field}")
+    behavior = results.get("behavior", {})
+    performance = results.get("fast_resume_performance", {})
+    invocations = results.get("model_invocations")
+    if (
+        results.get("status") != "passed"
+        or results.get("decision") != "PROVISIONAL"
+        or results.get("raw_transcript_retained") is not False
+        or results.get("permission_delta") != []
+        or isinstance(invocations, bool)
+        or not isinstance(invocations, int)
+        or not 0 < invocations <= budget["max_model_invocations"]
+        or behavior.get("rounds_per_arm") != budget["counterbalanced_rounds"]
+        or not isinstance(behavior.get("champion_correct_runs"), int)
+        or behavior["champion_correct_runs"] >= budget["counterbalanced_rounds"]
+        or behavior.get("candidate_correct_runs") != budget["counterbalanced_rounds"]
+        or behavior.get("candidate_primary_decisions")
+        != budget["counterbalanced_rounds"] * budget["primary_cases_per_arm"]
+        or behavior.get("candidate_control_decisions") != budget["candidate_control_cases"]
+        or behavior.get("unselected_optional_skill_activations") != 0
+        or behavior.get("selected_optional_skill_activations") != 1
+        or behavior.get("candidate_nulnul_activation_runs")
+        != budget["counterbalanced_rounds"] + 1
+        or performance.get("rounds") != 4
+        or performance.get("candidate_correct_runs") != 4
+        or performance.get("forbidden_read_runs") != 0
+        or performance.get("eligible_pairs") != 4
+    ):
+        raise ValueError("Behavior boundary candidate did not pass its frozen Gate")
+    paired_change = performance.get("paired_input_change_percent")
+    if not isinstance(paired_change, (int, float)) or paired_change > 20:
+        raise ValueError("Behavior boundary fast-resume input cost regressed")
+    verdicts = results.get("learning_verdicts")
+    if not isinstance(verdicts, list) or not verdicts:
+        raise ValueError("Behavior boundary evidence lacks its champion learning verdict")
+    return {
+        "status": "passed",
+        "decision": results["decision"],
+        "product_behavior_promoted": True,
+        "candidate_id": results.get("candidate_id"),
+        "plugin_tree_sha256": candidate["plugin_tree_sha256"],
+        "behavior_decisions": behavior["candidate_primary_decisions"] + behavior["candidate_control_decisions"],
+        "fast_resume_rounds": performance["candidate_correct_runs"],
+    }
 
 
 def load_evolution():
@@ -482,13 +650,24 @@ def main() -> None:
         (ROOT / "evals/meta-evolution/release-preregistration.json").read_text(encoding="utf-8")
     )
     version = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
+    archive = ROOT / "dist" / f"nulnul-harness-{version}.zip"
+    if not archive.is_file():
+        raise ValueError(f"Current candidate archive is missing: {archive.name}")
+    archive_sha256 = file_sha256(archive)
+    behavior_preregistration = json.loads(
+        (BEHAVIOR_BOUNDARIES / "preregistration.json").read_text(encoding="utf-8")
+    )
+    behavior_cases = json.loads((BEHAVIOR_BOUNDARIES / "cases.json").read_text(encoding="utf-8"))
+    behavior_results = json.loads((BEHAVIOR_BOUNDARIES / "results.json").read_text(encoding="utf-8"))
     validate_learning_gate(learning, evolution)
     validate_learning_gate(failed_holdout, evolution)
     validate_learning_gate(meta_results, evolution)
+    validate_learning_gate(behavior_results, evolution)
     validate_claude_gate(evidence, evidence["plugin_version"])
     score = calculate(cases, results)
     score["performance_gate"] = validate_performance_gate(performance)
     score["activation_gate"] = {
+        "status": "passed",
         **validate_activation_gate(),
         **validate_activation_results(activation, evolution),
     }
@@ -507,6 +686,9 @@ def main() -> None:
     score["cross_project_meta_evolution_gate"] = validate_meta_evolution_gate(
         meta_preregistration, meta_results, cross_project_evidence
     )
+    score["behavior_boundary_evaluation_gate"] = validate_behavior_boundary_gate(
+        behavior_preregistration, behavior_cases, behavior_results, version, archive_sha256
+    )
     score["public_personal_adoption_gate"] = validate_public_personal_adoption(
         public_personal_adoption, public_personal_adoption["installed_plugin"]["version"]
     )
@@ -514,20 +696,23 @@ def main() -> None:
         gate.get("status") == "passed"
         for gate in (
             score["performance_gate"],
+            score["activation_gate"],
             score["observable_evolution_gate"],
             score["generalization_gate"],
             score["bounded_autonomous_evolution_gate"],
             score["personal_evolution_gate"],
             score["cross_project_meta_evolution_gate"],
+            score["behavior_boundary_evaluation_gate"],
         )
     )
     score["published_baseline_release_ready"] = score["release_ready"]
     score["local_candidate_ready"] = local_candidate_ready
     blockers = []
-    claude_current = evidence["plugin_version"] == version
+    claude_current = public_evidence_is_current(evidence, version, archive_sha256)
     score["public_claude_adoption_gate"] = {
         "status": "passed" if claude_current else "stale",
         "version": evidence["plugin_version"],
+        "asset_sha256": evidence.get("distribution", {}).get("asset_sha256"),
     }
     public_meta_path = ROOT / "evals/meta-evolution/public-adoption.json"
     meta_current = False
@@ -537,7 +722,7 @@ def main() -> None:
         score["public_meta_adoption_gate"] = validate_public_meta_adoption(
             public_meta, meta_release_preregistration, meta_version
         )
-        meta_current = meta_version == version
+        meta_current = public_evidence_is_current(public_meta, version, archive_sha256)
         if not meta_current:
             score["public_meta_adoption_gate"]["status"] = "stale"
     else:
@@ -549,9 +734,9 @@ def main() -> None:
     if not meta_current:
         blockers.append("Exact-version public cross-project Meta adoption evidence is missing.")
     if changelog_unreleased:
-        blockers.append("The 2.0 changelog is still marked Unreleased.")
+        blockers.append("The changelog still contains an Unreleased candidate.")
     if prerelease:
-        blockers.append("A prerelease cannot close the final 2.0.0 Release Gate.")
+        blockers.append("A prerelease cannot close the final Release Gate.")
     score["release_ready"] = bool(
         score["published_baseline_release_ready"]
         and local_candidate_ready

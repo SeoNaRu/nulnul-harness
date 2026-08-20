@@ -2,6 +2,13 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 2.2.0 — 2026-08-20
+
+- Replaced circular acceptance with a schema-v4 provisional live cycle. The confirmed agent version stays active until the observed cycle is healthy; the shipped executor then confirms the trial or records rollback. Schema-v4 executable threshold validation and legacy accepted-version rollback remain covered.
+- Made documentation-debt checks active-host aware and dirty-worktree aware. `--host codex|claude` excludes the inactive root entry, a dirty document clears current-change debt, and dirty source still reports a clean document.
+- Bound public adoption freshness and local behavior evidence to exact candidate bytes instead of a version string alone. A same-version archive with a different SHA is stale, and the Release Gate records safely closed `NO_PROMOTION` episodes without crediting them as product behavior.
+- Rejected and removed the one-generation consent/continuity behavior candidate. In the corrected four-round DEV/VALIDATION comparison it met the ordinary-product and gameplay-choice core boundaries 4/4 and reduced unselected optional-skill reads from champion 3/4 to candidate 0/4, but the preregistered strict Gate remained 0/4 with controls 0/2; fast-resume calls were not spent after the stop condition fired. No behavior, HOLDOUT, Personal, public-release, or universal cost claim is made.
+
 ## 2.1.1 — 2026-08-14
 
 - Made the documentation-debt detector defer its recursive modification-time fallback until a document without Git history actually needs it; tracked documents continue to use commit order and the non-Git path remains covered.

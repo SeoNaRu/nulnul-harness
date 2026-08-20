@@ -8,7 +8,7 @@ Keep these invariants active on every setup or adopt-and-upgrade run. They are t
 4. **Capability decisions** — map each job to inspected evidence and report **reuse now**, **add now**, **needs approval**, or **skip**. Create a local substitute only after adequate candidates fail.
 5. **Permission boundary** — never expand credentials, cost, global configuration, external writes, deployment, or publication without explicit approval.
 6. **Continue the work** — after setup, resume the original project outcome and verify the user-visible result.
-7. **Governed evolution** — keep the last accepted version active until an independent Gate reproduces the change, checks guardrails, observes one live cycle, and records rollback.
+7. **Governed evolution** — keep the last accepted version active while an independent Gate reproduces the change and checks guardrails. Mark a passing candidate provisional, then confirm its version only after one healthy live cycle or roll it back when the executable threshold fires.
 
 ## Add infrastructure only when its signal appears
 

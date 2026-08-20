@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "episode_id": "consent-continuity-boundary-2",
+  "runner_emitted_episode_id": "consent-continuity-boundary-1",
+  "candidate_id": "nulnul-2.2.0-rc.1-consent-continuity",
+  "status": "rejected",
+  "decision": "NO_PROMOTION",
+  "stop_reason": "The frozen strict Gate failed: candidate exact runs were 0/4 and strict controls were 0/2. Fast-resume calls were not spent after the behavior stop condition fired.",
+  "model": "gpt-5.6-sol",
+  "model_invocations": 9,
+  "raw_transcript_retained": false,
+  "permission_delta": [],
+  "candidate_removed": true,
+  "candidate": {
+    "plugin_version": "2.2.0-rc.1",
+    "skill_sha256": "3a523ebf73027a83364d87ab13b37640cb6b9578f9eebf1a7b49d9a731a53524",
+    "plugin_tree_sha256": "2ff9ec2dc76d296d4c1b5d362c19d088c29242ba93855f4f807d24364d607003",
+    "archive_sha256": "2b9d374e973684f4f62a671c1a5cdae0ac1e895efa84bfe3d5af626eb8ecaec5",
+    "preregistration_sha256": "0f64a64e00ec6cba2d684036959331b79056b64c63012af26b8b0997544dbbf3",
+    "cases_sha256": "7e33c382d1244943feaedbc16494e28ab5c5dc3f6f6712960faeb40ed769aeaa",
+    "release_gate_sha256": "cbc65ead04f718a56c64d9072c39a50e73721b78ca7d94bc95d8d5331205f2ac",
+    "behavior_runner_sha256": "2a59594dc0c890a11e3e0c73726973717332c14732ced3edfff3b139919ec6ff",
+    "behavior_schema_sha256": "472d83b9accbc17fb8bf484c2572b8c2013b53440105ec62fd055522063ef666",
+    "activation_runner_sha256": "667bebaf9f828d69bc664181770fa73f4f387e715562842bb25fd7ad467d60e7",
+    "sanitized_result_sha256": "fa240a78f048635676e5a3c2c18482dcbbd28d7dd705e49ca339befa4074e8c8"
+  },
+  "behavior": {
+    "rounds_per_arm": 4,
+    "champion_correct_runs": 0,
+    "candidate_correct_runs": 0,
+    "candidate_primary_decisions": 4,
+    "candidate_control_decisions": 0,
+    "unselected_optional_skill_activations": 0,
+    "selected_optional_skill_activations": 1,
+    "candidate_nulnul_activation_runs": 5
+  },
+  "bounded_observations_not_used_for_promotion": {
+    "ordinary_product_core_boundary": "candidate 4/4; champion 3/4",
+    "gameplay_choice_core_boundary": "candidate 4/4; champion 4/4",
+    "unselected_optional_skill_reads": "candidate 0/4; champion 3/4",
+    "selected_ponytail_instruction_read": "candidate 1/1",
+    "paired_input_change_percent": -30.89
+  },
+  "fast_resume_performance": {
+    "status": "not_run",
+    "reason": "The frozen behavior Gate stopped the episode before the remaining eight-call performance stage."
+  },
+  "learning_verdicts": [
+    {
+      "id": "verdict-consent-continuity-no-promotion",
+      "status": "rejected",
+      "feedback_id": "feedback-consent-continuity-boundary",
+      "proposal_ids": [
+        "proposal-navigator-21-consent-continuity"
+      ]
+    }
+  ]
+}

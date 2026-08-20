@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.1.1-111111" alt="version 2.1.1">
+  <img src="https://img.shields.io/badge/version-2.2.0-111111" alt="version 2.2.0">
   <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="확인된 동작과 안전 점수: 100/100"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
@@ -19,9 +19,13 @@
 </p>
 
 <p align="center">
-  <a href="#빠른-시작">바로 사용</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.1">2.1.1</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">불편 신고</a>
+  <a href="#빠른-시작">바로 사용</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.1">공개 2.1.1</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">불편 신고</a>
 </p>
 
+> **NULNUL 2.2.0은 현재 로컬 최종 빌드입니다.** Provisional→confirmed evolution 상태, active-host·dirty-worktree documentation-debt 검사, exact candidate-byte Release Gate attribution을 추가합니다. 패키징과 로컬 검증은 완료했으며, exact 2.2.0 공개 adoption과 publication 전까지 최신 공개 릴리스는 2.1.1입니다.
+>
+> **이번 버전에 넣지 않은 것:** Consent/continuity 행동 후보는 frozen strict Gate가 `NO_PROMOTION`을 반환해 제거했습니다. Navigator는 v20을 유지하며, 새 consent 또는 일반 product routing 동작을 이 릴리스의 검증된 기능으로 주장하지 않습니다.
+>
 > **NULNUL 2.1.1은 필수 documentation-debt 검사를 lazy하게 실행합니다.** 이 tracked release 저장소에서 동일 결과의 median이 counterbalanced A/B 4회 기준 17.73645초에서 0.2308초로 줄었습니다.
 >
 > **2.1은 evolution context를 bounded 상태로 유지합니다.** 종료된 history는 일반 resume context에 넣지 않고 integrity-checked local archive로 옮깁니다.
@@ -118,16 +122,18 @@ NULNUL은 프로젝트 하네스를 바꿀 수 있지만 자기 변경을 스스
         ↓
   Independent Gate
      ↙        ↘
-   거부        승격
+   거부      provisional
                  ↓
            실제 실행 관찰
               ↙       ↘
-            유지     rollback
+           확정      rollback
 ```
 
 변경을 제안하는 과정과 credit을 부여하는 과정을 분리합니다. Coach는 causal hypothesis, prediction, falsification condition을 제시할 수 있지만 그 자체는 근거가 아닙니다. Gate가 completion check, validator, permission/privacy guardrail, cost, candidate identity, rollback 가능성에 대한 deterministic measurement를 소유합니다.
 
 Bounded evolution에서는 탐색을 시작하기 전에 후보 수, generation 수, 평가 budget, permission, 종료 조건을 고정합니다. 더 나은 후보가 없다면 **`NO_PROMOTION`이 올바른 결과**입니다.
+
+Gate를 통과했다는 이유만으로 confirmed agent version을 올리지 않습니다. 후보는 다음 실제 cycle을 관찰할 때까지 provisional이며, 건강한 결과일 때만 확정합니다.
 
 Personal reuse에서는 project 승인만으로도 부족합니다. 일반화된 후보가 representative transfer check와 별도 Personal Gate를 통과해야 하며, 새 프로젝트는 다시 compatibility를 검사해 적용·범위 축소·건너뛰기 중 하나를 선택합니다. 이는 사용자가 시작한 제한된 개선 절차입니다. 지속적인 자동 학습, 무인 반복 실행, open-ended self-improvement가 아닙니다.
 
@@ -274,7 +280,7 @@ NULNUL은 의도적으로 skills-only입니다. Server, daemon, hosted control p
 | Repository truth | 구성 전에 host surface, 기존 guidance, capability, agent, test, permission을 조사합니다. |
 | Adaptive topology | 독립된 프로젝트 작업과 그 검사가 정당화할 때만 role과 mechanism을 추가·병합·제거합니다. |
 | Verified continuity | Schema-v3 checkpoint는 exact completion command, bounded verification files, runner-owned freshness receipt를 사용합니다. 변경된 상태는 verified fast resume를 주장할 수 없습니다. |
-| Governed evolution | Schema-v4 episode는 승격 전에 pathology, candidate/generation/evaluation budget, permission delta, archive identity, deterministic credit owner, stop reason을 고정합니다. |
+| Governed evolution | Schema-v4 episode는 pathology, candidate/generation/evaluation budget, permission delta, archive identity, deterministic credit owner, stop reason을 고정합니다. Gate 통과는 provisional trial을 시작할 뿐이며 건강한 live cycle 뒤에만 confirmed version을 올립니다. |
 | Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, mechanism identity가 machine-readable합니다. 사용한 holdout을 unseen으로 다시 부를 수 없습니다. |
 | Personal adaptation | User-selected local registry에는 generalized mechanism, activation condition, contraindication, transfer summary, provenance, permission, revocation state만 저장합니다. Home 누락, conflict, private data, stale status, false activation은 fail-closed입니다. |
 | Cross-project selection | Typed privacy-safe summary에 activation boundary, failed transfer, status, permission, evidence-backed relation을 보존합니다. 근거 없는 관계는 `UNKNOWN`으로 두고 raw project workload는 집계하지 않습니다. |
@@ -341,7 +347,7 @@ transfer claim만 → sealed unseen check → scoped decision
 
 | Evidence | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **219개 통과 (219/219)** | deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, documentation-debt A/B, negative-control contract가 유지됩니다. |
+| 저장소 test | **233개 통과 (233/233)** | deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, negative-control contract가 유지됩니다. |
 | 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
 | 최종 1.7.0 Release Gate | **통과** | Exact-tag Claude Code와 personal-adaptation adoption 통과 후 main CI run `31651306556`도 green이 됐습니다. |
 | Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
@@ -351,6 +357,7 @@ transfer claim만 → sealed unseen check → scoped decision
 | 2.0 local Meta Gate | **3 family, full check 9 → 4, 결정 3/3 정답** | Bounded summary evidence가 sealed episode 하나에서 selection work를 줄였습니다. Token, runtime, universal, cross-user 개선은 미입증입니다. |
 | 2.1 release 상태 | **공개 및 검증 완료** | Exact public 2.1.0 Claude adoption이 protected write 0건과 check 5개를 통과했고, active evolution fixture는 **87.48%** 작아졌으며 exact Project M은 정답을 유지하며 full check를 **3 → 1**로 줄였습니다. Generalization은 narrower scope를 유지합니다. |
 | 2.1.1 release 상태 | **공개 및 검증 완료** | Counterbalanced 4회에서 동일 debt 결과를 유지하고 detector median을 **17.73645초 → 0.2308초(−98.70%)**로 줄였습니다. Fresh exact-final Claude·Meta adoption이 통과했고 Release Gate는 **100/100**으로 닫혔습니다. |
+| 2.2.0 local final | **로컬 준비 완료, 공개 대기** | 안전한 lifecycle, documentation-debt, exact-byte 변경은 로컬 검증을 통과했습니다. Consent/continuity 행동 후보는 `NO_PROMOTION`으로 제거했으며 공개 전 exact-version adoption이 필요합니다. |
 
 개선 후보가 반드시 이겨야 하는 것은 아닙니다. 거부, `NO_PROMOTION`, narrower scope, rollback은 모두 정상 결과입니다.
 
@@ -363,7 +370,11 @@ python3 scripts/release_gate.py
 
 현재 공개된 2.1.1 evidence는 `release_ready: true`를 보고합니다. [Main CI run 31772275214](https://github.com/SeoNaRu/nulnul-harness/actions/runs/31772275214)가 통과했고, 내려받은 archive SHA-256은 `dc7718ea2f7894a411ee2e179fb015d10621e5d684d9e6f228e298a3ed131b03`입니다.
 
+로컬 최종 2.2.0 archive SHA-256은 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`입니다. Gate는 `local_candidate_ready: true`, `release_ready: false`를 보고하며 2.1.1 evidence를 새 public-release 근거로 추론하지 않습니다.
+
 근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [documentation-debt A/B](evals/benchmarks/doc-debt/results.json), [rejected context-routing A/B](evals/benchmarks/context-routing/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json), 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) 결과를 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
+
+2.2 behavior-boundary episode는 [preregistration](evals/behavior-boundaries/preregistration.json), [cases](evals/behavior-boundaries/cases.json), [sanitized result](evals/behavior-boundaries/results.json), 제외한 [invalid first episode](evals/behavior-boundaries/invalid-evaluator-episode-1.json)를 보존합니다. 이는 shipped behavior 근거가 아니라 거절 기록입니다.
 
 ## 이런 사람을 위해 만들었습니다
 

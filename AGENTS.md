@@ -13,7 +13,7 @@ This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds prov
 - Add every necessary, non-overlapping capability, but activate only what the current task needs.
 - Prefer direct or single-agent execution. Add roles only from concrete independent work or verification boundaries, with one synthesis owner.
 - Never register global tools, use credentials, deploy, or publish without explicit user approval.
-- Keep generated setup removable. Accept an evolution only when a reproducible before/after check improves the primary outcome without violating guardrails, and observe one live cycle after promotion with an executable automatic rollback threshold; schema-v3/v4 states must run the shipped rollback executor before final validation.
+- Keep generated setup removable. Mark a Gate-passing evolution candidate provisional while the confirmed version remains active, then use one observed live cycle and the shipped schema-v3/v4 executor to confirm it or roll it back before final validation.
 - Keep ordinary resume context bounded: compact closed evolution history into the digest-bound adjacent archive, validate deterministic full-state reconstruction, and query rejected history only when a matching proposal needs it.
 - Give durable projects one validated concise resume checkpoint; keep stable setup evidence outside the host-loaded entry, and convert every reproducible nonpass verdict into Coach feedback and one bounded proposal in the same run.
 - Allow fast resume only from an explicitly verified checkpoint; machine-link every nonpass verdict to its feedback and proposal, and migrate legacy durable contracts without creating a second live-state writer.
@@ -38,7 +38,7 @@ The documentation-debt check uses Git commit order for tracked documents and onl
 ```bash
 python3 scripts/pack_plugin.py
 python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
-python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .
+python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex
 ```
 
 For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`.

@@ -16,19 +16,25 @@
       "version": 1,
       "job": "Own the outcome, checkpoint, permissions, resume, and synthesis.",
       "profile_path": null,
-      "last_promotion_id": null
+      "last_promotion_id": null,
+      "trial_version": null,
+      "trial_promotion_id": null
     },
     "coach": {
       "version": 1,
       "job": "Discover better methods and turn reproducible feedback into one task- or meta-level upgrade proposal.",
       "profile_path": null,
-      "last_promotion_id": null
+      "last_promotion_id": null,
+      "trial_version": null,
+      "trial_promotion_id": null
     },
     "gate": {
       "version": 1,
-      "job": "Independently evaluate and promote, reject, or roll back proposals.",
+      "job": "Independently evaluate proposals, start provisional trials, and confirm, reject, or roll them back.",
       "profile_path": null,
-      "last_promotion_id": null
+      "last_promotion_id": null,
+      "trial_version": null,
+      "trial_promotion_id": null
     }
   },
   "feedback": [],

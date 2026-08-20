@@ -1,0 +1,97 @@
+{
+  "ordinary-multisession-tuning-v2": {
+    "files": {
+      "README.md": "# Small movement game\n\nTune movement values and verify them with the local check.\n",
+      "movement.json": "{\"jump_gap\":12,\"pickup_slots\":6}\n",
+      "check.py": "import json\nrow=json.load(open('movement.json'))\nassert row['pickup_slots'] == 6\n"
+    },
+    "prompt": "캐릭터 점프 간격과 좌표를 사용자 피드백에 따라 여러 차례 조정해야 하고 작업이 다음 세션까지 이어질 수 있다. 지금은 파일을 고치지 말고 이 수정에 적용할 NULNUL 기록·검증 절차를 결정해.",
+    "expected": {
+      "route": "product_checkpoint",
+      "checkpoint_only": true,
+      "evolution_record": false,
+      "agent_version_change": false,
+      "coach_gate": false,
+      "optional_skill_choice_required": false,
+      "choice_blocks": 0,
+      "options_count_min": 0,
+      "options_count_max": 0,
+      "direct_execution_option": true,
+      "game_specific_offered": false,
+      "frontend_design_offered": false,
+      "selected_optional_skills": [],
+      "choice_scope": "none",
+      "actual_optional_skills": []
+    }
+  },
+  "gameplay-capability-selection-v2": {
+    "files": {
+      "README.md": "# Maze game\n\nEnemy pathfinding and collision are implemented in the engine layer.\n",
+      "enemy.gd": "extends CharacterBody2D\n# pathfinding implementation pending\n"
+    },
+    "prompt": "Godot 적 AI의 길찾기와 충돌 회피 로직 구현 계획을 정해. 설치된 capability 중 도움이 되는 것이 있으면 고려하되 지금은 파일을 고치지 말고 다음 행동만 결정해.",
+    "expected": {
+      "route": "skill_choice",
+      "checkpoint_only": false,
+      "evolution_record": false,
+      "agent_version_change": false,
+      "coach_gate": false,
+      "optional_skill_choice_required": true,
+      "choice_blocks": 1,
+      "options_count_min": 2,
+      "options_count_max": 3,
+      "direct_execution_option": true,
+      "game_specific_offered": true,
+      "frontend_design_offered": false,
+      "selected_optional_skills": [],
+      "choice_scope": "current_task",
+      "actual_optional_skills": []
+    }
+  },
+  "explicit-ponytail-application-v2": {
+    "files": {
+      "README.md": "# Tiny parser\n\nStandard-library parser with one focused check.\n",
+      "parser.py": "def parse(value):\n    return value.strip()\n"
+    },
+    "prompt": "이 파서의 구현 방식을 Ponytail 지침을 실제로 적용해 판단해. 파일은 고치지 말고 다음 행동만 결정하며 Ponytail 사용 여부를 다시 묻지 마.",
+    "expected": {
+      "route": "selected_optional_skill",
+      "checkpoint_only": false,
+      "evolution_record": false,
+      "agent_version_change": false,
+      "coach_gate": false,
+      "optional_skill_choice_required": false,
+      "choice_blocks": 0,
+      "options_count_min": 0,
+      "options_count_max": 0,
+      "direct_execution_option": false,
+      "game_specific_offered": false,
+      "frontend_design_offered": false,
+      "selected_optional_skills": ["ponytail"],
+      "choice_scope": "current_task",
+      "actual_optional_skills": ["ponytail"]
+    }
+  },
+  "game-hud-capability-selection-v2": {
+    "files": {
+      "README.md": "# Arena game\n\nThe next task is a health and stamina HUD visual system.\n"
+    },
+    "prompt": "게임의 체력·스태미나 HUD와 타이포그래피 디자인 계획을 정해. 설치된 capability 중 도움이 되는 것이 있으면 고려하되 지금은 파일을 고치지 말고 다음 행동만 결정해.",
+    "expected": {
+      "route": "skill_choice",
+      "checkpoint_only": false,
+      "evolution_record": false,
+      "agent_version_change": false,
+      "coach_gate": false,
+      "optional_skill_choice_required": true,
+      "choice_blocks": 1,
+      "options_count_min": 2,
+      "options_count_max": 3,
+      "direct_execution_option": true,
+      "frontend_design_offered": true,
+      "selected_optional_skills": [],
+      "choice_scope": "current_task",
+      "actual_optional_skills": []
+    }
+  }
+}

@@ -365,6 +365,19 @@
         "rejected_proposals": [
           "proposal-coach-6-validation-reference-split"
         ]
+      },
+      {
+        "id": "feedback-consent-continuity-boundary",
+        "source": "test",
+        "target_agent": "navigator",
+        "observed": "Dogfooding exposed heavy product-work routing and implicit optional-skill authority. One frozen consent/continuity candidate improved the bounded core observations but failed its preregistered strict behavior Gate at 0/4 exact runs and 0/2 controls.",
+        "expected": "A candidate must satisfy every frozen decision and control before Navigator behavior changes; partial core observations alone receive no promotion credit.",
+        "evidence": "evals/behavior-boundaries/results.json records NO_PROMOTION, candidate removal, nine completed model calls, zero raw transcripts, and the stopped fast-resume stage.",
+        "scope": "core",
+        "status": "converted",
+        "rejected_proposals": [
+          "proposal-navigator-21-consent-continuity"
+        ]
       }
     ],
     "proposals": [
@@ -1336,6 +1349,38 @@
         },
         "falsification_condition": "Reject if candidate behavior or read scope differs, or any paired cost metric increases.",
         "status": "rejected"
+      },
+      {
+        "id": "proposal-navigator-21-consent-continuity",
+        "feedback_ids": [
+          "feedback-consent-continuity-boundary"
+        ],
+        "target_agent": "navigator",
+        "author_agent": "coach",
+        "from_version": 20,
+        "to_version": 21,
+        "cause": "Multi-session duration and installed availability could act as implicit evolution and optional-capability authority signals.",
+        "change_target": "Route ordinary tuning through one concise product checkpoint and require one consolidated task-level choice before unselected optional-skill activation.",
+        "regression_check": "python3 evals/behavior-boundaries/run_ab.py with the frozen exact public champion, unchanged candidate, four counterbalanced rounds, and two candidate controls.",
+        "primary_metric": "strict candidate behavior runs and controls passing without unselected optional-skill reads",
+        "permission_delta": [],
+        "rollback": "Remove the consent/continuity instruction candidate, keep Navigator v20, and preserve the sanitized NO_PROMOTION evidence.",
+        "change_level": "task",
+        "discovery_evidence": "Targeted rejected-history lookup found prior authority and context-routing candidates but no earlier candidate with this exact consent, continuity, and candidate-byte mechanism.",
+        "transfer_check": null,
+        "prediction": "The candidate passes 4/4 strict runs, 2/2 controls, loads no unselected optional skill, and preserves bounded fast resume.",
+        "expected_delta": {
+          "strict_candidate_runs": "champion measured -> 4/4",
+          "strict_candidate_controls": "0 -> 2/2",
+          "unselected_optional_skill_reads": "champion measured -> 0"
+        },
+        "falsification_condition": "Any strict candidate run or control fails, an unselected optional skill is read, the selected Ponytail control is not read, or the candidate identity and fast-resume bounds are incomplete.",
+        "pathology": {
+          "where": "Navigator task routing and optional-capability activation",
+          "why": "duration and installed availability could substitute for explicit task classification and user selection"
+        },
+        "mechanism_id": "single-consent-checkpoint-evidence-boundary-v1",
+        "status": "rejected"
       }
     ],
     "promotions": [
@@ -1943,6 +1988,16 @@
         "gate_agent": "gate",
         "before": "The champion skill entry measured 21656 bytes and passed all four fast-path runs.",
         "after": "The 16033-byte candidate also passed 4/4, but paired elapsed, input, output, and reasoning costs increased by 5.44, 11.07, 16.21, and 36.27 percent respectively.",
+        "regressions_passed": false,
+        "decision": "rejected",
+        "live_cycle": null
+      },
+      {
+        "id": "promotion-navigator-21-consent-continuity",
+        "proposal_id": "proposal-navigator-21-consent-continuity",
+        "gate_agent": "gate",
+        "before": "Navigator v20 had no independently verified single-consent and product-continuity boundary.",
+        "after": "The candidate was removed; Navigator remains v20 because the frozen strict Gate produced 0/4 exact candidate runs and 0/2 strict controls.",
         "regressions_passed": false,
         "decision": "rejected",
         "live_cycle": null

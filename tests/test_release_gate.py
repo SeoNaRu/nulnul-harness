@@ -42,6 +42,57 @@ class ReleaseGateTests(unittest.TestCase):
         self.meta_release_preregistration = json.loads(
             (ROOT / "evals/meta-evolution/release-preregistration.json").read_text(encoding="utf-8")
         )
+        self.behavior_preregistration = json.loads(
+            (ROOT / "evals/behavior-boundaries/preregistration.json").read_text(encoding="utf-8")
+        )
+        self.behavior_cases = json.loads(
+            (ROOT / "evals/behavior-boundaries/cases.json").read_text(encoding="utf-8")
+        )
+        self.behavior_results = json.loads(
+            (ROOT / "evals/behavior-boundaries/results.json").read_text(encoding="utf-8")
+        )
+
+    def behavior_result(self, archive_sha256="a" * 64):
+        return {
+            "schema_version": 1,
+            "episode_id": self.behavior_preregistration["episode_id"],
+            "candidate_id": "nulnul-2.2.0",
+            "status": "passed",
+            "decision": "PROVISIONAL",
+            "model_invocations": 17,
+            "raw_transcript_retained": False,
+            "permission_delta": [],
+            "candidate": {
+                "plugin_version": "2.2.0",
+                "skill_sha256": MODULE.file_sha256(MODULE.PLUGIN / "skills/nulnul-harness/SKILL.md"),
+                "plugin_tree_sha256": MODULE.plugin_tree_sha256(),
+                "archive_sha256": archive_sha256,
+                "preregistration_sha256": MODULE.file_sha256(MODULE.BEHAVIOR_BOUNDARIES / "preregistration.json"),
+                "cases_sha256": MODULE.file_sha256(MODULE.BEHAVIOR_BOUNDARIES / "cases.json"),
+                "release_gate_sha256": MODULE.file_sha256(MODULE.RELEASE_GATE),
+                "behavior_runner_sha256": MODULE.file_sha256(MODULE.BEHAVIOR_RUNNER),
+                "behavior_schema_sha256": MODULE.file_sha256(MODULE.BEHAVIOR_SCHEMA),
+                "activation_runner_sha256": MODULE.file_sha256(MODULE.ACTIVATION_BENCHMARK),
+            },
+            "behavior": {
+                "rounds_per_arm": 4,
+                "champion_correct_runs": 3,
+                "candidate_correct_runs": 4,
+                "candidate_primary_decisions": 8,
+                "candidate_control_decisions": 2,
+                "unselected_optional_skill_activations": 0,
+                "selected_optional_skill_activations": 1,
+                "candidate_nulnul_activation_runs": 5,
+            },
+            "fast_resume_performance": {
+                "rounds": 4,
+                "candidate_correct_runs": 4,
+                "forbidden_read_runs": 0,
+                "eligible_pairs": 4,
+                "paired_input_change_percent": 0,
+            },
+            "learning_verdicts": [{"id": "champion-boundary-nonpass"}],
+        }
 
     def test_current_score_uses_only_passed_evidence(self):
         score = MODULE.calculate(self.cases, self.results)
@@ -303,6 +354,72 @@ class ReleaseGateTests(unittest.TestCase):
         stale["plugin_version"] = "1.6.0"
         with self.assertRaisesRegex(ValueError, "plugin version is stale"):
             MODULE.validate_claude_gate(stale, "1.7.0")
+
+    def test_public_evidence_requires_exact_archive_bytes(self):
+        evidence = {
+            "plugin_version": "2.2.0",
+            "distribution": {"asset_sha256": "a" * 64},
+        }
+        self.assertTrue(MODULE.public_evidence_is_current(evidence, "2.2.0", "a" * 64))
+        self.assertFalse(MODULE.public_evidence_is_current(evidence, "2.2.0", "b" * 64))
+
+    def test_behavior_boundary_gate_binds_exact_candidate_and_negative_control(self):
+        payload = self.behavior_result()
+        gate = MODULE.validate_behavior_boundary_gate(
+            self.behavior_preregistration,
+            self.behavior_cases,
+            payload,
+            "2.2.0",
+            "a" * 64,
+        )
+        self.assertEqual(gate["decision"], "PROVISIONAL")
+        self.assertTrue(gate["product_behavior_promoted"])
+
+        payload["candidate"]["plugin_tree_sha256"] = "b" * 64
+        with self.assertRaisesRegex(ValueError, "plugin_tree_sha256"):
+            MODULE.validate_behavior_boundary_gate(
+                self.behavior_preregistration,
+                self.behavior_cases,
+                payload,
+                "2.2.0",
+                "a" * 64,
+            )
+
+    def test_behavior_boundary_gate_requires_a_champion_nonpass(self):
+        payload = self.behavior_result()
+        payload["behavior"]["champion_correct_runs"] = 4
+        with self.assertRaisesRegex(ValueError, "frozen Gate"):
+            MODULE.validate_behavior_boundary_gate(
+                self.behavior_preregistration,
+                self.behavior_cases,
+                payload,
+                "2.2.0",
+                "a" * 64,
+            )
+
+    def test_rejected_behavior_candidate_is_removed_without_behavior_credit(self):
+        gate = MODULE.validate_behavior_boundary_gate(
+            self.behavior_preregistration,
+            self.behavior_cases,
+            self.behavior_results,
+            "2.2.0",
+            "a" * 64,
+        )
+        self.assertEqual(gate["decision"], "NO_PROMOTION")
+        self.assertEqual(gate["evaluated_version"], "2.2.0-rc.1")
+        self.assertTrue(gate["candidate_removed"])
+        self.assertFalse(gate["product_behavior_promoted"])
+
+        altered = json.loads(json.dumps(self.behavior_results))
+        altered["candidate_removed"] = False
+        with self.assertRaisesRegex(ValueError, "not closed safely"):
+            MODULE.validate_behavior_boundary_gate(
+                self.behavior_preregistration,
+                self.behavior_cases,
+                altered,
+                "2.2.0",
+                "a" * 64,
+            )
 
 
 if __name__ == "__main__":

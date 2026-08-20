@@ -1,14 +1,16 @@
-# nulnul harness 2.1.1
+# nulnul harness 2.2.0
 
-Make the required documentation-debt check fast on tracked repositories without weakening its fallback.
+Make evolution confirmation executable, fix dirty-worktree documentation debt, and bind release evidence to exact candidate bytes.
 
-The detector now scans the repository by modification time only when it encounters a document with no Git history. Tracked documents continue to use commit order, and repositories without usable history retain the existing modification-time behavior.
+A Gate-passing schema-v4 evolution candidate now remains provisional while the confirmed agent version stays active. The shipped executor confirms it only after one healthy observed cycle, or records rollback when the frozen numeric threshold fires. Legacy accepted-version rollback remains compatible.
 
-Four counterbalanced A/B rounds against exact `v2.1.0` returned the same debt inventory in every pair while median elapsed time fell from 17.73645 seconds to 0.2308 seconds, a 98.70% reduction on the release repository. Seven focused controls cover Git-history and modification-time paths. A separate same-model context-routing candidate was rejected because it increased paired input tokens by 11.07%; the shipped skill entry remains unchanged.
+Documentation-debt checks now distinguish the active host and treat a dirty document as updated for the current change while still reporting dirty source against a clean document. Release freshness requires both exact version and archive SHA; a closed `NO_PROMOTION` episode receives no product-behavior credit.
 
-No dependency, service, permission, credential, or external-write scope was added.
+The consent/continuity behavior candidate was tested and removed. Its corrected DEV/VALIDATION comparison met the core routing observations but failed the frozen strict Gate and controls, so Navigator remains v20 and no consent or ordinary-product routing claim ships in this candidate.
 
-Fresh exact-tag Claude adoption preserved the inactive host entry and both existing agent profiles while all five executable checks passed. Exact-final Meta adoption retained the correct apply with full compatibility checks reduced from three to one, and Release Gate closed at 100/100.
+No dependency, service, permission, credential, external-write scope, MCP server, hook, app, or additional product skill was added.
+
+This is the local final 2.2.0 build. Publication and exact-version public Claude and Meta adoption remain intentionally unperformed and unauthorized.
 
 ```bash
 codex plugin marketplace add SeoNaRu/nulnul-harness --ref main

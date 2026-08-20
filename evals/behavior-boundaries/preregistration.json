@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "episode_id": "consent-continuity-boundary-2",
+  "registered_at": "2026-08-20T15:47:20+09:00",
+  "champion_git_ref": "45500543e42373669eb84c442b5d4d6366e5e50c",
+  "champion_skill_sha256": "72fad7130ac4d224e1bb37d0a23a466ced50e741b3ee1d5c8900d033d14409b1",
+  "release_state": "exact public 2.1.1 champion; unchanged local candidate not published",
+  "prior_invalid_episode": {
+    "evidence": "evals/behavior-boundaries/invalid-evaluator-episode-1.json",
+    "reason": "answer-leaking prompts and ambiguous scoring fields made the first comparison invalid",
+    "candidate_changed_after_exposure": false
+  },
+  "observed_failures": [
+    {
+      "id": "ordinary-product-work-entered-evolution",
+      "evidence": "Green Movement dogfooding showed that iterative product corrections could inherit feedback, proposal, Gate, promotion, archive, and document-sync work even when the useful checks were product reproduction and focused validation."
+    },
+    {
+      "id": "optional-capability-activated-without-selection",
+      "evidence": "The user required task-specific choices before optional skills such as frontend-design or Ponytail are used, with game mechanics distinguished from game UI and HUD work."
+    },
+    {
+      "id": "stale-release-evidence-reused",
+      "evidence": "A locally repacked 2.1.1 archive differed from the exact public archive while Release Gate still reported local_candidate_ready=true from the older version-only evidence."
+    }
+  ],
+  "pathology": {
+    "where": "task routing, optional-capability activation, and release evidence attribution",
+    "why": "Multi-session duration and installed availability acted as implicit authority signals, while release evidence was bound to a version string rather than the exact candidate bytes."
+  },
+  "mechanism_id": "single-consent-checkpoint-evidence-boundary-v1",
+  "candidate_source_paths": [
+    "plugins/nulnul-harness/skills/nulnul-harness/SKILL.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/agent-assembly.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/capability-discovery.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/project-files.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/assets/project-contract.template.md",
+    "scripts/release_gate.py",
+    "evals/behavior-boundaries/run_ab.py",
+    "evals/behavior-boundaries/decision.schema.json",
+    "evals/benchmarks/activation/run_activation.py"
+  ],
+  "budget": {
+    "max_candidates": 1,
+    "max_generations": 1,
+    "primary_cases_per_arm": 2,
+    "counterbalanced_rounds": 4,
+    "candidate_control_cases": 2,
+    "max_model_invocations": 17,
+    "permission_delta": [],
+    "external_writes": 0,
+    "new_dependencies": 0,
+    "new_services": 0,
+    "holdout_access": false
+  },
+  "primary_cases": [
+    "ordinary-multisession-tuning-v2",
+    "gameplay-capability-selection-v2"
+  ],
+  "candidate_controls": [
+    "explicit-ponytail-application-v2",
+    "game-hud-capability-selection-v2"
+  ],
+  "prediction": "Without the prompt stating the desired route, the candidate routes multi-session tuning through a concise product checkpoint, presents one task-level choice before an unselected gameplay or HUD skill, keeps frontend-design available for HUD rather than gameplay logic, and applies an explicitly selected Ponytail skill without asking again.",
+  "expected_delta": {
+    "ordinary_product_evolution_violations": "champion reproduced -> candidate 0/4",
+    "unselected_optional_skill_activations": "champion measured -> candidate 0/4",
+    "candidate_primary_case_accuracy": "8/8 decisions",
+    "candidate_control_accuracy": "2/2 decisions",
+    "fast_resume_accuracy": "4/4",
+    "paired_fast_resume_input_change": "<= 20 percent"
+  },
+  "candidate_gate": "Start a provisional local candidate only when every candidate decision passes, no unselected optional skill is actually loaded, the selected Ponytail control is actually loaded, both controls pass, four same-model fast-resume runs remain exact and bounded, and comparable paired input cost stays within 20 percent.",
+  "falsification_condition": "Reject when any ordinary tuning case creates evolution state or an agent version, any unselected optional skill is loaded, choices are repeated instead of consolidated, frontend-design is offered for gameplay logic, an explicitly selected Ponytail skill is not loaded for application, fast-resume read scope changes, or candidate evidence is not bound to exact candidate and evaluator bytes.",
+  "rejected_archive": [
+    "proposal-coach-6-validation-reference-split",
+    "proposal-navigator-20-authority-reference",
+    "proposal-navigator-20-authority-binding",
+    "proposal-navigator-20-intent-means-gate"
+  ],
+  "claim_boundary": "This is fresh DEV and VALIDATION evidence for one unchanged local release candidate after an invalid evaluator was retired. It makes no HOLDOUT, Personal, cross-project, public-release, broad game-quality, or universal context-cost claim."
+}

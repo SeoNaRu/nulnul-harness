@@ -16,7 +16,7 @@ CHECKS = {
     "project_setup": ["python3", str(SKILL / "scripts/validate_project_setup.py"), "docs/nulnul/project.md"],
     "checkpoint": ["python3", str(SKILL / "scripts/validate_checkpoint.py"), "docs/nulnul/checkpoint.json"],
     "completion": ["python3", str(SKILL / "scripts/run_checkpoint_check.py"), "docs/nulnul/checkpoint.json", "--root", "."],
-    "documentation_debt": ["python3", str(SKILL / "scripts/check_doc_debt.py"), "."],
+    "documentation_debt": ["python3", str(SKILL / "scripts/check_doc_debt.py"), ".", "--host", "claude"],
 }
 CHECK_LABELS = {
     "repository": "npm test",

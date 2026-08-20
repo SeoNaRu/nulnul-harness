@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decisions"],
+  "properties": {
+    "decisions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id", "route", "checkpoint_only", "evolution_record",
+          "agent_version_change", "coach_gate", "optional_skill_choice_required",
+          "choice_blocks", "options_count", "direct_execution_option",
+          "game_specific_offered", "frontend_design_offered",
+          "selected_optional_skills", "choice_scope", "permission_delta", "brief_reason"
+        ],
+        "properties": {
+          "case_id": {"type": "string"},
+          "route": {"enum": ["product_checkpoint", "harness_evolution", "skill_choice", "selected_optional_skill", "direct_execution"]},
+          "checkpoint_only": {"type": "boolean"},
+          "evolution_record": {"type": "boolean"},
+          "agent_version_change": {"type": "boolean"},
+          "coach_gate": {"type": "boolean"},
+          "optional_skill_choice_required": {"type": "boolean"},
+          "choice_blocks": {"type": "integer", "minimum": 0, "maximum": 2},
+          "options_count": {"type": "integer", "minimum": 0, "maximum": 4},
+          "direct_execution_option": {
+            "type": "boolean",
+            "description": "True when direct execution is the chosen route or is included in a pending choice block."
+          },
+          "game_specific_offered": {"type": "boolean"},
+          "frontend_design_offered": {"type": "boolean"},
+          "selected_optional_skills": {
+            "type": "array",
+            "items": {"enum": ["gameplay-native", "frontend-design", "ponytail"]}
+          },
+          "choice_scope": {
+            "enum": ["none", "current_task", "standing_project"],
+            "description": "Use current_task for a pending task-level skill choice even before the user selects an option; use none only when no skill choice exists."
+          },
+          "permission_delta": {"type": "array", "items": {"type": "string"}},
+          "brief_reason": {"type": "string"}
+        }
+      }
+    }
+  }
+}

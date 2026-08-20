@@ -74,6 +74,20 @@ class PersonalEvolutionTests(unittest.TestCase):
         )
         self.state["agents"]["coach"].update(version=2, last_promotion_id="promotion-1")
 
+    def add_provisional_coach_upgrade(self):
+        self.add_accepted_coach_upgrade()
+        self.state["proposals"][0]["status"] = "provisional"
+        self.state["promotions"][0].update(decision="provisional")
+        self.state["promotions"][0]["live_cycle"].update(
+            status="pending", metric_value=None, evidence="next live cycle pending"
+        )
+        self.state["agents"]["coach"].update(
+            version=1,
+            last_promotion_id=None,
+            trial_version=2,
+            trial_promotion_id="promotion-1",
+        )
+
     def test_template_is_valid_and_resumable(self):
         self.state["checkpoint"].update(
             goal="Ship the personal evolution loop.",
@@ -101,6 +115,20 @@ class PersonalEvolutionTests(unittest.TestCase):
         self.state["promotions"][0]["live_cycle"] = None
         self.assertIn(
             "promotion promotion-1 needs a complete live cycle",
+            validator.validate(self.state),
+        )
+
+    def test_provisional_upgrade_keeps_confirmed_version_active(self):
+        self.add_provisional_coach_upgrade()
+        self.assertEqual(validator.validate(self.state), [])
+        self.assertEqual(self.state["agents"]["coach"]["version"], 1)
+        self.assertEqual(self.state["agents"]["coach"]["trial_version"], 2)
+
+    def test_provisional_upgrade_needs_matching_trial_pointer(self):
+        self.add_provisional_coach_upgrade()
+        self.state["agents"]["coach"]["trial_promotion_id"] = "wrong"
+        self.assertIn(
+            "agents.coach.trial_promotion_id does not match its provisional promotion",
             validator.validate(self.state),
         )
 
@@ -135,6 +163,14 @@ class PersonalEvolutionTests(unittest.TestCase):
         self.state.pop("autonomous_episodes")
         self.assertIn(
             "autonomous_episodes must be an array",
+            validator.validate(self.state),
+        )
+
+    def test_version_four_needs_an_executable_threshold(self):
+        self.add_accepted_coach_upgrade()
+        self.state["promotions"][0]["live_cycle"].pop("rollback_value")
+        self.assertIn(
+            "promotion promotion-1 needs a complete live cycle",
             validator.validate(self.state),
         )
 
