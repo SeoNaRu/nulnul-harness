@@ -65,6 +65,12 @@ class ClaudeAdoptEvidenceTests(unittest.TestCase):
         }]
         self.assertFalse(MODULE.roster_was_read(calls, {"collector": {}, "reviewer": {}}))
 
+    def test_reuse_is_an_explicit_agent_classification(self):
+        agents = {"collector": {}, "reviewer": {}}
+        project = "| collector | reuse |\n| reviewer | reuse |\n"
+        self.assertTrue(MODULE.agents_were_classified(project, agents))
+        self.assertFalse(MODULE.agents_were_classified("collector\nreviewer\n", agents))
+
     def test_release_identity_and_positioning_are_required(self):
         evidence = json.loads(
             (ROOT / "evals/benchmarks/claude-adopt/evidence.json").read_text(encoding="utf-8")

@@ -10,7 +10,7 @@ The consent/continuity behavior candidate was tested and removed. Its corrected 
 
 No dependency, service, permission, credential, external-write scope, MCP server, hook, app, or additional product skill was added.
 
-This is the local final 2.2.0 build. Publication and exact-version public Claude and Meta adoption remain intentionally unperformed and unauthorized.
+This is the public 2.2.0 release. The downloaded archive is byte-identical at SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`; fresh exact-version public Claude and Meta adoption passed, and Release Gate reports `release_ready: true`.
 
 ```bash
 codex plugin marketplace add SeoNaRu/nulnul-harness --ref main

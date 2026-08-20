@@ -19,10 +19,10 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Try it</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.1.1">public 2.1.1</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">Report friction</a>
+  <a href="#quick-start">Try it</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.0">public 2.2.0</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">Report friction</a>
 </p>
 
-> **NULNUL 2.2.0 is the current local final build.** It adds provisional-to-confirmed evolution state, active-host and dirty-worktree documentation-debt checks, and exact candidate-byte Release Gate attribution. It is packaged and locally verified; the latest public release remains 2.1.1 until exact 2.2.0 public adoption and publication are completed.
+> **NULNUL 2.2.0 is the current public release.** It adds provisional-to-confirmed evolution state, active-host and dirty-worktree documentation-debt checks, and exact candidate-byte Release Gate attribution. The downloaded archive matched the frozen local bytes, and fresh exact-version Claude and Meta adoption passed.
 >
 > **What did not ship:** The consent/continuity behavior candidate was removed after its frozen strict Gate returned `NO_PROMOTION`. Navigator remains v20, and this release makes no new consent or ordinary-product routing behavior claim.
 >
@@ -348,7 +348,7 @@ Some of the strongest evidence came from failures:
 
 | Evidence | Current result | What it means |
 | --- | --- | --- |
-| Repository tests | **233 passed (233/233)** | Deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, and negative-control contracts hold. |
+| Repository tests | **234 passed (234/234)** | Deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
 | Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by green main CI run `31651306556`. |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
@@ -358,7 +358,7 @@ Some of the strongest evidence came from failures:
 | 2.0 local Meta Gate | **3 families, 9 → 4 full checks, 3/3 decisions correct** | Bounded summary evidence improved selection work in one sealed episode; token, runtime, universal, and cross-user gains are not established. |
 | 2.1 release status | **Released and verified** | Exact public 2.1.0 Claude adoption passed five checks with protected writes 0; the active evolution fixture shrank **87.48%**, and exact Project M kept the correct apply with full checks **3 → 1**. Generalization remains narrower scope. |
 | 2.1.1 release status | **Released and verified** | Four counterbalanced rounds preserved the same debt result and reduced median detector time **17.73645 s → 0.2308 s (−98.70%)**. Fresh exact-final Claude and Meta adoption passed, and Release Gate closed at **100/100**. |
-| 2.2.0 local final | **Locally ready; publication pending** | The safe lifecycle, documentation-debt, and exact-byte changes pass locally. The consent/continuity behavior candidate was removed on `NO_PROMOTION`; exact-version public adoption is still required before publication. |
+| 2.2.0 release status | **Released and exact-version verified** | The safe lifecycle, documentation-debt, and exact-byte changes pass. Fresh public Claude adoption preserved both existing agent profiles and all five checks; Project M retained the correct apply with full checks **3 → 1**. The consent/continuity candidate remains removed on `NO_PROMOTION`. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
 
@@ -369,9 +369,7 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-The current public 2.1.1 evidence reports `release_ready: true`; [main CI run 31772275214](https://github.com/SeoNaRu/nulnul-harness/actions/runs/31772275214) passed, and the downloaded archive SHA-256 is `dc7718ea2f7894a411ee2e179fb015d10621e5d684d9e6f228e298a3ed131b03`.
-
-The local final 2.2.0 archive SHA-256 is `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`. Its Gate reports `local_candidate_ready: true` and `release_ready: false`; no public-release credit is inferred from the 2.1.1 evidence.
+The current public 2.2.0 evidence reports `local_candidate_ready: true` and `release_ready: true`. The downloaded archive is byte-identical at SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`; exact-version Claude and Meta adoption passed without protected writes, permission expansion, private evidence, or retired-holdout reuse.
 
 The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [documentation-debt A/B](evals/benchmarks/doc-debt/results.json), [rejected context-routing A/B](evals/benchmarks/context-routing/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), plus post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), and [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) results. Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
 

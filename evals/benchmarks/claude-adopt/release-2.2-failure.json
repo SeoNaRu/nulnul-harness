@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-08-20",
+  "surface": "fresh isolated Claude Code session using the exact GitHub-tag-installed public 2.2.0 release",
+  "plugin_version": "2.2.0",
+  "failure_classification": "RELEASE_GATE_FAILURE",
+  "observed": {
+    "product_adoption_passed": true,
+    "existing_agent_profiles_preserved": true,
+    "protected_write_calls": 0,
+    "completion_checks_passing": 5,
+    "agents_classified": false,
+    "classification_term": "reuse"
+  },
+  "diagnosis": "The generated contract explicitly classified both existing agents as reuse, but the sanitizer recognized only keep, upgrade, merge, or remove.",
+  "privacy": {
+    "raw_transcript_stored": false,
+    "private_project_data_stored": false,
+    "machine_path_stored": false
+  },
+  "learning_verdicts": [
+    {
+      "id": "claude-adopt-2.2.0-public-r1-initial",
+      "status": "failed",
+      "feedback_id": "feedback-claude-reuse-classification",
+      "proposal_ids": ["proposal-product-builder-8-reuse-classification"]
+    }
+  ]
+}

@@ -30,14 +30,14 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.2.0 is locally ready with exact-byte release attribution, executable provisional evolution, and active-host dirty-worktree documentation checks; the behavior candidate was rejected and removed.",
+    "milestone": "NULNUL 2.2.0 is publicly released with exact-byte Claude and Meta adoption, executable provisional evolution, and active-host dirty-worktree documentation checks; main promotion remains to be closed.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
     "status": "active",
-    "last_verified": "2026-08-20: 233 tests passed, documentation debt was empty for the active Codex host, and Release Gate scored 100/100 with local_candidate_ready true and release_ready false. The local final 2.2.0 archive SHA-256 is 779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0. The frozen consent/continuity candidate returned NO_PROMOTION and was removed; Gate v12 remains provisional without behavior or public-release credit.",
-    "next_action": "Observe one distinct real Gate cycle for provisional Gate v12 and execute confirmation or rollback; publish or collect exact-version public adoption only after explicit user approval.",
+    "last_verified": "2026-08-20: 234 tests passed, documentation debt was empty for the active Codex host, and Release Gate scored 100/100 with local_candidate_ready and release_ready true. The downloaded public 2.2.0 archive was byte-identical at SHA-256 779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0; fresh exact-version Claude and Meta adoption passed. The reuse-classification sanitizer nonpass was linked and closed as Product Builder v8; Gate v12 remains provisional pending a distinct later Gate cycle.",
+    "next_action": "Promote the exact-version evidence commit to main and watch CI to green; then observe one distinct real Gate cycle for provisional Gate v12 and execute confirmation or rollback.",
     "blockers": [],
     "approved_permissions": [
-      "Publish NULNUL 2.0 RC and final artifacts only within this user-requested release closure."
+      "Publish NULNUL 2.2.0 exact artifacts and promote the verified commit to main within this user-requested release closure."
     ]
   },
   "agents": {
@@ -62,10 +62,10 @@
       "trial_promotion_id": "promotion-gate-12-candidate-stage-identity"
     },
     "product-builder": {
-      "version": 7,
-      "job": "Implement the smallest complete product change, remove measured avoidable work, and leave executable verification.",
+      "version": 8,
+      "job": "Implement the smallest complete product change, keep release-evidence vocabulary aligned with shipped contracts, remove measured avoidable work, and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": "promotion-product-builder-7-lazy-doc-debt-scan"
+      "last_promotion_id": "promotion-product-builder-8-reuse-classification"
     }
   },
   "feedback": [
@@ -106,6 +106,16 @@
       "observed": "The required documentation-debt check spent 17.56 seconds on this tracked repository because it recursively scanned every source path before checking whether Git history already answered the question.",
       "expected": "Tracked documents use Git history directly; the recursive modification-time fallback runs only for a document without Git history and preserves the same stale-document result.",
       "evidence": "Four counterbalanced v2.1.0/current A/B rounds preserved identical empty debt results while median elapsed time fell from 17.73645 to 0.2308 seconds.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-claude-reuse-classification",
+      "source": "gate",
+      "target_agent": "product-builder",
+      "observed": "The fresh exact-public 2.2.0 Claude adoption explicitly classified both existing agents as reuse, but the evidence sanitizer rejected the run because it recognized only keep, upgrade, merge, or remove.",
+      "expected": "Treat reuse as an explicit kept-role classification while continuing to reject a roster with no classification decision.",
+      "evidence": "evals/benchmarks/claude-adopt/release-2.2-failure.json records the sanitized nonpass with all five completion checks passing and no raw transcript or machine path.",
       "scope": "core",
       "status": "converted"
     },
@@ -234,6 +244,33 @@
       "status": "accepted"
     },
     {
+      "id": "proposal-product-builder-8-reuse-classification",
+      "feedback_ids": [
+        "feedback-claude-reuse-classification"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 7,
+      "to_version": 8,
+      "cause": "The release sanitizer's closed classification vocabulary excluded the shipped contract's explicit reuse decision.",
+      "change_target": "Recognize reuse alongside keep, upgrade, merge, and remove in the shared Claude adoption classification predicate.",
+      "regression_check": "python3 -B -m unittest tests.test_claude_adopt_evidence -v and recapture the same fresh exact-public 2.2.0 run",
+      "primary_metric": "valid exact-public adoptions rejected by an explicit reuse decision",
+      "permission_delta": [],
+      "rollback": "Restore Product Builder v7 and the prior predicate if an unclassified roster receives credit or the explicit-reuse public run remains invalid.",
+      "change_level": "task",
+      "discovery_evidence": "The fresh generated contract recorded reuse for collector and reviewer; their profiles and the inactive host entry remained byte-identical and all five checks passed.",
+      "transfer_check": null,
+      "prediction": "The same public run validates while a roster that only names agents without a decision remains rejected.",
+      "expected_delta": {
+        "explicit_reuse_runs_rejected": "1 -> 0",
+        "unclassified_rosters_accepted": "0 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "The exact public run remains invalid, a no-decision roster is accepted, another adoption guardrail changes, or permissions expand.",
+      "status": "accepted"
+    },
+    {
       "id": "proposal-gate-12-candidate-stage-identity",
       "feedback_ids": [
         "feedback-candidate-stage-identity"
@@ -332,6 +369,24 @@
         "rollback_operator": "gt",
         "rollback_value": 8.868225,
         "evidence": "A separate post-selection command returned the same empty debt inventory in 0.56 seconds; seven focused controls passed."
+      }
+    },
+    {
+      "id": "promotion-product-builder-8-reuse-classification",
+      "proposal_id": "proposal-product-builder-8-reuse-classification",
+      "gate_agent": "gate",
+      "before": "The exact-public 2.2.0 adoption passed the product and safety checks but the sanitizer rejected its explicit reuse decisions.",
+      "after": "The shared predicate accepts explicit reuse, the same public run validates, and the no-decision negative control remains rejected.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "classification-attribution regressions in the exact-public adoption cycle",
+        "rollback_threshold": "roll back on one rejected explicit reuse decision or one credited no-decision roster",
+        "metric_value": 0,
+        "rollback_operator": "gte",
+        "rollback_value": 1,
+        "evidence": "The fresh 2.2.0 transcript was recaptured after the predicate change; it validates with both reuse decisions, while the focused negative control still rejects names without decisions."
       }
     },
     {

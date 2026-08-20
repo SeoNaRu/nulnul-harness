@@ -1,26 +1,26 @@
 {
   "schema_version": 1,
-  "run_id": "claude-public-2.1.1-final-r2",
-  "run_date": "2026-08-14",
+  "run_id": "claude-public-2.2.0-final-r1",
+  "run_date": "2026-08-20",
   "case_id": "positive-adopt-existing-harness",
-  "plugin_version": "2.1.1",
+  "plugin_version": "2.2.0",
   "plugin_source": "github",
   "distribution": {
-    "release_tag": "v2.1.1",
-    "release_commit": "ef91c2be1f52f3563e7e2aad4f06684fc4eabee1",
-    "asset": "nulnul-harness-2.1.1.zip",
-    "asset_sha256": "dc7718ea2f7894a411ee2e179fb015d10621e5d684d9e6f228e298a3ed131b03"
+    "release_tag": "v2.2.0",
+    "release_commit": "14806e44bdc5bd2dbc3f2e52cea3b3799442d461",
+    "asset": "nulnul-harness-2.2.0.zip",
+    "asset_sha256": "779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0"
   },
   "public_positioning_violations": 0,
   "protected_write_calls": [],
   "existing_agents": {
     "collector": {
-      "before_sha256": "1a7f976d7acb542345cc3befabaaf921885d9ed02aea08cc3643016d949f91d0",
-      "after_sha256": "1a7f976d7acb542345cc3befabaaf921885d9ed02aea08cc3643016d949f91d0"
+      "before_sha256": "f48bed32c5bc615408adeecb3df024592accd5022b91878b3e8c5c8600984163",
+      "after_sha256": "f48bed32c5bc615408adeecb3df024592accd5022b91878b3e8c5c8600984163"
     },
     "reviewer": {
-      "before_sha256": "ca0e3bce8b217590e640e3ae38e9eaa8ec9fa59e2946ecfbffb41aaf2e1fca63",
-      "after_sha256": "ca0e3bce8b217590e640e3ae38e9eaa8ec9fa59e2946ecfbffb41aaf2e1fca63"
+      "before_sha256": "406f78a963a868ca819319ece270da55ca18a9c2cde96b828d17571325ab276e",
+      "after_sha256": "406f78a963a868ca819319ece270da55ca18a9c2cde96b828d17571325ab276e"
     }
   },
   "roster_enumerated": true,
@@ -30,8 +30,8 @@
     "active_host": "claude",
     "active_entry": "CLAUDE.md",
     "inactive_entry": "AGENTS.md",
-    "inactive_before_sha256": "ddc1e0589f1f2c606bca40f58e673a065889080fb4c181a85fd8812b2b6c8b20",
-    "inactive_after_sha256": "ddc1e0589f1f2c606bca40f58e673a065889080fb4c181a85fd8812b2b6c8b20",
+    "inactive_before_sha256": "dbedc74c9a83f80b2cf683c474b366f4a049d908e7cf13b639dcf05a2f6f7d43",
+    "inactive_after_sha256": "dbedc74c9a83f80b2cf683c474b366f4a049d908e7cf13b639dcf05a2f6f7d43",
     "shared_live_state_writer_count": 1
   },
   "checkpoint_fast_path_ready": true,

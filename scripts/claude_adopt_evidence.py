@@ -90,6 +90,13 @@ def roster_was_read(calls, agents):
     return False
 
 
+def agents_were_classified(project, agents):
+    return all(
+        re.search(rf"{re.escape(name)}[^\n]*(?:keep|reuse|upgrade|merge|remove)", project, re.I)
+        for name in agents
+    )
+
+
 def installed_plugin():
     plugins = json.loads(subprocess.run(
         ["claude", "plugin", "list", "--json"], capture_output=True, text=True, check=True
@@ -153,7 +160,7 @@ def capture(fixture, transcript, publication):
         "protected_write_calls": protected_writes(calls),
         "existing_agents": agents,
         "roster_enumerated": any(call["name"] == "Bash" and "claude plugin list" in call["input"].get("command", "") for call in calls) and roster_was_read(calls, agents),
-        "agents_classified": all(name in project and re.search(rf"{re.escape(name)}[^\n]*(?:keep|upgrade|merge|remove)", project, re.I) for name in agents),
+        "agents_classified": agents_were_classified(project, agents),
         "session_entry_present": "docs/nulnul/checkpoint.json" in guidance,
         "host_entry_ownership": {
             "active_host": "claude",

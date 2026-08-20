@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
   "episode_id": "meta-public-adoption-2.0-r1",
-  "run_id": "meta-public-2.1.1-final-r1",
-  "run_date": "2026-08-14",
+  "run_id": "meta-public-2.2.0-final-r1",
+  "run_date": "2026-08-20",
   "installed_plugin": {
-    "version": "2.1.1",
+    "version": "2.2.0",
     "distribution_source": "github-tag",
-    "marketplace_ref": "v2.1.1",
+    "marketplace_ref": "v2.2.0",
     "local_override": false,
     "symlink": false
   },
   "distribution": {
-    "release_tag": "v2.1.1",
-    "release_commit": "ef91c2be1f52f3563e7e2aad4f06684fc4eabee1",
-    "asset": "nulnul-harness-2.1.1.zip",
-    "asset_sha256": "dc7718ea2f7894a411ee2e179fb015d10621e5d684d9e6f228e298a3ed131b03",
+    "release_tag": "v2.2.0",
+    "release_commit": "14806e44bdc5bd2dbc3f2e52cea3b3799442d461",
+    "asset": "nulnul-harness-2.2.0.zip",
+    "asset_sha256": "779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0",
     "local_public_byte_identity": true,
     "manifest_identity": true
   },
@@ -38,7 +38,7 @@
     "path_stored": false
   },
   "project_m": {
-    "case_id": "release:project-m-2.1.1-final-1",
+    "case_id": "release:project-m-2.2.0-final-1",
     "shape": "durable-local-json-migration",
     "user_named_adaptation": false,
     "available": [
@@ -85,7 +85,7 @@
         "exit_code": 0
       },
       {
-        "check": "public-final transactional migration and validation",
+        "check": "exact-public 2.2.0 transactional migration and validation",
         "exit_code": 0
       }
     ],
@@ -111,7 +111,7 @@
     "permission_delta": []
   },
   "live_cycle": {
-    "case_id": "release:project-m-2.1.1-final-1",
+    "case_id": "release:project-m-2.2.0-final-1",
     "downstream_completion_passed": true,
     "false_activations": 0,
     "relevant_omissions": 0,
@@ -131,7 +131,7 @@
     "retired_local_holdouts_reused": false,
     "candidate_modified_after_failure": false
   },
-  "control_provenance": "Fresh Project M, no-match, and conflict controls were rerun through the exact GitHub-tag-installed 2.1.1 scripts. The selected migration completed, its checkpoint validated, its recorded completion check passed, and the inactive host entry stayed byte-identical. The rollback source remained byte-identical and its threshold-breach control passed in the full release suite; no retired holdout was reopened and no candidate tuning occurred.",
+  "control_provenance": "Fresh Project M, no-match, and conflict controls were rerun through the exact GitHub-tag-installed 2.2.0 scripts. The selected migration completed, its checkpoint validated, its recorded completion check passed with verified fast resume, and the inactive host entry stayed byte-identical. The downloaded public archive was byte-identical to the frozen local archive and the threshold-breach rollback control passed in the full release suite; no retired holdout was reopened and no candidate tuning occurred.",
   "meta_gate": {
     "decision": "META_PROMOTION",
     "gate_agent": "product-builder",
@@ -144,5 +144,5 @@
   },
   "privacy_result": "passed",
   "permission_result": "passed",
-  "claim_boundary": "The exact public 2.1.1 artifact reduced fresh Project M full compatibility checks from three to one, preserved the one correct apply, completed the transactional migration with the inactive host entry unchanged, and reran no-match and conflict controls. No token, runtime, universal, cross-user, or background-learning claim is made."
+  "claim_boundary": "The exact public 2.2.0 artifact reduced fresh Project M full compatibility checks from three to one, preserved the one correct apply, completed the transactional migration with the inactive host entry unchanged, and reran no-match and conflict controls. No token, runtime, universal, cross-user, or background-learning claim is made."
 }
