@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">NULNUL Showcase Cover</title>
+  <desc id="desc">A dark developer-tool cover showing NULNUL and its inspect, reuse, add only what is missing, and verify workflow.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050706"/>
+      <stop offset="0.58" stop-color="#08100b"/>
+      <stop offset="1" stop-color="#07140c"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101715"/>
+      <stop offset="1" stop-color="#0a100e"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="980" cy="540" r="220" fill="#00a260" opacity="0.07"/>
+  <circle cx="250" cy="50" r="160" fill="#00a260" opacity="0.025"/>
+
+  <!-- brand -->
+  <g transform="translate(58 115)">
+    <g transform="translate(0 0)" stroke="#7df28f" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M0 26V8a8 8 0 0 1 8-8h18"/>
+      <path d="M88 26V8a8 8 0 0 0-8-8H62"/>
+      <path d="M0 62v18a8 8 0 0 0 8 8h18"/>
+      <path d="M88 62v18a8 8 0 0 1-8 8H62"/>
+    </g>
+    <g transform="translate(30 22)" stroke="#8cf99a" stroke-width="10" stroke-linecap="square">
+      <path d="M0 44 18 0"/>
+      <path d="M28 44 46 0"/>
+    </g>
+    <text x="118" y="72" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="800" letter-spacing="1.5" fill="#f5f7f6">NULNUL</text>
+
+    <text x="0" y="142" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="700" fill="#f3f5f4">Start small. <tspan fill="#79ef87">Reuse what already works.</tspan></text>
+    <text x="0" y="188" font-family="Inter, Arial, sans-serif" font-size="20" fill="#c8cfcb">A project-aligned coding harness that adds only what’s missing</text>
+    <text x="0" y="218" font-family="Inter, Arial, sans-serif" font-size="20" fill="#c8cfcb">and verifies every change.</text>
+  </g>
+
+  <!-- repository panel -->
+  <g transform="translate(760 58)">
+    <rect width="388" height="196" rx="18" fill="url(#panel)" stroke="#33423b" stroke-width="2"/>
+    <circle cx="24" cy="20" r="5" fill="#394640"/><circle cx="42" cy="20" r="5" fill="#394640"/><circle cx="60" cy="20" r="5" fill="#394640"/>
+    <line x1="0" y1="40" x2="388" y2="40" stroke="#202b26"/>
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#d8dfdb">
+      <text x="28" y="72">▱  your-project</text>
+      <text x="48" y="100" fill="#aeb8b3">src/</text>
+      <text x="48" y="126" fill="#aeb8b3">tests/</text>
+      <text x="48" y="152" fill="#aeb8b3">docs/</text>
+      <text x="48" y="178" fill="#aeb8b3">README.md</text>
+    </g>
+    <g stroke-linecap="round">
+      <line x1="210" y1="72" x2="338" y2="72" stroke="#1f3327" stroke-width="7"/>
+      <line x1="230" y1="100" x2="355" y2="100" stroke="#2c4937" stroke-width="6"/>
+      <line x1="210" y1="128" x2="315" y2="128" stroke="#22372a" stroke-width="6"/>
+      <line x1="242" y1="156" x2="360" y2="156" stroke="#24452f" stroke-width="6"/>
+    </g>
+  </g>
+
+  <!-- flow line -->
+  <line x1="548" y1="470" x2="1110" y2="470" stroke="#153722" stroke-width="2"/>
+
+  <!-- cards -->
+  <g font-family="Inter, Arial, sans-serif">
+    <g transform="translate(520 360)">
+      <rect width="145" height="185" rx="18" fill="#0d1712" stroke="#63cf70" stroke-width="2"/>
+      <circle cx="72" cy="62" r="23" fill="none" stroke="#82ec8d" stroke-width="4"/>
+      <line x1="89" y1="79" x2="105" y2="95" stroke="#82ec8d" stroke-width="4"/>
+      <text x="72" y="132" text-anchor="middle" font-size="18" font-weight="700" fill="#f4f6f5">Inspect</text>
+      <text x="72" y="157" text-anchor="middle" font-size="17" fill="#d3dad6">repository</text>
+    </g>
+
+    <g transform="translate(690 360)">
+      <rect width="145" height="185" rx="18" fill="#0d1712" stroke="#63cf70" stroke-width="2"/>
+      <path d="M54 62h36M72 44v36" stroke="#82ec8d" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="72" cy="62" r="28" fill="none" stroke="#82ec8d" stroke-width="3" stroke-dasharray="5 7"/>
+      <text x="72" y="132" text-anchor="middle" font-size="18" font-weight="700" fill="#f4f6f5">Reuse</text>
+      <text x="72" y="157" text-anchor="middle" font-size="17" fill="#d3dad6">what works</text>
+    </g>
+
+    <g transform="translate(860 360)">
+      <rect width="145" height="185" rx="18" fill="#0d1712" stroke="#63cf70" stroke-width="2"/>
+      <rect x="49" y="38" width="46" height="46" rx="8" fill="none" stroke="#82ec8d" stroke-width="3" stroke-dasharray="6 5"/>
+      <path d="M95 72h22M106 61v22" stroke="#82ec8d" stroke-width="4" stroke-linecap="round"/>
+      <text x="72" y="126" text-anchor="middle" font-size="17" font-weight="700" fill="#f4f6f5">Add only</text>
+      <text x="72" y="151" text-anchor="middle" font-size="16" fill="#d3dad6">what’s missing</text>
+    </g>
+
+    <g transform="translate(1030 360)">
+      <rect width="145" height="185" rx="18" fill="#0d1712" stroke="#63cf70" stroke-width="2"/>
+      <path d="M72 36 101 48v24c0 18-12 31-29 40-17-9-29-22-29-40V48z" fill="none" stroke="#82ec8d" stroke-width="3"/>
+      <path d="m58 72 10 10 20-23" fill="none" stroke="#82ec8d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="72" y="148" text-anchor="middle" font-size="18" font-weight="700" fill="#f4f6f5">Verify</text>
+    </g>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#79ef87" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M670 453h12l-7-7m7 7-7 7"/>
+    <path d="M840 453h12l-7-7m7 7-7 7"/>
+    <path d="M1010 453h12l-7-7m7 7-7 7"/>
+  </g>
+
+  <g transform="translate(58 542)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <text x="0" y="0" font-size="20" font-weight="700" fill="#79ef87">&gt;_</text>
+    <text x="42" y="0" font-size="17" fill="#aeb8b3">Works with Codex and Claude Code</text>
+  </g>
+</svg>
