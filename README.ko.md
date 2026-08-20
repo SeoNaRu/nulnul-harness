@@ -4,7 +4,7 @@
 
 <p align="center">
   <strong>작게 시작하세요. 프로젝트가 자랄 때 하네스도 함께 자랍니다.</strong><br>
-  NULNUL은 지금 필요한 개발 환경만 Codex와 Claude Code에 구성하고, 실제 작업이 다음 필요를 증명할 때만 확장합니다. 모든 변경은 검증 가능하고, 범위가 제한되며, 되돌릴 수 있습니다.
+  NULNUL은 프로젝트에 지금 필요한 설정만 Codex와 Claude Code에 구성하고, 실제 작업이 다음 필요를 증명할 때만 확장합니다. 모든 변경은 검증 가능하고, 범위가 제한되며, 되돌릴 수 있습니다.
 </p>
 
 <p align="center">
@@ -22,27 +22,27 @@
   <a href="#빠른-시작">바로 사용</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.0">공개 2.2.0</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">불편 신고</a>
 </p>
 
-> **NULNUL 2.2.0은 현재 공개 릴리스입니다.** Provisional→confirmed evolution 상태, active-host·dirty-worktree documentation-debt 검사, exact candidate-byte Release Gate attribution을 추가합니다. 내려받은 archive는 frozen local byte와 일치했고 fresh exact-version Claude·Meta adoption도 통과했습니다.
+> **NULNUL 2.2.0은 현재 공개 버전입니다.** 이번 버전에는 진화 후보를 잠정 상태에서 확정 상태로 전환하는 절차, 현재 호스트와 작업 트리 변경을 반영하는 문서 부채 검사, 후보 산출물의 정확한 바이트에 근거한 Release Gate 판정을 추가했습니다. 내려받은 아카이브는 고정된 로컬 산출물과 바이트 단위로 일치했고, 공개된 정확한 버전을 새로 설치한 Claude Code 및 Meta Evolution 채택 검증도 통과했습니다.
 >
-> **이번 버전에 넣지 않은 것:** Consent/continuity 행동 후보는 frozen strict Gate가 `NO_PROMOTION`을 반환해 제거했습니다. Navigator는 v20을 유지하며, 새 consent 또는 일반 product routing 동작을 이 릴리스의 검증된 기능으로 주장하지 않습니다.
+> **이번 버전에 넣지 않은 것:** 동의·연속성 동작 후보는 사전에 고정한 엄격한 Gate가 `NO_PROMOTION`을 반환해 제거했습니다. Navigator는 v20을 유지하며, 새로운 동의 처리나 일반 제품 작업 라우팅이 검증됐다고 주장하지 않습니다.
 >
-> **NULNUL 2.1.1은 필수 documentation-debt 검사를 lazy하게 실행합니다.** 이 tracked release 저장소에서 동일 결과의 median이 counterbalanced A/B 4회 기준 17.73645초에서 0.2308초로 줄었습니다.
+> **NULNUL 2.1.1은 필수 문서 부채 검사를 필요할 때만 실행합니다.** Git으로 추적되는 이 릴리스 저장소에서 순서를 교차한 A/B 네 차례 모두 같은 결과를 냈으며, 실행 시간 중앙값은 17.73645초에서 0.2308초로 줄었습니다.
 >
-> **2.1은 evolution context를 bounded 상태로 유지합니다.** 종료된 history는 일반 resume context에 넣지 않고 integrity-checked local archive로 옮깁니다.
+> **2.1은 진화 컨텍스트의 크기를 제한합니다.** 종료된 이력은 일반 재개 컨텍스트에 불러오지 않고 무결성을 검사한 로컬 아카이브로 옮깁니다.
 >
-> **1.7 상태:** 첫 scoped adaptation은 transfer shape 두 개를 통과하고 incompatible 및 revoked case를 건너뛴 뒤 승인된 opt-in home에서 raw project memory 없이 재사용됐습니다. Fresh GitHub-marketplace Claude Code adoption도 기존 agent 두 개를 보존하고 protected write 0건과 executable check 5개 통과를 기록했습니다.
+> **1.7 상태:** 범위가 제한된 첫 적응 방식은 두 프로젝트 형태에서 전이 검사를 통과하고 호환되지 않거나 폐기된 사례를 건너뛴 뒤, 사용자가 승인한 로컬 홈에서 원본 프로젝트 기억을 복사하지 않고 재사용됐습니다. GitHub Marketplace를 통해 공개 버전을 새로 설치한 Claude Code 채택 검증도 기존 에이전트 두 개를 보존하고, 보호 대상 쓰기 0건을 유지하며, 실행 가능한 검사 다섯 개를 통과했습니다.
 >
-> **2.0 상태:** 서로 다른 personal adaptation family 세 개가 bounded summary selector에 연결됐습니다. Sealed decision을 모두 유지하면서 full compatibility check를 9회에서 4회로 줄였고, exact public Project M smoke에서도 같은 정답을 유지하며 3회에서 1회로 줄였습니다.
+> **2.0 상태:** 서로 독립적인 개인 적응 방식 세 계열이 제한된 요약 선택기에 연결됐습니다. 봉인된 평가 결정을 모두 유지하면서 전체 호환성 검사를 9회에서 4회로 줄였고, 공개 버전을 정확히 사용한 Project M 스모크 검사에서도 같은 적용 결정을 유지하면서 3회에서 1회로 줄였습니다.
 >
-> **2.0.1 동작:** Codex와 Claude Code를 순차적으로 사용할 때 Codex는 `AGENTS.md`, Claude는 `CLAUDE.md`만 소유하고 둘은 하나의 `docs/nulnul/` 상태를 공유합니다. 동시 변경은 보장하지 않습니다.
+> **2.0.1 동작:** Codex와 Claude Code를 순차적으로 사용할 때 Codex는 `AGENTS.md`, Claude Code는 `CLAUDE.md`만 관리하고 둘은 하나의 `docs/nulnul/` 상태를 공유합니다. 두 환경의 동시 변경은 보장하지 않습니다.
 >
-> **2.1 동작:** Active evolution state에는 열린 작업과 현재 rollback 지점만 남깁니다. 종료된 전체 근거는 digest-bound archive에서 복구하고 필요한 대상만 조회할 수 있습니다.
+> **2.1 동작:** 현재 진화 상태에는 진행 중인 작업과 현재 롤백 지점만 남깁니다. 종료된 전체 근거는 다이제스트로 연결된 아카이브에서 복구하고 필요한 항목만 조회할 수 있습니다.
 
 ## NULNUL은 무엇인가요?
 
-NULNUL은 Codex와 Claude Code에서 프로젝트 안에 두고 쓰는 적응형 하네스입니다. 사용자가 첫날부터 최종 에이전트 구조를 설계하게 하는 대신, AI 개발 환경과 현재 프로젝트의 요구를 계속 맞춰 줍니다.
+NULNUL은 Codex와 Claude Code에서 프로젝트별로 사용하는 적응형 하네스입니다. 사용자가 첫날부터 최종 에이전트 구조를 설계하게 하는 대신 AI 개발 환경을 현재 프로젝트의 요구에 맞춰 줍니다.
 
-새 프로젝트에서는 가장 작은 유용한 작업 계약으로 시작합니다. 기존 프로젝트에서는 현재 설정을 먼저 읽고 잘 작동하는 것을 보존합니다. 프로젝트가 여러 세션으로 길어지거나, 새로운 검사가 생기거나, 책임 분리·권한 경계·반복 실패가 실제로 나타나면 빠진 메커니즘만 최소한으로 추가하고 유지하기 전에 검증합니다.
+새 프로젝트에서는 가장 작지만 유용한 작업 계약으로 시작합니다. 기존 프로젝트에서는 현재 설정을 먼저 읽고 잘 작동하는 것을 보존합니다. 여러 세션에 걸친 작업, 새로운 검사, 책임 분리, 권한 경계, 반복 실패 같은 요구가 실제로 나타나면 빠진 메커니즘만 최소한으로 추가한 뒤 유지하기 전에 검증합니다.
 
 원하는 결과를 말하면 NULNUL이 다음을 맡습니다.
 
@@ -60,7 +60,7 @@ NULNUL은 Codex와 Claude Code에서 프로젝트 안에 두고 쓰는 적응형
 다음 단계에 필요한 검증된 상태를 남긴다
 ```
 
-여기서 “하네스”는 coding agent가 안정적으로 일하도록 돕는 작은 프로젝트 규칙·능력·상태·검사 묶음입니다. “agent team을 만든다”는 뜻이 아닙니다. 때로는 **새 agent 0개, 새 skill 0개, 새 infrastructure 0개**가 정답입니다.
+여기서 “하네스”는 코딩 에이전트가 안정적으로 일하도록 돕는 작은 프로젝트 규칙·기능·상태·검사 묶음입니다. “에이전트 팀을 만든다”는 뜻이 아닙니다. 때로는 **새 에이전트 0개, 새 스킬 0개, 새 기반 시설 0개**가 정답입니다.
 
 ## 프로젝트와 함께 자라는 하네스
 
@@ -78,36 +78,36 @@ NULNUL은 미래의 복잡성을 예상해 큰 프레임워크부터 설치하�
                               ↓
                         독립 검증
                        ↙       ↘
-                    거부    유지 / rollback
+                    거부    유지 / 롤백
 ```
 
-하네스의 성장은 프로젝트 규모나 목표 에이전트 수가 아니라 실제로 확인된 작업이 결정합니다.
+하네스의 성장 여부는 프로젝트 규모나 목표 에이전트 수가 아니라 실제로 확인된 작업에 따라 결정됩니다.
 
 | 프로젝트에서 생긴 신호 | 정당화되는 최소 하네스 변화 |
 | --- | --- |
 | 명확한 검사 하나가 있는 작은 저장소 | 기존 지침과 검사를 재사용하고 역할을 추가하지 않습니다. |
-| 작업이 여러 세션으로 길어짐 | 전체 대화를 저장하는 대신 짧은 verified checkpoint 하나를 둡니다. |
-| Governed evolution 기록이 계속 커짐 | 열린 작업과 최신 rollback 지점만 active에 두고, 종료된 근거는 필요할 때만 조회하는 digest-bound archive로 옮깁니다. |
+| 작업이 여러 세션으로 길어짐 | 전체 대화를 저장하는 대신 짧고 검증된 체크포인트 하나를 둡니다. |
+| 통제된 진화 기록이 계속 커짐 | 진행 중인 작업과 최신 롤백 지점만 현재 상태에 두고, 종료된 근거는 필요할 때만 조회하는 다이제스트 연결 아카이브로 옮깁니다. |
 | 독립된 책임 주체가 필요함 | 그 경계만 분리하고 주변에 에이전트 팀을 만들지 않습니다. |
 | 반복 워크플로에 상태나 외부 쓰기가 생김 | 필요한 위치에만 식별자, 중복 제거, 검토 상태, 권한 통제를 추가합니다. |
-| 실패가 재현 가능해짐 | 인과관계가 명확한 개선 후보 하나를 등록하고 기존 방식과 비교해 Gate 통과 시에만 유지합니다. |
+| 실패가 재현 가능해짐 | 인과관계가 명확한 개선 후보 하나를 등록하고 기존 방식과 비교해 Gate를 통과할 때만 유지합니다. |
 | 역할이나 메커니즘의 실제 일이 사라짐 | 병합하거나 제거합니다. 하네스의 성장은 누적만을 뜻하지 않습니다. |
 
-공개된 1.7.0은 opt-in personal 경로를 추가했습니다. 2.0.0은 그 위에서 프로젝트마다 모든 방법을 처음부터 다시 검토하지 않고 privacy-safe evidence로 지금 확인할 가치가 있는 verified adaptation부터 좁힙니다. Compatibility를 통과한 것만 사용하며, 과거 성공 횟수만으로 적용하지 않습니다. Unresolved conflict는 자동 선택을 중단시키고, 무엇을 먼저 검토할지 결정하는 절차 자체도 independent Meta Gate에서 실제 downstream 결과가 좋아진 경우에만 승격합니다.
+공개된 1.7.0은 사용자가 명시적으로 동의하는 개인 재사용 경로를 추가했습니다. 2.0.0부터는 프로젝트마다 모든 방법을 처음부터 다시 검토하지 않고, 개인정보를 포함하지 않는 근거를 사용해 현재 확인할 가치가 있는 검증된 적응 방식부터 좁힙니다. 호환성 검사를 통과한 것만 사용하며 과거의 성공 횟수만으로 적용하지 않습니다. 해결되지 않은 충돌이 있으면 자동 선택을 중단하고, 무엇을 먼저 검토할지 정하는 절차 자체도 독립 Meta Gate에서 이후 작업 결과가 좋아진 경우에만 승격합니다.
 
 ## 실제 운영 문제
 
-AI로 개발하다 보면 프로젝트 옆에 또 하나의 프로젝트가 생깁니다. AI coding 환경 자체를 관리하는 일입니다.
+AI로 개발하다 보면 프로젝트 옆에 또 하나의 프로젝트가 생깁니다. AI 코딩 환경 자체를 관리하는 일입니다.
 
 - 세션마다 같은 프로젝트 설명을 다시 합니다.
-- 좋다는 plugin·agent·rule을 계속 추가하다 보니 설정이 코드보다 이해하기 어려워집니다.
-- 만들고 싶은 것보다 context와 token 관리부터 공부하게 됩니다.
-- agent는 완료했다고 했지만 실제 test는 실행되지 않았습니다.
+- 좋다고 알려진 플러그인·에이전트·규칙을 계속 추가하다 보니 설정이 코드보다 이해하기 어려워집니다.
+- 만들고 싶은 것보다 컨텍스트와 토큰 관리부터 공부하게 됩니다.
+- 에이전트는 완료했다고 했지만 실제 검사는 실행되지 않았습니다.
 - 실패했던 방법이 다음 세션에서 조용히 다시 등장합니다.
 - 저장소마다 하네스를 처음부터 다시 구성합니다.
 - 프로젝트보다 AI 도구를 고르는 데 더 오래 걸립니다.
 
-NULNUL은 이 일을 inspectable repository contract로 옮깁니다. 질문하기 전에 조사하고, 만들기 전에 재사용하고, 오래 남길 상태는 작게 유지하며, 자신감 있는 답변이 아니라 실행 가능한 검사를 완료 기준으로 삼습니다.
+NULNUL은 이 일을 검토 가능한 저장소 계약으로 옮깁니다. 질문하기 전에 조사하고, 만들기 전에 재사용하며, 오래 남길 상태는 작게 유지합니다. 자신감 있는 답변이 아니라 실행 가능한 검사를 완료 기준으로 삼습니다.
 
 ## 통제된 진화: 제안은 승인이 아닙니다
 
@@ -120,22 +120,22 @@ NULNUL은 프로젝트 하네스를 바꿀 수 있지만 자기 변경을 스스
         ↓
  기존 방식과 후보 비교
         ↓
-  Independent Gate
+     독립 Gate
      ↙        ↘
-   거부      provisional
+   거부        잠정
                  ↓
            실제 실행 관찰
               ↙       ↘
-           확정      rollback
+           확정        롤백
 ```
 
-변경을 제안하는 과정과 credit을 부여하는 과정을 분리합니다. Coach는 causal hypothesis, prediction, falsification condition을 제시할 수 있지만 그 자체는 근거가 아닙니다. Gate가 completion check, validator, permission/privacy guardrail, cost, candidate identity, rollback 가능성에 대한 deterministic measurement를 소유합니다.
+변경을 제안하는 과정과 성과를 판정하는 과정을 분리합니다. Coach는 인과 가설과 예측, 반증 조건을 제시할 수 있지만 그 자체는 근거가 아닙니다. Gate는 완료 검사와 검증기, 권한·개인정보 보호 경계, 비용, 후보 식별, 롤백 가능성을 결정론적으로 평가하는 책임을 집니다.
 
-Bounded evolution에서는 탐색을 시작하기 전에 후보 수, generation 수, 평가 budget, permission, 종료 조건을 고정합니다. 더 나은 후보가 없다면 **`NO_PROMOTION`이 올바른 결과**입니다.
+범위가 제한된 진화에서는 탐색을 시작하기 전에 후보 수, 생성 횟수, 평가 예산, 권한, 종료 조건을 고정합니다. 더 나은 후보가 없다면 **`NO_PROMOTION`이 올바른 결과**입니다.
 
-Gate를 통과했다는 이유만으로 confirmed agent version을 올리지 않습니다. 후보는 다음 실제 cycle을 관찰할 때까지 provisional이며, 건강한 결과일 때만 확정합니다.
+Gate를 통과했다는 이유만으로 확정 에이전트 버전을 올리지 않습니다. 통과한 후보는 다음 실제 작업 주기를 관찰할 때까지 잠정 상태이며, 문제가 없는 결과가 확인될 때만 확정합니다.
 
-Personal reuse에서는 project 승인만으로도 부족합니다. 일반화된 후보가 representative transfer check와 별도 Personal Gate를 통과해야 하며, 새 프로젝트는 다시 compatibility를 검사해 적용·범위 축소·건너뛰기 중 하나를 선택합니다. 이는 사용자가 시작한 제한된 개선 절차입니다. 지속적인 자동 학습, 무인 반복 실행, open-ended self-improvement가 아닙니다.
+개인 재사용에서는 프로젝트의 승인만으로 충분하지 않습니다. 일반화된 후보는 대표 전이 검사와 별도의 Personal Gate를 통과해야 합니다. 새 프로젝트에서는 호환성을 다시 검사해 적용·범위 축소·건너뛰기 중 하나를 선택합니다. 이는 사용자가 시작하는 제한된 개선 절차이며, 지속적인 자동 학습이나 무인 반복 실행, 끝없는 자기 개선이 아닙니다.
 
 ## 잘 맞는 경우와 필요 없는 경우
 
@@ -145,18 +145,18 @@ Personal reuse에서는 project 승인만으로도 부족합니다. 일반화된
 - 미리 만든 에이전트 팀 대신 최소 AI 작업 계약으로 시작하고 싶은 새 프로젝트
 - 기존 규칙과 도구를 버리지 않고 현재 자리에서 보완하고 싶은 프로젝트
 - 여러 세션에 걸쳐 검증된 저장소 상태에서 작업을 이어가야 하는 개발
-- 프로젝트 성장에 따라 테스트, 권한, 독립 검토, rollback이 중요해지는 작업
+- 프로젝트 성장에 따라 테스트, 권한, 독립 검토, 롤백이 중요해지는 작업
 - 반복 워크플로나 재현된 실패를 측정 가능한 프로젝트 범위 개선으로 바꾸고 싶은 경우
 - 실제 작업에 따라 구조를 추가할 뿐 아니라 병합하거나 제거하고 싶은 프로젝트
 
 **아마 필요 없습니다:**
 
 - 읽기 전용 질문이나 아주 작은 일회성 수정
-- 명확하고 안정적인 contract와 실행 가능한 completion check가 필요한 일을 이미 모두 덮는 단순 작업
-- always-on workflow engine이나 hosted orchestration service가 필요한 경우
+- 명확하고 안정적인 작업 계약과 실행 가능한 완료 검사가 이미 갖춰진 단순 작업
+- 상시 실행되는 워크플로 엔진이나 호스팅 오케스트레이션 서비스가 필요한 경우
 - AI가 승인 없이 인증·배포·공개·외부 쓰기를 해야 하는 경우
-- 기반 model의 reasoning 성능을 높여 주는 도구를 찾는 경우
-- raw personal memory, automatic global rule, 승인 없는 cross-project learning—1.7 release는 user-selected local home에 scoped verified adaptation만 저장합니다.
+- 기반 모델의 추론 성능을 높여 주는 도구를 찾는 경우
+- 가공하지 않은 개인 기억, 자동 전역 규칙, 승인 없는 프로젝트 간 학습이 필요한 경우—1.7부터는 사용자가 선택한 로컬 홈에 범위가 제한된 검증된 적응 방식만 저장합니다.
 
 저장소가 작업에 필요한 것을 이미 모두 갖췄다면 NULNUL을 쓰지 않아도 됩니다.
 
@@ -188,178 +188,178 @@ claude plugin install nulnul-harness@nulnul-harness
 예약 API를 수정하고 기존 동작이 계속 통과하는지 확인해줘.
 ```
 
-어떤 agent가 필요한지, workflow를 어떻게 나눌지 먼저 설계할 필요가 없습니다.
+어떤 에이전트가 필요한지, 작업 흐름을 어떻게 나눌지 먼저 설계할 필요가 없습니다.
 
-사용 중 불편했던 순간은 내부 용어로 바꾸지 말고 평범한 요청, 기대한 결과, 실제 결과만 [Issue로 알려주세요](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). Private code, credential, raw transcript는 포함하지 마세요.
+사용 중 불편한 점이 있었다면 [GitHub 이슈로 알려주세요](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). 무엇을 요청했고, 어떤 결과를 기대했으며, 실제로는 어떻게 됐는지만 적으면 됩니다. 비공개 코드, 인증 정보, 원본 대화 기록은 포함하지 마세요.
 
-## 운영 use case
+## 운영 사례
 
-아래 prompt는 공개 evaluation case와 같은 contract를 실제 프로젝트에 적용합니다.
+아래 요청 예시는 공개 평가 사례에서 검증한 것과 같은 작업 계약을 실제 프로젝트에 적용합니다.
 
-### 기존 backend 프로젝트
+### 기존 백엔드 프로젝트
 
 ```text
 Spring 예약 API가 겹치는 예약을 거부하도록 수정해줘.
 현재 프로젝트 설정을 먼저 조사하고, 이미 있는 것은 재사용하고,
-완료 전에 기존 regression check를 실행해줘.
+완료 전에 기존 회귀 검사를 실행해줘.
 ```
 
 ### 새 프로젝트
 
 ```text
-local-first 지출 관리 앱을 만들고 싶어.
-가장 작은 개발 하네스를 구성하고, 필요한 permission boundary를 설명한 뒤,
-첫 번째 동작 가능한 기능과 실행 가능한 검사 하나까지 만들어줘.
+로컬 우선 지출 관리 앱을 만들고 싶어.
+가장 작은 개발 하네스를 구성하고, 필요한 권한 경계를 설명한 뒤,
+첫 번째로 실제 동작하는 기능과 실행 가능한 검사 하나까지 만들어줘.
 ```
 
 ### 여러 세션에 걸친 개발
 
 ```text
-다음 세션이 chat을 처음부터 복원하지 않아도 이 프로젝트를 이어가게 해줘.
-짧고 검증된 checkpoint를 사용하고, 검사한 파일이 바뀌면 fast resume을 막아줘.
+다음 세션에서 대화 내용을 처음부터 복원하지 않고도 이 프로젝트를 이어가게 해줘.
+짧고 검증된 체크포인트를 사용하고, 검사한 파일이 바뀌면 빠른 재개를 막아줘.
 ```
 
-### 반복 workflow
+### 반복 작업 흐름
 
 ```text
-금융 YouTube creator를 찾고 중복을 제거한 뒤,
-불확실한 결과는 review로 보내고 Google Sheets write는 승인 뒤에 두는 workflow를 만들어줘.
+금융 유튜브 크리에이터를 찾고 중복을 제거한 뒤,
+불확실한 결과는 검토 대상으로 보내고 Google Sheets 쓰기는 승인 뒤에만 실행하는 작업 흐름을 만들어줘.
 ```
 
 ### 복잡해진 기존 AI 설정
 
 ```text
-현재 agent, skill, plugin, 프로젝트 rule을 조사해줘.
-실제 job이 있는 것은 유지하거나 재사용하고, 중복을 구분하고,
-현재 작업이 gap을 증명하지 않으면 아무것도 추가하지 마.
+현재 에이전트, 스킬, 플러그인, 프로젝트 규칙을 조사해줘.
+실제 역할이 있는 것은 유지하거나 재사용하고, 중복을 구분한 뒤,
+현재 작업에서 부족한 점이 확인되지 않으면 아무것도 추가하지 마.
 ```
 
 ### 반복되는 실패
 
 ```text
-이 실패가 두 번 이상 반복됐어. 재현하고, 이전에 reject된 방향을 확인하고,
-bounded improvement episode를 한 번 실행해줘. Deterministic evidence로 이기는
+이 실패가 두 번 이상 반복됐어. 재현하고, 이전에 거부된 방향을 확인한 뒤,
+범위가 제한된 개선 절차를 한 번 실행해줘. 결정론적 근거에서 더 나은
 후보가 없으면 현재 하네스를 그대로 유지해줘.
 ```
 
 ### 다른 프로젝트에서 검증된 방법 재사용 (1.7)
 
 ```text
-이 프로젝트에서 다른 곳에도 쓸 만한 방법이 나오면 mechanism만 일반화하고,
-representative transfer와 negative-skip check를 실행한 뒤 personal evolution home에
-쓰기 전에 물어봐. 새 프로젝트에서는 compatibility check 뒤에만 적용해줘.
+이 프로젝트에서 다른 곳에도 쓸 만한 방법이 나오면 메커니즘만 일반화하고,
+대표 전이 검사와 적용하면 안 되는 경우의 건너뛰기 검사를 실행한 뒤 개인 진화 홈에
+쓰기 전에 물어봐. 새 프로젝트에서는 호환성 검사를 통과한 뒤에만 적용해줘.
 ```
 
 ## NULNUL이 실제로 하는 일
 
-하네스가 없다면 사용자가 capability를 고르고, 프로젝트 rule을 쓰고, context를 관리하고, completion check를 설계하고, 세션 상태와 실패한 개선 방법까지 기억해야 할 수 있습니다.
+하네스가 없다면 사용자가 기능을 고르고, 프로젝트 규칙을 쓰고, 컨텍스트를 관리하고, 완료 검사를 설계하며, 세션 상태와 실패한 개선 방법까지 기억해야 할 수 있습니다.
 
-NULNUL을 사용하면 사용자는 결과를 요청할 수 있습니다. Plugin은 다음 순서로 움직입니다.
+NULNUL을 사용하면 사용자는 원하는 결과만 요청할 수 있습니다. 플러그인은 다음 순서로 움직입니다.
 
-1. Codex 또는 Claude Code surface를 감지하고 질문하기 전에 저장소를 읽습니다.
-2. 기존 설정을 inventory하고 local substitute를 만들기 전에 검증된 capability를 찾습니다.
-3. roster를 다시 만들지 않고 현재 구성을 유지·업그레이드·병합하거나 중복을 제거합니다.
-4. 덮이지 않은 작업이나 독립 검증 경계만 추가합니다.
+1. 실행 환경이 Codex인지 Claude Code인지 확인하고 질문하기 전에 저장소를 읽습니다.
+2. 기존 설정을 목록화하고 프로젝트 전용 대체 기능을 만들기 전에 검증된 기능을 찾습니다.
+3. 역할 구성을 처음부터 다시 만들지 않고 현재 구성을 유지·업그레이드·병합하거나 중복을 제거합니다.
+4. 아직 담당하지 않는 작업이나 독립 검증 경계만 추가합니다.
 5. 원래 작업을 계속합니다. 설정만 끝낸 것은 완료가 아닙니다.
-6. 정확한 저장소 command를 실행하고 제한되고 정제된 근거를 남깁니다.
-7. 오래 진행되는 프로젝트라면 다음 세션을 위한 verified state를 남깁니다.
-8. 재현 가능한 nonpass 결과를 제한된 개선 후보로 바꿉니다.
-9. 명시적으로 opt-in한 경우 Personal Gate를 통과한 adaptation을 찾고 새 프로젝트와의 compatibility를 확인한 뒤, source project를 복사하지 않고 적용하거나 건너뜁니다.
-10. 서로 다른 verified family가 세 개 이상이면 bounded summary로 relevant adaptation을 shortlist한 뒤에만 full compatibility check를 엽니다.
+6. 저장소에 지정된 정확한 완료 명령을 실행하고, 범위를 제한하고 민감 정보를 제거한 근거를 남깁니다.
+7. 오래 진행되는 프로젝트라면 다음 세션을 위한 검증된 상태를 남깁니다.
+8. 재현 가능한 미통과 결과를 범위가 제한된 개선 후보로 바꿉니다.
+9. 사용자가 명시적으로 동의한 경우 Personal Gate를 통과한 적응 방식을 찾고 새 프로젝트와의 호환성을 확인한 뒤, 원본 프로젝트를 복사하지 않고 적용하거나 건너뜁니다.
+10. 서로 독립적으로 검증된 계열이 세 개 이상이면 제한된 요약 정보로 관련 적응 방식의 후보를 좁힌 뒤에만 전체 호환성 검사를 실행합니다.
 
-Navigator, Worker, Coach, Gate는 네 명의 필수 agent가 아니라 responsibility boundary입니다. 단순한 작업에서는 역할을 합칩니다. 독립 검증처럼 별도 job이 있을 때만 역할을 분리합니다.
+Navigator, Worker, Coach, Gate는 네 명의 필수 에이전트가 아니라 책임 경계입니다. 단순한 작업에서는 역할을 합칩니다. 독립 검증처럼 별도의 책임이 있을 때만 역할을 분리합니다.
 
-프로젝트가 변하면 같은 조사를 다시 합니다. 새로운 일이 생기면 새 경계가 필요할 수 있고, 중복된 책임이 사라지면 병합하거나 제거할 수 있습니다. NULNUL은 에이전트와 파일을 한 방향으로 누적하는 대신 하네스 구조를 현재 프로젝트에 맞게 조정합니다.
+프로젝트가 변하면 같은 조사를 다시 합니다. 새로운 일이 생기면 새 경계가 필요할 수 있고, 책임이 사라지거나 중복되면 병합하거나 제거할 수 있습니다. NULNUL은 에이전트와 파일을 한 방향으로 누적하는 대신 하네스 구조를 현재 프로젝트에 맞게 조정합니다.
 
-## Engineering model
+## 기술 모델
 
-NULNUL은 의도적으로 skills-only입니다. Server, daemon, hosted control plane, background self-improvement process를 추가하지 않습니다. 신뢰성은 작은 repository-native contract 집합에서 나옵니다.
+NULNUL은 의도적으로 스킬만으로 구성됩니다. 서버, 데몬, 호스팅 제어 계층, 백그라운드 자기 개선 프로세스를 추가하지 않습니다. 신뢰성은 저장소 안에서 동작하는 작은 계약들의 집합에서 나옵니다.
 
-| Contract | Enforcement |
+| 계약 | 적용 방식 |
 | --- | --- |
-| Repository truth | 구성 전에 host surface, 기존 guidance, capability, agent, test, permission을 조사합니다. |
-| Adaptive topology | 독립된 프로젝트 작업과 그 검사가 정당화할 때만 role과 mechanism을 추가·병합·제거합니다. |
-| Verified continuity | Schema-v3 checkpoint는 exact completion command, bounded verification files, runner-owned freshness receipt를 사용합니다. 변경된 상태는 verified fast resume를 주장할 수 없습니다. |
-| Governed evolution | Schema-v4 episode는 pathology, candidate/generation/evaluation budget, permission delta, archive identity, deterministic credit owner, stop reason을 고정합니다. Gate 통과는 provisional trial을 시작할 뿐이며 건강한 live cycle 뒤에만 confirmed version을 올립니다. |
-| Evaluation exposure | DEV, VALIDATION, HOLDOUT, first exposure, retirement, mechanism identity가 machine-readable합니다. 사용한 holdout을 unseen으로 다시 부를 수 없습니다. |
-| Personal adaptation | User-selected local registry에는 generalized mechanism, activation condition, contraindication, transfer summary, provenance, permission, revocation state만 저장합니다. Home 누락, conflict, private data, stale status, false activation은 fail-closed입니다. |
-| Cross-project selection | Typed privacy-safe summary에 activation boundary, failed transfer, status, permission, evidence-backed relation을 보존합니다. 근거 없는 관계는 `UNKNOWN`으로 두고 raw project workload는 집계하지 않습니다. |
-| Release integrity | Exact plugin provenance/version, protected write, agent hash, validator, negative control, archive/source parity, documentation debt가 fail-closed로 동작합니다. |
-| Evidence hygiene | 저장 artifact에는 prompt, response, raw transcript, credential, private project data, 전체 command, machine path가 들어가지 않습니다. |
+| 저장소 사실 | 구성하기 전에 실행 환경, 기존 지침, 기능, 에이전트, 검사, 권한을 조사합니다. |
+| 적응형 구조 | 독립된 프로젝트 작업과 그 검사가 필요성을 입증할 때만 역할과 메커니즘을 추가·병합·제거합니다. |
+| 검증된 연속성 | 스키마 v3 체크포인트는 정확한 완료 명령, 범위가 제한된 검증 파일, 실행기가 소유하는 최신성 영수증을 사용합니다. 상태가 바뀌면 검증된 빠른 재개를 주장할 수 없습니다. |
+| 통제된 진화 | 스키마 v4 진화 실행은 병리 원인, 후보·생성·평가 예산, 권한 변화, 아카이브 식별자, 결정론적 성과 판정 주체, 종료 이유를 고정합니다. Gate 통과는 잠정 시험을 시작할 뿐이며, 실제 작업 주기가 문제없이 끝난 뒤에만 확정 버전을 올립니다. |
+| 평가 노출 | DEV, VALIDATION, HOLDOUT, 최초 노출, 폐기 여부, 메커니즘 식별자를 기계가 읽을 수 있게 기록합니다. 사용한 홀드아웃을 미사용 사례라고 다시 부를 수 없습니다. |
+| 개인 적응 | 사용자가 선택한 로컬 레지스트리에는 일반화된 메커니즘, 활성화 조건, 금지 조건, 전이 요약, 출처, 권한, 폐기 상태만 저장합니다. 홈 누락, 충돌, 비공개 데이터, 오래된 상태, 잘못된 활성화가 발견되면 안전하게 중단합니다. |
+| 프로젝트 간 선택 | 개인정보를 포함하지 않는 형식화된 요약에 활성화 경계, 실패한 전이, 상태, 권한, 근거가 있는 관계를 보존합니다. 근거 없는 관계는 `UNKNOWN`으로 두고 원본 프로젝트 작업 내용은 집계하지 않습니다. |
+| 릴리스 무결성 | 정확한 플러그인 출처와 버전, 보호 대상 쓰기, 에이전트 해시, 검증기, 부정 대조군, 아카이브·원본 일치 여부, 문서 부채를 검사하며 실패 시 안전하게 중단합니다. |
+| 근거 위생 | 저장하는 산출물에는 프롬프트, 응답, 원본 대화 기록, 인증 정보, 비공개 프로젝트 데이터, 전체 명령, 컴퓨터 경로를 넣지 않습니다. |
 
-이는 architecture 명칭이 아니라 실행 가능한 contract입니다. Validator와 negative control도 저장소에 함께 제공됩니다.
+이는 구조를 설명하기 위한 이름이 아니라 실행 가능한 계약입니다. 검증기와 부정 대조군도 저장소에 함께 제공됩니다.
 
 ## 주변 도구와 무엇이 다른가요?
 
-다음 category는 함께 사용할 수 있습니다. 차이는 어떤 도구가 다른 모든 도구를 대체한다는 주장이 아니라 기본 job의 차이입니다.
+다음 범주의 도구는 함께 사용할 수 있습니다. 차이는 어떤 도구 하나가 나머지를 모두 대체한다는 데 있지 않고, 각 도구가 기본적으로 맡는 일에 있습니다.
 
-| Category | 보통 하는 일 | NULNUL의 기본 선택 |
+| 범주 | 보통 하는 일 | NULNUL의 기본 선택 |
 | --- | --- | --- |
-| Agent-team generator | 여러 agent를 조합한다 | 독립된 job이 없다면 role을 만들지 않는다. |
-| Prompt 또는 rule bundle | 준비된 지침을 불러온다 | 현재 repository state와 executable check에서 시작한다. |
-| Memory layer | 대화나 context를 보존한다 | raw conversation 대신 짧고 검증된 repository state를 선호한다. |
-| Hosted orchestrator | service에서 장기 workflow를 실행한다 | project-local, skills-only로 유지하며 server나 daemon을 요구하지 않는다. |
-| NULNUL | 프로젝트에 맞춘 하네스, 실제 작업, 검증, gated improvement | 작게 시작하고, 확인된 작업에만 적응하며, 측정된 개선만 승격한다. |
+| 에이전트 팀 생성기 | 여러 에이전트를 조합한다 | 독립된 일이 없다면 역할을 만들지 않는다. |
+| 프롬프트 또는 규칙 묶음 | 준비된 지침을 불러온다 | 현재 저장소 상태와 실행 가능한 검사에서 시작한다. |
+| 메모리 계층 | 대화나 컨텍스트를 보존한다 | 원본 대화 대신 짧고 검증된 저장소 상태를 우선한다. |
+| 호스팅 오케스트레이터 | 서비스에서 장기 작업 흐름을 실행한다 | 프로젝트 안에서 스킬만으로 동작하며 서버나 데몬을 요구하지 않는다. |
+| NULNUL | 프로젝트에 맞춘 하네스, 실제 작업, 검증, Gate를 거치는 개선 | 작게 시작하고, 확인된 작업에만 적응하며, 측정된 개선만 승격한다. |
 
 ## 저장소에 남는 것
 
-아무것도 남지 않을 수 있습니다. 완전한 기존 설정은 그대로 재사용합니다. 지속 가능한 지원이 실제로 부족할 때만 다음과 같은 footprint가 생길 수 있습니다.
+아무것도 남지 않을 수 있습니다. 일관되게 갖춰진 기존 설정은 그대로 재사용합니다. 작업을 이어가기 위한 지원이 실제로 부족할 때만 다음과 같은 파일이 생길 수 있습니다.
 
 ```text
 your-project/
-├── AGENTS.md or CLAUDE.md     # 필요할 때만 병합되는 host guidance
+├── AGENTS.md or CLAUDE.md     # 필요할 때만 병합하는 실행 환경 지침
 ├── docs/nulnul/
-│   ├── project.md             # stable goal, check, decision, permission
-│   ├── checkpoint.json        # 짧고 검증된 multi-session state
-│   ├── evolution.json         # 필요한 경우의 bounded active improvement state
-│   └── evolution.archive.json # 일반 resume context 밖의 종료된 근거
-├── .agents/skills/<name>/     # 적합한 기존 capability가 없을 때만
+│   ├── project.md             # 안정된 목표, 검사, 결정, 권한
+│   ├── checkpoint.json        # 짧고 검증된 다중 세션 상태
+│   ├── evolution.json         # 필요할 때만 쓰는 제한된 현재 개선 상태
+│   └── evolution.archive.json # 일반 재개 컨텍스트 밖의 종료된 근거
+├── .agents/skills/<name>/     # 적합한 기존 기능이 없을 때만
 └── docs/nulnul/workflows/<name>.md
-                                # 필요성이 입증된 reusable workflow
+                                # 필요성이 입증된 재사용 작업 흐름
 ```
 
-일반 continuity는 `checkpoint.json`, governed evolution은 `evolution.json`을 사용하며 둘을 동시에 live writer로 두지 않습니다. 생성된 설정은 product code를 바꾸지 않고 제거할 수 있습니다.
+일반 작업 연속성에는 `checkpoint.json`, 통제된 진화에는 `evolution.json`을 사용하며, 두 파일을 동시에 현재 상태 기록자로 사용하지 않습니다. 생성된 설정은 제품 코드를 바꾸지 않고 제거할 수 있습니다.
 
-종료된 feedback, proposal, promotion, autonomous episode를 요약으로 덮어쓰지는 않습니다. 표준 라이브러리 compactor가 active state를 작게 유지하고 인접 archive를 digest로 연결하며, 전체 graph는 deterministic validation 때 재구성합니다. 거절 이력도 archive 전체를 매번 model context에 넣지 않고 필요한 agent에 대해서만 조회합니다.
+종료된 피드백, 제안, 승격, 자율 개선 실행을 요약으로 덮어쓰지는 않습니다. 표준 라이브러리 압축기가 현재 상태를 작게 유지하고 인접 아카이브를 다이제스트로 연결하며, 결정론적 검증이 필요할 때 전체 관계를 재구성합니다. 거절 이력도 아카이브 전체를 매번 모델 컨텍스트에 넣지 않고 필요한 항목만 조회합니다.
 
 ## NULNUL은 어떻게 검증하나요?
 
-논문 citation은 배경일 뿐 신뢰 모델이 아닙니다. 신뢰 모델은 실행 가능한 근거입니다.
+논문 인용은 배경일 뿐 신뢰 모델이 아닙니다. 신뢰 모델은 실행 가능한 근거입니다.
 
 ```text
-behavior check → negative controls → 후보 비교 → Independent Gate
-                                                  ↓
-                                        live cycle / rollback
+동작 검사 → 부정 대조군 → 후보 비교 → 독립 Gate
+                                      ↓
+                              실제 작업 주기 / 롤백
 
-transfer claim만 → sealed unseen check → scoped decision
+전이 주장에만 적용 → 봉인된 미사용 검사 → 범위가 제한된 결정
 ```
 
 강한 근거 중 상당수는 실패에서 나왔습니다.
 
-- **Stale checkpoint defect.** 검증되지 않은 repository mutation이 interrupted run 3/3에서 fast resume됐습니다. Runner-owned freshness receipt가 unsafe result를 0/3으로 줄였습니다.
-- **그럴듯한 후보 거부.** Navigator instruction 후보는 말로는 타당했지만 verification을 계속 놓치거나 read와 cost를 늘려 승격되지 않았습니다.
-- **잘못된 holdout 보존.** 첫 one-shot Ruby fixture 오류를 validation으로 강등하고 다시 unseen이라고 부르지 않았으며, 새 case로 교체했습니다.
-- **범위를 좁힌 일반화.** Checkpoint freshness는 unseen local Perl/TAP 프로젝트 shape 하나에서 살아남았습니다. 판정은 “harness가 generalize한다”가 아니라 **Narrower Scope**였습니다.
-- **Live bounded evolution.** Unchanged champion 검사는 두 번 모두 stale public-positioning surface 7개를 찾았습니다. 새로 생성된 one-generation 후보는 0개에 도달하고 independent Gate를 통과한 뒤 `SUCCESS`로 종료했습니다. 이 근거는 해당 activation-metadata failure family에만 유효합니다.
-- **Personal transfer candidate.** Accepted checkpoint-freshness mechanism은 fresh Node와 Make project shape를 통과하고 one-shot shape를 건너뛴 뒤 fresh data-CLI Project D에서 발견·검증됐습니다. Gate 판정 `PERSONAL_PROMOTION`은 명시된 durable-checkpoint 조건에만 유효하며 일반 personal-memory system을 증명하지 않습니다.
-- **Cross-project Meta Evolution.** Transactional local migration과 machine-linked nonpass verdict가 같은 Personal Gate lifecycle을 통과해 독립 family 세 개가 됐습니다. Frozen one-generation selector는 fresh Project X, no-match, conflict에서 flat lookup과 같은 결정을 내리면서 full compatibility check를 9회에서 4회로 줄였습니다. Independent Meta Gate가 승격했고 이후 live cycle도 rollback trigger 0건으로 통과했습니다.
-- **Field failure를 rule로 전환.** 한 workflow에서 concurrent writer가 decision 12,000개를 잃었고 empty-cycle cursor가 같은 120개를 반복 탐색했습니다. 이 incident는 single-writer와 cursor-persistence rule이 됐지만 범용 benchmark는 아닙니다.
+- **오래된 체크포인트 결함.** 검증되지 않은 저장소 변경이 중단된 실행 3/3에서 빠른 재개를 허용했습니다. 실행기가 소유하는 최신성 영수증을 추가해 이 위험한 결과를 0/3으로 줄였습니다.
+- **그럴듯한 후보 거부.** Navigator 지침 후보는 말로는 타당했지만 검증을 계속 놓치거나 읽기 횟수와 비용을 늘려 승격되지 않았습니다.
+- **잘못된 홀드아웃 보존.** 오류가 난 첫 일회성 Ruby 사례를 검증용으로 강등하고 다시 미사용 사례라고 부르지 않았으며, 새로운 사례로 교체했습니다.
+- **범위를 좁힌 일반화.** 체크포인트 최신성 검사는 이전에 사용하지 않은 로컬 Perl/TAP 프로젝트 형태 하나에서 통과했습니다. 판정은 “하네스 전체가 일반화된다”가 아니라 **Narrower Scope**였습니다.
+- **실제 환경의 제한된 진화.** 변경하지 않은 기존 방식은 두 번의 검사에서 모두 오래된 공개 설명 일곱 곳을 찾았습니다. 한 번의 생성으로 만든 새 후보는 이를 0개로 줄이고 독립 Gate를 통과한 뒤 `SUCCESS`로 종료했습니다. 이 근거는 해당 활성화 메타데이터 실패 계열에만 유효합니다.
+- **개인 전이 후보.** 승인된 체크포인트 최신성 메커니즘은 새로운 Node 및 Make 프로젝트 형태를 통과하고 일회성 형태를 건너뛴 뒤, 새 데이터 CLI 프로젝트인 Project D에서 발견·검증됐습니다. Gate 판정 `PERSONAL_PROMOTION`은 명시된 장기 체크포인트 조건에만 유효하며 일반적인 개인 메모리 시스템을 증명하지 않습니다.
+- **프로젝트 간 Meta Evolution.** 트랜잭션 방식의 로컬 마이그레이션과 기계적으로 연결된 미통과 판정이 같은 Personal Gate 절차를 거쳐 독립 계열 세 개가 됐습니다. 사전에 고정한 단일 생성 선택기는 새로운 Project X, 일치 항목 없음, 충돌 사례에서 전체 조회와 같은 결정을 내리면서 전체 호환성 검사를 9회에서 4회로 줄였습니다. 독립 Meta Gate가 이를 승격했고 이후 실제 작업 주기도 롤백 조건 0건으로 통과했습니다.
+- **현장 실패를 규칙으로 전환.** 한 작업 흐름에서는 여러 기록기가 동시에 쓰면서 결정 12,000개가 사라졌고, 빈 주기의 커서가 같은 항목 120개를 반복해서 탐색했습니다. 이 사건에서 단일 기록기와 커서 유지 규칙을 얻었지만 이를 범용 벤치마크로 주장하지는 않습니다.
 
-| Evidence | 현재 결과 | 의미 |
+| 근거 | 현재 결과 | 의미 |
 | --- | --- | --- |
-| 저장소 test | **234개 통과 (234/234)** | deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, negative-control contract가 유지됩니다. |
-| 확인된 behavior/safety 점수 | 12개 case에서 **100/100** | 공개 fixture가 통과합니다. 범용 품질 점수가 아닙니다. |
-| 최종 1.7.0 Release Gate | **통과** | Exact-tag Claude Code와 personal-adaptation adoption 통과 후 main CI run `31651306556`도 green이 됐습니다. |
-| Checkpoint defect | unsafe fast resume **3/3 → 0/3** | 재현된 correctness defect 하나를 닫았습니다. |
-| Unseen transfer | **Narrower Scope** | mechanism 하나가 project shape 하나로 전이됐으며 harness-wide generalization은 미입증입니다. |
-| Bounded evolution | champion/retry **위반 7개**, 새 후보 **0개**, stop `SUCCESS` | 좁은 failure family 하나에서 live generation과 bounded stopping이 한 번 동작했습니다. |
-| Personal transfer candidate | **적용 2, 건너뜀 1, fresh Project D 통과** | Raw project data 없이 adaptation 하나를 transfer, compatibility check, reuse, dedup, revoke할 수 있습니다. 더 넓은 personal evolution은 미입증입니다. |
-| 2.0 local Meta Gate | **3 family, full check 9 → 4, 결정 3/3 정답** | Bounded summary evidence가 sealed episode 하나에서 selection work를 줄였습니다. Token, runtime, universal, cross-user 개선은 미입증입니다. |
-| 2.1 release 상태 | **공개 및 검증 완료** | Exact public 2.1.0 Claude adoption이 protected write 0건과 check 5개를 통과했고, active evolution fixture는 **87.48%** 작아졌으며 exact Project M은 정답을 유지하며 full check를 **3 → 1**로 줄였습니다. Generalization은 narrower scope를 유지합니다. |
-| 2.1.1 release 상태 | **공개 및 검증 완료** | Counterbalanced 4회에서 동일 debt 결과를 유지하고 detector median을 **17.73645초 → 0.2308초(−98.70%)**로 줄였습니다. Fresh exact-final Claude·Meta adoption이 통과했고 Release Gate는 **100/100**으로 닫혔습니다. |
-| 2.2.0 release 상태 | **공개 및 exact-version 검증 완료** | 안전한 lifecycle, documentation-debt, exact-byte 변경이 통과했습니다. Fresh public Claude adoption은 기존 agent profile 두 개와 check 5개를 보존했고, Project M은 정답을 유지하며 full check를 **3 → 1**로 줄였습니다. Consent/continuity 후보는 `NO_PROMOTION` 상태로 제거돼 있습니다. |
+| 저장소 검사 | **234개 통과 (234/234)** | 제품, 상태, 압축, 실행 환경 전환, 개인정보 보호, 롤백, 전이, 프로젝트 간 선택, Meta Gate, 문서 부채, 정확한 후보 식별, 동작 경계, 부정 대조군에 관한 결정론적 계약을 모두 충족합니다. |
+| 확인된 동작·안전 점수 | 사례 12개에서 **100/100** | 공개 픽스처가 통과합니다. 범용 품질 점수는 아닙니다. |
+| 최종 1.7.0 Release Gate | **통과** | 정확한 태그를 사용한 Claude Code 및 개인 적응 채택 검증이 통과했고, 이어서 기본 브랜치 CI 실행 `31651306556`도 성공했습니다. |
+| 체크포인트 결함 | 위험한 빠른 재개 **3/3 → 0/3** | 재현된 정확성 결함 하나를 해결했습니다. |
+| 미사용 사례 전이 | **Narrower Scope** | 메커니즘 하나가 프로젝트 형태 하나에 전이됐으며 하네스 전체의 일반화는 입증하지 못했습니다. |
+| 제한된 진화 | 기존 방식·재시도 **위반 7개**, 새 후보 **0개**, 종료 `SUCCESS` | 좁은 실패 계열 하나에서 실제 생성과 제한된 종료가 한 번 동작했습니다. |
+| 개인 전이 후보 | **적용 2, 건너뜀 1, 새로운 Project D 통과** | 원본 프로젝트 데이터 없이 적응 방식 하나를 전이하고, 호환성을 검사하고, 재사용·중복 제거·폐기할 수 있습니다. 더 넓은 개인 진화는 입증하지 못했습니다. |
+| 2.0 로컬 Meta Gate | **3개 계열, 전체 검사 9 → 4, 결정 3/3 정답** | 제한된 요약 근거가 봉인된 실행 하나에서 선택 작업을 줄였습니다. 토큰, 실행 시간, 범용성, 사용자 간 개선은 입증하지 못했습니다. |
+| 2.1 릴리스 상태 | **공개 및 검증 완료** | 공개된 정확한 2.1.0을 사용한 Claude 채택 검증은 보호 대상 쓰기 0건을 유지하며 검사 다섯 개를 통과했습니다. 현재 진화 픽스처는 **87.48%** 작아졌고, 공개 버전을 정확히 사용한 Project M은 같은 적용 결정을 유지하면서 전체 검사를 **3 → 1**로 줄였습니다. 일반화 범위는 여전히 제한적입니다. |
+| 2.1.1 릴리스 상태 | **공개 및 검증 완료** | 순서를 교차한 네 차례의 검사에서 같은 문서 부채 결과를 유지하면서 탐지 시간 중앙값을 **17.73645초 → 0.2308초(−98.70%)**로 줄였습니다. 최종 공개 버전을 새로 설치한 Claude Code 및 Meta Evolution 채택 검증이 통과했고 Release Gate는 **100/100**을 기록했습니다. |
+| 2.2.0 릴리스 상태 | **공개 및 정확한 버전 검증 완료** | 안전한 상태 전환, 문서 부채, 정확한 바이트 판정 변경이 통과했습니다. 공개 버전을 새로 설치한 Claude Code 채택 검증은 기존 에이전트 프로필 두 개를 보존하고 검사 다섯 개를 모두 통과했습니다. Project M은 같은 적용 결정을 유지하면서 전체 검사를 **3회에서 1회로** 줄였습니다. 동의·연속성 후보는 `NO_PROMOTION` 판정에 따라 제거된 상태입니다. |
 
-개선 후보가 반드시 이겨야 하는 것은 아닙니다. 거부, `NO_PROMOTION`, narrower scope, rollback은 모두 정상 결과입니다.
+개선 후보가 반드시 이겨야 하는 것은 아닙니다. 거부, `NO_PROMOTION`, 범위 축소, 롤백은 모두 정상 결과입니다.
 
 저장소 검사를 직접 재현할 수 있습니다.
 
@@ -368,74 +368,78 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-현재 공개된 2.2.0 evidence는 `local_candidate_ready: true`, `release_ready: true`를 보고합니다. 내려받은 archive는 SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`으로 byte-identical하며, exact-version Claude·Meta adoption은 protected write, permission expansion, private evidence, retired holdout 재사용 없이 통과했습니다. 이어서 [Main CI run 32348453221](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32348453221)도 전체 suite와 Release Gate를 통과했습니다.
+현재 공개된 2.2.0 근거에는 `local_candidate_ready: true`와 `release_ready: true`가 기록돼 있습니다. 내려받은 아카이브는 고정된 로컬 산출물과 바이트 단위로 일치하며 SHA-256은 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`입니다. 정확한 버전을 사용한 Claude Code 및 Meta Evolution 채택 검증은 보호 대상 쓰기, 권한 확대, 비공개 근거, 폐기된 홀드아웃 재사용 없이 통과했습니다. 이어서 [기본 브랜치 CI 실행 32348453221](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32348453221)도 전체 검사와 Release Gate를 통과했습니다.
 
-근거 기록도 공개돼 있습니다. [Behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [documentation-debt A/B](evals/benchmarks/doc-debt/results.json), [rejected context-routing A/B](evals/benchmarks/context-routing/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json)과 [results](evals/personal-evolution/results.json), 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) 결과를 확인할 수 있습니다. 버전별 history는 [`CHANGELOG.md`](CHANGELOG.md)의 역할입니다.
+공개된 기본 기록에는 [동작 사례](evals/cases.json), [동작 결과](evals/results.json), [성능 근거](evals/benchmarks/performance.json), [활성화 근거](evals/benchmarks/activation/results.json), [문서 부채 A/B](evals/benchmarks/doc-debt/results.json), 거부된 [컨텍스트 라우팅 A/B](evals/benchmarks/context-routing/results.json)가 있습니다. 일반화 기록에는 [노출 목록](evals/generalization/manifest.json), [실패한 Ruby 근거](evals/generalization/results-ruby-failed.json), [Perl/TAP 근거](evals/generalization/results.json)가 있습니다.
 
-2.2 behavior-boundary episode는 [preregistration](evals/behavior-boundaries/preregistration.json), [cases](evals/behavior-boundaries/cases.json), [sanitized result](evals/behavior-boundaries/results.json), 제외한 [invalid first episode](evals/behavior-boundaries/invalid-evaluator-episode-1.json)를 보존합니다. 이는 shipped behavior 근거가 아니라 거절 기록입니다.
+진화 기록에는 [1.6 실제 실행 사전 등록](evals/autonomous/live-1.6-preregistration.json), 1.7 [개인 전이 사전 등록](evals/personal-evolution/preregistration.json)과 [결과](evals/personal-evolution/results.json), 2.0 [Meta 사전 등록](evals/meta-evolution/preregistration.json), [형식화된 근거](evals/meta-evolution/cross-project-evidence.json), [Meta Gate 결과](evals/meta-evolution/results.json), 공개된 정확한 버전의 [Meta 채택 근거](evals/meta-evolution/public-adoption.json)가 있습니다.
+
+2.0 이후 기록에는 [기능 권한 `NO_ADVANTAGE`](evals/capability-authority/results.json), [의도·더 나은 경로 `NO_PROMOTION`](evals/intent-better-path/results.json), [범위가 제한된 결정 산출물 `NO_PROMOTION`](evals/decision-boundaries/results.json), [저장소 영수증 `NO_PROMOTION`](evals/repository-receipts/results.json) 결과가 남아 있습니다. 버전별 변경 이력은 [`CHANGELOG.md`](CHANGELOG.md)에서 확인할 수 있습니다.
+
+2.2 동작 경계 실행은 [사전 등록](evals/behavior-boundaries/preregistration.json), [사례](evals/behavior-boundaries/cases.json), [정제된 결과](evals/behavior-boundaries/results.json), 평가에서 제외된 [잘못된 첫 번째 실행](evals/behavior-boundaries/invalid-evaluator-episode-1.json)을 보존합니다. 이는 공개 기능의 근거가 아니라 거절 기록입니다.
 
 ## 이런 사람을 위해 만들었습니다
 
-NULNUL은 AI로 무언가를 만들고 싶지만 그 전에 AI 개발 환경부터 공부하고 싶지는 않은 사람을 위해 만들었습니다. 비개발자나 개발을 처음 시작한 사람뿐 아니라, skill·plugin·agent 구성·context·stack을 매번 직접 최적화하고 싶지 않은 개발자도 포함합니다.
+NULNUL은 AI로 무언가를 만들고 싶지만 그 전에 AI 개발 환경부터 공부하고 싶지는 않은 사람을 위해 만들었습니다. 대상에는 비개발자와 개발 입문자뿐 아니라 스킬·플러그인·에이전트 구성·컨텍스트·기술 조합을 프로젝트마다 직접 최적화하고 싶지 않은 개발자도 포함됩니다.
 
-좋은 skill과 도구가 있으면 가져다 쓰고, 기존 프로젝트에서 잘 작동하는 것은 먼저 존중합니다. 하지만 이미 있다는 이유만으로 첫 방법에 사용자를 가두는 것도 목표가 아닙니다. 사용자는 만들고 싶은 결과와 의도한 방향을 정하고, NULNUL은 구현 방법을 검토해 중요한 선택 이유만 짧게 보여주는 쪽을 지향합니다.
+유용한 기존 스킬과 도구를 찾아 사용하고, 프로젝트에서 이미 잘 작동하는 것은 먼저 존중합니다. 그렇다고 처음 발견한 방법만 계속 사용하도록 제한하지는 않습니다. 사용자는 만들고 싶은 결과와 의도한 방향을 정하고, NULNUL은 구현 선택지를 검토해 중요한 선택의 이유만 짧게 설명합니다.
 
 **좋은 도구는 대신 찾되, 만들고 싶은 방향까지 대신 정하지 않습니다.**
 
-이것은 제품 철학이지 현재 release가 모든 디자인·architecture 결정을 올바르게 해결한다고 보장하는 문장이 아닙니다. 현재 검증된 동작은 위 evidence와 연결된 accepted/rejected 기록이 정합니다.
+이것은 제품 철학이지 현재 버전이 모든 디자인·구조 결정을 올바르게 해결한다고 보장하는 문장이 아닙니다. 현재 검증된 동작의 범위는 위의 근거와 연결된 승인·거부 기록으로 한정됩니다.
 
 ## 뿌리와 영향
 
-NULNUL은 [GeekNews Weekly 353](https://news.hada.io/weekly/202615)이 던진 harness-engineering 문제에서 출발했습니다. Coding-agent capability가 많아질수록 왜 사용자가 매번 주변 시스템을 직접 조립해야 하는가라는 질문입니다.
+NULNUL은 [GeekNews Weekly 353](https://news.hada.io/weekly/202615)이 던진 하네스 엔지니어링 문제에서 출발했습니다. 코딩 에이전트의 기능이 늘어날수록 왜 사용자가 매번 주변 시스템을 직접 조립해야 하는가라는 질문입니다.
 
-설계에는 editable task/meta boundary, independent verification, champion/challenger comparison, eval-gated delivery가 영향을 줬습니다. [HyperAgents](https://ai.meta.com/research/publications/hyperagents/) ([paper](https://arxiv.org/abs/2603.19461), [code](https://github.com/facebookresearch/Hyperagents))는 editable task/meta 질문의 중요한 참고였습니다. NULNUL은 HyperAgents를 재현하거나 open-ended self-improvement를 주장하지 않습니다.
+설계에는 편집 가능한 작업·메타 경계, 독립 검증, 기존 방식과 후보 방식의 비교, 평가를 통과해야 공개하는 절차가 영향을 줬습니다. [HyperAgents](https://ai.meta.com/research/publications/hyperagents/) ([논문](https://arxiv.org/abs/2603.19461), [코드](https://github.com/facebookresearch/Hyperagents))는 편집 가능한 작업·메타 경계를 고민하는 데 중요한 참고 자료였습니다. NULNUL은 HyperAgents를 재현하거나 끝없는 자기 개선을 주장하지 않습니다.
 
 <details>
-<summary>측정된 evolution 작업의 기술 참고 자료</summary>
+<summary>측정된 진화 작업의 기술 참고 자료</summary>
 
-Observable Evolution은 [Agentic Harness Engineering](https://arxiv.org/abs/2604.25850), Generalization Gate는 [Rethinking the Evaluation of Harness Evolution](https://arxiv.org/abs/2607.12227)의 영향을 받았습니다. 제한된 1.6 episode에는 [Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683), [Hierarchical Self-Improvement](https://arxiv.org/abs/2608.08466), [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621)의 아이디어 중 필요한 것만 사용했습니다.
+Observable Evolution은 [Agentic Harness Engineering](https://arxiv.org/abs/2604.25850), Generalization Gate는 [Rethinking the Evaluation of Harness Evolution](https://arxiv.org/abs/2607.12227)의 영향을 받았습니다. 범위를 제한한 1.6 실행에는 [Gated Semantic Quality-Diversity](https://arxiv.org/abs/2607.13683), [Hierarchical Self-Improvement](https://arxiv.org/abs/2608.08466), [Harness Updating Is Not Harness Benefit](https://arxiv.org/abs/2605.30621)의 아이디어 중 필요한 것만 사용했습니다.
 
-논문은 질문과 더 강한 falsification 방법을 제공합니다. Local evidence 없이 product capability가 되지는 않습니다. 정확한 contract는 [evolution](plugins/nulnul-harness/skills/nulnul-harness/references/evolution.md), [meta-evolution](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md), [generalization](plugins/nulnul-harness/skills/nulnul-harness/references/generalization.md) reference에 있습니다.
+논문은 질문과 더 강한 반증 방법을 제공합니다. 하지만 로컬 근거 없이는 제품 기능이 되지 않습니다. 정확한 계약은 [진화](plugins/nulnul-harness/skills/nulnul-harness/references/evolution.md), [메타 진화](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md), [일반화](plugins/nulnul-harness/skills/nulnul-harness/references/generalization.md) 참고 문서에 있습니다.
 </details>
 
-## 2.0까지의 로드맵
+## 공개된 진화 단계
 
-Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니다.
+이 단계는 사용자에게 제공하려는 가치를 설명하며, 자동으로 다음 버전을 공개하겠다는 약속은 아닙니다.
 
 | 단계 | 상태 | 사용자에게 좋아지는 점 |
 | --- | --- | --- |
 | 1.4 Observable Evolution | 완료 | 그럴듯한 설명을 믿는 대신 하네스가 왜 실패했는지 볼 수 있습니다. |
-| 1.5 Generalization Gate | 완료 | 해결책이 전이되는지 익숙한 evaluation case에만 맞는지 구분합니다. |
-| 1.6 Bounded Autonomous Evolution | 완료 | 고정 budget 안에서 작은 후보 공간을 탐색하고 근거가 약하면 아무것도 바꾸지 않은 채 멈춥니다. |
-| 1.7 Personal Evolution | 완료 | 프로젝트에서 검증된 개선을 transfer evidence, Personal Gate, 새 프로젝트 compatibility check 뒤에만 재사용합니다. Exact public adoption과 main CI가 통과했습니다. |
-| 2.0 Cross-project / Meta Evolution | 공개 및 검증 완료 | Verified family 세 개를 bounded selector에 연결했습니다. Sealed Meta Gate는 동일 결정을 유지하며 full check를 9회에서 4회로 줄였고, exact public adoption은 Project M 3회에서 1회, no-match/conflict control, rollback을 통과했습니다. |
+| 1.5 Generalization Gate | 완료 | 해결책이 다른 환경으로 전이되는지, 익숙한 평가 사례에만 맞는지 구분합니다. |
+| 1.6 Bounded Autonomous Evolution | 완료 | 고정된 예산 안에서 작은 후보 공간을 탐색하고 근거가 약하면 아무것도 바꾸지 않은 채 멈춥니다. |
+| 1.7 Personal Evolution | 완료 | 프로젝트에서 검증된 개선을 전이 근거, Personal Gate, 새 프로젝트 호환성 검사를 통과한 뒤에만 재사용합니다. 공개된 정확한 버전의 채택 검증과 기본 브랜치 CI가 통과했습니다. |
+| 2.0 Cross-project / Meta Evolution | 공개 및 검증 완료 | 검증된 세 계열을 제한된 선택기에 연결했습니다. 봉인된 Meta Gate는 같은 결정을 유지하면서 전체 검사를 9회에서 4회로 줄였습니다. 공개된 정확한 버전의 채택 검증에서는 Project M의 전체 검사가 3회에서 1회로 줄었고, 일치 항목 없음·충돌 대조군과 롤백 검사도 통과했습니다. |
 
 ## 신뢰 경계와 한계
 
-- 인증, 외부 쓰기, 배포, 공개, destructive operation, paid resource, 전역 등록에는 명시적 승인이 필요합니다.
-- Credential, raw conversation, transcript, 전체 command history, machine path, private project data는 evolution memory가 되지 않습니다.
-- Personal Evolution은 사용자가 명시적으로 선택한 기존 local directory를 요구합니다. 실제 private local home 하나가 설정되어 validator를 통과했으며, machine path는 public evidence에 남기지 않습니다.
-- 무인 Claude Code 세션은 host-owned `.claude/**` configuration을 검사할 수 있지만 다시 쓰지 않습니다.
-- Fast resume 전에 checkpoint를 제한된 repository reality와 비교합니다.
-- Compacted evolution archive는 local project evidence로 유지하고 active state를 신뢰하기 전에 integrity를 검사하지만, 일반 resume context에는 로드하지 않습니다.
-- Independent Gate ownership은 선언된 state에서 검증하며 서로 다른 runtime identity를 암호학적으로 증명하지 않습니다.
-- NULNUL은 기반 model의 reasoning 한계를 없애거나 모든 agent error를 막지 않습니다.
-- unseen transfer 하나와 live bounded episode 하나는 universal 또는 harness-wide generalization을 증명하지 않습니다.
-- 2.0 local evidence는 mechanism family 세 개, sealed selector case 세 개, 확인된 `COMPLEMENTS` relation 하나, live cycle 하나에만 해당합니다. 다른 관계는 `UNKNOWN`이며 arbitrary project lesson, token/runtime 개선, cross-user learning은 미입증입니다.
-- Daemon, recursive Coach, candidate population, hosted evolution service, unattended infinite loop가 없습니다.
+- 인증, 외부 쓰기, 배포, 공개, 파괴적 작업, 유료 자원 사용, 전역 등록에는 명시적인 승인이 필요합니다.
+- 인증 정보, 원본 대화, 전체 명령 이력, 컴퓨터 경로, 비공개 프로젝트 데이터는 진화 기억으로 저장하지 않습니다.
+- Personal Evolution은 사용자가 명시적으로 선택한 기존 로컬 디렉터리를 요구합니다. 실제 비공개 로컬 홈 하나가 설정돼 검증을 통과했으며, 해당 컴퓨터 경로는 공개 근거에 남기지 않습니다.
+- 무인 Claude Code 세션은 실행 환경이 소유한 `.claude/**` 설정을 검사할 수 있지만 다시 쓰지 않습니다.
+- 빠른 재개 전에 체크포인트를 지정된 범위 안의 실제 저장소 상태와 비교합니다.
+- 압축된 진화 아카이브는 프로젝트의 로컬 근거로 유지하고 현재 상태를 신뢰하기 전에 무결성을 검사하지만, 일반 재개 컨텍스트에는 불러오지 않습니다.
+- 독립 Gate의 책임 주체는 선언된 상태에서 검증하며 서로 다른 실행 주체를 암호학적으로 증명하지 않습니다.
+- NULNUL은 기반 모델의 추론 한계를 없애거나 모든 에이전트 오류를 막지 않습니다.
+- 미사용 사례 전이 하나와 실제 환경의 제한된 진화 실행 하나는 범용적이거나 하네스 전체에 적용되는 일반화를 증명하지 않습니다.
+- 2.0 로컬 근거는 메커니즘 세 계열, 봉인된 선택 사례 세 개, 확인된 `COMPLEMENTS` 관계 하나, 실제 작업 주기 하나에만 해당합니다. 다른 관계는 `UNKNOWN`이며 임의의 프로젝트 교훈, 토큰·실행 시간 개선, 사용자 간 학습은 입증하지 못했습니다.
+- 데몬, 재귀적으로 실행되는 Coach, 후보 집단, 호스팅 진화 서비스, 무인 무한 반복은 없습니다.
 
 ## 자주 묻는 질문
 
 <details>
-<summary>NULNUL은 항상 agent나 file을 추가하나요?</summary>
+<summary>NULNUL은 항상 에이전트나 파일을 추가하나요?</summary>
 
-아닙니다. 저장소가 이미 job을 덮는지 먼저 확인합니다. 현재 설정을 재사용하고 아무것도 만들지 않는 것도 성공입니다.
+아닙니다. 저장소가 작업에 필요한 조건을 이미 충족하는지 먼저 확인합니다. 현재 설정을 재사용하고 아무것도 만들지 않는 것도 성공입니다.
 </details>
 
 <details>
 <summary>NULNUL은 계속 혼자 학습하나요?</summary>
 
-아닙니다. Improvement는 user-triggered, bounded, evidence-gated, reversible합니다. 이기는 후보가 없으면 현재 champion을 유지합니다.
+아닙니다. 개선은 사용자가 시작하며, 범위와 근거가 명확하고 언제든 되돌릴 수 있습니다. 더 나은 후보가 없으면 현재 방식을 유지합니다.
 </details>
 
 <details>
@@ -447,18 +451,18 @@ Roadmap은 사용자 가치의 방향이지 자동 release 약속이 아닙니�
 <details>
 <summary>기존 AI 설정이 있어도 사용할 수 있나요?</summary>
 
-네. 무엇을 추가하기 전에 현재 설정을 조사하고 분류합니다. 기존 roster를 무조건 교체하는 것이 아니라 재사용하거나 in-place로 개선하도록 설계됐습니다.
+네. 무엇을 추가하기 전에 현재 설정을 조사하고 분류합니다. 기존 역할 구성을 무조건 교체하는 것이 아니라 현재 자리에서 재사용하거나 개선하도록 설계됐습니다.
 </details>
 
 <details>
 <summary>100/100은 NULNUL이 어디서나 더 좋다는 뜻인가요?</summary>
 
-아닙니다. 확인된 behavior와 safety fixture만 다룹니다. Generalization Gate가 transfer claim을 별도로 제한하며, accepted mechanism 하나가 unseen project shape 하나에 전이됐을 뿐 harness-wide generalization은 아닙니다.
+아닙니다. 확인된 동작과 안전 픽스처만 다룹니다. Generalization Gate가 전이 주장의 범위를 별도로 제한하며, 승인된 메커니즘 하나가 이전에 사용하지 않은 프로젝트 형태 하나에 전이됐을 뿐 하네스 전체의 일반화를 뜻하지는 않습니다.
 </details>
 
 ## 업데이트, 제거, 개발
 
-Codex는 Git marketplace를 갱신한 뒤 plugin을 다시 설치합니다.
+Codex를 업데이트하려면 Git 마켓플레이스를 갱신한 뒤 플러그인을 다시 설치합니다.
 
 ```bash
 codex plugin marketplace upgrade nulnul-harness
@@ -466,14 +470,14 @@ codex plugin remove nulnul-harness@nulnul-harness
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
-Claude Code는 marketplace와 plugin을 업데이트한 뒤 재시작합니다.
+Claude Code에서는 마켓플레이스와 플러그인을 업데이트한 뒤 Claude Code를 재시작합니다.
 
 ```bash
 claude plugin marketplace update nulnul-harness
 claude plugin update nulnul-harness@nulnul-harness
 ```
 
-Local clone에서 marketplace를 추가했다면 먼저 해당 clone을 pull하세요. 업데이트 후 새 agent 세션을 시작합니다. Project-local guidance와 `docs/nulnul/` state는 보존됩니다.
+로컬 복제본에서 마켓플레이스를 추가했다면 먼저 해당 복제본을 갱신하세요. 업데이트 후 새 에이전트 세션을 시작합니다. 프로젝트 지침과 `docs/nulnul/` 상태는 보존됩니다.
 
 Codex에서 제거합니다.
 
@@ -489,9 +493,9 @@ claude plugin uninstall nulnul-harness@nulnul-harness
 claude plugin marketplace remove nulnul-harness
 ```
 
-생성된 project state는 plugin과 별개입니다. Checkpoint나 evolution history가 더 이상 필요 없을 때만 제거하세요.
+생성된 프로젝트 상태는 플러그인과 별개입니다. 체크포인트나 진화 이력이 더 이상 필요 없을 때만 제거하세요.
 
-Local development와 검증:
+로컬 개발 및 검증:
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
@@ -499,6 +503,6 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-[`CHANGELOG.md`](CHANGELOG.md), [`SUPPORT.md`](SUPPORT.md), [`PRIVACY.md`](PRIVACY.md), [`TERMS.md`](TERMS.md), [MIT license](LICENSE)를 확인할 수 있습니다.
+[`CHANGELOG.md`](CHANGELOG.md), [`SUPPORT.md`](SUPPORT.md), [`PRIVACY.md`](PRIVACY.md), [`TERMS.md`](TERMS.md), [MIT 라이선스](LICENSE)를 확인할 수 있습니다.
 
 MIT © [SeoNaRu](https://github.com/SeoNaRu)

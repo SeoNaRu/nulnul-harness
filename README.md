@@ -22,17 +22,17 @@
   <a href="#quick-start">Try it</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.0">public 2.2.0</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml">Report friction</a>
 </p>
 
-> **NULNUL 2.2.0 is the current public release.** It adds provisional-to-confirmed evolution state, active-host and dirty-worktree documentation-debt checks, and exact candidate-byte Release Gate attribution. The downloaded archive matched the frozen local bytes, and fresh exact-version Claude and Meta adoption passed.
+> **NULNUL 2.2.0 is the current public release.** It adds a provisional-to-confirmed evolution lifecycle, documentation-debt checks that account for the active host and dirty worktree, and Release Gate evidence tied to the candidate's exact bytes. The downloaded archive matched the frozen local artifact byte for byte, and fresh exact-version adoption checks passed for Claude Code and Meta Evolution.
 >
 > **What did not ship:** The consent/continuity behavior candidate was removed after its frozen strict Gate returned `NO_PROMOTION`. Navigator remains v20, and this release makes no new consent or ordinary-product routing behavior claim.
 >
-> **NULNUL 2.1.1 makes the required documentation-debt check lazy.** On this tracked release repository, the same result moved from a 17.73645-second median to 0.2308 seconds across four counterbalanced A/B rounds.
+> **NULNUL 2.1.1 runs the required documentation-debt check only when needed.** In this tracked release repository, four counterbalanced A/B rounds produced the same result while reducing the median runtime from 17.73645 seconds to 0.2308 seconds.
 >
-> **2.1 keeps evolution context bounded.** Closed history moves to an integrity-checked local archive instead of loading into ordinary resume context.
+> **2.1 keeps evolution context bounded.** Closed history moves to an integrity-checked local archive instead of being loaded into normal resume context.
 >
-> **1.7 status:** The first scoped adaptation passed two transfer shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home with no raw project memory. A fresh GitHub-marketplace Claude Code adoption also preserved two existing agents, made zero protected writes, and passed five executable checks.
+> **1.7 status:** The first scoped adaptation passed transfer checks on two project shapes, skipped incompatible and revoked cases, and was reused from an approved opt-in home without copying raw project memory. A fresh GitHub Marketplace adoption in Claude Code also preserved two existing agents, made zero protected writes, and passed five executable checks.
 >
-> **2.0 status:** Three independent personal adaptation families feed a bounded summary selector. It preserved every sealed decision while reducing full compatibility checks from 9 to 4; the exact public Project M smoke reduced them from 3 to 1 with the same correct apply.
+> **2.0 status:** Three independent personal adaptation families feed a bounded summary selector. It preserved every sealed decision while reducing full compatibility checks from 9 to 4; the exact public Project M smoke test reduced them from 3 to 1 while making the same correct application decision.
 >
 > **2.0.1 behavior:** In sequential Codex/Claude Code use, Codex owns only `AGENTS.md`, Claude owns only `CLAUDE.md`, and both reuse one shared `docs/nulnul/` state. Concurrent mutation is not claimed.
 >
@@ -129,7 +129,7 @@ Independent Gate
          Confirm   Rollback
 ```
 
-The process that proposes a change is separate from the process that assigns credit. A Coach may state a causal hypothesis, prediction, and falsification condition; none of those is evidence by itself. The Gate owns deterministic measurement across completion checks, validators, permission and privacy guardrails, cost, candidate identity, and rollback viability.
+The process that proposes a change is separate from the process that assigns credit. A Coach may state a causal hypothesis, prediction, and falsification condition; none of those is evidence by itself. The Gate owns the deterministic assessment of completion checks, validators, permission and privacy guardrails, cost, candidate identity, and rollback viability.
 
 In bounded evolution, the candidate count, generation count, evaluation budget, permissions, and stop conditions are fixed before search begins. If nothing is better, **`NO_PROMOTION` is a correct result**.
 
@@ -190,7 +190,7 @@ Fix the booking API and verify that the existing behavior still passes.
 
 You do not need to choose the agents or design the workflow first.
 
-If anything feels uncomfortable in use, report the normal request, expected result, and actual result in an [Issue](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). Do not include private code, credentials, or raw transcripts.
+If anything feels uncomfortable in use, report what you asked for, what you expected, and what actually happened in a [GitHub issue](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). Do not include private code, credentials, or raw transcripts.
 
 ## Operational use cases
 
@@ -257,20 +257,20 @@ Without a harness, the user often has to choose capabilities, write project rule
 
 With NULNUL, the user can ask for the result. The plugin then:
 
-1. detects Codex or Claude Code and reads the repository before asking questions;
+1. detects whether it is running in Codex or Claude Code and reads the repository before asking questions;
 2. inventories the existing setup and searches proven capabilities before creating a local substitute;
 3. keeps, upgrades, merges, or removes overlap instead of rebuilding the roster;
 4. adds only uncovered work or independent verification boundaries;
 5. continues the original task—setup alone is not completion;
-6. runs an exact repository command and records bounded, sanitized evidence;
+6. runs the repository's exact completion command and records bounded, sanitized evidence;
 7. leaves verified state for later sessions when the project is durable;
-8. turns reproducible nonpass results into bounded improvement proposals.
-9. when explicitly opted in, can discover a Personal-Gate-approved adaptation, check it against the new project, and apply or skip it without copying the source project.
-10. when at least three independent verified families exist, can shortlist relevant adaptations from bounded summaries before opening their full compatibility checks.
+8. turns reproducible nonpass results into bounded improvement proposals;
+9. when explicitly opted in, can discover a Personal-Gate-approved adaptation, check it against the new project, and apply or skip it without copying the source project;
+10. when at least three independent verified families exist, can shortlist relevant adaptations from bounded summaries before running their full compatibility checks.
 
 Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Simple work combines roles. A separate role exists only when it has a distinct job, such as independent verification.
 
-The same inspection happens again as the project changes. A new job may justify a new boundary; disappearing overlap may justify a merge or removal. NULNUL adapts the harness topology instead of treating growth as a one-way accumulation of agents and files.
+The same inspection happens again as the project changes. A new job may justify a new boundary; a responsibility that disappears or becomes redundant may justify a merge or removal. NULNUL adapts the harness topology instead of treating growth as a one-way accumulation of agents and files.
 
 ## Engineering model
 
@@ -319,7 +319,7 @@ your-project/
                                 # reusable workflow, when justified
 ```
 
-Ordinary continuity uses `checkpoint.json`; governed evolution uses `evolution.json`, never both as live writers. Generated setup remains removable without changing product code.
+Ordinary continuity uses `checkpoint.json`, while governed evolution uses `evolution.json`; they are never concurrent live-state writers. Generated setup remains removable without changing product code.
 
 Closed feedback, proposals, promotions, and autonomous episodes are not summarized away. The standard-library compactor keeps the active state small, binds the adjacent archive by digest, reconstructs the full graph for deterministic validation, and supports targeted rejected-history lookup without loading the archive into every model turn.
 
@@ -350,15 +350,15 @@ Some of the strongest evidence came from failures:
 | --- | --- | --- |
 | Repository tests | **234 passed (234/234)** | Deterministic product, state, compaction, host switching, privacy, rollback, transfer, cross-project, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, and negative-control contracts hold. |
 | Known behavior/safety score | **100/100** across 12 cases | Published fixtures pass; this is not a universal quality score. |
-| Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by green main CI run `31651306556`. |
+| Final 1.7.0 Release Gate | **Passed** | Fresh exact-tag Claude Code and personal-adaptation adoption passed, followed by a green main CI run (`31651306556`). |
 | Checkpoint defect | Unsafe fast resume **3/3 → 0/3** | One reproduced correctness defect was closed. |
 | Unseen transfer | **Narrower Scope** | One mechanism transferred to one project shape; harness-wide generalization is not established. |
 | Bounded evolution | Champion/retry **7 violations**, new candidate **0**, stop `SUCCESS` | Live generation and bounded stopping worked once in a narrow failure family. |
 | Personal transfer candidate | **2 apply, 1 skip, fresh Project D pass** | One adaptation can be transferred, compatibility-checked, reused, deduplicated, and revoked without raw project data; broader personal evolution is not established. |
 | 2.0 local Meta Gate | **3 families, 9 → 4 full checks, 3/3 decisions correct** | Bounded summary evidence improved selection work in one sealed episode; token, runtime, universal, and cross-user gains are not established. |
-| 2.1 release status | **Released and verified** | Exact public 2.1.0 Claude adoption passed five checks with protected writes 0; the active evolution fixture shrank **87.48%**, and exact Project M kept the correct apply with full checks **3 → 1**. Generalization remains narrower scope. |
+| 2.1 release status | **Released and verified** | Exact public 2.1.0 Claude adoption passed five checks with protected writes 0; the active evolution fixture shrank **87.48%**, and exact Project M retained the correct application decision while reducing full checks from **3 to 1**. Generalization remains narrower scope. |
 | 2.1.1 release status | **Released and verified** | Four counterbalanced rounds preserved the same debt result and reduced median detector time **17.73645 s → 0.2308 s (−98.70%)**. Fresh exact-final Claude and Meta adoption passed, and Release Gate closed at **100/100**. |
-| 2.2.0 release status | **Released and exact-version verified** | The safe lifecycle, documentation-debt, and exact-byte changes pass. Fresh public Claude adoption preserved both existing agent profiles and all five checks; Project M retained the correct apply with full checks **3 → 1**. The consent/continuity candidate remains removed on `NO_PROMOTION`. |
+| 2.2.0 release status | **Released and exact-version verified** | The safe lifecycle, documentation-debt, and exact-byte changes pass. Fresh public Claude adoption preserved both existing agent profiles and passed all five checks; Project M retained the correct application decision while reducing full checks from **3 to 1**. The consent/continuity candidate remains removed on `NO_PROMOTION`. |
 
 Improvement does not have to win. Rejection, `NO_PROMOTION`, narrower scope, and rollback are normal outcomes.
 
@@ -369,17 +369,21 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 python3 scripts/release_gate.py
 ```
 
-The current public 2.2.0 evidence reports `local_candidate_ready: true` and `release_ready: true`. The downloaded archive is byte-identical at SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`; exact-version Claude and Meta adoption passed without protected writes, permission expansion, private evidence, or retired-holdout reuse. [Main CI run 32348453221](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32348453221) then passed the full suite and Release Gate.
+The current public 2.2.0 evidence reports `local_candidate_ready: true` and `release_ready: true`. The downloaded archive matches the frozen local artifact byte for byte and has SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`. Exact-version Claude Code and Meta Evolution adoption passed without protected writes, permission expansion, private evidence, or retired-holdout reuse. [Main CI run 32348453221](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32348453221) then passed the full suite and Release Gate.
 
-The records are public: [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [documentation-debt A/B](evals/benchmarks/doc-debt/results.json), [rejected context-routing A/B](evals/benchmarks/context-routing/results.json), [generalization exposure](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), [Perl/TAP evidence](evals/generalization/results.json), the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json), plus post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), and [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) results. Version history belongs in the [`CHANGELOG.md`](CHANGELOG.md).
+The public records include [behavior cases](evals/cases.json), [behavior results](evals/results.json), [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), [documentation-debt A/B](evals/benchmarks/doc-debt/results.json), and the rejected [context-routing A/B](evals/benchmarks/context-routing/results.json). Generalization records include the [exposure manifest](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), and [Perl/TAP evidence](evals/generalization/results.json).
+
+Evolution records include the [live 1.6 preregistration](evals/autonomous/live-1.6-preregistration.json), the 1.7 [personal transfer preregistration](evals/personal-evolution/preregistration.json) and [results](evals/personal-evolution/results.json), and the 2.0 [meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and exact-public [Meta adoption evidence](evals/meta-evolution/public-adoption.json).
+
+Post-2.0 records preserve the [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [scoped decision artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), and [repository receipt `NO_PROMOTION`](evals/repository-receipts/results.json) results. Version history belongs in [`CHANGELOG.md`](CHANGELOG.md).
 
 The 2.2 behavior-boundary episode preserves its [preregistration](evals/behavior-boundaries/preregistration.json), [cases](evals/behavior-boundaries/cases.json), [sanitized result](evals/behavior-boundaries/results.json), and the excluded [invalid first episode](evals/behavior-boundaries/invalid-evaluator-episode-1.json). It records a rejection, not shipped behavior evidence.
 
-## Who I built NULNUL for
+## Who NULNUL is for
 
-NULNUL is for people who want to build something with AI without first becoming experts in AI coding infrastructure. That includes non-developers, people starting development, and experienced developers who do not want to keep tuning skills, plugins, agent layouts, context, and stacks before every project.
+NULNUL is for people who want to build something with AI without first becoming experts in AI coding infrastructure. That includes non-developers, people new to software development, and experienced developers who do not want to keep tuning skills, plugins, agent layouts, context, and stacks before every project.
 
-It looks for useful existing skills and tools, and respects what already works in a project. But reuse should not trap someone in the first available method. The user owns the intended outcome and deliberate direction; NULNUL should examine the implementation means and explain important choices briefly.
+It looks for useful existing skills and tools and respects what already works in a project. But reuse should not trap someone in the first available method. The user owns the intended outcome and deliberate direction; NULNUL examines the implementation options and briefly explains important choices.
 
 **NULNUL looks for better tools, but does not choose what the user should want.**
 
@@ -399,9 +403,9 @@ Observable Evolution was informed by [Agentic Harness Engineering](https://arxiv
 Papers provide questions and stronger falsification methods. They do not become product capabilities without local evidence. Detailed contracts live in the [evolution](plugins/nulnul-harness/skills/nulnul-harness/references/evolution.md), [meta-evolution](plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md), and [generalization](plugins/nulnul-harness/skills/nulnul-harness/references/generalization.md) references.
 </details>
 
-## Roadmap to 2.0
+## Released evolution milestones
 
-The roadmap describes user value, not an automatic release promise.
+These milestones describe user value, not automatic release promises.
 
 | Stage | Status | What gets better for the user |
 | --- | --- | --- |
@@ -409,13 +413,13 @@ The roadmap describes user value, not an automatic release promise.
 | 1.5 Generalization Gate | Completed | Check whether a fix transfers or merely fits familiar evaluation cases. |
 | 1.6 Bounded Autonomous Evolution | Completed | Let the harness search a tiny candidate space under fixed budgets and stop without changing anything when evidence is weak. |
 | 1.7 Personal Evolution | Completed | Reuse a project-proven improvement elsewhere only after transfer evidence, a Personal Gate, and a new-project compatibility check. Exact public adoption and main CI passed. |
-| 2.0 Cross-project / Meta Evolution | Released and verified | Three verified families feed a bounded selector. The sealed Meta Gate reduced full checks from 9 to 4 with identical decisions; exact public adoption passed with Project M at 3 to 1, no-match/conflict controls, and rollback. |
+| 2.0 Cross-project / Meta Evolution | Released and verified | Three verified families feed a bounded selector. The sealed Meta Gate reduced full checks from 9 to 4 with identical decisions; exact public adoption reduced Project M's full checks from 3 to 1 and passed the no-match, conflict, and rollback controls. |
 
 ## Trust boundaries and limitations
 
 - Authentication, external writes, deployment, publication, destructive operations, paid resources, and global registration require explicit approval.
 - Credentials, raw conversations, transcripts, complete command histories, machine paths, and private project data do not become evolution memory.
-- Personal Evolution requires an explicitly selected existing local directory. One real private local home is configured and validates; its machine path is deliberately absent from public evidence.
+- Personal Evolution requires an explicitly selected existing local directory. One real private local home has been configured and passes validation; its machine path is deliberately absent from public evidence.
 - Unattended Claude Code sessions may inspect host-owned `.claude/**` configuration but do not rewrite it.
 - Checkpoints are compared with bounded repository reality before fast resume.
 - Compacted evolution archives remain local project evidence and are integrity-checked before the active state is trusted; they are not loaded into ordinary resume context.
@@ -459,7 +463,7 @@ No. It covers known behavior and safety fixtures. Generalization Gate limits tra
 
 ## Update, remove, and develop
 
-Codex refreshes its Git marketplace and reinstalls the plugin:
+To update Codex, refresh its Git marketplace and reinstall the plugin:
 
 ```bash
 codex plugin marketplace upgrade nulnul-harness
@@ -467,14 +471,14 @@ codex plugin remove nulnul-harness@nulnul-harness
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
-Claude Code updates the marketplace and plugin, then requires a restart:
+For Claude Code, update the marketplace and plugin, then restart Claude Code:
 
 ```bash
 claude plugin marketplace update nulnul-harness
 claude plugin update nulnul-harness@nulnul-harness
 ```
 
-If the marketplace came from a local clone, pull that clone first. Start a fresh agent session after either update. Project-local guidance and `docs/nulnul/` state are preserved.
+If you added the marketplace from a local clone, pull that clone first. Start a fresh agent session after either update. Project-local guidance and `docs/nulnul/` state are preserved.
 
 Remove from Codex:
 
