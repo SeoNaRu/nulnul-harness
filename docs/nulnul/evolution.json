@@ -30,11 +30,11 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.2.0 is publicly released with exact-byte Claude and Meta adoption, executable provisional evolution, and active-host dirty-worktree documentation checks; main promotion remains to be closed.",
+    "milestone": "NULNUL 2.2.0 is publicly released with exact-byte Claude and Meta adoption, executable provisional evolution, active-host dirty-worktree documentation checks, and green main CI.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
-    "status": "active",
-    "last_verified": "2026-08-20: 234 tests passed, documentation debt was empty for the active Codex host, and Release Gate scored 100/100 with local_candidate_ready and release_ready true. The downloaded public 2.2.0 archive was byte-identical at SHA-256 779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0; fresh exact-version Claude and Meta adoption passed. The reuse-classification sanitizer nonpass was linked and closed as Product Builder v8; Gate v12 remains provisional pending a distinct later Gate cycle.",
-    "next_action": "Promote the exact-version evidence commit to main and watch CI to green; then observe one distinct real Gate cycle for provisional Gate v12 and execute confirmation or rollback.",
+    "status": "complete",
+    "last_verified": "2026-08-20: 234 tests passed, documentation debt was empty for the active Codex host, and Release Gate scored 100/100 with local_candidate_ready and release_ready true. The downloaded public 2.2.0 archive was byte-identical at SHA-256 779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0; fresh exact-version Claude and Meta adoption passed. The reuse-classification sanitizer nonpass was linked and closed as Product Builder v8, candidate CI passed, and main CI run 32348453221 passed at merge commit 0dadd8f. Gate v12 remains provisional pending a distinct later Gate cycle.",
+    "next_action": "Observe one distinct real Gate cycle for provisional Gate v12 and execute confirmation or rollback; do not infer confirmation from this release cycle.",
     "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.2.0 exact artifacts and promote the verified commit to main within this user-requested release closure."
