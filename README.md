@@ -1,12 +1,10 @@
 <p align="center">
-  <img src="assets/nulnul-showcase-cover.svg" width="900" alt="nulnul harness inspects a repository, reuses what works, adds only what is missing, and verifies the result">
+  <img src="plugins/nulnul-harness/assets/nulnul-logo-green.svg" width="320" alt="NULNUL logo">
 </p>
 
-<h1 align="center">nulnul harness</h1>
-
 <p align="center">
-  <strong>Stop managing the AI setup. Build the product.</strong><br>
-  A repository-local working environment that helps Codex and Claude Code read the project first, reuse what works, add only what is missing, and run the real checks before calling the work done.
+  <strong>NULNUL is a repository-local AI development environment for Codex and Claude Code.</strong><br>
+  It inspects existing rules and tools first and keeps what fits. It adds only what is missing and uses the repository's real checks to decide whether the work is complete.
 </p>
 
 <p align="center">
@@ -25,10 +23,10 @@
 </p>
 
 <p align="center">
-  <strong>Reuse before creating</strong> · <strong>Add only what is missing</strong> · <strong>No completion without verification</strong>
+  Checks the existing setup first · Adds only what is missing · Uses repository checks as the completion criterion
 </p>
 
-> A “harness” is the small working environment—project rules, skills, state, and checks—that Codex and Claude Code follow consistently. It is not another agent team you have to operate.
+> A “harness” is the small working environment—project rules, skills, state, and checks—that Codex and Claude Code follow consistently. It does not mean an agent team.
 
 ## Before / With NULNUL
 
@@ -39,7 +37,7 @@
 | Accept “done” without a real check | Run the repository's test, build, or validation command |
 | Reconstruct old work from chat | Leave a concise, verified checkpoint when continuity is needed |
 
-Sometimes the right result is **0 new agents, 0 new skills, and 0 new infrastructure**.
+If the existing setup is sufficient, NULNUL adds **0 new agents, 0 new skills, and 0 new infrastructure**.
 
 ## Quick start
 
@@ -57,7 +55,7 @@ claude plugin marketplace add SeoNaRu/nulnul-harness
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
-Start a fresh session and give NULNUL the work, not an agent diagram:
+After installation, start a new session with this prompt:
 
 ```text
 Inspect this repository first. Reuse what already works and add only what is
@@ -79,13 +77,13 @@ Inspect this repository and show the smallest harness changes you would
 recommend. Do not modify any files.
 ```
 
-## The problem NULNUL removes
+## What NULNUL is for
 
-AI-assisted development can create a second project: maintaining the AI environment itself. You end up choosing plugins, rewriting rules, managing context, rebuilding session state, and checking whether the agent actually ran the tests.
+AI-assisted development also requires setup work: choosing plugins, maintaining rules, managing context, restoring session state, and checking whether the agent ran the tests.
 
-NULNUL moves that work into an inspectable, removable repository contract. It is for people who want to build with Codex or Claude Code without tuning an agent stack before every project—from beginners to experienced developers with an existing setup worth preserving.
+NULNUL records this setup in an inspectable, removable repository contract. It is intended for Codex and Claude Code projects that should preserve working settings and avoid unnecessary additions.
 
-The user still owns the product direction. NULNUL looks for a fitting implementation path and explains material choices; it does not decide what you should want.
+The user sets the product direction. NULNUL finds an implementation and verification path that fits the repository and explains material choices.
 
 ## Three common uses
 
@@ -166,7 +164,7 @@ a compatibility check.
 ```
 </details>
 
-## What NULNUL actually does
+## How NULNUL works
 
 ```text
 inspect the repository and host
@@ -197,7 +195,7 @@ In practice, the plugin:
 
 Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Ordinary work combines them. The proposal author and the independent Gate separate only when a change needs measured promotion.
 
-## How it differs from nearby tools
+## Comparison with other tool types
 
 The categories below can work together. The difference is the default job, not a claim that NULNUL replaces every other tool.
 
@@ -210,9 +208,9 @@ The categories below can work together. The difference is the default job, not a
 | Repository template | Apply the same starting structure | Adapts to an existing repository and may add nothing. |
 | NULNUL | Inspect, complete, verify, and improve project work | Reuses first, fills only proven gaps, and keeps only independently verified changes. |
 
-## What lands in the repository
+## Repository changes
 
-Possibly nothing. A coherent existing setup is a successful result. When durable support is genuinely missing, the footprint can look like this:
+If the existing setup is sufficient, NULNUL adds no files. When durable support is missing, it may add the following:
 
 ```text
 your-project/
@@ -274,7 +272,7 @@ The v2.2.0 evidence records `local_candidate_ready: true` and `release_ready: tr
 | Documentation-debt A/B | Median **17.73645 s → 0.2308 s (−98.70%)** across four counterbalanced rounds | Same result on the tracked release repository |
 </details>
 
-Failures stay in the evidence:
+Rejected and failed candidates remain in the evidence:
 
 - a plausible Navigator candidate missed verification or increased cost and was rejected;
 - an invalid first Ruby holdout was retired and preserved instead of being relabeled unseen;
@@ -291,7 +289,7 @@ python3 scripts/release_gate.py
 
 ## Controlled Evolution
 
-NULNUL may propose a better project harness, but it cannot approve its own proposal.
+A proposed harness change must pass checks owned by an independent Gate before it can be retained.
 
 ```text
 reproduced failure
@@ -309,7 +307,7 @@ Independent Gate
          confirm   rollback
 ```
 
-Before candidate generation, NULNUL fixes the failure description, candidate and generation count, evaluation and model budget, permission boundary, rejected-history lookup, fair retry baseline, and stop conditions. The Coach proposes; deterministic checks and the independent Gate assign credit. If nothing is better, `NO_PROMOTION` is a correct result.
+Before candidate generation, NULNUL fixes the failure description, candidate and generation count, evaluation and model budget, permission boundary, rejected-history lookup, fair retry baseline, and stop conditions. The Coach proposes; deterministic checks and the independent Gate assign credit. If the candidate does not improve the result, the decision is `NO_PROMOTION`.
 
 Evaluation exposure is state: DEV may inform development, VALIDATION may select a candidate, and a sealed HOLDOUT is used once for a transfer estimate. First exposure and retirement stay machine-readable; a used case cannot be renamed “unseen.”
 
@@ -457,9 +455,9 @@ Report a bug or setup mismatch in a [GitHub issue](https://github.com/SeoNaRu/nu
 
 See [`SUPPORT.md`](SUPPORT.md), [`PRIVACY.md`](PRIVACY.md), [`TERMS.md`](TERMS.md), and the [MIT license](LICENSE).
 
-## Roots and research
+## Research background
 
-NULNUL started from the harness-engineering question raised in [GeekNews Weekly 353](https://news.hada.io/weekly/202615): as coding-agent capabilities multiply, why must every user keep assembling the surrounding system by hand?
+NULNUL started from the harness-engineering problem described in [GeekNews Weekly 353](https://news.hada.io/weekly/202615): users repeatedly assemble the surrounding system as coding-agent capabilities multiply.
 
 Its design was influenced by editable task/meta boundaries, independent verification, champion/candidate comparison, and eval-gated delivery. [HyperAgents](https://ai.meta.com/research/publications/hyperagents/) ([paper](https://arxiv.org/abs/2603.19461), [code](https://github.com/facebookresearch/Hyperagents)) was an important reference for the editable task/meta question. NULNUL does not reproduce HyperAgents or claim open-ended self-improvement.
 
