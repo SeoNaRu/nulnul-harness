@@ -2,9 +2,11 @@
   <img src="plugins/nulnul-harness/assets/nulnul-logo-green.svg" width="320" alt="NULNUL logo">
 </p>
 
+<h1 align="center">NULNUL Harness</h1>
+
 <p align="center">
-  <strong>NULNUL is a repository-local AI development environment for Codex and Claude Code.</strong><br>
-  It inspects existing rules and tools first and keeps what fits. It adds only what is missing and uses the repository's real checks to decide whether the work is complete.
+  <strong>NULNUL is an open-source, repository-local AI development environment for OpenAI Codex and Anthropic Claude Code.</strong><br>
+  Before changing the AI setup, it inspects existing <code>AGENTS.md</code> or <code>CLAUDE.md</code> guidance, skills, plugins, agents, and project checks. It keeps what fits, adds only missing support, and uses actual test, build, or validation results as the completion criterion.
 </p>
 
 <p align="center">
@@ -26,7 +28,7 @@
   Checks the existing setup first · Adds only what is missing · Uses repository checks as the completion criterion
 </p>
 
-> A “harness” is the small working environment—project rules, skills, state, and checks—that Codex and Claude Code follow consistently. It does not mean an agent team.
+> A “harness” is the set of project rules, skills, work state, and executable checks that guide an AI coding agent. NULNUL keeps this setup in the repository; it is not an agent-team generator.
 
 ## Before / With NULNUL
 
@@ -41,14 +43,14 @@ If the existing setup is sufficient, NULNUL adds **0 new agents, 0 new skills, a
 
 ## Quick start
 
-Install for Codex:
+Install the NULNUL plugin for OpenAI Codex:
 
 ```bash
 codex plugin marketplace add SeoNaRu/nulnul-harness --ref main
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
-Or install for Claude Code:
+Or install it for Anthropic Claude Code:
 
 ```bash
 claude plugin marketplace add SeoNaRu/nulnul-harness
@@ -77,9 +79,11 @@ Inspect this repository and show the smallest harness changes you would
 recommend. Do not modify any files.
 ```
 
-## What NULNUL is for
+<a id="what-nulnul-is-for"></a>
 
-AI-assisted development also requires setup work: choosing plugins, maintaining rules, managing context, restoring session state, and checking whether the agent ran the tests.
+## What problem does NULNUL solve?
+
+AI coding agents need project-specific setup: plugins, rules, context, session state, and executable checks. Maintaining that setup by hand can leave overlapping agents and skills, stale work state, and completion claims without test results.
 
 NULNUL records this setup in an inspectable, removable repository contract. It is intended for Codex and Claude Code projects that should preserve working settings and avoid unnecessary additions.
 
@@ -164,7 +168,9 @@ a compatibility check.
 ```
 </details>
 
-## How NULNUL works
+<a id="how-nulnul-works"></a>
+
+## How does NULNUL work?
 
 ```text
 inspect the repository and host
@@ -195,7 +201,9 @@ In practice, the plugin:
 
 Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Ordinary work combines them. The proposal author and the independent Gate separate only when a change needs measured promotion.
 
-## Comparison with other tool types
+<a id="comparison-with-other-tool-types"></a>
+
+## How is NULNUL different from other AI coding tools?
 
 The categories below can work together. The difference is the default job, not a claim that NULNUL replaces every other tool.
 
@@ -208,7 +216,9 @@ The categories below can work together. The difference is the default job, not a
 | Repository template | Apply the same starting structure | Adapts to an existing repository and may add nothing. |
 | NULNUL | Inspect, complete, verify, and improve project work | Reuses first, fills only proven gaps, and keeps only independently verified changes. |
 
-## Repository changes
+<a id="repository-changes"></a>
+
+## What files can NULNUL add to a repository?
 
 If the existing setup is sufficient, NULNUL adds no files. When durable support is missing, it may add the following:
 
@@ -233,7 +243,9 @@ Closed evolution history is kept in a digest-bound adjacent archive. Determinist
 
 Each state file has one writer. Verification keeps `verified`, `failed`, and `unknown` distinct, and every validity check must also pass a negative control that is expected to fail.
 
-## Verification and trust model
+<a id="verification-and-trust-model"></a>
+
+## How does NULNUL verify AI coding work?
 
 NULNUL does not treat model confidence as proof. It runs repository checks and records bounded evidence. For broader claims, it also uses negative controls, a frozen candidate, an independent Gate, and a rollback path.
 
@@ -249,11 +261,11 @@ transfer claim only → sealed unseen check → scoped decision
 
 | Evidence | Current result | What it establishes |
 | --- | --- | --- |
-| Repository test suite | **234 passed (234/234)** | Deterministic product, state, host-switching, privacy, rollback, transfer, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, and negative-control contracts pass. |
-| Known behavior and safety | **100/100 across 12 cases** | The published fixtures pass. This is not a universal quality score or proof of better results in every repository. |
-| Exact public 2.2.0 adoption | **5/5 Claude checks; 0 protected writes** | A fresh public install preserved two existing agent profiles and the inactive Codex entry. |
-| Exact public Project M | **3 → 1 full compatibility checks** | The bounded selector kept the same correct transactional-migration decision and passed no-match, conflict, privacy, permission, migration, and rollback controls. |
-| Release artifact | **Byte-identical; SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`** | The downloaded v2.2.0 archive matched the frozen local artifact exactly. |
+| [Repository test suite](tests/) | **234 passed (234/234)** | Deterministic product, state, host-switching, privacy, rollback, transfer, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, and negative-control contracts pass. |
+| [Known behavior and safety](evals/results.json) | **100/100 across 12 cases** | The published fixtures pass. This is not a universal quality score or proof of better results in every repository. |
+| [Exact public 2.2.0 adoption](evals/personal-evolution/public-adoption.json) | **5/5 Claude checks; 0 protected writes** | A fresh public install preserved two existing agent profiles and the inactive Codex entry. |
+| [Exact public Project M](evals/meta-evolution/public-adoption.json) | **3 → 1 full compatibility checks** | The bounded selector kept the same correct transactional-migration decision and passed no-match, conflict, privacy, permission, migration, and rollback controls. |
+| [Release artifact](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.0) | **Byte-identical; SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`** | The downloaded v2.2.0 archive matched the frozen local artifact exactly. |
 
 The v2.2.0 evidence records `local_candidate_ready: true` and `release_ready: true`. [Main CI run 32348453221](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32348453221) passed the full suite and Release Gate.
 
@@ -323,7 +335,9 @@ Cross-project selection begins only after three independent mechanism families p
 
 This is user-triggered, bounded improvement. It is not continuous self-learning, an unattended loop, a vector database, a hosted evolution service, or cross-user learning.
 
-## Where NULNUL fits
+<a id="where-nulnul-fits"></a>
+
+## Who is NULNUL for?
 
 **Good fit:**
 
@@ -359,9 +373,11 @@ If the repository already has everything the task needs, you may not need NULNUL
 - The 2.0 evidence covers three mechanism families, three sealed selector cases, one confirmed `COMPLEMENTS` relation, and one live cycle. Other relations remain `UNKNOWN`. Arbitrary project lessons, token or runtime gains, and cross-user learning are not established.
 - There is no daemon, recursive Coach, candidate population, hosted control plane, or unattended infinite loop.
 
-## Current release
+<a id="current-release"></a>
 
-**v2.2.0** is the current public release.
+## Current NULNUL release
+
+**v2.2.0**, published on August 20, 2026, is the current public release.
 
 - A schema-v4 provisional-to-confirmed lifecycle keeps the confirmed version active until one observed cycle is healthy, otherwise it records rollback.
 - Documentation-debt checks account for the active host and dirty worktree.
@@ -387,7 +403,9 @@ See the full history in [`CHANGELOG.md`](CHANGELOG.md).
 | 2.1.1 Documentation debt | Released and verified | Four counterbalanced rounds kept the same result while cutting median detector time by 98.70%. |
 </details>
 
-## Technical records and evaluation data
+<a id="technical-records-and-evaluation-data"></a>
+
+## NULNUL evaluation results and technical records
 
 Public product records:
 
