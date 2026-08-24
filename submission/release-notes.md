@@ -12,6 +12,8 @@ This is a local prerelease candidate. Exact-version public Claude and Meta adopt
 
 Plugin and skill validation, 238 tests, documentation debt, and Release Gate 100/100 pass locally with `local_candidate_ready: true`. The normalized 38-entry archive has SHA-256 `6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998`; stale public 2.2.0 evidence receives no exact-version credit, so `release_ready: false`.
 
+The first clean candidate run exposed a missing pre-test pack step. That nonpass is linked to one bounded proposal; corrected candidate CI run `32685218407` passed and the shipped lifecycle executor confirmed the change.
+
 ```bash
 codex plugin marketplace add SeoNaRu/nulnul-harness --ref main
 codex plugin add nulnul-harness@nulnul-harness

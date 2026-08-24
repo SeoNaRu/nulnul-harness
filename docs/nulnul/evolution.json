@@ -32,14 +32,13 @@
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
     "milestone": "NULNUL 2.2.1-rc.2 is a locally verified candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
-    "status": "active",
-    "last_verified": "2026-08-24: the Feedback Capsule, exact-archive Meta capture, and normalized 38-entry archive passed 238 local tests, active Codex documentation debt, and Release Gate. Fresh-checkout candidate CI run 32685004838 then reproduced one archive-consistency nonpass because the current-version ZIP was not packed before tests; Product Builder v9 is provisional while the corrected CI order awaits one observed rerun.",
-    "next_action": "Push the CI-order correction, observe one fresh candidate run, then use the shipped executor to confirm Product Builder v9 or record rollback before publishing 2.2.1-rc.2.",
+    "status": "complete",
+    "last_verified": "2026-08-24: the Feedback Capsule, exact-archive Meta capture, and normalized 38-entry archive passed 238 local tests, active Codex documentation debt, and Release Gate. Fresh-checkout candidate CI run 32685004838 reproduced one missing-archive nonpass; the bounded CI-order correction then passed run 32685218407 with zero attribution, ordering, test, or permission regressions, and the shipped schema-v4 executor confirmed Product Builder v9.",
+    "next_action": "Publish 2.2.1-rc.2 outside main, capture exact-version public Claude and Meta adoption, then freeze and verify final 2.2.1 before any main promotion.",
     "blockers": [
       "Exact-version public Claude adoption evidence is not captured for 2.2.1-rc.2.",
       "Exact-version public Meta adoption evidence is not captured for 2.2.1-rc.2.",
-      "The prerelease cannot close the final Release Gate.",
-      "Product Builder v9 awaits one fresh candidate CI rerun."
+      "The prerelease cannot close the final Release Gate."
     ],
     "approved_permissions": [
       "Publish NULNUL 2.2.1 RC and final exact artifacts, run the paid Claude adoption check, and promote only the fully verified final commit to main within this user-requested release closure."
@@ -67,12 +66,12 @@
       "trial_promotion_id": null
     },
     "product-builder": {
-      "version": 8,
+      "version": 9,
       "job": "Implement the smallest complete product change, keep release-evidence vocabulary aligned with shipped contracts, remove measured avoidable work, and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": "promotion-product-builder-8-reuse-classification",
-      "trial_version": 9,
-      "trial_promotion_id": "promotion-product-builder-9-ci-pack-order"
+      "last_promotion_id": "promotion-product-builder-9-ci-pack-order",
+      "trial_version": null,
+      "trial_promotion_id": null
     }
   },
   "feedback": [
@@ -339,7 +338,7 @@
         "permission_delta": "0 -> 0"
       },
       "falsification_condition": "The next clean run fails archive consistency or ordering, changes artifact bytes, regresses another check, or expands permission.",
-      "status": "provisional"
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -456,17 +455,17 @@
       "proposal_id": "proposal-product-builder-9-ci-pack-order",
       "gate_agent": "gate",
       "before": "The candidate passed locally with a pre-existing archive but failed one clean-checkout archive assertion before release publication.",
-      "after": "The candidate workflow packs the current manifest version before tests and has an explicit order regression check; clean candidate CI is pending.",
+      "after": "The candidate workflow packs the current manifest version before tests, the order regression check passes, and clean candidate CI completed without regression.",
       "regressions_passed": true,
-      "decision": "provisional",
+      "decision": "accepted",
       "live_cycle": {
-        "status": "pending",
+        "status": "observed",
         "metric": "fresh-checkout archive consistency or workflow-order regressions",
         "rollback_threshold": "roll back on one missing archive, wrong artifact identity, ordering failure, test regression, or permission expansion",
-        "metric_value": null,
+        "metric_value": 0,
         "rollback_operator": "gte",
         "rollback_value": 1,
-        "evidence": "The corrected 238-test local suite passes; one independent fresh candidate CI cycle remains pending."
+        "evidence": "Fresh candidate CI run 32685218407 packed the 38-entry 2.2.1-rc.2 archive before tests and passed all 238 tests, documentation debt, and Release Gate with no permission change."
       }
     }
   ],
