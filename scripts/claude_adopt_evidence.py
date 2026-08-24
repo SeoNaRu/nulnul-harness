@@ -27,7 +27,7 @@ CHECK_LABELS = {
 }
 WRITE_COMMAND = re.compile(r"(?:>|>>|\btee\b|\bsed\s+-i\b|\bcp\b|\bmv\b|\brm\b).*(?:^|/)\.claude/", re.I)
 BOUNDED_AGENT_READ = re.compile(
-    r"for\s+\w+\s+in\s+(?:\./)?\.claude/agents/\*.*\b(?:cat|head|tail)\b",
+    r"for\s+\w+\s+in\s+(?:\./|[^;&|\n\s]+/)?\.claude/agents/\*.*\b(?:cat|head|tail)\b",
     re.I | re.S,
 )
 
@@ -81,7 +81,7 @@ def roster_was_read(calls, agents):
             return True
         if all(
             re.search(
-                rf"(?:^|[;&|]\s*)(?:cat|head|tail)\s+(?:--\s+)?[^;&|\n]*(?:\./)?\.claude/agents/{re.escape(name)}\.md(?:\s|;|$)",
+                rf"(?:^|[;&|]\s*)(?:cat|head|tail)\s+(?:--\s+)?[^;&|\n]*(?:\./|[^;&|\n\s]+/)?\.claude/agents/{re.escape(name)}\.md(?:\s|;|$)",
                 command,
             )
             for name in agents

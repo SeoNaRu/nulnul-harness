@@ -378,7 +378,7 @@ If the repository already has everything the task needs, you may not need NULNUL
 
 **v2.2.0**, published on August 20, 2026, is the current public release.
 
-The repository currently carries a published **v2.2.1-rc.2** prerelease. Its downloaded archive is byte-identical and exact-archive Meta adoption passed; exact-version Claude adoption remains pending, so it is not the final release.
+The repository currently carries a published **v2.2.1-rc.2** prerelease. Its downloaded archive is byte-identical, and exact-version Claude and Meta adoption passed; the prerelease stage alone keeps it from being the final release.
 
 - A validated Experience Digest can become a deterministic, local feedback capsule for user review without saving or uploading raw conversation data.
 - A schema-v4 provisional-to-confirmed lifecycle keeps the confirmed version active until one observed cycle is healthy, otherwise it records rollback.

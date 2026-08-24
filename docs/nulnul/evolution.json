@@ -33,10 +33,9 @@
     "milestone": "NULNUL 2.2.1-rc.2 is a locally verified candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
     "status": "complete",
-    "last_verified": "2026-08-24: v2.2.1-rc.2 is an annotated public prerelease at 3aee9af. Candidate CI 32685351308 and tag CI 32685408755 passed; the downloaded 38-entry archive is byte-identical at SHA-256 6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998. Exact-public Meta selection reduced checks from three to one while preserving the correct apply, and no-match, conflict, migration, verified fast resume, privacy, permission, and rollback controls passed without retired holdout reuse or candidate tuning.",
-    "next_action": "Capture exact-version public Claude adoption for 2.2.1-rc.2 after explicit credential-use approval, then freeze and verify final 2.2.1 before any main promotion.",
+    "last_verified": "2026-08-24: v2.2.1-rc.2 is an annotated public prerelease at 3aee9af. Candidate CI 32685351308 and tag CI 32685408755 passed; the downloaded 38-entry archive is byte-identical at SHA-256 6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998. Exact-public Claude preserved both agent profiles and the inactive Codex entry, made no protected write, and passed five completion checks. Exact-public Meta selection reduced checks from three to one while preserving apply, no-match, conflict, migration, verified fast resume, privacy, permission, and rollback controls without retired holdout reuse or candidate tuning.",
+    "next_action": "Freeze and verify final 2.2.1, publish the exact final artifact, repeat exact-version public Claude and Meta adoption, then promote only a fully green final commit to main.",
     "blockers": [
-      "Exact-version public Claude adoption evidence is not captured for 2.2.1-rc.2.",
       "The prerelease cannot close the final Release Gate."
     ],
     "approved_permissions": [
@@ -65,10 +64,10 @@
       "trial_promotion_id": null
     },
     "product-builder": {
-      "version": 9,
+      "version": 11,
       "job": "Implement the smallest complete product change, keep release-evidence vocabulary aligned with shipped contracts, remove measured avoidable work, and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": "promotion-product-builder-9-ci-pack-order",
+      "last_promotion_id": "promotion-product-builder-11-doc-contract-sync",
       "trial_version": null,
       "trial_promotion_id": null
     }
@@ -142,6 +141,26 @@
       "expected": "CI must deterministically pack the manifest's current version before any archive consistency check.",
       "evidence": "The run had one failure in test_release_metadata_and_archive_are_consistent; all earlier checks passed and the missing archive was the exact assertion.",
       "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-claude-absolute-roster-read",
+      "source": "gate",
+      "target_agent": "product-builder",
+      "observed": "The exact-public 2.2.1-rc.2 Claude run enumerated installed plugins and read both existing agent profiles through a bounded absolute fixture path, but the evidence sanitizer recognized only relative .claude/agents paths.",
+      "expected": "Credit bounded relative or absolute reads that end at the fixture's exact .claude/agents roster while continuing to reject commands that only print path text.",
+      "evidence": "evals/benchmarks/claude-adopt/release-2.2.1-rc.2-failure.json records the sanitized nonpass with both unchanged agent digests and all five completion checks passing.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-doc-debt-claude-evidence-contract",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "The full 239-test suite passed, then the required documentation-debt check rejected the candidate because the Claude evidence predicate changed after the active AGENTS.md contract.",
+      "expected": "Document the exact bounded absolute-read and printed-path boundary in the active contract in the same change as the evidence predicate.",
+      "evidence": "The required check reported AGENTS.md stale against scripts/claude_adopt_evidence.py and exited nonzero after all 239 tests passed.",
+      "scope": "project",
       "status": "converted"
     }
   ],
@@ -338,6 +357,59 @@
       },
       "falsification_condition": "The next clean run fails archive consistency or ordering, changes artifact bytes, regresses another check, or expands permission.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-10-absolute-roster-read",
+      "feedback_ids": [
+        "feedback-claude-absolute-roster-read"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 9,
+      "to_version": 10,
+      "cause": "The sanitizer's bounded roster-read predicate assumed Claude would use repository-relative paths even when the runtime supplied an absolute working path.",
+      "change_target": "Allow a bounded path prefix before the exact .claude/agents suffix in the existing shell-read predicate.",
+      "regression_check": "python3 -B -m unittest tests.test_claude_adopt_evidence -v and recapture the same exact-public RC run.",
+      "primary_metric": "valid bounded absolute roster reads rejected by evidence capture",
+      "permission_delta": [],
+      "rollback": "Restore the relative-only predicate and retain the RC nonpass if any printed-path command is credited or the same public run remains invalid.",
+      "change_level": "task",
+      "discovery_evidence": "The sanitized tool inventory contains the required plugin command and one bounded loop over the fixture-local .claude/agents roster; both tracked profiles remained byte-identical.",
+      "transfer_check": null,
+      "prediction": "The same public run validates while the printed-agent-path negative control remains rejected.",
+      "expected_delta": {
+        "valid_absolute_roster_reads_rejected": "1 -> 0",
+        "printed_path_false_positives": "0 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "The recapture remains invalid, the printed-path negative control passes, another adoption guardrail regresses, or permission expands.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-11-doc-contract-sync",
+      "feedback_ids": [
+        "feedback-doc-debt-claude-evidence-contract"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 10,
+      "to_version": 11,
+      "cause": "The evidence implementation changed without updating the active host contract that defines its attribution boundary.",
+      "change_target": "Add the verified bounded absolute-read and printed-path exclusion rule to the existing Claude roster-enumeration sentence in AGENTS.md.",
+      "regression_check": "python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex",
+      "primary_metric": "active-contract documentation-debt failures after release-evidence changes",
+      "permission_delta": [],
+      "rollback": "Restore Product Builder v10 and retain the documentation-debt nonpass if the contract remains stale or claims broader roster evidence.",
+      "change_level": "task",
+      "discovery_evidence": "The required documentation-debt command identified AGENTS.md as older than the exact changed evidence script after every code test passed.",
+      "transfer_check": null,
+      "prediction": "The same documentation-debt command passes with the precise evidence boundary documented and no permission change.",
+      "expected_delta": {
+        "active_contract_debt_failures": "1 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Documentation debt remains nonempty, the contract overclaims printed-path evidence, or permission expands.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -465,6 +537,42 @@
         "rollback_operator": "gte",
         "rollback_value": 1,
         "evidence": "Fresh candidate CI run 32685218407 packed the 38-entry 2.2.1-rc.2 archive before tests and passed all 238 tests, documentation debt, and Release Gate with no permission change."
+      }
+    },
+    {
+      "id": "promotion-product-builder-10-absolute-roster-read",
+      "proposal_id": "proposal-product-builder-10-absolute-roster-read",
+      "gate_agent": "gate",
+      "before": "The exact-public RC run performed the required bounded roster reads but received no evidence credit because its fixture path was absolute.",
+      "after": "The existing predicate accepts the same bounded read with an absolute prefix and retains the printed-path rejection control.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "bounded absolute roster-read attribution regressions in the same exact-public cycle",
+        "rollback_threshold": "roll back on one rejected valid bounded read, one credited printed-path command, another adoption regression, or permission expansion",
+        "metric_value": 0,
+        "rollback_operator": "gte",
+        "rollback_value": 1,
+        "evidence": "The same exact-public 2.2.1-rc.2 stream recaptured as valid with both unchanged profiles and all five checks passing; nine focused controls retain the printed-path rejection and no permission changed."
+      }
+    },
+    {
+      "id": "promotion-product-builder-11-doc-contract-sync",
+      "proposal_id": "proposal-product-builder-11-doc-contract-sync",
+      "gate_agent": "gate",
+      "before": "The evidence boundary was executable and tested but absent from the active Codex contract, so documentation debt correctly failed.",
+      "after": "The existing roster-enumeration sentence states the same bounded absolute-read and printed-path exclusion enforced by the sanitizer.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "active-contract documentation-debt failures in the repeated required check",
+        "rollback_threshold": "roll back on one remaining debt item, one broader evidence claim, or permission expansion",
+        "metric_value": 0,
+        "rollback_operator": "gte",
+        "rollback_value": 1,
+        "evidence": "The repeated required Codex documentation-debt check returned an empty inventory; the contract mirrors the tested boundary and no permission changed."
       }
     }
   ],

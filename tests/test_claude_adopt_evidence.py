@@ -41,6 +41,15 @@ class ClaudeAdoptEvidenceTests(unittest.TestCase):
         }]
         self.assertTrue(MODULE.roster_was_read(calls, {"collector": {}, "reviewer": {}}))
 
+    def test_bounded_absolute_shell_roster_read_counts(self):
+        calls = [{
+            "name": "Bash",
+            "input": {
+                "command": 'for f in /tmp/fixture/.claude/agents/*; do cat "$f"; done'
+            },
+        }]
+        self.assertTrue(MODULE.roster_was_read(calls, {"collector": {}, "reviewer": {}}))
+
     def test_explicit_bounded_agent_reads_count(self):
         calls = [{
             "name": "Bash",

@@ -23,7 +23,7 @@
       "after_sha256": "69d9b21ad6a53840ada8e1298161d21d66f67158283f5565b00c6b3766321f6b"
     }
   },
-  "roster_enumerated": true,
+  "roster_enumerated": false,
   "agents_classified": true,
   "session_entry_present": true,
   "host_entry_ownership": {
