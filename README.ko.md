@@ -261,13 +261,13 @@ NULNUL은 모델의 자신감을 증거로 취급하지 않습니다. 저장소�
 
 | 근거 | 현재 결과 | 확인된 범위 |
 | --- | --- | --- |
-| [저장소 전체 검사](tests/) | **234개 통과 (234/234)** | 제품, 상태, 실행 환경 전환, 개인정보 보호, 롤백, 전이, Meta Gate, 문서 부채, 정확한 후보, 동작 경계, 부정 대조군의 결정론적 계약이 통과함 |
+| [저장소 전체 검사](tests/) | **239개 통과 (239/239)** | 제품, 상태, 실행 환경 전환, 개인정보 보호, 롤백, 전이, Meta Gate, 문서 부채, 정확한 후보, 동작 경계, 부정 대조군의 결정론적 계약이 통과함 |
 | [확인된 동작과 안전](evals/results.json) | 사례 12개에서 **100/100** | 공개 픽스처가 통과함. 어디서나 더 좋다는 범용 품질 점수가 아님 |
-| [공개 2.2.0 정확한 버전 채택](evals/personal-evolution/public-adoption.json) | **Claude 검사 5/5, 보호 대상 쓰기 0건** | 공개 버전을 새로 설치한 환경에서 기존 에이전트 프로필 두 개와 사용하지 않은 Codex 루트 지침을 보존함 |
+| [공개 2.2.1 정확한 Claude 채택](evals/benchmarks/claude-adopt/evidence.json) | **검사 5/5, 보호 대상 쓰기 0건** | 공개 태그를 새로 설치한 환경에서 기존 에이전트 프로필 두 개와 사용하지 않은 Codex 루트 지침을 보존함 |
 | [공개 버전 Project M](evals/meta-evolution/public-adoption.json) | 전체 호환성 검사 **3 → 1** | 트랜잭션 마이그레이션 적용 판단을 그대로 유지하며 일치 항목 없음·충돌·개인정보·권한·마이그레이션·롤백 대조군을 통과함 |
-| [릴리스 산출물](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.0) | **바이트 단위 일치, SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`** | 내려받은 v2.2.0 아카이브와 고정한 로컬 산출물이 정확히 같음 |
+| [릴리스 산출물](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.1) | **바이트 단위 일치, SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`** | 내려받은 v2.2.1 아카이브와 고정한 로컬 산출물이 정확히 같음 |
 
-v2.2.0 근거에는 `local_candidate_ready: true`와 `release_ready: true`가 기록돼 있습니다. [기본 브랜치 CI 실행 32348453221](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32348453221)도 전체 검사와 Release Gate를 통과했습니다.
+v2.2.1 근거에는 `local_candidate_ready: true`와 `release_ready: true`가 기록돼 있습니다. [후보 CI 실행 32688744594](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688744594)와 [태그 CI 실행 32688807083](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688807083)이 전체 검사와 Release Gate를 통과했으며 기본 브랜치 승격은 남아 있습니다.
 
 <details>
 <summary>현재 계약을 뒷받침하는 측정 결과</summary>
@@ -379,7 +379,7 @@ Gate를 통과했다고 확정 버전을 곧바로 바꾸지 않습니다. 후�
 
 현재 공개 버전은 2026년 8월 20일에 공개한 **v2.2.0**입니다.
 
-현재 저장소에는 동결한 **v2.2.1** 최종 후보가 있습니다. 공개 RC의 정확한 버전 Claude·Meta 채택은 통과했지만, 최종 산출물 자체의 공개 바이트와 채택 근거를 확인해야 릴리스할 수 있습니다.
+현재 저장소에는 공개한 **v2.2.1** 최종 후보가 있습니다. 내려받은 산출물은 바이트 단위로 같고 정확한 최종 Claude·Meta 채택도 통과했습니다. 이제 근거 커밋 CI, 기본 브랜치 승격, 최종 릴리스 전환만 남았습니다.
 
 - 검증된 Experience Digest를 원본 대화 저장이나 업로드 없이 결정적인 로컬 피드백 캡슐로 만들어 사용자가 검토할 수 있습니다.
 - 스키마 v4의 잠정→확정 절차는 실제 작업 주기 하나가 문제없이 끝날 때까지 기존 확정 버전을 유지하고, 문제가 생기면 롤백을 기록합니다.

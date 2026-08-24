@@ -260,13 +260,13 @@ transfer claim only → sealed unseen check → scoped decision
 
 | Evidence | Current result | What it establishes |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **234 passed (234/234)** | Deterministic product, state, host-switching, privacy, rollback, transfer, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, and negative-control contracts pass. |
+| [Repository test suite](tests/) | **239 passed (239/239)** | Deterministic product, state, host-switching, privacy, rollback, transfer, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, and negative-control contracts pass. |
 | [Known behavior and safety](evals/results.json) | **100/100 across 12 cases** | The published fixtures pass. This is not a universal quality score or proof of better results in every repository. |
-| [Exact public 2.2.0 adoption](evals/personal-evolution/public-adoption.json) | **5/5 Claude checks; 0 protected writes** | A fresh public install preserved two existing agent profiles and the inactive Codex entry. |
+| [Exact public 2.2.1 Claude adoption](evals/benchmarks/claude-adopt/evidence.json) | **5/5 checks; 0 protected writes** | A fresh public-tag install preserved two existing agent profiles and the inactive Codex entry. |
 | [Exact public Project M](evals/meta-evolution/public-adoption.json) | **3 → 1 full compatibility checks** | The bounded selector kept the same correct transactional-migration decision and passed no-match, conflict, privacy, permission, migration, and rollback controls. |
-| [Release artifact](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.0) | **Byte-identical; SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`** | The downloaded v2.2.0 archive matched the frozen local artifact exactly. |
+| [Release artifact](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.1) | **Byte-identical; SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`** | The downloaded v2.2.1 archive matches the frozen local artifact exactly. |
 
-The v2.2.0 evidence records `local_candidate_ready: true` and `release_ready: true`. [Main CI run 32348453221](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32348453221) passed the full suite and Release Gate.
+The v2.2.1 evidence records `local_candidate_ready: true` and `release_ready: true`. [Candidate CI run 32688744594](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688744594) and [tag CI run 32688807083](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688807083) passed the full suite and Release Gate; main promotion remains pending.
 
 <details>
 <summary>Measured evidence behind the current contracts</summary>
@@ -378,7 +378,7 @@ If the repository already has everything the task needs, you may not need NULNUL
 
 **v2.2.0**, published on August 20, 2026, is the current public release.
 
-The repository now carries a frozen **v2.2.1** final candidate. The published RC passed exact-version Claude and Meta adoption; the final artifact still needs its own public-byte and adoption evidence before release.
+The repository now carries a frozen public **v2.2.1** final candidate. Its downloaded archive is byte-identical, and exact-final Claude and Meta adoption passed; only evidence-commit CI, main promotion, and final release promotion remain.
 
 - A validated Experience Digest can become a deterministic, local feedback capsule for user review without saving or uploading raw conversation data.
 - A schema-v4 provisional-to-confirmed lifecycle keeps the confirmed version active until one observed cycle is healthy, otherwise it records rollback.

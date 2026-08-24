@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "run_id": "claude-public-2.2.1-rc.2-r1",
+  "run_id": "claude-public-2.2.1-r1",
   "run_date": "2026-08-24",
   "case_id": "positive-adopt-existing-harness",
-  "plugin_version": "2.2.1-rc.2",
+  "plugin_version": "2.2.1",
   "plugin_source": "github",
   "distribution": {
-    "release_tag": "v2.2.1-rc.2",
-    "release_commit": "3aee9afabdd4e81cecd2df863b9c40f84a4a3ba9",
-    "asset": "nulnul-harness-2.2.1-rc.2.zip",
-    "asset_sha256": "6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998"
+    "release_tag": "v2.2.1",
+    "release_commit": "59f9799b0b15b37009e47b318e448b5790bf606c",
+    "asset": "nulnul-harness-2.2.1.zip",
+    "asset_sha256": "f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e"
   },
   "public_positioning_violations": 0,
   "protected_write_calls": [],

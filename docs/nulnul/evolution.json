@@ -30,14 +30,14 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.2.1 is a frozen final candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
+    "milestone": "NULNUL 2.2.1 is an exact-public verified final candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
     "status": "complete",
-    "last_verified": "2026-08-24: the reproducible 38-entry 2.2.1 final candidate is frozen at SHA-256 f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e. Plugin and skill validation, all 239 tests, documentation debt, and Release Gate 100/100 pass with local_candidate_ready true. Four reproducible release-workflow nonpasses were converted and fixed without permission change, and the shipped schema-v4 executor confirmed Product Builder v13. Exact-final public Claude and Meta evidence remains intentionally stale.",
-    "next_action": "Verify and publish the exact final 2.2.1 artifact from the non-main candidate, repeat exact-version public Claude and Meta adoption, then promote only a fully green evidence commit to main.",
+    "last_verified": "2026-08-24: public tag v2.2.1 points to candidate commit 59f9799; candidate CI 32688744594 and tag CI 32688807083 passed, and the downloaded 38-entry archive is byte-identical at SHA-256 f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e. Fresh exact-final Claude preserved two profiles and the inactive Codex entry with five passing checks and no protected write. Fresh exact-final Meta retained the correct apply at three-to-one checks and passed skip, conflict, migration, verified fast resume, privacy, permission, and rollback controls without holdout reuse or tuning.",
+    "next_action": "Run the complete evidence gate, push the final evidence commit to the candidate branch, watch CI green, then fast-forward main and promote the GitHub release to final/latest.",
     "blockers": [
-      "The exact final 2.2.1 artifact is not yet public and byte-verified.",
-      "Exact-version public Claude and Meta adoption evidence remains tied to 2.2.1-rc.2."
+      "The exact-final evidence commit has not yet passed candidate and main CI.",
+      "The GitHub release remains marked prerelease until main is green."
     ],
     "approved_permissions": [
       "Publish NULNUL 2.2.1 RC and final exact artifacts, run the paid Claude adoption check, and promote only the fully verified final commit to main within this user-requested release closure."
@@ -65,10 +65,10 @@
       "trial_promotion_id": null
     },
     "product-builder": {
-      "version": 13,
+      "version": 14,
       "job": "Implement the smallest complete product change, keep release-evidence vocabulary aligned with shipped contracts, remove measured avoidable work, and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": "promotion-product-builder-13-version-contract-sync",
+      "last_promotion_id": "promotion-product-builder-14-readme-count-parity",
       "trial_version": null,
       "trial_promotion_id": null
     }
@@ -181,6 +181,16 @@
       "observed": "After all 239 final-candidate tests passed, documentation debt rejected AGENTS.md as older than the corrected manifest-derived Meta release fixture.",
       "expected": "State the manifest-as-version-source rule in the active release contract in the same change as the test correction.",
       "evidence": "The required Codex documentation-debt check named tests/test_meta_adopt_evidence.py as the newer source and exited nonzero after the green suite.",
+      "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-readme-evidence-count-parity",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "After exact-final evidence updated both README tables to the measured 239-test result, the locale-parity test still required the historical 234-test strings and failed one assertion.",
+      "expected": "Keep the explicit English and Korean evidence-count guards synchronized with the measured full-suite count in the same release evidence change.",
+      "evidence": "The focused locale-parity test rejected README.md only because '234 passed' was absent while the document truthfully reported 239/239.",
       "scope": "project",
       "status": "converted"
     }
@@ -484,6 +494,33 @@
       },
       "falsification_condition": "Documentation debt remains, the rule duplicates version state, or permission expands.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-14-readme-count-parity",
+      "feedback_ids": [
+        "feedback-readme-evidence-count-parity"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 13,
+      "to_version": 14,
+      "cause": "The explicit locale evidence-count guard duplicated an older measured suite total and was omitted from the final evidence update.",
+      "change_target": "Update the two existing locale count literals to 239 and make exact evidence-count parity explicit in the active documentation rule.",
+      "regression_check": "python3 -B -m unittest tests.test_product_plugin.ProductPluginTests.test_readme_locales_are_consistent_and_links_resolve -v and the required Codex documentation-debt check",
+      "primary_metric": "README locale-parity failures from stale measured test counts",
+      "permission_delta": [],
+      "rollback": "Restore Product Builder v13 and retain the final evidence nonpass if either locale guard or documentation debt still fails.",
+      "change_level": "task",
+      "discovery_evidence": "The isolated assertion named only the stale '234 passed' expectation after both locale tables were updated to the green 239-test suite.",
+      "transfer_check": null,
+      "prediction": "The focused locale test and documentation-debt check pass with both locales guarded at 239 and no permission change.",
+      "expected_delta": {
+        "stale_locale_count_failures": "1 -> 0",
+        "documentation_debt_items": "unknown -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Either locale test fails, documentation debt is nonempty, or permission expands.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -683,6 +720,24 @@
         "rollback_operator": "gte",
         "rollback_value": 1,
         "evidence": "The repeated required Codex documentation-debt check returned an empty inventory, the rule retains one manifest source, and no permission changed."
+      }
+    },
+    {
+      "id": "promotion-product-builder-14-readme-count-parity",
+      "proposal_id": "proposal-product-builder-14-readme-count-parity",
+      "gate_agent": "gate",
+      "before": "Both README tables reported the current 239 tests, but the parity guard still asserted the older 234 strings.",
+      "after": "The two existing guard literals match the measured English and Korean evidence counts, and the active contract names exact evidence-count parity.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "locale evidence-count or documentation-debt regressions in the focused rerun",
+        "rollback_threshold": "roll back on one locale assertion failure, one debt item, or permission expansion",
+        "metric_value": 0,
+        "rollback_operator": "gte",
+        "rollback_value": 1,
+        "evidence": "The focused English/Korean link-and-count parity test passed, the required Codex documentation-debt inventory was empty, and no permission changed."
       }
     }
   ],
