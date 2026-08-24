@@ -8,9 +8,9 @@ The bug-report form accepts the capsule as optional supporting evidence. Generat
 
 No dependency, service, permission, credential, external-write scope, MCP server, hook, app, schema, or additional product skill was added.
 
-This is a local prerelease candidate. Exact-version public Claude and Meta adoption have not been captured, so it is not a final release and must not be pushed to `main` as release-complete evidence.
+This is a published prerelease candidate. The downloaded asset is byte-identical and exact-version public Meta adoption passed. Exact-version public Claude adoption has not been captured, so it is not a final release and must not be pushed to `main` as release-complete evidence.
 
-Plugin and skill validation, 238 tests, documentation debt, and Release Gate 100/100 pass locally with `local_candidate_ready: true`. The normalized 38-entry archive has SHA-256 `6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998`; stale public 2.2.0 evidence receives no exact-version credit, so `release_ready: false`.
+Plugin and skill validation, 238 tests, documentation debt, and Release Gate 100/100 pass with `local_candidate_ready: true`. The normalized 38-entry archive has SHA-256 `6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998`; exact-version Meta evidence receives credit, but the pending Claude check and prerelease stage keep `release_ready: false`.
 
 The first clean candidate run exposed a missing pre-test pack step. That nonpass is linked to one bounded proposal; corrected candidate CI run `32685218407` passed and the shipped lifecycle executor confirmed the change.
 

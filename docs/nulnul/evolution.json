@@ -33,11 +33,10 @@
     "milestone": "NULNUL 2.2.1-rc.2 is a locally verified candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
     "status": "complete",
-    "last_verified": "2026-08-24: the Feedback Capsule, exact-archive Meta capture, and normalized 38-entry archive passed 238 local tests, active Codex documentation debt, and Release Gate. Fresh-checkout candidate CI run 32685004838 reproduced one missing-archive nonpass; the bounded CI-order correction then passed run 32685218407 with zero attribution, ordering, test, or permission regressions, and the shipped schema-v4 executor confirmed Product Builder v9.",
-    "next_action": "Publish 2.2.1-rc.2 outside main, capture exact-version public Claude and Meta adoption, then freeze and verify final 2.2.1 before any main promotion.",
+    "last_verified": "2026-08-24: v2.2.1-rc.2 is an annotated public prerelease at 3aee9af. Candidate CI 32685351308 and tag CI 32685408755 passed; the downloaded 38-entry archive is byte-identical at SHA-256 6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998. Exact-public Meta selection reduced checks from three to one while preserving the correct apply, and no-match, conflict, migration, verified fast resume, privacy, permission, and rollback controls passed without retired holdout reuse or candidate tuning.",
+    "next_action": "Capture exact-version public Claude adoption for 2.2.1-rc.2 after explicit credential-use approval, then freeze and verify final 2.2.1 before any main promotion.",
     "blockers": [
       "Exact-version public Claude adoption evidence is not captured for 2.2.1-rc.2.",
-      "Exact-version public Meta adoption evidence is not captured for 2.2.1-rc.2.",
       "The prerelease cannot close the final Release Gate."
     ],
     "approved_permissions": [
