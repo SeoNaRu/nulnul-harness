@@ -247,6 +247,10 @@ class ProductPluginTests(unittest.TestCase):
         }
         self.assertEqual(bundled, product)
 
+    def test_ci_packs_current_version_before_archive_checks(self):
+        workflow = (ROOT / ".github/workflows/test.yml").read_text(encoding="utf-8")
+        self.assertLess(workflow.index("scripts/pack_plugin.py"), workflow.index("unittest discover"))
+
     def test_plugin_archive_is_reproducible(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

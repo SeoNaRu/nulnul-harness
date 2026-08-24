@@ -470,7 +470,7 @@ python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex
 ```
 
-패키징은 ZIP 시간과 권한을 정규화하므로 같은 플러그인 트리를 로컬에서 다시 빌드해도 아카이브 바이트가 같습니다.
+패키징은 ZIP 시간과 권한을 정규화하므로 같은 플러그인 트리를 로컬에서 다시 빌드해도 아카이브 바이트가 같습니다. 새 체크아웃의 CI는 아카이브 일치 검사 전에 이 패키저를 실행합니다.
 
 릴리스 근거를 바꿨다면 전체 `test_*.py` 검사와 `python3 scripts/release_gate.py`도 실행합니다.
 

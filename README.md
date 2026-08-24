@@ -469,7 +469,7 @@ python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex
 ```
 
-Packaging normalizes ZIP timestamps and permissions, so the same plugin tree produces byte-identical archives across local rebuilds.
+Packaging normalizes ZIP timestamps and permissions, so the same plugin tree produces byte-identical archives across local rebuilds. Fresh-checkout CI runs that packer before archive consistency tests.
 
 For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`.
 
