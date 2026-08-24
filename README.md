@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Quick start</a> · <a href="#read-only-preview">Read-only preview</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.0">Current release: v2.2.0</a>
+  <a href="#quick-start">Quick start</a> · <a href="#read-only-preview">Read-only preview</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.1">Current release: v2.2.1</a>
 </p>
 
 <p align="center">
@@ -266,7 +266,7 @@ transfer claim only → sealed unseen check → scoped decision
 | [Exact public Project M](evals/meta-evolution/public-adoption.json) | **3 → 1 full compatibility checks** | The bounded selector kept the same correct transactional-migration decision and passed no-match, conflict, privacy, permission, migration, and rollback controls. |
 | [Release artifact](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.1) | **Byte-identical; SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`** | The downloaded v2.2.1 archive matches the frozen local artifact exactly. |
 
-The v2.2.1 evidence records `local_candidate_ready: true` and `release_ready: true`. [Candidate CI run 32688744594](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688744594) and [tag CI run 32688807083](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688807083) passed the full suite and Release Gate; main promotion remains pending.
+The v2.2.1 evidence records `local_candidate_ready: true` and `release_ready: true`. [Candidate CI run 32689502007](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32689502007) and [main CI run 32689545235](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32689545235) passed the full suite and Release Gate; [tag CI run 32688807083](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688807083) also passed.
 
 <details>
 <summary>Measured evidence behind the current contracts</summary>
@@ -376,15 +376,13 @@ If the repository already has everything the task needs, you may not need NULNUL
 
 ## Current NULNUL release
 
-**v2.2.0**, published on August 20, 2026, is the current public release.
-
-The repository now carries a frozen public **v2.2.1** final candidate. Its downloaded archive is byte-identical, and exact-final Claude and Meta adoption passed; only evidence-commit CI, main promotion, and final release promotion remain.
+**v2.2.1**, published on August 24, 2026, is the current public release. Its downloaded archive is byte-identical, exact-final Claude and Meta adoption passed, Release Gate is ready, and main CI is green.
 
 - A validated Experience Digest can become a deterministic, local feedback capsule for user review without saving or uploading raw conversation data.
 - A schema-v4 provisional-to-confirmed lifecycle keeps the confirmed version active until one observed cycle is healthy, otherwise it records rollback.
 - Documentation-debt checks account for the active host and dirty worktree.
 - Release evidence is bound to the candidate's exact bytes, not only its version string.
-- The annotated release tag points to commit `14806e44bdc5bd2dbc3f2e52cea3b3799442d461`.
+- The annotated release tag points to commit `59f9799b0b15b37009e47b318e448b5790bf606c`.
 - Fresh exact-version Claude Code and Meta Evolution adoption passed without protected writes, permission expansion, private evidence, or retired-holdout reuse.
 - The consent/continuity behavior candidate did **not** ship. Its strict Gate returned `NO_PROMOTION`, so Navigator remains v20 and no new consent or ordinary-product routing claim is made.
 

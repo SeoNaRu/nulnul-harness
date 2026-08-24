@@ -8,7 +8,7 @@ The bug-report form accepts the capsule as optional supporting evidence. Generat
 
 No dependency, service, permission, credential, external-write scope, MCP server, hook, app, schema, or additional product skill was added.
 
-The exact final artifact is public as a validation prerelease. Its downloaded bytes match the frozen local ZIP, candidate and tag CI pass, and fresh exact-final Claude and Meta adoption pass. The evidence commit, main CI, and final/latest release promotion remain.
+The exact final artifact is published as the final/latest release. Its downloaded bytes match the frozen local ZIP; fresh exact-final Claude and Meta adoption, candidate CI, tag CI, main CI, and Release Gate all pass.
 
 The normalized 38-entry final archive has SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`. Plugin and skill validation, all 239 tests, documentation debt, and Release Gate 100/100 pass with `local_candidate_ready: true`; the exact-final public evidence now satisfies the remaining release gates.
 

@@ -10,6 +10,7 @@ All notable changes to `nulnul harness` are recorded here.
 - Published `v2.2.1` from candidate commit `59f9799`; candidate CI `32688744594` and tag CI `32688807083` passed, and the downloaded 38-entry archive is byte-identical at SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`.
 - Fresh exact-final Claude adoption preserved both existing profiles and the inactive Codex entry, made no protected write, retained one verified state writer, and passed all five executable checks. Exact-final Meta selection kept the correct migration apply at three-to-one checks and passed no-match, conflict, migration, verified fast-resume, privacy, permission, and rollback controls without holdout reuse or tuning.
 - The exact-final evidence update exposed a stale 234-test locale guard after both README tables moved to the measured 239/239 result. The focused English/Korean parity and documentation-debt cycle passed at the current count, and the shipped executor confirmed Product Builder v14.
+- Release Gate closed with `release_ready=true`; evidence candidate CI `32689502007` and main CI `32689545235` passed before the GitHub release was promoted to final/latest.
 
 ## 2.2.1-rc.2 — 2026-08-24
 

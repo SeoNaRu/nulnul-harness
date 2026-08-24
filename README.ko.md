@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <a href="#빠른-시작">빠른 시작</a> · <a href="#파일을-바꾸지-않고-체험하기">읽기 전용 체험</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.0">현재 릴리스: v2.2.0</a>
+  <a href="#빠른-시작">빠른 시작</a> · <a href="#파일을-바꾸지-않고-체험하기">읽기 전용 체험</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.1">현재 릴리스: v2.2.1</a>
 </p>
 
 <p align="center">
@@ -267,7 +267,7 @@ NULNUL은 모델의 자신감을 증거로 취급하지 않습니다. 저장소�
 | [공개 버전 Project M](evals/meta-evolution/public-adoption.json) | 전체 호환성 검사 **3 → 1** | 트랜잭션 마이그레이션 적용 판단을 그대로 유지하며 일치 항목 없음·충돌·개인정보·권한·마이그레이션·롤백 대조군을 통과함 |
 | [릴리스 산출물](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.1) | **바이트 단위 일치, SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`** | 내려받은 v2.2.1 아카이브와 고정한 로컬 산출물이 정확히 같음 |
 
-v2.2.1 근거에는 `local_candidate_ready: true`와 `release_ready: true`가 기록돼 있습니다. [후보 CI 실행 32688744594](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688744594)와 [태그 CI 실행 32688807083](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688807083)이 전체 검사와 Release Gate를 통과했으며 기본 브랜치 승격은 남아 있습니다.
+v2.2.1 근거에는 `local_candidate_ready: true`와 `release_ready: true`가 기록돼 있습니다. [후보 CI 실행 32689502007](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32689502007)과 [기본 브랜치 CI 실행 32689545235](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32689545235)가 전체 검사와 Release Gate를 통과했고, [태그 CI 실행 32688807083](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688807083)도 통과했습니다.
 
 <details>
 <summary>현재 계약을 뒷받침하는 측정 결과</summary>
@@ -377,15 +377,13 @@ Gate를 통과했다고 확정 버전을 곧바로 바꾸지 않습니다. 후�
 
 ## 현재 NULNUL 릴리스
 
-현재 공개 버전은 2026년 8월 20일에 공개한 **v2.2.0**입니다.
-
-현재 저장소에는 공개한 **v2.2.1** 최종 후보가 있습니다. 내려받은 산출물은 바이트 단위로 같고 정확한 최종 Claude·Meta 채택도 통과했습니다. 이제 근거 커밋 CI, 기본 브랜치 승격, 최종 릴리스 전환만 남았습니다.
+현재 공개 버전은 2026년 8월 24일에 공개한 **v2.2.1**입니다. 내려받은 산출물은 바이트 단위로 같고 정확한 최종 Claude·Meta 채택, Release Gate, 기본 브랜치 CI가 모두 통과했습니다.
 
 - 검증된 Experience Digest를 원본 대화 저장이나 업로드 없이 결정적인 로컬 피드백 캡슐로 만들어 사용자가 검토할 수 있습니다.
 - 스키마 v4의 잠정→확정 절차는 실제 작업 주기 하나가 문제없이 끝날 때까지 기존 확정 버전을 유지하고, 문제가 생기면 롤백을 기록합니다.
 - 문서 부채 검사는 현재 실행 환경과 작업 트리 변경을 반영합니다.
 - 릴리스 근거는 버전 문자열뿐 아니라 후보 산출물의 정확한 바이트와 연결됩니다.
-- 주석이 붙은 릴리스 태그는 커밋 `14806e44bdc5bd2dbc3f2e52cea3b3799442d461`을 가리킵니다.
+- 주석이 붙은 릴리스 태그는 커밋 `59f9799b0b15b37009e47b318e448b5790bf606c`을 가리킵니다.
 - 공개된 정확한 버전을 새로 설치한 Claude Code와 Meta Evolution 채택 검증은 보호 대상 쓰기, 권한 확대, 비공개 근거, 폐기한 홀드아웃 재사용 없이 통과했습니다.
 - 동의·연속성 동작 후보는 **포함하지 않았습니다.** 엄격한 Gate가 `NO_PROMOTION`을 반환했기 때문에 Navigator는 v20을 유지하며 새로운 동의 처리나 일반 제품 작업 라우팅을 검증했다고 주장하지 않습니다.
 

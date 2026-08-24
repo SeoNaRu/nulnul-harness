@@ -30,15 +30,12 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.2.1 is an exact-public verified final candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
+    "milestone": "NULNUL 2.2.1 is an exact-public verified final release with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
     "status": "complete",
-    "last_verified": "2026-08-24: public tag v2.2.1 points to candidate commit 59f9799; candidate CI 32688744594 and tag CI 32688807083 passed, and the downloaded 38-entry archive is byte-identical at SHA-256 f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e. Fresh exact-final Claude preserved two profiles and the inactive Codex entry with five passing checks and no protected write. Fresh exact-final Meta retained the correct apply at three-to-one checks and passed skip, conflict, migration, verified fast resume, privacy, permission, and rollback controls without holdout reuse or tuning.",
-    "next_action": "Run the complete evidence gate, push the final evidence commit to the candidate branch, watch CI green, then fast-forward main and promote the GitHub release to final/latest.",
-    "blockers": [
-      "The exact-final evidence commit has not yet passed candidate and main CI.",
-      "The GitHub release remains marked prerelease until main is green."
-    ],
+    "last_verified": "2026-08-24: final/latest v2.2.1 points to tag commit 59f9799; exact-evidence candidate CI 32689502007, tag CI 32688807083, and main CI 32689545235 passed. The downloaded 38-entry archive is byte-identical at SHA-256 f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e. Fresh exact-final Claude preserved two profiles and the inactive Codex entry with five passing checks and no protected write. Fresh exact-final Meta retained the correct apply at three-to-one checks and passed skip, conflict, migration, verified fast resume, privacy, permission, and rollback controls without holdout reuse or tuning. Release Gate is 100/100 with release_ready true.",
+    "next_action": "Collect measured post-release feedback; make no further roadmap claim until a new reproducible bottleneck appears.",
+    "blockers": [],
     "approved_permissions": [
       "Publish NULNUL 2.2.1 RC and final exact artifacts, run the paid Claude adoption check, and promote only the fully verified final commit to main within this user-requested release closure."
     ]
