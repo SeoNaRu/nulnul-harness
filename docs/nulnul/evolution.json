@@ -30,13 +30,14 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.2.1-rc.2 is a locally verified candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
+    "milestone": "NULNUL 2.2.1 is a frozen final candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
     "status": "complete",
-    "last_verified": "2026-08-24: v2.2.1-rc.2 is an annotated public prerelease at 3aee9af. Candidate CI 32685351308 and tag CI 32685408755 passed; the downloaded 38-entry archive is byte-identical at SHA-256 6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998. Exact-public Claude preserved both agent profiles and the inactive Codex entry, made no protected write, and passed five completion checks. Exact-public Meta selection reduced checks from three to one while preserving apply, no-match, conflict, migration, verified fast resume, privacy, permission, and rollback controls without retired holdout reuse or candidate tuning.",
-    "next_action": "Freeze and verify final 2.2.1, publish the exact final artifact, repeat exact-version public Claude and Meta adoption, then promote only a fully green final commit to main.",
+    "last_verified": "2026-08-24: the reproducible 38-entry 2.2.1 final candidate is frozen at SHA-256 f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e. Plugin and skill validation, all 239 tests, documentation debt, and Release Gate 100/100 pass with local_candidate_ready true. Four reproducible release-workflow nonpasses were converted and fixed without permission change, and the shipped schema-v4 executor confirmed Product Builder v13. Exact-final public Claude and Meta evidence remains intentionally stale.",
+    "next_action": "Verify and publish the exact final 2.2.1 artifact from the non-main candidate, repeat exact-version public Claude and Meta adoption, then promote only a fully green evidence commit to main.",
     "blockers": [
-      "The prerelease cannot close the final Release Gate."
+      "The exact final 2.2.1 artifact is not yet public and byte-verified.",
+      "Exact-version public Claude and Meta adoption evidence remains tied to 2.2.1-rc.2."
     ],
     "approved_permissions": [
       "Publish NULNUL 2.2.1 RC and final exact artifacts, run the paid Claude adoption check, and promote only the fully verified final commit to main within this user-requested release closure."
@@ -64,10 +65,10 @@
       "trial_promotion_id": null
     },
     "product-builder": {
-      "version": 11,
+      "version": 13,
       "job": "Implement the smallest complete product change, keep release-evidence vocabulary aligned with shipped contracts, remove measured avoidable work, and leave executable verification.",
       "profile_path": null,
-      "last_promotion_id": "promotion-product-builder-11-doc-contract-sync",
+      "last_promotion_id": "promotion-product-builder-13-version-contract-sync",
       "trial_version": null,
       "trial_promotion_id": null
     }
@@ -160,6 +161,26 @@
       "observed": "The full 239-test suite passed, then the required documentation-debt check rejected the candidate because the Claude evidence predicate changed after the active AGENTS.md contract.",
       "expected": "Document the exact bounded absolute-read and printed-path boundary in the active contract in the same change as the evidence predicate.",
       "evidence": "The required check reported AGENTS.md stale against scripts/claude_adopt_evidence.py and exited nonzero after all 239 tests passed.",
+      "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-meta-capture-version-fixture",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "After the final 2.2.1 version bump, one Meta capture test built the current plugin under a hard-coded 2.2.1-rc.2 archive name and failed the manifest-identity guard.",
+      "expected": "Derive the test archive name and expected version from the current plugin manifest so every real version transition retains the exact-name guard.",
+      "evidence": "The 239-test final-candidate run had one ValueError in test_capture_reruns_exact_archive_controls_without_storing_home_path; all other completed tests passed.",
+      "scope": "project",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-doc-debt-meta-version-fixture",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "After all 239 final-candidate tests passed, documentation debt rejected AGENTS.md as older than the corrected manifest-derived Meta release fixture.",
+      "expected": "State the manifest-as-version-source rule in the active release contract in the same change as the test correction.",
+      "evidence": "The required Codex documentation-debt check named tests/test_meta_adopt_evidence.py as the newer source and exited nonzero after the green suite.",
       "scope": "project",
       "status": "converted"
     }
@@ -410,6 +431,59 @@
       },
       "falsification_condition": "Documentation debt remains nonempty, the contract overclaims printed-path evidence, or permission expands.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-12-manifest-version-fixture",
+      "feedback_ids": [
+        "feedback-meta-capture-version-fixture"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 11,
+      "to_version": 12,
+      "cause": "The exact-archive capture test duplicated a release-candidate version that the manifest already owns.",
+      "change_target": "Read the current Codex plugin manifest once and reuse its version for the archive filename and validation expectation.",
+      "regression_check": "python3 -B -m unittest tests.test_meta_adopt_evidence -v",
+      "primary_metric": "version-transition failures caused by duplicated Meta capture fixture versions",
+      "permission_delta": [],
+      "rollback": "Restore Product Builder v11 and retain the final-candidate nonpass if exact-name validation weakens or the focused test still fails.",
+      "change_level": "task",
+      "discovery_evidence": "The failing test used the current plugin tree but duplicated 2.2.1-rc.2 in both the archive filename and expected validator version.",
+      "transfer_check": null,
+      "prediction": "The focused Meta evidence suite passes for 2.2.1 while the production manifest-name mismatch guard remains unchanged.",
+      "expected_delta": {
+        "duplicated_fixture_version_failures": "1 -> 0",
+        "production_identity_guards_changed": "0 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "The focused suite remains red, production identity validation changes, or permission expands.",
+      "status": "accepted"
+    },
+    {
+      "id": "proposal-product-builder-13-version-contract-sync",
+      "feedback_ids": [
+        "feedback-doc-debt-meta-version-fixture"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 12,
+      "to_version": 13,
+      "cause": "The release fixture removed a duplicated version without updating the active contract that governs version-changing validation.",
+      "change_target": "Add one manifest-as-version-source sentence beside the existing reproducible-pack and CI-order rules in AGENTS.md.",
+      "regression_check": "python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex",
+      "primary_metric": "active-contract debt failures after manifest-derived release fixture changes",
+      "permission_delta": [],
+      "rollback": "Restore Product Builder v12 and retain the debt result if the repeated check is nonempty or the rule claims a new permission.",
+      "change_level": "task",
+      "discovery_evidence": "The required debt check linked the corrected Meta fixture as newer than AGENTS.md after the full suite passed.",
+      "transfer_check": null,
+      "prediction": "The same debt check returns an empty inventory with one precise version-source rule and no permission change.",
+      "expected_delta": {
+        "active_contract_debt_failures": "1 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Documentation debt remains, the rule duplicates version state, or permission expands.",
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -573,6 +647,42 @@
         "rollback_operator": "gte",
         "rollback_value": 1,
         "evidence": "The repeated required Codex documentation-debt check returned an empty inventory; the contract mirrors the tested boundary and no permission changed."
+      }
+    },
+    {
+      "id": "promotion-product-builder-12-manifest-version-fixture",
+      "proposal_id": "proposal-product-builder-12-manifest-version-fixture",
+      "gate_agent": "gate",
+      "before": "One test duplicated the prior RC version and failed when the same plugin tree became final 2.2.1.",
+      "after": "The test derives both exact archive naming and validation identity from the existing current manifest; production guards are unchanged.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "version-transition fixture regressions in the focused Meta evidence suite",
+        "rollback_threshold": "roll back on one focused failure, one weakened production identity guard, or permission expansion",
+        "metric_value": 0,
+        "rollback_operator": "gte",
+        "rollback_value": 1,
+        "evidence": "All five focused Meta evidence tests passed against final 2.2.1, the production archive-name guard was unchanged, and no permission changed."
+      }
+    },
+    {
+      "id": "promotion-product-builder-13-version-contract-sync",
+      "proposal_id": "proposal-product-builder-13-version-contract-sync",
+      "gate_agent": "gate",
+      "before": "The test used the manifest as its only version source, but the active release contract did not state that invariant.",
+      "after": "The existing packaging paragraph now requires release fixtures to derive current version from the plugin manifest.",
+      "regressions_passed": true,
+      "decision": "accepted",
+      "live_cycle": {
+        "status": "observed",
+        "metric": "active-contract debt failures in the repeated required check",
+        "rollback_threshold": "roll back on one remaining debt item, duplicated version rule, or permission expansion",
+        "metric_value": 0,
+        "rollback_operator": "gte",
+        "rollback_value": 1,
+        "evidence": "The repeated required Codex documentation-debt check returned an empty inventory, the rule retains one manifest source, and no permission changed."
       }
     }
   ],

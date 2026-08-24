@@ -2,6 +2,13 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 2.2.1 — 2026-08-24
+
+- Promoted the RC's deterministic Feedback Capsule, exact-archive Meta capture, reproducible packaging, clean-checkout pack order, and privacy-safe public adoption evidence without adding a dependency, service, permission, credential scope, MCP server, hook, app, schema, or product skill.
+- Preserved the first exact-public RC Claude evidence nonpass: all product checks passed, but the sanitizer missed a bounded absolute roster path. One predicate control closed the gap, the printed-path negative control still fails, and the same public cycle plus the documentation-debt rerun confirmed Product Builder v11 through the shipped schema-v4 executor.
+- The final version bump exposed one Meta capture test that duplicated the RC version instead of reading the existing manifest. The focused five-test cycle now derives exact fixture identity from that manifest without changing production guards; its contract-sync rerun cleared documentation debt, and the shipped executor confirmed Product Builder v13.
+- Froze the 38-entry final archive at SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`. Exact-final public Claude and Meta adoption remain required before this candidate can close Release Gate or move to `main`.
+
 ## 2.2.1-rc.2 — 2026-08-24
 
 - Added `--feedback-capsule` to the existing Experience Digest validator. It refuses unvalidated evidence, then prints deterministic reviewable Markdown with bounded stage facts, a canonical digest hash, and blank sanitized request/expected/observed fields.

@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.2.1--rc.2-111111" alt="후보 버전 2.2.1-rc.2">
+  <img src="https://img.shields.io/badge/version-2.2.1-111111" alt="버전 2.2.1">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
 
@@ -379,7 +379,7 @@ Gate를 통과했다고 확정 버전을 곧바로 바꾸지 않습니다. 후�
 
 현재 공개 버전은 2026년 8월 20일에 공개한 **v2.2.0**입니다.
 
-현재 저장소에는 공개한 **v2.2.1-rc.2** 프리릴리스가 있습니다. 내려받은 아카이브는 바이트 단위로 같고 정확한 버전의 Claude와 Meta 채택도 통과했습니다. 이제 프리릴리스 단계만 최종 릴리스를 막습니다.
+현재 저장소에는 동결한 **v2.2.1** 최종 후보가 있습니다. 공개 RC의 정확한 버전 Claude·Meta 채택은 통과했지만, 최종 산출물 자체의 공개 바이트와 채택 근거를 확인해야 릴리스할 수 있습니다.
 
 - 검증된 Experience Digest를 원본 대화 저장이나 업로드 없이 결정적인 로컬 피드백 캡슐로 만들어 사용자가 검토할 수 있습니다.
 - 스키마 v4의 잠정→확정 절차는 실제 작업 주기 하나가 문제없이 끝날 때까지 기존 확정 버전을 유지하고, 문제가 생기면 롤백을 기록합니다.

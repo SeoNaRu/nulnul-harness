@@ -14,6 +14,7 @@ SPEC = importlib.util.spec_from_file_location("meta_adopt_evidence", ROOT / "scr
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
 PREREGISTRATION = json.loads((ROOT / "evals/meta-evolution/release-preregistration.json").read_text(encoding="utf-8"))
+VERSION = json.loads((ROOT / "plugins/nulnul-harness/.codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"]
 
 
 def valid_payload():
@@ -84,7 +85,7 @@ class MetaAdoptEvidenceTests(unittest.TestCase):
     def test_capture_reruns_exact_archive_controls_without_storing_home_path(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            archive = root / "nulnul-harness-2.2.1-rc.2.zip"
+            archive = root / f"nulnul-harness-{VERSION}.zip"
             pack(ROOT / "plugins/nulnul-harness", archive)
             home = root / "personal-home"
             home.mkdir()
@@ -101,7 +102,7 @@ class MetaAdoptEvidenceTests(unittest.TestCase):
                 "meta-capture-check", "2026-08-24",
             )
 
-            self.assertEqual(MODULE.validate(payload, PREREGISTRATION, "2.2.1-rc.2"), [])
+            self.assertEqual(MODULE.validate(payload, PREREGISTRATION, VERSION), [])
             self.assertEqual(payload["project_m"]["meta_selector"]["compatibility_checks_executed"], 1)
             self.assertEqual(payload["rollback_control"]["rolled_back_to"], "flat-lookup-v1")
             self.assertNotIn(str(home), json.dumps(payload))

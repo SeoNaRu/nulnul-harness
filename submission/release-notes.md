@@ -1,4 +1,4 @@
-# nulnul harness 2.2.1-rc.2
+# nulnul harness 2.2.1
 
 Turn bounded evaluation evidence into user-reviewable feedback without collecting raw conversations.
 
@@ -8,9 +8,9 @@ The bug-report form accepts the capsule as optional supporting evidence. Generat
 
 No dependency, service, permission, credential, external-write scope, MCP server, hook, app, schema, or additional product skill was added.
 
-This is a published prerelease candidate. The downloaded asset is byte-identical and exact-version public Claude and Meta adoption passed. The prerelease stage alone keeps it from being a final release and from `main` promotion as release-complete evidence.
+This is a frozen final candidate. The RC's downloaded asset was byte-identical and its exact-version public Claude and Meta adoption passed. The final artifact still needs its own public-byte and exact-version adoption evidence before release or `main` promotion.
 
-Plugin and skill validation, 239 tests, documentation debt, and Release Gate 100/100 pass with `local_candidate_ready: true`. The normalized 38-entry archive has SHA-256 `6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998`; both exact-version public evidence paths receive credit, but the prerelease stage keeps `release_ready: false`.
+The normalized 38-entry final archive has SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`. Plugin and skill validation, all 239 tests, documentation debt, and Release Gate 100/100 pass with `local_candidate_ready: true`; the RC evidence is intentionally stale for this final identity, so `release_ready` remains false until exact-final public adoption.
 
 The first clean candidate run exposed a missing pre-test pack step. That nonpass is linked to one bounded proposal; corrected candidate CI run `32685218407` passed and the shipped lifecycle executor confirmed the change.
 

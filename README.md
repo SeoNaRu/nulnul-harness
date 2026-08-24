@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.2.1--rc.2-111111" alt="candidate version 2.2.1-rc.2">
+  <img src="https://img.shields.io/badge/version-2.2.1-111111" alt="version 2.2.1">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
 
@@ -378,7 +378,7 @@ If the repository already has everything the task needs, you may not need NULNUL
 
 **v2.2.0**, published on August 20, 2026, is the current public release.
 
-The repository currently carries a published **v2.2.1-rc.2** prerelease. Its downloaded archive is byte-identical, and exact-version Claude and Meta adoption passed; the prerelease stage alone keeps it from being the final release.
+The repository now carries a frozen **v2.2.1** final candidate. The published RC passed exact-version Claude and Meta adoption; the final artifact still needs its own public-byte and adoption evidence before release.
 
 - A validated Experience Digest can become a deterministic, local feedback capsule for user review without saving or uploading raw conversation data.
 - A schema-v4 provisional-to-confirmed lifecycle keeps the confirmed version active until one observed cycle is healthy, otherwise it records rollback.
