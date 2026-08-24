@@ -11,8 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.2.0-111111" alt="버전 2.2.0">
-  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="확인된 동작과 안전 점수: 100/100"></a>
+  <img src="https://img.shields.io/badge/version-2.2.1--rc.2-111111" alt="후보 버전 2.2.1-rc.2">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
 
@@ -380,6 +379,9 @@ Gate를 통과했다고 확정 버전을 곧바로 바꾸지 않습니다. 후�
 
 현재 공개 버전은 2026년 8월 20일에 공개한 **v2.2.0**입니다.
 
+현재 저장소에는 로컬 검증을 마친 **v2.2.1-rc.2** 후보가 있습니다. 정확한 버전의 공개 Claude·Meta 채택 근거를 아직 수집하지 않았으므로 공개 릴리스가 아닙니다.
+
+- 검증된 Experience Digest를 원본 대화 저장이나 업로드 없이 결정적인 로컬 피드백 캡슐로 만들어 사용자가 검토할 수 있습니다.
 - 스키마 v4의 잠정→확정 절차는 실제 작업 주기 하나가 문제없이 끝날 때까지 기존 확정 버전을 유지하고, 문제가 생기면 롤백을 기록합니다.
 - 문서 부채 검사는 현재 실행 환경과 작업 트리 변경을 반영합니다.
 - 릴리스 근거는 버전 문자열뿐 아니라 후보 산출물의 정확한 바이트와 연결됩니다.
@@ -468,9 +470,13 @@ python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex
 ```
 
+패키징은 ZIP 시간과 권한을 정규화하므로 같은 플러그인 트리를 로컬에서 다시 빌드해도 아카이브 바이트가 같습니다.
+
 릴리스 근거를 바꿨다면 전체 `test_*.py` 검사와 `python3 scripts/release_gate.py`도 실행합니다.
 
-버그나 설정 불일치는 [GitHub 이슈](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml)에 남겨 주세요. 요청한 내용, 기대한 결과, 실제 결과만 적고 비공개 코드, 인증 정보, 원본 대화는 포함하지 마세요.
+릴리스 관리자는 `python3 scripts/meta_adopt_evidence.py capture PUBLIC_ZIP LOCAL_ZIP PERSONAL_HOME OUTPUT --release-commit COMMIT --run-id ID --run-date YYYY-MM-DD`로 내려받은 산출물 안의 고정된 Meta 대조군을 다시 실행할 수 있습니다. 출력은 정제되며 Personal Home 경로를 저장하지 않습니다.
+
+버그나 설정 불일치는 [GitHub 이슈](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml)에 남겨 주세요. 요청한 내용, 기대한 결과, 실제 결과만 적고 비공개 코드, 인증 정보, 원본 대화는 포함하지 마세요. 평가에서 제한된 Experience Digest가 생성됐다면 `validate_experience_digest.py DIGEST --feedback-capsule`로 로컬 검토용 Markdown을 만들 수 있으며, 이 명령은 파일을 저장하거나 업로드하지 않습니다.
 
 [`SUPPORT.md`](SUPPORT.md), [`PRIVACY.md`](PRIVACY.md), [`TERMS.md`](TERMS.md), [MIT 라이선스](LICENSE)도 확인할 수 있습니다.
 

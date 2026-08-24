@@ -1,16 +1,16 @@
-# nulnul harness 2.2.0
+# nulnul harness 2.2.1-rc.2
 
-Make evolution confirmation executable, fix dirty-worktree documentation debt, and bind release evidence to exact candidate bytes.
+Turn bounded evaluation evidence into user-reviewable feedback without collecting raw conversations.
 
-A Gate-passing schema-v4 evolution candidate now remains provisional while the confirmed agent version stays active. The shipped executor confirms it only after one healthy observed cycle, or records rollback when the frozen numeric threshold fires. Legacy accepted-version rollback remains compatible.
+The existing Experience Digest validator now supports `--feedback-capsule`. It rejects prohibited or malformed evidence before printing deterministic Markdown with plugin and run identity, bounded stage counts, signals, a canonical SHA-256, the validated digest, and blank sanitized request/expected/observed fields.
 
-Documentation-debt checks now distinguish the active host and treat a dirty document as updated for the current change while still reporting dirty source against a clean document. Release freshness requires both exact version and archive SHA; a closed `NO_PROMOTION` episode receives no product-behavior credit.
+The bug-report form accepts the capsule as optional supporting evidence. Generation stays local and writes no file; review and any submission remain user-controlled. Exact-archive Meta evidence now has a deterministic privacy-safe capture command, and the decorative 100/100 README shield is gone from both locales. The reproducible packer, product-first Codex activation copy, metadata coverage, and CI documentation-debt check from rc.1 remain included.
 
-The consent/continuity behavior candidate was tested and removed. Its corrected DEV/VALIDATION comparison met the core routing observations but failed the frozen strict Gate and controls, so Navigator remains v20 and no consent or ordinary-product routing claim ships in this candidate.
+No dependency, service, permission, credential, external-write scope, MCP server, hook, app, schema, or additional product skill was added.
 
-No dependency, service, permission, credential, external-write scope, MCP server, hook, app, or additional product skill was added.
+This is a local prerelease candidate. Exact-version public Claude and Meta adoption have not been captured, so it is not a final release and must not be pushed to `main` as release-complete evidence.
 
-This is the public 2.2.0 release. The downloaded archive is byte-identical at SHA-256 `779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0`; fresh exact-version public Claude and Meta adoption passed, Release Gate reports `release_ready: true`, and main CI run `32348453221` passed.
+Plugin and skill validation, 237 tests, documentation debt, and Release Gate 100/100 pass with `local_candidate_ready: true`. The normalized 38-entry archive has SHA-256 `6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998`; stale public 2.2.0 evidence receives no exact-version credit, so `release_ready: false`.
 
 ```bash
 codex plugin marketplace add SeoNaRu/nulnul-harness --ref main

@@ -11,8 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.2.0-111111" alt="version 2.2.0">
-  <a href="evals/results.json"><img src="https://img.shields.io/badge/Release_Gate-100%2F100-111111" alt="known behavior and safety score: 100/100"></a>
+  <img src="https://img.shields.io/badge/version-2.2.1--rc.2-111111" alt="candidate version 2.2.1-rc.2">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
 
@@ -379,6 +378,9 @@ If the repository already has everything the task needs, you may not need NULNUL
 
 **v2.2.0**, published on August 20, 2026, is the current public release.
 
+The repository currently carries a locally verified **v2.2.1-rc.2** candidate. It is not a public release: exact-version Claude and Meta adoption evidence has not been captured.
+
+- A validated Experience Digest can become a deterministic, local feedback capsule for user review without saving or uploading raw conversation data.
 - A schema-v4 provisional-to-confirmed lifecycle keeps the confirmed version active until one observed cycle is healthy, otherwise it records rollback.
 - Documentation-debt checks account for the active host and dirty worktree.
 - Release evidence is bound to the candidate's exact bytes, not only its version string.
@@ -467,9 +469,13 @@ python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex
 ```
 
+Packaging normalizes ZIP timestamps and permissions, so the same plugin tree produces byte-identical archives across local rebuilds.
+
 For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`.
 
-Report a bug or setup mismatch in a [GitHub issue](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). Include the request, expected result, and observed result—never private code, credentials, or raw transcripts.
+Release maintainers can run `python3 scripts/meta_adopt_evidence.py capture PUBLIC_ZIP LOCAL_ZIP PERSONAL_HOME OUTPUT --release-commit COMMIT --run-id ID --run-date YYYY-MM-DD` to rerun the frozen Meta controls from the downloaded artifact. The output is sanitized and does not store the Personal Home path.
+
+Report a bug or setup mismatch in a [GitHub issue](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). Include the request, expected result, and observed result—never private code, credentials, or raw transcripts. If an evaluation produced a bounded Experience Digest, run `validate_experience_digest.py DIGEST --feedback-capsule` for local, reviewable Markdown; it does not save or upload anything.
 
 See [`SUPPORT.md`](SUPPORT.md), [`PRIVACY.md`](PRIVACY.md), [`TERMS.md`](TERMS.md), and the [MIT license](LICENSE).
 

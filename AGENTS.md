@@ -41,4 +41,6 @@ python3 -m unittest discover -s tests -p 'test_product_plugin.py' -v
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex
 ```
 
+`pack_plugin.py` must normalize archive timestamps and permissions so identical plugin trees produce byte-identical archives. CI must run the full suite, the active Codex documentation-debt check, and Release Gate.
+
 For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`.

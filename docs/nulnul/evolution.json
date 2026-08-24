@@ -30,14 +30,18 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.2.0 is publicly released with exact-byte Claude and Meta adoption, executable provisional evolution, active-host dirty-worktree documentation checks, and green main CI.",
+    "milestone": "NULNUL 2.2.1-rc.2 is a locally verified candidate with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
     "status": "complete",
-    "last_verified": "2026-08-20: 234 tests passed, documentation debt was empty for the active Codex host, and Release Gate scored 100/100 with local_candidate_ready and release_ready true. The downloaded public 2.2.0 archive was byte-identical at SHA-256 779bd3d43178925fe53eafa348484d8bf6d0cb1e79fc00a31615b754b71124d0; fresh exact-version Claude and Meta adoption passed. The reuse-classification sanitizer nonpass was linked and closed as Product Builder v8, candidate CI passed, and main CI run 32348453221 passed at merge commit 0dadd8f. Gate v12 remains provisional pending a distinct later Gate cycle.",
-    "next_action": "Observe one distinct real Gate cycle for provisional Gate v12 and execute confirmation or rollback; do not infer confirmation from this release cycle.",
-    "blockers": [],
+    "last_verified": "2026-08-24: the Feedback Capsule reuses the closed Experience Digest schema, validates before rendering deterministic Markdown to stdout, and performs no save or upload. The exact-archive Meta capture reruns selection, no-match, conflict, migration, verified fast resume, and rollback without storing the Personal Home path. Plugin and skill validation, 237 tests, active Codex documentation debt, archive inspection, and Release Gate passed for local candidate 2.2.1-rc.2. The normalized 38-entry archive SHA-256 is 6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998. Release Gate scored 100/100 with local_candidate_ready true and release_ready false because exact-version public Claude and Meta evidence is intentionally absent and a prerelease cannot close the final Gate.",
+    "next_action": "Publish 2.2.1-rc.2 outside main, capture exact-version public Claude and Meta adoption, then freeze and verify final 2.2.1 before any main promotion.",
+    "blockers": [
+      "Exact-version public Claude adoption evidence is not captured for 2.2.1-rc.2.",
+      "Exact-version public Meta adoption evidence is not captured for 2.2.1-rc.2.",
+      "The prerelease cannot close the final Release Gate."
+    ],
     "approved_permissions": [
-      "Publish NULNUL 2.2.0 exact artifacts and promote the verified commit to main within this user-requested release closure."
+      "Publish NULNUL 2.2.1 RC and final exact artifacts, run the paid Claude adoption check, and promote only the fully verified final commit to main within this user-requested release closure."
     ]
   },
   "agents": {
@@ -54,12 +58,12 @@
       "last_promotion_id": "promotion-coach-5-evolution-compaction"
     },
     "gate": {
-      "version": 11,
+      "version": 12,
       "job": "Independently compare candidates, shortlist current permitted cross-project evidence before full compatibility checks, fail closed on unresolved conflicts, separate exposed evaluation from one-shot holdouts, and promote, reject, or roll back.",
       "profile_path": null,
-      "last_promotion_id": "promotion-gate-11-github-git-source",
-      "trial_version": 12,
-      "trial_promotion_id": "promotion-gate-12-candidate-stage-identity"
+      "last_promotion_id": "promotion-gate-12-candidate-stage-identity",
+      "trial_version": null,
+      "trial_promotion_id": null
     },
     "product-builder": {
       "version": 8,
@@ -295,7 +299,7 @@
         "permission_delta": "0 -> 0"
       },
       "falsification_condition": "Any lifecycle negative control fails, a same-version different archive or stale public run receives credit, the confirmed version changes before observation, or any permission expands.",
-      "status": "provisional"
+      "status": "accepted"
     }
   ],
   "promotions": [
@@ -394,17 +398,17 @@
       "proposal_id": "proposal-gate-12-candidate-stage-identity",
       "gate_agent": "product-builder",
       "before": "Gate v11 could not represent a safe unconfirmed trial and did not bind all release credit to exact candidate bytes.",
-      "after": "Gate v12 is provisional: lifecycle and exact-byte regressions pass, Gate v11 remains confirmed, and the next real Gate cycle will confirm or roll back the trial.",
+      "after": "Gate v12 remained provisional until the distinct 2.2.1-rc.1 cycle observed zero lifecycle or exact-byte attribution regressions; the shipped executor then confirmed v12 while stale public evidence remained uncredited.",
       "regressions_passed": true,
-      "decision": "provisional",
+      "decision": "accepted",
       "live_cycle": {
-        "status": "pending",
+        "status": "observed",
         "metric": "candidate-stage or candidate-identity attribution regressions in the next real Gate cycle",
         "rollback_threshold": "roll back on one premature activation, stale-evidence credit, archive-identity mismatch, or permission expansion",
-        "metric_value": null,
+        "metric_value": 0,
         "rollback_operator": "gte",
         "rollback_value": 1,
-        "evidence": "Deterministic regression and negative controls pass; a distinct post-promotion real Gate cycle is intentionally still pending."
+        "evidence": "The distinct 2.2.1-rc.1 packaging and activation-copy cycle kept Gate v11 confirmed before observation, produced archive SHA-256 4af765cfc20eb461fe0250f51bda248723c6f36680f86400acb00adca0027eae with one normalized metadata shape, passed 235 tests and Release Gate 100/100 with local_candidate_ready true, rejected stale 2.2.0 Claude and Meta evidence, and added no permission."
       }
     }
   ],

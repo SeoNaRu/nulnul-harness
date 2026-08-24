@@ -1,11 +1,15 @@
 import json
+import os
 import re
 import subprocess
 import sys
+import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 import zipfile
 from pathlib import Path
+
+from scripts.pack_plugin import pack
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +23,7 @@ class ProductPluginTests(unittest.TestCase):
         claude = json.loads((PLUGIN / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
         marketplace = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8"))
         listing = (ROOT / "submission/listing.md").read_text(encoding="utf-8")
+        openai = (SKILL / "agents/openai.yaml").read_text(encoding="utf-8")
         entry = next(item for item in marketplace["plugins"] if item["name"] == "nulnul-harness")
         descriptions = {
             "codex description": codex["description"],
@@ -29,6 +34,12 @@ class ProductPluginTests(unittest.TestCase):
             "marketplace entry": entry["description"],
             "listing short": re.search(r"^- Short description: (.+)$", listing, re.M).group(1),
             "listing long": re.search(r"^- Long description: (.+)$", listing, re.M).group(1),
+            "openai short": re.search(r'^\s*short_description: "(.+)"$', openai, re.M).group(1),
+            "openai default": re.search(r'^\s*default_prompt: "(.+)"$', openai, re.M).group(1),
+            **{
+                f"codex default prompt {index}": prompt
+                for index, prompt in enumerate(codex["interface"]["defaultPrompt"], 1)
+            },
         }
         forbidden = (
             re.compile(r"\b(?:AI|agent)[ -]team\b", re.I),
@@ -65,7 +76,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "2.2.0")
+        self.assertEqual(manifest["version"], "2.2.1-rc.2")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -236,6 +247,29 @@ class ProductPluginTests(unittest.TestCase):
         }
         self.assertEqual(bundled, product)
 
+    def test_plugin_archive_is_reproducible(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            plugin = root / "nulnul-harness"
+            plugin.mkdir()
+            source = plugin / "payload.txt"
+            source.write_text("same bytes", encoding="utf-8")
+            first, second = root / "first.zip", root / "second.zip"
+
+            source.chmod(0o600)
+            os.utime(source, (1_700_000_000, 1_700_000_000))
+            pack(plugin, first)
+            source.chmod(0o777)
+            os.utime(source, (1_800_000_000, 1_800_000_000))
+            pack(plugin, second)
+
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            with zipfile.ZipFile(first) as bundle:
+                info = bundle.infolist()[0]
+            self.assertEqual(info.date_time, (1980, 1, 1, 0, 0, 0))
+            self.assertEqual(info.create_system, 3)
+            self.assertEqual(info.external_attr >> 16, 0o100644)
+
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
@@ -246,7 +280,7 @@ class ProductPluginTests(unittest.TestCase):
             text = (ROOT / name).read_text(encoding="utf-8")
             self.assertIn(other_locale, text)
             self.assertIn(f"version-{manifest['version'].replace('-', '--')}", text)
-            self.assertIn("Release_Gate-100%2F100", text)
+            self.assertNotIn("Release_Gate-100%2F100", text)
             self.assertIn("codex plugin add nulnul-harness@nulnul-harness", text)
             self.assertIn("claude plugin install nulnul-harness@nulnul-harness", text)
             self.assertIn(test_claim, text)

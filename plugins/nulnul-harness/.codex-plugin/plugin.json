@@ -1,6 +1,6 @@
 {
   "name": "nulnul-harness",
-  "version": "2.2.0",
+  "version": "2.2.1-rc.2",
   "description": "Complete project outcomes by reusing proven capabilities and compatibility-checking only relevant verified personal adaptations behind independent Gates.",
   "author": {
     "name": "SeoNaRu",
@@ -51,7 +51,7 @@
     "defaultPrompt": [
       "Build this project. Find proven skills before creating new ones, and keep the setup minimal.",
       "Turn this recurring workflow into a verified automation and improve both the work and its improvement process from real runs.",
-      "Build the smallest task and meta-agent system for this project, preserve verified progress, and require independent promotion."
+      "Continue this project from verified state, add only a proven missing responsibility, and independently verify any harness change."
     ]
   }
 }

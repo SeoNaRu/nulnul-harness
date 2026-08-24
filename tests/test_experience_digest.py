@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 import unittest
 from pathlib import Path
@@ -67,6 +68,26 @@ class ExperienceDigestTests(unittest.TestCase):
         self.assertIn("stages[0].stage is invalid", errors)
         self.assertIn("digest.raw_transcript is prohibited", errors)
         self.assertIn("digest fields are not allowed: machine_path, raw_transcript", errors)
+
+    def test_feedback_capsule_is_deterministic_and_refuses_unvalidated_evidence(self):
+        digest = RUNNER.experience_digest(
+            "fast:candidate:r1", "fast", "fast-path", "candidate", 1.2, 0.1,
+            {
+                "tool_calls": 2, "read_commands": 1, "validator_commands": 1,
+                "test_commands": 1, "completion_check_invocations": 1,
+            },
+            {"input_tokens": 100, "output_tokens": 10}, 0, True,
+        )
+        capsule = VALIDATOR.feedback_capsule(digest, "test-version")
+        canonical = json.dumps(digest, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        self.assertIn(hashlib.sha256(canonical.encode("utf-8")).hexdigest(), capsule)
+        self.assertEqual(capsule, VALIDATOR.feedback_capsule(digest, "test-version"))
+        self.assertIn("| resume | navigator", capsule)
+        self.assertNotIn("raw_prompt", capsule)
+
+        digest["raw_prompt"] = "private"
+        with self.assertRaisesRegex(ValueError, "raw_prompt is prohibited"):
+            VALIDATOR.feedback_capsule(digest, "test-version")
 
     def test_first_divergence_stays_unknown_without_a_structural_difference(self):
         left = {"stages": [{"stage": "resume", "completion_check_invocations": 1}]}

@@ -2,6 +2,7 @@
 """Validate bounded process evidence without accepting traces or machine paths."""
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -94,15 +95,89 @@ def validate(payload):
     return errors
 
 
+def feedback_capsule(payload, plugin_version):
+    errors = validate(payload)
+    if errors:
+        raise ValueError("invalid Experience Digest: " + "; ".join(errors))
+    canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    digest_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    tokens = lambda value: "unknown" if value is None else str(value)
+    rows = [
+        "| Stage | Owner | Elapsed ms | Tools | Reads | Validators | Tests | Completion checks |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    rows.extend(
+        "| {stage} | {owner} | {elapsed_ms} | {tool_invocations} | "
+        "{repository_reads} | {validator_invocations} | {test_invocations} | "
+        "{completion_check_invocations} |".format(**stage)
+        for stage in payload["stages"]
+    )
+    signals = "\n".join(f"- `{signal}`" for signal in payload["signals"]) or "- None"
+    pretty_digest = json.dumps(payload, ensure_ascii=False, sort_keys=True, indent=2)
+    return "\n".join((
+        "# NULNUL feedback capsule",
+        "",
+        "> Review before sharing. This was generated locally from a validated, bounded "
+        "Experience Digest; do not add private code, credentials, personal data, or raw conversations.",
+        "",
+        f"- Plugin version: `{plugin_version}`",
+        f"- Run: `{payload['run_id']}`",
+        f"- Case: `{payload['case_id']}`",
+        f"- Arm: `{payload['arm']}`",
+        f"- Verification: `{payload['verification_result']}`",
+        f"- Tokens: input `{tokens(payload['input_tokens'])}`, output `{tokens(payload['output_tokens'])}`",
+        f"- Digest SHA-256: `{digest_sha}`",
+        "",
+        "## User review (fill before sharing)",
+        "",
+        "- Request: <!-- sanitized summary; never paste the raw prompt -->",
+        "- Expected: <!-- sanitized expected outcome -->",
+        "- Observed: <!-- sanitized uncomfortable behavior -->",
+        "",
+        "## Stage summary",
+        "",
+        *rows,
+        "",
+        "## Signals",
+        "",
+        signals,
+        "",
+        "<details>",
+        "<summary>Validated Experience Digest</summary>",
+        "",
+        "```json",
+        pretty_digest,
+        "```",
+        "</details>",
+    ))
+
+
+def plugin_version():
+    try:
+        manifest = Path(__file__).resolve().parents[3] / ".codex-plugin/plugin.json"
+        return json.loads(manifest.read_text(encoding="utf-8"))["version"]
+    except (OSError, UnicodeError, json.JSONDecodeError, KeyError, TypeError):
+        return "unknown"
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("digest", type=Path)
+    parser.add_argument(
+        "--feedback-capsule",
+        action="store_true",
+        help="print reviewable Markdown from a valid digest without saving or uploading it",
+    )
     args = parser.parse_args()
     try:
-        errors = validate(json.loads(args.digest.read_text(encoding="utf-8")))
+        payload = json.loads(args.digest.read_text(encoding="utf-8"))
+        errors = validate(payload)
     except (OSError, UnicodeError, json.JSONDecodeError) as error:
         errors = [f"cannot read digest: {error}"]
-    print(json.dumps({"valid": not errors, "errors": errors}, ensure_ascii=False, indent=2))
+    if args.feedback_capsule and not errors:
+        print(feedback_capsule(payload, plugin_version()))
+    else:
+        print(json.dumps({"valid": not errors, "errors": errors}, ensure_ascii=False, indent=2))
     raise SystemExit(bool(errors))
 
 

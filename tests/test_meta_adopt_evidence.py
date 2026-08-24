@@ -1,8 +1,12 @@
 import copy
 import importlib.util
 import json
+import shutil
+import tempfile
 import unittest
 from pathlib import Path
+
+from scripts.pack_plugin import pack
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,6 +80,31 @@ class MetaAdoptEvidenceTests(unittest.TestCase):
         self.assertIn("public no-relevant control failed", errors)
         self.assertIn("public conflict control did not fail closed", errors)
         self.assertIn("public meta rollback control failed", errors)
+
+    def test_capture_reruns_exact_archive_controls_without_storing_home_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            archive = root / "nulnul-harness-2.2.1-rc.2.zip"
+            pack(ROOT / "plugins/nulnul-harness", archive)
+            home = root / "personal-home"
+            home.mkdir()
+            shutil.copy2(
+                ROOT / "evals/meta-evolution/cross-project-evidence.json",
+                home / "cross-project-evidence.json",
+            )
+            (home / "personal-adaptations.json").write_text(
+                '{"schema_version":1,"adaptations":[]}\n', encoding="utf-8"
+            )
+
+            payload = MODULE.capture(
+                archive, archive, home, "a" * 40,
+                "meta-capture-check", "2026-08-24",
+            )
+
+            self.assertEqual(MODULE.validate(payload, PREREGISTRATION, "2.2.1-rc.2"), [])
+            self.assertEqual(payload["project_m"]["meta_selector"]["compatibility_checks_executed"], 1)
+            self.assertEqual(payload["rollback_control"]["rolled_back_to"], "flat-lookup-v1")
+            self.assertNotIn(str(home), json.dumps(payload))
 
 
 if __name__ == "__main__":

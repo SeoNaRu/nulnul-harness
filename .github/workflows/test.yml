@@ -18,4 +18,5 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - run: python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex
       - run: python3 scripts/release_gate.py

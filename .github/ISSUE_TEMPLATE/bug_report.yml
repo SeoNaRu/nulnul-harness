@@ -24,6 +24,11 @@ body:
       label: Actual behavior
     validations:
       required: true
+  - type: textarea
+    id: feedback_capsule
+    attributes:
+      label: Validated feedback capsule (optional)
+      description: Run the plugin's validate_experience_digest.py DIGEST --feedback-capsule command, review the local output, then paste it here. The command does not save or upload anything.
   - type: input
     id: host
     attributes:

@@ -2,6 +2,21 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 2.2.1-rc.2 — 2026-08-24
+
+- Added `--feedback-capsule` to the existing Experience Digest validator. It refuses unvalidated evidence, then prints deterministic reviewable Markdown with bounded stage facts, a canonical digest hash, and blank sanitized request/expected/observed fields.
+- Added an optional capsule field to the bug-report form and documented the local review flow in both locales. The command writes no file and performs no upload or external action.
+- Added a deterministic exact-archive Meta adoption capture that reruns selection, no-match, conflict, migration, fast-resume, and rollback controls without storing the approved Personal Home path. Removed the 100/100 shield from both README headers while retaining the scoped evidence table.
+- Reused the existing closed digest schema and standard library; no dependency, service, permission, credential, MCP server, hook, app, schema, or additional product skill was added.
+- The 38-entry local archive has SHA-256 `6e28f04efdb8fcf433b035ded0fa2418c776da7bd0248c9f655e715a70606998`; plugin and skill validation, 237 tests, documentation debt, and Release Gate 100/100 passed with `local_candidate_ready=true`. Exact-version public evidence remains stale as required, so `release_ready=false`.
+
+## 2.2.1-rc.1 — 2026-08-24
+
+- Normalized plugin ZIP timestamps, Unix metadata, and file permissions so identical plugin trees produce byte-identical archives instead of inheriting host filesystem metadata.
+- Aligned the shipped Codex activation copy with the reuse-first, minimal-setup product contract and extended the existing metadata test to cover `agents/openai.yaml` and every default prompt.
+- Added the active Codex documentation-debt check to CI. No dependency, service, permission, credential, external write, MCP server, hook, app, or additional product skill was added.
+- The local archive contains 38 normalized entries at SHA-256 `4af765cfc20eb461fe0250f51bda248723c6f36680f86400acb00adca0027eae`; plugin validation, 235 tests, documentation debt, and Release Gate 100/100 passed with `local_candidate_ready=true`. Exact-version public evidence remains stale as required, `release_ready=false`, and the distinct zero-regression cycle confirmed Gate v12 through the shipped executor.
+
 ## 2.2.0 — 2026-08-20
 
 - Replaced circular acceptance with a schema-v4 provisional live cycle. The confirmed agent version stays active until the observed cycle is healthy; the shipped executor then confirms the trial or records rollback. Schema-v4 executable threshold validation and legacy accepted-version rollback remain covered.
