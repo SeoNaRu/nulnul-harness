@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-lifecycle-2.3.0-1",
+  "model": "gpt-5.6-sol",
+  "rounds_per_arm": 4,
+  "raw_transcript_retained": false,
+  "permission_delta": [],
+  "arms": [
+    {
+      "id": "candidate",
+      "skill_tree_sha256": "1b60e53e15b9c67a8c9851947266d68544a8970c18075da10cf399a2ea18dc94",
+      "exact_runs": 2,
+      "medians": {
+        "elapsed_seconds": 60.489999999999995,
+        "input_tokens": 54338.5,
+        "output_tokens": 1111.0,
+        "reasoning_output_tokens": 511.5
+      },
+      "runs": [
+        {
+          "round": 1,
+          "correct": true,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "permission-conflict",
+            "ambiguous-project-conflict",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [],
+          "failed_checks": {},
+          "command_count": 2,
+          "elapsed_seconds": 61.33,
+          "input_tokens": 54361,
+          "output_tokens": 1116,
+          "reasoning_output_tokens": 497
+        },
+        {
+          "round": 2,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict",
+            "ambiguous-project-conflict"
+          ],
+          "failed_checks": {
+            "permission-conflict": [
+              "conflicts"
+            ],
+            "ambiguous-project-conflict": [
+              "conflicts"
+            ]
+          },
+          "command_count": 6,
+          "elapsed_seconds": 59.65,
+          "input_tokens": 54316,
+          "output_tokens": 1106,
+          "reasoning_output_tokens": 463
+        },
+        {
+          "round": 3,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict",
+            "ambiguous-project-conflict"
+          ],
+          "failed_checks": {
+            "permission-conflict": [
+              "conflicts"
+            ],
+            "ambiguous-project-conflict": [
+              "conflicts"
+            ]
+          },
+          "command_count": 1,
+          "elapsed_seconds": 56.35,
+          "input_tokens": 34673,
+          "output_tokens": 1105,
+          "reasoning_output_tokens": 557
+        },
+        {
+          "round": 4,
+          "correct": true,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "permission-conflict",
+            "ambiguous-project-conflict",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [],
+          "failed_checks": {},
+          "command_count": 10,
+          "elapsed_seconds": 94.05,
+          "input_tokens": 74820,
+          "output_tokens": 1285,
+          "reasoning_output_tokens": 526
+        }
+      ]
+    }
+  ],
+  "paired_input_change_percent": 19.98,
+  "baseline_results_sha256": "9f7428306c8736d5b8b728ccfd6c21f4028f209f8678fe08bebf4fc6712fc053"
+}

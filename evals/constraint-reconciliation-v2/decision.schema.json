@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["decisions"],
+  "additionalProperties": false,
+  "properties": {
+    "decisions": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "case_id", "route", "applicable_constraints", "inactive_constraints",
+          "superseded_constraints", "conflicts", "asks_user", "workaround_attempts",
+          "permission_delta", "brief_reason"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "case_id": {"type": "string"},
+          "route": {"enum": ["execute", "block"]},
+          "applicable_constraints": {"type": "array", "items": {"type": "string"}},
+          "inactive_constraints": {"type": "array", "items": {"type": "string"}},
+          "superseded_constraints": {"type": "array", "items": {"type": "string"}},
+          "conflicts": {"type": "array", "items": {"type": "string"}},
+          "asks_user": {"type": "boolean"},
+          "workaround_attempts": {"type": "integer", "minimum": 0},
+          "permission_delta": {"type": "array", "items": {"type": "string"}},
+          "brief_reason": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

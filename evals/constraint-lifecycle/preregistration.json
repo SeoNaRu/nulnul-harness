@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-lifecycle-2.3.0-1",
+  "registered_at": "2026-08-25T12:45:06+09:00",
+  "champion": {
+    "plugin_version": "2.2.1",
+    "git_ref": "61009342a2bd493500e6179cfa699dd578022550",
+    "skill_sha256": "79ebc602a6d8d590c88e4c106411521097b5d4f3a0e17f2bb0b000a0401a09ad"
+  },
+  "observed_failure": {
+    "source": "user",
+    "where": "Navigator resume and pre-execution planning",
+    "why": "Stored constraints are unscoped strings and fast-path readiness does not test whether they make the current milestone or next action impossible.",
+    "reproduction": "A valid verified schema-version-3 checkpoint whose next action edits app.py and whose permission_constraints forbids editing app.py still returns fast_path_ready=true.",
+    "baseline_result": {
+      "valid": true,
+      "fast_path_ready": true
+    }
+  },
+  "rejected_archive_lookup": [
+    "proposal-navigator-20-intent-means-gate",
+    "proposal-navigator-20-scoped-decision-artifact",
+    "proposal-navigator-20-repository-receipt"
+  ],
+  "rejected_replay_boundary": "Do not add a self-attested decision artifact without binding it to current checkpoint intent, and do not retry a prose-only intent classifier that lacks deterministic stale-state invalidation.",
+  "mechanism_id": "typed-scoped-constraint-reconciliation-v1",
+  "candidate": {
+    "change_level": "task",
+    "target_agent": "navigator",
+    "from_version": 20,
+    "to_version": 21,
+    "cause": "Constraint authority, applicability, and review freshness are not represented in the live checkpoint.",
+    "mechanism": "Store only active typed constraints with event-scoped applicability and revisit conditions, require imported strings to be classified, bind one compatible/blocked/unknown review to current checkpoint intent, fail fast on conflicts, and permit no second workaround for the same unresolved constraint.",
+    "prediction": "The candidate will block real permission and ambiguous project conflicts before execution, ignore a constraint from another milestone, preserve compatible constraints, and honor an exact current-user supersession without broadening permissions.",
+    "falsification_condition": "Reject when any conflict case executes, any compatible case blocks, an obsolete milestone constraint remains applicable, an exact override broadens beyond its stated scope, a changed checkpoint reuses an old compatible review, or legacy state enters fast resume without migration and re-verification.",
+    "rollback": "Restore the 2.2.1 skill and schema-version-3 checkpoint behavior; keep the failed evidence and do not bump the plugin version."
+  },
+  "candidate_source_paths": [
+    "plugins/nulnul-harness/skills/nulnul-harness/SKILL.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/baseline-kernel.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/project-files.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/personal-evolution.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/assets/checkpoint.template.json",
+    "plugins/nulnul-harness/skills/nulnul-harness/assets/evolution-state.template.json",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/constraint_state.py",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/record_constraint_review.py",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_checkpoint.py",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_evolution_state.py",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/migrate_legacy_checkpoint.py",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/run_checkpoint_check.py"
+  ],
+  "evaluation": {
+    "primary_cases": [
+      "obsolete-milestone-constraint",
+      "permission-conflict",
+      "ambiguous-project-conflict"
+    ],
+    "controls": [
+      "compatible-local-constraint",
+      "explicit-user-supersession"
+    ],
+    "primary_metric": "exact constraint decisions without execution-time workarounds",
+    "guardrails": [
+      "zero fixture writes",
+      "zero permission expansion",
+      "no false block on compatible work",
+      "legacy checkpoints fail closed",
+      "bounded fast-resume reads",
+      "full regression suite"
+    ],
+    "comparison": "Same-model champion/candidate paired A/B in four counterbalanced rounds plus deterministic negative controls.",
+    "maximum_paired_input_change_percent": 20
+  },
+  "budget": {
+    "max_candidates": 2,
+    "max_generations": 1,
+    "max_evaluation_runs": 16,
+    "max_failed_candidates": 1,
+    "max_identical_pathology_retries": 1,
+    "max_model_invocations": 16,
+    "counterbalanced_rounds": 4,
+    "permission_delta": [],
+    "external_writes": 0,
+    "new_dependencies": 0,
+    "new_services": 0,
+    "holdout_access": false
+  },
+  "refinement_rule": "Only one distinct refinement may replace the first candidate, and only when deterministic or paired evidence identifies a concrete false block, missed conflict, stale-review gap, or material cost regression.",
+  "stop_reasons": [
+    "SUCCESS",
+    "NO_PROMOTION",
+    "BUDGET_EXHAUSTED",
+    "REPEATED_PATHOLOGY",
+    "PERMISSION_BLOCKED"
+  ],
+  "claim_boundary": "DEV and VALIDATION evidence for a local 2.3.0 candidate only. No HOLDOUT, personal, broad cross-project, public-release, or universal runtime claim is preregistered."
+}

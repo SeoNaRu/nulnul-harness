@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-lifecycle-2.3.0-1",
+  "amendment_id": "structured-output-supported-subset",
+  "recorded_at": "2026-08-25T13:31:10+09:00",
+  "timing": "before any completed model decision and before candidate exposure",
+  "cause": "The API rejected uniqueItems in the strict structured-output schema before model execution.",
+  "official_source": "https://developers.openai.com/api/docs/guides/structured-outputs#supported-schemas",
+  "old_decision_schema_sha256": "f685e18402fb90d8b0b4dae84b2ee19486bba24d4e3da66c80ab6c7beed002bf",
+  "new_decision_schema_sha256": "cfcfe35a6bb9bb0cb738f11dbf647af4f29023a93a1f3554b3af7efc9eb46ce7",
+  "change": "Remove unsupported uniqueItems and minLength keywords; enforce non-empty brief_reason and exact list equality in the local scorer.",
+  "metric_changed": false,
+  "cases_changed": false,
+  "candidate_changed": false,
+  "permission_delta": []
+}

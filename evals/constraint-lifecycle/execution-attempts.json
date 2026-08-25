@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-lifecycle-2.3.0-1",
+  "attempts": [
+    {
+      "attempt": 1,
+      "started_arm": "champion",
+      "started_round": 1,
+      "status": "environment_timeout",
+      "elapsed_seconds": 600,
+      "completed_decisions": 0,
+      "model_invocations": 1,
+      "candidate_exposed": false,
+      "raw_transcript_retained": false,
+      "permission_delta": [],
+      "failure": "No model result completed inside the restricted-network sandbox before the per-call timeout.",
+      "retry_status": "requires_explicit_external_egress_approval",
+      "recorded_at": "2026-08-25T13:24:13+09:00"
+    },
+    {
+      "attempt": 2,
+      "started_arm": "champion",
+      "started_round": 1,
+      "status": "protocol_rejected",
+      "elapsed_seconds": 26.17,
+      "completed_decisions": 0,
+      "model_invocations": 0,
+      "candidate_exposed": false,
+      "raw_transcript_retained": false,
+      "permission_delta": [],
+      "failure": "The strict output schema used unsupported uniqueItems before model execution.",
+      "retry_status": "protocol_amended_before_valid_evaluation",
+      "recorded_at": "2026-08-25T13:31:10+09:00"
+    },
+    {
+      "attempt": 3,
+      "status": "completed",
+      "completed_decisions": 40,
+      "completed_evaluation_runs": 8,
+      "model_invocations": 8,
+      "candidate_exposed": true,
+      "raw_transcript_retained": false,
+      "permission_delta": [],
+      "result_sha256": "9f7428306c8736d5b8b728ccfd6c21f4028f209f8678fe08bebf4fc6712fc053",
+      "recorded_at": "2026-08-25T13:45:00+09:00"
+    },
+    {
+      "attempt": 4,
+      "status": "completed_no_promotion",
+      "completed_decisions": 20,
+      "completed_evaluation_runs": 4,
+      "model_invocations": 4,
+      "candidate_exposed": true,
+      "raw_transcript_retained": false,
+      "permission_delta": [],
+      "result_sha256": "2b6b130cc35821f7a00a412a5eb8e702a85a81928885da7cca4b0482babe64dc",
+      "recorded_at": "2026-08-25T13:54:01+09:00"
+    }
+  ],
+  "budget_after_attempts": {
+    "candidates_used": 2,
+    "candidates_remaining": 0,
+    "generations_used": 1,
+    "evaluation_runs_used": 12,
+    "evaluation_runs_remaining": 4,
+    "model_invocations_used": 13,
+    "model_invocations_remaining": 3,
+    "identical_pathology_retries_used": 1,
+    "identical_pathology_retries_remaining": 0,
+    "failed_candidates_observed": 2,
+    "failed_candidate_stop_limit": 1,
+    "budget_stop_triggered": true
+  }
+}

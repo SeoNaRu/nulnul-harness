@@ -30,14 +30,15 @@
   },
   "checkpoint": {
     "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "NULNUL 2.2.1 is an exact-public verified final release with a privacy-safe user-reviewed Feedback Capsule over the existing bounded Experience Digest.",
+    "milestone": "Build and independently evaluate one new 2.3 constraint-reconciliation candidate, then repair the three user-selected live project adoptions without publishing or pushing.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
-    "status": "complete",
-    "last_verified": "2026-08-24: final/latest v2.2.1 points to tag commit 59f9799; exact-evidence candidate CI 32689502007, tag CI 32688807083, and main CI 32689545235 passed. The downloaded 38-entry archive is byte-identical at SHA-256 f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e. Fresh exact-final Claude preserved two profiles and the inactive Codex entry with five passing checks and no protected write. Fresh exact-final Meta retained the correct apply at three-to-one checks and passed skip, conflict, migration, verified fast resume, privacy, permission, and rollback controls without holdout reuse or tuning. Release Gate is 100/100 with release_ready true.",
-    "next_action": "Collect measured post-release feedback; make no further roadmap claim until a new reproducible bottleneck appears.",
+    "status": "active",
+    "last_verified": "2026-08-25: the confirmed 2.2.1 plugin baseline passes the 15 product-plugin tests, the rejected constraint-lifecycle evidence test, active evolution validation, and digest-bound full-state reconstruction. The rejected first episode remains removed from the shipped plugin.",
+    "next_action": "Keep 2.2.1 active after the rejected derived-review episode, freeze one separate deterministic-output-envelope hypothesis without recycling the exposed score, and repair the three approved local project adoptions.",
     "blockers": [],
     "approved_permissions": [
-      "Publish NULNUL 2.2.1 RC and final exact artifacts, run the paid Claude adoption check, and promote only the fully verified final commit to main within this user-requested release closure."
+      "Publish NULNUL 2.2.1 RC and final exact artifacts, run the paid Claude adoption check, and promote only the fully verified final commit to main within this user-requested release closure.",
+      "Modify the local NULNUL product and the three user-selected local project adoptions, run bounded paid A/B evaluation, and update the local Claude plugin; do not publish, deploy, or push."
     ]
   },
   "agents": {
@@ -72,16 +73,6 @@
   },
   "feedback": [
     {
-      "id": "feedback-claude-git-marketplace-provenance",
-      "source": "gate",
-      "target_agent": "gate",
-      "observed": "The corrected fresh public RC.2 adoption satisfied every product and safety check, but Claude Code reported the exact GitHub tag marketplace as source=git plus its URL and the sanitizer rejected the historical label mismatch.",
-      "expected": "Credit source=git only when the marketplace URL is the exact public NULNUL GitHub repository, while continuing to reject local or other sources.",
-      "evidence": "evals/benchmarks/claude-adopt/release-2.0-rc2-failure.json records the sanitized nonpass with five passing checks and no raw transcript or private path.",
-      "scope": "core",
-      "status": "converted"
-    },
-    {
       "id": "feedback-host-entry-ownership",
       "source": "user",
       "target_agent": "navigator",
@@ -102,26 +93,6 @@
       "status": "converted"
     },
     {
-      "id": "feedback-doc-debt-eager-scan",
-      "source": "user",
-      "target_agent": "product-builder",
-      "observed": "The required documentation-debt check spent 17.56 seconds on this tracked repository because it recursively scanned every source path before checking whether Git history already answered the question.",
-      "expected": "Tracked documents use Git history directly; the recursive modification-time fallback runs only for a document without Git history and preserves the same stale-document result.",
-      "evidence": "Four counterbalanced v2.1.0/current A/B rounds preserved identical empty debt results while median elapsed time fell from 17.73645 to 0.2308 seconds.",
-      "scope": "core",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-claude-reuse-classification",
-      "source": "gate",
-      "target_agent": "product-builder",
-      "observed": "The fresh exact-public 2.2.0 Claude adoption explicitly classified both existing agents as reuse, but the evidence sanitizer rejected the run because it recognized only keep, upgrade, merge, or remove.",
-      "expected": "Treat reuse as an explicit kept-role classification while continuing to reject a roster with no classification decision.",
-      "evidence": "evals/benchmarks/claude-adopt/release-2.2-failure.json records the sanitized nonpass with all five completion checks passing and no raw transcript or machine path.",
-      "scope": "core",
-      "status": "converted"
-    },
-    {
       "id": "feedback-candidate-stage-identity",
       "source": "test",
       "target_agent": "gate",
@@ -129,56 +100,6 @@
       "expected": "Keep the confirmed version active during a bounded provisional trial, confirm or roll back only after an observed cycle, and bind release credit to the exact plugin tree and distribution archive.",
       "evidence": "Schema-v4 lifecycle controls exercise pending, healthy, and breached trials; Release Gate negative controls reject a same-version different archive and stale public evidence.",
       "scope": "core",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-ci-pack-before-archive-check",
-      "source": "test",
-      "target_agent": "product-builder",
-      "observed": "Fresh-checkout candidate CI run 32685004838 failed archive consistency because the 2.2.1-rc.2 ZIP did not exist before the full suite started.",
-      "expected": "CI must deterministically pack the manifest's current version before any archive consistency check.",
-      "evidence": "The run had one failure in test_release_metadata_and_archive_are_consistent; all earlier checks passed and the missing archive was the exact assertion.",
-      "scope": "core",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-claude-absolute-roster-read",
-      "source": "gate",
-      "target_agent": "product-builder",
-      "observed": "The exact-public 2.2.1-rc.2 Claude run enumerated installed plugins and read both existing agent profiles through a bounded absolute fixture path, but the evidence sanitizer recognized only relative .claude/agents paths.",
-      "expected": "Credit bounded relative or absolute reads that end at the fixture's exact .claude/agents roster while continuing to reject commands that only print path text.",
-      "evidence": "evals/benchmarks/claude-adopt/release-2.2.1-rc.2-failure.json records the sanitized nonpass with both unchanged agent digests and all five completion checks passing.",
-      "scope": "core",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-doc-debt-claude-evidence-contract",
-      "source": "test",
-      "target_agent": "product-builder",
-      "observed": "The full 239-test suite passed, then the required documentation-debt check rejected the candidate because the Claude evidence predicate changed after the active AGENTS.md contract.",
-      "expected": "Document the exact bounded absolute-read and printed-path boundary in the active contract in the same change as the evidence predicate.",
-      "evidence": "The required check reported AGENTS.md stale against scripts/claude_adopt_evidence.py and exited nonzero after all 239 tests passed.",
-      "scope": "project",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-meta-capture-version-fixture",
-      "source": "test",
-      "target_agent": "product-builder",
-      "observed": "After the final 2.2.1 version bump, one Meta capture test built the current plugin under a hard-coded 2.2.1-rc.2 archive name and failed the manifest-identity guard.",
-      "expected": "Derive the test archive name and expected version from the current plugin manifest so every real version transition retains the exact-name guard.",
-      "evidence": "The 239-test final-candidate run had one ValueError in test_capture_reruns_exact_archive_controls_without_storing_home_path; all other completed tests passed.",
-      "scope": "project",
-      "status": "converted"
-    },
-    {
-      "id": "feedback-doc-debt-meta-version-fixture",
-      "source": "test",
-      "target_agent": "product-builder",
-      "observed": "After all 239 final-candidate tests passed, documentation debt rejected AGENTS.md as older than the corrected manifest-derived Meta release fixture.",
-      "expected": "State the manifest-as-version-source rule in the active release contract in the same change as the test correction.",
-      "evidence": "The required Codex documentation-debt check named tests/test_meta_adopt_evidence.py as the newer source and exited nonzero after the green suite.",
-      "scope": "project",
       "status": "converted"
     },
     {
@@ -190,35 +111,39 @@
       "evidence": "The focused locale-parity test rejected README.md only because '234 passed' was absent while the document truthfully reported 239/239.",
       "scope": "project",
       "status": "converted"
+    },
+    {
+      "id": "feedback-cross-project-constraint-drift-v2",
+      "source": "user",
+      "target_agent": "navigator",
+      "observed": "Three user-selected live projects exposed different forms of the same pre-execution gap: conflicting active instructions, a claimed but inactive guard with stale permissions, invalid resumable evolution history, and state that could not provide a safe rollback boundary.",
+      "expected": "Before fast resume or implementation, classify each typed constraint once against current intent, derive every applicable, inactive, superseded, conflict, and unknown identifier mechanically, and fail closed when the review or its source inputs are stale.",
+      "evidence": "The sanitized audit reproduced one contradictory platform ordering, one zero-hook configuration beside a claimed Stop guard and 51 retained allows, two active and 26 reconstructed live-cycle validation failures, one empty VCS metadata directory, and 25 unlinked triaged corrections. The prior prompt-only refinement then omitted required conflict identifiers in two of four runs.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-deterministic-review-envelope",
+      "source": "test",
+      "target_agent": "gate",
+      "observed": "The derived-review candidate removed the champion's missing conflict identifiers, but the A/B output contract still asked the model to reassemble global decision fields after the deterministic writer ran. Candidate runs then changed permission_delta and handled an inactive guard inconsistently, scoring 0/4 despite the writer's deterministic negative controls passing.",
+      "expected": "Evaluate and return the exact writer-produced decision: the model supplies only one relation per applicable constraint plus explicit non-permission supersessions, while the runtime derives every global field and distinguishes granted permission changes from merely required approval.",
+      "evidence": "evals/constraint-reconciliation-v2/results.json records candidate 0/4 versus champion 0/4, complete candidate conflict identifiers, 1.42 percent paired input growth, four candidate activations, zero fixture writes, and no retained raw transcript.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-host-entry-legacy-canonical-conflict",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "A live sequential Claude adoption appended the correct managed host block while preserving an older user-owned sentence that still declared the Codex entry canonical, leaving both root-entry authorities active at once.",
+      "expected": "Before declaring host adoption complete, detect an explicit cross-host canonical declaration in the active root entry and require that active host to reconcile the exact line without mutating the inactive entry or shared state.",
+      "evidence": "The live cycle preserved the inactive entry and four shared-state hashes, reproduced one conflicting legacy sentence after the shipped sync writer ran, and resolved it with one Claude-owned line edit while all shared-state hashes remained unchanged.",
+      "scope": "core",
+      "status": "converted"
     }
   ],
   "proposals": [
-    {
-      "id": "proposal-gate-11-github-git-source",
-      "feedback_ids": [
-        "feedback-claude-git-marketplace-provenance"
-      ],
-      "target_agent": "gate",
-      "author_agent": "coach",
-      "from_version": 10,
-      "to_version": 11,
-      "cause": "The release sanitizer coupled public GitHub provenance to one historical Claude marketplace source label.",
-      "change_target": "Canonicalize source=git as GitHub only for the exact NULNUL GitHub repository URL before applying the unchanged public-source requirement.",
-      "regression_check": "python3 -m unittest tests.test_claude_adopt_evidence tests.test_release_gate -v and recapture the same fresh public RC.2 run.",
-      "primary_metric": "valid exact GitHub marketplace installations rejected by source-label coupling",
-      "permission_delta": [],
-      "rollback": "Restore the historical source-label check and retain the RC.2 nonpass if a non-GitHub source is credited or the exact public run remains invalid.",
-      "change_level": "meta",
-      "discovery_evidence": "The bounded plugin and marketplace inventories reported exact version 2.0.0-rc.2, source=git, the public repository URL, and ref v2.0.0-rc.2.",
-      "transfer_check": "A known-answer exact GitHub URL is accepted; the existing local-source negative evidence remains rejected.",
-      "prediction": "The same fresh public run validates with plugin_source=github while the local-source negative control remains rejected.",
-      "expected_delta": {
-        "valid_public_source_rejected": "1 -> 0",
-        "local_source_rejected": "1 -> 1"
-      },
-      "falsification_condition": "The exact GitHub run remains invalid, a different URL is canonicalized as GitHub, or any adoption guardrail changes.",
-      "status": "accepted"
-    },
     {
       "id": "proposal-navigator-20-host-entry-ownership",
       "feedback_ids": [
@@ -266,7 +191,7 @@
       "primary_metric": "bytes loaded from the active evolution state during ordinary resume",
       "permission_delta": [],
       "rollback": "Restore Coach v4, recombine the archive records with active state through the shipped reconstruction function, and remove the archive manifest and file.",
-      "change_level": "meta",
+      "change_level": "task",
       "discovery_evidence": "The user reported slower harness runs; the current evolution file measured 164211 bytes while model-stage evidence dominated verification time.",
       "transfer_check": null,
       "prediction": "The current real state compacts below one quarter of its original active bytes without losing record content or increasing active validation time.",
@@ -276,60 +201,6 @@
         "archive_tampering_accepted": "unknown -> 0"
       },
       "falsification_condition": "Active bytes remain above one quarter of baseline, any record content changes, compaction is not idempotent, archive tampering passes, legacy state fails, or active validation becomes slower.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-product-builder-7-lazy-doc-debt-scan",
-      "feedback_ids": [
-        "feedback-doc-debt-eager-scan"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 6,
-      "to_version": 7,
-      "cause": "The modification-time fallback was computed eagerly even when every inspected document had a Git commit and the fallback result could not be used.",
-      "change_target": "Initialize the fallback lazily and scan source paths only when the first untracked document actually needs modification-time comparison.",
-      "regression_check": "python3 -B -m unittest tests.test_doc_debt tests.test_doc_debt_benchmark -v && python3 evals/benchmarks/doc-debt/run_ab.py --out /tmp/doc-debt-ab.json",
-      "primary_metric": "counterbalanced median elapsed seconds for the tracked-repository documentation-debt check",
-      "permission_delta": [],
-      "rollback": "Restore the eager newest_source_by_mtime call from v2.1.0 if behavior differs or the post-promotion median exceeds half of the v2.1.0 champion median.",
-      "change_level": "task",
-      "discovery_evidence": "Direct stage timing isolated check_doc_debt.py at 17.56 seconds while evolution validation took 0.20 seconds, personal registry validation 0.18 seconds, and Release Gate 1.68 seconds.",
-      "transfer_check": null,
-      "prediction": "The same tracked-repository debt result remains byte-for-byte equivalent while median elapsed time falls by at least 50 percent with no dependency or permission change.",
-      "expected_delta": {
-        "median_elapsed_seconds": "17.73645 -> <8.868225",
-        "behavior_mismatch": "0 -> 0",
-        "permission_delta": "0 -> 0"
-      },
-      "falsification_condition": "Reject if any paired result differs, candidate median is not lower, tests regress, or the fallback stops detecting newer source in a repository without document history.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-product-builder-8-reuse-classification",
-      "feedback_ids": [
-        "feedback-claude-reuse-classification"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 7,
-      "to_version": 8,
-      "cause": "The release sanitizer's closed classification vocabulary excluded the shipped contract's explicit reuse decision.",
-      "change_target": "Recognize reuse alongside keep, upgrade, merge, and remove in the shared Claude adoption classification predicate.",
-      "regression_check": "python3 -B -m unittest tests.test_claude_adopt_evidence -v and recapture the same fresh exact-public 2.2.0 run",
-      "primary_metric": "valid exact-public adoptions rejected by an explicit reuse decision",
-      "permission_delta": [],
-      "rollback": "Restore Product Builder v7 and the prior predicate if an unclassified roster receives credit or the explicit-reuse public run remains invalid.",
-      "change_level": "task",
-      "discovery_evidence": "The fresh generated contract recorded reuse for collector and reviewer; their profiles and the inactive host entry remained byte-identical and all five checks passed.",
-      "transfer_check": null,
-      "prediction": "The same public run validates while a roster that only names agents without a decision remains rejected.",
-      "expected_delta": {
-        "explicit_reuse_runs_rejected": "1 -> 0",
-        "unclassified_rosters_accepted": "0 -> 0",
-        "permission_delta": "0 -> 0"
-      },
-      "falsification_condition": "The exact public run remains invalid, a no-decision roster is accepted, another adoption guardrail changes, or permissions expand.",
       "status": "accepted"
     },
     {
@@ -360,139 +231,6 @@
       "status": "accepted"
     },
     {
-      "id": "proposal-product-builder-9-ci-pack-order",
-      "feedback_ids": [
-        "feedback-ci-pack-before-archive-check"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 8,
-      "to_version": 9,
-      "cause": "Local verification inherited a current archive that a fresh checkout does not contain, while CI ran tests before the deterministic packer.",
-      "change_target": "Run the existing deterministic packer before the full CI suite and assert that workflow order in the product test.",
-      "regression_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 scripts/release_gate.py",
-      "primary_metric": "fresh-checkout archive consistency failures",
-      "permission_delta": [],
-      "rollback": "Restore Product Builder v8 and retain the failed candidate evidence if fresh CI still lacks the archive or any test regresses.",
-      "change_level": "task",
-      "discovery_evidence": "GitHub Actions run 32685004838 provided a clean-checkout negative control that local archive state had masked.",
-      "transfer_check": null,
-      "prediction": "The next clean candidate run creates the exact 2.2.1-rc.2 archive before tests and completes with zero archive or ordering failures.",
-      "expected_delta": {
-        "fresh_checkout_archive_failures": "1 -> 0",
-        "workflow_order_regressions": "unknown -> 0",
-        "permission_delta": "0 -> 0"
-      },
-      "falsification_condition": "The next clean run fails archive consistency or ordering, changes artifact bytes, regresses another check, or expands permission.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-product-builder-10-absolute-roster-read",
-      "feedback_ids": [
-        "feedback-claude-absolute-roster-read"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 9,
-      "to_version": 10,
-      "cause": "The sanitizer's bounded roster-read predicate assumed Claude would use repository-relative paths even when the runtime supplied an absolute working path.",
-      "change_target": "Allow a bounded path prefix before the exact .claude/agents suffix in the existing shell-read predicate.",
-      "regression_check": "python3 -B -m unittest tests.test_claude_adopt_evidence -v and recapture the same exact-public RC run.",
-      "primary_metric": "valid bounded absolute roster reads rejected by evidence capture",
-      "permission_delta": [],
-      "rollback": "Restore the relative-only predicate and retain the RC nonpass if any printed-path command is credited or the same public run remains invalid.",
-      "change_level": "task",
-      "discovery_evidence": "The sanitized tool inventory contains the required plugin command and one bounded loop over the fixture-local .claude/agents roster; both tracked profiles remained byte-identical.",
-      "transfer_check": null,
-      "prediction": "The same public run validates while the printed-agent-path negative control remains rejected.",
-      "expected_delta": {
-        "valid_absolute_roster_reads_rejected": "1 -> 0",
-        "printed_path_false_positives": "0 -> 0",
-        "permission_delta": "0 -> 0"
-      },
-      "falsification_condition": "The recapture remains invalid, the printed-path negative control passes, another adoption guardrail regresses, or permission expands.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-product-builder-11-doc-contract-sync",
-      "feedback_ids": [
-        "feedback-doc-debt-claude-evidence-contract"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 10,
-      "to_version": 11,
-      "cause": "The evidence implementation changed without updating the active host contract that defines its attribution boundary.",
-      "change_target": "Add the verified bounded absolute-read and printed-path exclusion rule to the existing Claude roster-enumeration sentence in AGENTS.md.",
-      "regression_check": "python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex",
-      "primary_metric": "active-contract documentation-debt failures after release-evidence changes",
-      "permission_delta": [],
-      "rollback": "Restore Product Builder v10 and retain the documentation-debt nonpass if the contract remains stale or claims broader roster evidence.",
-      "change_level": "task",
-      "discovery_evidence": "The required documentation-debt command identified AGENTS.md as older than the exact changed evidence script after every code test passed.",
-      "transfer_check": null,
-      "prediction": "The same documentation-debt command passes with the precise evidence boundary documented and no permission change.",
-      "expected_delta": {
-        "active_contract_debt_failures": "1 -> 0",
-        "permission_delta": "0 -> 0"
-      },
-      "falsification_condition": "Documentation debt remains nonempty, the contract overclaims printed-path evidence, or permission expands.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-product-builder-12-manifest-version-fixture",
-      "feedback_ids": [
-        "feedback-meta-capture-version-fixture"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 11,
-      "to_version": 12,
-      "cause": "The exact-archive capture test duplicated a release-candidate version that the manifest already owns.",
-      "change_target": "Read the current Codex plugin manifest once and reuse its version for the archive filename and validation expectation.",
-      "regression_check": "python3 -B -m unittest tests.test_meta_adopt_evidence -v",
-      "primary_metric": "version-transition failures caused by duplicated Meta capture fixture versions",
-      "permission_delta": [],
-      "rollback": "Restore Product Builder v11 and retain the final-candidate nonpass if exact-name validation weakens or the focused test still fails.",
-      "change_level": "task",
-      "discovery_evidence": "The failing test used the current plugin tree but duplicated 2.2.1-rc.2 in both the archive filename and expected validator version.",
-      "transfer_check": null,
-      "prediction": "The focused Meta evidence suite passes for 2.2.1 while the production manifest-name mismatch guard remains unchanged.",
-      "expected_delta": {
-        "duplicated_fixture_version_failures": "1 -> 0",
-        "production_identity_guards_changed": "0 -> 0",
-        "permission_delta": "0 -> 0"
-      },
-      "falsification_condition": "The focused suite remains red, production identity validation changes, or permission expands.",
-      "status": "accepted"
-    },
-    {
-      "id": "proposal-product-builder-13-version-contract-sync",
-      "feedback_ids": [
-        "feedback-doc-debt-meta-version-fixture"
-      ],
-      "target_agent": "product-builder",
-      "author_agent": "coach",
-      "from_version": 12,
-      "to_version": 13,
-      "cause": "The release fixture removed a duplicated version without updating the active contract that governs version-changing validation.",
-      "change_target": "Add one manifest-as-version-source sentence beside the existing reproducible-pack and CI-order rules in AGENTS.md.",
-      "regression_check": "python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex",
-      "primary_metric": "active-contract debt failures after manifest-derived release fixture changes",
-      "permission_delta": [],
-      "rollback": "Restore Product Builder v12 and retain the debt result if the repeated check is nonempty or the rule claims a new permission.",
-      "change_level": "task",
-      "discovery_evidence": "The required debt check linked the corrected Meta fixture as newer than AGENTS.md after the full suite passed.",
-      "transfer_check": null,
-      "prediction": "The same debt check returns an empty inventory with one precise version-source rule and no permission change.",
-      "expected_delta": {
-        "active_contract_debt_failures": "1 -> 0",
-        "permission_delta": "0 -> 0"
-      },
-      "falsification_condition": "Documentation debt remains, the rule duplicates version state, or permission expands.",
-      "status": "accepted"
-    },
-    {
       "id": "proposal-product-builder-14-readme-count-parity",
       "feedback_ids": [
         "feedback-readme-evidence-count-parity"
@@ -518,27 +256,106 @@
       },
       "falsification_condition": "Either locale test fails, documentation debt is nonempty, or permission expands.",
       "status": "accepted"
+    },
+    {
+      "id": "proposal-navigator-21-derived-constraint-review",
+      "feedback_ids": [
+        "feedback-cross-project-constraint-drift-v2"
+      ],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 20,
+      "to_version": 21,
+      "cause": "The prior candidate asked the model to author per-constraint reasoning and duplicate global conflict metadata, so safe routing could still omit the exact identifiers needed for a machine-linked block.",
+      "change_target": "Add typed scoped constraints plus one standard-library writer that computes applicability, review freshness, final decision, and all conflict identifiers from one authoritative per-constraint relation inventory; legacy states remain valid but cannot fast resume until migrated, reviewed, and re-verified.",
+      "regression_check": "Run focused constraint, checkpoint, migration, evolution, and negative-control tests; then run the preregistered four-round paired model comparison, the full test suite, documentation debt, and Release Gate.",
+      "primary_metric": "exact pre-execution constraint decisions with complete conflict identifiers and zero false execution or false blocks",
+      "permission_delta": [],
+      "rollback": "Remove the new writer and schema additions, restore the 2.2.1 skill tree and Navigator v20, and retain all failed evidence if any required decision, identifier, freshness, migration, permission, or regression check fails.",
+      "change_level": "task",
+      "discovery_evidence": "The user requested functionality-first improvement after the first bounded episode was rejected; three live project audits then reproduced semantic drift, inactive guards, stale permissions, invalid resume state, and missing rollback evidence without requiring private project content in the product candidate.",
+      "transfer_check": "Sanitized live-project shapes cover stale milestone, permission conflict, conflicting project decisions, compatible local work, explicit user supersession, source-file drift, inactive guard claims, and legacy migration; exposed shapes are DEV or VALIDATION only and a core claim still requires a fresh sealed holdout.",
+      "prediction": "The derived-review candidate will return every required decision and conflict identifier in all paired runs, reject stale or incomplete reviews deterministically, preserve compatible work, and add no permission or dependency.",
+      "expected_delta": {
+        "exact_paired_runs": "2/4 -> 4/4",
+        "missing_required_conflict_ids": "4 fields across 2 runs -> 0",
+        "stale_review_fast_resumes": "accepted -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Reject on one wrong decision, omitted or invented constraint identifier, false block, stale review accepted for resume, legacy state entering fast resume, source drift miss, test regression, permission expansion, or unbounded model execution.",
+      "pathology": {
+        "where": "Navigator pre-execution intent and constraint reconciliation",
+        "why": "duplicated model-authored decision metadata can disagree or omit the identifiers that make a block actionable"
+      },
+      "mechanism_id": "derived-constraint-review-v2",
+      "status": "rejected"
+    },
+    {
+      "id": "proposal-gate-13-deterministic-review-envelope",
+      "feedback_ids": [
+        "feedback-deterministic-review-envelope"
+      ],
+      "target_agent": "gate",
+      "author_agent": "coach",
+      "from_version": 12,
+      "to_version": 13,
+      "cause": "The evaluation and response boundary let a model-authored composite overwrite fields that the deterministic constraint writer had already derived.",
+      "change_target": "Make the relation inventory the only model output accepted by the candidate arm, derive the final schema through the shipped writer, name the permission field as granted permission change, and score the exact derived envelope without a second model assembly step.",
+      "regression_check": "Run deterministic constraint and malformed-input tests, then a newly preregistered exposed validation comparison; freeze the candidate before one fresh sealed holdout and keep 2.2.1 active unless both stages are exact.",
+      "primary_metric": "exact writer-produced pre-execution decisions with zero model-overwritten global fields",
+      "permission_delta": [],
+      "rollback": "Remove the envelope integration, restore Gate v12 and the confirmed 2.2.1 tree, and retain both rejected episode results if one final field is model-authored, ambiguous, stale, or incorrect.",
+      "change_level": "meta",
+      "discovery_evidence": "The strict A/B showed the candidate consistently fixed conflict identifier omission while every candidate run still failed a composite-only permission field and alternating runs disagreed on the inactive-guard composite.",
+      "transfer_check": "One fresh sealed family must cover stale scope, external-write approval, a compatible local action, an explicit non-permission supersession, and a declared source that disproves a stored guard claim.",
+      "prediction": "A relation-only candidate arm will produce 4/4 exact exposed validation runs, preserve zero permission grants and fixture writes, and leave every final identifier and decision attributable to the deterministic writer.",
+      "expected_delta": {
+        "exact_candidate_runs": "0/4 -> 4/4",
+        "model_authored_global_fields": "present -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Reject on one relation error, derived-field mismatch, stale source acceptance, false block, false execution, model-authored final field, fixture write, permission expansion, or unbounded invocation.",
+      "pathology": {
+        "where": "Gate evaluation and final decision-envelope integration",
+        "why": "a second model-authored assembly step can overwrite deterministic constraint results"
+      },
+      "mechanism_id": "deterministic-review-envelope-v1",
+      "status": "proposed"
+    },
+    {
+      "id": "proposal-navigator-21-host-legacy-conflict",
+      "feedback_ids": [
+        "feedback-host-entry-legacy-canonical-conflict"
+      ],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 20,
+      "to_version": 21,
+      "cause": "The host-entry writer correctly preserves user guidance, but preservation alone cannot distinguish ordinary guidance from a legacy sentence that grants authority to the other host.",
+      "change_target": "Add one bounded preflight that reports exact cross-host canonical declarations in the active entry and requires an active-host-owned edit before the managed block can count as successful adoption; never auto-delete user text or touch the inactive entry.",
+      "regression_check": "Extend host-entry ownership tests with one legacy-conflict negative control and one nonconflicting user-guidance control, then verify inactive-entry and shared-state hashes remain unchanged in a fresh sequential live cycle.",
+      "primary_metric": "undetected cross-host canonical declarations after sequential adoption",
+      "permission_delta": [],
+      "rollback": "Remove the preflight and restore Navigator v20 if it rewrites user text, flags ordinary references, changes the inactive entry, creates another state writer, or blocks a nonconflicting adoption.",
+      "change_level": "task",
+      "discovery_evidence": "One live dual-host adoption reproduced exactly one legacy cross-host canonical declaration after the shipped writer succeeded while all ownership and shared-state hash checks otherwise passed.",
+      "transfer_check": "A future fresh mixed-host fixture must include both a true canonical conflict and an ordinary historical reference, and only the conflict may block adoption.",
+      "prediction": "The bounded preflight will detect the reproduced semantic conflict with zero inactive-entry mutations, zero shared-state mutations, and zero false blocks on ordinary user guidance.",
+      "expected_delta": {
+        "undetected_legacy_conflicts": "1 -> 0",
+        "inactive_entry_mutations": "0 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Reject if the conflict is missed, ordinary guidance is flagged, user text is auto-rewritten, the inactive entry or shared state changes, permissions expand, or a nonconflicting adoption is blocked.",
+      "pathology": {
+        "where": "Navigator sequential host-adoption completion",
+        "why": "byte preservation can retain a legacy authority declaration that semantically conflicts with the newly managed host block"
+      },
+      "mechanism_id": "host-entry-legacy-conflict-preflight-v1",
+      "status": "proposed"
     }
   ],
   "promotions": [
-    {
-      "id": "promotion-gate-11-github-git-source",
-      "proposal_id": "proposal-gate-11-github-git-source",
-      "gate_agent": "product-builder",
-      "before": "The valid RC.2 adoption was rejected only because Claude reported its exact public GitHub marketplace as source=git plus URL rather than the historical source=github label.",
-      "after": "The sanitizer canonicalizes only the exact NULNUL GitHub repository URL, validates the public run, and retains the local-source rejection control.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "valid exact GitHub marketplace installations rejected by source-label coupling",
-        "rollback_threshold": "roll back if one non-GitHub source is credited or one exact public GitHub installation is rejected",
-        "metric_value": 0,
-        "rollback_operator": "gt",
-        "rollback_value": 0,
-        "evidence": "The exact RC.2 evidence validates with canonical plugin_source=github, while the existing wrong/local source control remains rejected."
-      }
-    },
     {
       "id": "promotion-navigator-20-host-entry-ownership",
       "proposal_id": "proposal-navigator-20-host-entry-ownership",
@@ -576,42 +393,6 @@
       }
     },
     {
-      "id": "promotion-product-builder-7-lazy-doc-debt-scan",
-      "proposal_id": "proposal-product-builder-7-lazy-doc-debt-scan",
-      "gate_agent": "gate",
-      "before": "The tracked-repository debt check returned no debt but spent 17.73645 median seconds across four counterbalanced v2.1.0 runs.",
-      "after": "The candidate returned the identical result in every pair with a 0.2308-second median, a 98.70 percent reduction, and all Git and modification-time controls passing.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "tracked-repository documentation-debt check elapsed seconds",
-        "rollback_threshold": "roll back if a post-promotion run exceeds 50 percent of the v2.1.0 median or returns a different debt result",
-        "metric_value": 0.56,
-        "rollback_operator": "gt",
-        "rollback_value": 8.868225,
-        "evidence": "A separate post-selection command returned the same empty debt inventory in 0.56 seconds; seven focused controls passed."
-      }
-    },
-    {
-      "id": "promotion-product-builder-8-reuse-classification",
-      "proposal_id": "proposal-product-builder-8-reuse-classification",
-      "gate_agent": "gate",
-      "before": "The exact-public 2.2.0 adoption passed the product and safety checks but the sanitizer rejected its explicit reuse decisions.",
-      "after": "The shared predicate accepts explicit reuse, the same public run validates, and the no-decision negative control remains rejected.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "classification-attribution regressions in the exact-public adoption cycle",
-        "rollback_threshold": "roll back on one rejected explicit reuse decision or one credited no-decision roster",
-        "metric_value": 0,
-        "rollback_operator": "gte",
-        "rollback_value": 1,
-        "evidence": "The fresh 2.2.0 transcript was recaptured after the predicate change; it validates with both reuse decisions, while the focused negative control still rejects names without decisions."
-      }
-    },
-    {
       "id": "promotion-gate-12-candidate-stage-identity",
       "proposal_id": "proposal-gate-12-candidate-stage-identity",
       "gate_agent": "product-builder",
@@ -627,96 +408,6 @@
         "rollback_operator": "gte",
         "rollback_value": 1,
         "evidence": "The distinct 2.2.1-rc.1 packaging and activation-copy cycle kept Gate v11 confirmed before observation, produced archive SHA-256 4af765cfc20eb461fe0250f51bda248723c6f36680f86400acb00adca0027eae with one normalized metadata shape, passed 235 tests and Release Gate 100/100 with local_candidate_ready true, rejected stale 2.2.0 Claude and Meta evidence, and added no permission."
-      }
-    },
-    {
-      "id": "promotion-product-builder-9-ci-pack-order",
-      "proposal_id": "proposal-product-builder-9-ci-pack-order",
-      "gate_agent": "gate",
-      "before": "The candidate passed locally with a pre-existing archive but failed one clean-checkout archive assertion before release publication.",
-      "after": "The candidate workflow packs the current manifest version before tests, the order regression check passes, and clean candidate CI completed without regression.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "fresh-checkout archive consistency or workflow-order regressions",
-        "rollback_threshold": "roll back on one missing archive, wrong artifact identity, ordering failure, test regression, or permission expansion",
-        "metric_value": 0,
-        "rollback_operator": "gte",
-        "rollback_value": 1,
-        "evidence": "Fresh candidate CI run 32685218407 packed the 38-entry 2.2.1-rc.2 archive before tests and passed all 238 tests, documentation debt, and Release Gate with no permission change."
-      }
-    },
-    {
-      "id": "promotion-product-builder-10-absolute-roster-read",
-      "proposal_id": "proposal-product-builder-10-absolute-roster-read",
-      "gate_agent": "gate",
-      "before": "The exact-public RC run performed the required bounded roster reads but received no evidence credit because its fixture path was absolute.",
-      "after": "The existing predicate accepts the same bounded read with an absolute prefix and retains the printed-path rejection control.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "bounded absolute roster-read attribution regressions in the same exact-public cycle",
-        "rollback_threshold": "roll back on one rejected valid bounded read, one credited printed-path command, another adoption regression, or permission expansion",
-        "metric_value": 0,
-        "rollback_operator": "gte",
-        "rollback_value": 1,
-        "evidence": "The same exact-public 2.2.1-rc.2 stream recaptured as valid with both unchanged profiles and all five checks passing; nine focused controls retain the printed-path rejection and no permission changed."
-      }
-    },
-    {
-      "id": "promotion-product-builder-11-doc-contract-sync",
-      "proposal_id": "proposal-product-builder-11-doc-contract-sync",
-      "gate_agent": "gate",
-      "before": "The evidence boundary was executable and tested but absent from the active Codex contract, so documentation debt correctly failed.",
-      "after": "The existing roster-enumeration sentence states the same bounded absolute-read and printed-path exclusion enforced by the sanitizer.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "active-contract documentation-debt failures in the repeated required check",
-        "rollback_threshold": "roll back on one remaining debt item, one broader evidence claim, or permission expansion",
-        "metric_value": 0,
-        "rollback_operator": "gte",
-        "rollback_value": 1,
-        "evidence": "The repeated required Codex documentation-debt check returned an empty inventory; the contract mirrors the tested boundary and no permission changed."
-      }
-    },
-    {
-      "id": "promotion-product-builder-12-manifest-version-fixture",
-      "proposal_id": "proposal-product-builder-12-manifest-version-fixture",
-      "gate_agent": "gate",
-      "before": "One test duplicated the prior RC version and failed when the same plugin tree became final 2.2.1.",
-      "after": "The test derives both exact archive naming and validation identity from the existing current manifest; production guards are unchanged.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "version-transition fixture regressions in the focused Meta evidence suite",
-        "rollback_threshold": "roll back on one focused failure, one weakened production identity guard, or permission expansion",
-        "metric_value": 0,
-        "rollback_operator": "gte",
-        "rollback_value": 1,
-        "evidence": "All five focused Meta evidence tests passed against final 2.2.1, the production archive-name guard was unchanged, and no permission changed."
-      }
-    },
-    {
-      "id": "promotion-product-builder-13-version-contract-sync",
-      "proposal_id": "proposal-product-builder-13-version-contract-sync",
-      "gate_agent": "gate",
-      "before": "The test used the manifest as its only version source, but the active release contract did not state that invariant.",
-      "after": "The existing packaging paragraph now requires release fixtures to derive current version from the plugin manifest.",
-      "regressions_passed": true,
-      "decision": "accepted",
-      "live_cycle": {
-        "status": "observed",
-        "metric": "active-contract debt failures in the repeated required check",
-        "rollback_threshold": "roll back on one remaining debt item, duplicated version rule, or permission expansion",
-        "metric_value": 0,
-        "rollback_operator": "gte",
-        "rollback_value": 1,
-        "evidence": "The repeated required Codex documentation-debt check returned an empty inventory, the rule retains one manifest source, and no permission changed."
       }
     },
     {
@@ -736,17 +427,127 @@
         "rollback_value": 1,
         "evidence": "The focused English/Korean link-and-count parity test passed, the required Codex documentation-debt inventory was empty, and no permission changed."
       }
+    },
+    {
+      "id": "promotion-navigator-21-derived-constraint-review",
+      "proposal_id": "proposal-navigator-21-derived-constraint-review",
+      "gate_agent": "gate",
+      "before": "Navigator v20 scored 0/4 and omitted required permission and project conflict identifiers in every baseline round.",
+      "after": "The candidate supplied complete conflict identifiers but scored 0/4 because every round changed the composite permission field and the inactive-guard composite remained order-sensitive; evals/constraint-reconciliation-v2/gate-decision.json keeps 2.2.1 active.",
+      "regressions_passed": false,
+      "decision": "rejected",
+      "live_cycle": null
     }
   ],
-  "autonomous_episodes": [],
+  "autonomous_episodes": [
+    {
+      "id": "episode-constraint-reconciliation-2",
+      "mode": "live",
+      "feedback_id": "feedback-cross-project-constraint-drift-v2",
+      "scope": "core_dev",
+      "pathology": {
+        "where": "Navigator pre-execution intent and constraint reconciliation",
+        "why": "duplicated model-authored decision metadata can disagree or omit the identifiers that make a block actionable"
+      },
+      "budget": {
+        "max_candidates": 1,
+        "max_generations": 1,
+        "max_evaluation_runs": 12,
+        "max_failed_candidates": 1,
+        "max_identical_pathology_retries": 1,
+        "max_model_invocations": 12
+      },
+      "archive_lookup": [],
+      "baseline": {
+        "comparable_dimension": "model_invocations",
+        "fair": true,
+        "arms": [
+          {
+            "id": "champion",
+            "runs": 4,
+            "primary_successes": 0,
+            "model_invocations": 4,
+            "completion_checks": 4,
+            "evidence": "The same-model 2.2.1 arm activated the skill in all four counterbalanced runs and scored 0/4 exact decisions."
+          },
+          {
+            "id": "retry",
+            "runs": 2,
+            "primary_successes": 0,
+            "model_invocations": 2,
+            "completion_checks": 2,
+            "evidence": "Two champion repeats both remained non-exact on the complete six-case decision inventory."
+          },
+          {
+            "id": "best_of_n",
+            "runs": 4,
+            "primary_successes": 0,
+            "model_invocations": 4,
+            "completion_checks": 4,
+            "evidence": "None of four champion runs was selectable as a complete exact result."
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "derived-constraint-review-v2-c1",
+          "proposal_id": "proposal-navigator-21-derived-constraint-review",
+          "generation": 1,
+          "author_agent": "coach",
+          "parent_agent": "navigator",
+          "parent_version": 20,
+          "pathology": {
+            "where": "Navigator pre-execution intent and constraint reconciliation",
+            "why": "duplicated model-authored decision metadata can disagree or omit the identifiers that make a block actionable"
+          },
+          "mechanism_id": "derived-constraint-review-v2",
+          "prediction": "The derived-review candidate will return every required decision and conflict identifier in all paired runs, reject stale or incomplete reviews deterministically, preserve compatible work, and add no permission or dependency.",
+          "falsification_condition": "Reject on one wrong decision, omitted or invented constraint identifier, false block, stale review accepted for resume, legacy state entering fast resume, source drift miss, test regression, permission expansion, or unbounded model execution.",
+          "permission_delta": [],
+          "rollback": "Remove the new writer and schema additions, restore the 2.2.1 skill tree and Navigator v20, and retain all failed evidence if any required decision, identifier, freshness, migration, permission, or regression check fails.",
+          "archive_match": null,
+          "evaluation": {
+            "candidate_id": "derived-constraint-review-v2-c1",
+            "owner_agent": "gate",
+            "status": "failed",
+            "runs": 4,
+            "primary_success": false,
+            "guardrails_passed": false,
+            "evidence": "The strict paired result was 0/4: conflict identifiers were complete, but every run changed permission_delta and the inactive-guard decision remained order-sensitive. Input grew 1.42 percent; no permission was granted, no fixture changed, and no raw transcript was retained.",
+            "cost": {
+              "model_invocations": 4,
+              "completion_checks": 4
+            }
+          },
+          "decision": "rejected",
+          "rejection_reason": "The frozen strict correctness Gate requires every final field to be exact and does not waive composite-output failures after exposure."
+        }
+      ],
+      "gate_agent": "gate",
+      "sealed_evaluation": true,
+      "holdout_case_ids_read": [],
+      "cost": {
+        "candidates_generated": 1,
+        "generations": 1,
+        "evaluation_runs": 4,
+        "failed_candidates": 1,
+        "model_invocations": 4,
+        "completion_checks": 4
+      },
+      "decision": "NO_PROMOTION",
+      "selected_candidate_id": null,
+      "stop_reason": "NO_PROMOTION",
+      "claim_boundary": "This exposed DEV/VALIDATION episode establishes only that deterministic conflict identifiers improved while the composite-output integration remained non-exact. It does not establish a 2.3 candidate, holdout generalization, live adoption, or permission change. The frozen preregistration's zero retries is represented as one evaluated mechanism instance and no retry under the shipped validator."
+    }
+  ],
   "archive": {
     "schema_version": 1,
     "path": "evolution.archive.json",
-    "sha256": "a54be9dd2e43c876b626989e0e9f892f342fe6151a918a3f26d3558c9880b69d",
+    "sha256": "6eb777970c9eaf3a376db9348f81a5baa96b715a6872702d5245c61f3d66544c",
     "counts": {
-      "feedback": 36,
-      "proposals": 41,
-      "promotions": 41,
+      "feedback": 45,
+      "proposals": 50,
+      "promotions": 50,
       "autonomous_episodes": 6
     }
   }

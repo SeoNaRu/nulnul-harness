@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-lifecycle-2.3.0-1",
+  "model": "gpt-5.6-sol",
+  "rounds_per_arm": 4,
+  "raw_transcript_retained": false,
+  "permission_delta": [],
+  "arms": [
+    {
+      "id": "champion",
+      "skill_tree_sha256": "853b5350f8e30b2bcd52387f7b2a202fbbba10f30aea3f9b13d6d8e73a7b3f79",
+      "exact_runs": 0,
+      "medians": {
+        "elapsed_seconds": 66.035,
+        "input_tokens": 53677.0,
+        "output_tokens": 1279.0,
+        "reasoning_output_tokens": 589.5
+      },
+      "runs": [
+        {
+          "round": 1,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict",
+            "ambiguous-project-conflict"
+          ],
+          "elapsed_seconds": 57.49,
+          "input_tokens": 54014,
+          "output_tokens": 1268,
+          "reasoning_output_tokens": 524
+        },
+        {
+          "round": 2,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict",
+            "ambiguous-project-conflict"
+          ],
+          "elapsed_seconds": 58.16,
+          "input_tokens": 34349,
+          "output_tokens": 1141,
+          "reasoning_output_tokens": 551
+        },
+        {
+          "round": 3,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict",
+            "ambiguous-project-conflict"
+          ],
+          "elapsed_seconds": 73.91,
+          "input_tokens": 53651,
+          "output_tokens": 1764,
+          "reasoning_output_tokens": 1107
+        },
+        {
+          "round": 4,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict",
+            "ambiguous-project-conflict"
+          ],
+          "elapsed_seconds": 85.6,
+          "input_tokens": 53703,
+          "output_tokens": 1290,
+          "reasoning_output_tokens": 628
+        }
+      ]
+    },
+    {
+      "id": "candidate",
+      "skill_tree_sha256": "60a49fa71b2ad5ae06dca5c7262d7d5cb7ee96939af9443762a758c28f9b38bd",
+      "exact_runs": 1,
+      "medians": {
+        "elapsed_seconds": 71.6,
+        "input_tokens": 64559.5,
+        "output_tokens": 1410.5,
+        "reasoning_output_tokens": 682.5
+      },
+      "runs": [
+        {
+          "round": 1,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "ambiguous-project-conflict",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict"
+          ],
+          "elapsed_seconds": 69.24,
+          "input_tokens": 74810,
+          "output_tokens": 1523,
+          "reasoning_output_tokens": 707
+        },
+        {
+          "round": 2,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "ambiguous-project-conflict",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict"
+          ],
+          "elapsed_seconds": 73.96,
+          "input_tokens": 54343,
+          "output_tokens": 1342,
+          "reasoning_output_tokens": 676
+        },
+        {
+          "round": 3,
+          "correct": false,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "ambiguous-project-conflict",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [
+            "permission-conflict"
+          ],
+          "elapsed_seconds": 77.49,
+          "input_tokens": 74776,
+          "output_tokens": 1479,
+          "reasoning_output_tokens": 689
+        },
+        {
+          "round": 4,
+          "correct": true,
+          "activated": true,
+          "exact_cases": [
+            "obsolete-milestone-constraint",
+            "permission-conflict",
+            "ambiguous-project-conflict",
+            "compatible-local-constraint",
+            "explicit-user-supersession"
+          ],
+          "failed_cases": [],
+          "elapsed_seconds": 55.02,
+          "input_tokens": 54338,
+          "output_tokens": 1281,
+          "reasoning_output_tokens": 634
+        }
+      ]
+    }
+  ],
+  "paired_input_change_percent": 38.94
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-lifecycle-2.3.0-1",
+  "refinement": 1,
+  "maximum_refinements": 1,
+  "from_candidate_id": "typed-scoped-constraint-reconciliation-v1-c1",
+  "from_skill_tree_sha256": "60a49fa71b2ad5ae06dca5c7262d7d5cb7ee96939af9443762a758c28f9b38bd",
+  "evidence_sha256": "9f7428306c8736d5b8b728ccfd6c21f4028f209f8678fe08bebf4fc6712fc053",
+  "observed": "Candidate 1 scored 1/4 exact runs; permission-conflict failed in three rounds and paired input increased 38.94%.",
+  "pathology": {
+    "where": "Navigator constraint preflight and read-only decision route",
+    "why": "The instruction did not operationally distinguish a request for a gated action from exact recorded approval, and the read-only route did not explicitly forbid irrelevant script/reference inspection. The cost cause is an inference from the repeated roughly one-turn input increase."
+  },
+  "mechanism_id": "direct-read-only-permission-preflight-v2",
+  "change": "Use one ordered preflight: exact milestone applicability, exact approved_permissions lookup for gated actions, narrow project-only supersession, then route; named read-only decisions load no scripts or references.",
+  "prediction": "Candidate 2 will score 4/4 exact runs and keep median paired input increase at or below 20% while preserving all four already-correct cases.",
+  "falsification_condition": "Reject on any failed case, permission expansion, fixture write, missing skill activation, or paired input increase above 20%.",
+  "permission_delta": [],
+  "candidate_one_decision": "rejected",
+  "recorded_at": "2026-08-25T13:45:45+09:00"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-reconciliation-2.3.0-2",
+  "gate_agent": "gate",
+  "recorded_at": "2026-08-25T16:52:00+09:00",
+  "champion": {
+    "version": "2.2.1",
+    "skill_tree_sha256": "156eaffa8b10e1aeb462b2a34e837d793feb66e869daded137d154af64d0497e",
+    "exact_runs": 0,
+    "required_runs": 4
+  },
+  "candidate": {
+    "id": "derived-constraint-review-v2-c1",
+    "skill_tree_sha256": "c81893f53b5e9010dc6b82151f0a8d6095ec771086e0ff8a144f364643914732",
+    "results_sha256": "464bd57325ad402f62cedae7b12b79e440e3884484fbe2918c3395cf94b4320f",
+    "exact_runs": 0,
+    "required_runs": 4,
+    "paired_input_change_percent": 1.42,
+    "decision": "rejected"
+  },
+  "guardrails": {
+    "raw_transcript_retained": false,
+    "permission_delta": [],
+    "fixture_writes": 0,
+    "candidate_skill_activation_runs": 4,
+    "deterministic_regressions_passed": true
+  },
+  "decision": "NO_PROMOTION",
+  "stop_reason": "NO_PROMOTION",
+  "reason": "The frozen candidate reached 0/4 exact runs. It removed the champion's missing conflict identifiers but the model-authored composite still changed permission_delta and handled the inactive-guard block inconsistently, so the strict correctness Gate cannot waive the failures after exposure.",
+  "next_unevaluated_hypothesis": "Move the final response boundary behind the deterministic writer: the model emits only per-constraint relations and explicit supersessions, while the runtime derives and scores every global field without a second model-authored assembly step.",
+  "plugin_version_decision": "keep 2.2.1"
+}

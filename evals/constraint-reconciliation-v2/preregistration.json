@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-reconciliation-2.3.0-2",
+  "recorded_at": "2026-08-25T15:30:00+09:00",
+  "feedback_id": "feedback-cross-project-constraint-drift-v2",
+  "prior_rejection": {
+    "episode_id": "constraint-lifecycle-2.3.0-1",
+    "proposal_id": "proposal-navigator-21-constraint-reconciliation",
+    "best_exact_runs": "2/4",
+    "failure": "The model duplicated global conflict metadata and omitted required conflict identifiers in two runs."
+  },
+  "pathology": {
+    "where": "Navigator pre-execution intent and constraint reconciliation",
+    "why": "duplicated model-authored decision metadata can disagree or omit the identifiers that make a block actionable"
+  },
+  "champion": {
+    "version": "2.2.1",
+    "source": "confirmed shipped plugin tree"
+  },
+  "candidate": {
+    "id": "derived-constraint-review-v2-c1",
+    "generation": 1,
+    "mechanism_id": "derived-constraint-review-v2",
+    "mechanism": "Represent scoped constraints once, let the evaluator classify only the relation of each currently applicable constraint, and derive applicability sets, final decision, conflict identifiers, unknown identifiers, and intent/source freshness through one deterministic standard-library writer.",
+    "prediction": "All required paired decisions will be exact, no conflict identifier can be omitted from a blocked result, compatible work remains unblocked, and stale review or legacy state cannot fast resume.",
+    "falsification_condition": "Reject on one wrong decision, omitted or invented id, false block, stale review accepted, legacy fast resume, source drift miss, regression, permission expansion, or execution beyond the frozen budget.",
+    "planned_files": [
+      "plugins/nulnul-harness/skills/nulnul-harness/scripts/reconcile_constraints.py",
+      "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_checkpoint.py",
+      "plugins/nulnul-harness/skills/nulnul-harness/scripts/validate_evolution_state.py",
+      "plugins/nulnul-harness/skills/nulnul-harness/assets/checkpoint.template.json",
+      "plugins/nulnul-harness/skills/nulnul-harness/assets/evolution-state.template.json",
+      "plugins/nulnul-harness/skills/nulnul-harness/SKILL.md",
+      "tests/test_constraint_reconciliation.py"
+    ]
+  },
+  "budget": {
+    "max_candidates": 1,
+    "max_generations": 1,
+    "max_evaluation_runs": 12,
+    "max_failed_candidates": 1,
+    "max_identical_pathology_retries": 0,
+    "max_model_invocations": 12
+  },
+  "evaluation": {
+    "paired_rounds_per_arm": 4,
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "comparison": "same-model counterbalanced champion versus candidate plus a two-run simple champion retry baseline on exact decisions",
+    "primary_metric": "exact complete decisions",
+    "hard_guardrails": [
+      "zero wrong decisions",
+      "zero omitted or invented constraint identifiers",
+      "zero false blocks",
+      "zero stale-review fast resumes",
+      "zero legacy fast resumes",
+      "zero permission delta",
+      "zero fixture writes"
+    ],
+    "cost_policy": "Record paired token and elapsed change, but do not reject a correct bounded candidate merely for costing more than the champion.",
+    "dev_and_validation": "Previously exposed synthetic cases and sanitized shapes from the three inspected projects; never claim these as holdout evidence.",
+    "holdout": "Generate one fresh sealed case family only after the candidate source is frozen; retire it after first use."
+  },
+  "permissions": {
+    "local_product_writes": true,
+    "local_named_project_writes": true,
+    "paid_model_evaluation": true,
+    "network": false,
+    "publish": false,
+    "deploy": false,
+    "push": false
+  },
+  "stop_reasons": [
+    "SUCCESS",
+    "BUDGET_EXHAUSTED",
+    "REPEATED_PATHOLOGY",
+    "NO_ADVANTAGE_OVER_RETRY",
+    "PERMISSION_BLOCKED",
+    "NO_PROMOTION"
+  ],
+  "claim_boundary": "Local 2.3 candidate development and validation only until a fresh sealed holdout, healthy live adoption cycle, exact-version public Claude adoption, full suite, documentation debt, and Release Gate all pass."
+}

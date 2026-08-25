@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-lifecycle-2.3.0-1",
+  "candidate_id": "typed-scoped-constraint-reconciliation-v1-c1",
+  "generation": 1,
+  "frozen_at": "2026-08-25T13:12:19+09:00",
+  "status": "frozen_before_evaluation",
+  "skill_tree_sha256": "60a49fa71b2ad5ae06dca5c7262d7d5cb7ee96939af9443762a758c28f9b38bd",
+  "skill_entry_sha256": "14150efae5434b4d881a8aec58be6b62f43da7287699ab02f8bd4216c552a8cb",
+  "preregistration_sha256": "85c22ca5e59e32ecae2ffdcae7f8226f546e0dd381833dfb81d48198413c94e8",
+  "cases_sha256": "8122d7029e51b50cbbc517cd334b0f3983656faa1370fd70ccd2512133c8b9b9",
+  "decision_schema_sha256": "f685e18402fb90d8b0b4dae84b2ee19486bba24d4e3da66c80ab6c7beed002bf",
+  "permission_delta": [],
+  "claim_boundary": "Local DEV and VALIDATION candidate only; no holdout or public-release claim."
+}

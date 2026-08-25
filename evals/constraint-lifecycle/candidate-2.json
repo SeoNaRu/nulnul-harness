@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "episode_id": "constraint-lifecycle-2.3.0-1",
+  "candidate_id": "direct-read-only-permission-preflight-v2-c2",
+  "parent_candidate_id": "typed-scoped-constraint-reconciliation-v1-c1",
+  "generation": 1,
+  "refinement": 1,
+  "frozen_at": "2026-08-25T13:45:45+09:00",
+  "status": "frozen_before_evaluation",
+  "skill_tree_sha256": "1b60e53e15b9c67a8c9851947266d68544a8970c18075da10cf399a2ea18dc94",
+  "skill_entry_sha256": "1008032e22363ebc79a3e9162bc236ccbec498b957493af02535afb26f010951",
+  "decision_schema_sha256": "cfcfe35a6bb9bb0cb738f11dbf647af4f29023a93a1f3554b3af7efc9eb46ce7",
+  "runner_sha256": "c7e62af78f8db37c13537ddfea1bd9783358ad7cad903ba6d6cb715efb536c56",
+  "baseline_results_sha256": "9f7428306c8736d5b8b728ccfd6c21f4028f209f8678fe08bebf4fc6712fc053",
+  "permission_delta": [],
+  "claim_boundary": "Local DEV and VALIDATION candidate only; no holdout or public-release claim."
+}

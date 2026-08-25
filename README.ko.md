@@ -422,8 +422,10 @@ Gate를 통과했다고 확정 버전을 곧바로 바꾸지 않습니다. 후�
 - 2.0 [Meta 사전 등록](evals/meta-evolution/preregistration.json), [형식화된 근거](evals/meta-evolution/cross-project-evidence.json), [Meta Gate 결과](evals/meta-evolution/results.json), [공개 버전 채택 근거](evals/meta-evolution/public-adoption.json)
 - 2.0 이후 [기능 권한 `NO_ADVANTAGE`](evals/capability-authority/results.json), [의도·더 나은 경로 `NO_PROMOTION`](evals/intent-better-path/results.json), [결정 산출물 `NO_PROMOTION`](evals/decision-boundaries/results.json), [저장소 영수증 `NO_PROMOTION`](evals/repository-receipts/results.json)
 - 2.2 동작 경계 [사전 등록](evals/behavior-boundaries/preregistration.json), [사례](evals/behavior-boundaries/cases.json), [정제된 거절 결과](evals/behavior-boundaries/results.json), 평가에서 제외한 [잘못된 첫 실행](evals/behavior-boundaries/invalid-evaluator-episode-1.json)
+- 거부된 2.3 제약 수명주기 [사전 등록](evals/constraint-lifecycle/preregistration.json)과 [Gate 결정](evals/constraint-lifecycle/gate-decision.json): 기존 방식은 정확 실행 0/4, 후보 1은 입력 +38.94%에서 1/4, 허용된 한 번의 개선안은 +19.98%에서 2/4였으므로 `NO_PROMOTION`으로 2.2.1을 유지함
+- 거부된 파생 검토 후속 [사전 등록](evals/constraint-reconciliation-v2/preregistration.json)과 [Gate 결정](evals/constraint-reconciliation-v2/gate-decision.json): 기존 방식과 후보 모두 0/4였고, 후보는 입력 +1.42%에서 충돌 식별자를 완성했지만 권한 필드를 바꾸고 비활성 가드 판정이 일관되지 않아 코드를 제거하고 2.2.1을 유지함
 
-마지막 묶음은 공개 기능의 근거가 아니라 거절 기록입니다.
+동작 경계와 두 제약 항목은 공개 기능의 근거가 아니라 거절 기록입니다.
 
 ## 업데이트, 제거, 개발, 기여
 

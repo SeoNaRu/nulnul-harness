@@ -421,8 +421,10 @@ Evolution records:
 - 2.0 [Meta preregistration](evals/meta-evolution/preregistration.json), [typed evidence](evals/meta-evolution/cross-project-evidence.json), [Meta Gate result](evals/meta-evolution/results.json), and [exact-public adoption](evals/meta-evolution/public-adoption.json);
 - post-2.0 [capability-authority `NO_ADVANTAGE`](evals/capability-authority/results.json), [intent/better-path `NO_PROMOTION`](evals/intent-better-path/results.json), [decision-artifact `NO_PROMOTION`](evals/decision-boundaries/results.json), and [repository-receipt `NO_PROMOTION`](evals/repository-receipts/results.json);
 - 2.2 behavior-boundary [preregistration](evals/behavior-boundaries/preregistration.json), [cases](evals/behavior-boundaries/cases.json), [sanitized rejection result](evals/behavior-boundaries/results.json), and the excluded [invalid first episode](evals/behavior-boundaries/invalid-evaluator-episode-1.json).
+- the rejected 2.3 constraint-lifecycle [preregistration](evals/constraint-lifecycle/preregistration.json) and [Gate decision](evals/constraint-lifecycle/gate-decision.json): the champion scored 0/4 exact runs, candidate 1 scored 1/4 at +38.94% paired input, and the one allowed refinement scored 2/4 at +19.98%, so `NO_PROMOTION` kept 2.2.1 active.
+- the rejected derived-review follow-up [preregistration](evals/constraint-reconciliation-v2/preregistration.json) and [Gate decision](evals/constraint-reconciliation-v2/gate-decision.json): champion and candidate both scored 0/4; the candidate completed conflict identifiers at +1.42% paired input but changed a permission field and remained inconsistent on the inactive guard, so its code was removed and 2.2.1 remained active.
 
-The last group records rejected work, not shipped behavior evidence.
+The behavior-boundary and both constraint entries record rejected work, not shipped behavior evidence.
 
 ## Update, remove, develop, and contribute
 
