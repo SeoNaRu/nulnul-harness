@@ -257,7 +257,7 @@ NULNUL's public claims are intentionally narrower than its architecture.
 
 | Evidence | Result | What it supports |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **431/431 PASS** | Foundation, Pack, verification, Memory, lifecycle, privacy, rollback, evolution, migration, and release contracts |
+| [Repository test suite](tests/) | **431 passed (431/431)** | Foundation, Pack, verification, Memory, lifecycle, privacy, rollback, evolution, migration, and release contracts |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | Release integrity for the frozen 3.0.0 product |
 | [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Published stable release** | Public `v3.0.0` tag and release |
 | `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | Reproducible release archive |
@@ -282,6 +282,8 @@ See:
 
 - [Post-2.2.1 proof decision](docs/roadmap/post-2.2.1-proof-decision.md)
 - [Baseline findings](docs/roadmap/post-2.2.1-baseline-findings.md)
+- [Meta HyperAgents](https://ai.meta.com/research/publications/hyperagents/)
+- [GeekNews Weekly 2026-15](https://news.hada.io/weekly/202615)
 
 Historical failure evidence remains available; it is no longer presented as the current product state.
 
