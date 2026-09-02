@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "evaluation_kind": "deterministic-decision-contract",
+  "claim_boundary": "These cases verify NULNUL's capability-selection contract. They do not measure model task performance, estimate universal quality, or prove that an external capability is better without task-specific evidence.",
+  "decision_order": [
+    "maximize_expected_verified_outcome_quality",
+    "respect_user_safety_permission_cost_compatibility_and_reproducibility_constraints",
+    "break_materially_equivalent_ties_by_lower_waste"
+  ],
+  "cases": [
+    {
+      "id": "more-capability-clearly-wins",
+      "category": "quality-over-size",
+      "evidence": "Direct execution misses a reproduced security defect; a specialized capability plus independent review fixes it and passes both checks at proportionate cost.",
+      "paths": {
+        "direct": {
+          "outcome": "materially_weaker",
+          "verification": "misses_reproduced_defect",
+          "added_capabilities": 0,
+          "total_cost": "lower"
+        },
+        "specialized-reviewed": {
+          "outcome": "materially_better",
+          "verification": "passes_completion_and_independent_review",
+          "added_capabilities": 2,
+          "total_cost": "proportionate"
+        }
+      },
+      "expected_path": "specialized-reviewed",
+      "expected_action": "SELECT",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "same-quality-less-complexity-wins",
+      "category": "simplicity-tie-breaker",
+      "evidence": "Both paths pass the same completion and regression checks with materially equivalent quality; the two-capability path has lower context and coordination cost.",
+      "paths": {
+        "focused-two": {
+          "outcome": "materially_equivalent",
+          "verification": "passes_all_checks",
+          "added_capabilities": 2,
+          "total_cost": "lower"
+        },
+        "broad-seven": {
+          "outcome": "materially_equivalent",
+          "verification": "passes_all_checks",
+          "added_capabilities": 7,
+          "total_cost": "higher"
+        }
+      },
+      "expected_path": "focused-two",
+      "expected_action": "SELECT",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "installed-capability-materially-weaker",
+      "category": "external-replacement",
+      "evidence": "The installed capability is verified but misses a task-critical check; a maintained compatible candidate passes it, has acceptable license and permissions, and requires approved installation. The installed capability has no unique project-fit value after comparison.",
+      "paths": {
+        "installed": {
+          "outcome": "materially_weaker",
+          "verification": "misses_task_critical_check",
+          "added_capabilities": 0,
+          "total_cost": "lower"
+        },
+        "external-verified": {
+          "outcome": "materially_better",
+          "verification": "passes_task_critical_check",
+          "added_capabilities": 1,
+          "total_cost": "proportionate",
+          "requires_approval": true
+        }
+      },
+      "expected_path": "external-verified",
+      "expected_action": "REQUEST_APPROVAL",
+      "expected_validation": "PASS",
+      "after_approval": {
+        "lifecycle": [
+          "REPLACE",
+          "RETIRE"
+        ],
+        "active": "external-verified",
+        "retired": "installed"
+      }
+    },
+    {
+      "id": "tiny-improvement-huge-complexity-loses",
+      "category": "quality-adjusted-cost",
+      "evidence": "The expanded path adds only a marginal quality estimate while multiplying context, runtime, coordination, and maintenance cost; both paths pass the required checks.",
+      "paths": {
+        "existing-strong": {
+          "outcome": "strong",
+          "verification": "passes_all_checks",
+          "added_capabilities": 0,
+          "total_cost": "lower"
+        },
+        "expanded": {
+          "outcome": "marginally_better",
+          "verification": "passes_all_checks",
+          "added_capabilities": 8,
+          "total_cost": "disproportionate"
+        }
+      },
+      "expected_path": "existing-strong",
+      "expected_action": "KEEP",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "zero-additions-is-correct",
+      "category": "outcome-competitive-reuse",
+      "evidence": "The current project setup already passes every task-specific completion, regression, and verification check; the proposed addition produces no material improvement.",
+      "paths": {
+        "current-zero": {
+          "outcome": "strongest_justified",
+          "verification": "passes_all_checks",
+          "added_capabilities": 0,
+          "total_cost": "lower"
+        },
+        "optional-addition": {
+          "outcome": "materially_equivalent",
+          "verification": "passes_all_checks",
+          "added_capabilities": 1,
+          "total_cost": "higher"
+        }
+      },
+      "expected_path": "current-zero",
+      "expected_action": "KEEP",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "under-building-is-failure",
+      "category": "under-building",
+      "evidence": "A minimal-only choice omits the available specialist and independent verification even though the reproduced task then remains incomplete and a known defect escapes.",
+      "paths": {
+        "minimal-only": {
+          "outcome": "incomplete",
+          "verification": "known_defect_escapes",
+          "added_capabilities": 0,
+          "total_cost": "lower"
+        },
+        "justified-specialist": {
+          "outcome": "materially_better",
+          "verification": "passes_completion_and_independent_review",
+          "added_capabilities": 2,
+          "total_cost": "proportionate"
+        }
+      },
+      "observed_path": "minimal-only",
+      "expected_path": "justified-specialist",
+      "expected_action": "REJECT_OBSERVED",
+      "expected_validation": "FAIL_UNDER_BUILDING"
+    },
+    {
+      "id": "beginner-states-outcome-not-topology",
+      "category": "beginner-burden",
+      "evidence": "The user asks only for signup with login regression safety. Repository inspection reveals the existing test and security boundaries without requiring the user to choose agents, skills, MCPs, or reviewer topology.",
+      "paths": {
+        "ask-user-for-topology": {
+          "outcome": "avoidable_user_burden",
+          "verification": "not_started",
+          "user_harness_decisions": 4
+        },
+        "infer-project-fit-path": {
+          "outcome": "strongest_justified",
+          "verification": "repository_checks_selected",
+          "user_harness_decisions": 0
+        }
+      },
+      "expected_path": "infer-project-fit-path",
+      "expected_action": "INFER_TOPOLOGY",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "no-ai-fomo-with-strong-project-fit-capability",
+      "category": "ai-fomo",
+      "evidence": "A newly popular external tool exists, but the current project-fit capability passes the relevant completion, regression, and verification checks and no material gap is observed.",
+      "paths": {
+        "search-because-new": {
+          "outcome": "no_material_improvement",
+          "verification": "no_gap_evidence",
+          "total_cost": "higher"
+        },
+        "keep-current": {
+          "outcome": "strongest_justified",
+          "verification": "passes_project_checks",
+          "total_cost": "lower"
+        }
+      },
+      "expected_path": "keep-current",
+      "expected_action": "KEEP",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "local-skill-evolves-without-external-replacement",
+      "category": "capability-evolution",
+      "evidence": "The current reservation-review skill repeatedly misses cancellation-state conflicts. No external candidate closes the project-specific gap; a bounded v3 candidate derived from failures and project tests passes the comparison without regression.",
+      "paths": {
+        "keep-v2": {
+          "outcome": "materially_weaker",
+          "verification": "reproduced_failure_remains"
+        },
+        "reservation-review-v3": {
+          "outcome": "materially_better",
+          "verification": "champion_comparison_and_gate_pass"
+        }
+      },
+      "expected_path": "reservation-review-v3",
+      "expected_action": "UPGRADE",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "project-skill-beats-famous-external",
+      "category": "project-fit-selection",
+      "evidence": "A famous external reviewer is maintained and safe but misses the project's Oracle and PMS transaction invariant. The current local reviewer passes the project-specific holdout.",
+      "paths": {
+        "famous-external": {
+          "outcome": "materially_weaker_here",
+          "verification": "misses_project_invariant",
+          "popularity": "higher"
+        },
+        "project-reviewer": {
+          "outcome": "project_fit",
+          "verification": "passes_project_holdout",
+          "popularity": "not_relevant"
+        }
+      },
+      "expected_path": "project-reviewer",
+      "expected_action": "KEEP",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "merge-overlap-instead-of-accumulate",
+      "category": "capability-merge",
+      "evidence": "Two active review skills overlap. A bounded merged survivor preserves both unique checks, passes the same outcome and regression suite, and lowers routing and context cost.",
+      "paths": {
+        "keep-both": {
+          "outcome": "materially_equivalent",
+          "verification": "passes_all_checks",
+          "duplicate_jobs": 1
+        },
+        "merged-survivor": {
+          "outcome": "materially_equivalent",
+          "verification": "passes_all_checks",
+          "duplicate_jobs": 0
+        }
+      },
+      "expected_path": "merged-survivor",
+      "expected_action": "MERGE_AND_RETIRE",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "agent-evolves-from-repeated-project-failure",
+      "category": "agent-evolution",
+      "evidence": "Backend Reviewer v1 repeatedly misses a project transaction boundary. One bounded v2 role candidate adds that concrete job, keeps bounded authority and handoff, and wins the comparison and Gate.",
+      "paths": {
+        "backend-reviewer-v1": {
+          "outcome": "materially_weaker",
+          "verification": "repeated_miss"
+        },
+        "backend-reviewer-v2": {
+          "outcome": "materially_better",
+          "verification": "champion_comparison_and_gate_pass"
+        }
+      },
+      "expected_path": "backend-reviewer-v2",
+      "expected_action": "UPGRADE",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "routing-evolves-without-rewriting-good-skills",
+      "category": "routing-evolution",
+      "evidence": "Both installed skills pass their own project checks, but repeated task failures come from activating the wrong one. A bounded routing change selects the correct skill and wins without changing either skill.",
+      "paths": {
+        "rewrite-skills": {
+          "outcome": "misdiagnosed",
+          "verification": "capabilities_were_already_strong"
+        },
+        "routing-candidate": {
+          "outcome": "materially_better",
+          "verification": "comparison_and_gate_pass",
+          "capability_files_changed": 0
+        }
+      },
+      "expected_path": "routing-candidate",
+      "expected_action": "UPGRADE_ROUTING",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "verified-state-enables-bounded-continuity",
+      "category": "continuity",
+      "evidence": "The checkpoint, verification receipt, task, files, and permission boundary still match. The resumed path validates them and uses only the declared read set without asking the user to restate project facts.",
+      "paths": {
+        "reconstruct-and-reask": {
+          "outcome": "avoidable_reexplanation",
+          "verification": "ignores_verified_state"
+        },
+        "verified-bounded-resume": {
+          "outcome": "strongest_justified",
+          "verification": "checkpoint_and_negative_controls_pass",
+          "reexplanation_questions": 0
+        }
+      },
+      "expected_path": "verified-bounded-resume",
+      "expected_action": "RESUME",
+      "expected_validation": "PASS"
+    },
+    {
+      "id": "plain-language-evidence-without-private-reasoning",
+      "category": "inspectability",
+      "evidence": "A user asks why the path was selected. The response is backed by bounded decision evidence and exposes no transcript, secret, personal data, or chain-of-thought.",
+      "paths": {
+        "opaque-result": {
+          "outcome": "not_learnable",
+          "verification": "missing_decision_evidence"
+        },
+        "progressive-evidence": {
+          "outcome": "inspectable",
+          "verification": "machine_linked_actions",
+          "fields": [
+            "USED",
+            "UPGRADED",
+            "REPLACED",
+            "RETIRED",
+            "SKIPPED",
+            "WHY",
+            "VERIFY",
+            "EVOLUTION",
+            "NEXT_STATE"
+          ],
+          "private_reasoning_exposed": false
+        }
+      },
+      "expected_path": "progressive-evidence",
+      "expected_action": "EXPLAIN",
+      "expected_validation": "PASS"
+    }
+  ]
+}

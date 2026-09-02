@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-09-01T09:37:20+09:00",
+  "frozen_before_fresh_tasks": true,
+  "base_revision": "cee7b91e2a992adee1582702b7a4084c631443b6",
+  "product_tree_sha256": "a91d8b25744efdb6c8867ad2ba33752fed95c53303da56ca933c7614bc28231f",
+  "scientific_tree_sha256": "b2215c8a83ea2abf6a9d894088680230c71eabf6c022ab1dcc678a6443a85f7a",
+  "package_sha256": "73015801eba607481669d689276856cf7a0d73891d582acc3080c8947fd56304",
+  "file_count": 46,
+  "source_path": "/tmp/nulnul-final-foundation.QVjANd/nulnul-harness",
+  "source_read_only": true,
+  "critical_files": {
+    "setup_transaction": "3d745a55ff5dde8baf2ada13718f5b5fc47b7806bcd0d409b170181f8b5effb4",
+    "canonical_capability_contract": "bb2421909061aab85d4d30473ab25515e7caef0069fc2bca664f49e4bf5cef53",
+    "foundation_runtime": "4ce6e4f0120d1b330881c6a0e861f126f0e23ef3084b57a35b056efeaf84f774",
+    "activation_boundary": "b3d729b6a82d10c44b6af42af59859c7eb4518538e99ac25d437880d4c0b2061",
+    "host_entry": "98b1a5166c58d6f43022740094844740da664fb98dcb5be5b51c2d6ec84e5d3b",
+    "layer_contract_registry": "c7a46f717635ebdb8d97725046884a35beebe0bde25471ce11978dd129889bdc",
+    "setup_plan_template": "80717a1374159d43fbd75dae4da0624b6a6c3865649760702f5e6a9ff5136555",
+    "foundation_reference": "b15006e9710eb8bb73d6a866ea9e3999dce450e28a0a1a6955a498fe408c635e",
+    "project_files_reference": "7e0c5955fa33ede6d5ae7fd2f70ce98d86447a4660ec349412e5026c9968d7d7"
+  }
+}

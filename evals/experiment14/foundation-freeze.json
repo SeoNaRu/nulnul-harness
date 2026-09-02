@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "frozen_before_fresh_tasks": true,
+  "base_revision": "cee7b91e2a992adee1582702b7a4084c631443b6",
+  "nulnul_revision": "cee7b91e2a992adee1582702b7a4084c631443b6+foundation.6466a15772673f96",
+  "product_tree_sha256": "6466a15772673f9650593b5488fb828aee9407b41d6ac0b05f8e774052288935",
+  "scientific_tree_sha256": "7d3e805d0bfaa5640119653a4fffe2e2bf85a3f553139d14b99616b6c049cdda",
+  "package_sha256": "982ae1c86bb38038831b4b04d982b222d487cee4ca3457af43daa2d3fea8ca7e",
+  "file_count": 44,
+  "changed_product_files": {
+    ".claude-plugin/plugin.json": "af260cb9343d834d1bec931e4477d5a9220368be5cb6254b876ffc72c7dd1921",
+    ".codex-plugin/plugin.json": "a281eba17c4815898280ab0b8267831f854e62db832181966597e612cc7abf96",
+    "skills/nulnul-harness/SKILL.md": "90e525cf0877e3b5dd5ebab973e0f5091c61f000ce46c2b7836bbd4644d28f1d",
+    "skills/nulnul-harness/agents/openai.yaml": "f5e6090f2482e2c26a0649c74be0ca51fb8a16f822c8a15d29b2cdc1489c409b",
+    "skills/nulnul-harness/assets/codex-activation.rules": "9e924670b92c543c253f2aec679d30e47b012c5d53ab93756e6608beda6566ef",
+    "skills/nulnul-harness/assets/layer-contracts.json": "c7a46f717635ebdb8d97725046884a35beebe0bde25471ce11978dd129889bdc",
+    "skills/nulnul-harness/assets/project-contract.template.md": "2caa1782d0c338b0dd9cd3dd7c2a377468ca58f5068ffc428b01f6d597efbd0a",
+    "skills/nulnul-harness/references/agent-assembly.md": "0ec3566052a6a2391d0d6a7a0c2ed969898caa932636c8acd60c706e55b00ed9",
+    "skills/nulnul-harness/references/baseline-kernel.md": "45b17940380685073cf68d1237474619c5e9b5cdf56ea742871295a5db3d7c41",
+    "skills/nulnul-harness/references/capability-discovery.md": "60e5ec81c338f9dab7870d77d0df68015c292b6e4ef189798d7c7610b3e2cfd8",
+    "skills/nulnul-harness/references/evolution.md": "73e6cdabc1577055251d11037ac7d5aceb94b0cef54d42d50df12c8a4a6705f8",
+    "skills/nulnul-harness/references/foundation.md": "03e2573097215d3dacceae1ab2b1bf5615c8cee8e4a017d6cf33275c06816ff2",
+    "skills/nulnul-harness/references/meta-evolution.md": "256adfb76ce01b4324514669fc840dda9e9be200f09c56ec2545ed8e924fc4f8",
+    "skills/nulnul-harness/references/project-files.md": "37efc4854dfe86f012afbc67611052f6c8ddb8d1e36e3587d6ee2a7a353cf2dd",
+    "skills/nulnul-harness/scripts/activation_boundary.py": "b3d729b6a82d10c44b6af42af59859c7eb4518538e99ac25d437880d4c0b2061",
+    "skills/nulnul-harness/scripts/capability_contract.py": "22183806f67655a24738f3c5cd9ea893d83d5e8d6cb34a34304ff340edeeeb38",
+    "skills/nulnul-harness/scripts/foundation_runtime.py": "8ebf7fc59a40387b4e14d2f4660be58fa5698b018ea47135f3063ecce8690059",
+    "skills/nulnul-harness/scripts/sync_host_entry.py": "5427c1c8f10049247b9af82e2a4ce551354e6decd943833ff571f222e59f9b58",
+    "skills/nulnul-harness/scripts/validate_project_setup.py": "a6d3d6c7c913a2c2245ced21221cf6f9ad1d3ab197e6994481cd7c588d2a8d5f"
+  },
+  "critical_files": {
+    "layer_contract_registry": "c7a46f717635ebdb8d97725046884a35beebe0bde25471ce11978dd129889bdc",
+    "canonical_capability_contract": "22183806f67655a24738f3c5cd9ea893d83d5e8d6cb34a34304ff340edeeeb38",
+    "foundation_runtime": "8ebf7fc59a40387b4e14d2f4660be58fa5698b018ea47135f3063ecce8690059",
+    "activation_boundary": "b3d729b6a82d10c44b6af42af59859c7eb4518538e99ac25d437880d4c0b2061",
+    "host_entry": "5427c1c8f10049247b9af82e2a4ce551354e6decd943833ff571f222e59f9b58"
+  }
+}

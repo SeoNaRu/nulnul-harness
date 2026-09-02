@@ -1,5 +1,6 @@
 import hashlib
 import json
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -62,10 +63,15 @@ class ConstraintLifecycleEvidenceTests(unittest.TestCase):
         self.assertTrue(budget["budget_stop_triggered"])
 
         plugin = ROOT / "plugins/nulnul-harness"
-        manifest = json.loads((plugin / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
-        skill = plugin / "skills/nulnul-harness/SKILL.md"
-        self.assertEqual(manifest["version"], "2.2.1")
-        self.assertEqual(hashlib.sha256(skill.read_bytes()).hexdigest(), prereg["champion"]["skill_sha256"])
+        champion_skill = subprocess.check_output(
+            [
+                "git",
+                "show",
+                f"{prereg['champion']['git_ref']}:plugins/nulnul-harness/skills/nulnul-harness/SKILL.md",
+            ],
+            cwd=ROOT,
+        )
+        self.assertEqual(hashlib.sha256(champion_skill).hexdigest(), prereg["champion"]["skill_sha256"])
         self.assertFalse((plugin / "skills/nulnul-harness/scripts/reconcile_constraints.py").exists())
         self.assertFalse((plugin / "skills/nulnul-harness/scripts/constraint_state.py").exists())
         self.assertFalse((plugin / "skills/nulnul-harness/scripts/record_constraint_review.py").exists())
@@ -84,8 +90,6 @@ class ConstraintLifecycleEvidenceTests(unittest.TestCase):
         self.assertFalse(gate["guardrails"]["raw_transcript_retained"])
 
         plugin = ROOT / "plugins/nulnul-harness"
-        manifest = json.loads((plugin / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
-        self.assertEqual(manifest["version"], "2.2.1")
         self.assertFalse((plugin / "skills/nulnul-harness/scripts/reconcile_constraints.py").exists())
 
 

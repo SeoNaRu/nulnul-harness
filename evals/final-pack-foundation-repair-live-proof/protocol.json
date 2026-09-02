@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "experiment_id": "final-pack-foundation-repair-continuation-proof",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 900,
+  "live_arm_budget": 4,
+  "retries": 0,
+  "foundation_frozen_before_fresh_tasks": true,
+  "historical_direct_surface": {
+    "model_visible_pack_lifecycle_calls": 2,
+    "prepare_output_bytes": 1523,
+    "work_start_output_bytes": 680,
+    "pack_command_output_bytes": 2203,
+    "host_envelope_bytes": 374,
+    "root_guidance_bytes": 989,
+    "capability_metadata_bytes": 899,
+    "input_tokens": 131082,
+    "champion_input_tokens": 94751,
+    "ratio_percent": 138.3437
+  },
+  "preflight_corrections": [
+    {
+      "scope": "fresh Direct scientific wording only",
+      "superseded_task_sha256": "797db2a4ea647027639ccf2a8a61db8e8ae2c00f4cf4ecd3b982e035d275bccd",
+      "cause": "the generic conjunction 'and' produced one score-1 metadata candidate",
+      "model_arms_started": 0,
+      "product_changed": false
+    }
+  ],
+  "champion": {
+    "revision": "cee7b91e2a992adee1582702b7a4084c631443b6",
+    "artifact_sha256": "48a819a3878c9611487a4a632d9a62d1c9bda403f5dbca224466082ada26136b",
+    "tree_sha256": "7965cadc2aa55782194f3c1df31bacd403b4463b222fea3952731cabac350732"
+  },
+  "foundation": {
+    "product_tree_sha256": "f7f3a5a776d7a710bc7f4447f5c59945d4347cf75083444bb63ae868a2f86f65",
+    "scientific_tree_sha256": "157e66829f5d018f5e04abcf59ae15cbd0e7bb5fa9813e1401fb5efee657686f",
+    "package_sha256": "5d093af1b8e7a1b13ef1ee28d6b1e0a902fa19cc51295c7a5207a2c5bdd17c21"
+  },
+  "arms": [
+    {
+      "arm_id": "FINAL-DIRECT-CHAMPION",
+      "task": "direct",
+      "source": "champion",
+      "workspace": "direct-champion"
+    },
+    {
+      "arm_id": "FINAL-DIRECT-PACK-FOUNDATION",
+      "task": "direct",
+      "source": "foundation",
+      "workspace": "direct-foundation"
+    },
+    {
+      "arm_id": "FINAL-SKILL-A-PACK-FOUNDATION",
+      "task": "skill_a",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    },
+    {
+      "arm_id": "FINAL-NEXT-SESSION-FOUNDATION",
+      "task": "next_session",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    }
+  ],
+  "tasks": {
+    "direct": {
+      "case_id": "FINAL-REPAIR-DIRECT",
+      "mode": "DIRECT",
+      "prompt": "Implement `chunk_inclusive()` in `ranges.py`: split an inclusive integer range into ordered `(start, end)` chunks of at most `size`; return an empty list when `start > stop`; reject nonpositive sizes. Leave tests plus NULNUL state untouched. Run the project tests.",
+      "job": "inclusive numeric range chunking",
+      "fixture": "evals/final-pack-foundation-repair-live-proof/fixtures/direct",
+      "task_sha256": "ea8e7e42d3fd599e1c5ac07076305d8243e554f1847fc84e05cefc8a5296a7f8",
+      "fixture_sha256": "171426a1df07072f22bc5032d322dc6c432ee0eaa83cf14a5b51b75e918a00aa",
+      "strict_command": "python3 -m unittest -q",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": [
+        "ranges.py"
+      ],
+      "required_writes": [
+        "ranges.py"
+      ]
+    },
+    "skill_a": {
+      "case_id": "FINAL-REPAIR-SKILL-A",
+      "mode": "PROJECT_FIT",
+      "prompt": "Extend public `submit_job()` requests with optional `region`. Preserve existing missing and empty behavior; accept `us-east` and `eu-west`, and reject other non-empty values through the repository's established validation contract before queue mutation. Do not modify tests. Run the relevant project checks.",
+      "job": "public API request validation and structured error-catalog invariants for job submission",
+      "fixture": "evals/final-pack-foundation-repair-live-proof/fixtures/lifecycle",
+      "overlay": "evals/final-pack-foundation-repair-live-proof/fixtures/project-fit-overlay",
+      "task_sha256": "91d51128c22ee453488c043c65222903004fea98e643ad8a18edb17a7bec6d82",
+      "fixture_sha256": "ac8502c38c3e7ee6606c991208642730f69131cf3f9290e683158fdaddc5c6d5",
+      "overlay_sha256": "7767a238e5c91aabd7319638aed85d2be09d7ca3dc0d016511a16cfd1fa93f2c",
+      "expected_capability": "project-api-validation",
+      "expected_target": "capabilities/project-api-validation/SKILL.md",
+      "expected_body_sha256": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+      "project_check_identity": "api-contract",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": [
+        "jobs.py",
+        "contracts/error-codes.json"
+      ],
+      "required_writes": [
+        "jobs.py",
+        "contracts/error-codes.json"
+      ]
+    },
+    "next_session": {
+      "case_id": "FINAL-REPAIR-NEXT-SESSION",
+      "mode": "NEXT_SESSION",
+      "prompt": "Add public `submit_jobs(requests, queue)` batch submission. Validate the entire batch through the existing request-validation contract before mutating the queue, preserve caller-owned inputs, return all jobs on success, and return the first structured validation error on failure. Do not modify tests. Run the relevant project checks.",
+      "job": "public API request validation and structured error-catalog invariants for job submission",
+      "fixture": "evals/final-pack-foundation-repair-live-proof/fixtures/lifecycle",
+      "overlay": "evals/final-pack-foundation-repair-live-proof/fixtures/next-session-overlay",
+      "task_sha256": "8a31304c6cd9238bc58b4fb5f854ef5b6104b0659f318b22ef143d2911b016cf",
+      "fixture_sha256": "ac8502c38c3e7ee6606c991208642730f69131cf3f9290e683158fdaddc5c6d5",
+      "overlay_sha256": "bdf50684e5027f4f52d14a7ed5d360b278c3583288c50d0a1f71c282100b1f67",
+      "expected_capability": "project-api-validation",
+      "expected_target": "capabilities/project-api-validation/SKILL.md",
+      "expected_body_sha256": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+      "project_check_identity": "api-contract",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": [
+        "jobs.py"
+      ],
+      "required_writes": [
+        "jobs.py"
+      ]
+    }
+  }
+}

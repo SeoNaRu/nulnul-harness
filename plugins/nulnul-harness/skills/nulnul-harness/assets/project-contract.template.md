@@ -8,7 +8,7 @@ Status: initial, removable hypothesis.
 
 ## Current milestone
 
-{smallest outcome that must work now}
+{user-visible outcome that must work now}
 
 Observable completion check: {user-visible or machine-verifiable result}
 
@@ -36,7 +36,15 @@ Observable completion check: {user-visible or machine-verifiable result}
 | --- | --- | --- | --- | --- | --- |
 | {existing skill, plugin, or native tool} | {installed, curated, or public source} | {evidence} | {boundary} | {verified, provisional with gap, or rejected} | {reuse or reject with reason} |
 
-Create a custom capability only when the checked candidates are inadequate.
+Create a custom capability only when a recurring job has a material outcome or verification gap and the checked candidates are not outcome-competitive.
+
+## Accepted capabilities
+
+This table is the single deterministic acceptance source used by Setup, Adopt, bounded Pack selection, Memory references, and future Evolution. Use `accepted/current` only for a currently accepted capability; other statuses remain unavailable to Pack construction.
+
+| Capability ID | Job | Activate when | Project check | Status | Version or digest | Logical load target |
+| --- | --- | --- | --- | --- | --- | --- |
+| {stable-lowercase-id} | {material job} | {positive trigger} | {stable-check-id} | {accepted/current, provisional, rejected, retired, or superseded} | {version, digest, or -} | {capabilities/stable-lowercase-id/SKILL.md} |
 
 ## Capability routing
 

@@ -9,22 +9,33 @@ Let a non-expert describe the outcome while the harness improves both the work a
 - The **shared program** is the repository guidance, `docs/nulnul/` contract and state, selected local workflows, and the NULNUL references they invoke. Both sides may be versioned change targets.
 - The **Gate** stays independent from the candidate. This is a deliberate safety boundary beyond the task/meta program, not a second team the user must operate.
 
-These are logical responsibilities. Keep them merged in one working agent until an independent evaluation boundary or real parallel work requires another agent.
+These are logical responsibilities, not a target count. Keep them merged when that path is outcome-competitive; separate as many as needed when specialization, independent evaluation, context isolation, or real parallel work materially improves the expected result.
+
+## First-order guarded Harness evolution
+
+The editable project program is not an invitation to rewrite the Foundation. `assets/harness-controls.json` draws a behavioral boundary:
+
+- the **guarded Kernel** owns identity, provenance, atomic single-writer transactions, rollback, evidence integrity, raw-transcript privacy, authority and host-trust separation, lifecycle history, authoritative Check receipts, Champion/Challenger separation, deterministic promotion, and hard Context limits;
+- the **evolvable control layer** currently owns only registered declarative policies for Capability metadata selection, Context ranking, verified Memory promotion, Agent-opportunity triggers, and maintenance/discovery triggers within Kernel bounds. Authoritative verification remains Kernel-owned; add an orchestration control only after repeated evidence exposes a real supplemental-check responsibility.
+
+Classify behavior rather than entire files: a runtime module may execute an evolvable ranking policy while its identity, validation, authority, and write behavior remain Kernel-owned. Ordinary project work uses compiled Champion defaults and does not load Harness Evolution or its registry into model context. A project registry appears only after a verified transaction promotes a control policy.
+
+Harness Evolution is first-order. Its attribution rules, evaluator, safety gate, evidence validator, competition ownership, transaction, rollback, and provenance verifier are not registered controls and cannot be a Challenger target. A future phase may evaluate some meta machinery; this phase cannot recursively authorize that change.
 
 ## Bootstrap the initial conditions
 
-The first useful harness leaves only what the next run needs to improve itself:
+The first useful harness starts with what the strongest justified outcome path needs, then removes parts that do not materially contribute:
 
 1. the user's outcome and one observable deliverable;
 2. the inspected repository and installed agent, skill, and plugin roster;
-3. one adequate capability per uncovered job, with activation and removal conditions;
-4. the smallest runnable completion check;
+3. an outcome-competitive capability set for the required jobs, with activation and removal conditions;
+4. a runnable completion check plus any task-specific verification that materially increases confidence;
 5. a verified checkpoint when work spans sessions; and
 6. a bounded feedback path to the Coach plus an independent Gate for promotion.
 
-Do not make the user choose an architecture, agent count, skill catalog, or meta-learning method. In plain language report **reuse now**, **add now**, **needs approval**, and **skip**. Reuse safe installed capabilities immediately. Ask once before downloads, global registration, authentication, external writes, deployment, or publication.
+Do not make the user choose an architecture, agent count, skill catalog, or meta-learning method. In plain language report **reuse now**, **add now**, **needs approval**, and **skip**. Reuse safe installed capabilities immediately only when they are outcome-competitive; otherwise investigate a justified better-fit candidate and ask once before downloads, global registration, authentication, external writes, deployment, or publication.
 
-Persistent memory, performance tracking, multi-stage verification, retries, benchmarks, and locks are candidate harness components, not a mandatory scaffold. Add the smallest one when the workflow exposes its job: session loss needs a checkpoint, repeated judgement needs a frozen sample, counted recurring work needs one deliverable function, concurrent state needs one writer and a lock, and risky promotion needs staged verification and rollback.
+Persistent memory, performance tracking, multi-stage verification, retries, benchmarks, and locks are candidate harness components, not a mandatory scaffold. Add one when its concrete job materially improves the expected verified outcome, then choose the simplest option among materially equivalent paths: session loss needs a checkpoint, repeated judgement needs a frozen sample, counted recurring work needs one deliverable function, concurrent state needs one writer and a lock, and risky promotion needs staged verification and rollback.
 
 ## Discover better ways, not only failures
 
@@ -36,15 +47,15 @@ Treat each of these as Coach-targeted meta feedback:
 - a maintained native, installed, official, curated, or public capability can replace custom setup;
 - current evidence shows the harness itself costs more time, context, or coordination than it saves.
 
-When the solution landscape may have changed, inspect current primary or reputable sources before fixing the frame around the existing design. Compare the current procedure with the first adequate credible alternative; do not perform an unbounded survey. Extract the useful mechanism rather than copying a branded architecture.
+When the solution landscape may have changed, inspect current primary or reputable sources before fixing the frame around the existing design. Compare a bounded set until the current procedure is outcome-competitive and no concrete material gap remains; do not perform an unbounded survey. Extract the useful mechanism rather than copying a branded architecture.
 
 Close every measured learning loop in the same run. When a benchmark or live-cycle verdict is `rejected`, `regressed`, `failed`, or `not-established`, append one bounded feedback record to the active evolution state before starting another experiment. If the evidence reproduces, let the Coach append one `pending` proposal for the nearest durable layer; never turn the result directly into accepted instructions. Preserve the failed arm, metric, and guardrail, then let an independent Gate accept or reject the candidate. Every result file containing a nonpass must include `learning_verdicts` with stable `feedback_id` and `proposal_ids` links, then pass `scripts/validate_learning_loop.py` against the active evolution state. Missing the entire verdict array is a failure, not an opt-out. Do not wait for the user to rediscover a result already present in machine-readable evidence.
 
 ## Change the improvement procedure
 
-Use `personal-evolution.md`, with the proposal marked `change_level: meta`, when the candidate changes how future improvements are discovered, generated, measured, selected, remembered, or rolled back. Record the discovery evidence that motivated it. A meta candidate may update the Coach, Gate criteria, capability search order, measurement strategy, checkpoint policy, or this procedure itself.
+Use `personal-evolution.md`, with the proposal marked `change_level: meta`, when evidence proposes changing how future improvements are discovered, generated, measured, selected, remembered, or rolled back. Record the discovery evidence that motivated it. Ordinary project-grounded Harness mutation is narrower: it targets one registered declarative CONTROL_ID through `harness_evolution.py`. Changing Coach implementation, Gate criteria, checkpoint integrity, this procedure, or Harness Evolution itself remains an explicit product-development change outside the control transaction.
 
-The Coach may edit its own candidate but cannot Gate it. A Gate-targeted candidate needs a fresh evaluator or deterministic negative control that did not author it. Do not create recursive Coaches.
+The Coach may draft one bounded capability, Agent, or registered control Challenger but cannot Gate or promote it. A Gate-targeted candidate needs a fresh evaluator or deterministic negative control that did not author it. Do not create recursive Coaches, and never let a Harness control candidate change the safety gate that evaluates it.
 
 Keep a project-scoped meta improvement when it wins on the originating workflow. Promote it to personal or core scope only after a representative transfer check shows that the improvement survives another project or domain without importing private data, paths, or permissions. Preserve rejected candidates so later runs improve the search for improvements instead of repeating it.
 

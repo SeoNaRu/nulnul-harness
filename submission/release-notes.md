@@ -1,18 +1,18 @@
-# nulnul harness 2.2.1
+# nulnul harness 3.0.0
 
-Turn bounded evaluation evidence into user-reviewable feedback without collecting raw conversations.
+NULNUL 3.0 turns repository-local AI setup into a quiet project workflow: automatic Sessions and Tasks, concise handoffs, verified Experience, and durable Memory preserve useful continuity without replaying raw conversations.
 
-The existing Experience Digest validator now supports `--feedback-capsule`. It rejects prohibited or malformed evidence before printing deterministic Markdown with plugin and run identity, bounded stage counts, signals, a canonical SHA-256, the validated digest, and blank sanitized request/expected/observed fields.
+Pre-session Capability Packs keep ordinary Direct work body-free and give project-fit work only the selected current capability guidance. Deterministic project checks create authoritative receipts that connect work, outcome, Experience, Memory, and later evolution evidence.
 
-The bug-report form accepts the capsule as optional supporting evidence. Generation stays local and writes no file; review and any submission remain user-controlled. Exact-archive Meta evidence now has a deterministic privacy-safe capture command, and the decorative 100/100 README shield is gone from both locales. Fresh-checkout CI runs the reproducible packer before archive checks; the product-first Codex activation copy, metadata coverage, and CI documentation-debt check from rc.1 remain included.
+Evidence can now support KEEP, UPGRADE, REPLACE, MERGE, RETIRE, or CREATE decisions for the project capability ecosystem. External candidates stay quarantined and untrusted until they win project checks. Agent topology and bounded Harness controls use the same evidence-gated Champion/Challenger and rollback discipline, while one Agent and current controls remain the default.
 
-No dependency, service, permission, credential, external-write scope, MCP server, hook, app, schema, or additional product skill was added.
+Cross-project Generalization keeps project Memory isolated. Only privacy-checked abstractions with provenance, applicability limits, and target validation can transfer as priors.
 
-The exact final artifact is published as the final/latest release. Its downloaded bytes match the frozen local ZIP; fresh exact-final Claude and Meta adoption, candidate CI, tag CI, main CI, and Release Gate all pass.
+The runtime-exclusive Codex-rule activation path is retired. Upgrades clean obsolete activation artifacts deterministically without changing user trust. The package remains skills-only and adds no server, daemon, MCP server, hook, app, telemetry, account, or external service.
 
-The normalized 38-entry final archive has SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`. Plugin and skill validation, all 239 tests, documentation debt, and Release Gate 100/100 pass with `local_candidate_ready: true`; the exact-final public evidence now satisfies the remaining release gates.
+Claims remain scoped: live autonomous Harness improvement, universal multi-Agent superiority, globally optimal capabilities, and live cross-project transfer are not established by this release.
 
-The first clean candidate run exposed a missing pre-test pack step. That nonpass is linked to one bounded proposal; corrected candidate CI run `32685218407` passed and the shipped lifecycle executor confirmed the change.
+The normalized 53-file archive has SHA-256 `99fd14bef3432f1542270cbdd8640f0a185d319cafcf054505b37260bc9335c1`. All 431 deterministic tests, documentation debt, package integrity, and the 100/100 Release Gate product score pass locally. Exact-version public adoption and remote publication remain separate release-publication gates.
 
 ```bash
 codex plugin marketplace add SeoNaRu/nulnul-harness --ref main

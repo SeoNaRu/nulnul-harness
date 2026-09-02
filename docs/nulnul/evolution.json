@@ -28,14 +28,28 @@
     "claim_boundary": "Bounded privacy-safe evidence improved which adaptations receive full compatibility checks in one three-family episode. No token, runtime, universal, cross-user, or background-learning claim is made.",
     "next_action": "Collect bounded post-2.0 dogfooding results; do not invent a new roadmap before a new bottleneck is measured."
   },
+  "cross_project_generalization": {
+    "status": "implemented",
+    "contract": "plugins/nulnul-harness/skills/nulnul-harness/scripts/generalization_core.py",
+    "storage": "approved Personal Home/generalizations.json",
+    "default_privacy": "PROJECT_ONLY",
+    "target_prior_bounds": "maximum 3 records and 2048 serialized bytes",
+    "legacy_status": "historical_noncurrent",
+    "real_evidence": "One real project store contains six eligible verified Experiences; independent project count is one.",
+    "decision": "MORE_REAL_PROJECT_EVIDENCE_REQUIRED",
+    "claim_boundary": "Privacy-safe Experience abstractions, target priors, target validation, counterevidence, and transactional lifecycle mechanics are deterministically validated. No live cross-project transfer, universal practice, or global optimality is claimed."
+  },
   "checkpoint": {
-    "goal": "Maintain nulnul-harness as a verified meta-harness that converts measured failures into independently gated improvements.",
-    "milestone": "Build and independently evaluate one new 2.3 constraint-reconciliation candidate, then repair the three user-selected live project adoptions without publishing or pushing.",
+    "goal": "Publish the exact validated NULNUL 3.0.0 skills-only package without weakening exact-version adoption, privacy, provenance, rollback, or branch-protection gates.",
+    "milestone": "The NULNUL 3.0.0 product tree is locally release-ready: versioned product and documentation surfaces agree, the normalized package is reproducible, and the complete deterministic product suite passes from an isolated staged snapshot.",
     "completion_check": "python3 scripts/pack_plugin.py && python3 -B -m unittest discover -s tests -p 'test_*.py' -v && python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex && python3 scripts/release_gate.py",
     "status": "active",
-    "last_verified": "2026-08-25: the confirmed 2.2.1 plugin baseline passes the 15 product-plugin tests, the rejected constraint-lifecycle evidence test, active evolution validation, and digest-bound full-state reconstruction. The rejected first episode remains removed from the shipped plugin.",
-    "next_action": "Keep 2.2.1 active after the rejected derived-review episode, freeze one separate deterministic-output-envelope hypothesis without recycling the exposed score, and repair the three approved local project adoptions.",
-    "blockers": [],
+    "last_verified": "2026-09-02: The exact staged NULNUL 3.0.0 snapshot passed 431/431 deterministic tests, documentation debt, diff checks, reproducible 53-file packaging, archive safety inspection, and the Release Gate product score at 100/100. The package SHA-256 is 99fd14bef3432f1542270cbdd8640f0a185d319cafcf054505b37260bc9335c1. Exact-version public Claude and Meta adoption remain publication gates; no stale 2.2.1 evidence is relabeled.",
+    "next_action": "Publish the validated release candidate only through the configured remote, capture exact-version public Claude and Meta evidence, rerun Release Gate, then promote the exact validated commit and tag without force operations.",
+    "blockers": [
+      "Exact-version public Claude adoption evidence requires the public 3.0.0 artifact.",
+      "Exact-version public Meta adoption evidence requires the public 3.0.0 artifact."
+    ],
     "approved_permissions": [
       "Publish NULNUL 2.2.1 RC and final exact artifacts, run the paid Claude adoption check, and promote only the fully verified final commit to main within this user-requested release closure.",
       "Modify the local NULNUL product and the three user-selected local project adoptions, run bounded paid A/B evaluation, and update the local Claude plugin; do not publish, deploy, or push."
@@ -139,6 +153,36 @@
       "observed": "A live sequential Claude adoption appended the correct managed host block while preserving an older user-owned sentence that still declared the Codex entry canonical, leaving both root-entry authorities active at once.",
       "expected": "Before declaring host adoption complete, detect an explicit cross-host canonical declaration in the active root entry and require that active host to reconcile the exact line without mutating the inactive entry or shared state.",
       "evidence": "The live cycle preserved the inactive entry and four shared-state hashes, reproduced one conflicting legacy sentence after the shipped sync writer ran, and resolved it with one Claude-owned line edit while all shared-state hashes remained unchanged.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-exp10-live-runner-evidence-gap",
+      "source": "test",
+      "target_agent": "coach",
+      "observed": "Experiment 10's first official Champion arm exited before model execution with agent_exit_code 1 and no token usage, but the frozen incremental aggregate returned CONTINUE_EXECUTION because it deferred missing-input validation until schedule completion.",
+      "expected": "A future experiment must classify any completed arm with a nonzero agent exit or missing required usage as INFRASTRUCTURE_INVALID immediately, preserve a sanitized failure category, and stop before a second arm without retrying or changing the frozen candidate.",
+      "evidence": "The signed Experiment 10 fp-a Champion record has runtime 0.243 seconds, agent_exit_code 1, null token_usage, no repository reads, no product change, and failed completion; its signed step-01 aggregate nevertheless returned CONTINUE_EXECUTION.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-exp10b-wrapper-evidence-gap",
+      "source": "test",
+      "target_agent": "coach",
+      "observed": "Experiment 10B's first Candidate invocation exited in the wrapper before run_one could create an arm record because the exact frozen Candidate was stored below the durable evidence root; the Champion-only smoke and record-level admission tests could not expose that cross-root arrangement.",
+      "expected": "Before the first official model arm, validate the resolved Champion, Candidate, benchmark, workspace, and evidence roots for every scheduled arm, and make any official wrapper exit produce a signed terminal launcher receipt before another arm can start.",
+      "evidence": "The signed 10B Champion FP-A arm passed with usage, then Candidate FP-A returned wrapper exit 2 with 'evidence root must be separate from product root'; no Candidate arm record, patch, usage, or later model call exists, and the signed controller decision is INFRASTRUCTURE_INVALID.",
+      "scope": "core",
+      "status": "converted"
+    },
+    {
+      "id": "feedback-exp10c-readonly-cleanup-gap",
+      "source": "test",
+      "target_agent": "coach",
+      "observed": "Experiment 10C passed the complete 22-arm path preflight, then its first official Champion arm became cleanup_invalid because read-only scientific-source modes were preserved into the disposable installed harness and shutil.rmtree could not remove its 0555 directories.",
+      "expected": "Before any future live proof, exercise the actual read-only materialization, harness installation, evidence readback, and cleanup lifecycle without a model; keep frozen sources read-only while ensuring only the disposable copy is removable, and stop the infrastructure-repair sequence for roadmap review if that lifecycle is not demonstrably stable.",
+      "evidence": "The signed 10C fp-a Champion record has agent exit 0, valid 124538/916 token usage, passing completion, one disposable product write, zero durable source writes, execution_status cleanup_invalid, cleanup_error:PermissionError, and a preserved workspace whose installed harness directories are mode 0555; no Candidate or later arm started.",
       "scope": "core",
       "status": "converted"
     }
@@ -352,6 +396,104 @@
         "why": "byte preservation can retain a legacy authority declaration that semantically conflicts with the newly managed host block"
       },
       "mechanism_id": "host-entry-legacy-conflict-preflight-v1",
+      "status": "proposed"
+    },
+    {
+      "id": "proposal-coach-6-live-runner-evidence-preflight",
+      "feedback_ids": [
+        "feedback-exp10-live-runner-evidence-gap"
+      ],
+      "target_agent": "coach",
+      "author_agent": "coach",
+      "from_version": 5,
+      "to_version": 6,
+      "cause": "Incremental evidence admission treated an exited no-usage arm as an ordinary failed task until the complete-schedule cost gate, allowing a frozen infrastructure failure to request more model arms.",
+      "change_target": "For a future experiment only, make arm admission reject nonzero agent exits, missing usage, and unavailable sanitized failure categories as immediate INFRASTRUCTURE_INVALID before pair or schedule aggregation; retain the failed arm and prohibit automatic retry.",
+      "regression_check": "Add one synthetic nonzero-exit/no-usage arm and one valid completed arm to the experiment controller tests; require immediate terminal rejection for the former and unchanged admission for the latter, then run one separately preregistered runner-availability smoke before candidate generation.",
+      "primary_metric": "official pre-model arm failures classified immediately before any second arm",
+      "permission_delta": [],
+      "rollback": "Remove the future arm-admission guard and restore Coach v5 if it rejects a valid completed arm, hides the signed failure record, retries automatically, changes candidate bytes, or expands permissions.",
+      "change_level": "meta",
+      "discovery_evidence": "Experiment 10 produced one signed no-usage Champion failure and one signed aggregate contradiction before any Candidate arm or holdout exposure.",
+      "transfer_check": "Synthetic Codex and Claude records must cover nonzero exit, missing usage, valid usage, and runner timeout, with identical stop semantics and no raw transcript retention.",
+      "prediction": "The future admission guard will map 4/4 invalid transport records to INFRASTRUCTURE_INVALID before a second arm while preserving 2/2 valid completed controls.",
+      "expected_delta": {
+        "unclassified_pre_model_failures": "1 -> 0",
+        "extra_arms_after_transport_failure": "possible -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Reject if one invalid transport record continues, one valid completed record is blocked, evidence is overwritten, a retry occurs, raw output is retained, candidate bytes change, or permissions expand.",
+      "pathology": {
+        "where": "experiment runner evidence admission and incremental aggregation",
+        "why": "transport validity was checked only at complete-schedule cost aggregation rather than at each official arm boundary"
+      },
+      "mechanism_id": "live-runner-evidence-preflight-v1",
+      "status": "proposed"
+    },
+    {
+      "id": "proposal-coach-6-live-arm-root-preflight",
+      "feedback_ids": [
+        "feedback-exp10b-wrapper-evidence-gap"
+      ],
+      "target_agent": "coach",
+      "author_agent": "coach",
+      "from_version": 5,
+      "to_version": 6,
+      "cause": "Promotion-grade validation began only after run_one created an arm record, while an official wrapper could fail earlier because one scheduled plugin root overlapped the evidence root.",
+      "change_target": "For a future clean proof only, preflight all resolved arm plugin, benchmark, workspace, and evidence roots before arm 1; materialize the exact Candidate tree outside protected roots when necessary, and create one signed launcher-attempt receipt that makes any nonzero wrapper exit terminal before run_one or the next arm.",
+      "regression_check": "Add deterministic positive controls for separated Champion and Candidate roots, negative controls for Candidate-inside-evidence and workspace overlap, and a simulated wrapper exit before run_one; require exact Candidate hashes, one terminal signed receipt, zero model calls, and zero next-arm starts on every negative control.",
+      "primary_metric": "official wrapper failures without a signed terminal record or detected root overlap before arm 1",
+      "permission_delta": [],
+      "rollback": "Remove the root preflight and launcher receipt if they alter Candidate bytes, weaken root containment, start a model during negative controls, duplicate evidence systems, or allow any later arm after a wrapper failure.",
+      "change_level": "meta",
+      "discovery_evidence": "Experiment 10B admitted one valid Champion arm, then its Candidate wrapper failed before record creation because the frozen Candidate path was a descendant of the durable evidence root; no retry or later arm occurred.",
+      "transfer_check": "A future fixture must exercise Champion and Candidate paths on different devices or top-level roots while preserving exact tree hashes, containment rejection, atomic receipts, and the same stop semantics.",
+      "prediction": "The preflight will reject 2/2 overlap controls before arm 1, admit 2/2 separated roots, and turn 1/1 simulated pre-run wrapper exit into a signed terminal decision with zero later arms.",
+      "expected_delta": {
+        "late_root_overlap_failures": "1 -> 0",
+        "unrecorded_official_wrapper_failures": "1 -> 0",
+        "extra_arms_after_wrapper_failure": "0 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Reject if any overlap reaches an official arm, any valid separated root is blocked, Candidate bytes change, a wrapper failure lacks a signed receipt, another arm starts, containment weakens, or permissions expand.",
+      "pathology": {
+        "where": "official-arm controller before run_one evidence creation",
+        "why": "record-level admission cannot classify a wrapper that exits before an arm record exists, and the Champion-only smoke does not validate Candidate root separation"
+      },
+      "mechanism_id": "live-arm-root-preflight-v1",
+      "status": "proposed"
+    },
+    {
+      "id": "proposal-coach-6-disposable-copy-cleanup",
+      "feedback_ids": [
+        "feedback-exp10c-readonly-cleanup-gap"
+      ],
+      "target_agent": "coach",
+      "author_agent": "coach",
+      "from_version": 5,
+      "to_version": 6,
+      "cause": "Scientific-source immutability was enforced by filesystem modes, but those modes propagated into the disposable installed harness while cleanup assumed a writable tree.",
+      "change_target": "Only if roadmap review authorizes another proof, add one model-free full-lifecycle rehearsal that copies the exact read-only Champion and Candidate harnesses into their planned disposable workspaces, persists and reads back zero-write evidence, makes only the disposable copies removable, and proves cleanup while the frozen source hashes and modes remain unchanged.",
+      "regression_check": "Run the actual materialize-install-readback-cleanup path for both Champion and Candidate plus a negative control that attempts to clean a protected source; require two clean disposable removals, one protected-source rejection, unchanged source trees and modes, signed evidence, and zero model calls.",
+      "primary_metric": "official arms invalidated by deterministic disposable-copy cleanup failures",
+      "permission_delta": [],
+      "rollback": "Remove the future cleanup adaptation if it changes frozen source modes or bytes, weakens protected-root rejection, deletes evidence, mutates a non-owned workspace, starts a model during rehearsal, or expands permissions.",
+      "change_level": "meta",
+      "discovery_evidence": "Experiment 10C passed path admission and its first model/product/check path, but the signed record became cleanup_invalid solely after shutil.rmtree met the read-only installed harness copy.",
+      "transfer_check": "The same model-free lifecycle must pass for both exact Champion and Candidate materializations and leave their tree and per-file hashes unchanged.",
+      "prediction": "If another proof is authorized, 2/2 full disposable lifecycles will clean successfully, 1/1 protected source cleanup will be rejected, and no model arm will be needed to discover mode propagation.",
+      "expected_delta": {
+        "late_cleanup_failures": "1 -> 0",
+        "model_calls_before_cleanup_validation": "1 -> 0",
+        "protected_source_mutations": "0 -> 0",
+        "permission_delta": "0 -> 0"
+      },
+      "falsification_condition": "Reject if either disposable lifecycle fails, any source mode or byte changes, protected cleanup succeeds, evidence disappears, a model starts, or permissions expand.",
+      "pathology": {
+        "where": "disposable harness installation and post-readback workspace cleanup",
+        "why": "copytree preserved scientific-source immutability modes into an owned disposable copy, but cleanup did not restore owner permissions before removal"
+      },
+      "mechanism_id": "disposable-readonly-copy-cleanup-v1",
       "status": "proposed"
     }
   ],

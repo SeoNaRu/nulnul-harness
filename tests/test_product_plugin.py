@@ -76,7 +76,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "2.2.1")
+        self.assertEqual(manifest["version"], "3.0.0")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -97,25 +97,25 @@ class ProductPluginTests(unittest.TestCase):
             self.assertIn(heading, text)
         self.assertIn("Enumerate the host's installed skills, plugins, and agents before judging coverage", text)
         self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
-        self.assertIn("Treat installed availability as discovery evidence, not verification", text)
+        self.assertIn("Treat installed availability as discovery evidence, not selection or verification", text)
         self.assertIn("Popularity is a signal, not proof", text)
-        self.assertIn("keep it only when the primary metric improves", text)
+        self.assertIn("Keep it only when primary outcome quality improves", text)
         self.assertIn("Never let an agent approve its own upgrade", text)
         self.assertIn("a better method the user had to surface", text)
-        self.assertIn("The meta side may modify its own discovery", text)
+        self.assertIn("Harness change is first-order and declarative", text)
         self.assertIn("reuse now, add now, needs approval, and skip", text)
         self.assertIn("resume from the last verified checkpoint", text)
         self.assertIn("**Fast path**", text)
         self.assertIn("**Adopt and upgrade**", text)
         self.assertIn("Never recreate a role that already exists", text)
-        self.assertIn("Context is a budget like any other", text)
+        self.assertIn("Context is a quality-adjusted budget", text)
         self.assertIn("Never make an unattended session edit host-protected configuration paths", text)
         self.assertIn("a denied write attempt is still a failed setup", text)
         self.assertIn("made no write tool call targeting `.claude/**`", text)
         self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
         self.assertIn("do not activate when it already provides explicit local inputs, outputs, constraints, and a runnable completion check", text)
         self.assertIn("external-write planning, multi-session checkpointing, or evidence-gated agent evolution", text)
-        self.assertIn("stop when every uncovered job has one adequate verified candidate", text)
+        self.assertIn("Stop when every job has a proven outcome-competitive candidate", text)
         self.assertIn("first run the bounded `claude plugin list --json` command", text)
         self.assertIn("A Codex run may create or update only `AGENTS.md`", text)
         self.assertIn("a Claude Code run may create or update only `CLAUDE.md`", text)
@@ -132,9 +132,13 @@ class ProductPluginTests(unittest.TestCase):
             "references/personal-evolution.md",
             "references/meta-evolution.md",
             "references/generalization.md",
+            "references/foundation.md",
             "assets/AGENTS.template.md",
             "assets/evolution-state.template.json",
+            "assets/layer-contracts.json",
+            "assets/harness-controls.json",
             "assets/project-contract.template.md",
+            "assets/setup-plan.template.json",
             "agents/openai.yaml",
             "scripts/validate_evolution_state.py",
             "scripts/validate_project_setup.py",
@@ -143,6 +147,18 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/validate_learning_loop.py",
             "scripts/migrate_legacy_checkpoint.py",
             "scripts/sync_host_entry.py",
+            "scripts/capability_contract.py",
+            "scripts/capability_pack.py",
+            "scripts/activation_boundary.py",
+            "scripts/foundation_runtime.py",
+            "scripts/setup_transaction.py",
+            "scripts/natural_selection.py",
+            "scripts/external_competition.py",
+            "scripts/agent_evolution.py",
+            "scripts/harness_control.py",
+            "scripts/harness_evolution.py",
+            "scripts/cross_project_evolution.py",
+            "scripts/generalization_core.py",
             "scripts/apply_live_cycle_rollback.py",
             "scripts/validate_experience_digest.py",
             "scripts/validate_generalization_gate.py",
@@ -151,6 +167,12 @@ class ProductPluginTests(unittest.TestCase):
             "scripts/personal_adaptation.py",
         ):
             self.assertTrue((SKILL / path).is_file(), path)
+        manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
+        self.assertIn("capability-natural-selection", manifest["interface"]["capabilities"])
+        self.assertIn("external-capability-competition", manifest["interface"]["capabilities"])
+        self.assertIn("agent-evolution-core", manifest["interface"]["capabilities"])
+        self.assertIn("harness-evolution-core", manifest["interface"]["capabilities"])
+        self.assertIn("cross-project-generalization-core", manifest["interface"]["capabilities"])
         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
             self.assertNotIn(forbidden, text)
         self.assertIn("stable identity, deterministic deduplication, exclusion precedence", text)
@@ -178,12 +200,103 @@ class ProductPluginTests(unittest.TestCase):
         generalization = (SKILL / "references/generalization.md").read_text(encoding="utf-8")
         self.assertIn("Evaluation exposure is state", generalization)
         self.assertIn("After the first result, retire the holdout", generalization)
+        self.assertIn("Project Memory never becomes global Memory", generalization)
+        self.assertIn("zero Generalization lookup", generalization)
         personal = (SKILL / "references/personal-evolution.md").read_text(encoding="utf-8")
         self.assertIn("Run one bounded autonomous episode", personal)
         self.assertIn("NO_PROMOTION", personal)
         self.assertIn("Reuse a verified adaptation personally", personal)
         self.assertIn("PERSONAL_HOME_REQUIRED", personal)
         self.assertIn("Move a candidate to `provisional`", personal)
+
+    def test_outcome_first_decision_contract(self):
+        payload = json.loads((ROOT / "evals/outcome-first/cases.json").read_text(encoding="utf-8"))
+        self.assertEqual(payload["schema_version"], 1)
+        self.assertEqual(payload["evaluation_kind"], "deterministic-decision-contract")
+        self.assertIn("do not measure model task performance", payload["claim_boundary"])
+        self.assertEqual(
+            payload["decision_order"],
+            [
+                "maximize_expected_verified_outcome_quality",
+                "respect_user_safety_permission_cost_compatibility_and_reproducibility_constraints",
+                "break_materially_equivalent_ties_by_lower_waste",
+            ],
+        )
+
+        cases = {case["id"]: case for case in payload["cases"]}
+        self.assertEqual(len(cases), 15)
+        expected = {
+            "more-capability-clearly-wins": ("specialized-reviewed", "SELECT", "PASS"),
+            "same-quality-less-complexity-wins": ("focused-two", "SELECT", "PASS"),
+            "installed-capability-materially-weaker": ("external-verified", "REQUEST_APPROVAL", "PASS"),
+            "tiny-improvement-huge-complexity-loses": ("existing-strong", "KEEP", "PASS"),
+            "zero-additions-is-correct": ("current-zero", "KEEP", "PASS"),
+            "under-building-is-failure": ("justified-specialist", "REJECT_OBSERVED", "FAIL_UNDER_BUILDING"),
+            "beginner-states-outcome-not-topology": ("infer-project-fit-path", "INFER_TOPOLOGY", "PASS"),
+            "no-ai-fomo-with-strong-project-fit-capability": ("keep-current", "KEEP", "PASS"),
+            "local-skill-evolves-without-external-replacement": ("reservation-review-v3", "UPGRADE", "PASS"),
+            "project-skill-beats-famous-external": ("project-reviewer", "KEEP", "PASS"),
+            "merge-overlap-instead-of-accumulate": ("merged-survivor", "MERGE_AND_RETIRE", "PASS"),
+            "agent-evolves-from-repeated-project-failure": ("backend-reviewer-v2", "UPGRADE", "PASS"),
+            "routing-evolves-without-rewriting-good-skills": ("routing-candidate", "UPGRADE_ROUTING", "PASS"),
+            "verified-state-enables-bounded-continuity": ("verified-bounded-resume", "RESUME", "PASS"),
+            "plain-language-evidence-without-private-reasoning": ("progressive-evidence", "EXPLAIN", "PASS"),
+        }
+        self.assertEqual(
+            {
+                case_id: (case["expected_path"], case["expected_action"], case["expected_validation"])
+                for case_id, case in cases.items()
+            },
+            expected,
+        )
+        self.assertTrue(cases["installed-capability-materially-weaker"]["paths"]["external-verified"]["requires_approval"])
+        self.assertEqual(
+            cases["installed-capability-materially-weaker"]["after_approval"]["lifecycle"],
+            ["REPLACE", "RETIRE"],
+        )
+        self.assertEqual(cases["zero-additions-is-correct"]["paths"]["current-zero"]["added_capabilities"], 0)
+        self.assertEqual(cases["under-building-is-failure"]["observed_path"], "minimal-only")
+        self.assertEqual(
+            cases["beginner-states-outcome-not-topology"]["paths"]["infer-project-fit-path"]["user_harness_decisions"],
+            0,
+        )
+        self.assertEqual(
+            cases["routing-evolves-without-rewriting-good-skills"]["paths"]["routing-candidate"]["capability_files_changed"],
+            0,
+        )
+        self.assertEqual(
+            cases["verified-state-enables-bounded-continuity"]["paths"]["verified-bounded-resume"]["reexplanation_questions"],
+            0,
+        )
+        inspectable = cases["plain-language-evidence-without-private-reasoning"]["paths"]["progressive-evidence"]
+        self.assertEqual(
+            inspectable["fields"],
+            ["USED", "UPGRADED", "REPLACED", "RETIRED", "SKIPPED", "WHY", "VERIFY", "EVOLUTION", "NEXT_STATE"],
+        )
+        self.assertFalse(inspectable["private_reasoning_exposed"])
+
+        skill = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+        discovery = (SKILL / "references/capability-discovery.md").read_text(encoding="utf-8")
+        assembly = (SKILL / "references/agent-assembly.md").read_text(encoding="utf-8")
+        evolution = (SKILL / "references/evolution.md").read_text(encoding="utf-8")
+        self.assertIn("Simplicity is a tie-breaker, not the objective", skill)
+        self.assertIn("under-building, premature reuse, verification underinvestment, or agent under-allocation", skill)
+        self.assertIn("outcome-first, project-fit, evidence-driven, waste-aware", skill)
+        self.assertIn("`KEEP`, `UPGRADE`, `REPLACE`, `MERGE`, `RETIRE`, or `CREATE`", skill)
+        self.assertIn("user never has to design the agent team or capability stack", skill)
+        self.assertIn("`RESULT`, `VERIFY`, and `RESUME`", skill)
+        self.assertIn("Do not equate installed with selected", discovery)
+        self.assertIn("project fit is determined by evidence", discovery)
+        self.assertIn("user-facing AI FOMO", discovery)
+        self.assertIn("Treat an external capability as a candidate, not a permanent addition", discovery)
+        self.assertIn("Agent count is neither a target nor a primary metric", assembly)
+        self.assertIn("fewer agents is not one either", assembly)
+        self.assertIn("new version of that same role even when no external replacement exists", assembly)
+        self.assertIn("A cost reduction that lowers quality is a regression", evolution)
+        self.assertIn("## Evolve capabilities and routing", evolution)
+        self.assertIn("Capability accumulation is not evolution", evolution)
+        for decision in ("KEEP", "UPGRADE", "REPLACE", "MERGE", "RETIRE", "CREATE"):
+            self.assertIn(f"`{decision}`", evolution)
 
     def test_setup_trigger_is_multilingual(self):
         description = re.search(
@@ -277,8 +390,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "239 passed"),
-            "README.ko.md": ("README.md", "239개 통과"),
+            "README.md": ("README.ko.md", "431 passed"),
+            "README.ko.md": ("README.md", "431개 통과"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")

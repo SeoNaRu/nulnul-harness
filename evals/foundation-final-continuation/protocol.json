@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "experiment_id": "v2.3-final-foundation-continuation",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 900,
+  "live_arm_budget": 3,
+  "retries": 0,
+  "foundation_frozen_before_fresh_tasks": true,
+  "foundation": {
+    "tree_sha256": "a91d8b25744efdb6c8867ad2ba33752fed95c53303da56ca933c7614bc28231f",
+    "scientific_tree_sha256": "b2215c8a83ea2abf6a9d894088680230c71eabf6c022ab1dcc678a6443a85f7a",
+    "package_sha256": "73015801eba607481669d689276856cf7a0d73891d582acc3080c8947fd56304"
+  },
+  "arms": [
+    {
+      "arm_id": "FINAL-GOVERNED-SETUP",
+      "task": "governed_setup",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    },
+    {
+      "arm_id": "FINAL-PROJECT-FIT-POST-RESTART",
+      "task": "project_fit",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    },
+    {
+      "arm_id": "FINAL-NEXT-SESSION",
+      "task": "next_session",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    }
+  ],
+  "tasks": {
+    "governed_setup": {
+      "case_id": "FINAL-GOVERNED-SETUP",
+      "prompt": "Use NULNUL to adopt this existing trusted Codex project into the v2.3 Foundation through the deterministic Governed Setup transaction. Produce only the bounded semantic Setup Plan at `docs/nulnul/.runtime/setup-plan.json` using the canonical product schema, preserve user-owned AGENTS.md guidance, product code, and Codex trust, install the accepted project capabilities and narrow project rule, and finish at the restart boundary. Do not manually write transaction-owned setup surfaces; invoke the transaction exactly once. Leave the ignored temporary Setup Plan available for host evidence capture; the host will remove it afterward.",
+      "job": "deterministic Foundation Codex project adoption",
+      "fixture": "evals/foundation-final-continuation/fixtures/lifecycle",
+      "task_sha256": "77b5bb064faea08de883e9b11a2d0fc1e29ffb3f435dc19c062d4c39b3716972",
+      "fixture_sha256": "9b426b52bd39e7f2818fd594065666918309ae20a402daec67095333fc3380dc",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 .agents/skills/nulnul-harness/scripts/validate_project_setup.py docs/nulnul/project.md && python3 .agents/skills/nulnul-harness/scripts/capability_contract.py validate docs/nulnul/project.md --setup && python3 .agents/skills/nulnul-harness/scripts/validate_checkpoint.py docs/nulnul/checkpoint.json --root . && python3 tools/verify_host_setup.py",
+      "allowed_write_prefixes": [
+        ".codex/rules/nulnul-activation.rules",
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md",
+        "docs/nulnul/.gitignore",
+        "docs/nulnul/memory/"
+      ],
+      "required_writes": [
+        ".codex/rules/nulnul-activation.rules",
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "transaction_owned_paths": [
+        ".codex/rules/nulnul-activation.rules",
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "setup_plan_path": "docs/nulnul/.runtime/setup-plan.json",
+      "expected_stage": "adopt-upgrade",
+      "expected_host": "codex",
+      "expected_capability_ids": [
+        "project-api-validation",
+        "project-release-docs"
+      ],
+      "mode": "GOVERNED_SETUP"
+    },
+    "project_fit": {
+      "case_id": "FINAL-PROJECT-FIT",
+      "prompt": "Update `register_webhook()` so a nonempty `delivery_mode` accepts only the lowercase values `sync`, `async`, or `batch`; reject every other nonempty value before registering the webhook. Preserve absent, empty, and accepted behavior, never mutate the input, and verify the project.",
+      "job": "webhook delivery-mode API validation",
+      "fixture": "evals/foundation-final-continuation/fixtures/lifecycle",
+      "fixture_sha256": "9b426b52bd39e7f2818fd594065666918309ae20a402daec67095333fc3380dc",
+      "overlay": "evals/foundation-final-continuation/fixtures/project-fit-overlay",
+      "overlay_sha256": "c5c4adcccfd3ec9ef0e3526fa0e28694c97c3adb12c4d68523e4db9ea73ad5d3",
+      "task_sha256": "ed9daf6244c7cbd4f8750ef5ab99396bda9e2dcd587af61c86de555bdc0df7ae",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check_identity": "api-contract",
+      "allowed_writes": ["webhooks.py", "contracts/error-codes.json"],
+      "required_writes": ["webhooks.py", "contracts/error-codes.json"],
+      "expected_capability": "project-api-validation",
+      "expected_match_basis": "The request changes the webhook API acceptance and rejection contract; the accepted capability owns pre-registry rejection, the structured project error, and the error-catalog check.",
+      "promotion_candidates": {},
+      "mode": "PROJECT_FIT"
+    },
+    "next_session": {
+      "case_id": "FINAL-NEXT-SESSION",
+      "prompt": "Extend accepted webhook `delivery_mode` values to include lowercase `deferred` while preserving validation-before-registry behavior and every existing response. Never mutate the input and verify the project.",
+      "job": "webhook delivery-mode API validation",
+      "fixture": "evals/foundation-final-continuation/fixtures/lifecycle",
+      "fixture_sha256": "9b426b52bd39e7f2818fd594065666918309ae20a402daec67095333fc3380dc",
+      "overlay": "evals/foundation-final-continuation/fixtures/next-session-overlay",
+      "overlay_sha256": "9c3a113b4028b1ff33d21c324882dba3ee082d3fb52d50871178066fe249acf2",
+      "task_sha256": "839a8e13379ef5ad1115b92f6836aa4a3a78c723c4e0d161652c87961226d8e3",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check_identity": "api-contract",
+      "allowed_writes": ["webhooks.py"],
+      "required_writes": ["webhooks.py"],
+      "expected_capability": "project-api-validation",
+      "mode": "NEXT_SESSION"
+    }
+  }
+}

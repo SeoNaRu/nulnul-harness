@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "experiment_id": "experiment-15-final-foundation-decision-proof",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 900,
+  "live_arm_budget": 5,
+  "retries": 0,
+  "foundation_frozen_before_fresh_tasks": true,
+  "champion": {
+    "revision": "cee7b91e2a992adee1582702b7a4084c631443b6",
+    "artifact_sha256": "48a819a3878c9611487a4a632d9a62d1c9bda403f5dbca224466082ada26136b",
+    "tree_sha256": "7965cadc2aa55782194f3c1df31bacd403b4463b222fea3952731cabac350732"
+  },
+  "foundation": {
+    "tree_sha256": "f38560badcf4a329ab51c641d5700a8e667cf6002f11713faf6828e78f5176c7",
+    "scientific_tree_sha256": "cddcbbc26d496cf8d642370ed6ccb807bc682d2c1f5d656d263b81662e9c83e0",
+    "package_sha256": "9dd54b385709fce131eb5fbc4507585f1c9265c9256043ea897cc4e877b41031"
+  },
+  "arms": [
+    {
+      "arm_id": "E15-DIRECT-CHAMPION",
+      "task": "direct",
+      "source": "champion",
+      "workspace": "direct-champion"
+    },
+    {
+      "arm_id": "E15-DIRECT-FOUNDATION",
+      "task": "direct",
+      "source": "foundation",
+      "workspace": "direct-foundation"
+    },
+    {
+      "arm_id": "E15-GOVERNED-SETUP-FOUNDATION",
+      "task": "governed_setup",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    },
+    {
+      "arm_id": "E15-PROJECT-FIT-POST-RESTART-FOUNDATION",
+      "task": "project_fit",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    },
+    {
+      "arm_id": "E15-NEXT-SESSION-FOUNDATION",
+      "task": "next_session",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    }
+  ],
+  "tasks": {
+    "direct": {
+      "case_id": "E15-DIRECT",
+      "prompt": "Update `sign_runs()` so it returns a new list of lists grouping only adjacent integers by sign class (negative, zero, positive), preserving input order. Handle empty input and never mutate the caller-owned list. Preserve the public signature and verify the project.",
+      "job": "internal signal sign grouping",
+      "fixture": "evals/experiment15/fixtures/direct",
+      "task_sha256": "30e6eab2e7c923be6bb28845b3d9a1080201289d920ae7bf1f80ea55d78601e2",
+      "fixture_sha256": "1c6a4928b386be3885a59d7314b4aea76124c71b630409f6d06bb80bfc2481b4",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q",
+      "allowed_writes": ["signals.py"],
+      "required_writes": ["signals.py"],
+      "mode": "DIRECT"
+    },
+    "governed_setup": {
+      "case_id": "E15-GOVERNED-SETUP",
+      "prompt": "Use NULNUL to adopt this existing trusted Codex project into the v2.3 Foundation through the deterministic Governed Setup transaction. Produce only the bounded semantic Setup Plan at `docs/nulnul/.runtime/setup-plan.json`, preserve user-owned AGENTS.md guidance, product code, and Codex trust, install the canonical accepted capabilities and narrow project rule, and finish at the restart boundary. Do not manually write transaction-owned setup surfaces; invoke the transaction once. Leave the ignored temporary Setup Plan available for host evidence capture; the host will remove it afterward.",
+      "job": "deterministic Foundation Codex project adoption",
+      "fixture": "evals/experiment15/fixtures/lifecycle",
+      "task_sha256": "84dc262c1967e2bcd61f4d23707d4cce757da94a1ba74a22596efb3e355e98af",
+      "fixture_sha256": "2f37608c06b75ffd61873f37ce7fe452a76d48f8833bfa856ec2030a8bea9bb4",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 .agents/skills/nulnul-harness/scripts/validate_project_setup.py docs/nulnul/project.md && python3 .agents/skills/nulnul-harness/scripts/capability_contract.py validate docs/nulnul/project.md --setup && python3 .agents/skills/nulnul-harness/scripts/validate_checkpoint.py docs/nulnul/checkpoint.json --root . && python3 tools/verify_host_setup.py",
+      "allowed_write_prefixes": [
+        ".codex/rules/nulnul-activation.rules",
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md",
+        "docs/nulnul/.gitignore",
+        "docs/nulnul/memory/"
+      ],
+      "required_writes": [
+        ".codex/rules/nulnul-activation.rules",
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "transaction_owned_paths": [
+        ".codex/rules/nulnul-activation.rules",
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "setup_plan_path": "docs/nulnul/.runtime/setup-plan.json",
+      "expected_stage": "adopt-upgrade",
+      "expected_host": "codex",
+      "expected_capabilities": [
+        {
+          "capability_id": "project-api-validation",
+          "job": "Preserve request-validation and error-catalog invariants",
+          "activation_trigger": "API acceptance, rejection, or structured-error behavior changes",
+          "project_check_identity": "api-contract",
+          "status": "accepted/current",
+          "version_or_digest": "v1",
+          "logical_load_target": "capabilities/project-api-validation/SKILL.md",
+          "accepted_current": true
+        },
+        {
+          "capability_id": "project-release-docs",
+          "job": "Preserve release documentation",
+          "activation_trigger": "release-note or publication documentation changes",
+          "project_check_identity": "release-docs",
+          "status": "accepted/current",
+          "version_or_digest": "v1",
+          "logical_load_target": "capabilities/project-release-docs/SKILL.md",
+          "accepted_current": true
+        }
+      ],
+      "mode": "GOVERNED_SETUP"
+    },
+    "project_fit": {
+      "case_id": "E15-PROJECT-FIT",
+      "prompt": "Update `create_alert()` so a nonempty `channel` accepts only the lowercase values `email`, `sms`, or `push`; reject every other nonempty value before enqueueing. Preserve absent, empty, and accepted behavior, never mutate the input, and verify the project.",
+      "job": "alert channel API validation",
+      "fixture": "evals/experiment15/fixtures/lifecycle",
+      "fixture_sha256": "2f37608c06b75ffd61873f37ce7fe452a76d48f8833bfa856ec2030a8bea9bb4",
+      "overlay": "evals/experiment15/fixtures/project-fit-overlay",
+      "overlay_sha256": "ffc052874ad974a1ea7999a4bfbff4c1b090d1fdd4c99d83b6cdeab15a9e7978",
+      "task_sha256": "252ca79862dfa06e0d43d8d3358281c1b3d8f061c794899264e429f06a429d53",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check_identity": "api-contract",
+      "allowed_writes": ["alerts.py", "contracts/error-codes.json"],
+      "required_writes": ["alerts.py", "contracts/error-codes.json"],
+      "expected_capability": "project-api-validation",
+      "expected_match_basis": "The request changes the alert API acceptance and rejection contract; the accepted capability owns pre-outbox rejection, the structured project error, and the error-catalog check.",
+      "promotion_candidates": {},
+      "mode": "PROJECT_FIT"
+    },
+    "next_session": {
+      "case_id": "E15-NEXT-SESSION",
+      "prompt": "Extend accepted alert `channel` values to include lowercase `pager` while preserving validation-before-enqueue behavior and every existing response. Never mutate the input and verify the project.",
+      "job": "alert channel API validation",
+      "fixture": "evals/experiment15/fixtures/lifecycle",
+      "fixture_sha256": "2f37608c06b75ffd61873f37ce7fe452a76d48f8833bfa856ec2030a8bea9bb4",
+      "overlay": "evals/experiment15/fixtures/next-session-overlay",
+      "overlay_sha256": "5c5d6b264cd666c658d87886fcbfe245d0cab7549b267045df562d0e7c5946f3",
+      "task_sha256": "d87e1a1d11f934dcb56b10aaaba247e94463a937700748bfc639ef9afe66e9f0",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check_identity": "api-contract",
+      "allowed_writes": ["alerts.py"],
+      "required_writes": ["alerts.py"],
+      "expected_capability": "project-api-validation",
+      "mode": "NEXT_SESSION"
+    }
+  },
+  "primary_decisions": [
+    "A_CURRENT_ARCHITECTURE_ACCEPTED",
+    "B_RUNTIME_EXCLUSIVE_ACTIVATION_REJECTED",
+    "C_LOCAL_FOUNDATION_FAILURE",
+    "INFRASTRUCTURE_INVALID"
+  ],
+  "failure_codes": [
+    "DIRECT_PERFORMANCE_BLOCKER",
+    "SETUP_ORCHESTRATION_REGRESSION",
+    "SETUP_TRANSACTION_FAILURE",
+    "SETUP_RUNTIME_CONTRACT_FAILURE",
+    "HOST_ADMISSION_FAILURE",
+    "EXCLUSIVE_CAPABILITY_GATE_FAILURE",
+    "TRUE_POSITIVE_UNDERACTIVATION",
+    "WRONG_CAPABILITY_IDENTITY",
+    "ATTRIBUTION_BOUNDARY_FAILURE",
+    "EXPERIENCE_CAPTURE_FAILURE",
+    "CONTEXT_RETRIEVAL_FAILURE",
+    "PROVENANCE_FAILURE",
+    "STATE_AUTHORITY_REGRESSION",
+    "PRODUCT_REGRESSION",
+    "INFRASTRUCTURE_INVALID"
+  ]
+}

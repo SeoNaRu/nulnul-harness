@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "experiment_id": "final-pre-session-pack-live-proof",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 900,
+  "live_arm_budget": 4,
+  "retries": 0,
+  "foundation_frozen_before_fresh_tasks": true,
+  "champion": {
+    "revision": "cee7b91e2a992adee1582702b7a4084c631443b6",
+    "artifact_sha256": "48a819a3878c9611487a4a632d9a62d1c9bda403f5dbca224466082ada26136b",
+    "tree_sha256": "7965cadc2aa55782194f3c1df31bacd403b4463b222fea3952731cabac350732"
+  },
+  "foundation": {
+    "product_tree_sha256": "479e9cd7ee18dc9537759edc1ba843ebe78aa2feb879294de8872636981a2a13",
+    "scientific_tree_sha256": "9bb30ebd8199e88a9290d50256cae2ef2da7dcda17e7dfbec8df01a7390aa321",
+    "package_sha256": "7904a22cb25e40843ddd4e8069f1673969a1f747da1691ec0c26fffe02fa19be"
+  },
+  "arms": [
+    {
+      "arm_id": "FINAL-DIRECT-CHAMPION",
+      "task": "direct",
+      "source": "champion",
+      "workspace": "direct-champion"
+    },
+    {
+      "arm_id": "FINAL-DIRECT-PACK-FOUNDATION",
+      "task": "direct",
+      "source": "foundation",
+      "workspace": "direct-foundation"
+    },
+    {
+      "arm_id": "FINAL-SKILL-A-PACK-FOUNDATION",
+      "task": "skill_a",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    },
+    {
+      "arm_id": "FINAL-NEXT-SESSION-FOUNDATION",
+      "task": "next_session",
+      "source": "foundation",
+      "workspace": "lifecycle"
+    }
+  ],
+  "tasks": {
+    "direct": {
+      "case_id": "FINAL-DIRECT",
+      "mode": "DIRECT",
+      "prompt": "Implement `collapse_adjacent()` in `runs.py`: return a new list with one value per adjacent run while preserving order. Support empty plus singleton inputs without mutating the caller-owned sequence. Leave tests/NULNUL state untouched. Run the project tests.",
+      "job": "adjacent sequence compaction",
+      "fixture": "evals/final-pack-live-proof/fixtures/direct",
+      "task_sha256": "94595597842ab1af87827a1c6938214eec637cf3e9a048c361f140421cda1ce0",
+      "fixture_sha256": "9b820850a05890707156ef12402c22745e9634460eefa89f8c03a74b0fc6cd61",
+      "strict_command": "python3 -m unittest -q",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": ["runs.py"],
+      "required_writes": ["runs.py"]
+    },
+    "skill_a": {
+      "case_id": "FINAL-SKILL-A",
+      "mode": "PROJECT_FIT",
+      "prompt": "Extend public `submit_job()` requests with optional `priority`. Preserve existing missing and empty behavior; accept `low`, `normal`, and `high`, and reject other non-empty values through the repository's established validation contract. Do not modify tests. Run the relevant project checks.",
+      "job": "public API request validation for job priority",
+      "fixture": "evals/final-pack-live-proof/fixtures/lifecycle",
+      "overlay": "evals/final-pack-live-proof/fixtures/project-fit-overlay",
+      "task_sha256": "499ed1558e8e64345759c85628609e7c3c1acc62ac878ecb0dcb7419635d7b56",
+      "fixture_sha256": "db5b8b5bcb2d1ffabf6706184f9e8acb6de1fc93e006cc0c268609e66617fd58",
+      "overlay_sha256": "c47269750cc2556da2da660e3291368a0d1c14d25a53c2bcfdabe774c595b7fa",
+      "expected_capability": "project-api-validation",
+      "expected_target": "capabilities/project-api-validation/SKILL.md",
+      "expected_body_sha256": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+      "project_check_identity": "api-contract",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": ["jobs.py", "contracts/error-codes.json"],
+      "required_writes": ["jobs.py", "contracts/error-codes.json"]
+    },
+    "next_session": {
+      "case_id": "FINAL-NEXT-SESSION",
+      "mode": "NEXT_SESSION",
+      "prompt": "Extend public `submit_job()` priority handling to accept `urgent` while preserving the existing priority validation and project error contract. Do not modify tests. Run the relevant project checks.",
+      "job": "public API request validation for job priority",
+      "fixture": "evals/final-pack-live-proof/fixtures/lifecycle",
+      "overlay": "evals/final-pack-live-proof/fixtures/next-session-overlay",
+      "task_sha256": "7d84a99a19fe20b0ff6109825e61efbc53f4c78f5c89722ada21f749968e31e9",
+      "fixture_sha256": "db5b8b5bcb2d1ffabf6706184f9e8acb6de1fc93e006cc0c268609e66617fd58",
+      "overlay_sha256": "85c05a3f4f74dfaa59e2775e1805a1e6c7470a4fc228818f43143f0e7818489b",
+      "expected_capability": "project-api-validation",
+      "expected_target": "capabilities/project-api-validation/SKILL.md",
+      "expected_body_sha256": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+      "project_check_identity": "api-contract",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": ["jobs.py"],
+      "required_writes": ["jobs.py"]
+    }
+  }
+}

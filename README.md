@@ -6,12 +6,12 @@
 
 <p align="center">
   <strong>NULNUL is an open-source, repository-local AI development environment for OpenAI Codex and Anthropic Claude Code.</strong><br>
-  Before changing the AI setup, it inspects existing <code>AGENTS.md</code> or <code>CLAUDE.md</code> guidance, skills, plugins, agents, and project checks. It keeps what fits, adds only missing support, and uses actual test, build, or validation results as the completion criterion.
+  Before changing the AI setup, it inspects existing <code>AGENTS.md</code> or <code>CLAUDE.md</code> guidance, skills, plugins, agents, and project checks. It selects the strongest justified task-fit capability path, verifies the result, and removes anything that does not materially help.
 </p>
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-2.2.1-111111" alt="version 2.2.1">
+  <img src="https://img.shields.io/badge/version-3.0.0-111111" alt="version 3.0.0">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
 
@@ -20,25 +20,78 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Quick start</a> · <a href="#read-only-preview">Read-only preview</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.1">Current release: v2.2.1</a>
+  <a href="#quick-start">Quick start</a> · <a href="#read-only-preview">Read-only preview</a> · <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0">Current release: v3.0.0</a>
 </p>
 
 <p align="center">
-  Checks the existing setup first · Adds only what is missing · Uses repository checks as the completion criterion
+  Outcome first · Evidence-backed capability selection · Waste removed after verification
 </p>
 
 > A “harness” is the set of project rules, skills, work state, and executable checks that guide an AI coding agent. NULNUL keeps this setup in the repository; it is not an agent-team generator.
+
+**Outcome quality comes first. Verification makes it credible. Simplicity breaks ties between materially equivalent paths.**
 
 ## Before / With NULNUL
 
 | Before | With NULNUL |
 | --- | --- |
 | Re-explain the project every session | Read the repository and its current setup first |
-| Accumulate overlapping skills and agents | Reuse what fits and add only uncovered support |
+| Keep a familiar but materially weaker capability, or accumulate overlapping ones | Reuse when outcome-competitive; add or replace only for material outcome value |
 | Accept “done” without a real check | Run the repository's test, build, or validation command |
 | Reconstruct old work from chat | Leave a concise, verified checkpoint when continuity is needed |
 
-If the existing setup is sufficient, NULNUL adds **0 new agents, 0 new skills, and 0 new infrastructure**.
+When the existing setup already provides the strongest justified path, **0 new agents, 0 new skills, and 0 new infrastructure** is a correct result—not a target that overrides quality.
+
+## Measured demo: verified continuity
+
+In corrected benchmark case 31, the same short task asked each arm to fix repeated
+whitespace in `slug()`, add a focused regression, run the existing checkpoint
+runner once, and stop.
+
+```text
+RESULT
+✓ Repeated-whitespace slug regression fixed
+
+VERIFY
+✓ checkpoint validation passed
+
+RESUME
+✓ verification receipt refreshed for the named files
+```
+
+<details>
+<summary>Harness evidence</summary>
+
+- USED: the existing verified project checkpoint
+- UPGRADED / REPLACED / RETIRED / ADDED: nothing
+- SKIPPED: a new Agent, Skill, or infrastructure
+
+Vanilla changed the two product files but failed checkpoint validation. Exact
+v2.2.1 and the frozen Project-Fit candidate changed those files plus the existing
+verification receipt and passed. This demonstrates one bounded continuity case,
+not long-term capability evolution.
+</details>
+
+### Historical post-2.2.1 Project-Fit proof
+
+The corrected proof view combines 19 valid frozen cases with six preregistered
+successors for invalid original contracts. It used zero result-driven retries.
+
+| Variant | Strict task pass | Completion-check pass | Runtime | Input-token proxy |
+| --- | ---: | ---: | ---: | ---: |
+| Vanilla | 21/25 | 21/25 | 889.613 s | 2,123,954 |
+| exact v2.2.1 | 21/25 | 23/25 | 1,154.986 s | 2,813,285 |
+| frozen Project-Fit candidate | 21/25 | 23/25 | 1,248.134 s | 3,367,586 |
+
+Verdict: **NO_ADVANTAGE** over exact v2.2.1 and **v2.3 NOT READY**. The current
+candidate tied task outcomes while using 8.1% more runtime and 19.7% more reported
+input tokens than exact v2.2.1. It won two cases against Vanilla and lost two; both
+cleanup cases failed in every variant. No product challenger was promoted. See the
+[proof decision](docs/roadmap/post-2.2.1-proof-decision.md) and
+[baseline losses](docs/roadmap/post-2.2.1-baseline-findings.md). These numbers cover
+only the recorded suite and are not a universal coding-quality claim. The original
+Vanilla/v2.2.1 pairs were counterbalanced; the Project-Fit third arm ran later, so
+its runtime and token differences are descriptive rather than causal paired deltas.
 
 ## Quick start
 
@@ -56,11 +109,15 @@ claude plugin marketplace add SeoNaRu/nulnul-harness
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
+Upgrading an existing project? Read [Upgrade to NULNUL 3.0](docs/upgrade-3.0.md)
+before migrating durable state.
+
 After installation, start a new session with this prompt:
 
 ```text
-Inspect this repository first. Reuse what already works and add only what is
-missing. Then continue the work I requested and run the real project checks.
+Inspect this repository first. Reuse what is outcome-competitive, add capability
+only where it materially improves the result, then complete my request and run
+the real project checks. Remove anything that did not materially help.
 ```
 
 You can also ask for the product change directly:
@@ -74,8 +131,8 @@ Fix the booking API and verify that the existing behavior still passes.
 See how NULNUL would reason about the setup without writing anything:
 
 ```text
-Inspect this repository and show the smallest harness changes you would
-recommend. Do not modify any files.
+Inspect this repository and show the strongest justified harness path for the
+outcome, including what you would omit as non-contributing. Do not modify files.
 ```
 
 <a id="what-nulnul-is-for"></a>
@@ -84,9 +141,9 @@ recommend. Do not modify any files.
 
 AI coding agents need project-specific setup: plugins, rules, context, session state, and executable checks. Maintaining that setup by hand can leave overlapping agents and skills, stale work state, and completion claims without test results.
 
-NULNUL records this setup in an inspectable, removable repository contract. It is intended for Codex and Claude Code projects that should preserve working settings and avoid unnecessary additions.
+NULNUL records this setup in an inspectable, removable repository contract. It is intended for Codex and Claude Code projects that need task-fit capability selection, verifiable results, preserved working settings, and no non-contributing additions.
 
-The user sets the product direction. NULNUL finds an implementation and verification path that fits the repository and explains material choices.
+The user sets the product direction. NULNUL chooses the strongest justified implementation and verification path for that task within safety, permission, compatibility, and cost boundaries, then explains material choices.
 
 ## Three common uses
 
@@ -102,7 +159,7 @@ Inspect the current setup first, reuse what already works, and run the
 existing regression checks before calling it done.
 ```
 
-**What NULNUL checks and leaves:** the current guidance and capabilities, the smallest scoped implementation, and the result of the repository's existing completion check.
+**What NULNUL checks and leaves:** the current guidance and capabilities, an outcome-complete implementation, and the result of the repository's existing completion check.
 
 ### Continue work across sessions
 
@@ -116,6 +173,8 @@ Use a concise verified checkpoint and refuse fast resume if the checked files ch
 ```
 
 **What NULNUL checks and leaves:** one bounded checkpoint, its exact completion command, and a freshness receipt tied to the files that command verifies.
+
+> **NULNUL 3.0.0:** NULNUL restores only relevant verified project Memory. A bounded pre-session Capability Pack adds only selected bodies; Direct gets none. Authoritative checks create attributable Experience, and evidence-triggered Natural Selection, external competition, Agent Evolution, and guarded Harness Evolution can propose lifecycle changes without gaining structural authority. Cross-project Generalization keeps project Memory isolated and transfers only privacy-safe abstract priors after independent or target validation. One Agent and shipped control policies remain the defaults; ordinary tasks load none of these maintenance systems or cross-project history.
 
 ### Clean up an overgrown AI setup
 
@@ -138,8 +197,9 @@ unless the current task proves a gap.
 
 ```text
 I want to build a local-first expense tracker.
-Set up the smallest useful development harness, explain any permission
-boundary, build the first working slice, and leave one runnable check.
+Set up the strongest justified development harness for this outcome, explain
+any permission boundary, build the first working slice, verify it, and remove
+setup that did not materially help.
 ```
 
 **Recurring workflow**
@@ -174,31 +234,31 @@ a compatibility check.
 ```text
 inspect the repository and host
         ↓
-reuse working rules and capabilities
+define the outcome and its quality checks
         ↓
-add only an uncovered job or verification boundary
+reuse outcome-competitive capabilities; investigate material gaps
         ↓
-continue the user's original work
+select the strongest justified task-fit path
         ↓
-run the repository's exact completion check
+complete the work and run its exact checks
         ↓
-leave only the verified state the next session needs
+remove non-contributing setup; keep verified state when needed
 ```
 
 In practice, the plugin:
 
 1. detects Codex or Claude Code and reads the applicable `AGENTS.md` or `CLAUDE.md`, project metadata, tests, and run evidence;
-2. inventories existing skills, plugins, agents, and tools before judging what is missing;
-3. searches installed, official, curated, and reputable public capabilities before creating a project-local substitute;
+2. inventories existing skills, plugins, agents, and tools before judging fit or gaps;
+3. reuses installed capabilities when they are outcome-competitive and searches a bounded set of official, curated, or reputable public candidates only for a concrete material quality or verification gap;
 4. keeps, upgrades, merges, or removes existing roles instead of recreating them;
-5. prefers direct or single-agent execution and adds a separate role only for a concrete independent job or verification boundary;
+5. uses direct or single-agent execution when outcome-competitive, and adds as many bounded roles as materially improve specialization, context isolation, parallel exploration, or independent verification;
 6. continues the original request—setup alone is not completion;
 7. runs the exact repository check and records bounded, sanitized evidence;
 8. leaves concise verified state when the work must span sessions;
 9. turns reproduced failures into bounded proposals, not silently accepted rules; and
 10. when explicitly opted in, compatibility-checks verified personal adaptations without copying the source project.
 
-Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Ordinary work combines them. The proposal author and the independent Gate separate only when a change needs measured promotion.
+Navigator, Worker, Coach, and Gate are responsibility boundaries, not four mandatory agents. Ordinary work combines them when that path is outcome-competitive. The proposal author and the independent Gate separate when a change needs measured promotion.
 
 <a id="comparison-with-other-tool-types"></a>
 
@@ -208,18 +268,18 @@ The categories below can work together. The difference is the default job, not a
 
 | Category | Typical starting point | NULNUL's difference |
 | --- | --- | --- |
-| Agent-team generator | Create a coordinated roster | Creates no role unless an independent job justifies it; existing roles are upgraded in place. |
+| Agent-team generator | Create a coordinated roster | Uses no target role count; each added or retained role must materially improve the verified outcome. |
 | Prompt or rule bundle | Load prepared instructions | Starts from the repository's current rules and executable checks. |
 | Memory layer | Retain conversation or context | Stores concise verified project state, not raw conversations. |
 | Hosted orchestrator | Run long-lived workflows on a service | Stays repository-local and skills-only; no server or daemon is required. |
-| Repository template | Apply the same starting structure | Adapts to an existing repository and may add nothing. |
-| NULNUL | Inspect, complete, verify, and improve project work | Reuses first, fills only proven gaps, and keeps only independently verified changes. |
+| Repository template | Apply the same starting structure | Adapts to an existing repository and may add nothing when that is the strongest justified path. |
+| NULNUL | Inspect, complete, verify, and improve project work | Reuses outcome-competitive capabilities, adds what materially helps, and removes what does not. |
 
 <a id="repository-changes"></a>
 
 ## What files can NULNUL add to a repository?
 
-If the existing setup is sufficient, NULNUL adds no files. When durable support is missing, it may add the following:
+If the existing setup already provides the strongest justified path, NULNUL adds no files. When durable support materially improves the outcome or its verification, it may add the following:
 
 ```text
 your-project/
@@ -229,7 +289,7 @@ your-project/
 │   ├── checkpoint.json        # concise verified multi-session state
 │   ├── evolution.json         # active governed-improvement state, when needed
 │   └── evolution.archive.json # closed evidence, outside normal resume context
-├── .agents/skills/<name>/     # Codex: only when no adequate capability exists
+├── .agents/skills/<name>/     # Codex: only when no outcome-competitive capability exists
 └── docs/nulnul/workflows/<name>.md
                                 # Claude Code: only for a justified reusable workflow
 ```
@@ -260,13 +320,24 @@ transfer claim only → sealed unseen check → scoped decision
 
 | Evidence | Current result | What it establishes |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **239 passed (239/239)** | Deterministic product, state, host-switching, privacy, rollback, transfer, Meta Gate, documentation-debt, exact-candidate, behavior-boundary, and negative-control contracts pass. |
+| [Repository test suite](tests/) | **431 passed (431/431)** | Deterministic product, Foundation, lifecycle, host-switching, privacy, rollback, transfer, evolution, documentation-debt, and negative-control contracts pass. |
 | [Known behavior and safety](evals/results.json) | **100/100 across 12 cases** | The published fixtures pass. This is not a universal quality score or proof of better results in every repository. |
 | [Exact public 2.2.1 Claude adoption](evals/benchmarks/claude-adopt/evidence.json) | **5/5 checks; 0 protected writes** | A fresh public-tag install preserved two existing agent profiles and the inactive Codex entry. |
 | [Exact public Project M](evals/meta-evolution/public-adoption.json) | **3 → 1 full compatibility checks** | The bounded selector kept the same correct transactional-migration decision and passed no-match, conflict, privacy, permission, migration, and rollback controls. |
 | [Release artifact](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v2.2.1) | **Byte-identical; SHA-256 `f2d320804c5b86a7d1797c8088a36cf824a8009a6b825f19dcda8b8fa2c3388e`** | The downloaded v2.2.1 archive matches the frozen local artifact exactly. |
 
 The v2.2.1 evidence records `local_candidate_ready: true` and `release_ready: true`. [Candidate CI run 32689502007](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32689502007) and [main CI run 32689545235](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32689545235) passed the full suite and Release Gate; [tag CI run 32688807083](https://github.com/SeoNaRu/nulnul-harness/actions/runs/32688807083) also passed.
+
+### Earlier local constraint-lifecycle evaluation (not shipped)
+
+The 2026-08-25 constraint-lifecycle work tested possible 2.3 behavior, but it did not upgrade the core product.
+
+| Question | Verified answer |
+| --- | --- |
+| Did NULNUL become 2.3? | **No.** Every evaluated candidate was rejected and removed. The active core version remains **2.2.1**. |
+| What did the A/B tests show? | [Episode 1](evals/constraint-lifecycle/gate-decision.json) improved the best exact result from 0/4 to 2/4 but omitted required conflict identifiers. The [follow-up](evals/constraint-reconciliation-v2/gate-decision.json) completed those identifiers at +1.42% paired input, but champion and candidate both scored 0/4 because permission and inactive-guard fields were still wrong. |
+| What did that cycle's green run prove? | **241/241** repository tests, **15/15** product-plugin tests, documentation debt **0**, and Release Gate **100/100** proved that the rejected code was removed and the 2.2.1 rollback state was intact. They did **not** prove the proposed 2.3 behavior. |
+| What was upgraded? | Three audited project-local harness setups were repaired and pass their own completion checks. Those local repairs are not core-product promotion evidence. |
 
 <details>
 <summary>Measured evidence behind the current contracts</summary>
@@ -341,7 +412,7 @@ This is user-triggered, bounded improvement. It is not continuous self-learning,
 **Good fit:**
 
 - an existing project whose current rules, skills, plugins, agents, and checks should be preserved;
-- a new project that should start with the smallest useful AI working contract, not a prebuilt team;
+- a new project that should start with an outcome-fit, waste-aware AI working contract, not a prebuilt team;
 - development that spans sessions and must resume from verified repository state;
 - work where tests, permissions, independent review, or rollback matter;
 - recurring workflows or reproducible failures that justify measured project-local improvement; and
@@ -376,17 +447,17 @@ If the repository already has everything the task needs, you may not need NULNUL
 
 ## Current NULNUL release
 
-**v2.2.1**, published on August 24, 2026, is the current public release. Its downloaded archive is byte-identical, exact-final Claude and Meta adoption passed, Release Gate is ready, and main CI is green.
+**v3.0.0** is the current product version.
 
-- A validated Experience Digest can become a deterministic, local feedback capsule for user review without saving or uploading raw conversation data.
-- A schema-v4 provisional-to-confirmed lifecycle keeps the confirmed version active until one observed cycle is healthy, otherwise it records rollback.
-- Documentation-debt checks account for the active host and dirty worktree.
-- Release evidence is bound to the candidate's exact bytes, not only its version string.
-- The annotated release tag points to commit `59f9799b0b15b37009e47b318e448b5790bf606c`.
-- Fresh exact-version Claude Code and Meta Evolution adoption passed without protected writes, permission expansion, private evidence, or retired-holdout reuse.
-- The consent/continuity behavior candidate did **not** ship. Its strict Gate returned `NO_PROMOTION`, so Navigator remains v20 and no new consent or ordinary-product routing claim is made.
+- Sessions, concise handoffs, verified Experience, and durable Memory preserve useful continuity without replaying raw conversation history.
+- Pre-session Capability Packs keep Direct empty and place only selected current capability bodies into project-fit work.
+- Deterministic check receipts connect work, outcome, Memory, and later evolution evidence.
+- Skills, capability ecosystems, Agent topologies, and bounded Harness controls change only through evidence-gated Champion/Challenger decisions with rollback.
+- External candidates remain quarantined and untrusted until project checks establish fit.
+- Cross-project knowledge remains an abstract, privacy-checked prior until the target project validates it.
+- The runtime-exclusive Codex-rule activation path is retired; upgrade cleanup is deterministic and does not mutate user trust.
 
-See the full history in [`CHANGELOG.md`](CHANGELOG.md).
+See [Upgrade to 3.0](docs/upgrade-3.0.md), [Security](SECURITY.md), and the full history in [`CHANGELOG.md`](CHANGELOG.md).
 
 <details>
 <summary>Earlier evolution milestones</summary>
@@ -409,7 +480,9 @@ See the full history in [`CHANGELOG.md`](CHANGELOG.md).
 
 Public product records:
 
+- the frozen [Product North Star](docs/product-north-star.md), the Korean [beginner-to-advanced product guide](docs/how-nulnul-works.ko.md), and the [post-2.2.1 proof decision](docs/roadmap/post-2.2.1-proof-decision.md);
 - [behavior cases](evals/cases.json) and [behavior results](evals/results.json);
+- the 15-case [outcome-first and project-fit selection contract](evals/outcome-first/cases.json), which checks deterministic routing and lifecycle expectations rather than measured model task performance;
 - [performance evidence](evals/benchmarks/performance.json), [activation evidence](evals/benchmarks/activation/results.json), and [documentation-debt A/B](evals/benchmarks/doc-debt/results.json);
 - the rejected [context-routing A/B](evals/benchmarks/context-routing/results.json);
 - the Generalization Gate [exposure manifest](evals/generalization/manifest.json), [failed Ruby evidence](evals/generalization/results-ruby-failed.json), and [Perl/TAP result](evals/generalization/results.json).
@@ -477,7 +550,7 @@ Release maintainers can run `python3 scripts/meta_adopt_evidence.py capture PUBL
 
 Report a bug or setup mismatch in a [GitHub issue](https://github.com/SeoNaRu/nulnul-harness/issues/new?template=bug_report.yml). Include the request, expected result, and observed result—never private code, credentials, or raw transcripts. If an evaluation produced a bounded Experience Digest, run `validate_experience_digest.py DIGEST --feedback-capsule` for local, reviewable Markdown; it does not save or upload anything.
 
-See [`SUPPORT.md`](SUPPORT.md), [`PRIVACY.md`](PRIVACY.md), [`TERMS.md`](TERMS.md), and the [MIT license](LICENSE).
+See [`SUPPORT.md`](SUPPORT.md), [`SECURITY.md`](SECURITY.md), [`PRIVACY.md`](PRIVACY.md), [`TERMS.md`](TERMS.md), the [3.0 upgrade guide](docs/upgrade-3.0.md), and the [MIT license](LICENSE).
 
 ## Research background
 

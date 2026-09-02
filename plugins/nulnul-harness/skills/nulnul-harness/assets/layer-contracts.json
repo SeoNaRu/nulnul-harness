@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "cross_cutting": "identity_and_provenance",
+  "layers": [
+    {
+      "id": "project-model",
+      "purpose": "State stable current project truth.",
+      "input": ["verified setup evidence", "stable promoted facts"],
+      "output": ["docs/nulnul/project.md"],
+      "durable_state_owned": ["docs/nulnul/project.md"],
+      "mutation_authority": ["governed setup", "governed adopt", "verified fact promotion"],
+      "observability_produced": ["project revision"],
+      "provenance_produced": ["source refs"],
+      "next_layer": "session-task",
+      "must_not_own": ["session history", "raw evidence", "evolution decisions"]
+    },
+    {
+      "id": "session-task",
+      "purpose": "Track one host session and its concrete user tasks without storing chat.",
+      "input": ["user goal", "project model", "checkpoint", "current Agent topology when selected"],
+      "output": ["session record", "task records", "session handoff", "bounded Agent-scoped child tasks and handoffs"],
+      "durable_state_owned": ["memory/sessions", "memory/handoff.json"],
+      "mutation_authority": ["foundation runtime session writer"],
+      "observability_produced": ["session, task, Agent binding, and handoff lifecycle events"],
+      "provenance_produced": ["SESSION_ID", "TASK_ID", "AGENT_ID", "AGENT_TOPOLOGY_ID", "host fingerprint"],
+      "next_layer": "context-assembly",
+      "must_not_own": ["project truth", "capability selection", "evolution decisions", "full conversation"]
+    },
+    {
+      "id": "context-assembly",
+      "purpose": "Select a bounded relevant subset of durable knowledge for one task.",
+      "input": ["task terms", "active memory index", "project model", "checkpoint"],
+      "output": ["inspectable context pack"],
+      "durable_state_owned": [],
+      "mutation_authority": ["none; read-only query"],
+      "observability_produced": ["why-included reasons", "item and byte counts"],
+      "provenance_produced": ["memory item refs"],
+      "next_layer": "capability-ecosystem",
+      "must_not_own": ["raw transcripts", "full history", "memory mutation", "semantic routing"]
+    },
+    {
+      "id": "capability-ecosystem",
+      "purpose": "Expose accepted metadata, exact identities, and bounded Pack candidates.",
+      "input": ["canonical accepted-capability table"],
+      "output": ["bounded accepted-capability view", "bounded Pack candidates", "frozen ecosystem Champion and lifecycle candidate refs"],
+      "durable_state_owned": ["accepted-capability rows in project.md"],
+      "mutation_authority": ["governed setup", "governed adopt", "validated Natural Selection transaction"],
+      "observability_produced": ["bounded opportunity", "lifecycle status"],
+      "provenance_produced": ["CAPABILITY_ID", "version or digest", "logical load target"],
+      "next_layer": "activation-authority",
+      "must_not_own": ["untrusted quarantine bodies", "external source execution", "task execution", "host trust"]
+    },
+    {
+      "id": "activation-authority",
+      "purpose": "Select the current execution topology, construct immutable per-Agent pre-work capability context, or validate separate Governed authority.",
+      "input": ["current Agent topology or implicit SINGLE_AGENT", "Agent task scope", "bounded selected IDs or NO_CAPABILITY", "accepted metadata", "bounded context refs", "Governed stage when applicable"],
+      "output": ["Agent-scoped Task", "immutable Capability Pack per Agent", "selected body context or empty Direct context", "separate stage authority"],
+      "durable_state_owned": ["docs/nulnul/agent-topology.json", "memory/agent-topologies history"],
+      "mutation_authority": ["validated Agent Evolution transaction", "Capability Pack builder has no write authority", "existing stage writers"],
+      "observability_produced": ["topology selection, Agent binding, selection, Pack, body-inclusion, handoff, and Governed events"],
+      "provenance_produced": ["AGENT_ID", "AGENT_TOPOLOGY_ID and digest", "PACK_ID", "body digest", "authority surface"],
+      "next_layer": "verification",
+      "must_not_own": ["Capability lifecycle mutation", "host trust or runtime privilege", "arbitrary write authority", "distributed scheduling"]
+    },
+    {
+      "id": "verification",
+      "purpose": "Execute exact completion and project checks against resulting state.",
+      "input": ["product state", "configured check", "Pack receipt when applicable"],
+      "output": ["check receipt"],
+      "durable_state_owned": ["existing checkpoint verification receipt"],
+      "mutation_authority": ["deterministic check runner"],
+      "observability_produced": ["check start, exit, result, output digest"],
+      "provenance_produced": ["CHECK_ID", "command hash", "product identity"],
+      "next_layer": "runtime-observability",
+      "must_not_own": ["model-authored result claims", "memory promotion"]
+    },
+    {
+      "id": "runtime-observability",
+      "purpose": "Preserve only genuinely observable ordered runtime evidence.",
+      "input": ["host events", "tool traces", "Pack, context-bind, and check receipts"],
+      "output": ["local raw evidence", "bounded event summary", "completeness state"],
+      "durable_state_owned": [],
+      "mutation_authority": ["foundation runtime event writer"],
+      "observability_produced": ["ordered event stream", "COMPLETE, PARTIAL, or MINIMAL"],
+      "provenance_produced": ["source refs", "event order"],
+      "next_layer": "experience",
+      "must_not_own": ["project memory", "fabricated unavailable events", "full transcript promotion"]
+    },
+    {
+      "id": "experience",
+      "purpose": "Represent meaningful verified or partially verified outcomes from work.",
+      "input": ["session outcome", "checks", "Pack and check receipts", "Agent topology, scope, and handoff receipts", "optional Harness control identity, expected and actual effect, and cost", "ordered evidence"],
+      "output": ["task, capability, governed, recovery, Agent-attributed, Topology-attributed, or Harness-control-attributed experience"],
+      "durable_state_owned": ["memory/experiences"],
+      "mutation_authority": ["foundation runtime experience writer"],
+      "observability_produced": ["quality", "evolution eligibility", "failure reason"],
+      "provenance_produced": ["EXPERIENCE_ID", "SESSION_ID", "TASK_ID", "AGENT_ID", "AGENT_TOPOLOGY_ID", "source refs"],
+      "next_layer": "durable-memory",
+      "must_not_own": ["raw chat", "automatic capability mutation", "unsupported attribution"]
+    },
+    {
+      "id": "durable-memory",
+      "purpose": "Retain bounded project knowledge worth restoring later.",
+      "input": ["experiences", "verified capability, Agent topology, and Harness control decisions", "reusable lessons", "open threads"],
+      "output": ["active memory index", "handoff", "promoted records"],
+      "durable_state_owned": ["memory/index.json", "memory/decisions.jsonl", "memory/lessons.jsonl", "memory/open-threads.json", "memory/agent-topologies"],
+      "mutation_authority": ["foundation runtime memory writer"],
+      "observability_produced": ["promotion and lifecycle status"],
+      "provenance_produced": ["DECISION_ID", "LESSON_ID", "derived_from"],
+      "next_layer": "provenance-lineage",
+      "must_not_own": ["project.md history", "checkpoint position", "raw transcripts"]
+    },
+    {
+      "id": "provenance-lineage",
+      "purpose": "Validate identity, derivation, source, and supersession links.",
+      "input": ["all bounded records"],
+      "output": ["valid or rejected lineage"],
+      "durable_state_owned": [],
+      "mutation_authority": ["none; deterministic validator"],
+      "observability_produced": ["dangling, invalid, or cyclic reference errors"],
+      "provenance_produced": ["validated lineage graph"],
+      "next_layer": "memory-lifecycle",
+      "must_not_own": ["content ranking", "semantic promotion", "record deletion"]
+    },
+    {
+      "id": "memory-lifecycle",
+      "purpose": "Stop stale knowledge entering context while preserving lineage.",
+      "input": ["active memory", "supersession", "retirement", "equivalent lessons"],
+      "output": ["ACTIVE, SUPERSEDED, RETIRED, or COMPACTED records"],
+      "durable_state_owned": ["memory lifecycle fields"],
+      "mutation_authority": ["foundation runtime lifecycle writer"],
+      "observability_produced": ["status transitions", "compaction counts"],
+      "provenance_produced": ["supersedes", "superseded_by", "preserved source refs"],
+      "next_layer": "evolution-input",
+      "must_not_own": ["destructive retention policy", "capability evolution"]
+    },
+    {
+      "id": "evolution-input",
+      "purpose": "Return bounded verified attributable experiences for later Capability, Agent, or first-order Harness control evolution.",
+      "input": ["active verified capability-, Agent-, or Harness-control-attributed experiences", "bounded query"],
+      "output": ["evolution input records", "control candidates", "bounded Natural Selection evidence", "bounded Agent topology evidence", "bounded Harness control evidence", "triggered lifecycle need", "privacy-safe Generalization source identities only on an explicit transfer trigger"],
+      "durable_state_owned": [],
+      "mutation_authority": ["none; read-only query"],
+      "observability_produced": ["filters", "result count", "source experience IDs"],
+      "provenance_produced": ["EXPERIENCE_ID refs", "capability digest boundary"],
+      "next_layer": "session-task",
+      "must_not_own": ["raw sessions", "cross-project Memory sharing", "Generalization promotion", "capability or Harness control mutation", "promotion decisions", "guarded Kernel changes"]
+    }
+  ]
+}

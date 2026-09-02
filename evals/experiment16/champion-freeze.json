@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-09-01T06:21:40Z",
+  "capability_id": "project-api-validation",
+  "body_sha256": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+  "version_or_digest": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+  "job": "Preserve public request validation and structured error-catalog invariants",
+  "activation_trigger": "public API acceptance, rejection, or structured error behavior changes",
+  "project_check_identity": "api-contract",
+  "project_check_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+  "logical_load_target": "capabilities/project-api-validation/SKILL.md",
+  "status": "accepted/current",
+  "accepted_current": true,
+  "source": "evals/final-pack-foundation-repair-live-proof/fixtures/lifecycle/.agents/skills/project-api-validation/SKILL.md",
+  "foundation_tree_sha256": "f7f3a5a776d7a710bc7f4447f5c59945d4347cf75083444bb63ae868a2f86f65",
+  "prior_evidence_manifest_sha256": "5b7cebe47c5cf586e29e06f843c683d0269ece82c37fa5441e96d15757bc1a4e",
+  "prior_memory_index_sha256": "a7aa329a17b379e6e120ff8309d83541e125e0220f272a10803613013101c3db",
+  "required_initial_experience_id": "exp-20260901T055728Z-41f38550196a",
+  "required_initial_experience_sha256": "0a6365d3218a8dfc42ee32a22a21434835426e2947f7f75f1a8fa6c42926e5df"
+}

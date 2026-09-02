@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "nulnul-experiment-16",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 600,
+  "fresh_experience_budget": 3,
+  "retries": 0,
+  "max_candidates": 1,
+  "max_generations": 1,
+  "max_competition_pairs": 3,
+  "initial_preliminary_decision": "MORE_EXPERIENCE_REQUIRED",
+  "foundation": {
+    "product_tree_sha256": "f7f3a5a776d7a710bc7f4447f5c59945d4347cf75083444bb63ae868a2f86f65",
+    "scientific_tree_sha256": "157e66829f5d018f5e04abcf59ae15cbd0e7bb5fa9813e1401fb5efee657686f",
+    "package_sha256": "5d093af1b8e7a1b13ef1ee28d6b1e0a902fa19cc51295c7a5207a2c5bdd17c21"
+  },
+  "base_fixture": {
+    "path": "evals/final-pack-foundation-repair-live-proof/fixtures/lifecycle",
+    "sha256": "ac8502c38c3e7ee6606c991208642730f69131cf3f9290e683158fdaddc5c6d5"
+  },
+  "current_state_overlay": {
+    "path": "evals/experiment16/fixtures/current-state",
+    "sha256": "9482f846673f57f9fa7398370fd9bfa2ec52d2f94d1ff02ef6ca4b8c38d60c96"
+  },
+  "arms": [
+    {"arm_id": "E16-CHAMPION-NORMAL", "task": "normal"},
+    {"arm_id": "E16-CHAMPION-BOUNDARY", "task": "boundary"},
+    {"arm_id": "E16-CHAMPION-DIFFERENT-SURFACE", "task": "different_surface"}
+  ],
+  "tasks": {
+    "normal": {
+      "case_id": "E16-NORMAL",
+      "mode": "PROJECT_FIT",
+      "prompt": "Extend public `submit_job()` and `submit_jobs()` requests with optional `channel`. Preserve missing and empty behavior; accept `web` and `cli`, and reject other nonempty values through the repository's established public API contract before queue mutation. Do not modify tests. Run the relevant project checks.",
+      "job": "public API request validation and structured error-catalog invariants for job channel acceptance",
+      "overlay": "evals/experiment16/fixtures/normal",
+      "task_sha256": "cbf1c49d3e779bcbe561ada157c6a2aa18a790f99379a471a49c2285b47d50c4",
+      "overlay_sha256": "63f5e9c07ded2cf3b7b45eb6d9df0341763a8560eff5765f0056bfca551d3f86",
+      "expected_capability": "project-api-validation",
+      "expected_target": "capabilities/project-api-validation/SKILL.md",
+      "expected_body_sha256": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+      "project_check_identity": "api-contract",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": ["jobs.py", "contracts/error-codes.json"],
+      "required_writes": ["jobs.py", "contracts/error-codes.json"]
+    },
+    "boundary": {
+      "case_id": "E16-BOUNDARY",
+      "mode": "PROJECT_FIT",
+      "prompt": "Support optional `attempts` on public job requests. Missing and empty values retain current behavior; accept whole-number counts from 2 through 6, and reject every other value through the established project contract before any single or batch queue mutation. Preserve caller-owned inputs. Do not modify tests. Run the relevant project checks.",
+      "job": "public API request validation and structured error-catalog invariants for bounded attempt counts",
+      "overlay": "evals/experiment16/fixtures/boundary",
+      "task_sha256": "f6c63aedd3a5279e9ae51a77bef91cc5a8e625f608699c2e0df1e5597b488272",
+      "overlay_sha256": "728852d9137ecc58c7382d2991d83ea9c0b11b81259e53dd9bd0ff573e541382",
+      "expected_capability": "project-api-validation",
+      "expected_target": "capabilities/project-api-validation/SKILL.md",
+      "expected_body_sha256": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+      "project_check_identity": "api-contract",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": ["jobs.py", "contracts/error-codes.json"],
+      "required_writes": ["jobs.py", "contracts/error-codes.json"]
+    },
+    "different_surface": {
+      "case_id": "E16-DIFFERENT-SURFACE",
+      "mode": "PROJECT_FIT",
+      "prompt": "API clients may now enqueue import requests through a new public `queue_import(request, outbox)` function. Optional format choices are `json` and `ndjson`; omitted or empty format remains accepted. Unsupported nonempty choices must follow the repository's public rejection behavior and leave the outbox and caller data untouched. Do not modify tests. Run the relevant project checks.",
+      "job": "public API request acceptance and structured error-catalog behavior for import enqueueing",
+      "overlay": "evals/experiment16/fixtures/different-surface",
+      "task_sha256": "6ca3d808c55481c2240f99688ecd157e4710dc7516eda6beaffb53d88ea948d9",
+      "overlay_sha256": "93f486e6eee487d1ae3486e6f8ce60767bfaea6474eda3877493f13a3d385bc2",
+      "expected_capability": "project-api-validation",
+      "expected_target": "capabilities/project-api-validation/SKILL.md",
+      "expected_body_sha256": "13ffff5d869132d68ca2554d64a4b3e425d268f6e99e938bf46cf56881cfa2b9",
+      "project_check_identity": "api-contract",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "completion_command": "python3 -m unittest -q",
+      "allowed_writes": ["imports.py", "contracts/error-codes.json"],
+      "required_writes": ["imports.py", "contracts/error-codes.json"]
+    }
+  }
+}

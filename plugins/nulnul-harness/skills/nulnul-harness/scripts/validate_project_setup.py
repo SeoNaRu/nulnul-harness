@@ -4,7 +4,12 @@
 import argparse
 import json
 import re
+import sys
 from pathlib import Path
+
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import capability_contract
 
 
 REQUIRED_HEADINGS = {
@@ -47,6 +52,7 @@ def validate(text):
             errors.append(f"unfinished field: {label}")
     if PLACEHOLDER.search(text):
         errors.append("contract contains template placeholders")
+    errors.extend(capability_contract.validate(text))
     return errors
 
 

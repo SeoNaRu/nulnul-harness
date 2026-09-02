@@ -1,4 +1,4 @@
 interface:
   display_name: "nulnul harness"
-  short_description: "Verify outcomes with minimal setup"
-  default_prompt: "Use $nulnul-harness to inspect this repository, reuse what works, add only proven gaps, complete the task, and run its checks."
+  short_description: "Outcome-first verified work"
+  default_prompt: "Use $nulnul-harness to inspect this repository, choose the strongest justified task-fit capability path, complete and verify the task, and remove anything that does not materially help."

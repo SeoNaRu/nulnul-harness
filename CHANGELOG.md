@@ -2,6 +2,21 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 3.0.0 — 2026-09-02
+
+- Added automatic Session and Task continuity with bounded handoffs, verified project state, interruption recovery, and relevant durable Memory instead of raw conversation replay.
+- Added pre-session Capability Packs. Clear Direct work receives no capability body or lifecycle ceremony; project-fit work receives only the exact selected current body before product work begins.
+- Made deterministic project checks authoritative. Check receipts bind the Session, Task, Pack, capability digest, product result, Experience, Memory, and later Evolution query.
+- Added evidence-grounded project-local Skill evolution, including a valid KEEP outcome that resists unnecessary self-modification when verified Experience shows no weakness.
+- Added Capability Natural Selection for KEEP, UPGRADE, REPLACE, MERGE, RETIRE, and CREATE. Current state remains Champion until an attributable Challenger wins quality-first competition and a rollback-safe transaction.
+- Added quarantined external capability competition. External instructions remain untrusted data, never execute during discovery, and cannot enter active Packs without project verification and lifecycle adoption.
+- Added Agent Evolution for responsibility topology while retaining one Agent as the default. Additional Agents must earn their coordination and context cost through verified project value.
+- Added first-order Harness Evolution for bounded declarative controls. Identity, privacy, provenance, authority, authoritative checks, candidate freeze, promotion, and rollback remain in the guarded Kernel.
+- Added privacy-safe Cross-Project Generalization. Project Memory stays isolated; only abstract, provenance-bound priors with applicability limits can transfer after independent or target-project validation.
+- Replaced model-orchestrated Setup artifact editing with one bounded deterministic transaction and retired the Codex-rule-based runtime unlock, activation-specific trust, and restart lifecycle.
+- Added a 3.0 migration guide, explicit security boundary, updated privacy contract, reproducible skills-only package, and release validation across Foundation, lifecycle, migration, privacy, provenance, rollback, documentation, and packaging.
+- Kept claims evidence-qualified: live Harness self-improvement, universal multi-Agent superiority, global capability optimality, and live cross-project transfer are not established.
+
 ## 2.2.1 — 2026-08-24
 
 - Promoted the RC's deterministic Feedback Capsule, exact-archive Meta capture, reproducible packaging, clean-checkout pack order, and privacy-safe public adoption evidence without adding a dependency, service, permission, credential scope, MCP server, hook, app, schema, or product skill.

@@ -1,0 +1,29 @@
+{
+  "schema_version": 2,
+  "mode": "new-setup",
+  "host": "codex",
+  "goal": "{stable project goal}",
+  "milestone": "{current observable milestone}",
+  "completion_check": "{exact command}",
+  "verification_files": [
+    "{relative file checked by the command}"
+  ],
+  "constraints": [
+    "{non-negotiable local constraint}"
+  ],
+  "roster": {
+    "skills": [],
+    "plugins": [],
+    "agents": []
+  },
+  "agent_topology": "{bounded topology and verification owner}",
+  "accepted_capabilities": [
+    {
+      "capability_id": "{stable-lowercase-id}",
+      "job": "{material project job}",
+      "activation_trigger": "{positive material-fit trigger}",
+      "project_check_identity": "{stable-check-id}",
+      "version_or_digest": "{version, digest, or null}"
+    }
+  ]
+}

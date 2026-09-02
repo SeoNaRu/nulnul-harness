@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "experiment_id": "experiment-14-integrated-foundation-e2e",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "timeout_seconds": 420,
+  "live_arm_budget": 5,
+  "foundation_frozen_before_fresh_tasks": true,
+  "champion": {
+    "revision": "cee7b91e2a992adee1582702b7a4084c631443b6",
+    "artifact_sha256": "48a819a3878c9611487a4a632d9a62d1c9bda403f5dbca224466082ada26136b",
+    "tree_sha256": "7965cadc2aa55782194f3c1df31bacd403b4463b222fea3952731cabac350732"
+  },
+  "foundation": {
+    "tree_sha256": "6466a15772673f9650593b5488fb828aee9407b41d6ac0b05f8e774052288935",
+    "scientific_tree_sha256": "7d3e805d0bfaa5640119653a4fffe2e2bf85a3f553139d14b99616b6c049cdda",
+    "package_sha256": "982ae1c86bb38038831b4b04d982b222d487cee4ca3457af43daa2d3fea8ca7e"
+  },
+  "arms": [
+    {"arm_id": "E14-DIRECT-CHAMPION", "task": "direct", "source": "champion", "workspace": "direct-champion"},
+    {"arm_id": "E14-DIRECT-FOUNDATION", "task": "direct", "source": "foundation", "workspace": "direct-foundation"},
+    {"arm_id": "E14-GOVERNED-SETUP-FOUNDATION", "task": "governed_setup", "source": "foundation", "workspace": "lifecycle"},
+    {"arm_id": "E14-PROJECT-FIT-FOUNDATION", "task": "project_fit", "source": "foundation", "workspace": "lifecycle"},
+    {"arm_id": "E14-NEXT-SESSION-MEMORY-FOUNDATION", "task": "next_session", "source": "foundation", "workspace": "lifecycle"}
+  ],
+  "tasks": {
+    "direct": {
+      "case_id": "E14-DIRECT",
+      "prompt": "Update `contiguous_runs()` so it returns a new list of lists grouping only adjacent equal values, preserving input order. Handle empty input and never mutate the caller-owned list. Preserve the public signature and verify the project.",
+      "job": "internal contiguous grouping",
+      "fixture": "evals/experiment14/fixtures/direct",
+      "task_sha256": "fcd623661da6c10b9ba02bb39c739ed533de472a47e7af2bf127a7903549ba76",
+      "fixture_sha256": "4d3def8f5f1ac6c6223f646b372c7cdb613811a7840bf5efaaee109e5f91802d",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q",
+      "allowed_writes": ["runs.py"],
+      "required_writes": ["runs.py"],
+      "mode": "DIRECT"
+    },
+    "governed_setup": {
+      "case_id": "E14-GOVERNED-SETUP",
+      "prompt": "Use $nulnul-harness to adopt this existing trusted Codex project into the v2.3 Foundation, including the canonical accepted-capability contract, supported project-local activation rule, host entry, verified checkpoint, and bounded Session/Memory state. Preserve user-owned AGENTS.md guidance and product code, never modify project trust, and finish at the required restart boundary.",
+      "job": "Foundation Codex project adoption",
+      "fixture": "evals/experiment14/fixtures/lifecycle",
+      "task_sha256": "44d7c875a87c60a150b47d1ff2c177b4c8f97a404318b0138e6ada705159a9ba",
+      "fixture_sha256": "fa260905d6e3e7d8bf1c0f7da955e2a361d86ca81f86fd50ed67bc6930006e4d",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 .agents/skills/nulnul-harness/scripts/validate_project_setup.py docs/nulnul/project.md && python3 .agents/skills/nulnul-harness/scripts/capability_contract.py validate docs/nulnul/project.md --setup && python3 .agents/skills/nulnul-harness/scripts/validate_checkpoint.py docs/nulnul/checkpoint.json --root . && python3 tools/verify_host_setup.py",
+      "allowed_write_prefixes": [".codex/rules/nulnul-activation.rules", "AGENTS.md", "docs/nulnul/checkpoint.json", "docs/nulnul/checkpoint.verification.json", "docs/nulnul/project.md", "docs/nulnul/.gitignore", "docs/nulnul/memory/"],
+      "required_writes": [".codex/rules/nulnul-activation.rules", "AGENTS.md", "docs/nulnul/checkpoint.json", "docs/nulnul/checkpoint.verification.json", "docs/nulnul/project.md"],
+      "expected_stage": "adopt-upgrade",
+      "expected_host": "codex",
+      "mode": "GOVERNED_SETUP"
+    },
+    "project_fit": {
+      "case_id": "E14-PROJECT-FIT",
+      "prompt": "Update `register_subscription()` so a nonempty `delivery` accepts only the lowercase values `email`, `sms`, or `push`; reject every other nonempty value before registration. Preserve absent, empty, and accepted behavior, never mutate the input, and verify the project.",
+      "job": "subscription delivery API validation",
+      "fixture": "evals/experiment14/fixtures/lifecycle",
+      "fixture_sha256": "fa260905d6e3e7d8bf1c0f7da955e2a361d86ca81f86fd50ed67bc6930006e4d",
+      "overlay": "evals/experiment14/fixtures/project-fit-overlay",
+      "overlay_sha256": "d4ec044847d3a2b91e0bfb9a0b10f748ae1e0d5c01fe52821f489d3035ca2e96",
+      "task_sha256": "5ba70af552fc85ff5f182923f0f5b93aaffbe00f00ae70984ddfb491966a35ba",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check_identity": "api-contract",
+      "allowed_writes": ["subscriptions.py", "contracts/error-codes.json"],
+      "required_writes": ["subscriptions.py", "contracts/error-codes.json"],
+      "expected_capability": "project-api-validation",
+      "expected_match_basis": "The request changes API acceptance and rejection behavior; the accepted capability owns pre-registry rejection, the structured project error, and the error-catalog check.",
+      "promotion_candidates": {
+        "decisions": [],
+        "lessons": [{"lesson": "For subscription delivery validation, reject invalid values before registry mutation and run the error-catalog check.", "scope": "subscription delivery API validation"}],
+        "open_threads": []
+      },
+      "mode": "PROJECT_FIT"
+    },
+    "next_session": {
+      "case_id": "E14-NEXT-SESSION",
+      "prompt": "Extend accepted subscription delivery values to include lowercase `webhook` while preserving validation-before-registration behavior and every existing response. Never mutate the input and verify the project.",
+      "job": "subscription delivery API validation",
+      "fixture": "evals/experiment14/fixtures/lifecycle",
+      "fixture_sha256": "fa260905d6e3e7d8bf1c0f7da955e2a361d86ca81f86fd50ed67bc6930006e4d",
+      "overlay": "evals/experiment14/fixtures/next-session-overlay",
+      "overlay_sha256": "c3130ef11a2c0c4b7121adc569a4286ba68eea35ab8510121b3ae49fa5805182",
+      "task_sha256": "7f3056ee28d5f105ecde770d87248c2d6819a4c13e5fdc4bb3a345c09201cc87",
+      "completion_command": "python3 -m unittest -q",
+      "strict_command": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check": "python3 -m unittest -q && python3 tools/verify_error_catalog.py",
+      "project_check_identity": "api-contract",
+      "allowed_writes": ["subscriptions.py"],
+      "required_writes": ["subscriptions.py"],
+      "expected_capability": "project-api-validation",
+      "mode": "NEXT_SESSION"
+    }
+  },
+  "primary_results": ["FOUNDATION_INTEGRATED_E2E_PROVEN", "FOUNDATION_CORE_FAILURE", "INFRASTRUCTURE_INVALID"],
+  "failure_codes": ["DIRECT_LANE_OVERHEAD", "SETUP_RUNTIME_CONTRACT_FAILURE", "HOST_ADMISSION_FAILURE", "EXCLUSIVE_CAPABILITY_GATE_FAILURE", "TRUE_POSITIVE_UNDERACTIVATION", "WRONG_CAPABILITY_IDENTITY", "ATTRIBUTION_BOUNDARY_FAILURE", "EXPERIENCE_CAPTURE_FAILURE", "MEMORY_PROMOTION_FAILURE", "CONTEXT_RETRIEVAL_FAILURE", "CONTEXT_BLOAT_REGRESSION", "PROVENANCE_FAILURE", "STATE_AUTHORITY_REGRESSION", "PRODUCT_REGRESSION", "INFRASTRUCTURE_INVALID"]
+}

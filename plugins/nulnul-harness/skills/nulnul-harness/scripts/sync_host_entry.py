@@ -2,10 +2,12 @@
 """Synchronize only the active host's root NULNUL session entry."""
 
 import argparse
+import hashlib
 import json
 import os
 import re
 import stat
+import sys
 import tempfile
 from pathlib import Path
 
@@ -13,6 +15,18 @@ from pathlib import Path
 HOST_ENTRIES = {"codex": "AGENTS.md", "claude": "CLAUDE.md"}
 START = "<!-- nulnul:session-entry:start -->"
 END = "<!-- nulnul:session-entry:end -->"
+SETUP_AUTHORITY = (
+    "AGENTS.md",
+    "docs/nulnul/project.md",
+    "docs/nulnul/checkpoint.json",
+    "docs/nulnul/checkpoint.verification.json",
+)
+LEGACY_RULE = Path(".codex/rules/nulnul-activation.rules")
+LEGACY_RULE_SHA256 = "9e924670b92c543c253f2aec679d30e47b012c5d53ab93756e6608beda6566ef"
+
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import validate_project_setup
 
 
 def temporary_file(path, text, mode):
@@ -31,6 +45,20 @@ def atomic_write(path, text):
         os.replace(temporary, path)
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def sha256_bytes(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def governed_setup_receipt(stage):
+    source = {
+        "activation": "GOVERNED",
+        "stage": stage,
+        "host": "codex",
+        "authority": list(SETUP_AUTHORITY),
+    }
+    return sha256_bytes(json.dumps(source, sort_keys=True, separators=(",", ":")).encode())
 
 
 def atomic_batch_write(updates, replace=os.replace):
@@ -72,23 +100,26 @@ def managed_block(host, state):
     entry = HOST_ENTRIES[host]
     other = HOST_ENTRIES["claude" if host == "codex" else "codex"]
     label = "Codex" if host == "codex" else "Claude Code"
-    if state.name == "checkpoint.json":
-        resume = (
-            f"Validate `{state.as_posix()}` before repository-wide inspection; when "
-            "`fast_path_ready` is true, read only it and directly needed task files."
+    if host == "codex":
+        opportunity = (
+            "The Foundation host constructs and binds an immutable pre-session Capability Pack "
+            "before this work model starts. Use only selected capability context already supplied; "
+            "do not invoke Pack lifecycle commands. No selected body is Direct. "
         )
     else:
-        resume = (
-            f"Validate `{state.as_posix()}` and its archive receipt before relying on its "
-            "checkpoint; keep closed history out of ordinary resume context."
+        opportunity = (
+            "Use the active Claude Code NULNUL Skill only when the task positively requires "
+            "setup, continuity, capability work, or another declared workflow; ordinary "
+            "unrelated product work does not load NULNUL state. "
         )
     return (
         f"{START}\n"
-        "## NULNUL session entry\n\n"
+        "## NULNUL task entry\n\n"
         f"This is the {label}-owned root entry (`{entry}`). During a {label} run, do not "
-        f"create or modify `{other}`.\n\n"
-        f"{resume} Use `docs/nulnul/project.md` for stable shared setup. Both hosts share "
-        "the existing `docs/nulnul/` state; do not create a second live-state writer.\n"
+        f"create or modify `{other}`. {opportunity}"
+        "Load the NULNUL Skill only for explicit setup, repair, continuation, or evolution. "
+        "Validate a named fast-resume checkpoint before repository-wide inspection. "
+        f"Stable setup: `docs/nulnul/project.md`; state: `{state.as_posix()}`; one writer.\n"
         f"{END}"
     )
 
@@ -127,10 +158,44 @@ def shared_state(root):
     return state.relative_to(root)
 
 
+def validate_setup_for_runtime(root):
+    project = root / "docs/nulnul/project.md"
+    if project.is_symlink() or not project.is_file():
+        raise ValueError("project setup contract is unavailable")
+    text = project.read_text(encoding="utf-8")
+    errors = validate_project_setup.validate(text)
+    errors.extend(validate_project_setup.capability_contract.validate(text, require_canonical=True))
+    errors = list(dict.fromkeys(errors))
+    if errors:
+        raise ValueError("setup is not runtime-valid: " + "; ".join(errors))
+
+
+def retire_legacy_runtime_rule(root):
+    """Remove only the exact retired rule during explicit teardown/adoption cleanup."""
+    root = Path(root).resolve()
+    target = root / LEGACY_RULE
+    if target.is_symlink() or not target.resolve(strict=False).is_relative_to(root):
+        raise ValueError("legacy Codex rule path is unsafe")
+    if not target.exists():
+        return {"status": "LEGACY_RUNTIME_RULE_ABSENT", "changed": False, "trust_mutated": False}
+    if not target.is_file() or sha256_bytes(target.read_bytes()) != LEGACY_RULE_SHA256:
+        raise ValueError("refusing to remove a foreign Codex rule")
+    try:
+        target.unlink()
+    except OSError as error:
+        return {
+            "status": "LEGACY_RUNTIME_RULE_REMOVAL_REQUIRED",
+            "changed": False,
+            "trust_mutated": False,
+            "reason": str(error),
+        }
+    return {"status": "LEGACY_RUNTIME_RULE_RETIRED", "changed": True, "trust_mutated": False}
+
+
 def sync(root, host):
     if host not in HOST_ENTRIES:
         raise ValueError("unsupported host")
-    root = Path(root)
+    root = Path(root).resolve()
     if not root.is_dir():
         raise ValueError("project root must be an existing directory")
     state = shared_state(root)
@@ -144,23 +209,31 @@ def sync(root, host):
     else:
         atomic_write(target, updated)
         status = "updated" if existing else "created"
-    return {
+    result = {
         "status": status,
         "host": host,
         "entry": HOST_ENTRIES[host],
         "shared_state": state.as_posix(),
         "other_host_entry_touched": False,
     }
+    return result
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("host", choices=sorted(HOST_ENTRIES))
     parser.add_argument("--root", type=Path, default=Path("."))
+    parser.add_argument("--retire-runtime-activation", action="store_true")
     args = parser.parse_args()
     try:
-        result = sync(args.root, args.host)
-        failed = False
+        if args.retire_runtime_activation:
+            if args.host != "codex":
+                raise ValueError("retired Codex rule cleanup requires the Codex host")
+            result = retire_legacy_runtime_rule(args.root) | {"host": "codex"}
+            failed = result["status"] == "LEGACY_RUNTIME_RULE_REMOVAL_REQUIRED"
+        else:
+            result = sync(args.root, args.host)
+            failed = result.get("status") == "failed"
     except (OSError, UnicodeError, ValueError) as error:
         result = {"status": "failed", "error": str(error)}
         failed = True

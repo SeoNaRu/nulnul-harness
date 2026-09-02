@@ -1,6 +1,6 @@
 # nulnul harness working agreement
 
-This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds proven capabilities, assembles the smallest useful project-local agent system, completes the user's work, and evolves it from measured outcomes without requiring users to operate a harness.
+This repository builds `plugins/nulnul-harness/`, a Codex plugin that selects the strongest justified project-local capability system for the requested outcome, verifies the user's work, removes non-contributing setup, and evolves from measured outcomes without requiring users to operate a harness. Simplicity breaks ties between materially equivalent outcome paths; agent, skill, plugin, context, and infrastructure counts are never primary goals.
 
 - Treat `plugins/nulnul-harness/` as the only shipped product boundary.
 - Keep the plugin skills-only until a real workflow proves that an MCP server, hook, app, or external service is necessary.
@@ -8,10 +8,10 @@ This repository builds `plugins/nulnul-harness/`, a Codex plugin that finds prov
 - Detect the host surface before writing setup files, and enumerate its installed skills, plugins, and agents before claiming a job is covered; on Claude Code adoption, first run the bounded `claude plugin list --json` command instead of inferring installed plugins from the session catalog. Treat bounded relative and fixture-local absolute `.claude/agents/` reads as roster inspection, but never credit printed paths alone. Treat Claude's `source=git` as public GitHub provenance only when the exact repository URL also matches.
 - Give each host its own root session entry: Codex owns only `AGENTS.md`, Claude Code owns only `CLAUDE.md`, and both point to the same `docs/nulnul/` contract and exactly one live-state writer. On sequential host adoption, preserve the inactive entry byte-for-byte; do not claim concurrent mutation support.
 - Upgrade an existing agent roster in place. Classify every existing role as kept, upgraded, merged, or removed; `reuse` is the kept classification when its profile and responsibilities stay unchanged. Never recreate one that already exists.
-- Search installed, official, curated, and reputable public capabilities before creating a project-local substitute. Verify fit, provenance, compatibility, maintenance, permissions, and license; popularity alone is not verification.
+- Reuse a verified installed capability when it is outcome-competitive. Search official, curated, and reputable public candidates for an uncovered job or concrete material quality or verification gap before creating a project-local substitute. Verify fit, provenance, compatibility, maintenance, permissions, and license; popularity alone is not verification.
 - Continue the user's original task after setup; setup alone is not task completion.
-- Add every necessary, non-overlapping capability, but activate only what the current task needs.
-- Prefer direct or single-agent execution. Add roles only from concrete independent work or verification boundaries, with one synthesis owner.
+- Select the non-overlapping capability set expected to produce the strongest verified task outcome. Among materially equivalent paths, choose the one with lower context, coordination, runtime, maintenance, and permission cost; activate only what the current task needs.
+- Use direct or single-agent execution when it is outcome-competitive. Add as many bounded roles as materially improve specialization, context isolation, parallel work, or independent verification; agent count has no target and one owner keeps final synthesis.
 - Never register global tools, use credentials, deploy, or publish without explicit user approval.
 - Keep generated setup removable. Mark a Gate-passing evolution candidate provisional while the confirmed version remains active, then use one observed live cycle and the shipped schema-v3/v4 executor to confirm it or roll it back before final validation.
 - Keep ordinary resume context bounded: compact closed evolution history into the digest-bound adjacent archive, validate deterministic full-state reconstruction, and query rejected history only when a matching proposal needs it.

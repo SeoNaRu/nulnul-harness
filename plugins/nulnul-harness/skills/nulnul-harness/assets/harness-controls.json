@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "guarded_kernel": [
+    {
+      "invariant_id": "stable-identity",
+      "behavior": "Runtime-generated Session, Task, Pack, Check, Experience, Decision, Agent, topology, candidate, and control identities remain deterministic or collision-resistant and are never model-owned.",
+      "implementation_refs": ["foundation_runtime.py identity helpers", "capability_pack.py pack identity", "lifecycle transaction validators"],
+      "validator": "reject malformed, duplicate, mismatched, or model-supplied runtime identities"
+    },
+    {
+      "invariant_id": "provenance-integrity",
+      "behavior": "Every promoted outcome keeps validated source, derivation, and supersession lineage.",
+      "implementation_refs": ["foundation_runtime.py validate_lineage", "memory/decisions.jsonl"],
+      "validator": "reject dangling, cyclic, self-referential, or rewritten lineage"
+    },
+    {
+      "invariant_id": "atomic-single-writer",
+      "behavior": "One project writer owns durable state changes and all owned mutations commit atomically.",
+      "implementation_refs": ["foundation_runtime.py writer", "sync_host_entry.py atomic_batch_write"],
+      "validator": "reject concurrent ownership and partial batch writes"
+    },
+    {
+      "invariant_id": "rollback",
+      "behavior": "Failed lifecycle transactions restore every transaction-owned byte.",
+      "implementation_refs": ["Natural Selection, External Competition, Agent Evolution, and Harness Evolution transactions"],
+      "validator": "negative-control replacement failure reconstructs the Champion exactly"
+    },
+    {
+      "invariant_id": "evidence-integrity",
+      "behavior": "Only active verified observable evidence may authorize evolution; raw chat and hidden reasoning cannot.",
+      "implementation_refs": ["foundation_runtime.py Experience eligibility", "Evolution Input queries"],
+      "validator": "reject unverified, inactive, unattributed, fabricated, or missing evidence"
+    },
+    {
+      "invariant_id": "raw-transcript-privacy",
+      "behavior": "Raw transcripts stay local-only and never enter durable Memory, Context Packs, or Evolution Input.",
+      "implementation_refs": ["docs/nulnul/.runtime/raw", "foundation_runtime.py context_pack"],
+      "validator": "raw transcript negative controls remain excluded"
+    },
+    {
+      "invariant_id": "authority-separation",
+      "behavior": "Capability, Agent, and Harness policy context never grants structural authority or mutates host trust.",
+      "implementation_refs": ["Capability Pack", "Agent contract authority boundary", "Governed transaction authority"],
+      "validator": "reject authority broadening, trust mutation, or unauthorized writes"
+    },
+    {
+      "invariant_id": "lifecycle-history",
+      "behavior": "Superseded and retired versions retain immutable history and version-bound evidence.",
+      "implementation_refs": ["memory lifecycle", "capability, topology, and control archives"],
+      "validator": "reject destructive history rewrite or missing supersession lineage"
+    },
+    {
+      "invariant_id": "check-receipt-integrity",
+      "behavior": "Deterministic authoritative checks, not model-authored success, own verification receipts.",
+      "implementation_refs": ["capability_pack.py finalize_pack_task", "foundation_runtime.py eligibility"],
+      "validator": "reject missing, mismatched, forged, or disabled authoritative Check receipts"
+    },
+    {
+      "invariant_id": "champion-challenger-separation",
+      "behavior": "The frozen current control remains active until one distinct frozen Challenger wins validation.",
+      "implementation_refs": ["Harness Challenger and competition receipts"],
+      "validator": "reject in-place mutation, second Challenger, stale Champion, or post-freeze edits"
+    },
+    {
+      "invariant_id": "deterministic-promotion",
+      "behavior": "A Challenger cannot edit its evidence, competition, Decision, current status, or promotion outcome.",
+      "implementation_refs": ["Harness safety gate", "Harness control transaction"],
+      "validator": "only the deterministic transaction may mark a validated winner current"
+    },
+    {
+      "invariant_id": "bounded-context-hard-limits",
+      "behavior": "Ordinary Context remains at most eight items and 4096 serialized bytes, with raw and retired content excluded.",
+      "implementation_refs": ["foundation_runtime.py MAX_CONTEXT_ITEMS", "foundation_runtime.py MAX_CONTEXT_BYTES"],
+      "validator": "ranking policy may vary only inside immutable hard maximums"
+    }
+  ],
+  "kernel_digest": "9505d00d66799a56c0c77b6ff35978c9d7815b0dcd795bdbab6af5a1291d739e",
+  "controls": [
+    {
+      "control_id": "control-capability-selection",
+      "job": "Rank accepted capability metadata and choose deterministic zero, deterministic single, or bounded semantic fallback before work.",
+      "current_version": 1,
+      "current_digest": "ee9331404c7d46bf5f47b9a78278ec4f0535425bf8a62aaddcc858d50829bf67",
+      "status": "CURRENT",
+      "attribution_class": "HARNESS_SELECTION_POLICY",
+      "input_contract": ["bounded Task metadata", "accepted/current capability metadata", "bounded relevant Memory refs"],
+      "output_contract": ["zero to three candidate IDs", "selection method", "bounded selection evidence"],
+      "allowed_effects": ["rank_capability_metadata", "bound_candidate_shortlist", "choose_semantic_fallback"],
+      "forbidden_effects": ["forge_identity", "rewrite_provenance", "bypass_atomic_writer", "disable_rollback", "alter_source_evidence", "include_raw_transcript", "broaden_authority", "mutate_host_trust", "rewrite_lifecycle_history", "disable_authoritative_check", "self_promote", "raise_context_hard_limits", "load_body_during_selection", "accept_unknown_capability"],
+      "evidence_signals": ["false positive", "false negative", "unnecessary semantic fallback", "missed material fit"],
+      "verification_contract": ["Direct remains zero-body", "selected IDs are accepted/current", "candidate count never exceeds three"],
+      "rollback_contract": ["restore prior policy digest", "preserve frozen Champion"],
+      "dependencies": [],
+      "policy_schema": {
+        "candidate_limit": {"type": "integer", "minimum": 1, "maximum": 3},
+        "semantic_fallback": {"type": "boolean"},
+        "strategy": {"type": "enum", "values": ["hybrid_p3", "deterministic_only"]},
+        "strong_match_terms": {"type": "integer", "minimum": 1, "maximum": 6}
+      },
+      "policy": {"candidate_limit": 3, "semantic_fallback": true, "strategy": "hybrid_p3", "strong_match_terms": 2}
+    },
+    {
+      "control_id": "control-context-ranking",
+      "job": "Rank active bounded Memory items for task relevance inside immutable Context limits.",
+      "current_version": 1,
+      "current_digest": "a6e0942ef229954c23a37cd440a4f8f79444072af4035dbe46fe7432f83de3f8",
+      "status": "CURRENT",
+      "attribution_class": "HARNESS_CONTEXT_POLICY",
+      "input_contract": ["Task terms", "active Memory index", "Capability and module refs"],
+      "output_contract": ["ranked bounded Memory refs", "why-included evidence"],
+      "allowed_effects": ["rank_active_memory", "set_relevance_threshold", "deduplicate_context"],
+      "forbidden_effects": ["forge_identity", "rewrite_provenance", "bypass_atomic_writer", "disable_rollback", "alter_source_evidence", "include_raw_transcript", "broaden_authority", "mutate_host_trust", "rewrite_lifecycle_history", "disable_authoritative_check", "self_promote", "raise_context_hard_limits", "include_retired_memory"],
+      "evidence_signals": ["relevant retrieval miss", "irrelevant retrieval", "context bloat"],
+      "verification_contract": ["maximum eight items", "maximum 4096 bytes", "raw and retired content excluded"],
+      "rollback_contract": ["restore prior ranking policy", "rebuild deterministic search index"],
+      "dependencies": [],
+      "policy_schema": {
+        "module_weight": {"type": "integer", "minimum": 0, "maximum": 10},
+        "overlap_weight": {"type": "integer", "minimum": 1, "maximum": 5},
+        "same_capability_weight": {"type": "integer", "minimum": 0, "maximum": 15}
+      },
+      "policy": {"module_weight": 6, "overlap_weight": 1, "same_capability_weight": 10}
+    },
+    {
+      "control_id": "control-memory-promotion",
+      "job": "Promote only verified reusable project knowledge while keeping terminal noise out of Memory.",
+      "current_version": 1,
+      "current_digest": "482f9241364d4e6e08a68f99a4a9b893ca080019bc00f45f4eeadedd358dd31b",
+      "status": "CURRENT",
+      "attribution_class": "HARNESS_MEMORY_POLICY",
+      "input_contract": ["verified Experience", "bounded promotion candidates", "active Memory state"],
+      "output_contract": ["accepted or rejected Decision, Lesson, or Open Thread candidates", "bounded reason"],
+      "allowed_effects": ["rank_promotion_candidates", "set_promotion_threshold"],
+      "forbidden_effects": ["forge_identity", "rewrite_provenance", "bypass_atomic_writer", "disable_rollback", "alter_source_evidence", "include_raw_transcript", "broaden_authority", "mutate_host_trust", "rewrite_lifecycle_history", "disable_authoritative_check", "self_promote", "raise_context_hard_limits", "promote_unverified_memory"],
+      "evidence_signals": ["repeated useful knowledge miss", "repeated terminal noise", "promotion churn"],
+      "verification_contract": ["verified source Experience required", "source refs valid", "raw transcript excluded"],
+      "rollback_contract": ["restore prior promotion policy", "preserve Memory lineage"],
+      "dependencies": [],
+      "policy_schema": {
+        "minimum_repeat_count": {"type": "integer", "minimum": 1, "maximum": 5},
+        "require_verified": {"type": "boolean"}
+      },
+      "policy": {"minimum_repeat_count": 1, "require_verified": true}
+    },
+    {
+      "control_id": "control-agent-opportunity",
+      "job": "Keep SINGLE_AGENT by default and trigger topology evaluation only for repeated observable responsibility evidence.",
+      "current_version": 1,
+      "current_digest": "c353cf867457ff4e23bf5a4b30e56e35e5d1292227330fca20d9b3c2c876795d",
+      "status": "CURRENT",
+      "attribution_class": "HARNESS_AGENT_POLICY",
+      "input_contract": ["verified Agent-attributable Experience", "topology carrying cost", "project responsibility state"],
+      "output_contract": ["single-Agent fast path or bounded Agent Evolution review trigger"],
+      "allowed_effects": ["decide_topology_review_trigger", "prefer_single_agent", "set_agent_evidence_threshold"],
+      "forbidden_effects": ["forge_identity", "rewrite_provenance", "bypass_atomic_writer", "disable_rollback", "alter_source_evidence", "include_raw_transcript", "broaden_authority", "mutate_host_trust", "rewrite_lifecycle_history", "disable_authoritative_check", "self_promote", "raise_context_hard_limits", "mutate_agent_topology"],
+      "evidence_signals": ["responsibility overload", "duplicate handoff cost", "missing specialization", "unnecessary Agents"],
+      "verification_contract": ["Agent lifecycle remains independently transactional", "ordinary Direct has no Agent review call"],
+      "rollback_contract": ["restore prior opportunity policy", "leave topology state untouched"],
+      "dependencies": [],
+      "policy_schema": {
+        "minimum_repeat_count": {"type": "integer", "minimum": 2, "maximum": 5}
+      },
+      "policy": {"minimum_repeat_count": 2}
+    },
+    {
+      "control_id": "control-maintenance-trigger",
+      "job": "Trigger Natural Selection or External Competition only after a verified lifecycle need.",
+      "current_version": 1,
+      "current_digest": "4c303cbde4c9b983c34840ac9957912532e7864973ee023d8f70a9cfb3efc6ca",
+      "status": "CURRENT",
+      "attribution_class": "HARNESS_SELECTION_POLICY",
+      "input_contract": ["verified Experience", "active lifecycle Decisions", "bounded capability state"],
+      "output_contract": ["no action or one bounded maintenance review trigger"],
+      "allowed_effects": ["decide_capability_review_trigger", "rank_maintenance_candidates", "rank_quarantined_shortlist"],
+      "forbidden_effects": ["forge_identity", "rewrite_provenance", "bypass_atomic_writer", "disable_rollback", "alter_source_evidence", "include_raw_transcript", "broaden_authority", "mutate_host_trust", "rewrite_lifecycle_history", "disable_authoritative_check", "self_promote", "raise_context_hard_limits", "bypass_quarantine", "bypass_lifecycle_transaction"],
+      "evidence_signals": ["lifecycle churn", "discovery waste", "missed recurring weakness", "uncovered control"],
+      "verification_contract": ["KEEP and NO_ACTION cause no discovery", "shortlist maximum remains three", "Natural Selection owns lifecycle writes"],
+      "rollback_contract": ["restore prior trigger policy", "leave capability ecosystem untouched"],
+      "dependencies": [],
+      "policy_schema": {
+        "minimum_repeat_count": {"type": "integer", "minimum": 2, "maximum": 5},
+        "shortlist_limit": {"type": "integer", "minimum": 1, "maximum": 3}
+      },
+      "policy": {"minimum_repeat_count": 2, "shortlist_limit": 3}
+    }
+  ],
+  "registry_digest": "884a9cd864e530d4459546bb458a71c28d8a5d0af4040a6b996b885f79a96f38"
+}
