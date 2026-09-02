@@ -257,7 +257,7 @@ NULNUL의 공개 주장은 내부 아키텍처보다 의도적으로 좁게 잡�
 
 | 근거 | 결과 | 무엇을 보여주나 |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **431/431 PASS** | Foundation, Pack, verification, Memory, lifecycle, privacy, rollback, evolution, migration, release contract |
+| [Repository test suite](tests/) | **431개 통과 (431/431)** | Foundation, Pack, verification, Memory, lifecycle, privacy, rollback, evolution, migration, release contract |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | 동결된 3.0.0 제품의 release integrity |
 | [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Stable release published** | 공개 `v3.0.0` 태그와 릴리스 |
 | `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | 재현 가능한 release archive |
@@ -280,6 +280,8 @@ NULNUL의 공개 주장은 내부 아키텍처보다 의도적으로 좁게 잡�
 
 - [Post-2.2.1 proof decision](docs/roadmap/post-2.2.1-proof-decision.md)
 - [Baseline findings](docs/roadmap/post-2.2.1-baseline-findings.md)
+- [Meta HyperAgents](https://ai.meta.com/research/publications/hyperagents/)
+- [GeekNews Weekly 2026-15](https://news.hada.io/weekly/202615)
 
 과거 실패 증거는 남겨두되 현재 제품 상태처럼 보이지 않도록 분리했습니다.
 
