@@ -268,6 +268,8 @@ The first public 3.1.0 candidate passed the product task but failed full Claude 
 
 The [second run](evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json) confirmed bootstrap and checkpoint repair, but skipped the installed-plugin listing and left shared README debt. The next candidate makes these existing acceptance requirements explicit for cold setup too; no verifier criteria are relaxed.
 
+The [third run](evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json) passed the roster listing and all five completion checks but omitted one explicit role disposition. Setup now validates `name: disposition` entries in the existing roster field and renders each one; missing, duplicate, ambiguous, and unknown dispositions fail before setup writes. Existing checkpoints need no migration.
+
 ```bash
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
 ```
@@ -278,7 +280,7 @@ NULNUL's public claims are intentionally narrower than its architecture.
 
 | Evidence | Result | What it supports |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **444 passed (444 checks)** | Clean publication validation includes workflow delivery, candidate preparation, and both-host public-plugin bootstrap with stale/unsafe receipt controls. Original untracked research files remain outside the release tree; the legacy-boundary check is unchanged. |
+| [Repository test suite](tests/) | **446 passed (446 checks)** | Clean publication validation includes workflow delivery, candidate preparation, and both-host public-plugin bootstrap with stale/unsafe receipt controls. Original untracked research files remain outside the release tree; the legacy-boundary check is unchanged. |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | Release integrity for the frozen 3.0.0 product |
 | [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Published stable release** | Public `v3.0.0` tag and release |
 | `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | Reproducible release archive |

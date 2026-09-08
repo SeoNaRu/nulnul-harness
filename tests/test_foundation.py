@@ -738,7 +738,7 @@ class SetupTransactionTests(FoundationCase):
             "roster": {
                 "skills": ["nulnul-harness"],
                 "plugins": [],
-                "agents": ["direct owner"],
+                "agents": ["direct owner: reuse"],
             },
             "agent_topology": "One direct owner with deterministic verification.",
             "accepted_capabilities": [SETUP_CAPABILITIES[0]],

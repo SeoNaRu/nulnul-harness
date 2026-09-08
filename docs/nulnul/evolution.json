@@ -205,6 +205,16 @@
       "evidence": "evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json: original captured roster_enumerated=false and documentation_debt exit 1; four other checks passed.",
       "scope": "project",
       "status": "converted"
+    },
+    {
+      "id": "feedback-claude-3-1-explicit-role-dispositions",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "The third public adoption passed all five checks and enumerated the installed roster, but one role remained available without an explicit disposition in the durable contract.",
+      "expected": "Each inspected existing role has exactly one explicit persisted disposition before setup can succeed.",
+      "evidence": "evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json",
+      "scope": "project",
+      "status": "converted"
     }
   ],
   "proposals": [
@@ -575,6 +585,36 @@
       "pathology": {
         "where": "cold setup entry and final setup acceptance",
         "why": "branch-local inspection and a late validation instruction did not constrain the completion claim"
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "proposal-product-builder-15-role-dispositions",
+      "feedback_ids": [
+        "feedback-claude-3-1-explicit-role-dispositions"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 14,
+      "to_version": 15,
+      "cause": "The transaction accepted unclassified roster strings and free-form topology prose; generic validators did not enforce the per-role output contract.",
+      "change_target": "Use the existing roster.agents field for explicit name: disposition entries. Reject missing, duplicate, ambiguous, or unknown values before mutation and render each classification. Do not add a second state writer or infer reuse from unchanged bytes.",
+      "regression_check": "Positive kept/reuse/upgraded/merged/removed cases and negative missing/duplicate/ambiguous/unknown cases; full suite; unchanged exact-public adoption validator.",
+      "primary_metric": "every existing role is explicitly classified without a protected-path write",
+      "permission_delta": [],
+      "rollback": "Reject the candidate if any public-adoption field or completion check fails; preserve confirmed release and all previous failures.",
+      "change_level": "task",
+      "discovery_evidence": "evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json",
+      "transfer_check": "Setup input validation only; existing checkpoint and state shapes remain unchanged; no new personal or generalization claim.",
+      "prediction": "The transaction prevents successful setup with a reported but unclassified role and the fresh public run records both dispositions.",
+      "expected_delta": {
+        "unclassified_existing_roles": "1 -> 0",
+        "protected_writes": "0 -> 0"
+      },
+      "falsification_condition": "A missing or invalid disposition reaches a completed setup, any role is lost, or an existing profile/inactive entry is modified.",
+      "pathology": {
+        "where": "setup plan validation and durable contract rendering",
+        "why": "required role dispositions were left to free-form model prose"
       },
       "status": "proposed"
     }

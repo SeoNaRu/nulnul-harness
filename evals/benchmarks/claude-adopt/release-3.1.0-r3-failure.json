@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "run_id": "claude-public-3.1.0-r2",
+  "run_id": "claude-public-3.1.0-r3",
   "run_date": "2026-09-08",
   "case_id": "positive-adopt-existing-harness",
   "plugin_version": "3.1.0",
   "plugin_source": "github",
   "distribution": {
     "release_tag": "v3.1.0",
-    "release_commit": "3047a847b3eee2ad5fb4f3c0c6bf9c3644e17155",
+    "release_commit": "747d49066bcd03f9ff32d510968e261b2e2f13b6",
     "asset": "nulnul-harness-3.1.0.zip",
-    "asset_sha256": "6b05d4ef8e50fa0c714d646799445d54f18e925cd94448c1164c6fdb5e1cf396"
+    "asset_sha256": "2b35b46348b530833638976815a6eae3ec58daa53e704cd3902e379b0a297005"
   },
   "public_positioning_violations": 0,
   "protected_write_calls": [],
@@ -23,8 +23,8 @@
       "after_sha256": "3d68b7dda70c1349bbbc4b8867a09d8d2e4465687087ec39fe7b6a61207b4f2a"
     }
   },
-  "roster_enumerated": false,
-  "agents_classified": true,
+  "roster_enumerated": true,
+  "agents_classified": false,
   "session_entry_present": true,
   "host_entry_ownership": {
     "active_host": "claude",
@@ -54,28 +54,21 @@
     },
     "documentation_debt": {
       "command": "check_doc_debt.py",
-      "exit_code": 1
+      "exit_code": 0
     }
   },
   "learning_verdicts": [
     {
-      "id": "claude-adopt-3.1.0-r2",
+      "id": "claude-adopt-3.1.0-r3",
       "status": "failed",
-      "feedback_id": "feedback-claude-3-1-setup-acceptance",
+      "feedback_id": "feedback-claude-3-1-explicit-role-dispositions",
       "proposal_ids": [
-        "proposal-navigator-21-setup-acceptance"
+        "proposal-product-builder-15-role-dispositions"
       ]
     }
   ],
   "failure_reasons": [
-    "No claude plugin list command was executed during the model run, although both existing profile bodies were read.",
-    "README documentation debt was observed and dismissed rather than repaired."
+    "All five completion checks and installed-roster enumeration passed, but collector had no explicit kept/reuse/upgraded/merged/removed classification in the durable contract."
   ],
-  "measurement_scope": "Fresh public-adoption regression, not a sealed holdout or an independent transfer family. First bootstrap failure was fixed; overall adoption still failed.",
-  "preserved_release": {
-    "tag": "v3.1.0-adoption-failed.2",
-    "url": "https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0-adoption-failed.2",
-    "archive_unchanged": true,
-    "original_result_unchanged": true
-  }
+  "measurement_scope": "Fresh public-adoption regression; no holdout, independent transfer family, or performance win is claimed."
 }

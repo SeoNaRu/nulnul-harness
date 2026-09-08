@@ -75,6 +75,8 @@ When host-loaded guidance points to a compacted `docs/nulnul/evolution.json`, ru
 
 ## Setup completion gate
 
+In the Setup Plan, encode each inspected existing role in `roster.agents` as `name: reuse`, `name: kept`, `name: upgraded`, `name: merged`, or `name: removed`; use an empty array only when inspection found no existing roles. Explain changed responsibilities in `agent_topology`. The transaction rejects missing, duplicate, or unknown dispositions and renders a separate classification for every role. `kept` normalizes to `reuse`; unchanged profile bytes alone do not prove unchanged responsibilities.
+
 New Setup and Adopt are complete only when roster inspection, the original project check, setup validation, checkpoint validation and its exact completion command, and the active-host documentation-debt check all pass. A passing product test or verified checkpoint alone is insufficient. If `check_doc_debt.py` reports a shared README or active-host document as stale, update it with the actual changed behavior and rerun the check; do not dismiss it as a timestamp-only warning or merely touch the file. Refresh any affected checkpoint evidence through its existing writer after the final edits. If a required check remains nonpass, report adoption as incomplete rather than successful with a minor note.
 
 ## Outputs

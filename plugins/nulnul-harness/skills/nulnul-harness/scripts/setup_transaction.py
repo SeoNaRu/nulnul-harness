@@ -111,6 +111,23 @@ def validate_plan(payload):
         "agent_topology": one_line(payload.get("agent_topology"), "agent_topology"),
         "capabilities": canonical_rows,
     }
+    classified_agents = []
+    agent_names = set()
+    for entry in plan["roster"]["agents"]:
+        name, separator, action = entry.rpartition(":")
+        name, action = name.strip(), action.strip()
+        if (
+            not separator or not name or ":" in name
+            or action not in {"reuse", "kept", "upgraded", "merged", "removed"}
+            or name.casefold() in agent_names
+        ):
+            raise ValueError(
+                "roster.agents needs one unique 'name: disposition' per existing role; "
+                "disposition is reuse, kept, upgraded, merged, or removed"
+            )
+        agent_names.add(name.casefold())
+        classified_agents.append(f"{name}: {'reuse' if action == 'kept' else action}")
+    plan["roster"]["agents"] = classified_agents
     checkpoint = checkpoint_payload(plan)
     errors = validate_checkpoint.validate(checkpoint)
     if errors:
@@ -124,6 +141,9 @@ def display(values):
 
 def project_contract(plan):
     capabilities = plan["capabilities"]
+    agent_rows = "\n".join(f"- {entry}" for entry in plan["roster"]["agents"])
+    if not agent_rows:
+        agent_rows = "- No existing project roles were reported by the inspected roster."
     requirement_rows = "\n".join(
         f"- `{row['capability_id']}`: {row['job']}; activate when {row['activation_trigger']}; "
         f"check `{row['project_check_identity']}`."
@@ -193,6 +213,10 @@ Available capabilities and capabilities active for the current task are separate
 ## Agent topology
 
 {plan['agent_topology']}
+
+## Agent classifications
+
+{agent_rows}
 
 ## Evolution baseline
 

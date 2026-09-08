@@ -14,7 +14,7 @@
   "roster": {
     "skills": [],
     "plugins": [],
-    "agents": []
+    "agents": ["{inspected existing role name}: reuse"]
   },
   "agent_topology": "{bounded topology and verification owner}",
   "accepted_capabilities": [

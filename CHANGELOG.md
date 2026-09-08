@@ -4,6 +4,8 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## 3.1.0 - Unreleased
 
+- Made existing-role dispositions explicit in the existing Setup Plan roster field and deterministic project contract. Missing, duplicate, ambiguous, or unknown classifications now fail before setup writes; existing checkpoints and live-state shapes do not change.
+
 - Retained the second public adoption nonpass and made the cold-setup roster preflight and conjunctive setup completion gate explicit. Shared-document debt is a required repair, not a warning that product tests can override.
 
 - Retained the first exact-public Claude adoption failure and repaired project-local-only bootstrap resolution. A host-admitted executing plugin can now supply its own bounded contract; project, host, manifest, contract, and runtime digests bind its setup receipt without a shadow skill, authority bypass, or protected-path write.

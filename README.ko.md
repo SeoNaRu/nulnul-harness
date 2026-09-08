@@ -268,6 +268,8 @@ NULNUL은 Guarded Kernel과 진화 가능한 control policy를 분리합니다. 
 
 [두 번째 실행](evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json)은 초기 설정과 체크포인트 수정을 확인했지만 설치 목록 확인과 공유 README 부채 처리를 누락했습니다. 다음 후보는 기존 완료 조건이 최초 설정에도 적용되도록 명시하며 검증 기준은 완화하지 않습니다.
 
+[세 번째 실행](evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json)은 설치 목록과 5개 완료 검사를 통과했지만 한 역할의 명시적인 유지·변경 분류를 누락했습니다. 이제 설정 트랜잭션이 기존 명단 필드의 `이름: 분류`를 검증해 역할별로 기록하며, 누락·중복·모호하거나 알 수 없는 분류는 설정 쓰기 전에 거부합니다. 기존 체크포인트 마이그레이션은 필요하지 않습니다.
+
 ```bash
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
 ```
@@ -278,7 +280,7 @@ NULNUL의 공개 주장은 내부 아키텍처보다 의도적으로 좁게 잡�
 
 | 근거 | 결과 | 무엇을 보여주나 |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **444개 통과 (444개 검사)** | 깨끗한 배포 트리에서 워크플로 실행·후보 준비·두 호스트의 공개 플러그인 초기 설정과 오래되거나 안전하지 않은 영수증 대조군을 검증했습니다. 미추적 연구 자료는 로컬에 보존하며 legacy 경계 검사는 변경하지 않습니다. |
+| [Repository test suite](tests/) | **446개 통과 (446개 검사)** | 깨끗한 배포 트리에서 워크플로 실행·후보 준비·두 호스트의 공개 플러그인 초기 설정과 오래되거나 안전하지 않은 영수증 대조군을 검증했습니다. 미추적 연구 자료는 로컬에 보존하며 legacy 경계 검사는 변경하지 않습니다. |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | 동결된 3.0.0 제품의 release integrity |
 | [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Stable release published** | 공개 `v3.0.0` 태그와 릴리스 |
 | `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | 재현 가능한 release archive |

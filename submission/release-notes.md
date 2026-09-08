@@ -23,4 +23,6 @@ The first public candidate passed 442 deterministic checks and Meta adoption but
 
 The second public run proved bootstrap and checkpoint creation but failed installed-plugin enumeration and shared README debt. Its original nonpass is retained. The next candidate explicitly applies the existing roster and all-checks completion requirements to cold setup, without weakening the validator.
 
+The third run passed the installed-roster listing and all five checks, but omitted one explicit role disposition. The transaction now validates and renders every reported role disposition through the existing roster field, with two additional positive/negative test methods for 446 checks in total. No live-state migration or verifier relaxation is introduced.
+
 The candidate archive is `dist/nulnul-harness-3.1.0.zip`. Do not reuse a 3.0.0 archive digest, public Claude adoption, or public Meta adoption as evidence for these new bytes. Exact-version public adoption, publication approval, and green publication CI remain required before release completion.
