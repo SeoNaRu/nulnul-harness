@@ -77,5 +77,13 @@
     "url": "https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0-adoption-failed.2",
     "archive_unchanged": true,
     "original_result_unchanged": true
+  },
+  "resolution": {
+    "status": "superseded_by_verified_repair",
+    "evidence": "evals/benchmarks/claude-adopt/release-3.1.0-r4.json",
+    "release_commit": "a9fd59e8c5852e8808f6698262e90d389f39f42a",
+    "asset_sha256": "7716a8ddfeb43632b4ad836c29deb1fd2981a84d423d2f2705fb88becad9e49d",
+    "original_verdict_preserved": true,
+    "validator_unchanged": true
   }
 }

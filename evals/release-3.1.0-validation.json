@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "version": "3.1.0",
+  "scope": "local release documentation validation, not public adoption or holdout evidence",
+  "learning_verdicts": [
+    {
+      "id": "release-heading-3.1.0",
+      "status": "failed",
+      "feedback_id": "feedback-3-1-release-heading-contract",
+      "proposal_ids": [
+        "proposal-product-builder-15-release-heading"
+      ]
+    },
+    {
+      "id": "release-learning-metadata-3.1.0",
+      "status": "failed",
+      "feedback_id": "feedback-3-1-release-heading-contract",
+      "proposal_ids": [
+        "proposal-product-builder-15-release-heading"
+      ]
+    }
+  ],
+  "observed_failure": {
+    "test": "test_release_metadata_and_archive_are_consistent",
+    "cause": "release-note heading format mismatch",
+    "suite_tests": 446,
+    "failed_tests": 1
+  },
+  "correction": "Restore the established heading and complete the required proposal metadata without changing tests or public package bytes.",
+  "final_validation_status": "passed",
+  "subsequent_failure": {
+    "test": "test_real_state_compacts_without_losing_history",
+    "cause": "new release-document proposal omitted discovery_evidence and transfer_check",
+    "suite_tests": 446,
+    "error_tests": 1
+  },
+  "checks": {
+    "full_suite": {
+      "tests": 446,
+      "failed": 0
+    },
+    "documentation_debt": 0,
+    "release_gate": {
+      "score": 100,
+      "release_ready": true
+    },
+    "public_archive_unchanged": true
+  }
+}

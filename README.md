@@ -23,7 +23,7 @@
   <a href="#quick-start">Quick start</a> ·
   <a href="#what-nulnul-does">What it does</a> ·
   <a href="#evidence">Evidence</a> ·
-  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0">v3.0.0 release</a>
+  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0">v3.1.0 release</a>
 </p>
 
 <p align="center"><strong>Outcome first · Verify the result · Keep only what earns its place</strong></p>
@@ -264,11 +264,7 @@ Version **3.1.0** is a publication candidate pending exact-version public adopti
 
 These references load only when needed. Planner receipts and development scores are advisory, not Foundation evidence, promotion authority, sealed holdouts, or proof of live quality gains. No new state migration is required.
 
-The first public 3.1.0 candidate passed the product task but failed full Claude adoption because setup required a project-local shadow skill. [That nonpass is retained](evals/benchmarks/claude-adopt/release-3.1.0-failure.json). The repaired candidate resolves only its executing plugin's contract and binds setup receipts to the project, host, and package file digests; fresh public adoption must pass before stable publication.
-
-The [second run](evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json) confirmed bootstrap and checkpoint repair, but skipped the installed-plugin listing and left shared README debt. The next candidate makes these existing acceptance requirements explicit for cold setup too; no verifier criteria are relaxed.
-
-The [third run](evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json) passed the roster listing and all five completion checks but omitted one explicit role disposition. Setup now validates `name: disposition` entries in the existing roster field and renders each one; missing, duplicate, ambiguous, and unknown dispositions fail before setup writes. Existing checkpoints need no migration.
+Public adoption exposed three gaps, now repaired: [installed-plugin bootstrap](evals/benchmarks/claude-adopt/release-3.1.0-failure.json), [cold-setup listing and document completion](evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json), and [explicit role dispositions](evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json). Setup receipts bind the project, host, and executing package digests; the transaction rejects missing, duplicate, ambiguous, or unknown role dispositions. No shadow skill, extra state writer, protected-path write, or checkpoint migration is required. The [fresh fourth public run passes](evals/benchmarks/claude-adopt/release-3.1.0-r4.json) without relaxing the validator. Earlier failures and their prerelease archives remain preserved; these are release regressions, not sealed holdouts or a universal quality-gain benchmark.
 
 ```bash
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
@@ -276,15 +272,17 @@ python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.p
 
 ## Evidence
 
-NULNUL's public claims are intentionally narrower than its architecture.
+Public claims stay narrower than the architecture. The exact public 3.1.0 archive is verified; new delivery helpers have deterministic coverage, not a claimed live quality advantage.
 
 | Evidence | Result | What it supports |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **446 passed (446 checks)** | Clean publication validation includes workflow delivery, candidate preparation, and both-host public-plugin bootstrap with stale/unsafe receipt controls. Original untracked research files remain outside the release tree; the legacy-boundary check is unchanged. |
-| [Release Gate](scripts/release_gate.py) | **100/100 PASS** | Release integrity for the frozen 3.0.0 product |
-| [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Published stable release** | Public `v3.0.0` tag and release |
-| `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | Reproducible release archive |
-| Release archive SHA-256 | `99fd14bef3432f1542270cbdd8640f0a185d319cafcf054505b37260bc9335c1` | Frozen artifact identity |
+| [Repository test suite](tests/) | **446 passed (446 checks)** | Delivery, candidate preparation, both-host installed-plugin bootstrap, explicit role dispositions, and negative controls. User-owned research files remain local; the legacy-boundary check is unchanged. |
+| [Release Gate](scripts/release_gate.py) | **100/100 PASS** | `release_ready=true` with exact-version public adoption evidence. |
+| [Public Claude adoption](evals/benchmarks/claude-adopt/release-3.1.0-r4.json) | **PASS, 5/5 checks** | Installed-roster inspection, role classifications, verified checkpoint, original task completion, document freshness, preserved profiles and inactive Codex entry, zero protected writes. |
+| [Public Meta adoption](evals/meta-evolution/release-3.1.0-meta-r4.json) | **PASS** | Same applicable adaptation with 3 flat checks versus 1 Meta check; no-match, conflict, migration, and rollback controls. Scoped to the frozen selector and this fresh adoption case. |
+| [NULNUL 3.1.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0) | **Verified public artifact** | Frozen product commit `a9fd59e8c5852e8808f6698262e90d389f39f42a`; [tag CI passed](https://github.com/SeoNaRu/nulnul-harness/actions/runs/34212367385). |
+| `nulnul-harness-3.1.0.zip` | **60 files, 237,942 bytes** | Reproducible archive; public download and actual installed files match. |
+| Release archive SHA-256 | `7716a8ddfeb43632b4ad836c29deb1fd2981a84d423d2f2705fb88becad9e49d` | Frozen artifact identity. |
 
 One frozen live Direct pair also kept the NULNUL path within the project's preferred `<=120%` input target while preserving zero capability bodies for a clear Direct task. These measurements are scoped evidence, not a universal performance guarantee.
 
@@ -435,8 +433,8 @@ The model may propose semantic changes. Deterministic runtime owns identity, dig
 
 ## Release and upgrade
 
-- Current stable release: [NULNUL 3.0.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0)
-- Upgrade guide: [docs/upgrade-3.0.md](docs/upgrade-3.0.md)
+- Current release: [NULNUL 3.1.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0)
+- Upgrade guide: [docs/upgrade-3.0.md](docs/upgrade-3.0.md), unchanged checkpoint shapes in 3.1.
 - Changelog: [CHANGELOG.md](CHANGELOG.md)
 - Security: [SECURITY.md](SECURITY.md)
 - Privacy: [PRIVACY.md](PRIVACY.md)

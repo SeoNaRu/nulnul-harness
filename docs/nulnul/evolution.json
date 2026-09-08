@@ -215,6 +215,16 @@
       "evidence": "evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json",
       "scope": "project",
       "status": "converted"
+    },
+    {
+      "id": "feedback-3-1-release-heading-contract",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "Final documentation validation rejected the rewritten release-note heading because it no longer matched the existing exact-version heading contract. The bounded correction proposal also omitted the required discovery_evidence and transfer_check fields; reconstructed-state validation rejected it.",
+      "expected": "Update release content while retaining the established machine-checked release heading. All learning records must also satisfy the existing complete proposal schema.",
+      "evidence": "evals/release-3.1.0-validation.json: test_release_metadata_and_archive_are_consistent failed on the heading before the local documentation-only correction.",
+      "scope": "project",
+      "status": "converted"
     }
   ],
   "proposals": [
@@ -617,6 +627,36 @@
         "why": "required role dispositions were left to free-form model prose"
       },
       "status": "proposed"
+    },
+    {
+      "id": "proposal-product-builder-15-release-heading",
+      "feedback_ids": [
+        "feedback-3-1-release-heading-contract"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 14,
+      "to_version": 15,
+      "cause": "A full release-note rewrite changed a stable machine-checked heading while updating the body.",
+      "change_target": "Restore only the established exact-version heading; keep the original assertion, product archive, and public adoption evidence unchanged.",
+      "regression_check": "Run the unchanged product-plugin tests and full repository suite, documentation-debt check, and Release Gate.",
+      "primary_metric": "release metadata consistency test passes without changing its assertion",
+      "permission_delta": [],
+      "rollback": "Retain the previous valid heading and do not publish a metadata-inconsistent candidate.",
+      "change_level": "task",
+      "prediction": "The documentation-only heading correction restores the existing release contract.",
+      "expected_delta": {
+        "release_heading_failures": "1 -> 0",
+        "product_archive_changes": "0 -> 0"
+      },
+      "falsification_condition": "Any release metadata assertion remains failing or product archive identity changes.",
+      "pathology": {
+        "where": "release-note heading",
+        "why": "documentation rewrite replaced a machine-checked stable format"
+      },
+      "status": "proposed",
+      "discovery_evidence": "evals/release-3.1.0-validation.json: unchanged metadata and reconstructed-state validators reproduced the missing heading format and required proposal fields.",
+      "transfer_check": "Local release-document and evidence-schema repair only; no personal transfer, product-byte change, or agent promotion is claimed."
     }
   ],
   "promotions": [

@@ -2,7 +2,9 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
-## 3.1.0 - Unreleased
+## 3.1.0 - 2026-09-08
+
+- Certified the exact public package with fresh Claude and Meta adoption: all five Claude completion checks, installed-roster inspection, explicit classifications, inactive-entry preservation, and zero protected writes passed. All 446 repository checks and Release Gate 100/100 pass; three earlier public nonpasses and their unchanged prerelease archives remain available.
 
 - Made existing-role dispositions explicit in the existing Setup Plan roster field and deterministic project contract. Missing, duplicate, ambiguous, or unknown classifications now fail before setup writes; existing checkpoints and live-state shapes do not change.
 

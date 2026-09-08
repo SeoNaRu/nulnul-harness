@@ -23,7 +23,7 @@
   <a href="#빠른-시작">빠른 시작</a> ·
   <a href="#nulnul이-하는-일">하는 일</a> ·
   <a href="#검증-근거">검증 근거</a> ·
-  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0">v3.0.0 릴리스</a>
+  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0">v3.1.0 릴리스</a>
 </p>
 
 <p align="center"><strong>결과 우선 · 실제로 검증 · 필요한 것만 유지</strong></p>
@@ -264,11 +264,7 @@ NULNUL은 Guarded Kernel과 진화 가능한 control policy를 분리합니다. 
 
 필요한 참조만 읽습니다. 계획 영수증과 개발 점수는 보조 자료이며 Foundation 증거, 승격 권한, 비공개 최종 평가, 실사용 품질 향상의 증명이 아닙니다. 새로운 상태 마이그레이션은 필요하지 않습니다.
 
-첫 공개 3.1.0 후보는 제품 작업을 통과했지만 초기 설정이 프로젝트 내부의 별도 스킬을 요구해 Claude 전체 채택에 실패했습니다. [이 실패는 삭제하지 않고 보존합니다](evals/benchmarks/claude-adopt/release-3.1.0-failure.json). 수정 후보는 실행 중인 플러그인의 계약만 사용하며 영수증을 프로젝트·호스트·패키지 파일 지문에 묶습니다. 정식 공개 전 새 공개 채택 검증을 통과해야 합니다.
-
-[두 번째 실행](evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json)은 초기 설정과 체크포인트 수정을 확인했지만 설치 목록 확인과 공유 README 부채 처리를 누락했습니다. 다음 후보는 기존 완료 조건이 최초 설정에도 적용되도록 명시하며 검증 기준은 완화하지 않습니다.
-
-[세 번째 실행](evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json)은 설치 목록과 5개 완료 검사를 통과했지만 한 역할의 명시적인 유지·변경 분류를 누락했습니다. 이제 설정 트랜잭션이 기존 명단 필드의 `이름: 분류`를 검증해 역할별로 기록하며, 누락·중복·모호하거나 알 수 없는 분류는 설정 쓰기 전에 거부합니다. 기존 체크포인트 마이그레이션은 필요하지 않습니다.
+공개 도입에서 확인한 세 공백을 수정했습니다: [설치된 플러그인의 초기 설정](evals/benchmarks/claude-adopt/release-3.1.0-failure.json), [최초 설정의 설치 목록·문서 완료 조건](evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json), [역할별 명시적 분류](evals/benchmarks/claude-adopt/release-3.1.0-r3-failure.json)입니다. 설정 영수증은 프로젝트·호스트·실행 패키지 지문에 묶이며, 트랜잭션은 누락·중복·모호하거나 알 수 없는 역할 분류를 거부합니다. 별도 스킬 복사본·추가 상태 writer·보호 경로 쓰기·체크포인트 마이그레이션은 필요하지 않습니다. 검증 기준을 완화하지 않고 [새 프로젝트의 네 번째 공개 실행이 통과했습니다](evals/benchmarks/claude-adopt/release-3.1.0-r4.json). 앞선 실패와 프리릴리스 패키지는 보존하며, 이 실행들은 릴리스 회귀 검증이지 비공개 최종 평가나 보편적인 품질 향상 benchmark가 아닙니다.
 
 ```bash
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
@@ -276,15 +272,17 @@ python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.p
 
 ## 검증 근거
 
-NULNUL의 공개 주장은 내부 아키텍처보다 의도적으로 좁게 잡습니다.
+공개 주장은 아키텍처보다 좁게 유지합니다. 정확한 공개 3.1.0 패키지를 검증했으며, 새 실행 도우미는 결정론적 검증을 갖췄지만 실사용 품질 우위를 주장하지 않습니다.
 
 | 근거 | 결과 | 무엇을 보여주나 |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **446개 통과 (446개 검사)** | 깨끗한 배포 트리에서 워크플로 실행·후보 준비·두 호스트의 공개 플러그인 초기 설정과 오래되거나 안전하지 않은 영수증 대조군을 검증했습니다. 미추적 연구 자료는 로컬에 보존하며 legacy 경계 검사는 변경하지 않습니다. |
-| [Release Gate](scripts/release_gate.py) | **100/100 PASS** | 동결된 3.0.0 제품의 release integrity |
-| [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Stable release published** | 공개 `v3.0.0` 태그와 릴리스 |
-| `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | 재현 가능한 release archive |
-| Release archive SHA-256 | `99fd14bef3432f1542270cbdd8640f0a185d319cafcf054505b37260bc9335c1` | 동결된 artifact identity |
+| [Repository test suite](tests/) | **446개 통과 (446개 검사)** | 실행 도우미·후보 준비·두 호스트의 설치 플러그인 초기 설정·역할별 분류와 음성 대조군. 사용자 연구 자료는 로컬에 보존하며 legacy 경계 검사는 바꾸지 않습니다. |
+| [Release Gate](scripts/release_gate.py) | **100/100 PASS** | 정확한 버전의 공개 도입 증거를 포함해 `release_ready=true`. |
+| [공개 Claude 도입](evals/benchmarks/claude-adopt/release-3.1.0-r4.json) | **PASS, 5/5 검사** | 설치 목록 확인·역할 분류·검증된 체크포인트·원래 작업 완료·문서 최신성, 기존 프로필과 비활성 Codex 진입점 보존, 보호 경로 쓰기 0건. |
+| [공개 Meta 도입](evals/meta-evolution/release-3.1.0-meta-r4.json) | **PASS** | 같은 적용 대상을 flat 검사 3회 대신 Meta 검사 1회로 선택. 해당 없음·충돌·마이그레이션·롤백 대조군 통과. 동결된 선택기와 이번 새 도입 사례에 한정합니다. |
+| [NULNUL 3.1.0 릴리스](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0) | **공개 패키지 검증 완료** | 제품 동결 커밋 `a9fd59e8c5852e8808f6698262e90d389f39f42a`; [태그 CI 통과](https://github.com/SeoNaRu/nulnul-harness/actions/runs/34212367385). |
+| `nulnul-harness-3.1.0.zip` | **60개 파일, 237,942바이트** | 재현 가능한 패키지이며 공개 다운로드와 실제 설치 파일이 일치합니다. |
+| Release archive SHA-256 | `7716a8ddfeb43632b4ad836c29deb1fd2981a84d423d2f2705fb88becad9e49d` | 동결된 패키지 식별자. |
 
 동결된 live Direct pair 하나에서는 명확한 Direct 작업에 capability body 0개를 유지하면서 프로젝트가 선호한 `<=120%` input 목표 안에 들어왔습니다. 이 수치는 해당 증거 범위에만 해당하며 보편적 성능 보장은 아닙니다.
 
@@ -433,8 +431,8 @@ Verification + holdout + rollback gate
 
 ## 릴리스와 업그레이드
 
-- 현재 stable release: [NULNUL 3.0.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0)
-- 업그레이드: [docs/upgrade-3.0.md](docs/upgrade-3.0.md)
+- 현재 릴리스: [NULNUL 3.1.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0)
+- 업그레이드: [docs/upgrade-3.0.md](docs/upgrade-3.0.md), 3.1에서도 기존 체크포인트 형태 유지
 - 변경 내역: [CHANGELOG.md](CHANGELOG.md)
 - 보안: [SECURITY.md](SECURITY.md)
 - 개인정보: [PRIVACY.md](PRIVACY.md)

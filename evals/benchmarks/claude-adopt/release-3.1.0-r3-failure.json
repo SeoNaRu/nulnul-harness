@@ -70,5 +70,19 @@
   "failure_reasons": [
     "All five completion checks and installed-roster enumeration passed, but collector had no explicit kept/reuse/upgraded/merged/removed classification in the durable contract."
   ],
-  "measurement_scope": "Fresh public-adoption regression; no holdout, independent transfer family, or performance win is claimed."
+  "measurement_scope": "Fresh public-adoption regression; no holdout, independent transfer family, or performance win is claimed.",
+  "resolution": {
+    "status": "superseded_by_verified_repair",
+    "evidence": "evals/benchmarks/claude-adopt/release-3.1.0-r4.json",
+    "release_commit": "a9fd59e8c5852e8808f6698262e90d389f39f42a",
+    "asset_sha256": "7716a8ddfeb43632b4ad836c29deb1fd2981a84d423d2f2705fb88becad9e49d",
+    "original_verdict_preserved": true,
+    "validator_unchanged": true
+  },
+  "preserved_release": {
+    "tag": "v3.1.0-adoption-failed.3",
+    "url": "https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0-adoption-failed.3",
+    "archive_unchanged": true,
+    "original_result_unchanged": true
+  }
 }
