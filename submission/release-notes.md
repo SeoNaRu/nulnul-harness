@@ -1,25 +1,24 @@
-# nulnul harness 3.0.0
+# nulnul harness 3.1.0
 
-NULNUL 3.0 turns repository-local AI setup into a quiet project workflow: automatic Sessions and Tasks, concise handoffs, verified Experience, and durable Memory preserve useful continuity without replaying raw conversations.
+Local release candidate, not published. The published baseline remains 3.0.0.
 
-Pre-session Capability Packs keep ordinary Direct work body-free and give project-fit work only the selected current capability guidance. Deterministic project checks create authoritative receipts that connect work, outcome, Experience, Memory, and later evolution evidence.
+## Added
 
-Evidence can now support KEEP, UPGRADE, REPLACE, MERGE, RETIRE, or CREATE decisions for the project capability ecosystem. External candidates stay quarantined and untrusted until they win project checks. Agent topology and bounded Harness controls use the same evidence-gated Champion/Challenger and rollback discipline, while one Agent and current controls remain the default.
+- Producer/consumer boundary QA with incremental checks and reproducible negative controls.
+- Three on-demand task recipes: web/API changes, data migration/sync, and evidence-backed research.
+- Six conditional execution patterns mapped to existing role, Task, Pack, and handoff contracts, without mandatory teams or fixed models.
+- A bounded dependency-aware rerun planner and local check executor that reuse only matching verified contracts and input/output fingerprints.
+- Skill use, near-miss skip, and follow-up development cases with explicit selection and check-reference scoring.
+- Offline preparation of inspected pinned public skill bytes for the existing LOCAL_DIRECTORY competition adapter, with digest, license, permission, and rollback controls.
 
-Cross-project Generalization keeps project Memory isolated. Only privacy-checked abstractions with provenance, applicability limits, and target validation can transfer as priors.
+## Compatibility and limits
 
-The runtime-exclusive Codex-rule activation path is retired. Upgrades clean obsolete activation artifacts deterministically without changing user trust. The package remains skills-only and adds no server, daemon, MCP server, hook, app, telemetry, account, or external service.
+Existing 3.0 state formats, acceptance authorities, fast-resume checks, and single-writer rules remain unchanged. No new state migration is required. The package stays skills-only and adds no service, dependency, hook, credential use, or automatic installation.
 
-Claims remain scoped: live autonomous Harness improvement, universal multi-Agent superiority, globally optimal capabilities, and live cross-project transfer are not established by this release.
+Planner receipts and development scores are advisory, not Foundation evidence or promotion authority. Exposed examples are not sealed holdouts. Neither measured live quality improvement nor new public adoption is claimed.
 
-The normalized 53-file archive has SHA-256 `99fd14bef3432f1542270cbdd8640f0a185d319cafcf054505b37260bc9335c1`. All 431 deterministic tests, documentation debt, package integrity, and the 100/100 Release Gate product score pass locally. Exact-version public adoption and remote publication remain separate release-publication gates.
+## Validation and publication
 
-```bash
-codex plugin marketplace add SeoNaRu/nulnul-harness --ref main
-codex plugin add nulnul-harness@nulnul-harness
-```
+The clean publication candidate passes all 442 checks and the 100/100 Release Gate product score. The original workspace's untracked `docs/research` directory was preserved outside the release tree, without weakening the legacy-boundary check. Exact-version public Claude and Meta adoption remain pending.
 
-```bash
-claude plugin marketplace add SeoNaRu/nulnul-harness
-claude plugin install nulnul-harness@nulnul-harness
-```
+The candidate archive is `dist/nulnul-harness-3.1.0.zip`. Do not reuse a 3.0.0 archive digest, public Claude adoption, or public Meta adoption as evidence for these new bytes. Exact-version public adoption, publication approval, and green publication CI remain required before release completion.

@@ -76,7 +76,7 @@ class ProductPluginTests(unittest.TestCase):
     def test_plugin_contains_only_the_product_skill(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["name"], PLUGIN.name)
-        self.assertEqual(manifest["version"], "3.0.0")
+        self.assertRegex(manifest["version"], r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$")
         self.assertEqual(manifest["skills"], "./skills/")
         self.assertEqual([path.name for path in (PLUGIN / "skills").iterdir()], ["nulnul-harness"])
         self.assertLessEqual(len(manifest["interface"]["shortDescription"]), 30)
@@ -133,6 +133,13 @@ class ProductPluginTests(unittest.TestCase):
             "references/meta-evolution.md",
             "references/generalization.md",
             "references/foundation.md",
+            "references/workflow-delivery.md",
+            "references/workflow-recipes.md",
+            "references/skill-acceptance.md",
+            "references/external-candidate-preparation.md",
+            "assets/workflow-example.json",
+            "assets/skill-cases.template.json",
+            "scripts/workflow_delivery.py",
             "assets/AGENTS.template.md",
             "assets/evolution-state.template.json",
             "assets/layer-contracts.json",
@@ -390,8 +397,8 @@ class ProductPluginTests(unittest.TestCase):
     def test_readme_locales_are_consistent_and_links_resolve(self):
         manifest = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
         readmes = {
-            "README.md": ("README.ko.md", "431 passed"),
-            "README.ko.md": ("README.md", "431개 통과"),
+            "README.md": ("README.ko.md", "442 checks"),
+            "README.ko.md": ("README.md", "442개 검사"),
         }
         for name, (other_locale, test_claim) in readmes.items():
             text = (ROOT / name).read_text(encoding="utf-8")

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "candidate_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "cases": [
+    {
+      "id": "api-consumer-check",
+      "kind": "use",
+      "prompt": "Check whether this API response and its UI consumer agree, including null and asynchronous responses.",
+      "expected_use": true
+    },
+    {
+      "id": "api-wording-only",
+      "kind": "skip",
+      "prompt": "Change only the wording of this API documentation paragraph; preserve the API and UI behavior.",
+      "expected_use": false
+    },
+    {
+      "id": "changed-response-recheck",
+      "kind": "followup",
+      "prompt": "The response wrapper changed since the previous check. Recheck its consumers and keep unrelated results.",
+      "expected_use": true
+    }
+  ]
+}

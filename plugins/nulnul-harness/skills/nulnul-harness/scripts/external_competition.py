@@ -103,6 +103,72 @@ def _write_frozen(updates):
         path.chmod(0o444)
 
 
+def prepare_source(source_root, specification, output, policy=None):
+    """Package inspected local public-source bytes; never fetch, install, or adopt."""
+    if not isinstance(specification, dict):
+        raise ValueError("source preparation needs an explicit specification")
+    source_root, output = Path(source_root), Path(output)
+    if source_root.is_symlink() or not source_root.is_dir():
+        raise ValueError("source preparation needs an existing regular directory")
+    source_root = source_root.resolve()
+    if any(part.lower() in {".git", ".claude", ".agents", ".codex"} for part in output.resolve().parts):
+        raise ValueError("prepared sources cannot target host configuration or installed capabilities")
+    source_id = _safe_id(specification.get("source_id"), "source_id")
+    revision = specification.get("source_revision")
+    origin = specification.get("source_url")
+    match = re.fullmatch(
+        r"https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/blob/([a-f0-9]{40})/([^?#%]+)",
+        origin if isinstance(origin, str) else "",
+    )
+    body_relative = _safe_relative(specification.get("body_path"), "body_path")
+    if not match or match[1] != revision or match[2] != body_relative.as_posix():
+        raise ValueError("source URL must bind the exact public repository revision and body path")
+    collected = {}
+    for field, bound in (("body", MAX_BODY_BYTES), ("license", MAX_BODY_BYTES)):
+        name = _safe_relative(specification.get(f"{field}_path"), f"{field}_path")
+        path = source_root / name
+        if (path.is_symlink() or not path.resolve().is_relative_to(source_root) or not path.is_file()
+                or not 0 < path.stat().st_size <= bound or path.stat().st_mode & 0o111):
+            raise ValueError("source preparation requires bounded non-executable regular files")
+        data = path.read_bytes()
+        expected = specification.get(f"{field}_digest")
+        if not isinstance(expected, str) or not re.fullmatch(r"[a-f0-9]{64}", expected) or hashlib.sha256(data).hexdigest() != expected:
+            raise ValueError("inspected source digest mismatch")
+        collected[field] = data.decode("utf-8")
+        if "\0" in collected[field]:
+            raise ValueError("source preparation rejects binary content")
+    body = collected["body"]
+    frontmatter = re.match(r"\A---\r?\n(.*?)\r?\n---(?:\r?\n|\Z)", body, re.S)
+    if not frontmatter or any(not re.search(rf"^{field}:\s*\S", frontmatter[1], re.M) for field in ("name", "description")):
+        raise ValueError("source must be a Skill; adapt a reference through a separately reviewed local candidate")
+    capability = specification.get("capability")
+    if not isinstance(capability, dict) or "adaptation_required" not in capability:
+        raise ValueError("source preparation requires explicit capability and adaptation decisions")
+    manifest = {**capability, "body_path": "SKILL.md", "license_path": "LICENSE",
+                "body_digest": specification["body_digest"],
+                "origin": {"url": origin, "revision": revision, "body_path": body_relative.as_posix(),
+                           "body_digest": specification["body_digest"], "license_digest": specification["license_digest"],
+                           "verification_scope": "local-bytes-against-declared-digests"}}
+    descriptor = {"source_type": "LOCAL_DIRECTORY", "source_id": source_id,
+                  "source_revision": revision, "source_location": str(output.resolve())}
+    output.mkdir()  # Exclusive reservation: never replace an existing catalog or user files.
+    try:
+        _write_frozen({output / "SKILL.md": body, output / "LICENSE": collected["license"],
+                       output / "capability.json": _json_text(manifest)})
+        inspected = _read_source(descriptor, _policy(policy))
+        normalized = inspected["normalized"]
+        if normalized["license"]["classification"] != "REUSE_ALLOWED" or normalized["compatibility_reasons"]:
+            raise ValueError("prepared source fails license or permission/tool/dependency compatibility")
+    except Exception:
+        for name in ("SKILL.md", "LICENSE", "capability.json"):
+            (output / name).unlink(missing_ok=True)
+        output.rmdir()
+        raise
+    return {"status": "prepared", "sources": [descriptor], "pack_selectable": False,
+            "authority": [], "source_digest": normalized["source_digest"],
+            "body_digest": normalized["body_digest"], "origin": manifest["origin"]}
+
+
 def sanitize_query(root, evaluation, query):
     """Return the only project-safe metadata an adapter may receive."""
     snapshot = natural_selection.validate_evaluation(root, evaluation, TRIGGERS)
@@ -953,6 +1019,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path("."))
     sub = parser.add_subparsers(dest="command", required=True)
+    preparation = sub.add_parser("prepare-source")
+    preparation.add_argument("source_root", type=Path)
+    preparation.add_argument("specification", type=Path)
+    preparation.add_argument("output", type=Path)
+    preparation.add_argument("--policy", type=Path)
     discovery = sub.add_parser("discover")
     discovery.add_argument("evaluation", type=Path)
     discovery.add_argument("query", type=Path)
@@ -979,7 +1050,10 @@ def main():
     sub.add_parser("validate")
     args = parser.parse_args()
     try:
-        if args.command == "discover":
+        if args.command == "prepare-source":
+            payload = prepare_source(args.source_root, runtime.read_json(args.specification), args.output,
+                                     runtime.read_json(args.policy) if args.policy else None)
+        elif args.command == "discover":
             payload = discover(
                 args.root, runtime.read_json(args.evaluation), runtime.read_json(args.query),
                 runtime.read_json(args.sources), runtime.read_json(args.policy) if args.policy else None,

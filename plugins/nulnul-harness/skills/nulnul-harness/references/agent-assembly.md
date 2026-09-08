@@ -39,6 +39,8 @@ An agent upgrade is an evolution: it needs the same evidence as any other change
 
 ## Define each role
 
+For a concrete multi-stage task, `workflow-delivery.md` gives six conditional execution shapes and `workflow-recipes.md` gives three task-sized examples. Map only justified roles to the existing Agent/Task/Pack and handoff contracts below. Examples prescribe neither an agent count nor a model, scheduler, or second state writer.
+
 Give every role:
 
 - one concrete job and activation condition

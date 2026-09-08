@@ -3,6 +3,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -124,6 +125,63 @@ class ExternalCompetitionCase(NaturalSelectionCase):
 
 
 class DiscoveryAndQuarantineTests(ExternalCompetitionCase):
+    def preparation(self, name="inspected"):
+        source = self.source(name, body="---\nname: api-check\ndescription: Check the project API contract.\n---\nValidate API consumers.\n")
+        root = Path(source["source_location"])
+        (root / "SKILL.md").rename(root / "skill.md")
+        manifest = json.loads((root / "capability.json").read_text())
+        revision = "a" * 40
+        specification = {
+            "source_id": name, "source_revision": revision,
+            "source_url": f"https://github.com/example/skills/blob/{revision}/skill.md",
+            "body_path": "skill.md", "license_path": "LICENSE",
+            "body_digest": hashlib.sha256((root / "skill.md").read_bytes()).hexdigest(),
+            "license_digest": hashlib.sha256((root / "LICENSE").read_bytes()).hexdigest(),
+            "capability": manifest,
+        }
+        return root, specification, root.parent / f"{name}-prepared"
+
+    def test_prepare_source_preserves_bytes_and_uses_existing_quarantine(self):
+        source, spec, output = self.preparation()
+        result = external_competition.prepare_source(source, spec, output)
+        self.assertEqual((source / "skill.md").read_bytes(), (output / "SKILL.md").read_bytes())
+        self.assertFalse(result["pack_selectable"])
+        self.assertEqual(result["authority"], [])
+        self.assertEqual(result["origin"]["body_digest"], spec["body_digest"])
+        discovery = self.discovery(self.need(), result["sources"])
+        self.assertEqual(len(discovery["shortlist_candidate_ids"]), 1)
+        self.assertNotIn(spec["capability"]["capability_id"],
+                         [row["capability_id"] for row in capability_contract.bounded_view(self.root / "docs/nulnul/project.md")])
+
+    def test_prepare_source_rejects_unpinned_bytes_and_permission_expansion(self):
+        source, spec, output = self.preparation()
+        for field, value in (("source_revision", "main"), ("body_digest", "0" * 64),
+                             ("source_url", spec["source_url"].replace("/skill.md", "/different.md")),
+                             ("license_path", "../LICENSE")):
+            with self.subTest(field=field):
+                with self.assertRaises(ValueError):
+                    external_competition.prepare_source(source, {**spec, field: value}, output)
+                self.assertFalse(output.exists())
+        denied = {**spec, "capability": {**spec["capability"], "required_permissions": ["external-write"]}}
+        with self.assertRaisesRegex(ValueError, "compatibility"):
+            external_competition.prepare_source(source, denied, output)
+        self.assertFalse(output.exists())
+        with self.assertRaisesRegex(ValueError, "host configuration"):
+            external_competition.prepare_source(source, spec, self.root / ".claude/skills/prepared")
+
+    def test_prepare_source_preserves_existing_files_and_rolls_back_failed_preparation(self):
+        source, spec, output = self.preparation()
+        output.mkdir()
+        (output / "keep.txt").write_text("user-owned")
+        with self.assertRaises(FileExistsError):
+            external_competition.prepare_source(source, spec, output)
+        self.assertEqual((output / "keep.txt").read_text(), "user-owned")
+        failed = output.parent / "failed-preparation"
+        with mock.patch.object(external_competition, "_read_source", side_effect=ValueError("injected failure")):
+            with self.assertRaisesRegex(ValueError, "injected"):
+                external_competition.prepare_source(source, spec, failed)
+        self.assertFalse(failed.exists())
+
     def test_discovery_is_trigger_gated_and_direct_has_zero_fixed_work(self):
         direct = natural_selection.evaluate(self.root, {
             "signal": "none", "affected_capability_ids": [], "source_experience_ids": [],

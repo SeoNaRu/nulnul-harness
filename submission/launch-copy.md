@@ -1,5 +1,7 @@
 # Launch copy
 
+Historical 3.0.0 launch copy. The local 3.1.0 candidate is not published; do not present the following installation, test, or public-adoption claims as evidence for 3.1.0. Prepare new launch copy only after its release gates pass.
+
 ## One line
 
 NULNUL is a free, open-source harness for Codex and Claude Code that selects task-fit capabilities for the outcome, verifies the work, and removes what does not materially help.

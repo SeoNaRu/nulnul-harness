@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "steps": [
+    {
+      "id": "api",
+      "needs": [],
+      "inputs": ["api.json"],
+      "outputs": ["api.json"],
+      "check": ["python3", "-c", "import json; from pathlib import Path; assert isinstance(json.loads(Path('api.json').read_text()), list)"]
+    },
+    {
+      "id": "view",
+      "needs": ["api"],
+      "inputs": ["api.json", "view.json"],
+      "outputs": ["view.json"],
+      "check": ["python3", "-c", "import json; from pathlib import Path; data=json.loads(Path('api.json').read_text()); view=json.loads(Path('view.json').read_text()); assert isinstance(data, list) and view['count'] == len(data)"]
+    },
+    {
+      "id": "notes",
+      "needs": [],
+      "inputs": ["notes.txt"],
+      "outputs": ["notes.txt"],
+      "check": ["python3", "-c", "from pathlib import Path; assert Path('notes.txt').read_text() == 'approved'"]
+    }
+  ]
+}

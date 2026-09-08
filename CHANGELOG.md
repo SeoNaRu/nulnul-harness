@@ -2,6 +2,16 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 3.1.0 - Unreleased
+
+- Added on-demand producer/consumer boundary QA with incremental checks and reproducible negative controls.
+- Added task-sized web/API, data migration/sync, and evidence-backed research recipes, plus six conditional execution patterns using existing role and handoff contracts.
+- Added bounded dependency-aware partial rerun planning and local check receipts that require matching contracts, inputs, outputs, and fresh prerequisites before reuse.
+- Added skill use, near-miss skip, and follow-up development cases without replacing authoritative Foundation checks or reusing exposed cases as holdouts.
+- Added offline preparation of inspected pinned external skill candidates into the existing quarantine and competition path, without fetching, installing, expanding permissions, or granting adoption.
+- Kept existing state formats, fast resume, acceptance authority, and the skills-only boundary unchanged; no new state migration is required.
+- Prepared 3.1.0 from a clean publication tree: all 442 checks pass while original untracked research files remain local and the legacy-boundary check stays unchanged. Exact-version public adoption is still required; prior 3.0.0 evidence is historical, not candidate verification.
+
 ## 3.0.0 — 2026-09-02
 
 - Added automatic Session and Task continuity with bounded handoffs, verified project state, interruption recovery, and relevant durable Memory instead of raw conversation replay.

@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-3.0.0-111111" alt="version 3.0.0">
+  <img src="https://img.shields.io/badge/version-3.1.0-111111" alt="version 3.1.0">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
 
@@ -251,13 +251,30 @@ Projects do not share raw Memory. Generalization transfers privacy-safe abstract
 
 <a id="evidence"></a>
 
+## New in 3.1
+
+Version **3.1.0** is a publication candidate pending exact-version public adoption. It adds six task-delivery improvements without changing the 3.0 state formats, fast resume, acceptance authorities, or skills-only boundary:
+
+1. [Boundary QA](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-delivery.md): inspect actual producers and consumers, check integration incrementally, and retain a reproducible negative control.
+2. [Task recipes](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-recipes.md): web/API changes, data migration/sync, and evidence-backed research.
+3. [Execution patterns](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-delivery.md): six conditional patterns using existing roles and handoffs, without mandatory teams or fixed models.
+4. [Partial reruns](plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py): invalidate affected dependency chains and reuse only matching verified contracts and input/output fingerprints.
+5. [Skill acceptance cases](plugins/nulnul-harness/skills/nulnul-harness/references/skill-acceptance.md): actual use, near-miss skips, and follow-ups, with authoritative check references.
+6. [Offline candidate preparation](plugins/nulnul-harness/skills/nulnul-harness/references/external-candidate-preparation.md): prepare inspected pinned skill bytes for existing quarantine and competition, without fetching, installing, or granting adoption.
+
+These references load only when needed. Planner receipts and development scores are advisory, not Foundation evidence, promotion authority, sealed holdouts, or proof of live quality gains. No new state migration is required.
+
+```bash
+python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
+```
+
 ## Evidence
 
 NULNUL's public claims are intentionally narrower than its architecture.
 
 | Evidence | Result | What it supports |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **431 passed (431/431)** | Foundation, Pack, verification, Memory, lifecycle, privacy, rollback, evolution, migration, and release contracts |
+| [Repository test suite](tests/) | **442 passed (442 checks)** | Clean publication-candidate validation includes workflow delivery and candidate preparation. The original workspace's untracked research files are preserved outside the release tree; the legacy-boundary check remains unchanged. |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | Release integrity for the frozen 3.0.0 product |
 | [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Published stable release** | Public `v3.0.0` tag and release |
 | `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | Reproducible release archive |

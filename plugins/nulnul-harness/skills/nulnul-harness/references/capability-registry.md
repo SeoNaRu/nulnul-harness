@@ -25,6 +25,17 @@ The first two are style layers over the model's own output; the third trims tool
 
 Measure the claim rather than repeating it. `claude plugin details <name>@<market>` gives the always-on cost, and a before/after comparison on a representative task gives the saving — the same evidence `evolution.md` demands of any other candidate.
 
+## Inspected workflow design sources
+
+On 2026-09-08, the following public sources were inspected as design references, not installed or accepted capabilities:
+
+| Source | Inspected revision | Useful scope | Limits |
+| --- | --- | --- | --- |
+| [revfactory/harness](https://github.com/revfactory/harness/tree/cceac68ea1d0ad198ef4b7b906cd238375836387) | `cceac68ea1d0ad198ef4b7b906cd238375836387` | Boundary QA, conditional execution patterns, skill use/near-miss cases | Instructions do not prove runtime outcomes; reject mandatory teams, fixed models, and forced PASS after retry limits |
+| [revfactory/harness-100](https://github.com/revfactory/harness-100/tree/8e8d35c6a19166614d1af1df85512266d51121ae) | `8e8d35c6a19166614d1af1df85512266d51121ae` | Task-specific artifact and handoff examples | Seven domains were sampled, not every package validated; lowercase `skill.md` and foreign host assumptions need compatibility inspection |
+
+Both inspected repositories declare Apache-2.0; recheck the selected files' license, provenance, maintenance, permissions, and fit at acquisition time. Source availability is not a verified capability or a quality advantage. Use `workflow-recipes.md` for project-sized examples and `external-candidate-preparation.md` only when a real gap justifies an offline candidate. Keep copied reference ideas separate from accepted runtime evidence.
+
 ## Reading a candidate before installing
 
 Prefer the host's own inspection commands over cloning:

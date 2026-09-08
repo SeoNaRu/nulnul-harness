@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-3.0.0-111111" alt="버전 3.0.0">
+  <img src="https://img.shields.io/badge/version-3.1.0-111111" alt="버전 3.1.0">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
 
@@ -251,13 +251,30 @@ NULNUL은 Guarded Kernel과 진화 가능한 control policy를 분리합니다. 
 
 <a id="검증-근거"></a>
 
+## 3.1에서 추가된 기능
+
+**3.1.0**은 정확한 새 버전의 공개 채택 검증을 진행하는 배포 후보입니다. 3.0 상태 형식, 빠른 재개, 기존 수용 권한, skills-only 경계를 유지하면서 여섯 가지 작업 실행 기능을 추가했습니다.
+
+1. [경계면 QA](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-delivery.md): 실제 생산자와 소비자를 함께 확인하고, 단계별 통합 검사와 재현 가능한 부정 대조군을 유지합니다.
+2. [업무별 절차](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-recipes.md): 웹/API 변경, 데이터 마이그레이션·동기화, 근거 기반 조사를 다룹니다.
+3. [실행 패턴](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-delivery.md): 기존 역할과 인계를 사용하는 조건부 패턴 6개이며 필수 팀이나 고정 모델을 강제하지 않습니다.
+4. [부분 재실행](plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py): 영향을 받는 의존 관계를 재실행하고 현재 계약·입출력 지문이 일치하는 검증 결과만 재사용합니다.
+5. [스킬 수용 사례](plugins/nulnul-harness/skills/nulnul-harness/references/skill-acceptance.md): 실제 사용·유사하지만 제외할 요청·후속 요청을 권위 있는 검사 참조와 함께 기록합니다.
+6. [오프라인 후보 준비](plugins/nulnul-harness/skills/nulnul-harness/references/external-candidate-preparation.md): 검토한 고정 리비전의 스킬을 다운로드·설치·채택 승인 없이 기존 격리·경쟁 경로에 준비합니다.
+
+필요한 참조만 읽습니다. 계획 영수증과 개발 점수는 보조 자료이며 Foundation 증거, 승격 권한, 비공개 최종 평가, 실사용 품질 향상의 증명이 아닙니다. 새로운 상태 마이그레이션은 필요하지 않습니다.
+
+```bash
+python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
+```
+
 ## 검증 근거
 
 NULNUL의 공개 주장은 내부 아키텍처보다 의도적으로 좁게 잡습니다.
 
 | 근거 | 결과 | 무엇을 보여주나 |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **431개 통과 (431/431)** | Foundation, Pack, verification, Memory, lifecycle, privacy, rollback, evolution, migration, release contract |
+| [Repository test suite](tests/) | **442개 통과 (442개 검사)** | 깨끗한 배포 후보에서 워크플로 실행과 후보 준비를 포함해 검증했습니다. 원래 작업 폴더의 미추적 연구 자료는 릴리스 트리 밖에 보존하며 legacy 경계 검사는 변경하지 않습니다. |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | 동결된 3.0.0 제품의 release integrity |
 | [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Stable release published** | 공개 `v3.0.0` 태그와 릴리스 |
 | `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | 재현 가능한 release archive |
