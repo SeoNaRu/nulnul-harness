@@ -21,4 +21,6 @@ Planner receipts and development scores are advisory, not Foundation evidence or
 
 The first public candidate passed 442 deterministic checks and Meta adoption but failed full Claude adoption: the product task passed while a project-local-only bootstrap guard prevented checkpoint creation. Its failed evidence and archive remain preserved. The repair adds both-host public-plugin bootstrap and stale/unsafe-receipt controls, bringing the suite to 444 checks. Fresh exact-version public Claude and Meta adoption are required for the repaired bytes.
 
+The second public run proved bootstrap and checkpoint creation but failed installed-plugin enumeration and shared README debt. Its original nonpass is retained. The next candidate explicitly applies the existing roster and all-checks completion requirements to cold setup, without weakening the validator.
+
 The candidate archive is `dist/nulnul-harness-3.1.0.zip`. Do not reuse a 3.0.0 archive digest, public Claude adoption, or public Meta adoption as evidence for these new bytes. Exact-version public adoption, publication approval, and green publication CI remain required before release completion.

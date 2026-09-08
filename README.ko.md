@@ -266,6 +266,8 @@ NULNUL은 Guarded Kernel과 진화 가능한 control policy를 분리합니다. 
 
 첫 공개 3.1.0 후보는 제품 작업을 통과했지만 초기 설정이 프로젝트 내부의 별도 스킬을 요구해 Claude 전체 채택에 실패했습니다. [이 실패는 삭제하지 않고 보존합니다](evals/benchmarks/claude-adopt/release-3.1.0-failure.json). 수정 후보는 실행 중인 플러그인의 계약만 사용하며 영수증을 프로젝트·호스트·패키지 파일 지문에 묶습니다. 정식 공개 전 새 공개 채택 검증을 통과해야 합니다.
 
+[두 번째 실행](evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json)은 초기 설정과 체크포인트 수정을 확인했지만 설치 목록 확인과 공유 README 부채 처리를 누락했습니다. 다음 후보는 기존 완료 조건이 최초 설정에도 적용되도록 명시하며 검증 기준은 완화하지 않습니다.
+
 ```bash
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
 ```

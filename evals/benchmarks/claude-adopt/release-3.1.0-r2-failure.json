@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "run_id": "claude-public-3.1.0-r2",
+  "run_date": "2026-09-08",
+  "case_id": "positive-adopt-existing-harness",
+  "plugin_version": "3.1.0",
+  "plugin_source": "github",
+  "distribution": {
+    "release_tag": "v3.1.0",
+    "release_commit": "3047a847b3eee2ad5fb4f3c0c6bf9c3644e17155",
+    "asset": "nulnul-harness-3.1.0.zip",
+    "asset_sha256": "6b05d4ef8e50fa0c714d646799445d54f18e925cd94448c1164c6fdb5e1cf396"
+  },
+  "public_positioning_violations": 0,
+  "protected_write_calls": [],
+  "existing_agents": {
+    "collector": {
+      "before_sha256": "ad58d23ce74db2b68f8d398c866f8c40e87b6a4556b4da123ba3d9822e241490",
+      "after_sha256": "ad58d23ce74db2b68f8d398c866f8c40e87b6a4556b4da123ba3d9822e241490"
+    },
+    "reviewer": {
+      "before_sha256": "3d68b7dda70c1349bbbc4b8867a09d8d2e4465687087ec39fe7b6a61207b4f2a",
+      "after_sha256": "3d68b7dda70c1349bbbc4b8867a09d8d2e4465687087ec39fe7b6a61207b4f2a"
+    }
+  },
+  "roster_enumerated": false,
+  "agents_classified": true,
+  "session_entry_present": true,
+  "host_entry_ownership": {
+    "active_host": "claude",
+    "active_entry": "CLAUDE.md",
+    "inactive_entry": "AGENTS.md",
+    "inactive_before_sha256": "19cb49b075b6cae1035affb5785201e8e76b4282513cd266fe07a9cf81b256f1",
+    "inactive_after_sha256": "19cb49b075b6cae1035affb5785201e8e76b4282513cd266fe07a9cf81b256f1",
+    "shared_live_state_writer_count": 1
+  },
+  "checkpoint_fast_path_ready": true,
+  "checks": {
+    "repository": {
+      "command": "npm test",
+      "exit_code": 0
+    },
+    "project_setup": {
+      "command": "validate_project_setup.py",
+      "exit_code": 0
+    },
+    "checkpoint": {
+      "command": "validate_checkpoint.py",
+      "exit_code": 0
+    },
+    "completion": {
+      "command": "run_checkpoint_check.py",
+      "exit_code": 0
+    },
+    "documentation_debt": {
+      "command": "check_doc_debt.py",
+      "exit_code": 1
+    }
+  },
+  "learning_verdicts": [
+    {
+      "id": "claude-adopt-3.1.0-r2",
+      "status": "failed",
+      "feedback_id": "feedback-claude-3-1-setup-acceptance",
+      "proposal_ids": [
+        "proposal-navigator-21-setup-acceptance"
+      ]
+    }
+  ],
+  "failure_reasons": [
+    "No claude plugin list command was executed during the model run, although both existing profile bodies were read.",
+    "README documentation debt was observed and dismissed rather than repaired."
+  ],
+  "measurement_scope": "Fresh public-adoption regression, not a sealed holdout or an independent transfer family. First bootstrap failure was fixed; overall adoption still failed."
+}

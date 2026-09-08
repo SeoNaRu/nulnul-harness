@@ -195,6 +195,16 @@
       "evidence": "evals/benchmarks/claude-adopt/release-3.1.0-failure.json: one model run, six product tests passed, governed stage unavailable, checkpoint absent, no candidate modification.",
       "scope": "project",
       "status": "converted"
+    },
+    {
+      "id": "feedback-claude-3-1-setup-acceptance",
+      "source": "test",
+      "target_agent": "navigator",
+      "observed": "The second exact-public run created a valid checkpoint and preserved the roster, but skipped the installed-plugin listing on cold setup and dismissed a reproduced shared README debt verdict.",
+      "expected": "Every Claude setup path enumerates installed plugins and completes all acceptance checks before claiming adoption success.",
+      "evidence": "evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json: original captured roster_enumerated=false and documentation_debt exit 1; four other checks passed.",
+      "scope": "project",
+      "status": "converted"
     }
   ],
   "proposals": [
@@ -534,6 +544,37 @@
       "pathology": {
         "where": "governed stage contract resolution before setup",
         "why": "project-local-only resolution excludes the public plugin installation"
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "proposal-navigator-21-setup-acceptance",
+      "feedback_ids": [
+        "feedback-claude-3-1-setup-acceptance"
+      ],
+      "target_agent": "navigator",
+      "author_agent": "coach",
+      "from_version": 20,
+      "to_version": 21,
+      "cause": "Cold setup selection bypassed an Adopt-only listing instruction; the late validation rule was treated as an optional note.",
+      "change_target": "Make bounded Claude listing mandatory for both New Setup and Adopt, and colocate the conjunctive acceptance rule before outputs. Keep all existing verifier criteria, permissions, and protected paths unchanged.",
+      "regression_check": "Existing full suite and unchanged public-adoption validator, followed by one fresh public run on the revised artifact.",
+      "primary_metric": "all public-adoption fields and five checks pass in the same run",
+      "permission_delta": [],
+      "rollback": "Reject the candidate and retain the confirmed release if any required roster, ownership, protected-path, or completion field fails.",
+      "change_level": "task",
+      "discovery_evidence": "evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json",
+      "transfer_check": "Project-local setup acceptance repair only; no generalization or personal mechanism promotion claimed.",
+      "prediction": "Cold setup performs the listing and fixes reported shared-document debt before completion.",
+      "expected_delta": {
+        "missing_installed_roster": "1 -> 0",
+        "unresolved_documentation_debt": "1 -> 0",
+        "protected_writes": "0 -> 0"
+      },
+      "falsification_condition": "Any missing listing, unresolved debt, protected write, changed inactive entry, or nonpass completion check rejects adoption.",
+      "pathology": {
+        "where": "cold setup entry and final setup acceptance",
+        "why": "branch-local inspection and a late validation instruction did not constrain the completion claim"
       },
       "status": "proposed"
     }

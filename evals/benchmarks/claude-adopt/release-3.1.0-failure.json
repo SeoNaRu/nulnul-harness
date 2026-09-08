@@ -51,5 +51,11 @@
       ]
     }
   ],
-  "release_decision": "BLOCKED_NO_MAIN_PUBLICATION"
+  "release_decision": "BLOCKED_NO_MAIN_PUBLICATION",
+  "preserved_release": {
+    "tag": "v3.1.0-adoption-failed.1",
+    "url": "https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0-adoption-failed.1",
+    "archive_unchanged": true,
+    "original_result_unchanged": true
+  }
 }

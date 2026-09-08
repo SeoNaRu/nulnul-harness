@@ -266,6 +266,8 @@ These references load only when needed. Planner receipts and development scores 
 
 The first public 3.1.0 candidate passed the product task but failed full Claude adoption because setup required a project-local shadow skill. [That nonpass is retained](evals/benchmarks/claude-adopt/release-3.1.0-failure.json). The repaired candidate resolves only its executing plugin's contract and binds setup receipts to the project, host, and package file digests; fresh public adoption must pass before stable publication.
 
+The [second run](evals/benchmarks/claude-adopt/release-3.1.0-r2-failure.json) confirmed bootstrap and checkpoint repair, but skipped the installed-plugin listing and left shared README debt. The next candidate makes these existing acceptance requirements explicit for cold setup too; no verifier criteria are relaxed.
+
 ```bash
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
 ```
