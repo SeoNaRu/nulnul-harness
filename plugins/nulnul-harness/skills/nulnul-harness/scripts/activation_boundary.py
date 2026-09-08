@@ -55,8 +55,48 @@ def governed_stage(script, root, stage, host):
     if stage == "evolution" and not evolution.is_file():
         raise ValueError("evolution requires the existing evolution state")
     load_target = root / surface / "skills/nulnul-harness/SKILL.md"
-    if load_target.is_symlink() or not load_target.is_file() or not load_target.resolve().is_relative_to(root):
-        raise ValueError("governed stage contract is unavailable")
+    binding = {}
+    if load_target.exists() or load_target.is_symlink():
+        if load_target.is_symlink() or not load_target.is_file() or not load_target.resolve().is_relative_to(root):
+            raise ValueError("governed stage contract is unavailable")
+    else:
+        # The executing package is already host-admitted; never accept a caller-selected skill directory.
+        runtime = Path(__file__).absolute()
+        caller = Path(script).absolute()
+        skill = runtime.parent.parent
+        plugin = skill.parent.parent
+        manifest = plugin / (".codex-plugin" if host == "codex" else ".claude-plugin") / "plugin.json"
+        load_target = skill / "SKILL.md"
+        files = (runtime, runtime.with_name("setup_transaction.py"), load_target, manifest)
+        directories = (runtime.parent, skill, skill.parent, plugin, manifest.parent, caller.parent)
+        if (
+            caller.is_symlink()
+            or caller.name not in {"activation_boundary.py", "setup_transaction.py"}
+            or caller.resolve().parent != runtime.resolve().parent
+            or not caller.is_file()
+            or runtime.parent.name != "scripts"
+            or skill.name != "nulnul-harness"
+            or skill.parent.name != "skills"
+            or any(path.is_symlink() or not path.is_dir() for path in directories)
+            or any(path.is_symlink() or not path.is_file() or not 0 < path.stat().st_size <= 65536 for path in files)
+        ):
+            raise ValueError("governed stage contract is unavailable: executing package is unsafe")
+        metadata = json.loads(manifest.read_text(encoding="utf-8"))
+        if (
+            not isinstance(metadata, dict)
+            or metadata.get("name") != "nulnul-harness"
+            or not isinstance(metadata.get("version"), str)
+            or not metadata["version"].strip()
+            or (host == "codex" and metadata.get("skills") != "./skills/")
+        ):
+            raise ValueError("governed stage contract is unavailable: host package identity is invalid")
+        binding = {
+            "project_root": str(root),
+            "package_files": {
+                path.relative_to(plugin).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+                for path in files
+            },
+        }
     if stage in {"new-setup", "adopt-upgrade"}:
         values = SETUP_AUTHORITY if host == "codex" else (
             "CLAUDE.md",
@@ -68,9 +108,10 @@ def governed_stage(script, root, stage, host):
         values = STAGE_AUTHORITY[stage]
     authority = [value.format(entry=entry_name) for value in values]
     source = {"activation": "GOVERNED", "stage": stage, "host": host, "authority": authority}
+    source.update(binding)
     receipt_value = (
         governed_setup_receipt(stage)
-        if host == "codex" and stage in {"new-setup", "adopt-upgrade"}
+        if not binding and host == "codex" and stage in {"new-setup", "adopt-upgrade"}
         else canonical_digest(source)
     )
     return {
@@ -79,7 +120,8 @@ def governed_stage(script, root, stage, host):
         "sequence": ["STAGE_REQUESTED", "STAGE_VALIDATED", "GOVERNED_ACTIVATED"],
         "stage": stage,
         "host": host,
-        "load_target": load_target.relative_to(root).as_posix(),
+        "load_target": load_target.relative_to(root).as_posix() if load_target.is_relative_to(root) else str(load_target),
+        "contract_source": "executing-plugin" if binding else "project-local",
         "authority": authority,
         "activation_receipt": receipt_value,
     }

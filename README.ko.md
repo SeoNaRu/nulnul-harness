@@ -264,6 +264,8 @@ NULNUL은 Guarded Kernel과 진화 가능한 control policy를 분리합니다. 
 
 필요한 참조만 읽습니다. 계획 영수증과 개발 점수는 보조 자료이며 Foundation 증거, 승격 권한, 비공개 최종 평가, 실사용 품질 향상의 증명이 아닙니다. 새로운 상태 마이그레이션은 필요하지 않습니다.
 
+첫 공개 3.1.0 후보는 제품 작업을 통과했지만 초기 설정이 프로젝트 내부의 별도 스킬을 요구해 Claude 전체 채택에 실패했습니다. [이 실패는 삭제하지 않고 보존합니다](evals/benchmarks/claude-adopt/release-3.1.0-failure.json). 수정 후보는 실행 중인 플러그인의 계약만 사용하며 영수증을 프로젝트·호스트·패키지 파일 지문에 묶습니다. 정식 공개 전 새 공개 채택 검증을 통과해야 합니다.
+
 ```bash
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
 ```
@@ -274,7 +276,7 @@ NULNUL의 공개 주장은 내부 아키텍처보다 의도적으로 좁게 잡�
 
 | 근거 | 결과 | 무엇을 보여주나 |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **442개 통과 (442개 검사)** | 깨끗한 배포 후보에서 워크플로 실행과 후보 준비를 포함해 검증했습니다. 원래 작업 폴더의 미추적 연구 자료는 릴리스 트리 밖에 보존하며 legacy 경계 검사는 변경하지 않습니다. |
+| [Repository test suite](tests/) | **444개 통과 (444개 검사)** | 깨끗한 배포 트리에서 워크플로 실행·후보 준비·두 호스트의 공개 플러그인 초기 설정과 오래되거나 안전하지 않은 영수증 대조군을 검증했습니다. 미추적 연구 자료는 로컬에 보존하며 legacy 경계 검사는 변경하지 않습니다. |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | 동결된 3.0.0 제품의 release integrity |
 | [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Stable release published** | 공개 `v3.0.0` 태그와 릴리스 |
 | `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | 재현 가능한 release archive |

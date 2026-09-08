@@ -132,6 +132,8 @@ Legacy projects without the table continue to run directly. A legacy routing tab
 
 Host trust and security approvals always belong to the user and host. NULNUL never writes Codex `trust_level`. Project-Fit Pack construction requires no Codex rule, restart, sandbox escape, or privileged command admission.
 
+Governed stages reuse a valid project-local contract when present. Otherwise, a host-admitted plugin uses only the contract beside its executing guard and transaction scripts, with the matching host manifest. No arbitrary skill-directory argument, shadow skill, host registration, or protected-path copy is needed. The executing-plugin receipt binds the project root, host, stage, unchanged write authority, and the contract, manifest, and two execution-script digests; setup recomputes it and rejects stale, cross-project, or wrong-host receipts before writing. Unsafe paths or malformed explicit local contracts still fail closed. This establishes executing-package identity, not independent publisher provenance: the host and discovery process must verify the installed source before executing it. It neither expands authority nor changes the Direct or verified-resume path.
+
 During a positively activated `new-setup` or `adopt-upgrade` stage, one deterministic Setup transaction:
 
 1. accepts only mode, host, project goal/milestone/check, constraints, inspected roster, topology, accepted capability IDs, and project-specific semantic capability facts from the model;

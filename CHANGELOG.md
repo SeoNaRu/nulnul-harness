@@ -4,6 +4,8 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## 3.1.0 - Unreleased
 
+- Retained the first exact-public Claude adoption failure and repaired project-local-only bootstrap resolution. A host-admitted executing plugin can now supply its own bounded contract; project, host, manifest, contract, and runtime digests bind its setup receipt without a shadow skill, authority bypass, or protected-path write.
+
 - Added on-demand producer/consumer boundary QA with incremental checks and reproducible negative controls.
 - Added task-sized web/API, data migration/sync, and evidence-backed research recipes, plus six conditional execution patterns using existing role and handoff contracts.
 - Added bounded dependency-aware partial rerun planning and local check receipts that require matching contracts, inputs, outputs, and fresh prerequisites before reuse.

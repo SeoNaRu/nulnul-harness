@@ -264,6 +264,8 @@ Version **3.1.0** is a publication candidate pending exact-version public adopti
 
 These references load only when needed. Planner receipts and development scores are advisory, not Foundation evidence, promotion authority, sealed holdouts, or proof of live quality gains. No new state migration is required.
 
+The first public 3.1.0 candidate passed the product task but failed full Claude adoption because setup required a project-local shadow skill. [That nonpass is retained](evals/benchmarks/claude-adopt/release-3.1.0-failure.json). The repaired candidate resolves only its executing plugin's contract and binds setup receipts to the project, host, and package file digests; fresh public adoption must pass before stable publication.
+
 ```bash
 python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.py demo
 ```
@@ -274,7 +276,7 @@ NULNUL's public claims are intentionally narrower than its architecture.
 
 | Evidence | Result | What it supports |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **442 passed (442 checks)** | Clean publication-candidate validation includes workflow delivery and candidate preparation. The original workspace's untracked research files are preserved outside the release tree; the legacy-boundary check remains unchanged. |
+| [Repository test suite](tests/) | **444 passed (444 checks)** | Clean publication validation includes workflow delivery, candidate preparation, and both-host public-plugin bootstrap with stale/unsafe receipt controls. Original untracked research files remain outside the release tree; the legacy-boundary check is unchanged. |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | Release integrity for the frozen 3.0.0 product |
 | [NULNUL 3.0.0 release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.0.0) | **Published stable release** | Public `v3.0.0` tag and release |
 | `nulnul-harness-3.0.0.zip` | **53 files · 220,223 bytes** | Reproducible release archive |

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "run_id": "claude-public-3.1.0-r1",
+  "run_date": "2026-09-08",
+  "surface": "fresh isolated Claude Code session using the GitHub-tag-installed public 3.1.0 artifact",
+  "plugin_version": "3.1.0",
+  "plugin_source": "github",
+  "distribution": {
+    "release_tag": "v3.1.0",
+    "release_commit": "e80c9bf47ccd711c56e752f9ae261e36e3d47cf9",
+    "asset": "nulnul-harness-3.1.0.zip",
+    "asset_sha256": "a5215ba8e4f9d4a680a272bbd63c923b6cde61d39b055f70af014233f4009654"
+  },
+  "failure_classification": "PUBLIC_ADOPTION_FAILURE",
+  "observed": {
+    "product_adoption_passed": false,
+    "product_tests_passed": 6,
+    "existing_agent_profiles_preserved": true,
+    "inactive_codex_entry_preserved": true,
+    "protected_write_calls": [],
+    "roster_enumerated": true,
+    "checkpoint_present": false,
+    "check_exit_codes": {
+      "repository": 0,
+      "project_setup": 1,
+      "checkpoint": 1,
+      "completion": 1,
+      "documentation_debt": 1
+    },
+    "governed_stage_result": {
+      "status": "unavailable",
+      "reason": "governed stage contract is unavailable"
+    },
+    "model_invocations": 1,
+    "candidate_modified_after_failure": false
+  },
+  "diagnosis": "Public user-scope plugin installation has exact artifact bytes, but the governed bootstrap resolves only a project-local skill contract. It rejects new setup before the transaction can create the durable checkpoint. The product task passed; full harness adoption did not.",
+  "preflight_note": "Before the model run, ZIP comparison rejected only differing top-level directory names. All 60 installed relative file paths and bytes were then independently matched to the downloaded public artifact; no product bytes changed.",
+  "privacy": {
+    "raw_transcript_stored": false,
+    "private_project_data_stored": false,
+    "machine_path_stored": false
+  },
+  "learning_verdicts": [
+    {
+      "id": "claude-adopt-3.1.0-r1",
+      "status": "failed",
+      "feedback_id": "feedback-claude-3-1-public-bootstrap-scope",
+      "proposal_ids": [
+        "proposal-product-builder-15-public-bootstrap"
+      ]
+    }
+  ],
+  "release_decision": "BLOCKED_NO_MAIN_PUBLICATION"
+}

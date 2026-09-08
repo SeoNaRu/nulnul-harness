@@ -185,6 +185,16 @@
       "evidence": "The signed 10C fp-a Champion record has agent exit 0, valid 124538/916 token usage, passing completion, one disposable product write, zero durable source writes, execution_status cleanup_invalid, cleanup_error:PermissionError, and a preserved workspace whose installed harness directories are mode 0555; no Candidate or later arm started.",
       "scope": "core",
       "status": "converted"
+    },
+    {
+      "id": "feedback-claude-3-1-public-bootstrap-scope",
+      "source": "test",
+      "target_agent": "product-builder",
+      "observed": "Exact-public 3.1.0 Claude adoption completed the product task but the governed new-setup entry rejected the plugin-cache installation, so no durable checkpoint was created.",
+      "expected": "A verified public plugin installation must have a permission-safe bootstrap path without requiring the user to pre-create a project-local shadow skill or allowing the model to bypass setup authority.",
+      "evidence": "evals/benchmarks/claude-adopt/release-3.1.0-failure.json: one model run, six product tests passed, governed stage unavailable, checkpoint absent, no candidate modification.",
+      "scope": "project",
+      "status": "converted"
     }
   ],
   "proposals": [
@@ -494,6 +504,37 @@
         "why": "copytree preserved scientific-source immutability modes into an owned disposable copy, but cleanup did not restore owner permissions before removal"
       },
       "mechanism_id": "disposable-readonly-copy-cleanup-v1",
+      "status": "proposed"
+    },
+    {
+      "id": "proposal-product-builder-15-public-bootstrap",
+      "feedback_ids": [
+        "feedback-claude-3-1-public-bootstrap-scope"
+      ],
+      "target_agent": "product-builder",
+      "author_agent": "coach",
+      "from_version": 14,
+      "to_version": 15,
+      "cause": "The governed bootstrap requires a project-local skill before setup, while the public marketplace installs the skill in its verified plugin cache.",
+      "change_target": "Only after explicit operator approval, repair installed-public bootstrap compatibility while retaining exact provenance, digest, host ownership, bounded setup authority, and one state writer. Do not bypass the guard, pre-seed the fixture with a shadow skill, or modify the frozen failed artifact.",
+      "regression_check": "Model-free public-cache and project-local bootstrap controls, with wrong-host, altered-body, unsafe-path, missing-provenance, protected-write, and missing-receipt negative controls; then a fresh exact-public adoption run and all five completion checks.",
+      "primary_metric": "exact-public adoption completion checks passed without a project-local shadow skill or authority bypass",
+      "permission_delta": [],
+      "rollback": "Keep the confirmed release active and withdraw the new candidate if provenance, authority, host ownership, protected paths, or any adoption completion check fails.",
+      "change_level": "task",
+      "discovery_evidence": "The public archive and 60 installed files matched exactly before one model run. The recorded govern new-setup command returned unavailable before setup, matching the project-local contract requirement in the shipped guard.",
+      "transfer_check": "Check Codex and Claude host ownership separately; public cache acceptance must not imply authority for arbitrary external skill paths.",
+      "prediction": "A bounded approved repair will admit an authentic installed public contract and reject all substituted or unauthorized contracts before a fresh model run.",
+      "expected_delta": {
+        "public_plugin_bootstrap_unavailable": "1 -> 0",
+        "authority_bypass": "0 -> 0",
+        "protected_writes": "0 -> 0"
+      },
+      "falsification_condition": "Reject if an unverified cache, modified body, wrong host, arbitrary path, duplicate writer, protected write, or missing completion receipt is accepted.",
+      "pathology": {
+        "where": "governed stage contract resolution before setup",
+        "why": "project-local-only resolution excludes the public plugin installation"
+      },
       "status": "proposed"
     }
   ],

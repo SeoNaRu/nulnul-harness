@@ -7,7 +7,8 @@ This checklist targets the local 3.1.0 candidate. Historical 3.0.0 public adopti
 - [x] Skills-only plugin with no MCP, app, hook, authentication, or external service
 - [x] Strict-semver `3.1.0` manifest and production square logo
 - [x] Plugin structure validator passes
-- [x] Full 442-test suite and 100/100 Release Gate product score pass in the clean publication tree; original untracked research files remain local
+- [x] Full 444-test suite passes for the repaired public-bootstrap candidate; original untracked research files remain local
+- [ ] Fresh exact-public Claude and Meta adoption pass for the repaired bytes before the final Release Gate
 - [ ] Fresh exact-3.1.0 public Codex/Claude host-ownership and cross-project Meta adoption pass
 - [x] Ordinary project-start requests implicitly trigger `nulnul-harness`; read-only requests do not
 - [ ] Exact-3.1.0 local install, removal, clean reinstall, installed-source equality, and installed-skill validation pass for `nulnul-harness`
