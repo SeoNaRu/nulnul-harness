@@ -50,21 +50,32 @@ NULNUL은 이 주변 레이어를 **프로젝트 기준 + 검증 근거 기준**
 
 ## 빠른 시작
 
+결과물부터 보고 싶다면 **[NULNUL in Action](examples/README.ko.md)**을 확인하세요. 로컬 예약 화면·API 데모, 합성 조사 데이터 워크북 예제, 기존 프로젝트의 3.1.0 도입 기록을 모았습니다. 사례마다 증거와 한계를 구분하며, 독립적으로 검증한 고객 프로젝트 3개나 새로운 성능 벤치마크를 의미하지 않습니다.
+
+아래는 변경되는 `main` 브랜치 대신 검증된 `v3.1.0` 릴리스에 고정하는 신규 설치 예시입니다. 플러그인 명령을 지원하는 Codex 또는 Claude Code를 사용하고, 호스트의 신뢰·권한 확인 절차를 따르세요. 버전을 고정하면 이후 릴리스를 자동으로 따라가지 않습니다.
+
 ### OpenAI Codex
 
 ```bash
-codex plugin marketplace add SeoNaRu/nulnul-harness --ref main
+codex plugin marketplace add SeoNaRu/nulnul-harness --ref v3.1.0
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
 ### Anthropic Claude Code
 
 ```bash
-claude plugin marketplace add SeoNaRu/nulnul-harness
+claude plugin marketplace add 'https://github.com/SeoNaRu/nulnul-harness.git#v3.1.0'
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
-설치한 다음 그냥 작업을 말하면 됩니다.
+처음 도입할 때는 기존 하네스가 있는 저장소에서도 다음처럼 요청하세요.
+
+```text
+기존 프로젝트 지침과 에이전트 역할을 보존하면서 이 저장소에 NULNUL을 설정해줘.
+이어서 예약 API를 수정하고 기존 동작이 계속 통과하는지 확인해줘.
+```
+
+이미 NULNUL을 사용하는 프로젝트에서는 필요한 작업만 말하면 됩니다.
 
 ```text
 예약 API를 수정하고 기존 동작이 계속 통과하는지 확인해줘.
@@ -72,7 +83,9 @@ claude plugin install nulnul-harness@nulnul-harness
 
 이게 NULNUL의 기본 사용 방식입니다. 사용자가 직접 Skill을 고르거나, Session을 만들거나, Memory를 저장하거나, Agent 수를 정하거나, Evolution을 실행할 필요가 없습니다.
 
-기존 NULNUL 프로젝트를 업그레이드한다면 먼저 [NULNUL 3.0 업그레이드 안내](docs/upgrade-3.0.md)를 확인하세요.
+완전한 로컬 작업 계약이 이미 있는 요청은 Direct 경로로 처리할 수 있습니다. 플러그인을 설치했다고 모든 요청에 설정 작업이나 영구 Memory를 강제하지 않습니다.
+
+기존 NULNUL 프로젝트에는 [3.0 기반 구조 업그레이드 안내](docs/upgrade-3.0.md)가 계속 적용되며, 3.1에서도 기존 체크포인트 형태는 바뀌지 않습니다. 직접 관리하는 Setup Plan이 있다면 확인한 기존 역할을 이름만 적지 말고 `이름: 분류`로 기록해야 합니다. 허용 값은 `reuse`, `kept`, `upgraded`, `merged`, `removed`이며, `kept`는 `reuse`로 정규화됩니다.
 
 <details>
 <summary>파일을 바꾸지 않고 미리 보기</summary>
@@ -98,7 +111,7 @@ NULNUL은 범위를 제한한 Session, handoff, Experience, Decision, Lesson, Op
 
 ### 2. 작업에 맞는 Capability Pack을 만듭니다
 
-작업을 시작하기 전에 현재 프로젝트와 Memory를 보고 필요한 기능만 고릅니다.
+작업을 시작하기 전에 결과 품질과 검증 가능성을 기준으로 가장 강하게 정당화되는 기능을 고릅니다. 결과가 실질적으로 동등한 경로 사이에서만 컨텍스트·조정·실행·유지보수·권한 비용이 더 낮은 구성을 선택합니다. 기능이나 에이전트 수 자체가 우선 목표는 아닙니다.
 
 ```text
 작업
@@ -150,7 +163,7 @@ KEEP · UPGRADE · REPLACE · MERGE · RETIRE · CREATE
 
 ---
 
-## NULNUL 3.0 한눈에 보기
+## NULNUL 3.1 한눈에 보기
 
 ```text
 사용자 작업
@@ -212,7 +225,7 @@ NULNUL은 Agent 팀 생성기, 거대한 프롬프트 묶음, Hosted orchestrato
 
 | 도구 유형 | 흔한 기본값 | NULNUL 기본값 |
 | --- | --- | --- |
-| Agent 팀 생성기 | 역할 여러 개 생성 | 한 실행 경로에서 시작하고 실제 가치가 있을 때만 topology 추가 |
+| Agent 팀 생성기 | 역할 여러 개 생성 | 직접 실행이 결과 면에서 경쟁력 있으면 재사용하고, 실질적인 결과 가치가 있을 때 제한된 역할 추가 |
 | Prompt / Rule bundle | 준비된 지침 로드 | 현재 저장소를 먼저 보고 작업에 맞는 capability만 선택 |
 | Memory layer | 대화/컨텍스트 보존 | raw chat 대신 범위를 제한한 검증된 프로젝트 Memory 유지 |
 | Hosted orchestrator | 원격 서비스에서 workflow 실행 | repository-local, 별도 서버/daemon 불필요 |
@@ -223,7 +236,7 @@ NULNUL은 Agent 팀 생성기, 거대한 프롬프트 묶음, Hosted orchestrato
 
 ## 불필요하게 변하지 않는 Evolution
 
-NULNUL 3.0은 “자가개선”을 하나의 자유로운 자기수정으로 취급하지 않습니다.
+NULNUL 3.1은 “자가개선”을 하나의 자유로운 자기수정으로 취급하지 않습니다.
 
 ### Capability Natural Selection
 
@@ -233,11 +246,11 @@ NULNUL 3.0은 “자가개선”을 하나의 자유로운 자기수정으로 �
 
 외부 후보는 **신뢰하지 않은 상태**로 quarantine한 뒤 평가합니다. 존재한다는 이유만으로 일반 Pack 선택에 들어오지 않습니다.
 
-현재 3.0의 외부 source 지원은 의도적으로 bounded되어 있으며, “인터넷에서 최고의 Skill을 자동으로 찾는다”는 주장은 하지 않습니다.
+3.1의 오프라인 준비 도우미는 검토하고 리비전을 고정한 공개 Skill 파일을 기존 로컬 디렉터리 기반 격리 경로에 맞게 준비합니다. 후보를 다운로드·설치하거나 자동으로 채택하지 않으며, “인터넷에서 최고의 Skill을 자동으로 찾는다”는 주장도 하지 않습니다.
 
 ### Agent Evolution
 
-Agent topology는 **누가 어떤 실행 책임을 가지는지**를 다룹니다. 기본은 Agent 하나입니다. 여러 Agent를 쓰는 구조는 coordination cost를 상쇄할 실제 검증 가치가 있어야 합니다.
+Agent topology는 **누가 어떤 실행 책임을 가지는지**를 다룹니다. 직접 실행이나 단일 에이전트가 결과 면에서 경쟁력이 있으면 우선합니다. 추가하는 역할은 전문성·컨텍스트 분리·병렬 작업·독립 검증을 실질적으로 개선해야 하며, 최종 종합 책임자는 한 명으로 유지합니다.
 
 ### Guarded Harness Evolution
 
@@ -245,7 +258,7 @@ NULNUL은 Guarded Kernel과 진화 가능한 control policy를 분리합니다. 
 
 ### Cross-Project Generalization
 
-프로젝트끼리 raw Memory를 공유하지 않습니다. provenance와 적용 조건을 가진 privacy-safe abstract prior만 전달하며, target project truth가 항상 우선입니다. target validation을 통과해야 target project의 실제 지식으로 사용할 수 있습니다.
+교차 프로젝트 재사용은 선택 사항이며, 사용자가 선택하고 승인한 기존 로컬 개인 적응 저장소(Personal Home)가 필요합니다. 프로젝트끼리 raw Memory를 복사하지 않습니다. 출처와 적용 조건을 갖추고 개인정보를 제거한 추상적 사전 지식만 후보가 될 수 있으며, 대상 프로젝트의 사실이 항상 우선하고 호환성과 대상 검증이 필요합니다. 공개 Meta 도입 근거는 동결된 선택기와 제한된 사례를 검증한 것이지, 보편적인 전이나 모든 Generalization 경로의 실사용을 증명한 것은 아닙니다.
 
 ---
 
@@ -272,11 +285,11 @@ python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.p
 
 ## 검증 근거
 
-공개 주장은 아키텍처보다 좁게 유지합니다. 정확한 공개 3.1.0 패키지를 검증했으며, 새 실행 도우미는 결정론적 검증을 갖췄지만 실사용 품질 우위를 주장하지 않습니다.
+아래 결과는 **2026-09-08에 공개한 동결된 3.1.0 릴리스**의 검증 근거이며, 이후의 모든 작업 폴더 변경을 검증한 것은 아닙니다. 검사 수는 깨끗한 배포 트리를 기준으로 합니다. 새 실행 도우미는 결정론적으로 검증했지만 실사용 품질 우위를 주장하지 않습니다.
 
 | 근거 | 결과 | 무엇을 보여주나 |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **446개 통과 (446개 검사)** | 실행 도우미·후보 준비·두 호스트의 설치 플러그인 초기 설정·역할별 분류와 음성 대조군. 사용자 연구 자료는 로컬에 보존하며 legacy 경계 검사는 바꾸지 않습니다. |
+| [Repository test suite](tests/) | **446개 통과 (446개 검사)** | 깨끗한 릴리스 기준으로 실행 도우미·후보 준비·두 호스트의 설치 플러그인 초기 설정·역할별 분류와 음성 대조군을 검증했습니다. 임의로 변경한 로컬 작업 폴더까지 통과를 보장하지는 않습니다. |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | 정확한 버전의 공개 도입 증거를 포함해 `release_ready=true`. |
 | [공개 Claude 도입](evals/benchmarks/claude-adopt/release-3.1.0-r4.json) | **PASS, 5/5 검사** | 설치 목록 확인·역할 분류·검증된 체크포인트·원래 작업 완료·문서 최신성, 기존 프로필과 비활성 Codex 진입점 보존, 보호 경로 쓰기 0건. |
 | [공개 Meta 도입](evals/meta-evolution/release-3.1.0-meta-r4.json) | **PASS** | 같은 적용 대상을 flat 검사 3회 대신 Meta 검사 1회로 선택. 해당 없음·충돌·마이그레이션·롤백 대조군 통과. 동결된 선택기와 이번 새 도입 사례에 한정합니다. |
@@ -284,7 +297,7 @@ python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.p
 | `nulnul-harness-3.1.0.zip` | **60개 파일, 237,942바이트** | 재현 가능한 패키지이며 공개 다운로드와 실제 설치 파일이 일치합니다. |
 | Release archive SHA-256 | `7716a8ddfeb43632b4ad836c29deb1fd2981a84d423d2f2705fb88becad9e49d` | 동결된 패키지 식별자. |
 
-동결된 live Direct pair 하나에서는 명확한 Direct 작업에 capability body 0개를 유지하면서 프로젝트가 선호한 `<=120%` input 목표 안에 들어왔습니다. 이 수치는 해당 증거 범위에만 해당하며 보편적 성능 보장은 아닙니다.
+이전에 동결한 live Direct pair 하나에서는 명확한 Direct 작업에 capability body 0개를 유지하면서 프로젝트가 선호한 `<=120%` input 목표 안에 들어왔습니다. 이는 과거의 제한된 측정 근거이며, 새로운 3.1 실사용 benchmark나 보편적인 성능 보장이 아닙니다.
 
 ### 증거를 구분합니다
 
@@ -312,7 +325,7 @@ python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.p
 
 ## 안전성과 개인정보
 
-NULNUL 3.0은 중요한 경계를 명시적으로 유지합니다.
+NULNUL 3.1은 중요한 경계를 명시적으로 유지합니다.
 
 - **Repository-local:** NULNUL용 서버나 daemon이 필요하지 않습니다.
 - **Raw evidence는 local-only:** raw transcript/runtime event는 일반 durable Memory가 아닙니다.
@@ -338,7 +351,9 @@ NULNUL은 이미 존재하는 프로젝트를 우선 재사용합니다. Durable
 - `docs/nulnul/` 아래의 bounded checkpoint / Session / Experience / Memory state
 - 현재 capability ecosystem이 작업을 커버하지 못할 때만 project-local Skill
 
-정확한 migration/ownership 규칙은 [NULNUL 3.0 업그레이드 안내](docs/upgrade-3.0.md)에 있습니다.
+활성 호스트의 진입점만 수정합니다. Codex는 `AGENTS.md`, Claude Code는 `CLAUDE.md`를 소유합니다. 다른 호스트를 순차적으로 도입해도 비활성 진입점은 보존하고, 같은 공유 계약과 하나의 상태 writer를 재사용합니다. 두 호스트가 공유 상태를 동시에 수정하는 것은 지원하지 않습니다.
+
+기반 구조의 마이그레이션과 소유권 규칙은 [3.0 업그레이드 안내](docs/upgrade-3.0.md)에 계속 적용됩니다.
 
 ---
 
@@ -361,7 +376,7 @@ Durable record는 provenance로 연결되며, 일반 inspection을 위해 raw tr
 
 ## 현재 한계
 
-NULNUL 3.0은 현재 증거보다 더 큰 주장을 하지 않습니다.
+NULNUL 3.1은 기록된 증거보다 더 큰 주장을 하지 않습니다.
 
 - Skill `KEEP` lifecycle은 live evidence가 있지만 자연 발생한 live Skill `UPGRADE`는 아직 공개 증거에서 관찰되지 않았습니다.
 - External Capability Competition은 bounded source/quarantine mechanics가 구현되어 있지만 인터넷 전체에서 최고의 capability를 찾는다고 주장하지 않습니다.
@@ -377,7 +392,7 @@ NULNUL 3.0은 현재 증거보다 더 큰 주장을 하지 않습니다.
 ## 아키텍처 자세히 보기
 
 <details>
-<summary>3.0 핵심 레이어</summary>
+<summary>핵심 레이어</summary>
 
 ```text
 Project Model

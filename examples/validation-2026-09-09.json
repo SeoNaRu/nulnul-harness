@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "kind": "local-example-validation",
+  "date": "2026-09-09",
+  "scope": "Local reference examples and validation of an existing historical adoption record; not release certification or a new harness trial.",
+  "environment": {
+    "python": "3.12.3",
+    "browser": "Chromium",
+    "browser_version": "147.0.7727.101",
+    "desktop_viewport": {"width": 1280, "height": 900},
+    "mobile_viewport": {"width": 390, "height": 844},
+    "server_origin": "http://127.0.0.1:18765",
+    "server_stopped_after_checks": true
+  },
+  "source_sha256": {
+    "examples/booking-service/app.py": "fe9c7745852ca92d61612abed56c20a22e6c95cd683bc21ad6ce25cb3a1aa782",
+    "scripts/build_youtube_sheets_example.py": "ef9d9276febe186c222e1c7deecc36749c3aa135b091dafd83ea496ff69cb9e9",
+    "examples/youtube-sheets/input.json": "073ca97ac1b557535a76b491db19fa91e781aeaed0c04bb640a9067251487d38",
+    "examples/youtube-sheets/expected.json": "6f95d5a896beb37c066ea6c1285afcefdf62dff3982d8d0049b41c3b5a7a97eb",
+    "evals/benchmarks/claude-adopt/release-3.1.0-r4.json": "74659e4d7984e0db0639edeffe24c75e5f6388db82ffc8cf744e36862c428e73",
+    "tests/test_booking_service_example.py": "3660f1c9543fa6063480abd2a557a9de67800cb6a1916fa44ca92a5ffc3ba695"
+  },
+  "checks": {
+    "booking_http": {
+      "command": "python3 examples/booking-service/app.py --check",
+      "exit_code": 0,
+      "status": "passed",
+      "initial_environment_failure": "The sandbox denied socket creation before application checks started. The unchanged command passed after approved loopback execution."
+    },
+    "booking_browser": {
+      "runner": "Playwright MCP browser_run_code_unsafe",
+      "server_command": "python3 examples/booking-service/app.py --port 18765",
+      "status": "passed",
+      "passed_checks": [
+        "desktop initial availability",
+        "browser reservation and updated availability",
+        "stale-tab duplicate rejection",
+        "availability persists across reload",
+        "mobile layout and keyboard booking",
+        "reduced-motion preference",
+        "guest name rendered as text, not markup",
+        "fully booked state",
+        "no JavaScript runtime errors"
+      ],
+      "javascript_runtime_errors": [],
+      "mobile_capture": "examples/booking-service/preview-mobile.png",
+      "coverage_limit": "One Chromium version; not an exhaustive accessibility or cross-browser audit."
+    },
+    "workbook_output": {
+      "command_source": "examples/youtube-sheets/README.md#run-and-completion-check",
+      "comparison": "Execute the existing builder and compare parsed JSON to the unchanged expected.json.",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    "workbook_tests": {
+      "command": "python3 -m unittest discover -s tests -p 'test_youtube_sheets_example.py' -v",
+      "tests_run": 5,
+      "failures": 0,
+      "errors": 0,
+      "status": "passed"
+    },
+    "adoption_validator_tests": {
+      "command": "python3 -m unittest discover -s tests -p 'test_claude_adopt_evidence.py' -v",
+      "tests_run": 9,
+      "failures": 0,
+      "errors": 0,
+      "status": "passed"
+    },
+    "historical_adoption_record": {
+      "command": "python3 scripts/claude_adopt_evidence.py validate evals/benchmarks/claude-adopt/release-3.1.0-r4.json --version 3.1.0",
+      "exit_code": 0,
+      "valid": true,
+      "errors": [],
+      "new_live_adoption_performed": false
+    },
+    "documentation_links_and_commands": {
+      "status": "passed",
+      "local_markdown_link_targets_checked": 100,
+      "documents_checked": 10,
+      "locale_pairs_with_matching_executable_examples": 4,
+      "method": "Check local inline Markdown link targets for existence and compare fenced bash/python examples across the four casebook locale pairs.",
+      "snapshot": "Before adding this validation record, screenshot links, and verification-status updates.",
+      "coverage_limit": "Not remote URL availability, fragment-anchor validation, or automated semantic translation verification."
+    },
+    "documentation_debt": {
+      "command": "python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex",
+      "exit_code": 0,
+      "documentation_debt": [],
+      "snapshot": "Before the verification-status documentation update."
+    }
+  },
+  "publication_preflight": {
+    "date": "2026-09-09",
+    "tree": "Clean publication worktree based on the certified 3.1.0 main commit, with casebook files and the booking CI regression test added.",
+    "plugin_changed": false,
+    "new_model_calls": 0,
+    "unexecuted_model_pilot_included": false,
+    "full_suite": {
+      "command": "python3 -m unittest discover -s tests -p 'test_*.py' -v",
+      "tests_run": 447,
+      "failures": 0,
+      "errors": 0,
+      "status": "passed"
+    },
+    "initial_documentation_debt": {
+      "status": "failed",
+      "document": "AGENTS.md",
+      "newest_source": "examples/booking-service/app.py",
+      "feedback_id": "casebook-active-entry-feedback-1",
+      "proposal_id": "casebook-active-entry-proposal-1"
+    },
+    "documentation_debt": {
+      "command": "python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex",
+      "documentation_debt": [],
+      "status": "passed"
+    },
+    "release_gate": {
+      "command": "python3 scripts/release_gate.py",
+      "score": 100,
+      "possible": 100,
+      "release_ready": true
+    },
+    "feedback": [
+      {
+        "id": "casebook-active-entry-feedback-1",
+        "verdict_ref": "publication_preflight.initial_documentation_debt",
+        "proposal_id": "casebook-active-entry-proposal-1",
+        "lesson": "A new repository-only executable example still needs an accurate active host entry describing its validation boundary."
+      }
+    ],
+    "proposals": [
+      {
+        "id": "casebook-active-entry-proposal-1",
+        "feedback_id": "casebook-active-entry-feedback-1",
+        "scope": ["AGENTS.md"],
+        "change": "Document the casebook's non-product boundary, model-free CI check, and exclusion of unexecuted model experiments.",
+        "status": "applied",
+        "verified_by": "publication_preflight.documentation_debt"
+      }
+    ]
+  },
+  "known_nonblocking_issues": [
+    {
+      "request": "GET /favicon.ico",
+      "status_code": 404,
+      "effect": "Missing browser favicon; tested booking behavior still passed.",
+      "fixed": false
+    }
+  ],
+  "measurement_limits": {
+    "elapsed_time": "unknown",
+    "token_cost": "unknown",
+    "monetary_cost": "unknown",
+    "harness_quality_advantage": "unknown",
+    "fresh_second_session_resume": "not_run",
+    "full_repository_suite": "passed_in_publication_preflight",
+    "release_gate": "passed_in_publication_preflight",
+    "paid_model_experiment": "not_run",
+    "publication": "not_performed_when_this_record_was_written"
+  }
+}

@@ -22,6 +22,7 @@
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
   <a href="#what-nulnul-does">What it does</a> ·
+  <a href="examples/README.md">In action</a> ·
   <a href="#evidence">Evidence</a> ·
   <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0">v3.1.0 release</a>
 </p>
@@ -50,21 +51,32 @@ If the existing project setup is already the strongest justified path, **adding 
 
 ## Quick start
 
+Want to see the output first? **[NULNUL in Action](examples/README.md)** collects a local booking UI/API demo, a synthetic research-workbook example, and the recorded 3.1.0 adoption of an existing project. Each case labels its evidence and limitations; these are not three independently verified customer projects or a new performance benchmark.
+
+These examples are for a new installation pinned to the verified `v3.1.0` release, rather than the moving `main` branch. Use a Codex or Claude Code build that supports plugin commands, and follow the host's trust and permission prompts. A pinned installation does not automatically follow later releases.
+
 ### OpenAI Codex
 
 ```bash
-codex plugin marketplace add SeoNaRu/nulnul-harness --ref main
+codex plugin marketplace add SeoNaRu/nulnul-harness --ref v3.1.0
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
 ### Anthropic Claude Code
 
 ```bash
-claude plugin marketplace add SeoNaRu/nulnul-harness
+claude plugin marketplace add 'https://github.com/SeoNaRu/nulnul-harness.git#v3.1.0'
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
-Then just ask for the work:
+For first-time adoption, including a repository with an existing harness, ask:
+
+```text
+Set up NULNUL for this repository, preserving its existing instructions and agent roles.
+Then fix the booking API and verify that the existing behavior still passes.
+```
+
+For a project already using NULNUL, just ask for the work:
 
 ```text
 Fix the booking API and verify that the existing behavior still passes.
@@ -72,7 +84,9 @@ Fix the booking API and verify that the existing behavior still passes.
 
 That is the intended normal workflow. You do **not** need to manually choose a Skill, create a Session, save Memory, pick an Agent topology, or run Evolution.
 
-Upgrading an existing NULNUL project? Read [Upgrade to NULNUL 3.0](docs/upgrade-3.0.md) first.
+A task already covered by a complete local contract can stay on the Direct path. Installing the plugin does not force setup or durable Memory for every request.
+
+Upgrading an existing NULNUL project? The [3.0 foundation upgrade guide](docs/upgrade-3.0.md) still applies; 3.1 does not change existing checkpoint shapes. If you maintain custom Setup Plans, each inspected existing role now needs a `name: disposition` entry rather than a bare name. Allowed dispositions are `reuse`, `kept`, `upgraded`, `merged`, and `removed`; `kept` normalizes to `reuse`.
 
 <details>
 <summary>Read-only preview</summary>
@@ -98,7 +112,7 @@ Interrupted work is recovered without inventing completion.
 
 ### 2. Builds a task-fit Capability Pack
 
-Before work starts, NULNUL selects the smallest justified set of project capabilities for the task.
+Before work starts, NULNUL selects capabilities for the strongest justified task outcome and verification. Only among materially equivalent outcome paths does it prefer lower context, coordination, runtime, maintenance, and permission cost. Capability or agent count is not the primary objective.
 
 ```text
 Task
@@ -150,7 +164,7 @@ External candidates, Agent topology changes, Harness-control changes, and cross-
 
 ---
 
-## NULNUL 3.0 in one flow
+## NULNUL 3.1 in one flow
 
 ```text
 USER TASK
@@ -212,7 +226,7 @@ NULNUL is not an agent-team generator, a giant prompt bundle, or a hosted orches
 
 | Tool type | Typical default | NULNUL's default |
 | --- | --- | --- |
-| Agent-team generator | Create a roster | Start with one execution path; add topology only when evidence justifies it |
+| Agent-team generator | Create a roster | Reuse direct execution when competitive; add bounded roles for material outcome value |
 | Prompt / rule bundle | Load prepared instructions | Inspect the repository and select task-fit capability context |
 | Memory layer | Retain conversation/context | Keep bounded verified project Memory, not raw chat |
 | Hosted orchestrator | Run a remote workflow service | Stay repository-local; no server or daemon is required |
@@ -223,7 +237,7 @@ NULNUL is not an agent-team generator, a giant prompt bundle, or a hosted orches
 
 ## Evolution without churn
 
-NULNUL 3.0 separates several kinds of change instead of treating “self-improvement” as one unrestricted rewrite.
+NULNUL 3.1 separates several kinds of change instead of treating “self-improvement” as one unrestricted rewrite.
 
 ### Capability Natural Selection
 
@@ -233,11 +247,11 @@ A project capability can stay, improve, be replaced, merge with another capabili
 
 External candidates are treated as **untrusted** and quarantined before evaluation. They do not enter ordinary Pack selection merely because they exist.
 
-The current 3.0 source adapter is intentionally bounded; remote marketplace superiority is **not** claimed.
+In 3.1, the offline preparation helper packages inspected, pinned public Skill files for the existing local-directory quarantine path. It does not fetch, install, or automatically accept candidates. Remote marketplace superiority is **not** claimed.
 
 ### Agent Evolution
 
-Agent topology is about **who owns which execution responsibility**. One Agent remains the default. Multi-Agent structure must earn its coordination cost through verified outcome value.
+Agent topology is about **who owns which execution responsibility**. Direct or single-agent execution is preferred when outcome-competitive. Additional bounded roles must materially improve specialization, context isolation, parallel work, or independent verification; one owner keeps final synthesis.
 
 ### Guarded Harness Evolution
 
@@ -245,7 +259,7 @@ NULNUL separates a guarded Kernel from evolvable control policy. Evidence may ju
 
 ### Cross-Project Generalization
 
-Projects do not share raw Memory. Generalization transfers privacy-safe abstract priors with provenance and applicability boundaries. Target-project truth always wins, and target validation is required before a transferred prior becomes project-local truth.
+Cross-project reuse is opt-in and requires an existing local Personal Home chosen and approved by the user. Projects never copy raw Memory into one another. Only privacy-safe abstract priors with provenance and applicability boundaries are eligible; they remain subordinate to target-project truth and require compatibility and target validation. Public Meta adoption evidence covers its frozen selector and a bounded case, not universal transfer or live proof of every Generalization path.
 
 ---
 
@@ -272,11 +286,11 @@ python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/workflow_delivery.p
 
 ## Evidence
 
-Public claims stay narrower than the architecture. The exact public 3.1.0 archive is verified; new delivery helpers have deterministic coverage, not a claimed live quality advantage.
+The results below certify the frozen **3.1.0 release on 2026-09-08**, not every subsequent working-tree change. Suite counts refer to the clean publication tree. New delivery helpers have deterministic coverage, not a claimed live quality advantage.
 
 | Evidence | Result | What it supports |
 | --- | --- | --- |
-| [Repository test suite](tests/) | **446 passed (446 checks)** | Delivery, candidate preparation, both-host installed-plugin bootstrap, explicit role dispositions, and negative controls. User-owned research files remain local; the legacy-boundary check is unchanged. |
+| [Repository test suite](tests/) | **446 passed (446 checks)** | Clean-release coverage for delivery, candidate preparation, both-host installed-plugin bootstrap, explicit role dispositions, and negative controls. This does not certify an arbitrarily modified local workspace. |
 | [Release Gate](scripts/release_gate.py) | **100/100 PASS** | `release_ready=true` with exact-version public adoption evidence. |
 | [Public Claude adoption](evals/benchmarks/claude-adopt/release-3.1.0-r4.json) | **PASS, 5/5 checks** | Installed-roster inspection, role classifications, verified checkpoint, original task completion, document freshness, preserved profiles and inactive Codex entry, zero protected writes. |
 | [Public Meta adoption](evals/meta-evolution/release-3.1.0-meta-r4.json) | **PASS** | Same applicable adaptation with 3 flat checks versus 1 Meta check; no-match, conflict, migration, and rollback controls. Scoped to the frozen selector and this fresh adoption case. |
@@ -284,7 +298,7 @@ Public claims stay narrower than the architecture. The exact public 3.1.0 archiv
 | `nulnul-harness-3.1.0.zip` | **60 files, 237,942 bytes** | Reproducible archive; public download and actual installed files match. |
 | Release archive SHA-256 | `7716a8ddfeb43632b4ad836c29deb1fd2981a84d423d2f2705fb88becad9e49d` | Frozen artifact identity. |
 
-One frozen live Direct pair also kept the NULNUL path within the project's preferred `<=120%` input target while preserving zero capability bodies for a clear Direct task. These measurements are scoped evidence, not a universal performance guarantee.
+One previously frozen live Direct pair kept the NULNUL path within the project's preferred `<=120%` input target while preserving zero capability bodies for a clear Direct task. This is historical, scoped evidence, not a new 3.1 live benchmark or a universal performance guarantee.
 
 ### Evidence discipline
 
@@ -314,7 +328,7 @@ Historical failure evidence remains available; it is no longer presented as the 
 
 ## Safety and privacy
 
-NULNUL 3.0 keeps the important boundaries explicit:
+NULNUL 3.1 keeps the important boundaries explicit:
 
 - **Repository-local operation:** no NULNUL server or daemon is required.
 - **Raw evidence stays local-only:** raw transcripts/runtime events are not normal durable Memory.
@@ -340,7 +354,9 @@ Typical managed surfaces include:
 - bounded checkpoint / Session / Experience / Memory state under `docs/nulnul/`;
 - a project-local Skill only when the current capability ecosystem does not already cover the job.
 
-The exact migration and ownership rules are documented in [Upgrade to NULNUL 3.0](docs/upgrade-3.0.md).
+Only the active host's entry may change: Codex owns `AGENTS.md`, and Claude Code owns `CLAUDE.md`. Sequential adoption preserves the inactive entry and reuses the same shared contract with one live-state writer. Concurrent mutation of that state by both hosts is not supported.
+
+The foundation migration and ownership rules remain documented in the [3.0 upgrade guide](docs/upgrade-3.0.md).
 
 ---
 
@@ -363,7 +379,7 @@ The durable records are provenance-linked; raw internal transcripts are not requ
 
 ## Current limitations
 
-NULNUL 3.0 deliberately does **not** claim more than the current evidence supports.
+NULNUL 3.1 deliberately does **not** claim more than its recorded evidence supports.
 
 - The Skill `KEEP` lifecycle has live evidence; a naturally occurring live Skill `UPGRADE` has not yet been observed in the public evidence set.
 - External Capability Competition is implemented with bounded source/quarantine mechanics; there is no claim that NULNUL finds the best capability on the internet.
@@ -379,7 +395,7 @@ These limitations are product boundaries, not hidden TODO claims.
 ## Architecture details
 
 <details>
-<summary>Core 3.0 layers</summary>
+<summary>Core layers</summary>
 
 ```text
 Project Model
