@@ -166,7 +166,7 @@ External candidates, Agent topology changes, Harness-control changes, and cross-
 
 ---
 
-## NULNUL 3.1 in one flow
+## NULNUL in one flow
 
 ```text
 USER TASK
@@ -239,7 +239,7 @@ NULNUL is not an agent-team generator, a giant prompt bundle, or a hosted orches
 
 ## Evolution without churn
 
-NULNUL 3.1 separates several kinds of change instead of treating “self-improvement” as one unrestricted rewrite.
+NULNUL separates several kinds of change instead of treating “self-improvement” as one unrestricted rewrite.
 
 ### Capability Natural Selection
 
@@ -352,7 +352,7 @@ Historical failure evidence remains available; it is no longer presented as the 
 
 ## Safety and privacy
 
-NULNUL 3.1 keeps the important boundaries explicit:
+NULNUL keeps the important boundaries explicit:
 
 - **Repository-local operation:** no NULNUL server or daemon is required.
 - **Raw evidence stays local-only:** raw transcripts/runtime events are not normal durable Memory.
@@ -403,7 +403,7 @@ The durable records are provenance-linked; raw internal transcripts are not requ
 
 ## Current limitations
 
-NULNUL 3.1 deliberately does **not** claim more than its recorded evidence supports.
+NULNUL deliberately does **not** claim more than its recorded evidence supports.
 
 - The Skill `KEEP` lifecycle has live evidence; a naturally occurring live Skill `UPGRADE` has not yet been observed in the public evidence set.
 - External Capability Competition is implemented with bounded source/quarantine mechanics; there is no claim that NULNUL finds the best capability on the internet.
@@ -508,6 +508,8 @@ remain unmeasured. See the [evidence contract](plugins/nulnul-harness/skills/nul
 3. Open the session ticket, expand **하네스가 한 일**, and choose **이번 세션** (this session) or **이 프로젝트** (this project). Selection, body loading and receipt-linked results are separate observations.
 
 ### Local validation (2026-09-09)
+
+The following records describe the integration at that time, separately from current 3.2.0 public release evidence.
 
 - Trace tests: **71/71 passed** (domain 48/48, collector 23/23); API and web builds passed.
 - Deterministic integration smoke: 12 canonical runtime events, one task and one receipt-linked pass reached the collector, API and browser. Session/project scopes, receipt provenance and a 390px mobile viewport passed.
