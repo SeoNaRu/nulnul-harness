@@ -4,7 +4,7 @@ All notable changes to `nulnul harness` are recorded here.
 
 ## 3.2.0 - 2026-09-10
 
-Publication candidate. All 481 repository checks pass; exact-version public Claude and Meta adoption and green main CI are pending.
+All 481 repository checks pass. Exact-public Claude adoption passed five checks in its first fresh session; deterministic Meta adoption also passed. Release Gate is 100/100 with `release_ready=true`. Candidate and tag CI passed; final/latest publication requires green main CI. The immutable 65-file archive is bound to product commit `59d366f`.
 
 - Reuse verified completion receipts inside metadata-only setup transactions, rechecking freshness after writes. Five regression tests and a fresh two-transaction follow-up observed zero additional completion executions; preserve the initial repeated-check failure.
 - Generate executable checkpoint commands at the host entry, condition Foundation integration claims, and preserve quoting and clean diffs. Compare complete shipped installation trees only when requested. Clarify first-contract setup, local-only Codex inventory and reuse of a transaction-owned passing check. Five bounded development sessions exercised document/bug resume, interruption and adoption; 476 repository checks passed. Preserve the first adoption limitations and the final extra-check observation; no universal routing, comparative performance or public-adoption claim is made.

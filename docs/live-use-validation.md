@@ -86,3 +86,11 @@ The two-file change accepts ordinary single- and double-quoted script paths and 
 After review and original-file hash checks, only the classifier and its regression tests were applied to the original project. Its recorded completion command passed once more as an integration check and restored a verified checkpoint. Original-project memory guard passed against its existing active item; private memory was not copied into the snapshot. Inactive host guidance, role/skill profiles, dependencies and unrelated source were preserved. No Trace commit or publication was performed.
 
 The worker's completion run and the supervisor's original-workspace integration run are distinct checks. These observations establish this repair and receipt-reuse case, without attributing comparative speed or general task superiority to the harness. The initial adoption nonpass remains linked to its Coach feedback and bounded proposal in [the machine-readable report](../evals/release-3.2.0-validation.json); ordinary code maintenance does not promote an agent version.
+
+## Exact-public 3.2.0 adoption
+
+The unchanged release product was published from commit `59d366f` after candidate CI passed. Tag CI also passed. The downloaded 65-file ZIP matched the release source, and native Claude installation from `v3.2.0` matched every archived file.
+
+The first fresh Claude session adopted an existing two-agent utility project and preserved its product code, both profiles and inactive Codex entry. It read the installed inventory and profile bodies, recorded both dispositions, and completed one setup transaction with verified state. A baseline `npm test` preceded setup. The independent capture then ran its five required acceptance checks; these evaluator executions are separate from worker repetition measurements. All five passed, with one state writer and zero protected writes.
+
+Exact-public Meta capture passed the frozen selector’s apply, no-match, conflict, migration, resume and rollback controls without a model call, candidate tuning or retired holdout reuse. Both sanitized immutable records are linked from the 3.2.0 validation report. Release Gate reports `release_ready=true`; these bounded public checks do not convert earlier local failures into passes or establish comparative model performance.

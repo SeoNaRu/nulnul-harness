@@ -1,6 +1,6 @@
 # nulnul harness 3.2.0
 
-Publication candidate. Exact-version public Claude and Meta adoption, final repository validation, and green main CI are pending. The existing public evidence pointers still certify 3.1.0.
+Exact-public Claude and Meta adoption pass for 3.2.0. All 481 repository checks pass and Release Gate reports 100/100 with `release_ready=true`. Final/latest publication follows green main CI, recorded on the GitHub release. Historical 3.1.0 evidence remains immutable.
 
 ## Changes
 
@@ -17,10 +17,15 @@ Publication candidate. Exact-version public Claude and Meta adoption, final repo
 
 The package remains skills-only. No new dependency, service, credential scope, MCP server, hook, app, or checkpoint migration is introduced. Existing pinned users must explicitly update their host's marketplace reference and installed plugin after publication.
 
-## Candidate distribution
+## Distribution
 
 - Version: `3.2.0`
-- Intended tag: `v3.2.0`
+- Public tag: `v3.2.0`
 - Asset: `nulnul-harness-3.2.0.zip`
 - Product boundary: `plugins/nulnul-harness/`
-- Public archive identity, adoption run references, and final CI results: pending.
+- Product commit: `59d366f7df3a6f0633317d563786caa6893ec109`
+- Archive: 65 files, 255,448 bytes; SHA-256 `95611e2f603c31f05d3be35b62aafa541b2ce86e93e2c27dfb050cf92f872bcb`
+- [Claude adoption](../evals/benchmarks/claude-adopt/release-3.2.0-r1.json): 5/5 checks; roles and inactive entry preserved, zero protected writes
+- [Meta adoption](../evals/meta-evolution/release-3.2.0-meta-r1.json): exact-public apply/skip/conflict, migration and rollback controls
+- [Candidate CI](https://github.com/SeoNaRu/nulnul-harness/actions/runs/34445729753) and [tag CI](https://github.com/SeoNaRu/nulnul-harness/actions/runs/34445849457): passed
+- [GitHub release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.2.0): final publication state and main CI record

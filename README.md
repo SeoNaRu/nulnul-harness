@@ -24,7 +24,7 @@
   <a href="#what-nulnul-does">What it does</a> ·
   <a href="examples/README.md">In action</a> ·
   <a href="#evidence">Evidence</a> ·
-  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.2.0">v3.2.0 candidate</a>
+  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.2.0">v3.2.0 release</a>
 </p>
 
 <p align="center"><strong>Outcome first · Verify the result · Keep only what earns its place</strong></p>
@@ -53,7 +53,7 @@ If the existing project setup is already the strongest justified path, **adding 
 
 Want to see the output first? **[NULNUL in Action](examples/README.md)** collects a local booking UI/API demo, a synthetic research-workbook example, and the recorded 3.1.0 adoption of an existing project. Each case labels its evidence and limitations; these are not three independently verified customer projects or a new performance benchmark.
 
-These new-installation commands target the `v3.2.0` publication candidate once its public tag is available. Exact-version public adoption is pending; the verified `v3.1.0` baseline remains documented below. Use a Codex or Claude Code build that supports plugin commands, and follow the host's trust and permission prompts. A pinned installation does not automatically follow later releases.
+These installation commands target public `v3.2.0`, verified by fresh Claude and Meta adoption. Use a Codex or Claude Code build supporting plugin commands and follow its trust and permission prompts. A pinned installation does not automatically follow later releases.
 
 ### OpenAI Codex
 
@@ -86,7 +86,9 @@ That is the intended normal workflow. You do **not** need to manually choose a S
 
 A task already covered by a complete local contract can stay on the Direct path. Installing the plugin does not force setup or durable Memory for every request.
 
-Upgrading an existing NULNUL project? The [3.0 foundation upgrade guide](docs/upgrade-3.0.md) still applies; 3.1 does not change existing checkpoint shapes. If you maintain custom Setup Plans, each inspected existing role now needs a `name: disposition` entry rather than a bare name. Allowed dispositions are `reuse`, `kept`, `upgraded`, `merged`, and `removed`; `kept` normalizes to `reuse`.
+Already pinned to an older public release? Remove that host’s old reference with `codex plugin marketplace remove nulnul-harness` or `claude plugin marketplace remove nulnul-harness --scope user`, then repeat its installation commands above. Start a new session and ask to upgrade the existing NULNUL setup while preserving project instructions and roles. A package update does not rewrite existing project entries automatically.
+
+Upgrading an existing NULNUL project? The [3.0 foundation upgrade guide](docs/upgrade-3.0.md) still applies; 3.2 does not change existing checkpoint shapes. If you maintain custom Setup Plans, each inspected existing role now needs a `name: disposition` entry rather than a bare name. Allowed dispositions are `reuse`, `kept`, `upgraded`, `merged`, and `removed`; `kept` normalizes to `reuse`.
 
 <details>
 <summary>Read-only preview</summary>
@@ -265,7 +267,17 @@ Cross-project reuse is opt-in and requires an existing local Personal Home chose
 
 <a id="evidence"></a>
 
-**3.2.0 publication candidate:** concise task routing, executable host resume commands, full installed-copy comparison, safer checkpoint verification, and bounded Trace evidence. The results below distinguish prior local observations from frozen public 3.1.0 evidence; exact-public 3.2.0 adoption is pending.
+**3.2.0:** focused task routing, executable host resume commands, complete installed-copy comparison, verified setup receipt reuse, stricter checkpoint evidence, and bounded Trace observability.
+
+| Current release evidence | Verified result |
+| --- | --- |
+| [Repository and actual-project checks](evals/release-3.2.0-validation.json) | **481/481** repository checks; two metadata-only transactions with zero additional completion executions; reviewed Trace repair passed in the original project. |
+| [Public Claude adoption](evals/benchmarks/claude-adopt/release-3.2.0-r1.json) | **5/5 checks**, first fresh session; both roles and inactive Codex entry preserved, one state writer, zero protected writes. |
+| [Public Meta adoption](evals/meta-evolution/release-3.2.0-meta-r1.json) | Same correct apply with 3 flat checks versus 1 Meta check; no-match, conflict, migration, resume and rollback passed without new model calls or retired holdout reuse. |
+| [Public Release Gate](scripts/public_release_gate.py) | **100/100, `release_ready=true`**; [candidate CI](https://github.com/SeoNaRu/nulnul-harness/actions/runs/34445729753) and [tag CI](https://github.com/SeoNaRu/nulnul-harness/actions/runs/34445849457) passed. |
+
+The public archive contains **65 files, 255,448 bytes**, from product commit `59d366f7df3a6f0633317d563786caa6893ec109`. Downloaded ZIP, release source and installed Claude files match. SHA-256: `95611e2f603c31f05d3be35b62aafa541b2ce86e93e2c27dfb050cf92f872bcb`.
+These bounded checks establish neither universal routing nor comparative model performance or general runtime savings. Earlier nonpasses and frozen 3.1.0 evidence remain unchanged.
 
 The skill entry now puts ordinary covered tasks first and routes setup, continuity, workflow and evolution details on demand. Its description is 244 characters and its entry is about 1,026 words; these are document sizes, not measured runtime gains. Required permission/check ownership and the verified checkpoint read/check boundaries are preserved. This user-directed documentation cleanup is separate from the closed experiment below.
 
@@ -461,7 +473,7 @@ The model may propose semantic changes. Deterministic runtime owns identity, dig
 
 ## Release and upgrade
 
-- Publication candidate: [NULNUL 3.2.0](submission/release-notes.md); exact-version public adoption is pending.
+- Current package: [NULNUL 3.2.0](submission/release-notes.md), with exact-version public Claude and Meta adoption.
 - Verified baseline: [NULNUL 3.1.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0)
 - Upgrade guide: [docs/upgrade-3.0.md](docs/upgrade-3.0.md), unchanged checkpoint shapes in 3.1 and 3.2.
 - Changelog: [CHANGELOG.md](CHANGELOG.md)
@@ -513,7 +525,7 @@ An actual task in this coding session used `trace-core-purity`: selection, body 
 
 The source-state digest now follows Git-tracked and non-ignored untracked files, retaining tracked files even when ignored. Dependency and build trees no longer make bootstrap scan the entire worktree. The digest alone took about 2.1 seconds on the local Trace checkout; this is not an end-to-end performance benchmark. Added two regression checks. After repacking, the full Harness suite is **449/450 passed**, with only the previously recorded `docs/research` product-boundary failure remaining. Frozen public release evidence is unchanged.
 
-## Operational visibility: local candidate
+## Operational visibility in 3.2
 
 Ask what NULNUL is doing without opening Trace. The read-only view separates source
 identity, an explicitly inspected installation, host-session binding, task state,
@@ -545,5 +557,4 @@ pull requests targeting main use this strict gate; non-main candidates retain th
 local evidence gate. Frozen evaluator files and historical adoption hashes are not
 rewritten to make a changed candidate look certified.
 
-The updated candidate passes all 481 repository checks. An actual Trace project repair now recognizes quoted verification paths; the original workspace passed its completion check after the reviewed two-file patch. The fresh metadata-only setup follow-up reused its existing receipt through two transactions with zero additional completion executions; the initial repeated-check failure remains recorded. Exact public adoption is still pending.
-This source change is not a new public release or proof of comparative superiority.
+The updated candidate passes all 481 repository checks. An actual Trace project repair now recognizes quoted verification paths; the original workspace passed its completion check after the reviewed two-file patch. The fresh metadata-only setup follow-up reused its existing receipt through two transactions with zero additional completion executions; the initial repeated-check failure remains recorded. Exact-public 3.2.0 Claude and Meta adoption also pass; release evidence is separate from these local observations. No comparative superiority is claimed.

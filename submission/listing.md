@@ -3,7 +3,7 @@
 - Name: nulnul harness
 - Package: `nulnul-harness`
 - Version: `3.2.0`
-- Status: Publication candidate; exact-version public adoption and directory submission are pending
+- Status: Public GitHub package with passing exact-version Claude and Meta adoption; separate directory submission remains pending
 - Publisher: SeoNaRu (must match the verified OpenAI Platform identity)
 - Category: Productivity
 - Shape: Skills only; no MCP server, app, UI, hooks, authentication, or publisher-operated service

@@ -82,5 +82,20 @@
     "original_completion_exit_code": 0,
     "original_checkpoint_fast_path_ready": true
   },
-  "local_stop_reason": "Completed all three bounded local calls; no further local model retries."
+  "local_stop_reason": "Completed all three bounded local calls; no further local model retries.",
+  "public_adoption": {
+    "claude_record": "evals/benchmarks/claude-adopt/release-3.2.0-r1.json",
+    "claude_model_calls": 1,
+    "claude_checks_passed": 5,
+    "meta_record": "evals/meta-evolution/release-3.2.0-meta-r1.json",
+    "meta_model_calls": 0,
+    "public_archive_bytes": 255448,
+    "public_archive_files": 65,
+    "public_archive_sha256": "95611e2f603c31f05d3be35b62aafa541b2ce86e93e2c27dfb050cf92f872bcb",
+    "installed_public_file_identity": true,
+    "candidate_commit": "59d366f7df3a6f0633317d563786caa6893ec109",
+    "candidate_ci": 34445729753,
+    "tag_ci": 34445849457,
+    "candidate_and_tag_ci": "success"
+  }
 }

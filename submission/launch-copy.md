@@ -1,6 +1,6 @@
 # Launch copy
 
-Historical 3.0.0 launch copy. The 3.2.0 publication candidate is not yet certified; the following installation, test, and public-adoption claims remain historical. Prepare new launch copy only after the exact-version release gates pass.
+Historical 3.0.0 launch copy. The following claims remain historical; current 3.2.0 package and exact-public adoption evidence are in [release notes](release-notes.md).
 
 ## One line
 

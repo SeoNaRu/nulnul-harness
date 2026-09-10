@@ -1,18 +1,18 @@
 # Submission checklist
 
-This checklist targets the 3.2.0 publication candidate. Historical 3.1.0 checks and public adoption do not certify its changed bytes.
+This checklist targets the verified public 3.2.0 package. Historical 3.1.0 evidence is preserved separately.
 
 ## Release preparation
 
 - [x] Skills-only product; no new MCP server, app, hook, authentication, or external service
 - [x] Matching `3.2.0` product manifests, marketplace metadata, and active submission pointers
 - [x] Preserve historical public adoption, casebook, failed candidates, and closed instruction evaluation
-- [ ] Pack the final product and verify archive reproducibility and installed-source equality
+- [x] Pack the final product and verify archive reproducibility and installed-source equality
 - [x] Pass all 481 repository checks and the active-host documentation-debt check on the publication candidate
-- [ ] Publish the non-main candidate and watch its CI to green
-- [ ] Capture fresh exact-public Claude adoption and deterministic Meta adoption
-- [ ] Require `public_release_gate.py` to report `release_ready=true`
-- [ ] Watch final main CI to green before marking the GitHub release final/latest
+- [x] Publish the non-main candidate and watch its CI to green
+- [x] Capture fresh exact-public Claude adoption and deterministic Meta adoption
+- [x] Require `public_release_gate.py` to report `release_ready=true`
+Final/latest publication requires a successful main CI run. The [GitHub release](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.2.0) records that run and publication state.
 
 ## Separate OpenAI directory submission
 
