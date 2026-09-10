@@ -2,6 +2,24 @@
 
 All notable changes to `nulnul harness` are recorded here.
 
+## 3.2.0 - 2026-09-10
+
+Publication candidate. All 481 repository checks pass; exact-version public Claude and Meta adoption and green main CI are pending.
+
+- Reuse verified completion receipts inside metadata-only setup transactions, rechecking freshness after writes. Five regression tests and a fresh two-transaction follow-up observed zero additional completion executions; preserve the initial repeated-check failure.
+- Generate executable checkpoint commands at the host entry, condition Foundation integration claims, and preserve quoting and clean diffs. Compare complete shipped installation trees only when requested. Clarify first-contract setup, local-only Codex inventory and reuse of a transaction-owned passing check. Five bounded development sessions exercised document/bug resume, interruption and adoption; 476 repository checks passed. Preserve the first adoption limitations and the final extra-check observation; no universal routing, comparative performance or public-adoption claim is made.
+
+- Verify the local installed copy and exercise an actual receipt-validation task plus interrupted-check recovery in fresh Codex sessions. Require an integer receipt schema version, rejecting booleans and floats. Keep redundant discovery as an observed limitation; a skill-section reorder did not remove it and was restored. These bounded local trials are not a comparative model benchmark or public adoption evidence.
+
+- Move subsystem-specific developer invariants from `AGENTS.md` into an on-demand development contract, preserving all existing rules. Reject malformed checkpoint fields before executing checks, invalidate prior verification before a recheck, and require matching ordered body-inclusion evidence in status reports. Scan the non-Git documentation fallback once and reuse empty results. These local maintenance changes do not inherit frozen public-adoption or model-performance evidence.
+
+- Make the skill entry task-specific: ordinary work uses its existing contract and check; setup, continuity, workflow and governed evolution details load on demand. Preserve checkpoint read/check boundaries and runtime implementations. This user-requested documentation cleanup carries no new model-performance or public-adoption claim.
+
+- Retain a bounded local instruction evaluator repair and its negative controls. The instruction-routing candidate was rejected after eight model attempts (six invalid v1 attempts, then champion pass/candidate unknown under v2); restore this episode’s product and guidance deltas. No instruction-performance improvement or public adoption is claimed.
+
+- Make Trace's selected/loaded/checked runtime chain observable in the request-first UI, with session-bound connection diagnostics. This candidate does not inherit frozen 3.1.0 release validation or claim comparative gains.
+- Avoid traversing Git-ignored dependency and build trees while fingerprinting product state. Tracked files, non-ignored untracked source and symlink identity remain in scope; missing initialized submodule state fails closed. Two focused regression checks cover the source boundary.
+
 ## 3.1.0 - 2026-09-08
 
 - Certified the exact public package with fresh Claude and Meta adoption: all five Claude completion checks, installed-roster inspection, explicit classifications, inactive-entry preservation, and zero protected writes passed. All 446 repository checks and Release Gate 100/100 pass; three earlier public nonpasses and their unchanged prerelease archives remain available.

@@ -49,6 +49,10 @@ Treat each of these as Coach-targeted meta feedback:
 
 When the solution landscape may have changed, inspect current primary or reputable sources before fixing the frame around the existing design. Compare a bounded set until the current procedure is outcome-competitive and no concrete material gap remains; do not perform an unbounded survey. Extract the useful mechanism rather than copying a branded architecture.
 
+## Close a measured learning loop
+
+This recording step does not require reading personal or cross-project procedures. Repair an ordinary product defect in its task. Reproduce a benchmark/live-cycle nonpass, preserve it, and record the bounded links before choosing whether a durable evolution is justified. Keep unapproved evaluation pending.
+
 Close every measured learning loop in the same run. When a benchmark or live-cycle verdict is `rejected`, `regressed`, `failed`, or `not-established`, append one bounded feedback record to the active evolution state before starting another experiment. If the evidence reproduces, let the Coach append one `pending` proposal for the nearest durable layer; never turn the result directly into accepted instructions. Preserve the failed arm, metric, and guardrail, then let an independent Gate accept or reject the candidate. Every result file containing a nonpass must include `learning_verdicts` with stable `feedback_id` and `proposal_ids` links, then pass `scripts/validate_learning_loop.py` against the active evolution state. Missing the entire verdict array is a failure, not an opt-out. Do not wait for the user to rediscover a result already present in machine-readable evidence.
 
 ## Change the improvement procedure
@@ -81,3 +85,10 @@ Relations are `COMPLEMENTS`, `CONFLICTS`, `SUPERSEDES`, `REQUIRES`, `ALTERNATIVE
 Measure flat personal lookup before proposing a selector. Preregister the pathology, one-generation search budget, candidate identity, fair simple baseline, DEV/VALIDATION/HOLDOUT exposure, permission boundary, prediction, falsification, and rollback threshold. Freeze the candidate source before reading a fresh project family, and retire every used holdout. Credit comes from downstream apply/skip/conflict correctness and completion checks, not from a plausible ranking.
 
 The proposer cannot approve its selection procedure. A deterministic Meta Gate may return provisional `META_PROMOTION`, `META_REJECT`, `META_NARROWER_SCOPE`, `META_NO_ADVANTAGE`, `META_INSUFFICIENT_EVIDENCE`, `META_CONFLICT`, `META_PERMISSION_BLOCKED`, or `META_ROLLBACK`. After provisional promotion, observe one live cycle and run `scripts/apply_live_cycle_rollback.py` against the schema-v4 state before confirming the version. Do not add a vector database, cloud memory, background learner, recursive loop, cross-user learning, arbitrary project sharing, or autonomous publication.
+
+## Completion checks for this mode
+
+Apply only the checks whose named state or operation is present. Reuse current authoritative results; repeat after changed inputs, failure, or a concrete unresolved concern.
+
+- When three independently Personal-Gate-verified adaptation families exist and the user requests cross-project improvement, read `references/meta-evolution.md`, validate typed evidence with `scripts/cross_project_evolution.py`, and measure flat lookup before generating one bounded selector candidate.
+- Validate any cross-project selector episode with `scripts/validate_meta_evolution.py`. Stale/revoked evidence, permission mismatch, unsupported relations, hidden failures, HOLDOUT reuse, no-match forced apply, unresolved conflict, proposer self-approval, and missing rollback fail closed.

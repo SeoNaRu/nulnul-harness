@@ -13,7 +13,7 @@ Combine roles for low-risk execution when useful. Separate Coach and Gate for ev
 
 ## Persist only when needed
 
-For work that spans sessions or needs agent-specific learning, create `docs/nulnul/evolution.json` from `../assets/evolution-state.template.json`. Validate it with `../scripts/validate_evolution_state.py` after each change.
+Use `docs/nulnul/evolution.json` when agent-specific learning or governed evolution needs feedback, proposal, and version history. Start from `../assets/evolution-state.template.json` only when no writer already owns that state; validate it with `../scripts/validate_evolution_state.py` after each change. Multiple sessions alone need only the concise checkpoint described in `project-files.md`.
 
 New states use schema version 4. Versions 1 through 3 remain readable for compatibility. Version 3 added an executable live-cycle threshold. Version 4 adds bounded autonomous episodes that link a reproduced feedback item, `WHERE`/`WHY` pathology, fixed search budget, rejected archive lookup, candidates, independent evidence, comparable retry baseline, cost, decision, and stop reason without duplicating proposal or promotion fields. Cross-project personal adaptations use their own schema-version-1 registry so project evolution history is not copied into a personal home.
 
@@ -123,3 +123,15 @@ Never move source code, repository or customer identity, machine paths, credenti
 ## Resume the original work
 
 After a provisional decision, confirmation, rejection, or rollback, the Navigator records the decision, updates the confirmed target version only after a healthy observed live cycle, checkpoints the verified state, and resumes the unfinished user outcome. Evolution is not task completion.
+
+## Completion checks for this mode
+
+Apply only the checks whose named state or operation is present. Reuse current authoritative results; repeat after changed inputs, failure, or a concrete unresolved concern.
+
+- Confirm feedback is bounded evidence, the Coach cannot promote its own proposal, a gated candidate stays provisional while the last accepted agent version remains active, permission expansion has explicit approval, and only one observed healthy live cycle confirms the new version; a threshold breach rolls it back.
+- Confirm task and meta changes are both editable targets, a user-supplied better direction becomes Coach feedback rather than documentation only, and personal or core meta changes have a representative transfer check.
+- For a bounded autonomous episode, confirm its budget was frozen before generation, rejected replay was deduplicated, HOLDOUT reads and unapproved permissions are absent, deterministic credit belongs to the independent Gate, retry/best-of-N evidence is fair on the declared dimension, and `scripts/validate_autonomous_evolution.py` passes even when the outcome is `NO_PROMOTION`.
+- For a personal/core transfer claim, confirm the candidate was frozen before holdout exposure, the claim was preregistered, the used holdout was retired, simple retry/selection evidence was compared on an explicit fair dimension, and `scripts/validate_generalization_gate.py` passes.
+- For personal adaptation reuse, confirm the selected home was explicitly approved, only generalized bounded evidence entered it, transfer and negative-skip cases passed, Personal Gate differed from the candidate author, conflicts and revocation fail closed, fresh-project compatibility and completion checks passed, and `scripts/personal_adaptation.py validate-evidence` succeeds.
+- When a schema-version-4 evolution state contains autonomous episodes, also run `scripts/validate_autonomous_evolution.py` from this skill.
+- After recording a schema-version-3 or schema-version-4 live cycle, run `scripts/apply_live_cycle_rollback.py` from this skill against the state, then validate it again; the executor confirms a healthy provisional candidate or rolls back a threshold breach, and a prose threshold is not an automatic rollback.

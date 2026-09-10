@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -51,7 +52,10 @@ class LegacyMigrationTests(unittest.TestCase):
             ])
             self.assertIn("Active checkpoint: `docs/nulnul/checkpoint.json`", contract.read_text(encoding="utf-8"))
             self.assertIn("docs/nulnul/checkpoint.json", guidance.read_text(encoding="utf-8"))
-            self.assertIn("before repository-wide inspection", guidance.read_text(encoding="utf-8"))
+            command = re.findall(r"```sh\n(.*?)\n```", guidance.read_text(encoding="utf-8"), re.S)[0]
+            validation = subprocess.run(command, shell=True, cwd=target, capture_output=True, text=True)
+            self.assertEqual(validation.returncode, 0, validation.stderr)
+            self.assertFalse(json.loads(validation.stdout)["fast_path_ready"])
             self.assertEqual(guidance.stat().st_mode & 0o777, 0o640)
 
     def test_existing_evolution_state_prevents_a_second_writer(self):
@@ -77,7 +81,7 @@ class LegacyMigrationTests(unittest.TestCase):
             result = self.migrate(contract, claude)
             self.assertEqual(result["status"], "created")
             self.assertEqual(agents.read_bytes(), agents_before)
-            self.assertIn("Claude Code-owned", claude.read_text(encoding="utf-8"))
+            self.assertEqual(claude.read_text(encoding="utf-8").count("<!-- nulnul:session-entry:start -->"), 1)
 
     def test_host_protected_guidance_is_never_modified(self):
         with tempfile.TemporaryDirectory() as directory:

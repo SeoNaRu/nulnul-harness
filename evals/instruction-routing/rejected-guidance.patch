@@ -1,0 +1,304 @@
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -1,42 +1,27 @@
+ # nulnul harness working agreement
+ 
+-This repository builds `plugins/nulnul-harness/`, a Codex plugin that selects the strongest justified project-local capability system for the requested outcome, verifies the user's work, removes non-contributing setup, and evolves from measured outcomes without requiring users to operate a harness. Simplicity breaks ties between materially equivalent outcome paths; agent, skill, plugin, context, and infrastructure counts are never primary goals.
++Build `plugins/nulnul-harness/`, the only shipped product boundary. Choose the strongest justified verified outcome within the user's scope; simplicity breaks ties between materially equivalent paths. Keep the plugin skills-only until a real workflow justifies another surface.
+ 
+-- Treat `plugins/nulnul-harness/` as the only shipped product boundary.
+-- Keep the plugin skills-only until a real workflow proves that an MCP server, hook, app, or external service is necessary.
+-- Inspect a target repository before asking questions. Ask only for product decisions or constraints that cannot be discovered safely. A request to set the harness up on a repository that already has work is never one of those questions.
+-- Detect the host surface before writing setup files, and enumerate its installed skills, plugins, and agents before claiming a job is covered; on Claude Code adoption, first run the bounded `claude plugin list --json` command instead of inferring installed plugins from the session catalog. Treat bounded relative and fixture-local absolute `.claude/agents/` reads as roster inspection, but never credit printed paths alone. Treat Claude's `source=git` as public GitHub provenance only when the exact repository URL also matches.
+-- Give each host its own root session entry: Codex owns only `AGENTS.md`, Claude Code owns only `CLAUDE.md`, and both point to the same `docs/nulnul/` contract and exactly one live-state writer. On sequential host adoption, preserve the inactive entry byte-for-byte; do not claim concurrent mutation support.
+-- Upgrade an existing agent roster in place. Classify every existing role as kept, upgraded, merged, or removed; `reuse` is the kept classification when its profile and responsibilities stay unchanged. Setup plans encode each inspected role as `name: disposition`; the transaction rejects missing, duplicate, or unknown dispositions and writes each classification explicitly. Never recreate one that already exists.
+-- Reuse a verified installed capability when it is outcome-competitive. Search official, curated, and reputable public candidates for an uncovered job or concrete material quality or verification gap before creating a project-local substitute. Verify fit, provenance, compatibility, maintenance, permissions, and license; popularity alone is not verification.
+-- Continue the user's original task after setup; setup alone is not task completion.
+-- Select the non-overlapping capability set expected to produce the strongest verified task outcome. Among materially equivalent paths, choose the one with lower context, coordination, runtime, maintenance, and permission cost; activate only what the current task needs.
+-- Use direct or single-agent execution when it is outcome-competitive. Add as many bounded roles as materially improve specialization, context isolation, parallel work, or independent verification; agent count has no target and one owner keeps final synthesis.
+-- For justified multi-stage work, check actual producer/consumer boundaries with a negative control and reuse only dependency-current verified artifacts. Keep task recipes, execution examples, skill use/skip/follow-up cases, and offline candidate preparation on demand; their advisory outputs never replace Foundation checks, grant adoption, or create another live-state writer.
+-- Never register global tools, use credentials, deploy, or publish without explicit user approval.
+-- Keep generated setup removable. Mark a Gate-passing evolution candidate provisional while the confirmed version remains active, then use one observed live cycle and the shipped schema-v3/v4 executor to confirm it or roll it back before final validation.
+-- Keep ordinary resume context bounded: compact closed evolution history into the digest-bound adjacent archive, validate deterministic full-state reconstruction, and query rejected history only when a matching proposal needs it.
+-- Give durable projects one validated concise resume checkpoint; keep stable setup evidence outside the host-loaded entry, and convert every reproducible nonpass verdict into Coach feedback and one bounded proposal in the same run.
+-- Allow fast resume only from an explicitly verified checkpoint; machine-link every nonpass verdict to its feedback and proposal, and migrate legacy durable contracts without creating a second live-state writer.
+-- Version concise checkpoint shapes explicitly, fail release on a missing learning-verdict inventory, and restore all earlier project files when a migration replacement fails.
+-- Give every state file one writing process, keep `unknown` distinct from `verified` and `failed`, persist cursors on empty cycles, and prove each validity check against a negative control.
+-- Store checkpoint completion as an exact command, execute that field before verified fast resume, and require sanitized machine-valid evidence before a paid runtime result contributes Release Gate points.
+-- Fail release on a recorded setup, workflow, activation, or fast-path regression; use version-independent champion/candidate evidence, counterbalance paired order, prefer relative budgets to absolute token ceilings, and keep fast resume inside its checkpoint and directly needed task files.
+-- Bootstrap from a host-admitted executing plugin when no project-local contract exists; bind setup receipts to the project, host, manifest, contract, and runtime digests. Never bypass an unsafe local contract, create a shadow skill, or treat package metadata as independent publisher provenance. Cold Claude setup still requires its bounded installed-plugin listing and profile reads; setup completion requires every acceptance check, including actual shared-document updates for reported documentation debt.
+-- Before pushing a version-changing commit to `main`, require exact-version public Claude adoption evidence and, when personal or cross-project reuse changes, sanitized apply/skip/revocation or Meta adoption evidence; otherwise use a non-main publication candidate first. Never knowingly leave `main` red while calling the release work complete. After any approved push, watch the resulting CI to green before reporting completion.
+-- Treat evaluation exposure as state: preregister a frozen candidate before one-shot holdout use, retire every used holdout, reject leakage or recycling, compare a simple retry/selection baseline, and activate Generalization Gate only for personal/core transfer claims rather than ordinary project-local changes.
+-- Bound autonomous evolution before generation: one reproduced feedback item, `WHERE`/`WHY` pathology, one generation, a small candidate/evaluation/model budget, rejected-archive lookup, deterministic independent credit, sealed holdouts, permission-safe execution, a fair retry baseline on model invocations or deterministic completion checks, and an explicit stop reason including `NO_PROMOTION`.
+-- Treat required conflict identifiers, permission fields, and inactive-guard decisions as correctness, not optional metadata: if a bounded A/B gets any required final field wrong, reject the candidate and restore the confirmed version even when routing and cost checks pass.
+-- For capability-authority feedback, distinguish a missing explicit role boundary from a proven user or project decision override; keep the current capability contract when a bounded candidate has no reproducible advantage.
+-- Keep personal evolution opt-in and adaptation-only: require a user-selected existing local home, preregister representative transfer plus a negative skip, let an independent Personal Gate promote or narrow, compatibility-check every new project, and fail closed on private data, missing permission, duplicate identity, conflict, stale or revoked status. Never copy raw project memory across repositories.
+-- Begin cross-project selection only after three independent Personal-Gate-verified mechanism families exist. Aggregate typed privacy-safe summaries inside the approved Personal Home boundary, preserve failed transfers and `unknown` relations, and never count renamed variants or cloned fixtures as independent evidence.
+-- Freeze one bounded meta-selection candidate before a fresh HOLDOUT, compare flat and simple baselines, retire every used case, credit only downstream apply/skip/conflict and completion results, and let an independent Meta Gate decide promotion, rejection, no advantage, narrower scope, or rollback.
+-- After a test, rejection, promotion, or user correction produces a durable reusable lesson, read `.nulnul.local.json`; when its approved `obsidian_wiki_root` exists, follow that vault's `00_위키-작업규칙.md`, read `index.md` first, update the relevant `projects/nulnul-harness/` pages and links, then append one entry to `log.md`. Skip routine passing runs and never copy raw transcripts, secrets, personal data, or code facts that the repository already owns. Treat this as the user's standing approval only for that configured vault path.
+-- Update the harness documents, exact evidence counts, and locale-parity claims in the same change as the code or release evidence they describe.
++- Inspect relevant repository evidence before asking questions; ask only material decisions safe inspection cannot resolve. Continue the original task after setup.
++- Reuse verified outcome-competitive capabilities. Add skills, agents, or infrastructure only for a demonstrated job; use one synthesis owner and one writer per state file.
++- Within the requested scope, continue reversible local edits, inspected local tests, and repairs of attributable failures through verification. Reuse existing authorization; new credentials, paid experiments, global registration, deployment, publication, destructive operations, or external writes require explicit approval.
++- Local Python tests and the booking HTTP self-check use local fixtures and loopback HTTP. A request for local tests does not authorize paid-model experiments. Inspect a newly introduced test's side effects before treating it as local.
++- Preserve host ownership, permission boundaries, exact evidence provenance, distinct `unknown`/`verified`/`failed` states, negative controls, independent promotion, and executable rollback. Product-development permission does not grant authority to adopted capabilities.
++- Keep stable evidence out of host-loaded entries. Read the checkpoint and directly needed task files for verified fast resume; load broader setup or history only when its conditions apply.
++- Update affected documentation, exact evidence counts, and locale-parity claims with the changes they describe. Preserve existing unrelated work and historical evidence.
+ 
+-Validate product changes with:
++## Read when relevant
+ 
+-The documentation-debt check uses Git commit order for tracked documents and only falls back to a repository modification-time scan when Git history is unavailable.
++- Setup/host ownership or roster changes: [host adoption requirements](docs/maintaining-harness.md#host-adoption) and the shipped `references/setup.md`.
++- Checkpoint, evidence, feedback, promotion, or transfer changes: [evidence and evolution requirements](docs/maintaining-harness.md#evidence-and-evolution) and only the corresponding shipped reference.
++- Release evidence, version changes, or approved publication: [release requirements](docs/maintaining-harness.md#release-and-publication) and [release validation](docs/maintaining-harness.md#release-validation).
++- Example changes: [public examples](docs/maintaining-harness.md#public-examples). Trace changes: [trace integration](docs/maintaining-harness.md#trace-integration).
++
++## Validation
++
++Run checks required by the changed surface. Reuse a passing result while its inputs remain current; rerun after changes, failure, or a concrete unresolved concern. Do not repeat a command already owned by a transaction or expand a small task into a full audit.
++
++For product changes:
+ 
+ ```bash
+ python3 scripts/pack_plugin.py
+@@ -44,10 +29,8 @@
+ python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py . --host codex
+ ```
+ 
+-`pack_plugin.py` must normalize archive timestamps and permissions so identical plugin trees produce byte-identical archives. Release fixtures must derive the current version from the plugin manifest instead of duplicating it. CI must pack the manifest's current version before archive checks, then run the full suite, the active Codex documentation-debt check, and Release Gate.
++For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`. Source behavior changes require the relevant behavioral regressions. Documentation-only work needs its affected consistency/link checks, not a paid experiment. The documentation-debt check uses Git commit order for tracked documents, falling back to modification times only without Git history.
+ 
+-For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`.
++## Durable lessons
+ 
+-Public casebook examples live under `examples/`, outside the shipped plugin. Keep reference implementations, deterministic fixtures, historical adoption records, and new live-model trials explicitly distinct. The booking example's HTTP self-check belongs to the ordinary unittest suite through `tests/test_booking_service_example.py`; that check uses only local Python and loopback HTTP, not a model API. Do not turn a request for local tests into a new Claude or other paid-model experiment. Exclude unexecuted experiment drafts from publication, and preserve their unexecuted status rather than presenting them as outcome evidence.
+-
+-Trace outcome observability uses the existing Foundation event writer and a bounded schema-versioned projection, never another live-state writer. Keep selected/loaded/checked evidence separate from availability and model claims. Require exact session binding and receipt provenance; telemetry cannot grant authority, promote a capability, prove comparative superiority, or publish private runtime data. See `plugins/nulnul-harness/skills/nulnul-harness/references/trace-evidence.md`. This integration candidate is not covered by frozen v3.1.0 release evidence until separately validated.
++After a test, rejection, promotion, or user correction produces a durable reusable lesson, read `.nulnul.local.json`; when its approved `obsidian_wiki_root` exists, follow that vault's `00_위키-작업규칙.md`, read `index.md` first, update the relevant `projects/nulnul-harness/` pages and links, then append one entry to `log.md`. Skip routine passing runs and never copy raw transcripts, secrets, personal data, or code facts that the repository already owns. Treat this as the user's standing approval only for that configured vault path.
+--- /dev/null
++++ b/docs/maintaining-harness.md
+@@ -0,0 +1,47 @@
++# Maintaining the harness
++
++Read only the section matching the change. These are maintained product requirements, not steps to execute on every task. Shipped workflow details live in the matching plugin references.
++
++## Host adoption
++
++- Detect the host surface before writing setup files, and enumerate its installed skills, plugins, and agents before claiming a job is covered; on Claude Code adoption, first run the bounded `claude plugin list --json` command instead of inferring installed plugins from the session catalog. Treat bounded relative and fixture-local absolute `.claude/agents/` reads as roster inspection, but never credit printed paths alone. Treat Claude's `source=git` as public GitHub provenance only when the exact repository URL also matches.
++- Give each host its own root session entry: Codex owns only `AGENTS.md`, Claude Code owns only `CLAUDE.md`, and both point to the same `docs/nulnul/` contract and exactly one live-state writer. On sequential host adoption, preserve the inactive entry byte-for-byte; do not claim concurrent mutation support.
++- Upgrade an existing agent roster in place. Classify every existing role as kept, upgraded, merged, or removed; `reuse` is the kept classification when its profile and responsibilities stay unchanged. Setup plans encode each inspected role as `name: disposition`; the transaction rejects missing, duplicate, or unknown dispositions and writes each classification explicitly. Never recreate one that already exists.
++- Bootstrap from a host-admitted executing plugin when no project-local contract exists; bind setup receipts to the project, host, manifest, contract, and runtime digests. Never bypass an unsafe local contract, create a shadow skill, or treat package metadata as independent publisher provenance. Cold Claude setup still requires its bounded installed-plugin listing and profile reads; setup completion requires every acceptance check, including actual shared-document updates for reported documentation debt.
++
++## Evidence and evolution
++
++- Reuse a verified installed capability when it is outcome-competitive. Search official, curated, and reputable public candidates for an uncovered job or concrete material quality or verification gap before creating a project-local substitute. Verify fit, provenance, compatibility, maintenance, permissions, and license; popularity alone is not verification.
++- For justified multi-stage work, check actual producer/consumer boundaries with a negative control and reuse only dependency-current verified artifacts. Keep task recipes, execution examples, skill use/skip/follow-up cases, and offline candidate preparation on demand; their advisory outputs never replace Foundation checks, grant adoption, or create another live-state writer.
++- Keep generated setup removable. Mark a Gate-passing evolution candidate provisional while the confirmed version remains active, then use one observed live cycle and the shipped schema-v3/v4 executor to confirm it or roll it back before final validation.
++- Keep ordinary resume context bounded: compact closed evolution history into the digest-bound adjacent archive, validate deterministic full-state reconstruction, and query rejected history only when a matching proposal needs it.
++- Give durable projects one validated concise resume checkpoint; keep stable setup evidence outside the host-loaded entry, and convert every reproducible nonpass verdict into Coach feedback and one bounded proposal in the same run.
++- Allow fast resume only from an explicitly verified checkpoint; machine-link every nonpass verdict to its feedback and proposal, and migrate legacy durable contracts without creating a second live-state writer.
++- Treat evaluation exposure as state: preregister a frozen candidate before one-shot holdout use, retire every used holdout, reject leakage or recycling, compare a simple retry/selection baseline, and activate Generalization Gate only for personal/core transfer claims rather than ordinary project-local changes.
++- Bound autonomous evolution before generation: one reproduced feedback item, `WHERE`/`WHY` pathology, one generation, a small candidate/evaluation/model budget, rejected-archive lookup, deterministic independent credit, sealed holdouts, permission-safe execution, a fair retry baseline on model invocations or deterministic completion checks, and an explicit stop reason including `NO_PROMOTION`.
++- Treat required conflict identifiers, permission fields, and inactive-guard decisions as correctness, not optional metadata: if a bounded A/B gets any required final field wrong, reject the candidate and restore the confirmed version even when routing and cost checks pass.
++- For capability-authority feedback, distinguish a missing explicit role boundary from a proven user or project decision override; keep the current capability contract when a bounded candidate has no reproducible advantage.
++- Keep personal evolution opt-in and adaptation-only: require a user-selected existing local home, preregister representative transfer plus a negative skip, let an independent Personal Gate promote or narrow, compatibility-check every new project, and fail closed on private data, missing permission, duplicate identity, conflict, stale or revoked status. Never copy raw project memory across repositories.
++- Begin cross-project selection only after three independent Personal-Gate-verified mechanism families exist. Aggregate typed privacy-safe summaries inside the approved Personal Home boundary, preserve failed transfers and `unknown` relations, and never count renamed variants or cloned fixtures as independent evidence.
++- Freeze one bounded meta-selection candidate before a fresh HOLDOUT, compare flat and simple baselines, retire every used case, credit only downstream apply/skip/conflict and completion results, and let an independent Meta Gate decide promotion, rejection, no advantage, narrower scope, or rollback.
++
++## Release and publication
++
++- Version concise checkpoint shapes explicitly, fail release on a missing learning-verdict inventory, and restore all earlier project files when a migration replacement fails.
++- Store checkpoint completion as an exact command, execute that field before verified fast resume, and require sanitized machine-valid evidence before a paid runtime result contributes Release Gate points.
++- Fail release on a recorded setup, workflow, activation, or fast-path regression; use version-independent champion/candidate evidence, counterbalance paired order, prefer relative budgets to absolute token ceilings, and keep fast resume inside its checkpoint and directly needed task files.
++- Before pushing a version-changing commit to `main`, require exact-version public Claude adoption evidence and, when personal or cross-project reuse changes, sanitized apply/skip/revocation or Meta adoption evidence; otherwise use a non-main publication candidate first. Never knowingly leave `main` red while calling the release work complete. After any approved push, watch the resulting CI to green before reporting completion.
++
++## Release validation
++
++`pack_plugin.py` must normalize archive timestamps and permissions so identical plugin trees produce byte-identical archives. Release fixtures must derive the current version from the plugin manifest instead of duplicating it. CI must pack the manifest's current version before archive checks, then run the full suite, the active Codex documentation-debt check, and Release Gate.
++
++For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`.
++
++## Public examples
++
++Public casebook examples live under `examples/`, outside the shipped plugin. Keep reference implementations, deterministic fixtures, historical adoption records, and new live-model trials explicitly distinct. The booking example's HTTP self-check belongs to the ordinary unittest suite through `tests/test_booking_service_example.py`; that check uses only local Python and loopback HTTP, not a model API. Do not turn a request for local tests into a new Claude or other paid-model experiment. Exclude unexecuted experiment drafts from publication, and preserve their unexecuted status rather than presenting them as outcome evidence.
++
++## Trace integration
++
++Trace outcome observability uses the existing Foundation event writer and a bounded schema-versioned projection, never another live-state writer. Keep selected/loaded/checked evidence separate from availability and model claims. Require exact session binding and receipt provenance; telemetry cannot grant authority, promote a capability, prove comparative superiority, or publish private runtime data. See `plugins/nulnul-harness/skills/nulnul-harness/references/trace-evidence.md`. This integration candidate is not covered by frozen v3.1.0 release evidence until separately validated.
+--- a/tests/test_product_plugin.py
++++ b/tests/test_product_plugin.py
+@@ -15,6 +15,31 @@
+ ROOT = Path(__file__).resolve().parents[1]
+ PLUGIN = ROOT / "plugins/nulnul-harness"
+ SKILL = PLUGIN / "skills/nulnul-harness"
++
++
++def reachable_skill_documents(root):
++    """Follow packaged Markdown routes, without making users load them together."""
++    pending = [root / "SKILL.md"]
++    documents = {}
++    while pending:
++        path = pending.pop()
++        if path in documents:
++            continue
++        text = path.read_text(encoding="utf-8")
++        documents[path] = text
++        links = re.findall(r"\[[^\]]*\]\(([^)#]+\.md)(?:#[^)]*)?\)|`([^`\n]+\.md)`", text)
++        for markdown, code in links:
++            target = markdown or code
++            if "://" in target:
++                continue
++            candidates = [path.parent / target, root / target]
++            resolved = next((item.resolve() for item in candidates if item.is_file()), None)
++            if resolved is not None and resolved.is_relative_to(root.resolve()):
++                if resolved not in documents:
++                    pending.append(resolved)
++            elif target.startswith(("references/", "../references/")):
++                raise ValueError(f"Missing packaged reference: {target}")
++    return documents
+ 
+ 
+ class ProductPluginTests(unittest.TestCase):
+@@ -93,33 +118,13 @@
+ 
+     def test_skill_is_portable_and_complete(self):
+         text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+-        for heading in ("## Product decision gate", "## Required inputs", "## Workflow", "## Outputs", "## Failure handling", "## Validation"):
+-            self.assertIn(heading, text)
+-        self.assertIn("Enumerate the host's installed skills, plugins, and agents before judging coverage", text)
+-        self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
+-        self.assertIn("Treat installed availability as discovery evidence, not selection or verification", text)
+-        self.assertIn("Popularity is a signal, not proof", text)
+-        self.assertIn("Keep it only when primary outcome quality improves", text)
+-        self.assertIn("Never let an agent approve its own upgrade", text)
+-        self.assertIn("a better method the user had to surface", text)
+-        self.assertIn("Harness change is first-order and declarative", text)
+-        self.assertIn("reuse now, add now, needs approval, and skip", text)
+-        self.assertIn("resume from the last verified checkpoint", text)
+-        self.assertIn("**Fast path**", text)
+-        self.assertIn("**Adopt and upgrade**", text)
+-        self.assertIn("Never recreate a role that already exists", text)
+-        self.assertIn("Context is a quality-adjusted budget", text)
+-        self.assertIn("Never make an unattended session edit host-protected configuration paths", text)
+-        self.assertIn("a denied write attempt is still a failed setup", text)
+-        self.assertIn("made no write tool call targeting `.claude/**`", text)
+-        self.assertIn("Before activating, inspect any user-named local task contract such as TASK.md", text)
+-        self.assertIn("do not activate when it already provides explicit local inputs, outputs, constraints, and a runnable completion check", text)
+-        self.assertIn("external-write planning, multi-session checkpointing, or evidence-gated agent evolution", text)
+-        self.assertIn("Stop when every job has a proven outcome-competitive candidate", text)
+-        self.assertIn("first run the bounded `claude plugin list --json` command", text)
+-        self.assertIn("A Codex run may create or update only `AGENTS.md`", text)
+-        self.assertIn("a Claude Code run may create or update only `CLAUDE.md`", text)
+-        self.assertIn("scripts/sync_host_entry.py", text)
++        documents = reachable_skill_documents(SKILL)
++        self.assertEqual(
++            {path.name for path in documents if path.parent.name == "references"},
++            {path.name for path in (SKILL / "references").glob("*.md")},
++        )
++        # Packaging checks discoverability; behavioral suites verify the executable
++        # permission, host ownership, checkpoint and lifecycle boundaries.
+         for path in (
+             "references/discovery-and-questions.md",
+             "references/baseline-kernel.md",
+@@ -182,39 +187,15 @@
+         self.assertIn("cross-project-generalization-core", manifest["interface"]["capabilities"])
+         for forbidden in ("AI Capability Lab", "curate-capabilities", "validate_lab.py", "sandbox/runs", "[TODO:", "Project Harness"):
+             self.assertNotIn(forbidden, text)
+-        self.assertIn("stable identity, deterministic deduplication, exclusion precedence", text)
+-        self.assertIn("Apply `references/baseline-kernel.md`", text)
+-        self.assertIn("Do not load it for a pure local function", text)
+-        self.assertIn("Run them without reading their source", text)
+-        self.assertIn("## Resume fast path", text)
+-        self.assertLess(text.index("## Resume fast path"), text.index("## Workflow"))
+-        self.assertIn("Do not load setup, discovery, assembly, or evolution references", text)
+-        self.assertIn("Read that checkpoint and the current task files, not the full setup contract", text)
+-        self.assertIn("validate that checkpoint before any repository-wide inspection", text)
+-        self.assertIn("entire allowed read set", text)
+-        self.assertIn("repeat an unchanged passing check", text)
+-        self.assertIn("when a legacy `project.md` has durable continuity", text)
+-        self.assertIn("existing root guidance alone does not preserve that evidence", text)
+-        self.assertIn("Never create `checkpoint.json` when `evolution.json` exists", text)
+-        self.assertIn("compacted `docs/nulnul/evolution.json`", text)
+-        self.assertIn("do not load the archive into ordinary resume context", text)
+-        discovery = (SKILL / "references/capability-discovery.md").read_text(encoding="utf-8")
+-        self.assertIn("Never recursively scan a home directory", discovery)
+-        self.assertIn("Do not treat cached marketplace entries as installed", discovery)
+-        meta = (SKILL / "references/meta-evolution.md").read_text(encoding="utf-8")
+-        self.assertIn("Close every measured learning loop in the same run", meta)
+-        self.assertIn("append one `pending` proposal", meta)
+-        generalization = (SKILL / "references/generalization.md").read_text(encoding="utf-8")
+-        self.assertIn("Evaluation exposure is state", generalization)
+-        self.assertIn("After the first result, retire the holdout", generalization)
+-        self.assertIn("Project Memory never becomes global Memory", generalization)
+-        self.assertIn("zero Generalization lookup", generalization)
+-        personal = (SKILL / "references/personal-evolution.md").read_text(encoding="utf-8")
+-        self.assertIn("Run one bounded autonomous episode", personal)
+-        self.assertIn("NO_PROMOTION", personal)
+-        self.assertIn("Reuse a verified adaptation personally", personal)
+-        self.assertIn("PERSONAL_HOME_REQUIRED", personal)
+-        self.assertIn("Move a candidate to `provisional`", personal)
++
++    def test_reference_routing_rejects_a_missing_mode(self):
++        with tempfile.TemporaryDirectory() as raw:
++            root = Path(raw)
++            (root / "SKILL.md").write_text(
++                "Read [setup](references/missing-setup.md).\n", encoding="utf-8"
++            )
++            with self.assertRaisesRegex(ValueError, "missing-setup"):
++                reachable_skill_documents(root)
+ 
+     def test_outcome_first_decision_contract(self):
+         payload = json.loads((ROOT / "evals/outcome-first/cases.json").read_text(encoding="utf-8"))
+@@ -282,43 +263,14 @@
+         )
+         self.assertFalse(inspectable["private_reasoning_exposed"])
+ 
+-        skill = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+-        discovery = (SKILL / "references/capability-discovery.md").read_text(encoding="utf-8")
+-        assembly = (SKILL / "references/agent-assembly.md").read_text(encoding="utf-8")
+-        evolution = (SKILL / "references/evolution.md").read_text(encoding="utf-8")
+-        self.assertIn("Simplicity is a tie-breaker, not the objective", skill)
+-        self.assertIn("under-building, premature reuse, verification underinvestment, or agent under-allocation", skill)
+-        self.assertIn("outcome-first, project-fit, evidence-driven, waste-aware", skill)
+-        self.assertIn("`KEEP`, `UPGRADE`, `REPLACE`, `MERGE`, `RETIRE`, or `CREATE`", skill)
+-        self.assertIn("user never has to design the agent team or capability stack", skill)
+-        self.assertIn("`RESULT`, `VERIFY`, and `RESUME`", skill)
+-        self.assertIn("Do not equate installed with selected", discovery)
+-        self.assertIn("project fit is determined by evidence", discovery)
+-        self.assertIn("user-facing AI FOMO", discovery)
+-        self.assertIn("Treat an external capability as a candidate, not a permanent addition", discovery)
+-        self.assertIn("Agent count is neither a target nor a primary metric", assembly)
+-        self.assertIn("fewer agents is not one either", assembly)
+-        self.assertIn("new version of that same role even when no external replacement exists", assembly)
+-        self.assertIn("A cost reduction that lowers quality is a regression", evolution)
+-        self.assertIn("## Evolve capabilities and routing", evolution)
+-        self.assertIn("Capability accumulation is not evolution", evolution)
+-        for decision in ("KEEP", "UPGRADE", "REPLACE", "MERGE", "RETIRE", "CREATE"):
+-            self.assertIn(f"`{decision}`", evolution)
+-
+-    def test_setup_trigger_is_multilingual(self):
+-        description = re.search(
+-            r"^description: (.*)$", (SKILL / "SKILL.md").read_text(encoding="utf-8"), re.M
+-        ).group(1)
+-        for phrase in (
+-            "set up the harness",
+-            "하네스 세팅해줘",
+-            "하네스 구성해줘",
+-            "配置一下 harness",
+-            "设置这个项目的 harness",
+-            "ハーネスをセットアップして",
+-            "ハーネスを構成して",
+-        ):
+-            self.assertIn(phrase, description, phrase)
++
++    def test_selection_cases_preserve_multilingual_and_skip_coverage(self):
++        cases = json.loads((ROOT / "evals/instruction-routing/cases.json").read_text())
++        self.assertEqual({case["language"] for case in cases if case["kind"] == "setup"},
++                         {"en", "ko", "zh", "ja"})
++        self.assertTrue(any(case["kind"] == "skip" for case in cases))
++        self.assertTrue(any(case["kind"] == "follow-up" for case in cases))
++        self.assertEqual(len({case["id"] for case in cases}), len(cases))
+ 
+     def test_submission_scenario_inventory(self):
+         payload = json.loads((ROOT / "evals/cases.json").read_text(encoding="utf-8"))

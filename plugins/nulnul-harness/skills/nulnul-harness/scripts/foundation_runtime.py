@@ -16,6 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import capability_contract
+import trace_evidence
 from sync_host_entry import atomic_batch_write, atomic_write
 
 
@@ -261,7 +262,9 @@ def append_event(store, session_id, task_id, kind, details=None):
         "created_at": utc_now(),
         "details": redact(details or {}),
     }
-    rows.append(event)
+    # Keep the transport projection out of CLI/model output. The same writer owns it.
+    projection = trace_evidence.project_event(event, read_json(store.active, {}) or {})
+    rows.append(event | {"trace": projection} if projection is not None else event)
     write_jsonl(path, rows)
     return event
 
@@ -372,6 +375,11 @@ def start_session(root, goal, fingerprint, current_checkpoint=None, session_id=N
             "schema_version": SCHEMA_VERSION,
             "session_id": identity,
             "host_fingerprint": redact(fingerprint),
+            # Explicit host identity only. Never infer a session from cwd or recency.
+            "trace_host_session_key": trace_evidence.identity(
+                os.environ.get("NULNUL_TRACE_SESSION")
+                or (os.environ.get("CODEX_THREAD_ID") if fingerprint.get("host") == "codex" else None)
+            ),
             "started_at": utc_now(),
             "ended_at": None,
             "status": "RECOVERED" if recovered_from else "STARTED",

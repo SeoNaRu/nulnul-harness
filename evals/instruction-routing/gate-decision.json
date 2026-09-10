@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "episode_id": "instruction-routing-20260910",
+  "evaluator_revision": 2,
+  "decision": "NO_PROMOTION",
+  "reviewer": "instruction_gate",
+  "evidence": "evals/instruction-routing/results-v2.json",
+  "frozen_identity": "evals/instruction-routing/candidate-v2.json",
+  "required_pairs": 4,
+  "eligible_pairs": 0,
+  "completed_v2_runs": 2,
+  "cumulative_model_attempts": 8,
+  "authorized_model_attempts": 17,
+  "candidate_verdict": "unknown execution event 8; unsupported_or_invalid_event",
+  "attribution": "Missing acceptance evidence. Independent product verification was skipped. This does not establish a product defect or eligible cost regression.",
+  "required_action": "Restore this episode product/guidance deltas, preserve rejected artifacts and unrelated work; no candidate revision or later model phases in this episode.",
+  "evaluator_retention": "The unchanged v2 evaluator may remain as separately verified local tooling within its closed DEV grammar; no extra model experiment required.",
+  "learning_verdicts": [
+    {
+      "id": "instruction-routing-final-gate",
+      "status": "rejected",
+      "feedback_id": "feedback-instruction-routing-v2-unknown-20260910",
+      "proposal_ids": [
+        "proposal-gate-13-bounded-trace-diagnostics-20260910"
+      ]
+    }
+  ]
+}

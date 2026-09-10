@@ -45,7 +45,7 @@ Use the available skill or plugin catalog first. Installed or catalog-listed mea
 
 Enumeration records names, versions, and installed or active status; it does not mean reading every capability. Use the session-provided skill and agent catalog as the canonical roster, then one bounded host command when available:
 
-- Codex plugins: `codex plugin list --json` without `--available`;
+- Codex plugins: `codex plugin list --json` without `--available` when network access is permitted. This command can still query the remote installed catalog; JSON output is not an offline guarantee. Under local-only constraints, use the session catalog and bounded local registration/profile evidence instead. Leave unproven installation status `unknown`; do not invoke a potentially remote inventory command merely to complete the roster;
 - Claude Code plugins: `claude plugin list --json` without marketplace-wide expansion;
 - project-local skills or agents: list only the immediate capability directories named by the detected surface map.
 
@@ -93,3 +93,12 @@ Treat an external capability as a candidate, not a permanent addition. Compare i
 Create a project-local skill only when a recurring job has a material outcome or verification gap and no verified current candidate is outcome-competitive. Record the candidates checked, the material gap and rejection reasons, the new skill's narrow job, and its removal condition.
 
 For a new or adapted skill, use the bounded use/near-miss/follow-up cases in `skill-acceptance.md`. Record actual selection and authoritative check evidence under the existing acceptance owner; development case scores alone never grant adoption or promotion.
+
+## Completion checks for this mode
+
+Apply only the checks whose named state or operation is present. Reuse current authoritative results; repeat after changed inputs, failure, or a concrete unresolved concern.
+
+- Confirm every selected capability has a concrete job, inspectable source, activation condition, check, permission boundary, verification status, and removal condition.
+- Confirm the selected path targets the strongest expected verified outcome inside the stated constraints, and that simplicity breaks ties only between materially equivalent paths.
+- Fail validation for under-building, premature reuse, verification underinvestment, or agent under-allocation when omitting an available justified capability materially lowers completion quality or confidence. Also fail over-building when an addition has no material outcome contribution.
+- Confirm a custom skill was created only after verified existing candidates were checked and found not outcome-competitive for a recurring job, with the material gap and rejection reasons recorded.

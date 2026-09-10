@@ -74,3 +74,9 @@ Use a small synthetic fixture containing:
 - one formula-like text value.
 
 The check must prove deterministic routing, exclusion precedence, unique action keys, reason preservation, `unknown` never collapsing into `verified` or `failed`, cursor persistence on an empty cycle, safe cell output, and no real personal data.
+
+## Completion checks for this mode
+
+Apply only the checks whose named state or operation is present. Reuse current authoritative results; repeat after changed inputs, failure, or a concrete unresolved concern.
+
+- Confirm recurring data workflows use stable identity, deterministic deduplication, exclusion precedence, explicit review states, auditable reasons, idempotent writes, and spreadsheet-safe values where applicable.

@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,8 @@ spec = importlib.util.spec_from_file_location(
 )
 validator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(validator)
+sys.path.insert(0, str(SKILL / "scripts"))
+import run_checkpoint_check as runner
 
 
 class CheckpointTests(unittest.TestCase):
@@ -46,6 +49,43 @@ class CheckpointTests(unittest.TestCase):
     def test_complete_checkpoint_is_valid(self):
         self.assertEqual(validator.validate(self.checkpoint), [])
         self.assertTrue(validator.fast_path_ready(self.checkpoint, self.root, self.evidence))
+
+    def test_receipt_schema_version_requires_integer_one(self):
+        for version in (True, False, 1.0, "1", None, [], {}, 0, 2):
+            with self.subTest(version=version):
+                evidence = {**self.evidence, "schema_version": version}
+                self.assertFalse(validator.fast_path_ready(self.checkpoint, self.root, evidence))
+        self.assertTrue(validator.fast_path_ready(self.checkpoint, self.root, self.evidence))
+
+    def test_malformed_fields_are_rejected_before_running_a_check(self):
+        path = self.root / "checkpoint.json"
+        for field, value in (
+            ("schema_version", []), ("schema_version", True), ("schema_version", 3.0),
+            ("verification_status", {}), ("verification_status", []),
+            ("verification_files", [{}]), ("verification_files", ["app.py", []]),
+            ("verification_files", ["bad\0file.py"]),
+        ):
+            with self.subTest(field=field, value=value):
+                payload = {**self.checkpoint, field: value}
+                path.write_text(json.dumps(payload), encoding="utf-8")
+                self.assertTrue(validator.validate(payload))
+                self.assertFalse(validator.fast_path_ready(payload, self.root, self.evidence))
+                with patch.object(runner.subprocess, "run") as command:
+                    self.assertFalse(runner.run(path, self.root, 1)["passed"])
+                command.assert_not_called()
+
+    def test_interrupted_or_unstarted_recheck_invalidates_prior_success(self):
+        path = self.root / "checkpoint.json"
+        for failure in (KeyboardInterrupt(), OSError("cannot start check")):
+            with self.subTest(failure=type(failure).__name__):
+                runner.record_verification(path, self.checkpoint, self.root, "verified")
+                with patch.object(runner.subprocess, "run", side_effect=failure):
+                    with self.assertRaises(type(failure)):
+                        runner.run(path, self.root, 1)
+                payload = json.loads(path.read_text(encoding="utf-8"))
+                evidence = json.loads(path.with_name("checkpoint.verification.json").read_text())
+                self.assertEqual(payload["verification_status"], "unknown")
+                self.assertFalse(validator.fast_path_ready(payload, self.root, evidence))
 
     def test_only_verified_checkpoints_can_take_the_fast_path(self):
         for status in ("unknown", "failed"):

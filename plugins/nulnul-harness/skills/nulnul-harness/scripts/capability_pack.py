@@ -395,13 +395,32 @@ def bootstrap(root, project, task_id, host, selected=None, evidence=None, no_cap
 
 
 def scientific_tree_digest(root):
+    root = Path(root).resolve()
     entries = []
-    for path in sorted(Path(root).rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+    if (root / ".git").exists():
+        # Product inputs include tracked files (even ignored ones) and untracked source.
+        # Do not traverse installed dependencies, build output or private ignored state.
+        listed = subprocess.run(
+            ["git", "-C", str(root), "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True,
+        )
+        paths = [root / os.fsdecode(name) for name in set(listed.stdout.split(b"\0")) if name]
+    else:
+        paths = []
+        for directory, folders, files in os.walk(root, followlinks=False):
+            folders[:] = [name for name in folders if name not in {".git", "__pycache__", ".pytest_cache", ".runtime"}]
+            paths.extend(Path(directory) / name for name in files)
+            paths.extend(Path(directory) / name for name in folders if (Path(directory) / name).is_symlink())
+    for path in sorted(paths, key=lambda item: item.relative_to(root).as_posix()):
         relative = path.relative_to(root)
         if {".git", "__pycache__", ".pytest_cache", ".runtime"}.intersection(relative.parts):
             continue
         if path.is_symlink():
             entries.append([relative.as_posix(), "symlink", os.readlink(path)])
+        elif path.is_dir():
+            if not (path / ".git").exists():
+                raise ValueError("initialize the submodule before recording product state")
+            entries.append([relative.as_posix(), "submodule", scientific_tree_digest(path)])
         elif path.is_file() and path.suffix != ".pyc":
             entries.append([relative.as_posix(), "file", hashlib.sha256(path.read_bytes()).hexdigest()])
     return canonical_digest(entries)

@@ -1,44 +1,26 @@
-# nulnul harness 3.1.0
+# nulnul harness 3.2.0
 
-Outcome-first delivery improvements for the skills-only Codex and Claude Code plugin. The shipped boundary remains `plugins/nulnul-harness/`; no server, hook, global tool registration, or new live-state writer is added.
+Publication candidate. Exact-version public Claude and Meta adoption, final repository validation, and green main CI are pending. The existing public evidence pointers still certify 3.1.0.
 
-## What's new
+## Changes
 
-- Producer/consumer boundary QA with explicit checks and negative controls.
-- On-demand web/API, migration/sync, and evidence-research recipes.
-- Six conditional execution patterns mapped to existing roles, Tasks, Packs, and handoffs, without fixed teams or model assignments.
-- Dependency- and fingerprint-aware partial rerun planning.
-- Skill use, near-miss skip, and follow-up development cases with observed selection/check references.
-- Offline pinned public Skill preparation into the existing quarantine and competition path. Preparation does not download, install, execute, or grant authority to a candidate.
+- Route ordinary work through its existing contract; load setup, workflow, and evolution details only when needed. Move repository-specific developer invariants into a conditional development contract.
+- Generate directly executable checkpoint validation and completion commands in the active host entry. Preserve the inactive host entry and one state writer; reuse a transaction-owned passing check while its inputs remain current.
+- Compare all shipped files when an installed-copy check is requested. Report stale or unknown copies and use native host installation commands for refresh.
+- Reject malformed checkpoint and receipt fields, invalidate previous verification before rechecking, and scan the non-Git documentation fallback once.
+- Project bounded, session-bound selected/loaded/checked Trace evidence through the existing Foundation writer. Observability grants no authority, promotion, or comparative-quality claim.
+- Preserve the rejected instruction-routing experiment and its frozen evaluator as historical development evidence, without reopening its exposed cases or adopting its performance claim.
 
-## Public-adoption repairs
+## Validation boundary
 
-- Bootstrap resolves the host-admitted executing plugin when no project-local contract exists. Receipts bind project, host, manifest, skill, and runtime digests; unsafe local contracts still fail closed.
-- Cold Claude setup must enumerate installed plugins and read existing profiles. Product tests do not override unresolved documentation debt or other adoption checks.
-- Every existing role is explicitly classified through the existing Setup Plan roster field. Missing, duplicate, ambiguous, or unknown dispositions fail before setup writes. `kept` normalizes to `reuse`; unchanged profiles alone do not establish unchanged responsibilities.
-- Existing checkpoints and live-state shapes need no migration. Fresh Setup Plans must use the documented `name: disposition` roster entries.
+[Local maintenance](../docs/runtime-maintenance.md) and [fresh Codex work sessions](../docs/live-use-validation.md) record the observed fixes and remaining limitations. The updated 3.2.0 candidate passed all 481 repository checks. A fresh metadata-only adoption follow-up reused the existing receipt through two transactions with zero additional completion executions, preserving the initial failure. Public 3.1.0 evidence and earlier nonpasses remain unchanged.
 
-## Verification
+The package remains skills-only. No new dependency, service, credential scope, MCP server, hook, app, or checkpoint migration is introduced. Existing pinned users must explicitly update their host's marketplace reference and installed plugin after publication.
 
-- Full repository suite: **446 passed**. Both-host public-plugin bootstrap and role-disposition negative controls are included.
-- Active Codex documentation debt: **0**.
-- Release Gate: **100/100**, `release_ready=true`.
-- Fresh exact-public Claude adoption: **PASS**, all five completion checks; installed roster inspected, both existing roles classified, profiles and inactive Codex entry preserved, zero protected-path writes.
-- Fresh exact-public Meta adoption: **PASS**; same applicable adaptation with 3 flat checks versus 1 Meta check, with no-match, conflict, migration, and rollback controls.
-- Frozen product tag CI: [passed](https://github.com/SeoNaRu/nulnul-harness/actions/runs/34212367385). Final evidence is committed to `main`; its resulting CI must be green before stable promotion.
-- English and Korean README evidence, version, artifact identity, and claim boundaries are synchronized.
+## Candidate distribution
 
-## Artifact
-
-- Tag: `v3.1.0`
-- Frozen product commit: `a9fd59e8c5852e8808f6698262e90d389f39f42a`
-- Asset: `nulnul-harness-3.1.0.zip`
-- Contents: **60 files, 237,942 bytes**
-- SHA-256: `7716a8ddfeb43632b4ad836c29deb1fd2981a84d423d2f2705fb88becad9e49d`
-- Public download matches the reproducible local archive; installed relative paths and file bytes also match exactly.
-
-## Evidence and limitations
-
-[Claude r4](https://github.com/SeoNaRu/nulnul-harness/blob/main/evals/benchmarks/claude-adopt/release-3.1.0-r4.json) and [Meta r4](https://github.com/SeoNaRu/nulnul-harness/blob/main/evals/meta-evolution/release-3.1.0-meta-r4.json) certify these exact bytes. Three earlier public nonpasses remain unchanged and linked to bounded Coach feedback and proposals; their assets are preserved as [failed preview 1](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0-adoption-failed.1), [failed preview 2](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0-adoption-failed.2), and [failed preview 3](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0-adoption-failed.3).
-
-These are sequential release-regression candidates with one fresh Claude run per artifact, not sealed holdouts, independent mechanism families, or a best-of-N quality advantage claim. The six delivery improvements are implemented and deterministically checked; universal live quality gains, full live host parity, and broader Meta transfer are not claimed. Raw transcripts and authentication remain local-only. Original user research files stay outside the clean release tree; no legacy-boundary test was weakened.
+- Version: `3.2.0`
+- Intended tag: `v3.2.0`
+- Asset: `nulnul-harness-3.2.0.zip`
+- Product boundary: `plugins/nulnul-harness/`
+- Public archive identity, adoption run references, and final CI results: pending.

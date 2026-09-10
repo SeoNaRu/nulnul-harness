@@ -11,14 +11,27 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins/nulnul-harness"
+LEGACY_PATHS = ("plugins/project-harness", "catalog", "docs/research", "sandbox", "scripts/validate_lab.py", "skills-lock.json")
+
+
+def product_files(plugin):
+    files = []
+    for path in plugin.rglob("*"):
+        relative = path.relative_to(plugin)
+        if "__pycache__" in relative.parts or path.suffix == ".pyc":
+            continue
+        if path.is_symlink():
+            raise ValueError("plugin archives cannot include symlinks: " + relative.as_posix())
+        if any(relative.as_posix() == old or relative.as_posix().startswith(old + "/") for old in LEGACY_PATHS):
+            raise ValueError("legacy lab data is inside the shipped product: " + relative.as_posix())
+        if path.is_file():
+            files.append(path)
+    return sorted(files)
 
 
 def pack(plugin, archive):
+    files = product_files(plugin)
     archive.parent.mkdir(parents=True, exist_ok=True)
-    files = sorted(
-        path for path in plugin.rglob("*")
-        if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc"
-    )
     with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as bundle:
         for path in files:
             info = zipfile.ZipInfo(

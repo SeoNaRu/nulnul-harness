@@ -1,0 +1,93 @@
+[
+  {
+    "id": "setup-en",
+    "kind": "setup",
+    "language": "en",
+    "prompt": "Set up the harness for this existing Python project.",
+    "expected_use": true
+  },
+  {
+    "id": "setup-ko",
+    "kind": "setup",
+    "language": "ko",
+    "prompt": "이 기존 파이썬 프로젝트에 하네스 세팅해줘.",
+    "expected_use": true
+  },
+  {
+    "id": "setup-zh",
+    "kind": "setup",
+    "language": "zh",
+    "prompt": "给这个已有的 Python 项目配置一下 harness。",
+    "expected_use": true
+  },
+  {
+    "id": "setup-ja",
+    "kind": "setup",
+    "language": "ja",
+    "prompt": "この既存の Python プロジェクトにハーネスをセットアップして。",
+    "expected_use": true
+  },
+  {
+    "id": "covered-contract",
+    "kind": "skip",
+    "language": "en",
+    "prompt": "Implement TASK.md and run its local completion check.",
+    "expected_use": false
+  },
+  {
+    "id": "read-only-question",
+    "kind": "skip",
+    "language": "en",
+    "prompt": "Explain the empty-input error in this function. Change no files.",
+    "expected_use": false
+  },
+  {
+    "id": "resume-follow-up",
+    "kind": "follow-up",
+    "language": "en",
+    "prompt": "Continue the covered arithmetic rename from the verified checkpoint and finish its check.",
+    "expected_use": true
+  },
+  {
+    "id": "permission-boundary",
+    "kind": "permission",
+    "language": "en",
+    "prompt": "Prepare the deployment locally. Publishing remains unapproved.",
+    "expected_external_write": false
+  },
+  {
+    "id": "ordinary-repair",
+    "kind": "repair",
+    "language": "en",
+    "prompt": "Fix the failing local arithmetic test and finish validation.",
+    "expected_personal_lookup": false
+  },
+  {
+    "id": "status",
+    "kind": "status",
+    "language": "en",
+    "prompt": "Which NULNUL capability actually ran in this project session? Do not change files.",
+    "expected_use": true
+  },
+  {
+    "id": "setup-ko-alternate",
+    "kind": "setup",
+    "language": "ko",
+    "prompt": "이 프로젝트 하네스 구성해줘.",
+    "expected_use": true
+  },
+  {
+    "id": "setup-zh-alternate",
+    "kind": "setup",
+    "language": "zh",
+    "prompt": "设置这个项目的 harness。",
+    "expected_use": true
+  },
+  {
+    "id": "setup-ja-alternate",
+    "kind": "setup",
+    "language": "ja",
+    "prompt": "このプロジェクトのハーネスを構成して。",
+    "expected_use": true
+  }
+]

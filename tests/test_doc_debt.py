@@ -52,6 +52,29 @@ class DocDebtTests(unittest.TestCase):
         self.touch(self.workspace / "notes.txt", 5_000)
         self.assertEqual(detector.check(self.workspace, ("AGENTS.md",)), [])
 
+    def test_empty_source_result_is_reused_across_documents(self):
+        self.source.unlink()
+        (self.workspace / "README.md").write_text("readme", encoding="utf-8")
+        with mock.patch.object(detector, "newest_source_by_mtime", wraps=detector.newest_source_by_mtime) as scan:
+            self.assertEqual(detector.check(self.workspace, ("AGENTS.md", "README.md")), [])
+        self.assertEqual(scan.call_count, 1)
+
+    def test_fallback_scans_once_and_preserves_source_scope(self):
+        nested = self.workspace / "nested"
+        nested.mkdir()
+        (nested / ".sql").write_text("select 1", encoding="utf-8")
+        (nested / "app.tsx").write_text("source", encoding="utf-8")
+        (nested / "notes.txt").write_text("not source", encoding="utf-8")
+        ignored = self.workspace / ".git"
+        ignored.mkdir()
+        (ignored / "hook.py").write_text("not source", encoding="utf-8")
+        self.touch(self.source, 1000)
+        self.touch(nested / "app.tsx", 1500)
+        self.touch(nested / ".sql", 2000)
+        with mock.patch.object(os, "scandir", wraps=os.scandir) as scan:
+            self.assertEqual(detector.newest_source_by_mtime(self.workspace), nested / ".sql")
+        self.assertEqual(scan.call_count, 2)
+
 
 class DocDebtGitTests(unittest.TestCase):
     """Commit times decide, so a document fixed in the same commit is not flagged."""

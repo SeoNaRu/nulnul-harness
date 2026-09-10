@@ -12,7 +12,7 @@ Use agents when clear work boundaries materially improve the outcome, never for 
 
 Zero, one, three, or six agents can all be correct. The only count test is whether each role materially improves the final verified outcome. Do not withhold a justified role to preserve a smaller topology, and do not retain a role whose contribution is not material.
 
-For multi-session or personally evolving work, preserve four logical responsibilities:
+For governed agent evolution, preserve four logical responsibilities:
 
 - **Navigator** owns the user outcome, checkpoint, next action, permission state, and final synthesis.
 - **Worker** performs a bounded project job and emits results or structured feedback, not self-edits.
@@ -71,3 +71,9 @@ Use run evidence to merge idle roles, split overloaded roles, replace weak capab
 A repeated agent-specific miss may justify a bounded new version of that same role even when no external replacement exists. Compare it with the confirmed version through an independent Gate; keep the winner and rollback point, and do not leave both versions active. When the reproduced cause is capability routing rather than the role profile, change routing instead of rewriting a good agent.
 
 Use Agent Evolution only after materially new Agent-attributable evidence, repeated overload/handoff/duplication, a recurring uncovered responsibility, a project topology change, or an explicit maintenance boundary. `KEEP` is normal. `UPGRADE` improves one responsibility contract without necessarily adding an Agent; `SPLIT` partitions demonstrated overload; `MERGE` removes demonstrated duplicate coordination; `REPLACE` changes the preferred Agent design; `RETIRE` removes an obsolete or absorbed responsibility; `CREATE` adds one recurring uncovered responsibility. One frozen Topology Challenger competes against the current topology under equivalent project checks and a sealed holdout. Quality dominates; equivalent quality favors lower verified carrying cost or another named verified advantage. The transaction, not the model, owns identities, digests, graph validation, Decision lineage, commit, and rollback.
+
+## Completion checks for this mode
+
+Apply only the checks whose named state or operation is present. Reuse current authoritative results; repeat after changed inputs, failure, or a concrete unresolved concern.
+
+- Confirm every agent role has distinct ownership, bounded inputs and outputs, a completion check, and one synthesis owner.

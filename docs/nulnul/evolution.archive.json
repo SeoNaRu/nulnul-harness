@@ -468,6 +468,36 @@
         "evidence": "The 2.2.1 checkpoint validator accepts a verified schema-version-3 state with next_action 'Edit app.py' and permission_constraints 'Do not edit app.py' as fast_path_ready=true; evals/constraint-lifecycle/preregistration.json freezes the reproduction and A/B budget.",
         "scope": "core",
         "status": "converted"
+      },
+      {
+        "id": "feedback-cross-project-constraint-drift-v2",
+        "source": "user",
+        "target_agent": "navigator",
+        "observed": "Three user-selected live projects exposed different forms of the same pre-execution gap: conflicting active instructions, a claimed but inactive guard with stale permissions, invalid resumable evolution history, and state that could not provide a safe rollback boundary.",
+        "expected": "Before fast resume or implementation, classify each typed constraint once against current intent, derive every applicable, inactive, superseded, conflict, and unknown identifier mechanically, and fail closed when the review or its source inputs are stale.",
+        "evidence": "The sanitized audit reproduced one contradictory platform ordering, one zero-hook configuration beside a claimed Stop guard and 51 retained allows, two active and 26 reconstructed live-cycle validation failures, one empty VCS metadata directory, and 25 unlinked triaged corrections. The prior prompt-only refinement then omitted required conflict identifiers in two of four runs.",
+        "scope": "core",
+        "status": "converted"
+      },
+      {
+        "id": "feedback-instruction-routing-20260910",
+        "source": "user",
+        "target_agent": "coach",
+        "observed": "Conditional procedures occupy a 4,800-word skill entry and a 994-character description; prior entry-only shortening increased measured input cost.",
+        "expected": "Make discovery precise and procedures task-specific while retaining exact correctness, authority and measured cost gates.",
+        "evidence": "evals/instruction-routing/preregistration.json; unchanged baseline product tests 16/16.",
+        "scope": "project",
+        "status": "converted"
+      },
+      {
+        "id": "feedback-instruction-routing-validation-20260910",
+        "source": "test",
+        "target_agent": "coach",
+        "observed": "Pre-freeze validation found a disconnected trace reference and a stale archive; independent inspection found that the read-only exclusion also suppressed explicit status routing. The first full run also caught the generated Codex entry exceeding its unchanged 800-byte bound; the booking loopback test was blocked by the filesystem/network sandbox.",
+        "expected": "Every shipped mode must be reachable under its correct activation condition; pack current product bytes before archive assertions. Preserve the existing entry bound, make multi-session guidance consistent, and execute the approved loopback check with appropriate local permission.",
+        "evidence": "Pre-freeze product validation 15/17; missing trace-evidence route and stale archive. Independent instruction_gate review identified status discovery conflict. First full run: 453/456; archive mismatch, entry 972 > 800 bytes, and sandbox socket PermissionError. No assertion was relaxed.",
+        "scope": "project",
+        "status": "converted"
       }
     ],
     "proposals": [
@@ -1713,6 +1743,72 @@
         },
         "falsification_condition": "Any conflict executes, compatible work blocks, milestone scoping is ignored, explicit supersession expands permission, stale review survives a checkpoint change, or paired input cost exceeds the frozen budget.",
         "status": "rejected"
+      },
+      {
+        "id": "proposal-navigator-21-derived-constraint-review",
+        "feedback_ids": [
+          "feedback-cross-project-constraint-drift-v2"
+        ],
+        "target_agent": "navigator",
+        "author_agent": "coach",
+        "from_version": 20,
+        "to_version": 21,
+        "cause": "The prior candidate asked the model to author per-constraint reasoning and duplicate global conflict metadata, so safe routing could still omit the exact identifiers needed for a machine-linked block.",
+        "change_target": "Add typed scoped constraints plus one standard-library writer that computes applicability, review freshness, final decision, and all conflict identifiers from one authoritative per-constraint relation inventory; legacy states remain valid but cannot fast resume until migrated, reviewed, and re-verified.",
+        "regression_check": "Run focused constraint, checkpoint, migration, evolution, and negative-control tests; then run the preregistered four-round paired model comparison, the full test suite, documentation debt, and Release Gate.",
+        "primary_metric": "exact pre-execution constraint decisions with complete conflict identifiers and zero false execution or false blocks",
+        "permission_delta": [],
+        "rollback": "Remove the new writer and schema additions, restore the 2.2.1 skill tree and Navigator v20, and retain all failed evidence if any required decision, identifier, freshness, migration, permission, or regression check fails.",
+        "change_level": "task",
+        "discovery_evidence": "The user requested functionality-first improvement after the first bounded episode was rejected; three live project audits then reproduced semantic drift, inactive guards, stale permissions, invalid resume state, and missing rollback evidence without requiring private project content in the product candidate.",
+        "transfer_check": "Sanitized live-project shapes cover stale milestone, permission conflict, conflicting project decisions, compatible local work, explicit user supersession, source-file drift, inactive guard claims, and legacy migration; exposed shapes are DEV or VALIDATION only and a core claim still requires a fresh sealed holdout.",
+        "prediction": "The derived-review candidate will return every required decision and conflict identifier in all paired runs, reject stale or incomplete reviews deterministically, preserve compatible work, and add no permission or dependency.",
+        "expected_delta": {
+          "exact_paired_runs": "2/4 -> 4/4",
+          "missing_required_conflict_ids": "4 fields across 2 runs -> 0",
+          "stale_review_fast_resumes": "accepted -> 0",
+          "permission_delta": "0 -> 0"
+        },
+        "falsification_condition": "Reject on one wrong decision, omitted or invented constraint identifier, false block, stale review accepted for resume, legacy state entering fast resume, source drift miss, test regression, permission expansion, or unbounded model execution.",
+        "pathology": {
+          "where": "Navigator pre-execution intent and constraint reconciliation",
+          "why": "duplicated model-authored decision metadata can disagree or omit the identifiers that make a block actionable"
+        },
+        "mechanism_id": "derived-constraint-review-v2",
+        "status": "rejected"
+      },
+      {
+        "id": "proposal-coach-6-instruction-routing-20260910",
+        "feedback_ids": [
+          "feedback-instruction-routing-20260910",
+          "feedback-instruction-routing-validation-20260910",
+          "feedback-instruction-routing-v2-unknown-20260910"
+        ],
+        "target_agent": "coach",
+        "author_agent": "coach",
+        "from_version": 5,
+        "to_version": 6,
+        "cause": "Conditional instruction location and broad discovery exclusions can change routing and completion overhead.",
+        "change_target": "One task-routed skill candidate, scoped developer and generated host guidance, and validation of reachable references and runtime boundaries.",
+        "regression_check": "Current product and full unittest suites, document debt, candidate/public Release Gate distinction, and frozen counterbalanced same-model A/B.",
+        "primary_metric": "Exact completion and permission behavior with lower paired input cost and bounded elapsed cost.",
+        "permission_delta": [],
+        "rollback": "Restore only this episode product and guidance deltas from the pre-change snapshot; preserve existing user changes and failed evidence.",
+        "change_level": "task",
+        "discovery_evidence": "User-requested six-part instruction audit; baseline counts and prior rejected split recorded before generation.",
+        "transfer_check": "Local product development only; no personal/core transfer or public adoption claim.",
+        "prediction": "Keeping fast resume self-contained while loading setup and evolution procedures conditionally reduces input cost without changing required decisions.",
+        "expected_delta": {
+          "candidate_correct_runs": "4/4",
+          "paired_input_change": "less than 0 percent",
+          "paired_elapsed_change": "at most +10 percent"
+        },
+        "falsification_condition": "Any required decision, read scope, permission, completion owner, regression check, or preregistered cost budget fails.",
+        "pathology": {
+          "where": "skill discovery, entrypoint and generated session guidance",
+          "why": "conditional procedures are always loaded while task execution and stop boundaries are distributed"
+        },
+        "status": "rejected"
       }
     ],
     "promotions": [
@@ -2487,6 +2583,26 @@
         "regressions_passed": false,
         "decision": "rejected",
         "live_cycle": null
+      },
+      {
+        "id": "promotion-navigator-21-derived-constraint-review",
+        "proposal_id": "proposal-navigator-21-derived-constraint-review",
+        "gate_agent": "gate",
+        "before": "Navigator v20 scored 0/4 and omitted required permission and project conflict identifiers in every baseline round.",
+        "after": "The candidate supplied complete conflict identifiers but scored 0/4 because every round changed the composite permission field and the inactive-guard composite remained order-sensitive; evals/constraint-reconciliation-v2/gate-decision.json keeps 2.2.1 active.",
+        "regressions_passed": false,
+        "decision": "rejected",
+        "live_cycle": null
+      },
+      {
+        "id": "promotion-coach-6-instruction-routing-20260910",
+        "proposal_id": "proposal-coach-6-instruction-routing-20260910",
+        "gate_agent": "gate",
+        "before": "Pre-task champion instruction and guidance tree preserved for the frozen local comparison.",
+        "after": "NO_PROMOTION: v2 candidate has unknown execution evidence; zero eligible pairs. Restored scoped product and guidance exactly to pre-task snapshot; evaluator repair retained as local tooling.",
+        "regressions_passed": false,
+        "decision": "rejected",
+        "live_cycle": null
       }
     ],
     "autonomous_episodes": [
@@ -3143,6 +3259,105 @@
         "selected_candidate_id": "candidate-host-entry-ownership-v1",
         "stop_reason": "SUCCESS",
         "claim_boundary": "Sequential Codex and Claude Code root-entry ownership is verified over one repository-local shared NULNUL state. Concurrent mutation, conflict merging, other hosts, global configuration, and repository-receipt promotion are not claimed."
+      },
+      {
+        "id": "episode-constraint-reconciliation-2",
+        "mode": "live",
+        "feedback_id": "feedback-cross-project-constraint-drift-v2",
+        "scope": "core_dev",
+        "pathology": {
+          "where": "Navigator pre-execution intent and constraint reconciliation",
+          "why": "duplicated model-authored decision metadata can disagree or omit the identifiers that make a block actionable"
+        },
+        "budget": {
+          "max_candidates": 1,
+          "max_generations": 1,
+          "max_evaluation_runs": 12,
+          "max_failed_candidates": 1,
+          "max_identical_pathology_retries": 1,
+          "max_model_invocations": 12
+        },
+        "archive_lookup": [],
+        "baseline": {
+          "comparable_dimension": "model_invocations",
+          "fair": true,
+          "arms": [
+            {
+              "id": "champion",
+              "runs": 4,
+              "primary_successes": 0,
+              "model_invocations": 4,
+              "completion_checks": 4,
+              "evidence": "The same-model 2.2.1 arm activated the skill in all four counterbalanced runs and scored 0/4 exact decisions."
+            },
+            {
+              "id": "retry",
+              "runs": 2,
+              "primary_successes": 0,
+              "model_invocations": 2,
+              "completion_checks": 2,
+              "evidence": "Two champion repeats both remained non-exact on the complete six-case decision inventory."
+            },
+            {
+              "id": "best_of_n",
+              "runs": 4,
+              "primary_successes": 0,
+              "model_invocations": 4,
+              "completion_checks": 4,
+              "evidence": "None of four champion runs was selectable as a complete exact result."
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "id": "derived-constraint-review-v2-c1",
+            "proposal_id": "proposal-navigator-21-derived-constraint-review",
+            "generation": 1,
+            "author_agent": "coach",
+            "parent_agent": "navigator",
+            "parent_version": 20,
+            "pathology": {
+              "where": "Navigator pre-execution intent and constraint reconciliation",
+              "why": "duplicated model-authored decision metadata can disagree or omit the identifiers that make a block actionable"
+            },
+            "mechanism_id": "derived-constraint-review-v2",
+            "prediction": "The derived-review candidate will return every required decision and conflict identifier in all paired runs, reject stale or incomplete reviews deterministically, preserve compatible work, and add no permission or dependency.",
+            "falsification_condition": "Reject on one wrong decision, omitted or invented constraint identifier, false block, stale review accepted for resume, legacy state entering fast resume, source drift miss, test regression, permission expansion, or unbounded model execution.",
+            "permission_delta": [],
+            "rollback": "Remove the new writer and schema additions, restore the 2.2.1 skill tree and Navigator v20, and retain all failed evidence if any required decision, identifier, freshness, migration, permission, or regression check fails.",
+            "archive_match": null,
+            "evaluation": {
+              "candidate_id": "derived-constraint-review-v2-c1",
+              "owner_agent": "gate",
+              "status": "failed",
+              "runs": 4,
+              "primary_success": false,
+              "guardrails_passed": false,
+              "evidence": "The strict paired result was 0/4: conflict identifiers were complete, but every run changed permission_delta and the inactive-guard decision remained order-sensitive. Input grew 1.42 percent; no permission was granted, no fixture changed, and no raw transcript was retained.",
+              "cost": {
+                "model_invocations": 4,
+                "completion_checks": 4
+              }
+            },
+            "decision": "rejected",
+            "rejection_reason": "The frozen strict correctness Gate requires every final field to be exact and does not waive composite-output failures after exposure."
+          }
+        ],
+        "gate_agent": "gate",
+        "sealed_evaluation": true,
+        "holdout_case_ids_read": [],
+        "cost": {
+          "candidates_generated": 1,
+          "generations": 1,
+          "evaluation_runs": 4,
+          "failed_candidates": 1,
+          "model_invocations": 4,
+          "completion_checks": 4
+        },
+        "decision": "NO_PROMOTION",
+        "selected_candidate_id": null,
+        "stop_reason": "NO_PROMOTION",
+        "claim_boundary": "This exposed DEV/VALIDATION episode establishes only that deterministic conflict identifiers improved while the composite-output integration remained non-exact. It does not establish a 2.3 candidate, holdout generalization, live adoption, or permission change. The frozen preregistration's zero retries is represented as one evaluated mechanism instance and no retry under the shipped validator."
       }
     ]
   }

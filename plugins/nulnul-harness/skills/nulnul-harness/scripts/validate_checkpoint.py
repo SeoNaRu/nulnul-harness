@@ -22,10 +22,11 @@ def validate(payload):
         return ["checkpoint must be an object"]
     errors = []
     version = payload.get("schema_version")
-    if version not in {1, 2, 3}:
+    if type(version) is not int or version not in {1, 2, 3}:
         errors.append("schema_version must be 1, 2, or 3")
         return errors
-    if version >= 2 and payload.get("verification_status") not in VERIFICATION_STATUSES:
+    status = payload.get("verification_status")
+    if version >= 2 and (not isinstance(status, str) or status not in VERIFICATION_STATUSES):
         errors.append("verification_status must be verified, failed, or unknown")
     for field in TEXT_FIELDS:
         value = payload.get(field)
@@ -45,7 +46,7 @@ def validate(payload):
             invalid = [item for item in files if isinstance(item, str) and not valid_relative_path(item)]
             if invalid:
                 errors.append("verification_files must contain normalized relative file paths")
-            if len(files) != len(set(files)):
+            if all(isinstance(item, str) for item in files) and len(files) != len(set(files)):
                 errors.append("verification_files must not contain duplicates")
             if payload.get("verification_status") == "verified" and not files:
                 errors.append("verified checkpoints require verification_files")
@@ -62,6 +63,7 @@ def valid_relative_path(value):
         value == path.as_posix()
         and not path.is_absolute()
         and "\\" not in value
+        and "\0" not in value
         and value not in {".", "docs/nulnul/checkpoint.json"}
         and ".." not in path.parts
     )
@@ -91,7 +93,8 @@ def freshness_errors(payload, root, evidence):
         return ["checkpoint is not a schema-version-3 verified state"]
     if not isinstance(evidence, dict):
         return ["verification evidence is missing"]
-    if evidence.get("schema_version") != 1 or evidence.get("verification_status") != "verified":
+    version = evidence.get("schema_version")
+    if type(version) is not int or version != 1 or evidence.get("verification_status") != "verified":
         return ["verification evidence is not verified"]
     if evidence.get("verification_files") != payload.get("verification_files"):
         return ["verification evidence does not match checkpoint files"]
@@ -99,6 +102,11 @@ def freshness_errors(payload, root, evidence):
         evidence["verification_fingerprint"]
     ):
         return ["verification evidence fingerprint is invalid"]
+    command_digest = evidence.get("completion_check_digest")
+    if command_digest is not None and command_digest != hashlib.sha256(
+        payload["completion_check"].encode("utf-8")
+    ).hexdigest():
+        return ["verification command changed after the recorded check"]
     try:
         actual = verification_fingerprint(root, payload.get("verification_files", []))
     except (OSError, UnicodeError, ValueError) as error:

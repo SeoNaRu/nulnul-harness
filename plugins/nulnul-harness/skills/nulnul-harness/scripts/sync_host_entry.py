@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import re
+import shlex
 import stat
 import sys
 import tempfile
@@ -99,26 +100,31 @@ def atomic_batch_write(updates, replace=os.replace):
 def managed_block(host, state):
     entry = HOST_ENTRIES[host]
     other = HOST_ENTRIES["claude" if host == "codex" else "codex"]
-    label = "Codex" if host == "codex" else "Claude Code"
     if host == "codex":
         opportunity = (
-            "The Foundation host constructs and binds an immutable pre-session Capability Pack "
-            "before this work model starts. Use only selected capability context already supplied; "
-            "do not invoke Pack lifecycle commands. No selected body is Direct. "
+            " If a Foundation host supplies a bound Pack, use supplied context without Pack "
+            "lifecycle commands. No selected body is Direct."
         )
     else:
-        opportunity = (
-            "Use the active Claude Code NULNUL Skill only when the task positively requires "
-            "setup, continuity, capability work, or another declared workflow; ordinary "
-            "unrelated product work does not load NULNUL state. "
+        opportunity = ""
+    resume = ""
+    if state.as_posix() == "docs/nulnul/checkpoint.json":
+        scripts = Path(__file__).resolve().parent
+        validator = shlex.join(["python3", str(scripts / "validate_checkpoint.py"), state.as_posix()])
+        runner = shlex.join(["python3", str(scripts / "run_checkpoint_check.py"), state.as_posix()])
+        resume = (
+            "On checkpoint resume, before discovery, run from project root:\n"
+            f"```sh\n{validator}\n```\n"
+            "If `fast_path_ready` is true and scope/permissions match, read checkpoint and needed "
+            "task files only; otherwise use full workflow. Then run the recorded check once:\n"
+            f"```sh\n{runner}\n```\n"
         )
     return (
         f"{START}\n"
         "## NULNUL task entry\n\n"
-        f"This is the {label}-owned root entry (`{entry}`). During a {label} run, do not "
-        f"create or modify `{other}`. {opportunity}"
-        "Load the NULNUL Skill only for explicit setup, repair, continuation, or evolution. "
-        "Validate a named fast-resume checkpoint before repository-wide inspection. "
+        f"{host} owns `{entry}`; preserve `{other}`. "
+        "Load NULNUL only for explicit setup, repair, continuation, or evolution."
+        f"{opportunity}\n{resume}"
         f"Stable setup: `docs/nulnul/project.md`; state: `{state.as_posix()}`; one writer.\n"
         f"{END}"
     )
@@ -132,7 +138,7 @@ def merge_entry(existing, block):
     if starts == 1:
         return re.sub(
             rf"{re.escape(START)}.*?{re.escape(END)}",
-            block,
+            lambda _match: block,
             existing,
             count=1,
             flags=re.DOTALL,

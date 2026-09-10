@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-3.1.0-111111" alt="version 3.1.0">
+  <img src="https://img.shields.io/badge/version-3.2.0-111111" alt="version 3.2.0">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT license"></a>
 </p>
 
@@ -24,7 +24,7 @@
   <a href="#what-nulnul-does">What it does</a> ·
   <a href="examples/README.md">In action</a> ·
   <a href="#evidence">Evidence</a> ·
-  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0">v3.1.0 release</a>
+  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.2.0">v3.2.0 candidate</a>
 </p>
 
 <p align="center"><strong>Outcome first · Verify the result · Keep only what earns its place</strong></p>
@@ -53,19 +53,19 @@ If the existing project setup is already the strongest justified path, **adding 
 
 Want to see the output first? **[NULNUL in Action](examples/README.md)** collects a local booking UI/API demo, a synthetic research-workbook example, and the recorded 3.1.0 adoption of an existing project. Each case labels its evidence and limitations; these are not three independently verified customer projects or a new performance benchmark.
 
-These examples are for a new installation pinned to the verified `v3.1.0` release, rather than the moving `main` branch. Use a Codex or Claude Code build that supports plugin commands, and follow the host's trust and permission prompts. A pinned installation does not automatically follow later releases.
+These new-installation commands target the `v3.2.0` publication candidate once its public tag is available. Exact-version public adoption is pending; the verified `v3.1.0` baseline remains documented below. Use a Codex or Claude Code build that supports plugin commands, and follow the host's trust and permission prompts. A pinned installation does not automatically follow later releases.
 
 ### OpenAI Codex
 
 ```bash
-codex plugin marketplace add SeoNaRu/nulnul-harness --ref v3.1.0
+codex plugin marketplace add SeoNaRu/nulnul-harness --ref v3.2.0
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
 ### Anthropic Claude Code
 
 ```bash
-claude plugin marketplace add 'https://github.com/SeoNaRu/nulnul-harness.git#v3.1.0'
+claude plugin marketplace add 'https://github.com/SeoNaRu/nulnul-harness.git#v3.2.0'
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
@@ -265,9 +265,21 @@ Cross-project reuse is opt-in and requires an existing local Personal Home chose
 
 <a id="evidence"></a>
 
+**3.2.0 publication candidate:** concise task routing, executable host resume commands, full installed-copy comparison, safer checkpoint verification, and bounded Trace evidence. The results below distinguish prior local observations from frozen public 3.1.0 evidence; exact-public 3.2.0 adoption is pending.
+
+The skill entry now puts ordinary covered tasks first and routes setup, continuity, workflow and evolution details on demand. Its description is 244 characters and its entry is about 1,026 words; these are document sizes, not measured runtime gains. Required permission/check ownership and the verified checkpoint read/check boundaries are preserved. This user-directed documentation cleanup is separate from the closed experiment below.
+
+Current local maintenance also reduces the developer entry to 615 words by moving subsystem-specific invariants into the [development contract](docs/development-contract.md). Checkpoint rechecks invalidate old verification before execution, malformed fields fail closed, status requires matching ordered body evidence, and the non-Git documentation fallback scans once. [Reproductions and validation](docs/runtime-maintenance.md) describe these changes; frozen public-adoption results do not certify them.
+
+A subsequent [installed-copy and live-use check](docs/live-use-validation.md) refreshed the stale local cache, completed a real receipt-schema correction, and recovered an interrupted check in a fresh Codex session. Each session ran its completion check once and passed all 12 checks. Both still listed files before checkpoint validation; an ineffective section reorder was restored, so fast-resume conformance and comparative speed are not claimed.
+
+The [three-upgrade follow-up](docs/live-use-validation.md#follow-up-all-three-requested-upgrades) adds executable host-entry commands and full installed-file comparison. Two fresh document/bug resumes validated the checkpoint before discovery and ran completion once; an interrupted check recovered safely. Local-only adoption preserved the original code and roles after an inventory guard repair. The full local suite passed 476 checks. Extra skill loading and an adoption recheck remain explicit limits; no comparative speed or public-release claim is made.
+
+The [instruction-routing evaluation](docs/instruction-routing.md) ended with NO_PROMOTION after eight model attempts: the first evaluator was invalidated, and the repaired evaluator withheld acceptance for an unknown candidate event. This episode’s product and guidance changes were restored; only the verified local evaluator repair and rejection evidence remain. The frozen 3.1.0 evidence below is unchanged.
+
 ## New in 3.1
 
-Version **3.1.0** is a publication candidate pending exact-version public adoption. It adds six task-delivery improvements without changing the 3.0 state formats, fast resume, acceptance authorities, or skills-only boundary:
+The published **3.1.0** baseline added six task-delivery improvements without changing the 3.0 state formats, fast resume, acceptance authorities, or skills-only boundary:
 
 1. [Boundary QA](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-delivery.md): inspect actual producers and consumers, check integration incrementally, and retain a reproducible negative control.
 2. [Task recipes](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-recipes.md): web/API changes, data migration/sync, and evidence-backed research.
@@ -449,8 +461,9 @@ The model may propose semantic changes. Deterministic runtime owns identity, dig
 
 ## Release and upgrade
 
-- Current release: [NULNUL 3.1.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0)
-- Upgrade guide: [docs/upgrade-3.0.md](docs/upgrade-3.0.md), unchanged checkpoint shapes in 3.1.
+- Publication candidate: [NULNUL 3.2.0](submission/release-notes.md); exact-version public adoption is pending.
+- Verified baseline: [NULNUL 3.1.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0)
+- Upgrade guide: [docs/upgrade-3.0.md](docs/upgrade-3.0.md), unchanged checkpoint shapes in 3.1 and 3.2.
 - Changelog: [CHANGELOG.md](CHANGELOG.md)
 - Security: [SECURITY.md](SECURITY.md)
 - Privacy: [PRIVACY.md](PRIVACY.md)
@@ -460,3 +473,77 @@ The model may propose semantic changes. Deterministic runtime owns identity, dig
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+
+## NULNUL + Trace: outcome evidence
+
+Locally execution-validated integration candidate; not included in the frozen
+v3.1.0 release evidence. NULNUL projects its existing runtime records into a
+privacy-bounded, versioned contract for [NULNUL Trace](https://github.com/SeoNaRu/nulnul-trace).
+The useful distinction is **selected capability -> body loaded -> work -> authoritative
+check -> task outcome**, with source digests, rather than more logs or inferred success.
+
+Trace separates project configuration from observed use, checks receipt/file/command
+freshness and exposes checked outcomes, missing evidence and limited cost signals.
+It does not call another model, export transcripts, mutate the harness or claim an
+improvement percentage without a comparison. Token savings and fresh-resume success
+remain unmeasured. See the [evidence contract](plugins/nulnul-harness/skills/nulnul-harness/references/trace-evidence.md).
+
+### Seeing Harness work in Trace
+
+1. Use the updated Harness producer with a new Foundation task. Setup alone and older sessions do not create runtime evidence; an unchanged installed plugin will not gain this integration automatically.
+2. Run the matching Trace API, web app and collector. Apply the additional table with the existing `pnpm db:push` command when updating a database.
+3. Open the session ticket, expand **하네스가 한 일**, and choose **이번 세션** (this session) or **이 프로젝트** (this project). Selection, body loading and receipt-linked results are separate observations.
+
+### Local validation (2026-09-09)
+
+- Trace tests: **71/71 passed** (domain 48/48, collector 23/23); API and web builds passed.
+- Deterministic integration smoke: 12 canonical runtime events, one task and one receipt-linked pass reached the collector, API and browser. Session/project scopes, receipt provenance and a 390px mobile viewport passed.
+- API negative controls passed: replay deduplication, wrong project/session, private-field rejection, missing authentication and cross-device session/project isolation.
+- Harness workspace: **447/448 passed**; the remaining product-boundary failure is the pre-existing `docs/research` directory. It was not deleted or excluded to manufacture a pass.
+- A separate publication-base copy was not green: 448 tests, 5 failures and 6 errors, including frozen-evidence source-identity mismatches. This is not clean release validation.
+- Documentation-debt check passed. Release Gate still reports `release_ready: false`: exact-version public Claude and cross-project Meta adoption evidence does not cover the changed producer bytes.
+- The smoke used synthetic data in a temporary DB schema, not an observed user or model trial. The temporary servers/schema were removed; existing sessions were untouched. Additional model calls: **0**. No global plugin update, push or release was performed.
+
+### Request-first integration update (2026-09-09)
+
+The Trace home screen now lists user requests with results, verification and next actions. **하네스가 한 일** distinguishes connected, absent, legacy and unbound runtime records; `nulnul-trace doctor` reports the local cause. The local installed Codex plugin was refreshed for this explicitly requested integration work.
+
+An actual task in this coding session used `trace-core-purity`: selection, body loading and a passing Foundation receipt reached the running collector, API and browser. The earlier interrupted bootstrap remains a partial observation. This is one live development run, not a controlled model comparison or evidence of savings.
+
+The source-state digest now follows Git-tracked and non-ignored untracked files, retaining tracked files even when ignored. Dependency and build trees no longer make bootstrap scan the entire worktree. The digest alone took about 2.1 seconds on the local Trace checkout; this is not an end-to-end performance benchmark. Added two regression checks. After repacking, the full Harness suite is **449/450 passed**, with only the previously recorded `docs/research` product-boundary failure remaining. Frozen public release evidence is unchanged.
+
+## Operational visibility: local candidate
+
+Ask what NULNUL is doing without opening Trace. The read-only view separates source
+identity, an explicitly inspected installation, host-session binding, task state,
+capability selection with its recorded reason, changes and verification evidence.
+
+~~~bash
+python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/harness_status.py --root . --lang en
+~~~
+
+The host supplies its actual session key. Unknown binding is not inactivity; an
+explicit historical lookup is not current execution. An installed/enabled plugin
+entry is not proof that an already-open thread loaded the latest skill body.
+Recorded check exits and validated historical receipts are shown separately.
+No notification, extra model call, global installation or second state writer is added.
+
+Repository research stays outside the product without being deleted. Packaging
+rejects legacy lab paths and symlinks inside the shipped plugin, while retaining
+normalized archive timestamps and permissions.
+
+Local evidence and publication permission are separate commands:
+
+~~~bash
+python3 scripts/release_gate.py
+python3 scripts/public_release_gate.py
+~~~
+
+The second command exits nonzero unless `release_ready` is exactly true. Main and
+pull requests targeting main use this strict gate; non-main candidates retain the
+local evidence gate. Frozen evaluator files and historical adoption hashes are not
+rewritten to make a changed candidate look certified.
+
+The updated candidate passes all 481 repository checks. An actual Trace project repair now recognizes quoted verification paths; the original workspace passed its completion check after the reviewed two-file patch. The fresh metadata-only setup follow-up reused its existing receipt through two transactions with zero additional completion executions; the initial repeated-check failure remains recorded. Exact public adoption is still pending.
+This source change is not a new public release or proof of comparative superiority.

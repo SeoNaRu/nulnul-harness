@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml"><img src="https://github.com/SeoNaRu/nulnul-harness/actions/workflows/test.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/version-3.1.0-111111" alt="버전 3.1.0">
+  <img src="https://img.shields.io/badge/version-3.2.0-111111" alt="버전 3.2.0">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111111" alt="MIT 라이선스"></a>
 </p>
 
@@ -23,7 +23,7 @@
   <a href="#빠른-시작">빠른 시작</a> ·
   <a href="#nulnul이-하는-일">하는 일</a> ·
   <a href="#검증-근거">검증 근거</a> ·
-  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0">v3.1.0 릴리스</a>
+  <a href="https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.2.0">v3.2.0 배포 후보</a>
 </p>
 
 <p align="center"><strong>결과 우선 · 실제로 검증 · 필요한 것만 유지</strong></p>
@@ -52,19 +52,19 @@ NULNUL은 이 주변 레이어를 **프로젝트 기준 + 검증 근거 기준**
 
 결과물부터 보고 싶다면 **[NULNUL in Action](examples/README.ko.md)**을 확인하세요. 로컬 예약 화면·API 데모, 합성 조사 데이터 워크북 예제, 기존 프로젝트의 3.1.0 도입 기록을 모았습니다. 사례마다 증거와 한계를 구분하며, 독립적으로 검증한 고객 프로젝트 3개나 새로운 성능 벤치마크를 의미하지 않습니다.
 
-아래는 변경되는 `main` 브랜치 대신 검증된 `v3.1.0` 릴리스에 고정하는 신규 설치 예시입니다. 플러그인 명령을 지원하는 Codex 또는 Claude Code를 사용하고, 호스트의 신뢰·권한 확인 절차를 따르세요. 버전을 고정하면 이후 릴리스를 자동으로 따라가지 않습니다.
+아래 신규 설치 명령은 공개 태그가 준비된 뒤 사용할 `v3.2.0` 배포 후보를 가리킵니다. 정확한 버전의 공개 도입 검증은 아직 진행 전이며, 검증된 `v3.1.0` 근거는 아래에 보존합니다. 플러그인 명령을 지원하는 Codex 또는 Claude Code를 사용하고, 호스트의 신뢰·권한 확인 절차를 따르세요. 버전을 고정하면 이후 릴리스를 자동으로 따라가지 않습니다.
 
 ### OpenAI Codex
 
 ```bash
-codex plugin marketplace add SeoNaRu/nulnul-harness --ref v3.1.0
+codex plugin marketplace add SeoNaRu/nulnul-harness --ref v3.2.0
 codex plugin add nulnul-harness@nulnul-harness
 ```
 
 ### Anthropic Claude Code
 
 ```bash
-claude plugin marketplace add 'https://github.com/SeoNaRu/nulnul-harness.git#v3.1.0'
+claude plugin marketplace add 'https://github.com/SeoNaRu/nulnul-harness.git#v3.2.0'
 claude plugin install nulnul-harness@nulnul-harness
 ```
 
@@ -264,9 +264,21 @@ NULNUL은 Guarded Kernel과 진화 가능한 control policy를 분리합니다. 
 
 <a id="검증-근거"></a>
 
+**3.2.0 배포 후보:** 작업에 맞춘 간결한 진입 지침, 실행 가능한 호스트 재개 명령, 설치 파일 전체 비교, 체크포인트 검증 보강, 제한된 Trace 근거를 포함합니다. 아래 기록은 이전 로컬 관찰과 동결된 공개 3.1.0 근거를 구분하며, 정확한 공개 3.2.0 도입 검증은 아직 진행 전입니다.
+
+스킬 진입 문서는 기존 계약으로 충분한 일반 작업을 먼저 처리하고, 설치·연속 작업·전문 워크플로·진화 절차를 필요할 때 연결하도록 정리했습니다. 설명은 244자, 진입 문서는 약 1,026단어이며 문서 크기를 뜻할 뿐 실행 성능 개선 수치는 아닙니다. 필수 권한·검사 책임과 검증된 체크포인트의 읽기·검사 범위는 유지했습니다. 이번 사용자 요청에 따른 문서 정리는 아래 종료된 실험과 별개입니다.
+
+현재 로컬 유지보수에서는 세부 개발 규칙을 [조건부 개발 계약](docs/development-contract.md)으로 옮겨 기본 개발 지침도 615단어로 정리했습니다. 체크포인트 재검사 시작 전에 과거 검증을 무효화하고, 잘못된 필드를 거부하며, 상태 조회에서 본문 로드의 식별자·순서를 확인합니다. Git 이력이 없을 때의 문서 검사는 한 번만 순회합니다. [재현과 검증 기록](docs/runtime-maintenance.md)에 범위를 정리했으며, 기존 공개 채택 결과가 이 변경을 인증하지는 않습니다.
+
+후속 [설치 사본·실제 사용 검증](docs/live-use-validation.md)에서는 오래된 로컬 캐시를 갱신하고, 실제 영수증 버전 검사 결함을 수정한 뒤 새 Codex 세션에서 중단된 검사를 복구했습니다. 각 세션은 완료 검사를 한 번 실행해 12개 검사를 모두 통과했습니다. 두 세션 모두 체크포인트 검증 전 파일 목록 조회가 남았고, 효과가 없던 문서 순서 변경은 복원했으므로 빠른 재개 규칙 준수나 비교 속도 개선은 주장하지 않습니다.
+
+[세 가지 후속 업그레이드](docs/live-use-validation.md#follow-up-all-three-requested-upgrades)에서는 실행 가능한 호스트 진입 명령과 설치 파일 전체 비교를 추가했습니다. 새 문서·버그 수정 세션 두 건은 탐색 전에 체크포인트를 검증하고 완료 검사를 한 번 실행했으며, 중단된 검사도 복구했습니다. 로컬 전용 도입은 목록 조회 조건을 보완한 뒤 기존 코드와 역할을 보존했습니다. 전체 로컬 검사 476개가 통과했습니다. 별도 스킬 로드와 도입 후 추가 검사는 한계로 남기며 비교 속도 개선이나 공개 릴리스 완료는 주장하지 않습니다.
+
+[지침 라우팅 평가](docs/instruction-routing.md)는 모델 8회 시도 후 NO_PROMOTION으로 종료했습니다. 첫 평가기는 무효 처리했고, 수정 평가기에서도 후보의 미확인 실행 기록 때문에 합격 근거가 부족했습니다. 이번 제품·지침 변경은 복원했으며, 검증된 로컬 평가기 수정과 기각 근거만 남겼습니다. 아래 동결된 3.1.0 근거는 그대로 유지합니다.
+
 ## 3.1에서 추가된 기능
 
-**3.1.0**은 정확한 새 버전의 공개 채택 검증을 진행하는 배포 후보입니다. 3.0 상태 형식, 빠른 재개, 기존 수용 권한, skills-only 경계를 유지하면서 여섯 가지 작업 실행 기능을 추가했습니다.
+공개된 **3.1.0** 기준 버전은 아래 검증을 통과했습니다. 3.0 상태 형식, 빠른 재개, 기존 수용 권한, skills-only 경계를 유지하면서 여섯 가지 작업 실행 기능을 추가했습니다.
 
 1. [경계면 QA](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-delivery.md): 실제 생산자와 소비자를 함께 확인하고, 단계별 통합 검사와 재현 가능한 부정 대조군을 유지합니다.
 2. [업무별 절차](plugins/nulnul-harness/skills/nulnul-harness/references/workflow-recipes.md): 웹/API 변경, 데이터 마이그레이션·동기화, 근거 기반 조사를 다룹니다.
@@ -446,7 +458,8 @@ Verification + holdout + rollback gate
 
 ## 릴리스와 업그레이드
 
-- 현재 릴리스: [NULNUL 3.1.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0)
+- 배포 후보: [NULNUL 3.2.0](submission/release-notes.md). 정확한 버전의 공개 도입 검증은 아직 진행 전입니다.
+- 검증된 기준 버전: [NULNUL 3.1.0](https://github.com/SeoNaRu/nulnul-harness/releases/tag/v3.1.0)
 - 업그레이드: [docs/upgrade-3.0.md](docs/upgrade-3.0.md), 3.1에서도 기존 체크포인트 형태 유지
 - 변경 내역: [CHANGELOG.md](CHANGELOG.md)
 - 보안: [SECURITY.md](SECURITY.md)
@@ -457,3 +470,73 @@ Verification + holdout + rollback gate
 ## License
 
 MIT — [LICENSE](LICENSE).
+
+
+## NULNUL + Trace: 결과를 설명할 수 있는 실행 근거
+
+로컬 실행 검증을 통과한 연동 후보이며, 공개된 v3.1.0의 고정 릴리스 근거에 포함되지 않습니다.
+NULNUL은 기존 런타임 기록에 민감정보를 제외한 버전 명시형 근거를 추가하여
+[NULNUL Trace](https://github.com/SeoNaRu/nulnul-trace)에 전달합니다.
+차별점은 로그의 양이 아니라 **능력 선택 -> 실제 본문 로드 -> 작업 -> 공식 검증 -> 작업 결과**를
+소스 다이제스트와 함께 연결한다는 점입니다.
+
+Trace는 프로젝트 설정과 실제 사용을 구분하고, 영수증·파일·검증 명령의 유효성을 확인하며,
+검증된 결과와 근거 부족, 제한된 비용 신호를 표시합니다. 별도 모델 호출, 원문 대화 전송,
+하네스 상태 수정, 비교 없는 개선율 주장은 하지 않습니다. 토큰 절감과 새 세션 재개 성공은
+아직 미측정입니다. [근거 계약](plugins/nulnul-harness/skills/nulnul-harness/references/trace-evidence.md)을 참고하세요.
+
+### Trace에서 하네스가 하는 일 보기
+
+1. 업데이트된 Harness 생산자 코드로 새 Foundation 작업을 실행합니다. 설정만 하거나 이전 세션을 여는 것으로 실행 근거가 생기지 않으며, 기존 설치 플러그인이 자동으로 갱신되지는 않습니다.
+2. 대응하는 Trace API·웹·수집기를 실행합니다. DB를 업데이트할 때는 기존 `pnpm db:push` 명령으로 추가 테이블을 적용합니다.
+3. 세션 티켓에서 **하네스가 한 일**를 펼치고 **이번 세션** 또는 **이 프로젝트**를 선택합니다. 능력 선택·본문 로드·영수증 연결 결과는 구분해서 표시합니다.
+
+### 로컬 검증 결과 (2026-09-09)
+
+- Trace 테스트 **71/71 통과**(도메인 48/48, 수집기 23/23). API·웹 빌드도 통과했습니다.
+- 결정적 연동 검증에서 공식 런타임 이벤트 12개, 작업 1개, 영수증 연결 통과 1건이 수집기·API·브라우저까지 전달됐습니다. 세션·프로젝트 범위, 영수증 출처, 모바일 너비 390px 표시를 확인했습니다.
+- API 음성 대조군 통과: 재전송 중복 방지, 잘못된 프로젝트·세션, 민감정보 필드 거부, 인증 누락, 다른 기기의 세션·프로젝트 접근 차단.
+- Harness 작업 공간은 **447/448 통과**입니다. 남은 제품 경계 실패는 기존 `docs/research` 디렉터리이며, 통과를 만들기 위해 삭제하거나 검사에서 제외하지 않았습니다.
+- 별도 공개 기준 복사본은 448개 테스트 중 실패 5개·오류 6개로 전체 통과하지 못했습니다. 고정 근거의 소스 식별 불일치 등이 포함되며, 깨끗한 릴리스 검증으로 취급하지 않습니다.
+- 문서 부채 검사는 통과했습니다. Release Gate는 변경된 생산자 코드에 맞는 공개 Claude·교차 프로젝트 Meta 채택 근거가 없어 여전히 `release_ready: false`입니다.
+- 합성 데이터와 임시 DB 스키마로 진행한 검증이며 실제 사용자·모델 실험이 아닙니다. 임시 서버·스키마는 제거했고 기존 세션은 건드리지 않았습니다. 추가 모델 호출 **0회**. 전역 플러그인 갱신·푸시·릴리스는 하지 않았습니다.
+
+### 요청 중심 연동 갱신 (2026-09-09)
+
+Trace 첫 화면을 사용자 요청별 결과·검증·다음 행동으로 바꿨습니다. **하네스가 한 일**은 연결됨·기록 없음·이전 형식·세션 미연결을 구분하며, `nulnul-trace doctor`로 로컬 원인을 확인합니다. 이번에 명시적으로 요청한 연동 작업을 위해 로컬 Codex 설치 플러그인도 갱신했습니다.
+
+이 코딩 세션의 실제 작업에서 `trace-core-purity`를 선택하고 본문을 로드한 뒤 Foundation 검사 통과 영수증이 실행 중인 수집기·API·브라우저에 도착했습니다. 앞서 중단된 시작 기록은 부분 관측으로 남겼습니다. 실제 개발 실행 한 건이며 통제된 모델 비교나 절감 효과의 근거는 아닙니다.
+
+소스 상태 확인은 Git 추적 파일과 무시되지 않은 미추적 파일을 사용하며, 무시 규칙에 걸려도 추적 중인 파일은 유지합니다. 의존성·빌드 폴더 때문에 시작 단계가 전체 작업 트리를 훑던 문제를 해결했습니다. 로컬 Trace에서 다이제스트 계산만 약 2.1초였으며 전체 실행 성능 측정은 아닙니다. 회귀 검사 2개를 추가했습니다. 다시 패키징한 뒤 Harness 전체 검사는 **449/450 통과**이며 기존 `docs/research` 제품 경계 실패만 남았습니다. 공개 릴리스의 고정 근거는 변경하지 않았습니다.
+
+## 작동 상태 확인: 로컬 후보
+
+Trace를 열지 않고도 NULNUL이 무엇을 하는지 확인할 수 있습니다. 읽기 전용 상태 명령은
+개발 소스·명시적으로 검사한 설치 사본·호스트 세션 연결·작업 상태·능력 선택과 기록된 이유·
+변경 내용·검증 근거를 구분합니다.
+
+~~~bash
+python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/harness_status.py --root . --lang ko
+~~~
+
+호스트가 실제 세션 키를 제공합니다. 연결 미확인은 미작동 판정이 아니며, 과거 기록 조회는
+현재 실행의 증거가 아닙니다. 플러그인이 설치·활성화되어 있어도 이미 열린 스레드가 최신
+스킬 본문을 읽었다고 단정하지 않습니다. 검사 종료 기록과 검증된 과거 영수증도 구분합니다.
+알림·추가 모델 호출·전역 설치·두 번째 상태 기록기를 추가하지 않습니다.
+
+기존 연구자료는 삭제하지 않고 제품 밖에 보존합니다. 패키징은 배포 플러그인 안의 과거
+실험실 경로와 심볼릭 링크를 거부하며, 아카이브 타임스탬프·권한 정규화는 유지합니다.
+
+로컬 근거 검사와 공개 허용 판정은 다른 명령입니다.
+
+~~~bash
+python3 scripts/release_gate.py
+python3 scripts/public_release_gate.py
+~~~
+
+두 번째 명령은 `release_ready`가 정확히 true가 아니면 실패합니다. main과 main 대상 PR에는
+엄격한 판정을, non-main 후보에는 로컬 근거 검사를 적용합니다. 변경된 후보를 인증된 것처럼
+보이게 하려고 고정된 판정기나 과거 채택 근거의 해시를 덮어쓰지 않습니다.
+
+업데이트한 후보는 전체 저장소 검사 481개를 통과했습니다. 실제 Trace 프로젝트에서는 따옴표로 감싼 검증 경로 인식을 수정했고, 검토한 두 파일을 반영한 원본 작업 폴더의 완료 검사도 통과했습니다. 새 세션의 설명 변경 도입에서는 두 번의 설정 처리 모두 기존 영수증을 재사용해 완료 검사를 추가 실행하지 않았고, 최초 중복 실행 실패 기록도 보존했습니다. 정확한 공개 패키지 도입 검증은 아직 진행 전입니다.
+이 소스 변경은 새 공개 릴리스나 다른 하네스 대비 우월성의 증거가 아닙니다.

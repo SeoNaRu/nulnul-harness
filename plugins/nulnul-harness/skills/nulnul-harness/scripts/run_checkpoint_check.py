@@ -2,6 +2,7 @@
 """Run the exact completion command recorded by a concise checkpoint."""
 
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -31,6 +32,7 @@ def record_verification(checkpoint_path, payload, root, status):
         "verification_status": status,
         "verification_files": payload["verification_files"],
         "verification_fingerprint": "",
+        "completion_check_digest": hashlib.sha256(payload["completion_check"].encode("utf-8")).hexdigest(),
     }
     if status == "verified":
         try:
@@ -54,6 +56,8 @@ def run(checkpoint_path, root, timeout):
     if errors:
         return {"passed": False, "exit_code": None, "errors": errors}
     command = payload["completion_check"]
+    # A started or interrupted recheck cannot reuse the previous success receipt.
+    record_verification(checkpoint_path, payload, root, "unknown")
     try:
         result = subprocess.run(command, cwd=root, shell=True, timeout=timeout)
         passed = result.returncode == 0

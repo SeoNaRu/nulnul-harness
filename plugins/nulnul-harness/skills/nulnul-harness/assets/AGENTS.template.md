@@ -16,5 +16,5 @@ This is the Codex-owned root entry. Shared stable setup belongs in `docs/nulnul/
 - Build: `{build_command}`
 - Test: `{test_command}`
 - Verify: `{verification_command}`
-- Resume checkpoint: validate `docs/nulnul/checkpoint.json` before any repository-wide inspection; when `fast_path_ready` is true, read only it and task files
+- Resume checkpoint: use the managed entry's executable validator before discovery; when `fast_path_ready` is true, read only the checkpoint and needed task files. Generate that block with the loaded skill's `scripts/sync_host_entry.py`; do not guess project-relative script paths.
 - Detailed project setup: `docs/nulnul/project.md` (full workflow only)

@@ -65,7 +65,7 @@ Available capabilities and capabilities active for the current task are separate
 
 {direct, single-agent, multi-agent, or hybrid topology chosen from concrete work boundaries; include distinct ownership, handoffs, checks, and one synthesis owner}
 
-For multi-session or personally evolving work, record Navigator, Worker, Coach, and independent Gate responsibilities. Point to `docs/nulnul/evolution.json`; do not duplicate its live state here.
+Use a concise checkpoint for continuity alone. For evidence-gated agent evolution, record Navigator, Worker, Coach, and independent Gate responsibilities and point to `docs/nulnul/evolution.json`; do not duplicate its live state here.
 
 ## Evolution baseline
 

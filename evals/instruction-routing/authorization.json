@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "episode_id": "instruction-routing-20260910",
+  "approved_at": "2026-09-10T02:03:48.547406+00:00",
+  "source": "explicit user approval in this thread",
+  "max_external_model_invocations": 17,
+  "model": "gpt-6-astra",
+  "scope": "frozen local instruction A/B, controls and gated live cycle using the existing Codex login",
+  "publication": false,
+  "global_registration": false,
+  "new_provider_or_billing_configuration": false,
+  "amendments": [
+    {
+      "approved_at": "2026-09-10T02:32:16.942136+00:00",
+      "source": "explicit user approval of five additional calls in this thread",
+      "previous_limit": 12,
+      "new_cumulative_limit": 17
+    }
+  ]
+}

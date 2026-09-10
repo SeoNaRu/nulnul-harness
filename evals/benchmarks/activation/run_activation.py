@@ -259,6 +259,16 @@ def shell_segments(command):
     return segments
 
 
+def python_command(tokens):
+    """Normalize harmless interpreter flags without mistaking -c text for a script."""
+    if not tokens or not re.fullmatch(r"python(?:3(?:\.\d+)?)?", os.path.basename(tokens[0])):
+        return tokens
+    arguments = tokens[1:]
+    while arguments and arguments[0] in {"-B", "-E", "-I", "-s", "-S", "-u"}:
+        arguments = arguments[1:]
+    return ["python", *arguments]
+
+
 def executes_script(segment, script_name):
     try:
         tokens = shlex.split(segment)
@@ -268,14 +278,15 @@ def executes_script(segment, script_name):
         tokens.pop(0)
     if not tokens:
         return False
+    tokens = python_command(tokens)
     executable = os.path.basename(tokens[0])
-    if executable.startswith("python"):
-        return any(os.path.basename(token) == script_name for token in tokens[1:])
+    if executable == "python":
+        return len(tokens) > 1 and os.path.basename(tokens[1]) == script_name
     return executable == script_name
 
 
 def completion_check_counts(commands, completion_check):
-    expected = shlex.split(completion_check) if completion_check else []
+    expected = python_command(shlex.split(completion_check)) if completion_check else []
     counts = {"checkpoint_runner": 0, "direct": 0}
     for command in commands:
         for segment in shell_segments(command):
@@ -283,7 +294,7 @@ def completion_check_counts(commands, completion_check):
                 counts["checkpoint_runner"] += 1
                 continue
             try:
-                actual = shlex.split(segment)
+                actual = python_command(shlex.split(segment))
             except ValueError:
                 continue
             if expected and actual[:len(expected)] == expected:
@@ -542,7 +553,7 @@ def summarize(records):
     }
 
 
-def run_case(name, case, arm, skill, model, effort, timeout, round_index):
+def run_case(name, case, arm, skill, model, effort, timeout, round_index, audit_factory=None):
     case_started = time.monotonic()
     workspace = Path(tempfile.mkdtemp(prefix=f"act-{name}-"))
     try:
@@ -582,6 +593,7 @@ def run_case(name, case, arm, skill, model, effort, timeout, round_index):
             json.loads(checkpoint_path.read_text(encoding="utf-8"))
             if initial_validation is not None else None
         )
+        audit = audit_factory(workspace) if audit_factory else None
         fixture_seconds = round(time.monotonic() - case_started, 3)
         agent_started = time.monotonic()
         process = subprocess.run(
@@ -605,6 +617,23 @@ def run_case(name, case, arm, skill, model, effort, timeout, round_index):
         missing_reads = [marker for marker in case.get("required_reads", ()) if marker not in trace]
         forbidden_reads = [marker for marker in case.get("forbidden_reads", ()) if marker in trace]
         telemetry = execution_telemetry(process.stdout, case.get("completion_check"))
+        command_audit = audit(process.stdout) if audit else None
+        audit_passed = command_audit is None or command_audit["status"] == "verified"
+        if command_audit is not None:
+            reads = command_audit["read_paths"]
+            activated = ".agents/skills/nulnul-harness/SKILL.md" in reads
+            missing_reads = [path for path in case.get("required_reads", ()) if path not in reads]
+            forbidden_reads = command_audit["forbidden_read_paths"]
+            counts = command_audit["completion_check_invocations_by_kind"]
+            telemetry["completion_check_invocations_by_kind"] = counts
+            telemetry["completion_check_invocations"] = sum(counts.values())
+        # Do not execute fixture validators after an unaudited command or protected-file mutation.
+        if not audit_passed:
+            return {"case": name, "category": case["category"], "arm": arm,
+                    "correct": False, "agent_exit_code": process.returncode,
+                    "activated": activated, "expected_activation": case["expect_activation"],
+                    "command_audit": command_audit, "telemetry": telemetry,
+                    "elapsed_seconds": agent_seconds, **usage}
         current_validation = fresh_checkpoint_validation(workspace, timeout)
         current_checkpoint = (
             json.loads(checkpoint_path.read_text(encoding="utf-8"))
@@ -625,6 +654,12 @@ def run_case(name, case, arm, skill, model, effort, timeout, round_index):
         )
         check_exit_code = None
         verification_started = time.monotonic()
+        behavior_exit_code = None
+        if case.get("gate_check"):
+            behavior_exit_code = subprocess.run(
+                case["gate_check"], cwd=workspace, stdin=subprocess.DEVNULL,
+                capture_output=True, text=True, timeout=timeout,
+            ).returncode
         if command := case.get("completion_check"):
             gate_command = (
                 [sys.executable, str(checkpoint_runner), str(checkpoint_path), "--root", str(workspace)]
@@ -645,6 +680,7 @@ def run_case(name, case, arm, skill, model, effort, timeout, round_index):
             and not missing_reads
             and not forbidden_reads
             and check_exit_code in (None, 0)
+            and behavior_exit_code in (None, 0)
         )
         telemetry["lifecycle_signals"] = lifecycle_signals(
             process.stdout, case.get("completion_check"),
@@ -666,6 +702,7 @@ def run_case(name, case, arm, skill, model, effort, timeout, round_index):
             "missing_required_reads": missing_reads,
             "forbidden_reads": forbidden_reads,
             "completion_check_exit_code": check_exit_code,
+            "behavior_check_exit_code": behavior_exit_code,
             "elapsed_seconds": agent_seconds,
             "stage_seconds": {
                 "fixture": fixture_seconds,
@@ -674,6 +711,7 @@ def run_case(name, case, arm, skill, model, effort, timeout, round_index):
                 "total": round(time.monotonic() - case_started, 2),
             },
             "telemetry": telemetry,
+            **({"command_audit": command_audit} if command_audit is not None else {}),
             "experience_digest": digest,
             "checkpoint_truth": checkpoint_truth,
             "created_harness_files": sorted(

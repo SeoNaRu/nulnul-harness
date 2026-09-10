@@ -261,7 +261,9 @@ class CapabilityContractTests(FoundationCase):
 class DirectSurfaceTests(FoundationCase):
     def test_direct_entry_is_bounded_and_defers_heavy_context(self):
         block = sync_host_entry.managed_block("codex", Path("docs/nulnul/checkpoint.json"))
-        self.assertLessEqual(len(block.encode()), 800)
+        # Installed paths vary by machine; bound guidance independently of those paths.
+        guidance = block.replace(str(sync_host_entry.Path(sync_host_entry.__file__).resolve().parent), "")
+        self.assertLessEqual(len(guidance.encode()), 800)
         for forbidden in (
             "trust_level", "CODEX_RESTART_REQUIRED", "new-setup", "adopt-upgrade",
             "evolution history", "rule installation", "SETUP_TRANSACTION", "Experience schema",
@@ -814,6 +816,129 @@ class SetupTransactionTests(FoundationCase):
             ),
             capability_contract.bounded_view(self.root / "docs/nulnul/project.md"),
         )
+
+    def test_metadata_only_adopt_reuses_the_executed_check_and_receipt(self):
+        inactive = self.root / "CLAUDE.md"
+        inactive.write_text("# Keep the other host unchanged\n", encoding="utf-8")
+        with mock.patch.object(
+            setup_transaction.run_checkpoint_check, "run",
+            wraps=setup_transaction.run_checkpoint_check.run,
+        ) as runner:
+            first, _ = self.execute("new-setup")
+            self.assertEqual(first["status"], "SETUP_TRANSACTION_PASS")
+            self.assertFalse(first["completion_check"]["reused"])
+            self.assertEqual(runner.call_count, 1)
+            before = self.setup_bytes()
+            result, _ = self.execute(plan=self.plan(goal="A shorter goal.", milestone="Continue."))
+        self.assertEqual(result["status"], "SETUP_TRANSACTION_PASS")
+        self.assertTrue(result["completion_check"]["reused"])
+        self.assertIsNone(result["completion_check"]["exit_code"])
+        self.assertEqual(runner.call_count, 1)
+        self.assertEqual(
+            self.setup_bytes()["docs/nulnul/checkpoint.verification.json"],
+            before["docs/nulnul/checkpoint.verification.json"],
+        )
+        self.assertNotEqual(
+            self.setup_bytes()["docs/nulnul/checkpoint.json"], before["docs/nulnul/checkpoint.json"]
+        )
+        self.assertEqual(inactive.read_text(), "# Keep the other host unchanged\n")
+
+    def test_changed_verified_source_rechecks_and_rolls_back_failure(self):
+        first, _ = self.execute()
+        self.assertEqual(first["status"], "SETUP_TRANSACTION_PASS")
+        before = self.setup_bytes()
+        (self.root / "product.txt").write_text("broken", encoding="utf-8")
+        with mock.patch.object(
+            setup_transaction.run_checkpoint_check, "run",
+            wraps=setup_transaction.run_checkpoint_check.run,
+        ) as runner:
+            result, _ = self.execute()
+        self.assertEqual(runner.call_count, 1)
+        self.assertFalse(result["completion_check"]["reused"])
+        self.assertEqual(result["failed_phase"], "checkpoint-verification")
+        self.assertEqual(result["rollback_result"], "PASS")
+        self.assertEqual(self.setup_bytes(), before)
+
+    def test_changed_command_or_verification_file_set_requires_execution(self):
+        for field in ("completion_check", "verification_files"):
+            with self.subTest(field=field):
+                first, _ = self.execute()
+                self.assertEqual(first["status"], "SETUP_TRANSACTION_PASS")
+                plan = self.plan()
+                if field == "completion_check":
+                    plan[field] += " && true"
+                else:
+                    (self.root / "extra.txt").write_text("input", encoding="utf-8")
+                    plan[field] += ["extra.txt"]
+                with mock.patch.object(
+                    setup_transaction.run_checkpoint_check, "run",
+                    wraps=setup_transaction.run_checkpoint_check.run,
+                ) as runner:
+                    result, _ = self.execute(plan=plan)
+                self.assertEqual(result["status"], "SETUP_TRANSACTION_PASS")
+                self.assertFalse(result["completion_check"]["reused"])
+                self.assertEqual(runner.call_count, 1)
+
+    def test_untrusted_prior_checkpoint_or_receipt_requires_execution(self):
+        first, _ = self.execute()
+        self.assertEqual(first["status"], "SETUP_TRANSACTION_PASS")
+        checkpoint = self.root / "docs/nulnul/checkpoint.json"
+        receipt = checkpoint.with_name("checkpoint.verification.json")
+        valid_checkpoint = checkpoint.read_text()
+        valid_receipt = receipt.read_text()
+        for target, update in (
+            (checkpoint, {"verification_status": "unknown"}),
+            (checkpoint, {"verification_status": "failed"}),
+            (checkpoint, {"schema_version": 2}),
+            (checkpoint, "invalid JSON"),
+            (receipt, {"verification_status": "unknown"}),
+            (receipt, {"verification_status": "failed"}),
+            (receipt, {"verification_fingerprint": "invalid"}),
+            (receipt, {"completion_check_digest": None}),
+            (receipt, "invalid JSON"),
+            (receipt, None),
+        ):
+            with self.subTest(target=target.name, update=update):
+                checkpoint.write_text(valid_checkpoint, encoding="utf-8")
+                receipt.write_text(valid_receipt, encoding="utf-8")
+                if update is None:
+                    target.unlink()
+                elif isinstance(update, dict):
+                    target.write_text(
+                        json.dumps({**json.loads(target.read_text()), **update}), encoding="utf-8"
+                    )
+                else:
+                    target.write_text(update, encoding="utf-8")
+                with mock.patch.object(
+                    setup_transaction.run_checkpoint_check, "run",
+                    wraps=setup_transaction.run_checkpoint_check.run,
+                ) as runner:
+                    result, _ = self.execute()
+                self.assertEqual(result["status"], "SETUP_TRANSACTION_PASS")
+                self.assertFalse(result["completion_check"]["reused"])
+                self.assertEqual(runner.call_count, 1)
+
+    def test_changed_setup_or_host_verification_input_requires_execution(self):
+        for name in ("docs/nulnul/project.md", "AGENTS.md"):
+            with self.subTest(name=name):
+                plan = self.plan(verification_files=["product.txt", name])
+                first, _ = self.execute(plan=plan)
+                self.assertEqual(first["status"], "SETUP_TRANSACTION_PASS")
+                plan["milestone"] = "Shorten setup metadata."
+                managed_block = sync_host_entry.managed_block
+
+                def updated_block(host, state):
+                    block = managed_block(host, state)
+                    return block.replace("Stable setup:", "Shared setup:") if name == "AGENTS.md" else block
+
+                with mock.patch.object(
+                    setup_transaction.run_checkpoint_check, "run",
+                    wraps=setup_transaction.run_checkpoint_check.run,
+                ) as runner, mock.patch.object(sync_host_entry, "managed_block", side_effect=updated_block):
+                    result, _ = self.execute(plan=plan)
+                self.assertEqual(result["status"], "SETUP_TRANSACTION_PASS")
+                self.assertFalse(result["completion_check"]["reused"])
+                self.assertEqual(runner.call_count, 1)
 
     def test_pack_setup_neither_requires_nor_mutates_codex_trust(self):
         config = self.codex_home / "config.toml"

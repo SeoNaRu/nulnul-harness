@@ -37,11 +37,13 @@ Record an omitted mechanism as `not applicable` with one reason. The Coach may a
 
 One durable **session entry instruction** and one concise checkpoint belong in day-one output. Put the instruction in the repository file the detected host already loads: `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code. For `new-setup` or `adopt-upgrade`, give the exact Governed receipt and one bounded Setup Plan to `../scripts/setup_transaction.py`; it writes and validates the project contract, accepted rows, active entry, checkpoint, and verification receipt as one rollback-safe unit. Pre-session Capability Packs require no activation rule, trust mutation, or capability-only restart. Do not hand-author those files or write the inactive host entry. The checkpoint owns only the current goal, milestone, completion check, bounded verification files, explicit verification status, last verified result, next action, permission constraints and approvals, and blockers; `project.md` keeps stable setup evidence and does not duplicate those live fields. The completion runner alone owns the sibling verification receipt. When `evolution.json` already owns the checkpoint, the Setup transaction fails rather than creating a second writer. Existing Claude Code agents still get classified and may be upgraded through shared repository guidance, but an unattended session must not create or edit `.claude/**`. Worker, Coach, and Gate stay merged until concrete evidence splits them.
 
+Before running a schema-v3 completion check, the existing runner marks its checkpoint and verification receipt `unknown`. Interruption or a command-start failure must not leave an older success eligible for fast resume. Only a successful completed check restores `verified`; malformed checkpoint field types and invalid verification paths are rejected before execution. The verification receipt requires integer schema version `1`; booleans and floating-point versions do not authorize fast resume.
+
 ## Documentation debt detection
 
 A fix that lands in code but not in the harness documents is knowledge the next session cannot see, and the next session is where it was needed.
 
-- Warn when source files are newer than the harness documents that describe them. Comparing modification times is enough; a precise detector is not required.
+- Warn when source files are newer than the harness documents that describe them. Use Git commit order for tracked documents, including working-tree changes; fall back to modification times only when history is unavailable.
 - A false positive costs one warning line. A miss costs re-digging a hole that was already dug.
 
 Run the shipped detector instead of writing one:
@@ -52,7 +54,8 @@ python3 ../scripts/check_doc_debt.py . --host claude          # CLAUDE.md plus s
 python3 ../scripts/check_doc_debt.py . --document AGENTS.md   # narrow it to one document
 ```
 
-The active-host option excludes the inactive root entry. Dirty working-tree documents take precedence over commit order, so a document already updated in the current change is not falsely reported as stale; dirty source with a clean document is still reported. The command exits non-zero when a listed document is older than the newest source file, so it works as a pre-push hook or a final check before ending a session.
+The active-host option excludes the inactive root entry. Dirty working-tree documents take precedence over commit order, so a document already updated in the current change is not falsely reported as stale; dirty source with a clean document is still reported. Without usable history, the fallback scans the source tree once, skips `.git`, and reuses even an empty result across documents. The command exits non-zero when a listed document is stale against source changes, so it works as a pre-push hook or a final check before ending a session.
+
 
 ## Root host entries
 
@@ -62,6 +65,8 @@ Use `AGENTS.md` for Codex and `CLAUDE.md` for Claude Code. Keep each entry short
 - point to the stable shared project contract;
 - point to the single active checkpoint or evolution state;
 - forbid modifying the other host entry.
+
+For checkpoint state, the managed entry includes executable validator and completion-runner commands bound to the skill that generated it. Run them from the project root; target repositories need no copy of the plugin's scripts. A Foundation Pack is available only when an integrating host actually supplies one. Ordinary Codex execution has no automatic pre-session wrapper. After moving or replacing the installed skill path, regenerate only the active entry with that installed skill's `scripts/sync_host_entry.py HOST --root PROJECT`; preserve the inactive entry and shared state.
 
 Do not copy one host entry into the other or duplicate directory tours, temporary plans, generated capability lists, live checkpoint values, or model-specific retry advice. Keep shared repository truth in `docs/nulnul/`.
 
@@ -91,7 +96,7 @@ For a legacy durable setup, run `../scripts/migrate_legacy_checkpoint.py docs/nu
 
 ## `docs/nulnul/evolution.json`
 
-Create this only for multi-session work, agent-specific feedback, or personal evolution. Start from `../assets/evolution-state.template.json`. Keep the current checkpoint, confirmed and provisional agent versions, bounded feedback, proposals, and Gate decisions. Validate it with `../scripts/validate_evolution_state.py` after every update.
+Use this for agent-specific learning or governed evolution requiring feedback, proposal, and version history. Multiple sessions alone use the concise checkpoint. Start from `../assets/evolution-state.template.json` only when no existing writer owns live state. Keep the current checkpoint, confirmed and provisional agent versions, bounded feedback, proposals, and Gate decisions. Validate it with `../scripts/validate_evolution_state.py` after every update.
 
 After terminal decisions accumulate, run `../scripts/compact_evolution_state.py docs/nulnul/evolution.json`. The active file keeps open work and the latest accepted rollback point per agent; the adjacent `evolution.archive.json` keeps full closed records behind a digest. Validate both with `--check`, keep the archive out of normal resume context, and use `--rejected-for <agent>` for bounded replay checks. The compactor is the only writer of the archive and updates active state plus archive as one rollback-safe batch.
 

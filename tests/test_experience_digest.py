@@ -49,6 +49,12 @@ class ExperienceDigestTests(unittest.TestCase):
             RUNNER.completion_check_counts(commands, "python3 -m unittest -q"),
             {"checkpoint_runner": 1, "direct": 0},
         )
+        self.assertEqual(RUNNER.completion_check_counts([
+            'python3 -B -m unittest -q',
+            'python -u -B -m unittest -q',
+            'python3 -c pass run_checkpoint_check.py',
+            'echo python3 -m unittest -q',
+        ], 'python3 -m unittest -q'), {'checkpoint_runner': 0, 'direct': 2})
 
     def test_digest_rejects_bad_stage_and_trace_fields(self):
         digest = RUNNER.experience_digest(

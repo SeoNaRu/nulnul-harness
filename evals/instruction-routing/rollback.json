@@ -1,0 +1,37 @@
+{
+  "product_files": [
+    "plugins/nulnul-harness/skills/nulnul-harness/SKILL.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/assets/AGENTS.template.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/assets/project-contract.template.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/agent-assembly.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/capability-discovery.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/data-workflow-safety.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/evolution.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/foundation.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/generalization.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/meta-evolution.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/personal-evolution.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/project-files.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/runtime-visibility.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/references/setup.md",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/setup_transaction.py",
+    "plugins/nulnul-harness/skills/nulnul-harness/scripts/sync_host_entry.py"
+  ],
+  "guidance_files": [
+    "AGENTS.md",
+    "docs/maintaining-harness.md",
+    "tests/test_product_plugin.py"
+  ],
+  "guidance_patch_sha256": "f611132bd497f15669e58fea714959b7f839b5067adba169b849b11e8db1b77c",
+  "product_patch_sha256": "73e581bc35fa0e8ced591b66701243bc1203d3cba06861541c295393911a8255",
+  "schema_version": 1,
+  "restored_at": "2026-09-10T02:37:21.192502+00:00",
+  "decision": "NO_PROMOTION",
+  "product_tree_sha256": "29406f3ce8b0e5be8590308363a982f03bd2de070168bd9899a0295b4473fcb9",
+  "matches_pre_task_champion": true,
+  "guidance_matches_pre_task_snapshot": true,
+  "unrelated_preexisting_changes_preserved": true,
+  "model_calls_consumed": 8,
+  "model_calls_authorized": 17,
+  "remaining_calls_not_used": 9
+}

@@ -13,6 +13,7 @@ path with no commit yet, the file modification time is used instead.
 
 import argparse
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -49,17 +50,24 @@ def sources_changed_since(root, commit):
 
 
 def newest_source_by_mtime(root):
-    sources = [
-        path for glob in SOURCE_GLOBS for path in root.rglob(glob)
-        if path.is_file() and ".git" not in path.parts
-    ]
-    return max(sources, key=lambda path: path.stat().st_mtime) if sources else None
+    suffixes = tuple(pattern[1:] for pattern in SOURCE_GLOBS)
+
+    def sources():
+        for directory, folders, files in os.walk(root):
+            folders[:] = [name for name in folders if name != ".git"]
+            for name in files:
+                path = Path(directory) / name
+                if name.endswith(suffixes) and path.is_file():
+                    yield path
+
+    return max(sources(), key=lambda path: path.stat().st_mtime, default=None)
 
 
 def check(root, documents=None, host=None):
     root = Path(root).resolve()
     documents = documents or ((HOST_DOCUMENTS[host], *SHARED_DOCUMENTS) if host else DOCUMENTS)
     newest = None
+    scanned = False
     uncommitted_source = dirty_source(root)
     stale = []
     for name in documents:
@@ -75,8 +83,9 @@ def check(root, documents=None, host=None):
             if document_commit:
                 source = sources_changed_since(root, document_commit)
             else:
-                if newest is None:
+                if not scanned:
                     newest = newest_source_by_mtime(root)
+                    scanned = True
                 source = (
                     str(newest.relative_to(root))
                     if newest is not None and newest.stat().st_mtime > document.stat().st_mtime

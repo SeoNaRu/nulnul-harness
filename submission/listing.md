@@ -2,8 +2,8 @@
 
 - Name: nulnul harness
 - Package: `nulnul-harness`
-- Version: `3.1.0`
-- Status: Local candidate; not published or submitted
+- Version: `3.2.0`
+- Status: Publication candidate; exact-version public adoption and directory submission are pending
 - Publisher: SeoNaRu (must match the verified OpenAI Platform identity)
 - Category: Productivity
 - Shape: Skills only; no MCP server, app, UI, hooks, authentication, or publisher-operated service
@@ -24,7 +24,7 @@
 - Privacy: <https://github.com/SeoNaRu/nulnul-harness/blob/main/PRIVACY.md>
 - Terms: <https://github.com/SeoNaRu/nulnul-harness/blob/main/TERMS.md>
 
-These URLs become valid only after the publisher creates and pushes the public repository.
+The repository URLs are public. This draft is not an OpenAI directory submission or approval.
 
 ## Availability
 

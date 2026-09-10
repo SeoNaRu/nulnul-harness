@@ -1,0 +1,663 @@
+{
+  "schema_version": 1,
+  "episode_id": "instruction-routing-20260910",
+  "decision": "INVALID_EVALUATOR_NO_PROMOTION",
+  "candidate_changed": false,
+  "completed_calls": 5,
+  "charged_attempts": 6,
+  "frozen_candidate": {
+    "schema_version": 1,
+    "episode_id": "instruction-routing-20260910",
+    "frozen_at": "2026-09-10T01:54:59.342295+00:00",
+    "champion_plugin_sha256": "29406f3ce8b0e5be8590308363a982f03bd2de070168bd9899a0295b4473fcb9",
+    "candidate_plugin_sha256": "035c11d7cef4528c46d964a044568ec65734cf9ef1aa0ed9eec7078b392cc379",
+    "evaluation_sha256": {
+      "evals/instruction-routing/run_ab.py": "48135c714d007f7a708853134d5ce036a731483f37c77b13cff3405055629499",
+      "evals/instruction-routing/preregistration.json": "258414bfffa60625cd6f3de1e9042bad8640a1f628bf172eaaf6ec4187947827",
+      "evals/instruction-routing/cases.json": "411cfa1575aa0da6f3603e9126d8e5145c51813df0646672c128bba839771721",
+      "evals/benchmarks/activation/run_activation.py": "7fcb8530b217f72d4a67657e2959bbdf895776fc66341e814aeb5fe80fa5dc3f"
+    },
+    "exposure": "DEV/VALIDATION only; no holdout reads",
+    "status": "frozen, model comparison not executed",
+    "surfaces": {
+      "champion": {
+        "skill_bytes": 35879,
+        "skill_words": 4800,
+        "description_characters": 994,
+        "agents_bytes": 11417,
+        "agents_words": 1533
+      },
+      "candidate": {
+        "skill_bytes": 8789,
+        "skill_words": 1192,
+        "description_characters": 311,
+        "agents_bytes": 4078,
+        "agents_words": 492
+      }
+    }
+  },
+  "preregistration": {
+    "schema_version": 1,
+    "episode_id": "instruction-routing-20260910",
+    "registered_at": "2026-09-10T01:39:51.039305+00:00",
+    "scope": "local product instruction routing; no personal transfer or public-release claim",
+    "feedback_id": "feedback-instruction-routing-20260910",
+    "proposal_id": "proposal-coach-6-instruction-routing-20260910",
+    "pathology": {
+      "where": "skill discovery and entrypoint, developer root guidance, generated task entry",
+      "why": "Conditional procedures and phrase-location tests keep unrelated guidance in the entrypoint; local execution permission and finish ownership are less explicit than prohibitions."
+    },
+    "baseline": {
+      "skill_bytes": 35879,
+      "skill_words": 4800,
+      "description_characters": 994,
+      "product_tests": {
+        "passed": 16,
+        "total": 16
+      },
+      "skill_sha256": "b3103dad85ab53911674721f23026c31ba811b0f8d7bb8ed4e4fbb929cee82f9"
+    },
+    "rejected_history": {
+      "proposal": "proposal-coach-6-validation-reference-split",
+      "outcome": "NO_PROMOTION",
+      "paired_input_change_percent": 11.07,
+      "paired_elapsed_change_percent": 5.44,
+      "lesson": "A smaller entry alone does not establish cheaper execution. Keep fast resume self-contained and require measured paired behavior and cost."
+    },
+    "budget": {
+      "max_generations": 1,
+      "max_candidates": 1,
+      "max_external_model_invocations": 12,
+      "max_model_seconds_per_call": 600,
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "new_dependencies": 0,
+      "new_services": 0,
+      "external_writes": 0,
+      "holdout_access": false,
+      "permission_delta": []
+    },
+    "evaluation": {
+      "fast_resume": "4 paired rounds, AB/BA/AB/BA; existing activation evaluator with isolated frozen arm trees",
+      "development_routing": "positive multilingual setup, complete-contract skip, status, permission, ordinary failure and follow-up cases; independent forward evaluation",
+      "baseline": "unchanged champion plus simple retry/selection over its same four completion attempts; count every attempt",
+      "live_cycle": "one additional observed candidate task only after independent provisional acceptance",
+      "exposure": "DEV/VALIDATION only; no retired or sealed holdouts"
+    },
+    "acceptance": {
+      "behavior": "Every candidate completion and required permission/conflict field passes; no forbidden fast-resume read or duplicate completion; preserve host and single-writer invariants",
+      "cost": "Median paired input tokens strictly lower; median paired elapsed time no more than 10 percent above champion; all four pairs eligible",
+      "required_checks": [
+        "product tests",
+        "full unittest suite",
+        "active-host documentation debt",
+        "Release Gate with candidate/public distinction",
+        "evolution reconstruction and learning links"
+      ],
+      "stop": "One frozen candidate; reject and restore changed product surfaces on any required behavior or cost nonpass. NO_PROMOTION on no reproducible advantage. Do not iterate on exposed cases as fresh holdouts."
+    },
+    "execution_status": "registered; external model budget awaiting user answer",
+    "learning_verdicts": []
+  },
+  "records": [
+    {
+      "phase": "paired",
+      "round": 1,
+      "arm": "champion",
+      "status": "completed",
+      "case": "verified-checkpoint-fast-path",
+      "category": "fast-path",
+      "expected_activation": true,
+      "activated": true,
+      "correct": true,
+      "agent_exit_code": 0,
+      "missing_required_reads": [],
+      "forbidden_reads": [],
+      "completion_check_exit_code": 0,
+      "behavior_check_exit_code": 0,
+      "elapsed_seconds": 36.39,
+      "stage_seconds": {
+        "fixture": 0.149,
+        "agent": 36.39,
+        "verification": 0.115,
+        "total": 36.72
+      },
+      "telemetry": {
+        "tool_calls": 5,
+        "tool_calls_by_type": {
+          "agent_message": 2,
+          "command_execution": 4,
+          "file_change": 1
+        },
+        "shell_commands": 4,
+        "read_commands": 2,
+        "validator_commands": 1,
+        "test_commands": 1,
+        "completion_check_invocations": 1,
+        "completion_check_invocations_by_kind": {
+          "checkpoint_runner": 1,
+          "direct": 0
+        },
+        "lifecycle_signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ]
+      },
+      "experience_digest": {
+        "schema_version": 1,
+        "run_id": "verified-checkpoint-fast-path:champion:r1",
+        "case_id": "verified-checkpoint-fast-path",
+        "arm": "champion",
+        "stages": [
+          {
+            "stage": "resume",
+            "owner": "navigator",
+            "elapsed_ms": 36390,
+            "tool_invocations": 5,
+            "repository_reads": 2,
+            "validator_invocations": 1,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          },
+          {
+            "stage": "verification",
+            "owner": "gate",
+            "elapsed_ms": 115,
+            "tool_invocations": 1,
+            "repository_reads": 0,
+            "validator_invocations": 0,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          }
+        ],
+        "signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ],
+        "verification_result": "verified",
+        "input_tokens": 129090,
+        "output_tokens": 514
+      },
+      "checkpoint_truth": {
+        "initial_fast_path_ready": true,
+        "product_mutated": true,
+        "navigator_completion_check_invocations": 1,
+        "checkpoint_changed_before_gate": true,
+        "verified_evidence_changed_before_gate": true,
+        "last_verified_changed_before_gate": false,
+        "verification_status_before_gate": "verified",
+        "fast_path_ready_before_gate": true,
+        "fresh_resume_accepted": true,
+        "unverified_mutated_repository_state_accepted_for_fast_resume": false,
+        "verification_status_after_gate": "verified",
+        "fast_path_ready_after_gate": true
+      },
+      "created_harness_files": [
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "input_tokens": 129090,
+      "cached_input_tokens": 116480,
+      "output_tokens": 514,
+      "reasoning_output_tokens": 0
+    },
+    {
+      "phase": "paired",
+      "round": 1,
+      "arm": "candidate",
+      "status": "completed",
+      "case": "verified-checkpoint-fast-path",
+      "category": "fast-path",
+      "expected_activation": true,
+      "activated": true,
+      "correct": true,
+      "agent_exit_code": 0,
+      "missing_required_reads": [],
+      "forbidden_reads": [],
+      "completion_check_exit_code": 0,
+      "behavior_check_exit_code": 0,
+      "elapsed_seconds": 36.75,
+      "stage_seconds": {
+        "fixture": 0.142,
+        "agent": 36.75,
+        "verification": 0.112,
+        "total": 37.07
+      },
+      "telemetry": {
+        "tool_calls": 6,
+        "tool_calls_by_type": {
+          "agent_message": 2,
+          "command_execution": 5,
+          "file_change": 1
+        },
+        "shell_commands": 5,
+        "read_commands": 3,
+        "validator_commands": 1,
+        "test_commands": 1,
+        "completion_check_invocations": 1,
+        "completion_check_invocations_by_kind": {
+          "checkpoint_runner": 1,
+          "direct": 0
+        },
+        "lifecycle_signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ]
+      },
+      "experience_digest": {
+        "schema_version": 1,
+        "run_id": "verified-checkpoint-fast-path:candidate:r1",
+        "case_id": "verified-checkpoint-fast-path",
+        "arm": "candidate",
+        "stages": [
+          {
+            "stage": "resume",
+            "owner": "navigator",
+            "elapsed_ms": 36750,
+            "tool_invocations": 6,
+            "repository_reads": 3,
+            "validator_invocations": 1,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          },
+          {
+            "stage": "verification",
+            "owner": "gate",
+            "elapsed_ms": 112,
+            "tool_invocations": 1,
+            "repository_reads": 0,
+            "validator_invocations": 0,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          }
+        ],
+        "signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ],
+        "verification_result": "verified",
+        "input_tokens": 118720,
+        "output_tokens": 586
+      },
+      "checkpoint_truth": {
+        "initial_fast_path_ready": true,
+        "product_mutated": true,
+        "navigator_completion_check_invocations": 1,
+        "checkpoint_changed_before_gate": true,
+        "verified_evidence_changed_before_gate": true,
+        "last_verified_changed_before_gate": false,
+        "verification_status_before_gate": "verified",
+        "fast_path_ready_before_gate": true,
+        "fresh_resume_accepted": true,
+        "unverified_mutated_repository_state_accepted_for_fast_resume": false,
+        "verification_status_after_gate": "verified",
+        "fast_path_ready_after_gate": true
+      },
+      "created_harness_files": [
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "input_tokens": 118720,
+      "cached_input_tokens": 111488,
+      "output_tokens": 586,
+      "reasoning_output_tokens": 49
+    },
+    {
+      "phase": "paired",
+      "round": 2,
+      "arm": "candidate",
+      "status": "completed",
+      "case": "verified-checkpoint-fast-path",
+      "category": "fast-path",
+      "expected_activation": true,
+      "activated": true,
+      "correct": true,
+      "agent_exit_code": 0,
+      "missing_required_reads": [],
+      "forbidden_reads": [],
+      "completion_check_exit_code": 0,
+      "behavior_check_exit_code": 0,
+      "elapsed_seconds": 38.9,
+      "stage_seconds": {
+        "fixture": 0.143,
+        "agent": 38.9,
+        "verification": 0.118,
+        "total": 39.23
+      },
+      "telemetry": {
+        "tool_calls": 6,
+        "tool_calls_by_type": {
+          "agent_message": 2,
+          "command_execution": 5,
+          "file_change": 1
+        },
+        "shell_commands": 5,
+        "read_commands": 3,
+        "validator_commands": 1,
+        "test_commands": 1,
+        "completion_check_invocations": 1,
+        "completion_check_invocations_by_kind": {
+          "checkpoint_runner": 1,
+          "direct": 0
+        },
+        "lifecycle_signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ]
+      },
+      "experience_digest": {
+        "schema_version": 1,
+        "run_id": "verified-checkpoint-fast-path:candidate:r2",
+        "case_id": "verified-checkpoint-fast-path",
+        "arm": "candidate",
+        "stages": [
+          {
+            "stage": "resume",
+            "owner": "navigator",
+            "elapsed_ms": 38900,
+            "tool_invocations": 6,
+            "repository_reads": 3,
+            "validator_invocations": 1,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          },
+          {
+            "stage": "verification",
+            "owner": "gate",
+            "elapsed_ms": 118,
+            "tool_invocations": 1,
+            "repository_reads": 0,
+            "validator_invocations": 0,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          }
+        ],
+        "signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ],
+        "verification_result": "verified",
+        "input_tokens": 119022,
+        "output_tokens": 698
+      },
+      "checkpoint_truth": {
+        "initial_fast_path_ready": true,
+        "product_mutated": true,
+        "navigator_completion_check_invocations": 1,
+        "checkpoint_changed_before_gate": true,
+        "verified_evidence_changed_before_gate": true,
+        "last_verified_changed_before_gate": false,
+        "verification_status_before_gate": "verified",
+        "fast_path_ready_before_gate": true,
+        "fresh_resume_accepted": true,
+        "unverified_mutated_repository_state_accepted_for_fast_resume": false,
+        "verification_status_after_gate": "verified",
+        "fast_path_ready_after_gate": true
+      },
+      "created_harness_files": [
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "input_tokens": 119022,
+      "cached_input_tokens": 111616,
+      "output_tokens": 698,
+      "reasoning_output_tokens": 143
+    },
+    {
+      "phase": "paired",
+      "round": 2,
+      "arm": "champion",
+      "status": "completed",
+      "case": "verified-checkpoint-fast-path",
+      "category": "fast-path",
+      "expected_activation": true,
+      "activated": true,
+      "correct": true,
+      "agent_exit_code": 0,
+      "missing_required_reads": [],
+      "forbidden_reads": [],
+      "completion_check_exit_code": 0,
+      "behavior_check_exit_code": 0,
+      "elapsed_seconds": 39.27,
+      "stage_seconds": {
+        "fixture": 0.135,
+        "agent": 39.27,
+        "verification": 0.124,
+        "total": 39.61
+      },
+      "telemetry": {
+        "tool_calls": 7,
+        "tool_calls_by_type": {
+          "agent_message": 3,
+          "command_execution": 6,
+          "file_change": 1
+        },
+        "shell_commands": 6,
+        "read_commands": 4,
+        "validator_commands": 1,
+        "test_commands": 1,
+        "completion_check_invocations": 1,
+        "completion_check_invocations_by_kind": {
+          "checkpoint_runner": 1,
+          "direct": 0
+        },
+        "lifecycle_signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ]
+      },
+      "experience_digest": {
+        "schema_version": 1,
+        "run_id": "verified-checkpoint-fast-path:champion:r2",
+        "case_id": "verified-checkpoint-fast-path",
+        "arm": "champion",
+        "stages": [
+          {
+            "stage": "resume",
+            "owner": "navigator",
+            "elapsed_ms": 39270,
+            "tool_invocations": 7,
+            "repository_reads": 4,
+            "validator_invocations": 1,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          },
+          {
+            "stage": "verification",
+            "owner": "gate",
+            "elapsed_ms": 124,
+            "tool_invocations": 1,
+            "repository_reads": 0,
+            "validator_invocations": 0,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          }
+        ],
+        "signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ],
+        "verification_result": "verified",
+        "input_tokens": 106190,
+        "output_tokens": 674
+      },
+      "checkpoint_truth": {
+        "initial_fast_path_ready": true,
+        "product_mutated": true,
+        "navigator_completion_check_invocations": 1,
+        "checkpoint_changed_before_gate": true,
+        "verified_evidence_changed_before_gate": true,
+        "last_verified_changed_before_gate": false,
+        "verification_status_before_gate": "verified",
+        "fast_path_ready_before_gate": true,
+        "fresh_resume_accepted": true,
+        "unverified_mutated_repository_state_accepted_for_fast_resume": false,
+        "verification_status_after_gate": "verified",
+        "fast_path_ready_after_gate": true
+      },
+      "created_harness_files": [
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "input_tokens": 106190,
+      "cached_input_tokens": 93824,
+      "output_tokens": 674,
+      "reasoning_output_tokens": 60
+    },
+    {
+      "phase": "paired",
+      "round": 3,
+      "arm": "champion",
+      "status": "completed",
+      "case": "verified-checkpoint-fast-path",
+      "category": "fast-path",
+      "expected_activation": true,
+      "activated": true,
+      "correct": true,
+      "agent_exit_code": 0,
+      "missing_required_reads": [],
+      "forbidden_reads": [],
+      "completion_check_exit_code": 0,
+      "behavior_check_exit_code": 0,
+      "elapsed_seconds": 39.14,
+      "stage_seconds": {
+        "fixture": 0.151,
+        "agent": 39.14,
+        "verification": 0.188,
+        "total": 39.57
+      },
+      "telemetry": {
+        "tool_calls": 6,
+        "tool_calls_by_type": {
+          "agent_message": 2,
+          "command_execution": 5,
+          "file_change": 1
+        },
+        "shell_commands": 5,
+        "read_commands": 3,
+        "validator_commands": 1,
+        "test_commands": 1,
+        "completion_check_invocations": 1,
+        "completion_check_invocations_by_kind": {
+          "checkpoint_runner": 1,
+          "direct": 0
+        },
+        "lifecycle_signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ]
+      },
+      "experience_digest": {
+        "schema_version": 1,
+        "run_id": "verified-checkpoint-fast-path:champion:r3",
+        "case_id": "verified-checkpoint-fast-path",
+        "arm": "champion",
+        "stages": [
+          {
+            "stage": "resume",
+            "owner": "navigator",
+            "elapsed_ms": 39140,
+            "tool_invocations": 6,
+            "repository_reads": 3,
+            "validator_invocations": 1,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          },
+          {
+            "stage": "verification",
+            "owner": "gate",
+            "elapsed_ms": 188,
+            "tool_invocations": 1,
+            "repository_reads": 0,
+            "validator_invocations": 0,
+            "test_invocations": 1,
+            "completion_check_invocations": 1
+          }
+        ],
+        "signals": [
+          "implementation_completed",
+          "verification_stage_entered",
+          "wrapper_invocation_observed",
+          "final_synthesis_observed"
+        ],
+        "verification_result": "verified",
+        "input_tokens": 105973,
+        "output_tokens": 598
+      },
+      "checkpoint_truth": {
+        "initial_fast_path_ready": true,
+        "product_mutated": true,
+        "navigator_completion_check_invocations": 1,
+        "checkpoint_changed_before_gate": true,
+        "verified_evidence_changed_before_gate": true,
+        "last_verified_changed_before_gate": false,
+        "verification_status_before_gate": "verified",
+        "fast_path_ready_before_gate": true,
+        "fresh_resume_accepted": true,
+        "unverified_mutated_repository_state_accepted_for_fast_resume": false,
+        "verification_status_after_gate": "verified",
+        "fast_path_ready_after_gate": true
+      },
+      "created_harness_files": [
+        "AGENTS.md",
+        "docs/nulnul/checkpoint.json",
+        "docs/nulnul/checkpoint.verification.json",
+        "docs/nulnul/project.md"
+      ],
+      "input_tokens": 105973,
+      "cached_input_tokens": 93696,
+      "output_tokens": 598,
+      "reasoning_output_tokens": 50
+    },
+    {
+      "phase": "paired",
+      "round": 3,
+      "arm": "candidate",
+      "status": "interrupted",
+      "correct": false,
+      "error_type": "EvaluatorInvalidation"
+    }
+  ],
+  "failures": [
+    "Glob-expanded forbidden document reads produce the same retained evidence as allowed task reads.",
+    "Python interpreter flags can hide a duplicate completion command.",
+    "Control completion must be owned by the work agent, not supplied only by the independent post-run check."
+  ],
+  "claim_boundary": "Token observations are retained but cannot establish a comparison satisfying the exact read/check boundaries; no product regression or improvement is inferred.",
+  "learning_verdicts": [
+    {
+      "id": "invalid-evaluator-v1",
+      "status": "not-established",
+      "feedback_id": "feedback-instruction-evaluator-20260910",
+      "proposal_ids": [
+        "proposal-gate-13-instruction-evaluator-20260910"
+      ]
+    }
+  ]
+}

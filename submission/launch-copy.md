@@ -1,6 +1,6 @@
 # Launch copy
 
-Historical 3.0.0 launch copy. The local 3.1.0 candidate is not published; do not present the following installation, test, or public-adoption claims as evidence for 3.1.0. Prepare new launch copy only after its release gates pass.
+Historical 3.0.0 launch copy. The 3.2.0 publication candidate is not yet certified; the following installation, test, and public-adoption claims remain historical. Prepare new launch copy only after the exact-version release gates pass.
 
 ## One line
 

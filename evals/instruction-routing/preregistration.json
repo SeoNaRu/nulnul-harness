@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "episode_id": "instruction-routing-20260910",
+  "registered_at": "2026-09-10T01:39:51.039305+00:00",
+  "scope": "local product instruction routing; no personal transfer or public-release claim",
+  "feedback_id": "feedback-instruction-routing-20260910",
+  "proposal_id": "proposal-coach-6-instruction-routing-20260910",
+  "pathology": {
+    "where": "skill discovery and entrypoint, developer root guidance, generated task entry",
+    "why": "Conditional procedures and phrase-location tests keep unrelated guidance in the entrypoint; local execution permission and finish ownership are less explicit than prohibitions."
+  },
+  "baseline": {
+    "skill_bytes": 35879,
+    "skill_words": 4800,
+    "description_characters": 994,
+    "product_tests": {
+      "passed": 16,
+      "total": 16
+    },
+    "skill_sha256": "b3103dad85ab53911674721f23026c31ba811b0f8d7bb8ed4e4fbb929cee82f9"
+  },
+  "rejected_history": {
+    "proposal": "proposal-coach-6-validation-reference-split",
+    "outcome": "NO_PROMOTION",
+    "paired_input_change_percent": 11.07,
+    "paired_elapsed_change_percent": 5.44,
+    "lesson": "A smaller entry alone does not establish cheaper execution. Keep fast resume self-contained and require measured paired behavior and cost."
+  },
+  "budget": {
+    "max_generations": 1,
+    "max_candidates": 1,
+    "max_external_model_invocations": 12,
+    "max_model_seconds_per_call": 600,
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "new_dependencies": 0,
+    "new_services": 0,
+    "external_writes": 0,
+    "holdout_access": false,
+    "permission_delta": []
+  },
+  "evaluation": {
+    "fast_resume": "4 paired rounds, AB/BA/AB/BA; existing activation evaluator with isolated frozen arm trees",
+    "development_routing": "positive multilingual setup, complete-contract skip, status, permission, ordinary failure and follow-up cases; independent forward evaluation",
+    "baseline": "unchanged champion plus simple retry/selection over its same four completion attempts; count every attempt",
+    "live_cycle": "one additional observed candidate task only after independent provisional acceptance",
+    "exposure": "DEV/VALIDATION only; no retired or sealed holdouts"
+  },
+  "acceptance": {
+    "behavior": "Every candidate completion and required permission/conflict field passes; no forbidden fast-resume read or duplicate completion; preserve host and single-writer invariants",
+    "cost": "Median paired input tokens strictly lower; median paired elapsed time no more than 10 percent above champion; all four pairs eligible",
+    "required_checks": [
+      "product tests",
+      "full unittest suite",
+      "active-host documentation debt",
+      "Release Gate with candidate/public distinction",
+      "evolution reconstruction and learning links"
+    ],
+    "stop": "One frozen candidate; reject and restore changed product surfaces on any required behavior or cost nonpass. NO_PROMOTION on no reproducible advantage. Do not iterate on exposed cases as fresh holdouts."
+  },
+  "execution_status": "registered; external model budget awaiting user answer",
+  "learning_verdicts": []
+}

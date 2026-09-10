@@ -1,7 +1,12 @@
 import hashlib
 import importlib.util
+import json
+import re
+import shutil
+import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 
@@ -74,6 +79,7 @@ class HostEntryOwnershipTests(unittest.TestCase):
             target.write_text("# Existing rules\n\nKeep this.\n", encoding="utf-8")
             host_entry.sync(root, "codex")
             once = target.read_text(encoding="utf-8")
+            self.assertTrue(all(line == line.rstrip() for line in once.splitlines()))
             result = host_entry.sync(root, "codex")
             self.assertEqual(result["status"], "unchanged")
             self.assertEqual(target.read_text(encoding="utf-8"), once)
@@ -92,6 +98,48 @@ class HostEntryOwnershipTests(unittest.TestCase):
                 host_entry.sync(root, "claude")
             with self.assertRaisesRegex(ValueError, "unsupported host"):
                 host_entry.sync(root, "other")
+
+    def test_generated_commands_execute_from_project_and_reject_stale_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.project(directory, "checkpoint.json")
+            scripts = root / "installed 'plugin' $literal\\copy" / "scripts"
+            scripts.mkdir(parents=True)
+            for name in ("validate_checkpoint.py", "run_checkpoint_check.py"):
+                shutil.copy2(SCRIPT.with_name(name), scripts / name)
+            (root / "input.txt").write_text("original")
+            (root / "check.py").write_text(
+                "from pathlib import Path\n"
+                "with Path('runs.txt').open('a') as handle: handle.write('run\\n')\n"
+            )
+            checkpoint = root / "docs/nulnul/checkpoint.json"
+            checkpoint.write_text(json.dumps({
+                "schema_version": 3, "goal": "local task", "milestone": "local check",
+                "completion_check": "python3 check.py", "verification_status": "unknown",
+                "verification_files": ["input.txt", "check.py"], "last_verified": "none",
+                "next_action": "run check", "permission_constraints": ["local only"],
+                "approved_permissions": ["local check"], "blockers": [],
+            }))
+            inactive = root / "CLAUDE.md"
+            inactive.write_text("preserve me\n")
+            with patch.object(host_entry, "__file__", str(scripts / "sync_host_entry.py")):
+                host_entry.sync(root, "codex")
+                # Replacement must preserve shell quoting and literal backslashes too.
+                host_entry.sync(root, "codex")
+            commands = re.findall(r"```sh\n(.*?)\n```", (root / "AGENTS.md").read_text(), re.S)
+            self.assertEqual(len(commands), 2)
+
+            def run(command):
+                result = subprocess.run(command, shell=True, cwd=root, capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                return json.loads(result.stdout)
+
+            self.assertFalse(run(commands[0])["fast_path_ready"])
+            self.assertTrue(run(commands[1])["fast_path_ready"])
+            self.assertTrue(run(commands[0])["fast_path_ready"])
+            (root / "input.txt").write_text("changed")
+            self.assertFalse(run(commands[0])["fast_path_ready"])
+            self.assertEqual((root / "runs.txt").read_text(), "run\n")
+            self.assertEqual(inactive.read_text(), "preserve me\n")
 
 
 if __name__ == "__main__":

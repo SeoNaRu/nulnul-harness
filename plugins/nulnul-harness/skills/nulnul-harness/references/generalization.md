@@ -93,3 +93,9 @@ target Experience, transferable prior, then an unvalidated Candidate. A prior ma
 seed Natural Selection, Agent Evolution, or Harness Evolution, but cannot mutate a
 Capability, topology, control, project contract, or guarded Kernel. Those existing
 lifecycle transactions remain the only mutation owners.
+
+## Completion checks for this mode
+
+Apply only the checks whose named state or operation is present. Reuse current authoritative results; repeat after changed inputs, failure, or a concrete unresolved concern.
+
+- For cross-project Generalization, confirm `scripts/generalization_core.py validate-home` passes, every source ID resolves to eligible verified Foundation Experience and privacy-safe project identity, Candidate and Transferable states have the required independent or target evidence, Target Prior Packs contain no source Memory/path/name/body/transcript, target validation links its own Experience, counterevidence and reciprocal lineage survive, legacy summaries remain non-authoritative, lifecycle writes roll back, and clear Direct performs no lookup or source-project read.

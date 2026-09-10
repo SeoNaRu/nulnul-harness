@@ -400,6 +400,22 @@ def execute(root, payload, governed_receipt, timeout=300):
         if expected != {path.relative_to(root).as_posix() for path in paths}:
             raise ValueError("Governed authority does not match the Setup transaction write set")
         originals = snapshot(paths)
+        prior_checkpoint = prior_verification = None
+        if plan["mode"] == "adopt-upgrade":
+            try:
+                prior_checkpoint = json.loads(originals[root / "docs/nulnul/checkpoint.json"][0])
+                prior_verification = json.loads(
+                    originals[root / "docs/nulnul/checkpoint.verification.json"][0]
+                )
+                if not (
+                    validate_checkpoint.fast_path_ready(prior_checkpoint, root, prior_verification)
+                    and prior_verification.get("completion_check_digest") is not None
+                    and prior_checkpoint["completion_check"] == plan["completion_check"]
+                    and prior_checkpoint["verification_files"] == plan["verification_files"]
+                ):
+                    prior_checkpoint = None
+            except (TypeError, UnicodeError, ValueError):
+                prior_checkpoint = None
         inactive = root / sync_host_entry.HOST_ENTRIES[
             "claude" if plan["host"] == "codex" else "codex"
         ]
@@ -457,7 +473,19 @@ def execute(root, payload, governed_receipt, timeout=300):
         emit(root, "HOST_ENTRY_WRITTEN", {"transaction_id": transaction_id})
 
         phase = "checkpoint-verification"
-        check = run_checkpoint_check.run(checkpoint, root, timeout)
+        if prior_checkpoint is not None and validate_checkpoint.fast_path_ready(
+            prior_checkpoint, root, prior_verification
+        ):
+            expected_checkpoint["verification_status"] = "verified"
+            sync_host_entry.atomic_write(
+                checkpoint, json.dumps(expected_checkpoint, ensure_ascii=False, indent=2) + "\n"
+            )
+            check = {
+                "passed": True, "exit_code": None, "verification_status": "verified",
+                "fast_path_ready": True, "errors": [], "reused": True,
+            }
+        else:
+            check = {**run_checkpoint_check.run(checkpoint, root, timeout), "reused": False}
         result["completion_check"] = check
         if not check.get("passed"):
             raise ValueError("completion check failed: " + "; ".join(check.get("errors", [])))

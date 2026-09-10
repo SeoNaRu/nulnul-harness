@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "episode_id": "instruction-routing-20260910",
+  "recorded_at": "2026-09-10T02:41:40.459547+00:00",
+  "candidate": {
+    "schema_version": 1,
+    "episode_id": "instruction-routing-20260910",
+    "frozen_at": "2026-09-10T01:54:59.342295+00:00",
+    "champion_plugin_sha256": "29406f3ce8b0e5be8590308363a982f03bd2de070168bd9899a0295b4473fcb9",
+    "candidate_plugin_sha256": "035c11d7cef4528c46d964a044568ec65734cf9ef1aa0ed9eec7078b392cc379",
+    "evaluation_sha256": {
+      "evals/instruction-routing/run_ab.py": "48135c714d007f7a708853134d5ce036a731483f37c77b13cff3405055629499",
+      "evals/instruction-routing/preregistration.json": "258414bfffa60625cd6f3de1e9042bad8640a1f628bf172eaaf6ec4187947827",
+      "evals/instruction-routing/cases.json": "411cfa1575aa0da6f3603e9126d8e5145c51813df0646672c128bba839771721",
+      "evals/benchmarks/activation/run_activation.py": "7fcb8530b217f72d4a67657e2959bbdf895776fc66341e814aeb5fe80fa5dc3f"
+    },
+    "exposure": "DEV/VALIDATION only; no holdout reads",
+    "status": "frozen, model comparison not executed",
+    "surfaces": {
+      "champion": {
+        "skill_bytes": 35879,
+        "skill_words": 4800,
+        "description_characters": 994,
+        "agents_bytes": 11417,
+        "agents_words": 1533
+      },
+      "candidate": {
+        "skill_bytes": 8789,
+        "skill_words": 1192,
+        "description_characters": 311,
+        "agents_bytes": 4078,
+        "agents_words": 492
+      }
+    }
+  },
+  "status": "closed_no_promotion_scoped_rollback_verified",
+  "decision": "NO_PROMOTION",
+  "independent_instruction_review": {
+    "reviewer": "instruction_gate",
+    "blocking_findings_remaining": 0,
+    "scope": "read-only instruction reachability and permission/completion coherence; not behavioral promotion"
+  },
+  "checks": {
+    "product": {
+      "passed": 16,
+      "total": 16
+    },
+    "full_suite": {
+      "passed": 464,
+      "total": 464,
+      "model_calls": 0,
+      "loopback_only": true,
+      "elapsed_seconds": 64.019,
+      "log_sha256": "06137a56647ea8f640209c493eb5593ee5c7201d6db561005311cb6b67b0cb52"
+    },
+    "skill_validation": "passed",
+    "documentation_debt": 0,
+    "learning_links": "passed",
+    "evolution_reconstruction": "passed",
+    "packaging": {
+      "files": 64,
+      "sha256": "7136d8bb2073d2047624a0c8aeb6e3faca8268b25099cadec44f3c77da21be32"
+    },
+    "release_gate": {
+      "score": 100,
+      "possible": 100,
+      "local_candidate_ready": true,
+      "release_ready": false,
+      "release_blockers": [
+        "Exact-version public Claude adoption evidence is missing.",
+        "Exact-version public cross-project Meta adoption evidence is missing.",
+        "The changelog still contains an Unreleased candidate."
+      ]
+    }
+  },
+  "model_ab": {
+    "status": "stopped_no_promotion",
+    "external_model_invocations": 8,
+    "authorized_maximum": 17,
+    "unused_allowance": 9,
+    "v1_attempts": {
+      "invalid_completed": 5,
+      "interrupted": 1
+    },
+    "v2_attempts": {
+      "champion_passed": 1,
+      "candidate_unknown": 1
+    },
+    "eligible_pairs": 0,
+    "required_pairs": 4,
+    "evidence": [
+      "evals/instruction-routing/invalid-evaluator-v1.json",
+      "evals/instruction-routing/results-v2.json"
+    ],
+    "attribution": "Acceptance evidence unavailable; no demonstrated product defect or eligible comparative cost regression."
+  },
+  "live_cycle": {
+    "status": "not_run",
+    "reason": "Independent Gate rejected before provisional acceptance."
+  },
+  "installed_plugin_changed": false,
+  "published": false,
+  "raw_transcripts_retained": false,
+  "claim_boundary": "Exact pre-task product and guidance restored; separately verified local evaluator mechanics only. No instruction-performance, transfer, installation, publication or model-superiority claim.",
+  "learning_verdicts": [
+    {
+      "id": "local-instruction-validation",
+      "status": "passed"
+    },
+    {
+      "id": "invalid-instruction-evaluator-v1",
+      "status": "failed",
+      "feedback_id": "feedback-instruction-evaluator-20260910",
+      "proposal_ids": [
+        "proposal-gate-13-instruction-evaluator-20260910"
+      ]
+    },
+    {
+      "id": "final-instruction-candidate-rejection",
+      "status": "rejected",
+      "feedback_id": "feedback-instruction-routing-v2-unknown-20260910",
+      "proposal_ids": [
+        "proposal-gate-13-bounded-trace-diagnostics-20260910"
+      ]
+    }
+  ],
+  "replacement_evaluation": {
+    "status": "closed_after_first_candidate_nonpass",
+    "registration": "evals/instruction-routing/preregistration-v2.json",
+    "cumulative_authorized_calls": 17,
+    "cumulative_used_calls": 8,
+    "additional_approval_needed": 0,
+    "controls": "not_run_due_to_registered_stop"
+  },
+  "evaluator_repair": {
+    "status": "independently_verified_for_bounded_dev_grammar",
+    "identity": "evals/instruction-routing/candidate-v2.json",
+    "independent_reviewer": "instruction_gate",
+    "blocking_findings_remaining": 0,
+    "local_evaluator_tests": 9,
+    "model_calls": 0,
+    "covered_negatives": [
+      "forbidden, glob, dynamic and outside-fixture reads",
+      "duplicate, missing, late and wrong worker checks",
+      "incomplete, duplicate or unsupported events",
+      "missing native edit evidence",
+      "fixed checkpoint field and protected-file changes",
+      "cumulative budget exceeding authorization before credentials or model execution"
+    ],
+    "limits": "Constrained DEV command evidence; not arbitrary shell/syscall auditing, model superiority, product promotion, or additional authorization."
+  },
+  "candidate_validation_before_trial": {
+    "product": {
+      "passed": 17,
+      "total": 17
+    },
+    "full_suite": {
+      "passed": 465,
+      "total": 465,
+      "model_calls": 0,
+      "loopback_only": true,
+      "elapsed_seconds": 64.284,
+      "log_sha256": "0b63fdcff8f7ff821c30ec8c0ba68ac8151f819c47f9c87a186e187f705a9f21"
+    },
+    "skill_validation": "passed",
+    "documentation_debt": 0,
+    "learning_links": "passed",
+    "evolution_reconstruction": "passed",
+    "packaging": {
+      "files": 65,
+      "sha256": "d978fcbf67f1e5bf6845e44ff1d4e9f254fee8a539c17944738603ca69845520"
+    },
+    "release_gate": {
+      "score": 100,
+      "possible": 100,
+      "local_candidate_ready": true,
+      "release_ready": false,
+      "release_blockers": [
+        "Exact-version public Claude adoption evidence is missing.",
+        "Exact-version public cross-project Meta adoption evidence is missing.",
+        "The changelog still contains an Unreleased candidate."
+      ]
+    }
+  },
+  "rollback": {
+    "receipt": "evals/instruction-routing/rollback.json",
+    "product_and_guidance_restored": true,
+    "retained": "local evaluator repair and rejected evidence only",
+    "unrelated_work_preserved": true
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "scope": "bounded local development; no release points or comparative claim",
+  "local_model_budget": {
+    "receipt_reuse": 1,
+    "conditional_repair": 1,
+    "actual_project_task": 1
+  },
+  "receipt_reuse_initial": {
+    "schema_version": 1,
+    "stage": "receipt-reuse-initial",
+    "case_kind": "known exposed regression",
+    "completed": true,
+    "verdict": "failed_redundant_completion",
+    "direct_baseline_checks": 1,
+    "successful_setup_transactions": 2,
+    "invalid_intermediate_plans": 1,
+    "recorded_completion_executions": 2,
+    "cause": "descriptive setup rewrite re-entered unconditional transaction check",
+    "planned_fix": "dependency-current prior receipt reuse inside setup_transaction.execute",
+    "claims": {
+      "independent_case": false,
+      "holdout": false,
+      "speed_gain": false
+    }
+  },
+  "receipt_reuse_repair": {
+    "schema_version": 1,
+    "case_id": "metadata-adoption-receipt-reuse",
+    "result": "PASS",
+    "successful_transactions": 2,
+    "additional_completion_executions": 0,
+    "existing_journal_starts": 2,
+    "receipt_byte_identical": true,
+    "independent_holdout": false,
+    "comparative_performance_claim": false
+  },
+  "repository_tests": {
+    "passed": 481,
+    "failed": 0
+  },
+  "learning_verdicts": [
+    {
+      "id": "setup-reuse-3.2.0-initial",
+      "status": "failed",
+      "feedback_id": "feedback-setup-reuse-3-2",
+      "proposal_ids": [
+        "proposal-product-builder-setup-reuse-3-2"
+      ]
+    }
+  ],
+  "ordinary_maintenance_retained": true,
+  "agent_promotion": false,
+  "sealed_holdout_used": false,
+  "actual_project_task": {
+    "project": "NULNUL Trace",
+    "scope": "existing dirty source snapshot plus reviewed two-file original integration",
+    "result": "passed",
+    "task": "Recognize literal quoted NULNUL Python script paths while preserving exact comparison identity.",
+    "new_regression_groups": 3,
+    "old_code_negative_control": "failed as expected",
+    "worker_completion_executions": 1,
+    "worker_check": "pnpm test",
+    "test_file_groups": {
+      "trace_core": 4,
+      "collector": 5
+    },
+    "affected_builds": [
+      "trace-core",
+      "collector"
+    ],
+    "added_dependencies": 0,
+    "inactive_host_and_profiles_preserved": true,
+    "original_memory_guard": {
+      "passed": true,
+      "existing_active_items": 1,
+      "snapshot_memory_copied": false
+    },
+    "holdout": false,
+    "comparative_claim": false,
+    "original_completion_executions": 1,
+    "original_completion_exit_code": 0,
+    "original_checkpoint_fast_path_ready": true
+  },
+  "local_stop_reason": "Completed all three bounded local calls; no further local model retries."
+}

@@ -5,34 +5,29 @@ This repository builds `plugins/nulnul-harness/`, a Codex plugin that selects th
 - Treat `plugins/nulnul-harness/` as the only shipped product boundary.
 - Keep the plugin skills-only until a real workflow proves that an MCP server, hook, app, or external service is necessary.
 - Inspect a target repository before asking questions. Ask only for product decisions or constraints that cannot be discovered safely. A request to set the harness up on a repository that already has work is never one of those questions.
-- Detect the host surface before writing setup files, and enumerate its installed skills, plugins, and agents before claiming a job is covered; on Claude Code adoption, first run the bounded `claude plugin list --json` command instead of inferring installed plugins from the session catalog. Treat bounded relative and fixture-local absolute `.claude/agents/` reads as roster inspection, but never credit printed paths alone. Treat Claude's `source=git` as public GitHub provenance only when the exact repository URL also matches.
-- Give each host its own root session entry: Codex owns only `AGENTS.md`, Claude Code owns only `CLAUDE.md`, and both point to the same `docs/nulnul/` contract and exactly one live-state writer. On sequential host adoption, preserve the inactive entry byte-for-byte; do not claim concurrent mutation support.
-- Upgrade an existing agent roster in place. Classify every existing role as kept, upgraded, merged, or removed; `reuse` is the kept classification when its profile and responsibilities stay unchanged. Setup plans encode each inspected role as `name: disposition`; the transaction rejects missing, duplicate, or unknown dispositions and writes each classification explicitly. Never recreate one that already exists.
-- Reuse a verified installed capability when it is outcome-competitive. Search official, curated, and reputable public candidates for an uncovered job or concrete material quality or verification gap before creating a project-local substitute. Verify fit, provenance, compatibility, maintenance, permissions, and license; popularity alone is not verification.
 - Continue the user's original task after setup; setup alone is not task completion.
 - Select the non-overlapping capability set expected to produce the strongest verified task outcome. Among materially equivalent paths, choose the one with lower context, coordination, runtime, maintenance, and permission cost; activate only what the current task needs.
 - Use direct or single-agent execution when it is outcome-competitive. Add as many bounded roles as materially improve specialization, context isolation, parallel work, or independent verification; agent count has no target and one owner keeps final synthesis.
-- For justified multi-stage work, check actual producer/consumer boundaries with a negative control and reuse only dependency-current verified artifacts. Keep task recipes, execution examples, skill use/skip/follow-up cases, and offline candidate preparation on demand; their advisory outputs never replace Foundation checks, grant adoption, or create another live-state writer.
 - Never register global tools, use credentials, deploy, or publish without explicit user approval.
-- Keep generated setup removable. Mark a Gate-passing evolution candidate provisional while the confirmed version remains active, then use one observed live cycle and the shipped schema-v3/v4 executor to confirm it or roll it back before final validation.
-- Keep ordinary resume context bounded: compact closed evolution history into the digest-bound adjacent archive, validate deterministic full-state reconstruction, and query rejected history only when a matching proposal needs it.
-- Give durable projects one validated concise resume checkpoint; keep stable setup evidence outside the host-loaded entry, and convert every reproducible nonpass verdict into Coach feedback and one bounded proposal in the same run.
-- Allow fast resume only from an explicitly verified checkpoint; machine-link every nonpass verdict to its feedback and proposal, and migrate legacy durable contracts without creating a second live-state writer.
-- Version concise checkpoint shapes explicitly, fail release on a missing learning-verdict inventory, and restore all earlier project files when a migration replacement fails.
 - Give every state file one writing process, keep `unknown` distinct from `verified` and `failed`, persist cursors on empty cycles, and prove each validity check against a negative control.
-- Store checkpoint completion as an exact command, execute that field before verified fast resume, and require sanitized machine-valid evidence before a paid runtime result contributes Release Gate points.
-- Fail release on a recorded setup, workflow, activation, or fast-path regression; use version-independent champion/candidate evidence, counterbalance paired order, prefer relative budgets to absolute token ceilings, and keep fast resume inside its checkpoint and directly needed task files.
-- Bootstrap from a host-admitted executing plugin when no project-local contract exists; bind setup receipts to the project, host, manifest, contract, and runtime digests. Never bypass an unsafe local contract, create a shadow skill, or treat package metadata as independent publisher provenance. Cold Claude setup still requires its bounded installed-plugin listing and profile reads; setup completion requires every acceptance check, including actual shared-document updates for reported documentation debt.
-- Before pushing a version-changing commit to `main`, require exact-version public Claude adoption evidence and, when personal or cross-project reuse changes, sanitized apply/skip/revocation or Meta adoption evidence; otherwise use a non-main publication candidate first. Never knowingly leave `main` red while calling the release work complete. After any approved push, watch the resulting CI to green before reporting completion.
-- Treat evaluation exposure as state: preregister a frozen candidate before one-shot holdout use, retire every used holdout, reject leakage or recycling, compare a simple retry/selection baseline, and activate Generalization Gate only for personal/core transfer claims rather than ordinary project-local changes.
-- Bound autonomous evolution before generation: one reproduced feedback item, `WHERE`/`WHY` pathology, one generation, a small candidate/evaluation/model budget, rejected-archive lookup, deterministic independent credit, sealed holdouts, permission-safe execution, a fair retry baseline on model invocations or deterministic completion checks, and an explicit stop reason including `NO_PROMOTION`.
-- Treat required conflict identifiers, permission fields, and inactive-guard decisions as correctness, not optional metadata: if a bounded A/B gets any required final field wrong, reject the candidate and restore the confirmed version even when routing and cost checks pass.
-- For capability-authority feedback, distinguish a missing explicit role boundary from a proven user or project decision override; keep the current capability contract when a bounded candidate has no reproducible advantage.
-- Keep personal evolution opt-in and adaptation-only: require a user-selected existing local home, preregister representative transfer plus a negative skip, let an independent Personal Gate promote or narrow, compatibility-check every new project, and fail closed on private data, missing permission, duplicate identity, conflict, stale or revoked status. Never copy raw project memory across repositories.
-- Begin cross-project selection only after three independent Personal-Gate-verified mechanism families exist. Aggregate typed privacy-safe summaries inside the approved Personal Home boundary, preserve failed transfers and `unknown` relations, and never count renamed variants or cloned fixtures as independent evidence.
-- Freeze one bounded meta-selection candidate before a fresh HOLDOUT, compare flat and simple baselines, retire every used case, credit only downstream apply/skip/conflict and completion results, and let an independent Meta Gate decide promotion, rejection, no advantage, narrower scope, or rollback.
-- After a test, rejection, promotion, or user correction produces a durable reusable lesson, read `.nulnul.local.json`; when its approved `obsidian_wiki_root` exists, follow that vault's `00_위키-작업규칙.md`, read `index.md` first, update the relevant `projects/nulnul-harness/` pages and links, then append one entry to `log.md`. Skip routine passing runs and never copy raw transcripts, secrets, personal data, or code facts that the repository already owns. Treat this as the user's standing approval only for that configured vault path.
 - Update the harness documents, exact evidence counts, and locale-parity claims in the same change as the code or release evidence they describe.
+
+## Read only when the work needs it
+
+For ordinary development, inspect the relevant files, make the requested change, execute the applicable checks, and fix attributable failures. Reuse current passing results; repeat a check only after its inputs change, it fails, or a concrete concern remains. Documentation cleanup does not require a new model experiment or reopen a closed one.
+
+Before changing a subsystem, read its section in [the development contract](docs/development-contract.md):
+
+| Change | Section |
+| --- | --- |
+| Setup, host entries, roster or capability adoption | [Setup](docs/development-contract.md#setup-and-capability-adoption) |
+| Checkpoint, resume, state writers or migration | [State](docs/development-contract.md#state-and-checkpoints) |
+| Producer/consumer checks or status/Trace evidence | [Workflow and trace](docs/development-contract.md#workflow-and-trace-evidence) |
+| Governed evolution, evaluators or comparative claims | [Evolution](docs/development-contract.md#governed-evolution-and-comparisons) |
+| Personal or cross-project transfer | [Reuse](docs/development-contract.md#personal-and-cross-project-reuse) |
+| Release evidence, casebooks or publication | [Release](docs/development-contract.md#release-and-publication) |
+
+## Validation
 
 Validate product changes with:
 
@@ -48,4 +43,6 @@ python3 plugins/nulnul-harness/skills/nulnul-harness/scripts/check_doc_debt.py .
 
 For release-evidence changes, also run the full `test_*.py` suite and `python3 scripts/release_gate.py`.
 
-Public casebook examples live under `examples/`, outside the shipped plugin. Keep reference implementations, deterministic fixtures, historical adoption records, and new live-model trials explicitly distinct. The booking example's HTTP self-check belongs to the ordinary unittest suite through `tests/test_booking_service_example.py`; that check uses only local Python and loopback HTTP, not a model API. Do not turn a request for local tests into a new Claude or other paid-model experiment. Exclude unexecuted experiment drafts from publication, and preserve their unexecuted status rather than presenting them as outcome evidence.
+## Durable lessons
+
+- After a test, rejection, promotion, or user correction produces a durable reusable lesson, read `.nulnul.local.json`; when its approved `obsidian_wiki_root` exists, follow that vault's `00_위키-작업규칙.md`, read `index.md` first, update the relevant `projects/nulnul-harness/` pages and links, then append one entry to `log.md`. Skip routine passing runs and never copy raw transcripts, secrets, personal data, or code facts that the repository already owns. Treat this as the user's standing approval only for that configured vault path.

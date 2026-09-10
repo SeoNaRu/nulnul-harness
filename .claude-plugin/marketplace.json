@@ -10,7 +10,7 @@
       "name": "nulnul-harness",
       "source": "./plugins/nulnul-harness",
       "description": "Complete project outcomes by selecting task-fit, evidence-backed capabilities, verifying the work, and removing only what does not materially help.",
-      "version": "3.1.0"
+      "version": "3.2.0"
     }
   ]
 }

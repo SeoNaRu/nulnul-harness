@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "episode_id": "instruction-routing-20260910",
+  "stage": "development",
+  "learning_verdicts": [
+    {
+      "id": "pre-freeze-routing-validation",
+      "status": "failed",
+      "feedback_id": "feedback-instruction-routing-validation-20260910",
+      "proposal_ids": [
+        "proposal-coach-6-instruction-routing-20260910"
+      ]
+    },
+    {
+      "id": "pre-freeze-full-validation",
+      "status": "failed",
+      "feedback_id": "feedback-instruction-routing-validation-20260910",
+      "proposal_ids": [
+        "proposal-coach-6-instruction-routing-20260910"
+      ]
+    }
+  ],
+  "claim_boundary": "Pre-freeze development failures retained; no candidate promotion or runtime improvement claimed.",
+  "resolved_findings": [
+    "status description and generated host route",
+    "reachable trace reference",
+    "explicit personal-reuse route",
+    "session count alone uses concise checkpoint",
+    "preserve 800-byte generated entry limit",
+    "pack before archive checks"
+  ]
+}
